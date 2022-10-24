@@ -8,5 +8,6 @@
 </head>
 <body>
 	<h1>SDC</h1>
+	<a href="/partnerMain.do">파트너 메인페이지</a>
 </body>
 </html>
