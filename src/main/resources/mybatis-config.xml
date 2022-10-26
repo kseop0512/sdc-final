@@ -6,6 +6,6 @@
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
 	<typeAliases>
-		<typeAlias type="kr.or.partner.model.vo.Partner" alias="p"/>
+		<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
 	</typeAliases>
 </configuration>
