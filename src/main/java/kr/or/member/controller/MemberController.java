@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import kr.or.member.model.service.memberService;
 
 @Controller
-public class memberController {
+public class MemberController {
 	@Autowired
 	private memberService service;
 }
