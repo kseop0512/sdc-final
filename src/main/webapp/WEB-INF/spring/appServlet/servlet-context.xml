@@ -62,7 +62,7 @@
 	<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource"></beans:property>
 		<beans:property name="configLocation" value="classpath:mybatis-config.xml"/>
-		<!-- <beans:property name="mapperLocations" value="classpath:/mapper/*SQL.xml"/> -->
+		<beans:property name="mapperLocations" value="classpath:/mapper/*SQL.xml"/>
 	</beans:bean>
 	
 	<!-- DB작업을 수행하는 객체 -->	
@@ -79,5 +79,6 @@
 	
 	
 	<context:component-scan base-package="kr.or.sdc" />
+	<context:component-scan base-package="kr.or.partner" />
 	
 </beans:beans>
