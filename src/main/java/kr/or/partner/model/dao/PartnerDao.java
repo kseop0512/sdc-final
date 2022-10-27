@@ -15,4 +15,9 @@ public class PartnerDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("partner.selectOnePartner",p);
 	}
+
+	public int changePwPartNer(Partner p) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("partner.changePw",p);
+	}
 }
