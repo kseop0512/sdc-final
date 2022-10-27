@@ -8,4 +8,9 @@ import org.springframework.stereotype.Repository;
 public class memberDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+
+	public int selectOneMemberId(String memberId) {
+		
+		return 0;
+	}
 }
