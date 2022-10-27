@@ -36,12 +36,35 @@ public class PartnerController {
 			// 비밀번호 틀림 -> sweetalert창
 			model.addAttribute("title","비밀번호 불일치");
 			model.addAttribute("msg","현재 비밀번호와 일치하지 않습니다");
-			model.addAttribute("icon","warning");
+			model.addAttribute("icon","error");
 			model.addAttribute("loc","/chkPwFrm.do");
 			return "common/msg";
 		}else {
 			// 현재비밀번호 일치 -> resetPassword 페이지 이동
 			return "partner/updatePw";
 		}
+	}
+	// 파트너 비밀번호 변경
+	@RequestMapping(value="/changePw.do")
+	public String changePw(Partner p, Model model) {
+		int result = service.changePwPartNer(p); // *PartNer : 암호화
+		if(result>0) {
+			model.addAttribute("title","비밀번호 변경 완료");
+			model.addAttribute("msg","새 비밀번호로 변경되었습니다.");
+			model.addAttribute("icon","success");
+			model.addAttribute("loc","/partnerMain.do");
+			return "common/msg";
+		}else {
+			model.addAttribute("title","비밀번호 변경 실패");
+			model.addAttribute("msg","비밀번호 변경 중 문제가 생겼습니다.");
+			model.addAttribute("icon","error");
+			model.addAttribute("loc","/chkPw.do");
+			return "common/msg";
+		}
+	}
+
+	@RequestMapping(value = "/joinPartnerFrm.do")
+	public String joinPartnerFrm() {
+		return "main/partner/joinPartnerFrm";
 	}
 }
