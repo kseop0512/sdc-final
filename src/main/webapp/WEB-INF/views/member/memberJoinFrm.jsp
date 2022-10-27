@@ -17,22 +17,22 @@
 			<h3>회원가입<br><span style="font-size: 12px">똑독캣의 회원이 되어보세요!</span></h3>
 			
 				<label for="mId">아이디</label><span id="idSpan"></span><br>
-				<input type="text" name="mId" id="mId" placeholder="아이디 입력(6~10자)"><br>
+				<input type="text" name="memberId" id="mId" placeholder="아이디 입력(6~10자)"><br>
 				<label for="mPw">비밀번호</label><span id="pwSpan"></span><br>
-				<input type="password" name="mPw" id="mPw" placeholder="비밀번호 입력(대소문자, 숫자, 특수문자를 포함한 10~20자)"><br>
+				<input type="password" name="memberPw" id="mPw" placeholder="비밀번호 입력(대소문자, 숫자, 특수문자를 포함한 10~20자)"><br>
 				<label for="mPwRe">비밀번호확인</label><span id="pwReSpan"></span><br>
-				<input type="password" name="mPwRe" id="mPwRe" placeholder="비밀번호 재입력"><br>
+				<input type="password" name="memberPwRe" id="mPwRe" placeholder="비밀번호 재입력"><br>
 				<label for="mName">이름</label><br>
-				<input type="text" id="mName" placeholder="본명을 입력해주세요"><br>
+				<input type="text" name="memberName" id="mName" placeholder="본명을 입력해주세요"><br>
 				
 			성별<br>
 				<div id="genderWrap">
 		          <label class="custom-radio-button__container">
-		            <input type="radio" name="radio" checked>
+		            <input type="radio" name="memberGender" checked>
 		            <span class="custom-radio-button designer"><img class="personImg" src="/resources/img/man.png"></span>
 		          </label>
 		          <label class="custom-radio-button__container">
-		            <input type="radio" name="radio">
+		            <input type="radio" name="memberGender">
 		            <span class="custom-radio-button"><img class="personImg" src="/resources/img/woman.png"></span>
 		          </label><br>
 		        </div>	
@@ -49,7 +49,7 @@
 	var joinFrmChks = 0; //모든 조건 만족 확인을 위한 변수
 	
 	//아이디 부분체크
-	$("[name=mId]").on("keyup",function(){
+	$("[name=memberId]").on("keyup",function(){
 		var joinFrmChksId = 0;
 		$("#idSpan").text("");
 		const memberId=$(this).val();
@@ -87,27 +87,43 @@
 	
 	
 	//비밀번호 유효성 조건 소문자/대문자/숫자로 8~12글자
-    $("[name=mPw]").on("keyup",function(){
+    $("[name=memberPw]").on("keyup",function(){
     	var joinFrmChksPw = 0;
+    	var joinFrmChksPwRe = 0;
 		$("#pwSpan").text("");
-		const pwReg=/^[a-zA-Z0-9]{8,12}$/;
+		const pwReg=/^[a-zA-Z0-9!@#$%^*+=-]{8,12}$/;
 	    const pwReg1=/[a-z]/;
 	    const pwReg2=/[A-Z]/;
 	    const pwReg3=/[0-9]/;
 	    
-	    const pw = $("mPw");
-	    const pwValue = pw.val();
-		if(pwReg.test(pwValue)){
+	    var pw = $("#mPw");
+	    var pwValue = pw.val();
+		if(pwReg.test(pwValue) && pwReg1.test(pwValue) && pwReg2.test(pwValue) && pwReg3.test(pwValue)){
 			$("#pwSpan").text("사용 가능한 비밀번호입니다.");
 			$("#pwSpan").css("color","blue");
-			var joinFrmChksPw = 1;
+			joinFrmChksPw = 1;
+			
+			//비밀번호확인 일치검사
+			$("[name=memberPwRe]").on("keyup",function(){
+				$("#pwReSpan").text("");
+				var pwRe = $("#mPwRe");
+				var pwReValue = pwRe.val();
+				if(pwValue == pwReValue){
+					$("#pwReSpan").text("비밀번호가 일치합니다.");
+					$("#pwReSpan").css("color","blue");
+					joinFrmChksPwRe = 1;	
+				}else{
+					$("#pwReSpan").text("비밀번호가 일치하지 않습니다.");
+					$("#pwReSpan").css("color","red");
+					joinFrmChksPwRe = 0;
+				}	
+			});
 		}else{
-			$("#pwSpan").text("비밀번호는 영어/숫자 조합으로 8~12글자입니다.");
+			$("#pwSpan").text("비밀번호는 소문자/대문자/숫자 조합으로 8~12글자입니다.");
 			$("#pwSpan").css("color","red");
-			var joinFrmChksPw = 1;
+			joinFrmChksPw = 0;
 		}
     });
-    
 	</script>
 </body>
 </html>
