@@ -26,25 +26,30 @@ window.addEventListener('DOMContentLoaded', event => {
 });
 
 // 파트너 비밀번호 변경 유효성 검사
-$("input[name=newPw]").on("focusout",function(){
+$("#password1").on("keyup",function(){
 	console.log("asdf");
 	const pwValue = $(this).val();
 	const pwComment = $(this).next();
 	
-  	const pwReg = /^[a-zA-Z0-9]{8,16}$/;
-	const pwReg1 = /^[a-z]/;
-	const pwReg2 = /^[A-Z]/;
-	const pwReg3 = /^[0-9]/;
-	const pwReg4 = /[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/;
-	$(this).attr("style", "margin-bottom: 0px;");
-	
-    if(pwReg.test(pwValue)&&pwReg1.test(pwValue)&&pwReg2.test(pwValue)&&pwReg3.test(pwValue)&&pwReg4.test(pwValue)){
-	    pwComment.text("Satisfied");
+  	const pwReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,16}/;
+
+    if(pwReg.test(pwValue)){
 	    pwComment.css("color","blue");
-    }else{
-	    pwComment.text("8~16자의 영문 대소문자, 숫자, 특수문자")
+    }else{	   
 	    pwComment.css("color","red");
-	  
-  }
+ 	 }
+});
+
+// 파트너 변경 비밀번호 일치해야만 버튼 활성화 -> update password
+$(".chkNewPw").on("click",function(){
+	const newPw = $("#password1").val();
+	const chkPw = $("#password2").val();
+	if (newPw == chkPw){		
+		const pId = $("#partnerId").val();
+		location.href = "/changePw.do?pId="+pId+"&&pPw="+chkPw;
+	}else{	
+		event.preventDefault();
+		alert("비밀번호가 일치하지 않습니다.");
+	}
 });
 

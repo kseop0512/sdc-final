@@ -53,7 +53,7 @@
                         <li><a href="#">Drop Down 4</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-link scrollto" href="index_my.html">마이페이지</a></li>
+                <li><a class="nav-link scrollto" href="/partnerMain.do">마이페이지</a></li>
                 <li><a class="nav-link scrollto" href="#contact">문의하기</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>

@@ -15,4 +15,9 @@ public class PartnerService {
 		// TODO Auto-generated method stub
 		return dao.selectOnePartNer(p);
 	}
+
+	public int changePwPartNer(Partner p) {
+		// TODO Auto-generated method stub
+		return dao.changePwPartNer(p);
+	}
 }
