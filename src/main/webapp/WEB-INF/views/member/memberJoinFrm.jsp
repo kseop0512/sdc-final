@@ -48,10 +48,9 @@
 	<script>
 	var joinFrmChks = 0; //모든 조건 만족 확인을 위한 변수
 	
-	
 	//아이디 부분체크
 	$("[name=mId]").on("keyup",function(){
-		joinFrmChks = 0;
+		var joinFrmChksId = 0;
 		$("#idSpan").text("");
 		const memberId=$(this).val();
 		//유효성 검사 먼저 수행
@@ -68,10 +67,11 @@
 					if(data=="1"){
 						$("#idSpan").text("이미 사용중인 아이디입니다.");
 						$("#idSpan").css("color","red");
+						joinFrmChksId = 0;
 					}else if(data=="0"){
 						$("#idSpan").text("사용가능한 아이디입니다.");
 						$("#idSpan").css("color","blue");
-						joinFrmChks++;
+						joinFrmChksId = 1;
 					}
 					
 					
@@ -85,6 +85,29 @@
 		
 	});
 	
+	
+	//비밀번호 유효성 조건 소문자/대문자/숫자로 8~12글자
+    $("[name=mPw]").on("keyup",function(){
+    	var joinFrmChksPw = 0;
+		$("#pwSpan").text("");
+		const pwReg=/^[a-zA-Z0-9]{8,12}$/;
+	    const pwReg1=/[a-z]/;
+	    const pwReg2=/[A-Z]/;
+	    const pwReg3=/[0-9]/;
+	    
+	    const pw = $("mPw");
+	    const pwValue = pw.val();
+		if(pwReg.test(pwValue)){
+			$("#pwSpan").text("사용 가능한 비밀번호입니다.");
+			$("#pwSpan").css("color","blue");
+			var joinFrmChksPw = 1;
+		}else{
+			$("#pwSpan").text("비밀번호는 영어/숫자 조합으로 8~12글자입니다.");
+			$("#pwSpan").css("color","red");
+			var joinFrmChksPw = 1;
+		}
+    }
+    
 	</script>
 </body>
 </html>
