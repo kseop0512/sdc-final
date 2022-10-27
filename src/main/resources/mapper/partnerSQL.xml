@@ -26,4 +26,7 @@
 		and p_pw = #{pPw}
 		</if>
 	</select>
+	<update id="changePw" parameterType="p">
+		update partner set p_pw = #{pPw} where p_id = #{pId}
+	</update>
 </mapper>
