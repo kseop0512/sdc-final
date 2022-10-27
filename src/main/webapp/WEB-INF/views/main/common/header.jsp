@@ -58,7 +58,7 @@
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
-        <a href="login.html" class="book-a-table-btn scrollto d-none d-lg-flex">LOGIN</a>
+        <a href="before_login.jsp" class="book-a-table-btn scrollto d-none d-lg-flex">LOGIN</a>
 
     </div>
 </header><!-- End Header -->
