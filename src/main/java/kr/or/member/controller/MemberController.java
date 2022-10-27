@@ -3,6 +3,7 @@ package kr.or.member.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.member.model.service.memberService;
 
@@ -16,13 +17,19 @@ public class MemberController {
 		return "member/memberJoinSuccess";
 	}
 	
-	@RequestMapping(value="memberJoinFrm.do")
+	@RequestMapping(value="memberJoinChkFrm.do")
 	public String memberJoinFrm() {
+		return "member/memberJoinChkFrm";
+	}
+	
+	@RequestMapping(value="memberJoinFrm.do")
+	public String memberJoin() {
 		return "member/memberJoinFrm";
 	}
 	
-	@RequestMapping(value="memberJoin.do")
-	public String memberJoin() {
-		return "member/memberJoin";
+	@ResponseBody
+	@RequestMapping(value="ajaxCheckMemberId.do")
+	public String ajaxCheckMemberId(String memberId) {
+		int result = service.selectOneMemberId(memberId);
 	}
 }

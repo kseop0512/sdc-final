@@ -9,4 +9,8 @@ import kr.or.member.model.dao.memberDao;
 public class memberService {
 	@Autowired
 	private memberDao dao;
+
+	public int selectOneMemberId(String memberId) {
+		return dao.selectOneMemberId(memberId);
+	}
 }
