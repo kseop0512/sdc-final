@@ -63,23 +63,6 @@ public class PartnerController {
 		}
 	}
 	// 파트너 비밀번호 변경
-	@RequestMapping(value="/changePw.do")
-	public String changePw(Partner p, Model model) {
-		int result = service.changePwPartNer(p); // *PartNer : 암호화
-		if(result>0) {
-			model.addAttribute("title","비밀번호 변경 완료");
-			model.addAttribute("msg","새 비밀번호로 변경되었습니다.");
-			model.addAttribute("icon","success");
-			model.addAttribute("loc","/partnerMain.do");
-			return "common/msg";
-		}else {
-			model.addAttribute("title","비밀번호 변경 실패");
-			model.addAttribute("msg","비밀번호 변경 중 문제가 생겼습니다.");
-			model.addAttribute("icon","error");
-			model.addAttribute("loc","/chkPw.do");
-			return "common/msg";
-		}
-	}
 
 	@RequestMapping(value = "/joinPartnerFrm.do")
 	public String joinPartnerFrm() {
