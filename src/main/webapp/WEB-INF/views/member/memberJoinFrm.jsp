@@ -17,7 +17,7 @@
 			<h3>회원가입<br><span style="font-size: 12px">똑독캣의 회원이 되어보세요!</span></h3>
 			
 				<label for="mId">아이디</label><span id="idSpan"></span><br>
-				<input type="text" name="mId" id="mId" placeholder="아이디 입력(6~10자)"><input type="button" value="중복 확인"><br>
+				<input type="text" name="mId" id="mId" placeholder="아이디 입력(6~10자)"><br>
 				<label for="mPw">비밀번호</label><span id="pwSpan"></span><br>
 				<input type="password" name="mPw" id="mPw" placeholder="비밀번호 입력(대소문자, 숫자, 특수문자를 포함한 10~20자)"><br>
 				<label for="mPwRe">비밀번호확인</label><span id="pwReSpan"></span><br>
@@ -46,29 +46,43 @@
 				</fieldset>
 			</form>
 	<script>
+	var joinFrmChks = 0; //모든 조건 만족 확인을 위한 변수
+	
+	
+	//아이디 부분체크
 	$("[name=mId]").on("keyup",function(){
+		joinFrmChks = 0;
+		$("#idSpan").text("");
 		const memberId=$(this).val();
 		//유효성 검사 먼저 수행
-		
-		
+		const idReg = /^[a-zA-Z0-9]{6,20}$/;
+		const id=$("#mId");
+		const idValue = id.val();
 		//유효성 검사 통과하면 중복체크
-		$.ajax({
-			url:"/ajaxCheckId.do",
-			type:"get",
-			data: {memberId:memberId},
-			success: function(data){
-				if(data=="1"){
-					$("#idSpan").text("이미 사용중인 아이디입니다.");
-					$("#idSpan").css("color","red");
-				}else if(data=="0"){
-					$("#idSpan").text("사용가능한 아이디입니다.");
-					$("#idSpan").css("color","blue");
+		if(idReg.test(idValue)){
+			$.ajax({
+				url:"/ajaxCheckMemberId.do",
+				type:"get",
+				data: {memberId:memberId},
+				success: function(data){
+					if(data=="1"){
+						$("#idSpan").text("이미 사용중인 아이디입니다.");
+						$("#idSpan").css("color","red");
+					}else if(data=="0"){
+						$("#idSpan").text("사용가능한 아이디입니다.");
+						$("#idSpan").css("color","blue");
+						joinFrmChks++;
+					}
+					
+					
 				}
 				
-				
-			}
-			
-		});
+			});
+		}else{
+			$("#idSpan").text("영어/숫자 조합으로 6~20글자입니다.");
+			$("#idSpan").css("color","red");
+		}
+		
 	});
 	
 	</script>

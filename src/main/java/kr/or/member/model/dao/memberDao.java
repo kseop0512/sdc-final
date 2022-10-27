@@ -10,7 +10,6 @@ public class memberDao {
 	private SqlSessionTemplate sqlSession;
 
 	public int selectOneMemberId(String memberId) {
-		
-		return 0;
+		return sqlSession.selectOne("member.selectOneMemberId", memberId);
 	}
 }

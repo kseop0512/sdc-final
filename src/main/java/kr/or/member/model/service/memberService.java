@@ -12,5 +12,6 @@ public class memberService {
 
 	public int selectOneMemberId(String memberId) {
 		return dao.selectOneMemberId(memberId);
+		
 	}
 }

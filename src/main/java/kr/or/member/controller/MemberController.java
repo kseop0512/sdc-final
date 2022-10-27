@@ -29,7 +29,8 @@ public class MemberController {
 	
 	@ResponseBody
 	@RequestMapping(value="ajaxCheckMemberId.do")
-	public String ajaxCheckMemberId(String memberId) {
+	public int ajaxCheckMemberId(String memberId) {
 		int result = service.selectOneMemberId(memberId);
+		return result;
 	}
 }

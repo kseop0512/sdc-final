@@ -1,3 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="member"></mapper>
+<mapper namespace="member">
+
+	<!-- 아이디 중복체크 ajax -->
+	<select id="selectOneMemberId" parameterType="String" resultType="int">
+		select count(*) from member_tbl where member_id=#{_parameter}
+	</select>
+
+
+</mapper>
