@@ -106,7 +106,7 @@
 			$("#pwSpan").css("color","red");
 			var joinFrmChksPw = 1;
 		}
-    }
+    });
     
 	</script>
 </body>

@@ -3,12 +3,12 @@ package kr.or.member.model.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.or.member.model.dao.memberDao;
+import kr.or.member.model.dao.MemberDao;
 
 @Service
-public class memberService {
+public class MemberService {
 	@Autowired
-	private memberDao dao;
+	private MemberDao dao;
 
 	public int selectOneMemberId(String memberId) {
 		return dao.selectOneMemberId(memberId);

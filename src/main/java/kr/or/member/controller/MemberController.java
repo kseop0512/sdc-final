@@ -5,12 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.or.member.model.service.memberService;
+import kr.or.member.model.service.MemberService;
 
 @Controller
 public class MemberController {
 	@Autowired
-	private memberService service;
+	private MemberService service;
 	
 	@RequestMapping(value="memberJoinSuccess.do")
 	public String memberJoinSuccess() {
