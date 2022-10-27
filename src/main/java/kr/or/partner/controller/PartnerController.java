@@ -62,4 +62,10 @@ public class PartnerController {
 			return "common/msg";
 		}
 	}
+	// 파트너 비밀번호 변경
+
+	@RequestMapping(value = "/joinPartnerFrm.do")
+	public String joinPartnerFrm() {
+		return "main/partner/joinPartnerFrm";
+	}
 }
