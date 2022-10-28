@@ -40,4 +40,9 @@ public class MemberController {
 		int result = service.selectOneMemberId(memberId);
 		return result;
 	}
+	
+	@RequestMapping(value="/memberMypage.do")
+	public String memberMypage() {
+		return "member/memberMypage";
+	}
 }

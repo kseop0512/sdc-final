@@ -1,0 +1,32 @@
+/* 마이페이지 왼쪽 메뉴 */
+#mypage-nav{
+    width: 200px;
+    position: fixed;
+    bottom: 250px;
+    transition-duration: 0.5s;
+}
+#mypage-nav.on{
+    position: absolute;
+    bottom: 180px;
+    transition-duration: 0.5s;
+}
+#mypage-nav>ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+#mypage-nav>ul>li>a{
+    display: block;
+    line-height: 60px;
+    text-align: center;
+    background-color: #26231d;
+    color: #fff;
+}
+#mypage-nav>ul>li>a:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #cda45e;
+    transition-duration: 0.3s;
+}
+#mypage-nav>ul>li>.active{
+    background-color: rgba(255, 255, 255, 0.2);
+}
