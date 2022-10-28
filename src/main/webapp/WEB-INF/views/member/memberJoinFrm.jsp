@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/member/memberJoin.css">
 </head>
 <body>
-	<form action="/joinSuccess.do" method="post">
+	<form action="/memberJoin.do" method="post">
 		<fieldset>
 			<h3>회원가입<br><span style="font-size: 12px">똑독캣의 회원이 되어보세요!</span></h3>
 			
@@ -28,11 +28,11 @@
 			성별<br>
 				<div id="genderWrap">
 		          <label class="custom-radio-button__container">
-		            <input type="radio" name="memberGender" checked>
+		            <input type="radio" name="genderRadio" value="M" checked>
 		            <span class="custom-radio-button designer"><img class="personImg" src="/resources/img/man.png"></span>
 		          </label>
 		          <label class="custom-radio-button__container">
-		            <input type="radio" name="memberGender">
+		            <input type="radio" name="genderRadio" value="F">
 		            <span class="custom-radio-button"><img class="personImg" src="/resources/img/woman.png"></span>
 		          </label><br>
 		        </div>	
@@ -43,11 +43,12 @@
 					<input type="text" name="memberAddr" id="mAddr" placeholder=""><br>
 					<label for="mPhone">전화번호</label><span id="phoneSpan"></span><br>
 					<input type="text" name="memberPhone" id="mPhone" placeholder="ex)01012340000 숫자만"><br>
-					<input type="submit" value="회원가입">
+					<input type="hidden" name="memberGender" value="">
+					<input type="submit" id="joinBtn" value="회원가입">
 				</fieldset>
 			</form>
 	<script type="text/javascript" src="/resources/js/member/memberJoinFrm.js">
-	 
+		
 	</script>
 </body>
 </html>
