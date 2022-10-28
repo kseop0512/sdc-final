@@ -72,5 +72,10 @@ public class PartnerController {
 	public String showProfile() {
 		return "partner/showProfile";
 	}
+	// 파트너 프로필변경 이동
+	@RequestMapping(value="/updateProfileFrm.do")
+	public String updateProfileFrm() {
+		return "partner/updateProfileFrm";
+	}
 	
 }

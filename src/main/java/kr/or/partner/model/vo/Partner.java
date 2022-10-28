@@ -1,5 +1,7 @@
 package kr.or.partner.model.vo;
 
+import java.util.ArrayList;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +29,7 @@ public class Partner {
 	private String approveDate;
 	private String license;
 	private String workExp;
+	private ArrayList<String> licenceArr;
 	
 	public String getApplyMotivBr() {
 		return applyMotiv.replaceAll("\r\n", "<br>");
