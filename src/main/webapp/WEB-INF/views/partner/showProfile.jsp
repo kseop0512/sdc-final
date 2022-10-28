@@ -14,13 +14,6 @@
         <link href="/resources/css/partnerStyles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
-    <style>
-     #profileTable{
-     	width: 1200px;
-     	margin: 0 auto;
-     }
-    </style>
-    
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
@@ -124,23 +117,23 @@
                             <li class="breadcrumb-item active">${sessionScope.m.pId }님 환영합니다.</li>
                         </ol>
                   	<div>
-                      <table id="profileTable" border="1">
+                      <table class="table table-bordered table-dark" style="width: 1200px; margin: 0 auto;">
                           <tr>
-                              <td rowspan="4" style="width: 20%; background-color: pink">프로필사진</td>
-                              <th style="width: 30%; background-color: grey">이름</th>
+                              <td rowspan="5" style="width: 20%;">프로필사진</td>
+                              <th style="width: 30%;">이름</th>
                               <td>신혜규</td>
                           </tr>
                           <tr>
                           	<th>생년월일</th>
-                          	<td>${sessionScope.m.pDob }</td>
+                          	<td>${sessionScope.p.pDob }</td>
                           </tr>
                           <tr>
                           	<th>주소</th>
-                          	<td>${sessionScope.m.pAddr }</td>
+                          	<td>${sessionScope.p.pAddr }</td>
                           </tr>
                           <tr>
                           	<th>전화번호</th>
-                          	<td>${sessionScope.m.pPhone }</td>
+                          	<td>${sessionScope.p.pPhone }</td>
                           </tr>
                       </table>
                   </div>
