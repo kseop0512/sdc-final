@@ -12,79 +12,42 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/member/memberJoin.css">
 </head>
 <body>
-	<form action="/join.do" method="post">
+	<form action="/joinSuccess.do" method="post">
 		<fieldset>
 			<h3>회원가입<br><span style="font-size: 12px">똑독캣의 회원이 되어보세요!</span></h3>
 			
 				<label for="mId">아이디</label><span id="idSpan"></span><br>
-				<input type="text" name="mId" id="mId" placeholder="아이디 입력(6~10자)"><br>
+				<input type="text" name="memberId" id="mId" placeholder="아이디 입력(6~10자)"><br>
 				<label for="mPw">비밀번호</label><span id="pwSpan"></span><br>
-				<input type="password" name="mPw" id="mPw" placeholder="비밀번호 입력(대소문자, 숫자, 특수문자를 포함한 10~20자)"><br>
+				<input type="password" name="memberPw" id="mPw" placeholder="비밀번호 입력(대소문자, 숫자, 특수문자를 포함한 10~20자)"><br>
 				<label for="mPwRe">비밀번호확인</label><span id="pwReSpan"></span><br>
-				<input type="password" name="mPwRe" id="mPwRe" placeholder="비밀번호 재입력"><br>
+				<input type="password" name="memberPwRe" id="mPwRe" placeholder="비밀번호 재입력"><br>
 				<label for="mName">이름</label><br>
-				<input type="text" id="mName" placeholder="본명을 입력해주세요"><br>
+				<input type="text" name="memberName" id="mName" placeholder="본명을 입력해주세요"><br>
 				
 			성별<br>
 				<div id="genderWrap">
 		          <label class="custom-radio-button__container">
-		            <input type="radio" name="radio" checked>
+		            <input type="radio" name="memberGender" checked>
 		            <span class="custom-radio-button designer"><img class="personImg" src="/resources/img/man.png"></span>
 		          </label>
 		          <label class="custom-radio-button__container">
-		            <input type="radio" name="radio">
+		            <input type="radio" name="memberGender">
 		            <span class="custom-radio-button"><img class="personImg" src="/resources/img/woman.png"></span>
 		          </label><br>
 		        </div>	
 		        
-					<label for="mBdate">생년월일</label><br>
-					<input type="text" id="mBdate" placeholder="ex)20221225 숫자8자리"><br>
+					<label for="mBdate">생년월일</label><span id="bdateSpan"></span><br>
+					<input type="text" name="memberBdate" id="mBdate" placeholder="ex)20221225 숫자8자리"><br>
 					<label for="mAddr">주소</label><br>
-					<input type="text" id="mAddr" placeholder=""><br>
-					<label for="mPhone">전화번호</label><br>
-					<input type="text" id="mPhone" placeholder="ex)01012340000 숫자만"><br>
+					<input type="text" name="memberAddr" id="mAddr" placeholder=""><br>
+					<label for="mPhone">전화번호</label><span id="phoneSpan"></span><br>
+					<input type="text" name="memberPhone" id="mPhone" placeholder="ex)01012340000 숫자만"><br>
+					<input type="submit" value="회원가입">
 				</fieldset>
 			</form>
-	<script>
-	var joinFrmChks = 0; //모든 조건 만족 확인을 위한 변수
-	
-	
-	//아이디 부분체크
-	$("[name=mId]").on("keyup",function(){
-		joinFrmChks = 0;
-		$("#idSpan").text("");
-		const memberId=$(this).val();
-		//유효성 검사 먼저 수행
-		const idReg = /^[a-zA-Z0-9]{6,20}$/;
-		const id=$("#mId");
-		const idValue = id.val();
-		//유효성 검사 통과하면 중복체크
-		if(idReg.test(idValue)){
-			$.ajax({
-				url:"/ajaxCheckMemberId.do",
-				type:"get",
-				data: {memberId:memberId},
-				success: function(data){
-					if(data=="1"){
-						$("#idSpan").text("이미 사용중인 아이디입니다.");
-						$("#idSpan").css("color","red");
-					}else if(data=="0"){
-						$("#idSpan").text("사용가능한 아이디입니다.");
-						$("#idSpan").css("color","blue");
-						joinFrmChks++;
-					}
-					
-					
-				}
-				
-			});
-		}else{
-			$("#idSpan").text("영어/숫자 조합으로 6~20글자입니다.");
-			$("#idSpan").css("color","red");
-		}
-		
-	});
-	
+	<script type="text/javascript" src="/resources/js/member/memberJoinFrm.js">
+	 
 	</script>
 </body>
 </html>
