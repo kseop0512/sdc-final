@@ -126,7 +126,7 @@
                                     	
                                         <form action="/chkPw.do" method="post">
                                             <div class="form-floating mb-3">
-                                                <input type="password" class="form-control" id="inputPw" name="pPw"/>
+                                                <input type="password" class="form-control" id="inputPw" name="pPw" placeholder="password"/>
                                                 <label for="inputPw">Enter your current password</label>
                                                 <input type="hidden" name="pId" value="zoeshin">
                                             </div>

@@ -63,9 +63,14 @@ public class PartnerController {
 		}
 	}
 	// 파트너 비밀번호 변경
-
 	@RequestMapping(value = "/joinPartnerFrm.do")
 	public String joinPartnerFrm() {
 		return "main/partner/joinPartnerFrm";
 	}
+	// 파트너 프로필 이동
+	@RequestMapping(value="/showProfile.do")
+	public String showProfile() {
+		return "partner/showProfile";
+	}
+	
 }

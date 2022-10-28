@@ -25,8 +25,16 @@ public class Partner {
 	private String applyMotiv;
 	private String applyDate;
 	private String approveDate;
+	private String license;
+	private String workExp;
 	
 	public String getApplyMotivBr() {
 		return applyMotiv.replaceAll("\r\n", "<br>");
+	}
+	public String getLicenseBr() {
+		return license.replaceAll("\r\n", "<br>");
+	}
+	public String getWorkExpBr() {
+		return workExp.replaceAll("\r\n", "<br>");
 	}
 }
