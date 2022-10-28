@@ -45,9 +45,21 @@ $("[name=memberPw]").on("keyup",function(){
     const pwReg1=/[a-z]/;
     const pwReg2=/[A-Z]/;
     const pwReg3=/[0-9]/;
-    
+    var pwRe = $("#mPwRe");
+	var pwReValue = pwRe.val();
     var pw = $("#mPw");
     var pwValue = pw.val();
+    if(pwReValue.length > 7){
+	    if(pwValue == pwReValue){
+			$("#pwReSpan").text("비밀번호가 일치합니다.");
+			$("#pwReSpan").css("color","blue");
+			joinFrmChksPwRe = 1;	
+		}else{
+			$("#pwReSpan").text("비밀번호가 일치하지 않습니다.");
+			$("#pwReSpan").css("color","red");
+			joinFrmChksPwRe = 0;
+		}
+	}
 	if(pwReg.test(pwValue) && pwReg1.test(pwValue) && pwReg2.test(pwValue) && pwReg3.test(pwValue)){
 		$("#pwSpan").text("사용 가능한 비밀번호입니다.");
 		$("#pwSpan").css("color","blue");
@@ -56,16 +68,17 @@ $("[name=memberPw]").on("keyup",function(){
 		//비밀번호확인 일치검사
 		$("[name=memberPwRe]").on("keyup",function(){
 			$("#pwReSpan").text("");
-			var pwRe = $("#mPwRe");
-			var pwReValue = pwRe.val();
-			if(pwValue == pwReValue){
-				$("#pwReSpan").text("비밀번호가 일치합니다.");
-				$("#pwReSpan").css("color","blue");
-				joinFrmChksPwRe = 1;	
-			}else{
-				$("#pwReSpan").text("비밀번호가 일치하지 않습니다.");
-				$("#pwReSpan").css("color","red");
-				joinFrmChksPwRe = 0;
+			
+			if(pwReValue.length > 7){
+				if(pwValue == pwReValue){
+					$("#pwReSpan").text("비밀번호가 일치합니다.");
+					$("#pwReSpan").css("color","blue");
+					joinFrmChksPwRe = 1;	
+				}else{
+					$("#pwReSpan").text("비밀번호가 일치하지 않습니다.");
+					$("#pwReSpan").css("color","red");
+					joinFrmChksPwRe = 0;
+				}
 			}	
 		});
 	}else{
@@ -73,6 +86,23 @@ $("[name=memberPw]").on("keyup",function(){
 		$("#pwSpan").css("color","red");
 		joinFrmChksPw = 0;
 	}
+	$("[name=memberPwRe]").on("keyup",function(){
+			$("#pwReSpan").text("");
+			var pwRe = $("#mPwRe");
+			var pwReValue = pwRe.val();
+			if(pwReValue.length > 7){
+				if(pwValue == pwReValue){
+					$("#pwReSpan").text("비밀번호가 일치합니다.");
+					$("#pwReSpan").css("color","blue");
+					joinFrmChksPwRe = 1;	
+				}else{
+					$("#pwReSpan").text("비밀번호가 일치하지 않습니다.");
+					$("#pwReSpan").css("color","red");
+					joinFrmChksPwRe = 0;
+				}
+			}	
+		});
+	
 });
 
 $("[name=memberBdate]").on("keyup",function(){
