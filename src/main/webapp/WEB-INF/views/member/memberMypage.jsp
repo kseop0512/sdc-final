@@ -37,7 +37,7 @@
 					</div>
 					<div id="content-wrap">
 						<div id="content">
-							<form action="#" method="post">
+							<form action="/memberUpdate.do" method="post">
 								<div>
 									<label for="memberId">아이디</label> <input type="text"
 										id="memberId" name="memberId" value="memberId" readonly
@@ -61,8 +61,8 @@
 										class="radio-label">여</label>
 								</div>
 								<div>
-									<label for="memberBday">생년월일</label> <input type="text"
-										id="memberBday" name="memberBday" value="memberBday"
+									<label for="memberBdate">생년월일</label> <input type="text"
+										id="memberBdate" name="memberBdate" value="memberBdate"
 										autocomplete="off">
 								</div>
 								<div>
