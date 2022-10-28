@@ -6,6 +6,19 @@
 	<select id="selectOneMemberId" parameterType="String" resultType="int">
 		select count(*) from member_tbl where member_id=#{_parameter}
 	</select>
-
-
+	
+	<!-- 회원가입 -->
+	<insert id="insertMember" parameterType="m">
+		insert into member_tbl values(
+		member_seq.nextval,
+		#{memberId} as member_id,
+		#{memberPw},
+		#{memberName},
+		#{memberGender},
+		#{memberBdate},
+		#{memberAddr},
+		#{memberPhone},
+		to_char(sysdate,'yyyymmdd')
+		)
+	</insert>
 </mapper>

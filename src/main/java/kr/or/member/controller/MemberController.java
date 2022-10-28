@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.member.model.service.MemberService;
+import kr.or.member.model.vo.Member;
 
 @Controller
 public class MemberController {
@@ -18,13 +19,19 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="memberJoinChkFrm.do")
-	public String memberJoinFrm() {
+	public String memberJoinChkFrm() {
 		return "member/memberJoinChkFrm";
 	}
 	
 	@RequestMapping(value="memberJoinFrm.do")
-	public String memberJoin() {
+	public String memberJoinFrm() {
 		return "member/memberJoinFrm";
+	}
+	
+	@RequestMapping(value="memberJoin.do")
+	public String memberJoin(Member m) {
+		int result = service.insertMember(m);
+		return "member/memberJoinSuccess";
 	}
 	
 	@ResponseBody
