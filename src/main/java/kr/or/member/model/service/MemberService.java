@@ -16,8 +16,15 @@ public class MemberService {
 		return dao.selectOneMemberId(memberId);
 	}
 	
+
 	@Transactional
 	public int insertMember(Member m) {
 		return dao.insertMember(m);
+	}
+	//유저용 로그인 화면
+	public Member selectOneMember(Member member) {
+		Member m = dao.selectOneMember(member);
+		return m;
+
 	}
 }

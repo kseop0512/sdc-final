@@ -1,5 +1,7 @@
 package kr.or.member.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,8 +48,34 @@ public class MemberController {
 		return result;
 	}
 	
+
 	@RequestMapping(value="/memberMypage.do")
 	public String memberMypage() {
 		return "member/memberMypage";
 	}
+	
+	
+	//로그인 폼 이동
+	@RequestMapping(value="/loginUserFrm.do")
+	public String loginUserFrm(){
+		return "main/common/loginUser";
+	}
+	
+	//유저 로그인 화면
+	@RequestMapping(value="/loginUser.do")
+	public String loginUser(Member member, HttpSession session) {
+		Member m = service.selectOneMember(member);
+		if(m!=null) {
+			session.setAttribute("m", m);
+		}
+		return "redirect:/";
+	}
+	
+	//유저 로그아웃
+	@RequestMapping(value="logoutUser.do")
+	public String logoutUser(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
+	
 }

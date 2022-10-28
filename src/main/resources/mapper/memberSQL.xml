@@ -6,6 +6,7 @@
 	<select id="selectOneMemberId" parameterType="String" resultType="int">
 		select count(*) from member_tbl where member_id=#{_parameter}
 	</select>
+
 	
 	<!-- 회원가입 -->
 	<insert id="insertMember" parameterType="m">
@@ -21,4 +22,26 @@
 		to_char(sysdate,'yyyymmdd')
 		)
 	</insert>
+
+	<!-- 유저용 로그인 -->
+	<select id="selectOneMember" parameterType="m" resultType="m">
+		select
+			member_no as memberNo,
+			member_name as memberName,
+			member_id as memberId,
+	  		member_pw as memberPw,
+	  		member_bday as memberBday,
+	  		member_phone as memberPhone,
+	  		member_addr as memberAddr,
+	  		member_gender as memberGender,
+	  		enroll_date as enrollDate
+		from member_tbl
+		where member_id=#{memberId}
+		<if test="memberPw != null">
+		and member_pw=#{memberPw}
+		</if>
+		<if test="memberAddr != null">
+		and member_addr=#{memberAddr}
+		</if>
+	</select>
 </mapper>

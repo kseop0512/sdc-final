@@ -15,7 +15,16 @@ public class MemberDao {
 		return sqlSession.selectOne("member.selectOneMemberId", memberId);
 	}
 
+
 	public int insertMember(Member m) {
 		return sqlSession.insert("member.insertMember", m);
+
+	}
+	
+	//유저용 로그인
+	public Member selectOneMember(Member member) {
+		Member m = sqlSession.selectOne("member.selectOneMember",member);
+		System.out.println("로그인완료");
+		return m;
 	}
 }
