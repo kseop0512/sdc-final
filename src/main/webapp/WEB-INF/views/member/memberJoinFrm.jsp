@@ -18,9 +18,9 @@
 			<label for="mId">아이디</label><span id="idSpan"></span><br>
 			<input type="text" name="memberId" id="mId" placeholder="아이디 입력(6~10자)"><br>
 			<label for="mPw">비밀번호</label><span id="pwSpan"></span><br>
-			<input type="text" name="memberPw" id="mPw" placeholder="비밀번호 입력(대소문자, 숫자, 특수문자를 포함한 10~20자)"><br>
+			<input type="password" name="memberPw" id="mPw" placeholder="비밀번호 입력(대소문자, 숫자, 특수문자를 포함한 10~20자)"><br>
 			<label for="mPwRe">비밀번호확인</label><span id="pwReSpan"></span><br>
-			<input type="text" name="memberPwRe" id="mPwRe" placeholder="비밀번호 재입력"><br>
+			<input type="password" name="memberPwRe" id="mPwRe" placeholder="비밀번호 재입력"><br>
 			<label for="mName">이름</label><br>
 			<input type="text" name="memberName" id="mName" placeholder="본명을 입력해주세요"><br>
 			성별<br>

@@ -14,11 +14,14 @@
 </style>
 <body>
 	<h1>회원가입 완료!!</h1>
-	<input type="button" id="backBtn" value="메인페이지로" style="background-color: lightgrey; font-weight:bolder; border:none">
-	<input type="button" id="addPet" value="펫등록하기" style="background-color: lightgrey; color:white; font-weight:bolder; border:none">
+	<input type="button" id="backBtn" value="로그인" style="background-color: lightgrey; font-weight:bolder; border:none">
+	<input type="button" id="addPet" value="펫등록" style="background-color: lightgrey; color:white; font-weight:bolder; border:none">
 	<script>
 		$("#backBtn").click(function(){
 			location.href="/";
+		});
+		$("#addPet").click(function(){
+			location.href="/petAddFrm.do";
 		});
 	</script>
 </body>

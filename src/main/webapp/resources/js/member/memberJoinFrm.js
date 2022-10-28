@@ -1,4 +1,5 @@
 var joinFrmChks = 0; //모든 조건 만족 확인을 위한 변수
+var joinFinalChk = 0;
 $("#mGender").attr("value","M");
 //아이디 부분체크
 $("[name=memberId]").on("keyup",function(){
@@ -33,6 +34,8 @@ $("[name=memberId]").on("keyup",function(){
 		$("#idSpan").text("영어/숫자 조합으로 6~20글자입니다.");
 		$("#idSpan").css("color","red");
 	}
+	joinFinalChk += joinFrmChks;
+	console.log(joinFinalChk);
 });
 
 
@@ -102,7 +105,8 @@ $("[name=memberPw]").on("keyup",function(){
 				}
 			}	
 		});
-	
+	joinFinalChk += joinFrmChks;
+	console.log(joinFinalChk);
 });
 
 $("[name=memberBdate]").on("keyup",function(){
@@ -117,6 +121,8 @@ $("[name=memberBdate]").on("keyup",function(){
 	}else{
 		joinFrmChks = 1;
 	}
+	joinFinalChk += joinFrmChks;
+	console.log(joinFinalChk);
 });
 
 $("[name=memberPhone]").on("keyup",function(){
@@ -131,6 +137,8 @@ $("[name=memberPhone]").on("keyup",function(){
 	}else{
 		joinFrmChks = 1;
 	}
+	joinFinalChk += joinFrmChks;
+	console.log(joinFinalChk);
 });
 
 $("#RadioF").click(function(){
@@ -143,7 +151,7 @@ $("#RadioM").click(function(){
 });
 
 $("#joinBtn").click(function(e){
-	if((joinFrmChks == 1) && (!$("#mAddr").val()=="") && (!$("#mName").val()=="") && (!$("#mPwRe").val()=="") && (!$("#mPw").val()=="")){
+	if((joinFinalChk >= 4) && (joinFrmChks == 1) && (!$("#mAddr").val()=="") && (!$("#mName").val()=="") && (!$("#mPwRe").val()=="") && (!$("#mPw").val()=="")){
 
 	}else{
 		e.preventDefault();
