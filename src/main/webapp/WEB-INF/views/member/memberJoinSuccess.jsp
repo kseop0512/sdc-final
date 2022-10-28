@@ -18,7 +18,7 @@
 	<input type="button" id="addPet" value="펫등록하기" style="background-color: lightgrey; color:white; font-weight:bolder; border:none">
 	<script>
 		$("#backBtn").click(function(){
-			location.href="/index.jsp";
+			location.href="/";
 		});
 	</script>
 </body>

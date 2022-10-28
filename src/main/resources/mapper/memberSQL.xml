@@ -11,13 +11,13 @@
 	<insert id="insertMember" parameterType="m">
 		insert into member_tbl values(
 		member_seq.nextval,
-		#{memberId} as member_id,
-		#{memberPw},
 		#{memberName},
-		#{memberGender},
+		#{memberId},
+		#{memberPw},
 		#{memberBdate},
-		#{memberAddr},
 		#{memberPhone},
+		#{memberAddr},
+		#{memberGender},
 		to_char(sysdate,'yyyymmdd')
 		)
 	</insert>
