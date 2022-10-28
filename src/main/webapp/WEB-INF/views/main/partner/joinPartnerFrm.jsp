@@ -35,6 +35,9 @@
     <section id="contact" class="contact" style="">
         <div class="container" data-aos="">
             <div class="row justify-content-center">
+                <form action="/" id="" name="" method="post" enctype="multipart/form-data">
+
+
                 <div class="col-lg-10 mt-lg-0">
                     <!-- <form action="forms/contact.php" method="post" role="form" class="php-email-form"> -->
                     <div class="row php-email-form">
@@ -51,7 +54,7 @@
                             <input type="password" class="form-control" name="pPw" id="pPw" placeholder="영어, 숫자, 특수문자 조합" required>
                         </div>
                         <div class="col-md-6 form-group mt-3">
-                            <label for="dob">생년월일 <span class="text-warning">*</span></label>
+                            <label for="dob">생년월일 <span class="text-warning">*</span> <small class="text-muted">03년 생부터 (만 18세이상)지원이 가능합니다.</small></label>
                             <input type="text" name="dob" class="form-control" id="dob" placeholder="예) 19940101" required>
                         </div>
                         <div class="col-md-6 form-group mt-3">
@@ -61,7 +64,7 @@
                         <div class="col-md-6 form-group mt-3">
                             <label for="pAddr">거주지 주소 <span class="text-warning">*</span></label>
                             <div class="input-group align-items-center">
-                                <input type="text" class="form-control" name="pAddr" id="pAddr" placeholder="" required>
+                                <input type="text" class="form-control" name="pAddr" id="pAddr" placeholder="" required readonly>
                                 <div class="input-group-append" style="margin-left:8px;">
                                     <button class="btn btn-secondary btn-addr-search" type="button" onclick="">검색</button>
                                 </div>
@@ -71,7 +74,7 @@
                             <label for="">성별 <span class="text-warning">*</span></label>
                             <div class="row">
                                 <div class="col">
-                                    <input type="radio" class="btn-check" name="pGender" id="gender1" checked>
+                                    <input type="radio" class="btn-check" name="pGender" id="gender1">
                                     <label class="btn col-md-12 btn-outline-secondary" for="gender1">남자</label>
                                 </div>
                                 <div class="col">
@@ -84,7 +87,9 @@
 
                     </div>
 
+                    <%--
                     <div class="row mt-5 php-email-form">
+
                         <div class="section-title">
                             <!-- <h2>파트너 지원</h2> -->
                             <p>2. 활동 정보</p>
@@ -137,65 +142,51 @@
                             </div>
                         </div>
                     </div>
-
+                    --%>
                     <div class="row mt-5 php-email-form">
                         <div class="section-title">
                             <!-- <h2>파트너 지원</h2> -->
                             <p>2. 반려 경험 및 경력</p>
                         </div>
 
-                        <div class="col col-md-6 form-group">
-                            <label for="">고양이 반려 경험</label>
-                            <div class="row mt-2">
-                                <div class="col-md-4">
-                                    <input type="radio" class="btn-check" name="catExp" id="catExpY" checked>
-                                    <label class="btn col-md-12 btn-outline-secondary" for="catExpY">있음</label>
-                                </div>
-                                <div class="col-md-4">
-                                    <input type="radio" class="btn-check " name="catExp" id="catExpN">
-                                    <label class="btn col-md-12 btn-outline-secondary" for="catExpN">없음</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col col-md-6 form-group">
-                            <label for="">강아지 반려 경험</label>
-                            <div class="row mt-2">
-                                <div class="col-md-4">
-                                    <input type="radio" class="btn-check" name="dogExp" id="dogExpY" checked>
-                                    <label class="btn col-md-12 btn-outline-secondary" for="dogExpY">있음</label>
-                                </div>
-                                <div class="col-md-4">
-                                    <input type="radio" class="btn-check " name="dogExp" id="dogExpN">
-                                    <label class="btn col-md-12 btn-outline-secondary" for="dogExpN">없음</label>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-12 form-group mt-4">
-                            <label for="">펫시터 활동 경력 <span class="text-warning">*</span></label>
+                        <div class="col col-md-12 form-group">
+                            <label for="">자격증 또는 교육수료 <span class="text-warning">*</span></label>
                             <div class="col mt-3">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="pCareer" id="pCareer1" value="c1" checked>
-                                    <label class="form-check-label" for="pCareer1">과거에 활동했지만, 현재는 활동하지 않음</label>
+                                    <input class="form-check-input" type="checkbox" name="license" id="license1" value="반려동물행동교정사 자격증">
+                                    <label class="form-check-label" for="license1">반려동물행동교정사 자격증</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="pCareer" id="pCareer2" value="c2">
-                                    <label class="form-check-label" for="pCareer2">현재도 활동하고 있음</label>
+                                    <input class="form-check-input" type="checkbox" name="license" id="license2" value="반려동물관리사 1급 자격증">
+                                    <label class="form-check-label" for="license2">반려동물관리사 1급 자격증</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="pCareer" id="pCareer3" value="c3">
-                                    <label class="form-check-label" for="pCareer3">타인의 강아지/고양이를 돌봐준 적이 있음</label>
+                                    <input class="form-check-input" type="checkbox" name="license" id="license3" value="반려동물행동상담사 2급 자격증">
+                                    <label class="form-check-label" for="license3">반려동물행동상담사 2급 자격증</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="pCareer" id="pCareer4" value="c4">
-                                    <label class="form-check-label" for="pCareer4">펫시터로 활동을 해본 적이 없음</label>
+                                    <input class="form-check-input" type="checkbox" name="license" id="license4" value="반려동물목욕관리사 2급 자격증">
+                                    <label class="form-check-label" for="license4">반려동물목욕관리사 2급 자격증</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="pCareer" id="pCareer5" value="c5">
-                                    <label class="form-check-label" for="pCareer5">직접입력</label>
+                                    <input class="form-check-input" type="checkbox" name="license" id="license5" value="전문 펫시터 자격증">
+                                    <label class="form-check-label" for="license5">전문 펫시터 자격증</label>
                                 </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="license" id="license6" value="펫시터 전문가 교육 수료">
+                                    <label class="form-check-label" for="license6">펫시터 전문가 교육 수료</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="license" id="license7" value="펫시터 직업 훈련 교육 수료">
+                                    <label class="form-check-label" for="license7">펫시터 직업 훈련 교육 수료</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 form-group mt-3">
+                            <label for="">펫시터 활동 경력 <span class="text-warning">*</span></label>
+                            <div class="col mt-3">
+                                <textarea class="form-control" id="workExp" rows="4"></textarea>
                             </div>
                         </div>
                     </div>
@@ -211,12 +202,20 @@
                                 <textarea class="form-control" id="applyMotive" rows="4"></textarea>
                             </div>
                         </div>
+
+                        <div class="col-md-12 form-group mt-4">
+                            <label for="">프로필 사진 <span class="text-warning">*</span></label>
+                            <div class="col mt-3">
+                                <input type="file" name="profileName">
+                            </div>
+                        </div>
+
                         <div class="col-md-12 form-group mt-4">
                             <label for="">동의 사항 <span class="text-warning">*</span></label>
                             <div class="col mt-3">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="agreement" id="agreement1" value="c1">
-                                    <label class="form-check-label" for="agreement1">개인정보 수집/이용에 동의합니다.</label>
+                                    <label class="form-check-label" for="agreement1">개인정보 <a href="">수집/이용에 동의</a>합니다.</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="agreement" id="agreement2" value="c2">
@@ -225,12 +224,7 @@
 
                             </div>
                         </div>
-                        <div class="col-md-12 form-group mt-4">
-                            <label for="">프로필 사진 <span class="text-warning">*</span></label>
-                            <div class="col mt-3">
-                                <input type="file" name="profileName">
-                            </div>
-                        </div>
+
                     </div>
                     <div class="row mt-5 php-email-form">
                         <div class="section-title">
@@ -248,11 +242,11 @@
                                         <p class="text-muted">* 사용가능한 메일 주소로 꼭 입력해주새요.</p>
                                     </div>
                                     <div class="resume-item">
-                                        <h4>자체 테스트 <span class="text-muted">(선택)</span></h4>
+                                        <h4>자체 테스트 <span class="text-warning">*</span></h4>
                                         <p>
                                             <em>자체 테스트 실시 후 결과에 따른 점수가 반영됩니다.</em>
                                         </p>
-                                        <button type="button" class="btn btn-primary">테스트 보러가기</button>
+                                        <button type="button" class="btn btn-primary">테스트 시작</button>
                                     </div>
                                     <div class="resume-item">
                                         <h4>펫시터 등록</h4>
@@ -267,9 +261,9 @@
                     </div>
                 </div>
                 <div class="text-center php-email-form border-top pt-5 mt-5">
-                    <button type="submit">지원서 보내기</button>
+                    <button type="submit" disabled>지원서 보내기</button>
                 </div>
-                <!-- </form> -->
+                </form>
             </div>
         </div>
         </div>
