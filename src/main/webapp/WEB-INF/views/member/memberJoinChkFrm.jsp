@@ -327,7 +327,7 @@
 			var chk1 = $(".chk").eq(0).is(":checked");
 			var chk2 = $(".chk").eq(1).is(":checked");
 			if((chk1) && (chk2)){
-				location.href="/memberJoin.do";
+				location.href="/memberJoinFrm.do";
 			}else{
 				alert("필수 약관에 동의해주세요.");
 			}

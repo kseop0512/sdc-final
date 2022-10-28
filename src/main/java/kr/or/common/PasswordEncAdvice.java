@@ -34,7 +34,7 @@ public class PasswordEncAdvice {
    
    
    //이용자 비밀번호 암호화  <아직 확인 못함>
-   /*
+   
    @Pointcut(value="execution(* kr.or.member.model.service.MemberService.*Member(kr.or.member.model.vo.Member))")
    public void memberEncPointcut() {}
    
@@ -48,5 +48,5 @@ public class PasswordEncAdvice {
          m.setMemberPw(encPw);
       }
    }
-   */
+   
 }

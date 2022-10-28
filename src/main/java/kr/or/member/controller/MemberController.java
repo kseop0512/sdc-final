@@ -13,29 +13,34 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	
-	@RequestMapping(value="memberJoinSuccess.do")
+	@RequestMapping(value="/memberJoinSuccess.do")
 	public String memberJoinSuccess() {
 		return "member/memberJoinSuccess";
 	}
 	
-	@RequestMapping(value="memberJoinChkFrm.do")
+	@RequestMapping(value="/memberJoinChkFrm.do")
 	public String memberJoinChkFrm() {
 		return "member/memberJoinChkFrm";
 	}
 	
-	@RequestMapping(value="memberJoinFrm.do")
+	@RequestMapping(value="/memberJoinFrm.do")
 	public String memberJoinFrm() {
 		return "member/memberJoinFrm";
 	}
 	
-	@RequestMapping(value="memberJoin.do")
+	@RequestMapping(value="/memberJoin.do")
 	public String memberJoin(Member m) {
+		System.out.println(m);
 		int result = service.insertMember(m);
-		return "member/memberJoinSuccess";
+		if (result > 0) {
+			return "member/memberJoinSuccess";
+		} else {
+			return "redirect:/";
+		}
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="ajaxCheckMemberId.do")
+	@RequestMapping(value="/ajaxCheckMemberId.do")
 	public int ajaxCheckMemberId(String memberId) {
 		int result = service.selectOneMemberId(memberId);
 		return result;
