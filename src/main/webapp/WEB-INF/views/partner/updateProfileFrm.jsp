@@ -73,7 +73,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/updatePartnerProfileFrm.do">프로필 변경</a>
+                                    <a class="nav-link" href="/showProfile.do">프로필 변경</a>
                                     <a class="nav-link" href="/chkPwFrm.do">비밀번호 변경</a>
                                     <a class="nav-link" href="login.html">파트너 탈퇴신청</a>
                                 </nav>
@@ -127,14 +127,18 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">파트너 프로필</h1>
+                        <h1 class="mt-4">파트너 프로필 수정</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">${sessionScope.p.pId }님 환영합니다.</li>
                         </ol>
                   	<div>
+                  	<form action="/updateProfile.do" method="post" enctype="multipart/form-data">
                       <table class="table table-bordered table-dark profileTable">
                           <tr>
-                              <td rowspan="5" style="width: 20%; background-color: #fff"><img src="/resources/img/dog.png"></td>
+                              <td rowspan="5" style="width: 20%;">
+                              	<img id="profileImg" src="/resources/img/dog.png">
+							    <input type="file" class="custom-file-input" name="profileFile" aria-describedby="inputGroupFileAddon01">
+                              </td>
                               <th>이름</th>
                               <td>신혜규${sessionScope.p.pName }</td>
                           </tr>
@@ -144,11 +148,14 @@
                           </tr>
                           <tr>
                           	<th>주소</th>
-                          	<td>${sessionScope.p.pAddr }</td>
+                          	<td>서울특별시 금천구 한내로62 2동 806호 내 우편번호는 몰랑 이게 이러케 뜨네 css천재한테물어봐야징${sessionScope.p.pAddr }
+                         	<button class="btn btn-secondary btn-addr-search" style="float: right;">찾기</button></td>
                           </tr>
                           <tr>
                           	<th>전화번호</th>
-                          	<td>${sessionScope.p.pPhone }</td>
+                          	<td>
+                          	<input type="text" name="pPhone" placeholder="01027850281${sessionScope.p.pPhone }" style="color: white; background-color: #212529;">
+                          	</td>
                           </tr>
                           <tr>
                           	<th>E-Mail</th>
@@ -168,27 +175,6 @@
                       		<td>${sessionScope.p.pPoint}</td>
                       	</tr>
                       </table>
-                      <table class="table profileTable" style="margin-top: 10px; text-align: center;">
-                      	<tr style="background-color: #f8f9fa;">
-                      		<th colspan="2" style="border-right: 1px solid">파트너 등급 기준</th>
-                      		<th>포인트 적립 기준</th>
-                      	</tr>
-                      	<tr>
-                      		<td>등급 C</td>
-                      		<td>0 point ~ 300 point</td>
-                      		<td style="border-left: 1px solid ;">서비스제공 마다 <span><strong>50</strong></span> point!</td>
-                      	</tr>
-                      	<tr>
-                      		<td>등급 B</td>
-                      		<td>301 point ~ 700 point</td>
-                      		<td style="border-left: 1px solid ;">이용자가 후기작성하면 <span><strong>30</strong></span> point!</td>
-                      	</tr>
-                      	<tr>
-                      		<td>등급 A</td>
-                      		<td>701 point ~</td>
-                      		<td style="border-left: 1px solid ;">파트너가 훈련일지/돌봄일지 <span><strong>30</strong></span> point!</td>
-                      	</tr>
-                      </table>
                       <table class="table table-bordered table-dark profileTable">
                       	<tr>
                       		<th>자격증</th>
@@ -199,9 +185,7 @@
                       		<td>${sessionScope.p.workExp }</td>
                       	</tr>
                       </table>
-                      <div class="profileTable">
-                      	<button type="button" class="btn btn-warning updateBtn" onClick="location.href='/updateProfileFrm.do'">내 정보 수정</button>
-                      </div>
+                      </form>
                   </div>
                   </div>
                 </main>
