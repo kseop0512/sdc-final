@@ -10,6 +10,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>파트너메인페이지</title>
+        <script src="http://code.jquery.com/jquery-3.6.1.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="/resources/css/partnerStyles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -23,10 +24,19 @@
     	.profileTable th{
     		width: 20%;
     		text-align: center;
+    		vertical-align: middle;
     	}
     	.updateBtn{
     		display: block;
     		margin: 0 auto;
+    		margin-top: 20px;
+    	}
+    	.inputStyle{
+    		color: white; 
+    		background-color: #212529; 
+    		width: 100%; height: 44px; 
+    		border: none;
+    		
     	}
     </style>
     <body class="sb-nav-fixed">
@@ -136,30 +146,33 @@
                       <table class="table table-bordered table-dark profileTable">
                           <tr>
                               <td rowspan="5" style="width: 20%;">
-                              	<img id="profileImg" src="/resources/img/dog.png">
-							    <input type="file" class="custom-file-input" name="profileFile" aria-describedby="inputGroupFileAddon01">
+                              	<img id="profileImg" src="/resources/img/dog.png" style="width:100%;">
+							    <input type="file" class="custom-file-input" name="profileFile" style="width: 100%;" accept=".jpg,.png,.jpeg,gif" onchange="loadImg(this);" aria-describedby="inputGroupFileAddon01">
                               </td>
                               <th>이름</th>
-                              <td>신혜규${sessionScope.p.pName }</td>
+                              <td colspan="2">
+                              	<input type="hidden" name="pNo" value="${sessionScope.p.pNo }">
+                              	신혜규${sessionScope.p.pName }
+                              </td>
                           </tr>
                           <tr>
                           	<th>생년월일</th>
-                          	<td>${sessionScope.p.pDob }</td>
+                          	<td colspan="2">${sessionScope.p.pDob }</td>
                           </tr>
                           <tr>
                           	<th>주소</th>
-                          	<td>서울특별시 금천구 한내로62 2동 806호 내 우편번호는 몰랑 이게 이러케 뜨네 css천재한테물어봐야징${sessionScope.p.pAddr }
-                         	<button class="btn btn-secondary btn-addr-search" style="float: right;">찾기</button></td>
+                          	<td><input type="text" name="pAddr" class="inputStyle" placeholder="css천재한테물어봐야징${sessionScope.p.pAddr }" value="${sessionScope.p.pAddr }"></td>
+                         	<td style="width:8%;padding: 0px; vertical-align: middle;"><button type="button"class="btn btn-secondary btn-addr-search" style="width: 100%;">찾기</button></td>
                           </tr>
                           <tr>
                           	<th>전화번호</th>
-                          	<td>
-                          	<input type="text" name="pPhone" placeholder="01027850281${sessionScope.p.pPhone }" style="color: white; background-color: #212529;">
+                          	<td style="padding: 0px;" colspan="2">
+                          	<input type="text" name="pPhone" placeholder="01027850281${sessionScope.p.pPhone }" class="inputStyle">
                           	</td>
                           </tr>
                           <tr>
                           	<th>E-Mail</th>
-                          	<td>${sessionScope.p.pEmail }</td>
+                          	<td colspan="2" style="padding: 0px;"><input type="text" name="pEmail" placeholder="${sessionScope.p.pEmail }" class="inputStyle"></td>
                           </tr>
                       </table>
                       <table class="table table-bordered table-dark profileTable">
@@ -178,19 +191,22 @@
                       <table class="table table-bordered table-dark profileTable">
                       	<tr>
                       		<th>자격증</th>
-                      		<td>for문으로 sessionScope.p.licenseArra 출력하기 / for문으로 sessionScope.p.licenseArra 출력하기 / for문으로 sessionScope.p.licenseArra 출력하기 / for문으로 sessionScope.p.licenseArra 출력하기</td>
+                      		<td><input type="hidden" name="license">for문으로 sessionScope.p.licenseArr 출력하기</td>
+                      		<td style="width: 8%; padding: 0px;vertical-align: middle;"><button type="button"class="btn btn-secondary" style="width:100%;">추가</button></td>
                       	</tr>
                       	<tr>
                       		<th>경력 사항</th>
-                      		<td>${sessionScope.p.workExp }</td>
+                      		<td colspan="2"><textarea name="workExp" style="width: 100%;">${sessionScope.p.workExp }</textarea></td>
                       	</tr>
                       </table>
+                      <button type="submit" class="btn btn-warning updateBtn">정보 수정</button>
                       </form>
                   </div>
                   </div>
                 </main>
             </div>
         </div>
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         <script src="/resources/js/partnerScripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     </body>

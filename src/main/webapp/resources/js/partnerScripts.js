@@ -25,9 +25,29 @@ window.addEventListener('DOMContentLoaded', event => {
 
 });
 
+
+
+// 주소API 열기
+$(".btn-addr-search").on("click", function() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+        	console.log(data);
+        	const roadAddr = data.roadAddress;
+        	const jibunAddr = data.jibunAddress;
+        	if(roadAddr != ''){
+        		const roadAddr = data.roadAddress;
+        		$("input[name=pAddr]").attr("value",roadAddr);
+        		console.log(roadAddr);
+        	}else if(jibunAddr !== ''){
+        		const jibunAddr = data.jibunAddress;
+        		$("input[name=pAddr]").attr("value",jibunAddr);
+        	}
+        }
+    }).open();
+});
+
 // 파트너 비밀번호 변경 유효성 검사
-$("#password1").on("keyup",function(){
-	console.log("asdf");
+ $("#password1").on("keyup",function(){
 	const pwValue = $(this).val();
 	const pwComment = $(this).next();
 	
@@ -53,3 +73,21 @@ $(".chkNewPw").on("click",function(){
 	}
 });
 
+// 파트너 등급기준 표 보여주기
+//$("#gradeTbl").on("click",function(){
+//	$(".gradeTable).show();
+//	$(".gradeTable).slideDown();
+// });
+
+// 프로필 변경사진 띄워주기
+function loadImg(f){
+	if(f.files.length!=0 && f.files[0]!=0){
+		const reader = new FileReader(); 
+		reader.readAsDataURL(f.files[0]);
+		reader.onload = function(e){
+			$("#profileImg").attr("src",e.target.result);
+		}
+	}else{
+		$("#profileImg").attr("src","");
+	}
+}

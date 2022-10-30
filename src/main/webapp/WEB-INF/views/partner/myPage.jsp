@@ -60,7 +60,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="/showProfile.do">파트너 프로필</a>
                                     <a class="nav-link" href="/chkPwFrm.do">비밀번호 변경</a>
-                                    <a class="nav-link" href="login.html">파트너 탈퇴신청</a>
+                                    <a class="nav-link" href="/uregisterFrm.do">파트너 탈퇴신청</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">

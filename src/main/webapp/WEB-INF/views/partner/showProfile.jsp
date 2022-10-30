@@ -10,6 +10,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>파트너메인페이지</title>
+        <script src="http://code.jquery.com/jquery-3.6.1.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="/resources/css/partnerStyles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -27,6 +28,11 @@
     	.updateBtn{
     		display: block;
     		margin: 0 auto;
+    	}
+    	.gradeTable{
+    		display: none;
+    		margin-top: 10px;
+    		text-align: center;
     	}
     </style>
     <body class="sb-nav-fixed">
@@ -75,7 +81,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="/updatePartnerProfileFrm.do">프로필 변경</a>
                                     <a class="nav-link" href="/chkPwFrm.do">비밀번호 변경</a>
-                                    <a class="nav-link" href="login.html">파트너 탈퇴신청</a>
+                                    <a class="nav-link" href="/unregisterFrm.do">파트너 탈퇴신청</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -162,13 +168,13 @@
                       		
                       	</tr>
                       	<tr>
-                      		<th>파트너 등급</th>
+                      		<th><span id="gradeTbl">파트너 등급    *</span></th>
                       		<td>${sessionScope.p.pGrade}</td>
-                      		<th>포인트</th>
+                      		<th>포인트    *</th>
                       		<td>${sessionScope.p.pPoint}</td>
                       	</tr>
                       </table>
-                      <table class="table profileTable" style="margin-top: 10px; text-align: center;">
+                      <table class="table profileTable gradeTable">
                       	<tr style="background-color: #f8f9fa;">
                       		<th colspan="2" style="border-right: 1px solid">파트너 등급 기준</th>
                       		<th>포인트 적립 기준</th>

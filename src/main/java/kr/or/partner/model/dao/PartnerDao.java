@@ -1,5 +1,8 @@
 package kr.or.partner.model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,5 +22,16 @@ public class PartnerDao {
 	public int changePwPartNer(Partner p) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("partner.changePw",p);
+	}
+
+	public int updateProfile(Partner p) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("partner.updateProfile",p);
+	}
+
+	public ArrayList<Partner> selectTrainers() {
+		// TODO Auto-generated method stub
+		List list = sqlSession.selectList("partner.selectTrainers");
+		return (ArrayList<Partner>) list;
 	}
 }
