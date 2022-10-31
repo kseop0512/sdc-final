@@ -1,12 +1,13 @@
-package kr.or.member.model.service;
+package kr.or.pet.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.or.member.model.dao.memberDao;
+import kr.or.pet.model.dao.PetDao;
 
 @Service
-public class memberService {
+public class PetService {
 	@Autowired
-	private memberDao dao;
+	private PetDao dao;
+	
 }

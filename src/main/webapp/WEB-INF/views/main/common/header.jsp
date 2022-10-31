@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!-- ======= Top Bar ======= -->
 <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex justify-content-center justify-content-md-between">
@@ -13,12 +13,13 @@
         <div class="languages d-none d-md-flex align-items-center">
             <ul>
                 <li>Kr</li>
-                <li><a href="#">예정</a></li>
+                <li><a href="#">Manager</a></li>
             </ul>
         </div>
     </div>
 </div>
 <!-- ======= Header ======= -->
+
 <header id="header" class="fixed-top d-flex align-items-cente">
 
     <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
@@ -26,7 +27,8 @@
         <h1 class="logo me-auto me-lg-0"><a href="/"><img class="img-logo" src="/resources/assets/img/logo-15수정본.png"/></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
+		
+		
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
                 <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
@@ -53,12 +55,24 @@
                         <li><a href="#">Drop Down 4</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-link scrollto" href="index_my.html">마이페이지</a></li>
+        <c:choose>
+        <c:when test="${empty sessionScope.m }">
+                <li><a class="nav-link scrollto" href="/memberMypage.do">마이페이지</a></li>
                 <li><a class="nav-link scrollto" href="#contact">문의하기</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
-        <a href="login.html" class="book-a-table-btn scrollto d-none d-lg-flex">LOGIN</a>
-
+        <a href="/loginUserFrm.do" class="book-a-table-btn scrollto d-none d-lg-flex">LOGIN</a>
+		</c:when>
+		
+		<c:otherwise>
+			<li><a class="nav-link scrollto" href="/partnerMain.do">마이페이지</a></li>
+                <li><a class="nav-link scrollto" href="#contact">문의하기</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+        <a href="/logoutUser.do" class="book-a-table-btn scrollto d-none d-lg-flex">LOGOUT</a>
+		</c:otherwise>
+	</c:choose>
     </div>
 </header><!-- End Header -->
