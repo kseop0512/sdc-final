@@ -14,7 +14,7 @@
 <body>
 	<!-- 헤더 -->
 	<jsp:include page="/WEB-INF/views/main/common/header.jsp"/>
-
+	<!-- main -->
 	<main id="main">
 		<section class="mypage">
 			<div class="mypage-container">
@@ -39,41 +39,38 @@
 						<div id="content">
 							<form action="/memberUpdate.do" method="post">
 								<div>
-									<label for="memberId">아이디</label> <input type="text"
-										id="memberId" name="memberId" value="memberId" readonly
-										autocomplete="off">
+									<label for="memberId">아이디</label>
+									<input type="text" id="memberId" name="memberId" value="memberId" readonly autocomplete="off">
 								</div>
 								<div>
-									<label for="memberPw">비밀번호</label> <input type="text"
-										id="memberPw" name="memberPw" value="memberPw"
-										autocomplete="off">
+									<label for="memberPw">비밀번호</label>
+									<input type="password" id="memberPw" name="memberPw" value="memberPw" autocomplete="off">
+									<span id="pwSpan"></span>
 								</div>
 								<div>
-									<label for="memberName">이름</label> <input type="text"
-										id="memberName" name="memberName" value="memberName"
-										autocomplete="off">
+									<label for="memberName">이름</label>
+									<input type="text" id="memberName" name="memberName" value="memberName" autocomplete="off">
 								</div>
 								<div id="gender-div">
-									<label>성별</label> <input type="radio" id="m"
-										name="memberGender" value="m"> <label for="m"
-										class="radio-label">남</label> <input type="radio" id="f"
-										name="memberGender" value="f"> <label for="f"
-										class="radio-label">여</label>
+									<label>성별</label>
+									<input type="radio" id="m" name="memberGender" value="m">
+									<label for="m" class="radio-label">남</label>
+									<input type="radio" id="f" name="memberGender" value="f">
+									<label for="f" class="radio-label">여</label>
 								</div>
 								<div>
-									<label for="memberBdate">생년월일</label> <input type="text"
-										id="memberBdate" name="memberBdate" value="memberBdate"
-										autocomplete="off">
+									<label for="memberBdate">생년월일</label>
+									<input type="text" id="memberBdate" name="memberBdate" value="memberBdate" autocomplete="off">
+									<span id="bdateSpan"></span>
 								</div>
 								<div>
-									<label for="memberAddr">주소</label> <input type="text"
-										id="memberAddr" name="memberAddr" value="memberAddr"
-										autocomplete="off">
+									<label for="memberAddr">주소</label>
+									<input type="text" id="memberAddr" name="memberAddr" value="memberAddr" autocomplete="off">
 								</div>
 								<div>
-									<label for="memberPhone">전화번호</label> <input type="text"
-										id="memberPhone" name="memberPhone" value="memberPhone"
-										autocomplete="off">
+									<label for="memberPhone">전화번호</label>
+									<input type="text" id="memberPhone" name="memberPhone" value="memberPhone" autocomplete="off">
+									<span id="phoneSpan"></span>
 								</div>
 								<div>
 									<input type="submit" value="정보수정">
@@ -89,7 +86,8 @@
 
 	<!-- 푸터 -->
 	<jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
-	<!-- 마이페이지 메뉴 JS -->
+	<!-- 마이페이지 JS -->
 	<script type="text/javascript" src="/resources/js/member/mypage_nav.js"></script>
+	<script type="text/javascript" src="/resources/js/member/mypage_myinfo.js"></script>
 </body>
 </html>
