@@ -14,7 +14,13 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
-	
+		<!-- mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+
 		<!-- Websocket 사용을 위한 라이브러리(spring-websocket, jackson-databind) -->
 		<!-- spring-websocket -->
 		<dependency>
