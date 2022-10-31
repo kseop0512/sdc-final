@@ -1248,6 +1248,14 @@ section {
 /*--------------------------------------------------------------
 # Book A Table
 --------------------------------------------------------------*/
+#loginBack{
+	background-image: url("/resources/assets/img/WELC.png");
+	background-repeat: no-repeat;
+	background-position: right center;
+	background-size: contain;
+	/*웰시코기 위치 움직이게 만드려는 코드*/
+}
+
 .book-a-table .php-email-form {
   width: 100%;
 }

@@ -20,7 +20,7 @@
   <br>
   <!-- ======= Book A Table Section ======= -->
   <section id="book-a-table" class="book-a-table section-bg1">
-    <div class="container" data-aos="fade-up">
+    <div class="container" data-aos="fade-up" id="loginBack">
 
       <div class="section-title">
         <h2>LOGIN</h2>
@@ -30,10 +30,10 @@
       <form action="/loginUser.do" method="post" role="form" data-aos="fade-up" data-aos-delay="100">
         <div class="row">
           <div class="col-lg-4 col-md-6 form-group">
-            ID <input type="text" name="memberId" class="form-control" id="memberId" placeholder="Your ID" >
+            ID <input type="text" name="memberId" class="form-control" id="memberId" placeholder="Your ID" style="background-color: #0c0b09;border-color: #625b4b;color:#aaaaaa;"autocomplete="off">
           </div>
           <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-            PASSWORD <input type="password" class="form-control" name="memberPw" id="memberPw" placeholder="Your PASSWORD">
+            PASSWORD <input type="password" class="form-control" name="memberPw" id="memberPw" placeholder="Your PASSWORD" style="background-color: #0c0b09;border-color: #625b4b;color:#aaaaaa;" autocomplete="off">
           </div>
           <div class="submit-btn">
             <a href="#">회원가입</a>
@@ -41,11 +41,11 @@
             <a href="/findPwPage.do" id="findPwBtn">/비밀번호 찾기</a>
           </div>
           <br>
-        <div class="text-center"><input type="submit" class="submitBtn loginBtn" value="LOGIN"></div>
+          <br>
+          <br>
+          <br>
+        <div class="text-center"><input type="submit" class="submitBtn loginBtn" value="LOGIN" style="background: #cda45e;border: 0;padding: 10px 35px;color: #fff;transition: 0.4s;border-radius: 50px;"></div>
       </form>
-		<div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-	        <img src="assets/img/WELC.png" alt="" class="img-fluid" style="width: 200px; height: 200px;">
-	    </div>
     </div>
   </section><!-- End Book A Table Section -->
 	

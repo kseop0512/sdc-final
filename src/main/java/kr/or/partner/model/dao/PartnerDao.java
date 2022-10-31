@@ -20,4 +20,13 @@ public class PartnerDao {
 		// TODO Auto-generated method stub
 		return sqlSession.update("partner.changePw",p);
 	}
+	
+	/*
+	public Partner selectOnepartner(Partner partner) {
+		Partner p = sqlSession.selectOne("partner.selectOnepartner",partner);
+		System.out.println("파트너 로그인완료");
+		System.out.println(partner.getPEmail());
+		return p;
+	}
+	*/
 }

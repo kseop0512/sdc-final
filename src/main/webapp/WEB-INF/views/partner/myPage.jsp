@@ -35,7 +35,7 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/">SDC홈페이지</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">로그아웃</a></li>
+                        <li><a class="dropdown-item" href="/logoutPartner.do">로그아웃</a></li>
                     </ul>
                 </li>
             </ul>
@@ -105,7 +105,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        	${sessionScope.m.pId }
+                        	 ${sessionScope.p.PName }
                     </div>
                 </nav>
             </div>
@@ -114,7 +114,7 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Dashboard</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">${sessionScope.m.pId }님 환영합니다.</li>
+                            <li class="breadcrumb-item active">${sessionScope.p.PName }님 환영합니다.</li>
                         </ol>
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
