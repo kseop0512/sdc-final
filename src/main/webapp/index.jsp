@@ -20,7 +20,7 @@
 					<h2>Hello, Welcome to Ddok Dog&Cat!</h2>
 					<div class="btns">
 						<a href="#menu" class="btn-menu animated fadeInUp scrollto">Our Service</a>
-						<a href="before_login.jsp" class="btn-book animated fadeInUp scrollto">LOGIN</a>
+						<a href="#chefs" class="btn-book animated fadeInUp scrollto">INFO</a>
 					</div>
 				</div>
 				<div class="col-lg-4 d-flex align-items-center justify-content-center position-relative" data-aos="zoom-in" data-aos-delay="200">

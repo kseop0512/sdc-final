@@ -6,19 +6,54 @@
 	<select id="selectOneMemberId" parameterType="String" resultType="int">
 		select count(*) from member_tbl where member_id=#{_parameter}
 	</select>
+
 	
 	<!-- 회원가입 -->
 	<insert id="insertMember" parameterType="m">
 		insert into member_tbl values(
 		member_seq.nextval,
-		#{memberId} as member_id,
-		#{memberPw},
 		#{memberName},
-		#{memberGender},
+		#{memberId},
+		#{memberPw},
 		#{memberBdate},
-		#{memberAddr},
 		#{memberPhone},
+		#{memberAddr},
+		#{memberGender},
 		to_char(sysdate,'yyyymmdd')
 		)
 	</insert>
+
+	<!-- 유저용 로그인 -->
+	<select id="selectOneMember" parameterType="m" resultType="m">
+		select
+			member_no as memberNo,
+			member_name as memberName,
+			member_id as memberId,
+	  		member_pw as memberPw,
+	  		member_bday as memberBday,
+	  		member_phone as memberPhone,
+	  		member_addr as memberAddr,
+	  		member_gender as memberGender,
+	  		enroll_date as enrollDate
+		from member_tbl
+		where member_id=#{memberId}
+		<if test="memberPw != null">
+		and member_pw=#{memberPw}
+		</if>
+		<if test="memberAddr != null">
+		and member_addr=#{memberAddr}
+		</if>
+	</select>
+	
+	<!-- 회원정보수정 -->
+	<update id="updateMember" parameterType="m">
+		update member_tbl set
+			member_pw = #{memberPw},
+			member_bday = #{memberBdate},
+			member_phone = #{memberPhone},
+			member_addr = #{memberAddr},
+			member_gender = #{memberGender}
+		where member_id = #{memberId}
+	</update>
+	
 </mapper>
