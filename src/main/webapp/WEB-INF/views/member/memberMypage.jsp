@@ -56,7 +56,7 @@
 									<input type="hidden" value="${sessionScope.m.memberGender }" id="mGender">
 									<input type="radio" id="m" name="memberGender" value="M">
 									<label for="m" class="radio-label">남</label>
-									<input type="radio" id="f" name="memberGender" value="F">
+									<input type="radio" id="f" name="memberGender" value="F"> 
 									<label for="f" class="radio-label">여</label>
 								</div>
 								<div>
