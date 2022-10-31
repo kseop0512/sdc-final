@@ -27,8 +27,8 @@
         <h1 class="logo me-auto me-lg-0"><a href="/"><img class="img-logo" src="/resources/assets/img/logo-15수정본.png"/></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-		
-		
+
+
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
                 <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
@@ -50,9 +50,9 @@
                                 <li><a href="#">파트너(훈련사) 지원</a></li>-->
                             </ul>
                         </li>
-                        <li><a href="/joinPetSitterPartnerFrm.do">파트너(펫시터) 지원</a></li>
-                        <li><a href="/joinTrainerPartnerFrm">파트너(훈련사) 지원</a></li>
-                        <li><a href="#">Drop Down 4</a></li>
+                        <li><a href="#">파트너(펫시터) 지원</a></li>
+                        <li><a href="#">파트너(훈련사) 지원</a></li>
+                        <li><a href="/adminMemberList.do">Drop Down 4</a></li>
                     </ul>
                 </li>
         <c:choose>
