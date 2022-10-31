@@ -52,7 +52,7 @@
                         </li>
                         <li><a href="#">파트너(펫시터) 지원</a></li>
                         <li><a href="#">파트너(훈련사) 지원</a></li>
-                        <li><a href="#">Drop Down 4</a></li>
+                        <li><a href="/adminMemberList.do">Drop Down 4</a></li>
                     </ul>
                 </li>
         <c:choose>
