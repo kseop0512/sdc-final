@@ -98,5 +98,8 @@
 		</if>
 	</select>
 	-->
-
+	<!-- 관리자P 파트너 회원수 -->
+	<select id="selectPartner" resultType="int">
+		select count(*) as cnt from partner
+	</select>
 </mapper>

@@ -56,4 +56,7 @@
 		where member_id = #{memberId}
 	</update>
 	
+	<select id="selectUserList" resultType="int">
+		select count(*) as cnt from member_tbl
+	</select>
 </mapper>

@@ -38,4 +38,13 @@ public class MemberService {
 			return null;
 		}
 	}
+
+	//관리자 P 회원 수
+	public int selectMemberList() {
+		 return dao.selectUserList();
+	}
+	//관리자 P 파트너 수 
+	public int selectPartnerList() {
+		return dao.selectPartnerCount() ;
+	}
 }

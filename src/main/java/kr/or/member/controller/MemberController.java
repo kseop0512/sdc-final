@@ -108,4 +108,16 @@ public class MemberController {
 	public String adminMemberList() {
 		return "manager/adminMemberList";
 	}
+	
+	//유저리스트 회원 수 
+	@RequestMapping(value="/selectUserList.do")
+	public String selectUserList(Model model) {
+		int result = service.selectMemberList();
+		int result2 = service.selectPartnerList();
+		model.addAttribute("count", result);
+		model.addAttribute("pCount", result2);
+		return "manager/adminMemberList";
+	}
+	
+	
 }
