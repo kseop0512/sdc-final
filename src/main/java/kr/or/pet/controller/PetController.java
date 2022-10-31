@@ -15,4 +15,14 @@ public class PetController {
 	public String petAddFrm() {
 		return "pet/petAddFrm";
 	}
+	
+	@RequestMapping(value="/petDogAddFrm.do")
+	public String petDogAddFrm() {
+		return "pet/petDogAddFrm";
+	}
+
+	@RequestMapping(value="/petCatAddFrm.do")
+	public String petCatAddFrm() {
+		return "pet/petCatAddFrm";
+	}
 }
