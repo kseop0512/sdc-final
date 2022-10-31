@@ -34,4 +34,15 @@ public class PartnerDao {
 		List list = sqlSession.selectList("partner.selectTrainers");
 		return (ArrayList<Partner>) list;
 	}
+
+	
+	/*
+	public Partner selectOnepartner(Partner partner) {
+		Partner p = sqlSession.selectOne("partner.selectOnepartner",partner);
+		System.out.println("파트너 로그인완료");
+		System.out.println(partner.getPEmail());
+		return p;
+	}
+	*/
+
 }

@@ -1,6 +1,7 @@
 package kr.or.partner.controller;
 
 
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,13 +11,19 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
+import javax.servlet.http.HttpSession;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+
 import common.FileRename;
+
+import kr.or.member.model.vo.Member;
 import kr.or.partner.model.service.PartnerService;
 import kr.or.partner.model.vo.Partner;
 
@@ -145,4 +152,32 @@ public class PartnerController {
 	public String trainerBoardFrm() {
 		return "partner/trainerBoardFrm";
 	}
+
+	//파트너용 로그인 기능
+		//로그인 폼 이동
+		@RequestMapping(value="/loginPartnerFrm.do")
+		public String loginUserFrm(){
+			return "main/common/loginPartner";
+		}
+		
+		//파트너 로그인 화면
+		@RequestMapping(value="/loginPartner.do")
+		public String loginpartner(Partner partner, HttpSession session) {
+			Partner p = service.selectOnePartNer(partner);
+			if(p!=null) {
+				session.setAttribute("p", p);
+				System.out.println(session);
+			}else {
+				System.out.println("값이 없어요");
+			}
+			return "redirect:/";
+		}
+		
+		//파트너 로그아웃
+		@RequestMapping(value="logoutPartner.do")
+		public String logoutpartner(HttpSession session) {
+			session.invalidate();
+			return "redirect:/";
+		}
+
 }
