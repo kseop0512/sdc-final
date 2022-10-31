@@ -12,6 +12,7 @@
         .contact .php-email-form input[type=checkbox] {
             height:1em;
         }
+        #preview{height:120px;object-fit: contain}
     </style>
 </head>
 <body>
@@ -47,15 +48,21 @@
                         </div>
                         <div class="col col-md-6 form-group">
                             <label for="pId">지원자 이메일 <span class="text-warning">*</span></label>
-                            <input type="text" name="pId" class="form-control" id="pId" placeholder="name@example.com" required>
+                            <div class="input-group align-items-center">
+
+                                <input type="text" name="pId" class="form-control" id="pId" placeholder="name@example.com" required>
+                                <div class="input-group-append" style="margin-left:8px;">
+                                    <button class="btn btn-secondary btn-check-mail" type="button" onclick="checkPartnerMail(this)">인증 </button>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6 form-group mt-3 mt-md-0">
                             <label for="pPw">비밀번호 <span class="text-warning">*</span></label>
                             <input type="password" class="form-control" name="pPw" id="pPw" placeholder="영어, 숫자, 특수문자 조합" required>
                         </div>
                         <div class="col-md-6 form-group mt-3">
-                            <label for="dob">생년월일 <span class="text-warning">*</span> <small class="text-muted">03년 생부터 (만 18세이상)지원이 가능합니다.</small></label>
-                            <input type="text" name="dob" class="form-control" id="dob" placeholder="예) 19940101" required>
+                            <label for="pDob">생년월일 <span class="text-warning">*</span> <small class="text-muted">03년 생부터 (만 18세이상)지원이 가능합니다.</small></label>
+                            <input type="text" name="pDob" class="form-control" id="pDob" placeholder="예) 19940101" required>
                         </div>
                         <div class="col-md-6 form-group mt-3">
                             <label for="pPhone">연락처 <span class="text-warning">*</span></label>
@@ -186,7 +193,7 @@
                         <div class="col-md-12 form-group mt-3">
                             <label for="">펫시터 활동 경력 <span class="text-warning">*</span></label>
                             <div class="col mt-3">
-                                <textarea class="form-control" id="workExp" rows="4"></textarea>
+                                <textarea class="form-control" id="workExp" name="workExp" rows="4"></textarea>
                             </div>
                         </div>
                     </div>
@@ -199,14 +206,15 @@
                         <div class="col col-md-12 form-group">
                             <label for="applyMotive">지원동기 <span class="text-warning">*</span></label>
                             <div class="col mt-3">
-                                <textarea class="form-control" id="applyMotive" rows="4"></textarea>
+                                <textarea class="form-control" id="applyMotive" name="applyMotiv" rows="4"></textarea>
                             </div>
                         </div>
 
                         <div class="col-md-12 form-group mt-4">
                             <label for="">프로필 사진 <span class="text-warning">*</span></label>
                             <div class="col mt-3">
-                                <input type="file" name="profileName">
+                                <input type="file" name="profilename" onchange="">
+                                <img src="" alt="" id="preview">
                             </div>
                         </div>
 
@@ -253,7 +261,6 @@
                                         <p>
                                             <em>본인 인증, 관리자 승인 메일을 받으신 분들만 SDC 펫시터로 활동할 수 있습니다.</em>
                                         </p>
-
                                     </div>
                                 </div>
                             </div>
@@ -261,7 +268,7 @@
                     </div>
                 </div>
                 <div class="text-center php-email-form border-top pt-5 mt-5">
-                    <button type="submit" disabled>지원서 보내기</button>
+                    <button type="button" class="btn-complete">지원서 보내기</button>
                 </div>
                 </form>
             </div>
