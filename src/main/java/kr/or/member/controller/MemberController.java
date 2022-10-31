@@ -100,6 +100,6 @@ public class MemberController {
 	//관리자 페이지 확인용
 	@RequestMapping(value="/adminMemberList.do")
 	public String adminMemberList() {
-		return "manager/adminIndex";
+		return "manager/adminMemberList";
 	}
 }

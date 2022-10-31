@@ -27,8 +27,8 @@
         <h1 class="logo me-auto me-lg-0"><a href="/"><img class="img-logo" src="/resources/assets/img/logo-15수정본.png"/></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-		
-		
+
+
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
                 <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
