@@ -30,7 +30,7 @@
 			member_name as memberName,
 			member_id as memberId,
 	  		member_pw as memberPw,
-	  		member_bday as memberBday,
+	  		member_bday as memberBdate,
 	  		member_phone as memberPhone,
 	  		member_addr as memberAddr,
 	  		member_gender as memberGender,

@@ -55,6 +55,13 @@ public class MemberController {
 	}
 	
 	
+	
+	//메인에서 로그인 버튼 누르면 나오는 첫 페이지 이동
+	@RequestMapping(value="/beforeLogin.do")
+	public String beforeLogin(){
+		return "main/common/beforeLogin";
+	}
+	
 	//로그인 폼 이동
 	@RequestMapping(value="/loginUserFrm.do")
 	public String loginUserFrm(){

@@ -16,7 +16,17 @@
 		<div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
 			<div class="row">
 				<div class="col-lg-8">
-					<h1>안녕하세요 <span>똑독캣에 오신걸 환영합니다</span></h1>
+				<c:choose>
+					<c:when test="${not empty sessionScope.m }">
+						<h1>안녕하세요  ${sessionScope.m.memberName }님 <span>똑독캣에 오신걸 환영합니다</span></h1>
+					</c:when>
+					<c:when test="${not empty sessionScope.p }">
+						<h1>안녕하세요  ${sessionScope.p.PName }님 <span>똑독캣에 오신걸 환영합니다</span></h1>
+					</c:when>
+					<c:otherwise>
+						<h1>안녕하세요  <span>똑독캣에 오신걸 환영합니다</span></h1>
+					</c:otherwise>
+				</c:choose>	
 					<h2>Hello, Welcome to Ddok Dog&Cat!</h2>
 					<div class="btns">
 						<a href="#menu" class="btn-menu animated fadeInUp scrollto">Our Service</a>

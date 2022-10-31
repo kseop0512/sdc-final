@@ -31,12 +31,12 @@
 		
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
-                <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                <li><a class="nav-link scrollto" href="#about">About</a></li>
-                <li><a class="nav-link scrollto" href="#menu">산책&돌봄서비스</a></li>
-                <li><a class="nav-link scrollto" href="#specials">세부정보</a></li>
-                <li><a class="nav-link scrollto" href="#chefs">훈련사정보</a></li>
-                <li><a class="nav-link scrollto" href="#gallery">갤러리</a></li>
+                <li><a class="nav-link scrollto active" href="/#hero">Home</a></li>
+                <li><a class="nav-link scrollto" href="/#about">About</a></li>
+                <li><a class="nav-link scrollto" href="/#menu">산책&돌봄서비스</a></li>
+                <li><a class="nav-link scrollto" href="/#specials">세부정보</a></li>
+                <li><a class="nav-link scrollto" href="/#chefs">훈련사정보</a></li>
+                <li><a class="nav-link scrollto" href="/#gallery">갤러리</a></li>
                 <li class="dropdown"><a href="#"><span>게시판</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li><a href="#">공지사항</a></li>
@@ -55,24 +55,34 @@
                         <li><a href="#">Drop Down 4</a></li>
                     </ul>
                 </li>
-        <c:choose>
-        <c:when test="${empty sessionScope.m }">
-                <li><a class="nav-link scrollto" href="/memberMypage.do">마이페이지</a></li>
-                <li><a class="nav-link scrollto" href="#contact">문의하기</a></li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-        <a href="/loginUserFrm.do" class="book-a-table-btn scrollto d-none d-lg-flex">LOGIN</a>
-		</c:when>
-		
-		<c:otherwise>
-			<li><a class="nav-link scrollto" href="/partnerMain.do">마이페이지</a></li>
-                <li><a class="nav-link scrollto" href="#contact">문의하기</a></li>
-            </ul>
+     <c:choose>
+        <c:when test="${not empty sessionScope.m }">
+            <li><a class="nav-link scrollto" href="/memberMypage.do">마이페이지</a></li>
+            <li><a class="nav-link scrollto" href="#contact">문의하기</a></li>
+         </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
         <a href="/logoutUser.do" class="book-a-table-btn scrollto d-none d-lg-flex">LOGOUT</a>
-		</c:otherwise>
+      </c:when>
+      
+      <c:when test="${not empty sessionScope.p }">
+            <li><a class="nav-link scrollto" href="/partnerMain.do">마이페이지</a></li>
+            <li><a class="nav-link scrollto" href="#contact">문의하기</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+        <a href="/logoutPartner.do" class="book-a-table-btn scrollto d-none d-lg-flex">LOGOUT</a>
+      </c:when>
+
+      <c:otherwise>
+         <li><a class="nav-link scrollto" href="/beforeLogin.do">마이페이지</a></li>
+         <li><a class="nav-link scrollto" href="#contact">문의하기</a></li>
+         </ul>
+         <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+      <!-- .navbar -->
+      <a href="/beforeLogin.do" class="book-a-table-btn scrollto d-none d-lg-flex">LOGIN</a>
+      </c:otherwise>
 	</c:choose>
     </div>
 </header><!-- End Header -->
