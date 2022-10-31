@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>똑독캣 마이페이지 - 관리자용</title>
+<title>Insert title here</title>
 </head>
 <body>
-	
+
 </body>
 </html>
