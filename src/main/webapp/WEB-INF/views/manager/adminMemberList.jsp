@@ -7,6 +7,6 @@
 <title>똑독캣 마이페이지 - 관리자용</title>
 </head>
 <body>
-	
+
 </body>
 </html>
