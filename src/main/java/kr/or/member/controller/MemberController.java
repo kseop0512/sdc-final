@@ -97,4 +97,9 @@ public class MemberController {
 		return "common/msg";
 	}
 	
+	//관리자 페이지 확인용
+	@RequestMapping(value="/adminMemberList.do")
+	public String adminMemberList() {
+		return "manager/adminMemberList";
+	}
 }
