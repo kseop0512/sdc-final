@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>킹댕이</h1>
+	<h1>강아지 등록</h1>
+	<hr>
 </body>
 </html>
