@@ -40,13 +40,17 @@
 	display: block;
 	color: white;
 	position: relative;
+	transition-duration: 0.6s;
 }
 
 .petBtn1.active {
 	background: transparent url("/resources/img/maltipoo.jpg") center / 100% no-repeat;
+	transition-duration: 0.3s;
 }
 .petBtn1{
 	background: url("/resources/img/dog.png") center / 70% no-repeat;
+	transition-duration: 0.3s;
+	
 }
 .petBtn1.active::before{
 	content:'';
@@ -62,6 +66,7 @@
 .petBtn2.active {
 	background: transparent url("/resources/img/1652337370806_0.jpg") center / 100% no-repeat;
 	background-size: cover;
+	transition-duration: 0.4s;
 }
 .petBtn2.active::before{
 	content:'';
@@ -76,7 +81,7 @@
 }
 .petBtn2{
 	background: url("/resources/img/cat.png") center / 70% no-repeat;
-	
+	transition-duration: 0.4s;
 }
 </style>
 <body>
