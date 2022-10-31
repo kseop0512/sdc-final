@@ -33,8 +33,4 @@
 		where member_id = #{memberId}
 	</update>
 	
-	<!-- 세션에 입력할 회원정보 조회 -->
-	<select id="selectOneMember" parameterType="m" resultType="m">
-		select * from member_tbl where member_id=#{memberId}
-	</select>
 </mapper>

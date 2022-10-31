@@ -23,7 +23,4 @@ public class MemberDao {
 		return sqlSession.update("member.updateMember",m);
 	}
 
-	public Member selectOneMember(Member m) {
-		return sqlSession.selectOne("member.selectOneMember",m);
-	}
 }
