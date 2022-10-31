@@ -63,9 +63,9 @@ public class PartnerController {
 		}
 	}
 	// 파트너 비밀번호 변경
-	@RequestMapping(value = "/joinPartnerFrm.do")
+	@RequestMapping(value = "/joinPetSitterPartnerFrm.do")
 	public String joinPartnerFrm() {
-		return "main/partner/joinPartnerFrm";
+		return "main/partner/joinPetSitterPartnerFrm";
 	}
 	// 파트너 프로필 이동
 	@RequestMapping(value="/showProfile.do")
