@@ -131,17 +131,18 @@ public class PartnerController {
 			return "common/msg";
 		}
 	}
-	// 파트너 회원탈퇴 신청
-	@RequestMapping(value="/unregisterFrm.do")
-	public String unregisterFrm() {
-		return "partner/unregisterFrm";
-	}
-	
+
 	// 훈련사 리스트 페이지 이동
 	@RequestMapping(value="/trainerList.do")
 	public String trainerList(Model model) {
 		ArrayList<Partner> list = service.selectTrainers() ;
 		model.addAttribute("list",list);
 		return "main/partner/trainerList";
+	}
+	
+	// 훈련사 게시글 작성 페이지 이동
+	@RequestMapping(value="/trainerBoardFrm.do")
+	public String trainerBoardFrm() {
+		return "partner/trainerBoardFrm";
 	}
 }

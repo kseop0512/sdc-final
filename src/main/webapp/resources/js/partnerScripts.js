@@ -74,10 +74,10 @@ $(".chkNewPw").on("click",function(){
 });
 
 // 파트너 등급기준 표 보여주기
-//$("#gradeTbl").on("click",function(){
-//	$(".gradeTable).show();
-//	$(".gradeTable).slideDown();
-// });
+
+$("#gradeTbl").on("click",function(){
+	$(".gradeTable").slideDown();
+ });
 
 // 프로필 변경사진 띄워주기
 function loadImg(f){
@@ -91,3 +91,16 @@ function loadImg(f){
 		$("#profileImg").attr("src","");
 	}
 }
+
+// trainerBoardFrm.jsp  - summernote
+$(document).ready(function(){
+	$("#summernote").summernote({
+		height: 300,
+		minHeight: null,
+		maxHeight: null,
+		focus: true,
+		lang: "ko-KR",
+		placeholder: '어디한번작성해보자'
+	});
+}); 
+

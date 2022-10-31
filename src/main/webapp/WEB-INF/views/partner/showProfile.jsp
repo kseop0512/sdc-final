@@ -168,9 +168,9 @@
                       		
                       	</tr>
                       	<tr>
-                      		<th><span id="gradeTbl">파트너 등급    *</span></th>
+                      		<th id="gradeTbl">파트너 등급    *</th>
                       		<td>${sessionScope.p.pGrade}</td>
-                      		<th>포인트    *</th>
+                      		<th id="gradeTbl">포인트    *</th>
                       		<td>${sessionScope.p.pPoint}</td>
                       	</tr>
                       </table>
