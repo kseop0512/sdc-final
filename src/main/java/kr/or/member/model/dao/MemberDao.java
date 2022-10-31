@@ -18,4 +18,12 @@ public class MemberDao {
 	public int insertMember(Member m) {
 		return sqlSession.insert("member.insertMember", m);
 	}
+
+	public int updateMember(Member m) {
+		return sqlSession.update("member.updateMember",m);
+	}
+
+	public Member selectOneMember(Member m) {
+		return sqlSession.selectOne("member.selectOneMember",m);
+	}
 }

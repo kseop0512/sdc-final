@@ -78,7 +78,7 @@
     padding-left: 15%;
 }
 #content>form>div{
-    height: 30px;
+    height: 40px;
     font-size: 18px;
     margin-bottom: 30px;
 }
@@ -92,7 +92,7 @@
 }
 
 /* input[text,submit]디자인 수정 */
-input[type=text]{
+input[type=text], input[type=password]{
     width: 400px;
     line-height: 40px;
     background-color: transparent;
@@ -102,7 +102,7 @@ input[type=text]{
     padding-left: 20px;
     font-size: 16px;
 }
-input[type=text]:focus{
+input[type=text]:focus, input[type=password]:focus{
     color: #cda45e;
 }
 input[type=submit]{
@@ -138,4 +138,12 @@ input[type=radio]{
 }
 input[type=radio]:checked+.radio-label{
     background-color: #ffb347;
+}
+
+/* span조절 */
+input+span{
+    display: block;
+    width: 400px;
+    font-size: 13px;
+    margin-left: 150px;
 }

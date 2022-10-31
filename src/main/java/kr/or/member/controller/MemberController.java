@@ -1,5 +1,7 @@
 package kr.or.member.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,11 +48,12 @@ public class MemberController {
 	public String memberMypage() {
 		return "member/memberMypage";
 	}
-	/*
+	
 	@RequestMapping(value="/memberUpdate.do")
-	public String memberUpdate(Member m, Model model) {
-		int result = service.updateMember(m);
-		if(result>0) {
+	public String memberUpdate(Member m, Model model, HttpSession session) {
+		Member updateM = service.updateMember(m);
+		if(updateM != null) {
+			session.setAttribute("m", updateM);
 			model.addAttribute("title","정보수정 완료");
 			model.addAttribute("msg","입력하신 정보로 수정을 완료했습니다.");
 			model.addAttribute("icon","success");
@@ -63,5 +66,5 @@ public class MemberController {
 		}
 		return "common/msg";
 	}
-	*/
+	
 }

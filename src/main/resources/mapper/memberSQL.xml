@@ -21,4 +21,20 @@
 		to_char(sysdate,'yyyymmdd')
 		)
 	</insert>
+	
+	<!-- 회원정보수정 -->
+	<update id="updateMember" parameterType="m">
+		update member_tbl set
+			member_pw = #{memberPw},
+			member_bday = #{memberBdate},
+			member_phone = #{memberPhone},
+			member_addr = #{memberAddr},
+			member_gender = #{memberGender}
+		where member_id = #{memberId}
+	</update>
+	
+	<!-- 세션에 입력할 회원정보 조회 -->
+	<select id="selectOneMember" parameterType="m" resultType="m">
+		select * from member_tbl where member_id=#{memberId}
+	</select>
 </mapper>
