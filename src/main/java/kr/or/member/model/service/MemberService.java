@@ -21,10 +21,21 @@ public class MemberService {
 	public int insertMember(Member m) {
 		return dao.insertMember(m);
 	}
+	
 	//유저용 로그인 화면
 	public Member selectOneMember(Member member) {
 		Member m = dao.selectOneMember(member);
 		return m;
-
+	}
+	
+	@Transactional
+	public Member updateMember(Member m) {
+		int result = dao.updateMember(m);
+		if(result>0) {
+			Member updateM = dao.selectOneMember(m);
+			return updateM;
+		}else {
+			return null;
+		}
 	}
 }

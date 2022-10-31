@@ -75,10 +75,10 @@ public class PartnerController {
 			return "common/msg";
 		}
 	}
-	// 파트너 지원서 작성
-	@RequestMapping(value = "/joinPartnerFrm.do")
+
+	@RequestMapping(value = "/joinPetSitterPartnerFrm.do")
 	public String joinPartnerFrm() {
-		return "main/partner/joinPartnerFrm";
+		return "main/partner/joinPetSitterPartnerFrm";
 	}
 	// 파트너 프로필 이동
 	@RequestMapping(value="/showProfile.do")

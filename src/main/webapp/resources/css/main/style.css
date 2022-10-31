@@ -1652,7 +1652,13 @@ section {
 .contact .php-email-form textarea:focus {
   border-color: #cda45e;
 }
-
+.contact .php-email-form input.is-invalid:focus,
+.contact .php-email-form textarea.is-invalid:focus {
+  border-color: #dc3545;
+}
+.contact .php-email-form input.is-invalid{
+  border-color: #dc3545;
+}
 .contact .php-email-form input {
   height: 44px;
 }

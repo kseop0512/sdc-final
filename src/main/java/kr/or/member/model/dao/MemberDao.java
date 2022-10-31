@@ -27,4 +27,9 @@ public class MemberDao {
 		System.out.println("로그인완료");
 		return m;
 	}
+
+	public int updateMember(Member m) {
+		return sqlSession.update("member.updateMember",m);
+	}
+
 }
