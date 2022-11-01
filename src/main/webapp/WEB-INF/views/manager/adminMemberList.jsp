@@ -152,45 +152,38 @@
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>번호</th>
                                             <th>이름</th>
                                             <th>아이디</th>
+                                            <th>생년월일</th>
                                             <th>전화번호</th>
-                                            <th>구분</th>
+                                            <th>주소</th>
                                             <th>가입일</th>
                                             <th>관리</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
-                                        <tr>
-                                            <th>번호</th>
+                                     	<tr>
                                             <th>이름</th>
                                             <th>아이디</th>
+                                            <th>생년월일</th>
                                             <th>전화번호</th>
-                                            <th>구분</th>
+                                            <th>주소</th>
                                             <th>가입일</th>
                                             <th>관리</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                    <c:forEach items="${list }" var="m">
                                         <tr>
-                                            <td>1</td>
-                                            <td>김정환</td>
-                                            <td>user01</td>
-                                            <td>01088776625</td>
-                                            <td>파트너/펫시터</td>
-                                            <td>2011/04/25</td>
+                                            <td>${m.memberName }</td>
+                                            <td>${m.memberId }</td>
+                                            <td>${m.memberBdate}</td>
+                                            <td>${m.memberPhone}</td>
+                                            <td>${m.memberAddr}</td>
+                                            <td>${m.memberEnrollDate}</td>
                                             <td><button class="bc77">관리</button></td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>이수진</td>
-                                            <td>user02</td>
-                                            <td>01099999999</td>
-                                            <td>이용자</td>
-                                            <td>2019/05/21</td>
-                                            <td><button class="bc77">관리</button></td>
-                                        </tr>
+                                     </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

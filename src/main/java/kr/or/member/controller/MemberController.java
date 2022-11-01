@@ -1,5 +1,7 @@
 package kr.or.member.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,15 +113,17 @@ public class MemberController {
 	
 	//유저리스트 회원 수 
 	@RequestMapping(value="/selectUserList.do")
-	public String selectUserList(Model model) {
+	public String selectUserList(Model model,Member m) {
 		int result = service.selectMemberList();
 		int result2 = service.selectPartnerList();
 		int result3 = service.selectTotalMember();
 		model.addAttribute("memberCount", result);
 		model.addAttribute("partnerCount", result2);
 		model.addAttribute("totalCount",result3);
+		
+		ArrayList<Member> list = service.selectMemberPartnerList(m);
+		model.addAttribute("list",list);
 		return "manager/adminMemberList";
 	}
-	
 	
 }
