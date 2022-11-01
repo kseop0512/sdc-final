@@ -106,7 +106,23 @@
 	<div class="chk-modal">
 		<div class="modal-body">
 			<form action="" method="post">
-				<div class="q1">
+				<div class="q1 modal-question active-question">
+					<h4>Q1</h4>
+					<p>집에 낯선 사람이 들어오면 어떤 반응을 보이나요?</p>
+					<input type="radio" name="a1" value="좋아하며 가까이 다가가 반겨요">
+					<label for="a1" class="modal-label">1) 좋아하며 가까이 다가가 반겨요</label>
+					<input type="radio" name="a2" value="초반에 짖기는 하지만 물지는 않아요"><br>
+					<label for="a2" class="modal-label">2) 초반에 짖기는 하지만 물지는 않아요</label>
+					<input type="radio" name="a3" value="무서워하며 뒤로 물러나거나 피하려고 해요"><br>
+					<label for="a3" class="modal-label">3) 무서워하며 뒤로 물러나거나 피하려고 해요</label>
+					<input type="radio" name="a4" value="짖거나 으르렁대며 경계를 하고, 물 수도 있어요"><br>
+					<label for="a4" class="modal-label">4) 짖거나 으르렁대며 경계를 하고, 물 수도 있어요</label>
+					<input type="radio" name="a5" value="별로 관심이 없어요"><br>
+					<label for="a5" class="modal-label">5) 별로 관심이 없어요</label><br>
+					<input type="hidden" class="q1answer">
+					<button type="button" class="modal-nextBtn">다음으로</button>
+				</div>
+				<div class="q2 modal-question">
 					<p>Q1. 집에 낯선 사람이 들어오면 어떤 반응을 보이나요?</p>
 					<input type="radio" name="a1" value="좋아하며 가까이 다가가 반겨요">
 					<label for="a1" class="modal-label">1) 좋아하며 가까이 다가가 반겨요</label>
@@ -118,6 +134,53 @@
 					<label for="a4" class="modal-label">4) 짖거나 으르렁대며 경계를 하고, 물 수도 있어요</label>
 					<input type="radio" name="a5" value="별로 관심이 없어요"><br>
 					<label for="a5" class="modal-label">5) 별로 관심이 없어요</label>
+					<input type="hidden" class="q1answer">
+					<button type="button" class="modal-nextBtn">다음으로</button>
+				</div>
+				<div class="q3 modal-question">
+					<p>Q1. 집에 낯선 사람이 들어오면 어떤 반응을 보이나요?</p>
+					<input type="radio" name="a1" value="좋아하며 가까이 다가가 반겨요">
+					<label for="a1" class="modal-label">1) 좋아하며 가까이 다가가 반겨요</label>
+					<input type="radio" name="a2" value="초반에 짖기는 하지만 물지는 않아요"><br>
+					<label for="a2" class="modal-label">2) 초반에 짖기는 하지만 물지는 않아요</label>
+					<input type="radio" name="a3" value="무서워하며 뒤로 물러나거나 피하려고 해요"><br>
+					<label for="a3" class="modal-label">3) 무서워하며 뒤로 물러나거나 피하려고 해요</label>
+					<input type="radio" name="a4" value="짖거나 으르렁대며 경계를 하고, 물 수도 있어요"><br>
+					<label for="a4" class="modal-label">4) 짖거나 으르렁대며 경계를 하고, 물 수도 있어요</label>
+					<input type="radio" name="a5" value="별로 관심이 없어요"><br>
+					<label for="a5" class="modal-label">5) 별로 관심이 없어요</label>
+					<input type="hidden" class="q1answer">
+					<button type="button" class="modal-nextBtn">다음으로</button>
+				</div>
+				<div class="q4 modal-question">
+					<p>Q1. 집에 낯선 사람이 들어오면 어떤 반응을 보이나요?</p>
+					<input type="radio" name="a1" value="좋아하며 가까이 다가가 반겨요">
+					<label for="a1" class="modal-label">1) 좋아하며 가까이 다가가 반겨요</label>
+					<input type="radio" name="a2" value="초반에 짖기는 하지만 물지는 않아요"><br>
+					<label for="a2" class="modal-label">2) 초반에 짖기는 하지만 물지는 않아요</label>
+					<input type="radio" name="a3" value="무서워하며 뒤로 물러나거나 피하려고 해요"><br>
+					<label for="a3" class="modal-label">3) 무서워하며 뒤로 물러나거나 피하려고 해요</label>
+					<input type="radio" name="a4" value="짖거나 으르렁대며 경계를 하고, 물 수도 있어요"><br>
+					<label for="a4" class="modal-label">4) 짖거나 으르렁대며 경계를 하고, 물 수도 있어요</label>
+					<input type="radio" name="a5" value="별로 관심이 없어요"><br>
+					<label for="a5" class="modal-label">5) 별로 관심이 없어요</label>
+					<input type="hidden" class="q1answer">
+					<button type="button" class="modal-nextBtn">다음으로</button>
+				</div>
+				<div class="q5 modal-question">
+					<p>Q1. 집에 낯선 사람이 들어오면 어떤 반응을 보이나요?</p>
+					<input type="radio" name="a1" value="좋아하며 가까이 다가가 반겨요">
+					<label for="a1" class="modal-label">1) 좋아하며 가까이 다가가 반겨요</label>
+					<input type="radio" name="a2" value="초반에 짖기는 하지만 물지는 않아요"><br>
+					<label for="a2" class="modal-label">2) 초반에 짖기는 하지만 물지는 않아요</label>
+					<input type="radio" name="a3" value="무서워하며 뒤로 물러나거나 피하려고 해요"><br>
+					<label for="a3" class="modal-label">3) 무서워하며 뒤로 물러나거나 피하려고 해요</label>
+					<input type="radio" name="a4" value="짖거나 으르렁대며 경계를 하고, 물 수도 있어요"><br>
+					<label for="a4" class="modal-label">4) 짖거나 으르렁대며 경계를 하고, 물 수도 있어요</label>
+					<input type="radio" name="a5" value="별로 관심이 없어요"><br>
+					<label for="a5" class="modal-label">5) 별로 관심이 없어요</label>
+					<input type="hidden" class="q1answer">
+					<button type="button" class="modal-nextBtn">다음으로</button>
 				</div>
 			</form>
 		</div>

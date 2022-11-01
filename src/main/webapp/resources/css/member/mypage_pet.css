@@ -274,3 +274,13 @@ input+span{
 	margin-left: -2px;
 	font-weight: bolder;
 }
+.modal-question>h4{
+	font-weight: bolder;
+	left: 50px;
+}
+.modal-question{
+	display: none;
+}
+.active-question{
+	display: block;
+}
