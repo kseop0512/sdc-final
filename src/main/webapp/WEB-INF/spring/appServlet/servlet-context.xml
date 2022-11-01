@@ -84,4 +84,5 @@
 	<context:component-scan base-package="kr.or.common" />
 	<context:component-scan base-package="kr.or.member" />
 	<context:component-scan base-package="kr.or.mail" />
+	<context:component-scan base-package="kr.or.main.partner" />
 </beans:beans>

@@ -29,4 +29,7 @@
 	<update id="changePw" parameterType="p">
 		update partner set p_pw = #{pPw} where p_id = #{pId}
 	</update>
+	<insert id="insertPartner" parameterMap="p">
+
+	</insert>
 </mapper>
