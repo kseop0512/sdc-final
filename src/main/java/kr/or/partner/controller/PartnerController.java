@@ -131,8 +131,8 @@ public class PartnerController {
 			// 프로필 변경 시 기존 사진 삭제
 			Partner partner = (Partner)session.getAttribute("p");
 			if(!profileFile[0].isEmpty()) {
-				String rout = request.getSession().getServletContext().getRealPath("/resources/upload/partner/profileImg/");
-				String deleteFile = rout+partner.getProfilePath();
+				String rout = request.getSession().getServletContext().getRealPath("/");
+				String deleteFile = rout+"resources/upload/partner/profileImg/"+partner.getProfilePath();
 				File delFile = new File(deleteFile);
 				delFile.delete();
 				partner.setProfileName(p.getProfileName());
