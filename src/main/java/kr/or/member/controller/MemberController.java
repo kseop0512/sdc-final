@@ -114,8 +114,10 @@ public class MemberController {
 	public String selectUserList(Model model) {
 		int result = service.selectMemberList();
 		int result2 = service.selectPartnerList();
-		model.addAttribute("count", result);
-		model.addAttribute("pCount", result2);
+		int result3 = service.selectTotalMember();
+		model.addAttribute("memberCount", result);
+		model.addAttribute("partnerCount", result2);
+		model.addAttribute("totalCount",result3);
 		return "manager/adminMemberList";
 	}
 	

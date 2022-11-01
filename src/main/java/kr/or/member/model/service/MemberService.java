@@ -47,4 +47,8 @@ public class MemberService {
 	public int selectPartnerList() {
 		return dao.selectPartnerCount() ;
 	}
+	// 관리자 P 총 인원
+	public int selectTotalMember() {
+		return dao.selectTotalMember();
+	}
 }
