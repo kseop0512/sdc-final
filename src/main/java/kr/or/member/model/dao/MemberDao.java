@@ -51,7 +51,6 @@ public class MemberDao {
 		int result = sqlSession.selectOne("member.selectTotal");
 		return result;
 	}
-
 	//관리자p 회원리스트
 	public ArrayList<Member> selectMemberPartnerList(Member m) {
 		List list = sqlSession.selectList("member.selectMemberPartnerList",m);

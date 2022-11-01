@@ -121,6 +121,8 @@ public class MemberController {
 		model.addAttribute("partnerCount", result2);
 		model.addAttribute("totalCount",result3);
 		
+		
+		
 		ArrayList<Member> list = service.selectMemberPartnerList(m);
 		model.addAttribute("list",list);
 		return "manager/adminMemberList";
