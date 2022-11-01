@@ -56,7 +56,7 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/">SDC홈페이지</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">로그아웃</a></li>
+                        <li><a class="dropdown-item" href="/logoutPartner.do">로그아웃</a></li>
                     </ul>
                 </li>
             </ul>
@@ -79,7 +79,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/updatePartnerProfileFrm.do">프로필 변경</a>
+                                    <a class="nav-link" href="/showProfile.do">프로필 변경</a>
                                     <a class="nav-link" href="/chkPwFrm.do">비밀번호 변경</a>
                                     <a class="nav-link" href="/unregisterFrm.do">파트너 탈퇴신청</a>
                                 </nav>
@@ -126,7 +126,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        	${sessionScope.p.pId }
+                        	${sessionScope.p.PName }
                     </div>
                 </nav>
             </div>
@@ -135,30 +135,30 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">파트너 프로필</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">${sessionScope.p.pId }님 환영합니다.</li>
+                            <li class="breadcrumb-item active">${sessionScope.p.PName }님 환영합니다.</li>
                         </ol>
                   	<div>
                       <table class="table table-bordered table-dark profileTable">
                           <tr>
-                              <td rowspan="5" style="width: 20%; background-color: #fff"><img src="/resources/img/dog.png"></td>
+                              <td rowspan="5" style="width: 20%; background-color: #fff"><img src="/resources/upload/partner/profileImg/${sessionScope.p.profilePath }" style="width: 100%; height: 100%;"></td>
                               <th>이름</th>
-                              <td>신혜규${sessionScope.p.pName }</td>
+                              <td>${sessionScope.p.PName }</td>
                           </tr>
                           <tr>
                           	<th>생년월일</th>
-                          	<td>${sessionScope.p.pDob }</td>
+                          	<td>${sessionScope.p.PDob }</td>
                           </tr>
                           <tr>
                           	<th>주소</th>
-                          	<td>${sessionScope.p.pAddr }</td>
+                          	<td>${sessionScope.p.PAddr }</td>
                           </tr>
                           <tr>
                           	<th>전화번호</th>
-                          	<td>${sessionScope.p.pPhone }</td>
+                          	<td>${sessionScope.p.PPhone }</td>
                           </tr>
                           <tr>
                           	<th>E-Mail</th>
-                          	<td>${sessionScope.p.pEmail }</td>
+                          	<td>${sessionScope.p.PEmail }</td>
                           </tr>
                       </table>
                       <table class="table table-bordered table-dark profileTable">
@@ -169,9 +169,9 @@
                       	</tr>
                       	<tr>
                       		<th id="gradeTbl">파트너 등급    *</th>
-                      		<td>${sessionScope.p.pGrade}</td>
+                      		<td>${sessionScope.p.PGrade}</td>
                       		<th id="gradeTbl">포인트    *</th>
-                      		<td>${sessionScope.p.pPoint}</td>
+                      		<td>${sessionScope.p.PPoint}</td>
                       	</tr>
                       </table>
                       <table class="table profileTable gradeTable">

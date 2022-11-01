@@ -1,5 +1,7 @@
 package kr.or.member.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,21 +105,7 @@ public class MemberController {
 		return "common/msg";
 	}
 	
-	//관리자 페이지 확인용
-	@RequestMapping(value="/adminMemberList.do")
-	public String adminMemberList() {
-		return "manager/adminMemberList";
-	}
 	
-	//유저리스트 회원 수 
-	@RequestMapping(value="/selectUserList.do")
-	public String selectUserList(Model model) {
-		int result = service.selectMemberList();
-		int result2 = service.selectPartnerList();
-		model.addAttribute("count", result);
-		model.addAttribute("pCount", result2);
-		return "manager/adminMemberList";
-	}
-	
+
 	
 }

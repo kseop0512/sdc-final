@@ -18,7 +18,8 @@ public class PasswordEncAdvice {
    private SHA256Util passEnc;
    
    // 파트너 비밀번호 암호화
-   @Pointcut(value="execution(* kr.or.partner.model.service.PartnerService.*PartNer(kr.or.partner.model.vo.Partner))")
+   @Pointcut(value="execution(* kr.or.partner.model.service.PartnerService.*PartNer(kr.or.partner.model.vo.Partner))" +
+           "|| execution(* kr.or.main.partner.model.service.PartnerMainService.*Partner(kr.or.partner.model.vo.Partner))")
    public void partnerEncPointcut() {}
    
    @Before(value="partnerEncPointcut()")
@@ -48,5 +49,6 @@ public class PasswordEncAdvice {
          m.setMemberPw(encPw);
       }
    }
+
    
 }
