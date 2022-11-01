@@ -36,26 +36,5 @@ public class MemberDao {
 		return sqlSession.update("member.updateMember",m);
 	}
 
-	//관리자 P 유저 수 
-	public int selectUserList() {
-		int result = sqlSession.selectOne("member.selectUserList");
-		return result;
-	}
-	//관리자 P 파트너 수 
-	public int selectPartnerCount() {
-		int result = sqlSession.selectOne("partner.selectPartner");
-		return result;
-	}
-	//관리자 P 총 인원
-	public int selectTotalMember() {
-		int result = sqlSession.selectOne("member.selectTotal");
-		return result;
-	}
-
-	//관리자p 회원리스트
-	public ArrayList<Member> selectMemberPartnerList(Member m) {
-		List list = sqlSession.selectList("member.selectMemberPartnerList",m);
-		return (ArrayList<Member>)list;
-	}
 
 }

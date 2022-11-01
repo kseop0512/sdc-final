@@ -1,13 +1,17 @@
 package kr.or.manager.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.manager.model.service.ManagerService;
 import kr.or.manager.model.vo.Manager;
+import kr.or.member.model.vo.Member;
 
 @Controller
 public class ManagerController {
@@ -35,5 +39,37 @@ public class ManagerController {
 	public String logoutManager(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
+	}
+	
+	//관리자 페이지 확인용
+	@RequestMapping(value="/adminMemberList.do")
+	public String adminMemberList() {
+		return "manager/adminMemberList";
+	}
+		
+	//유저리스트 회원 수 
+	@RequestMapping(value="/selectUserList.do")
+	public String selectUserList(Model model,Member m) {
+		int result = service.selectMemberList();
+		int result2 = service.selectPartnerList();
+		int result3 = service.selectTotalMember();
+		model.addAttribute("memberCount", result);
+		model.addAttribute("partnerCount", result2);
+		model.addAttribute("totalCount",result3);
+			
+		ArrayList<Member> list = service.selectMemberPartnerList(m);
+		model.addAttribute("list",list);
+		return "manager/adminMemberList";
+	}
+	//관리자P 공지사항 이동
+	@RequestMapping(value="/adminNotice.do")
+	public String adminNotice() {
+		return "manager/adminNotice";
+	}
+		
+	//관리자P 공지사항 글쓰기 Frm
+	@RequestMapping(value="/adminNoticeWriteFrm.do")
+	public String adminNoticeFrm() {
+		return "manager/adminNoticeWrite";
 	}
 }
