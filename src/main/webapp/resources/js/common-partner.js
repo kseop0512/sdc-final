@@ -41,9 +41,18 @@ $(document).ready(function() {
                 const idRef = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
                 confirmValue(idRef);
 
-            } else if (inputId == "pPw") {
-                const pwReg = /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+            } else if (inputId == "pPw" || inputId == "rePw") {
+                const pwReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
                 confirmValue(pwReg);
+                if(pwReg.test(inputVal) && $("[id=pPw]").val() == inputVal && $("[id=rePw]").val() == inputVal ) {
+                    $("[id=rePw]").removeClass("is-invalid");
+                } else {
+                    if($("[id=rePw]").val() != "") {
+                        $("[id=rePw]").addClass("is-invalid");
+                        input.focus();
+                    }
+                }
+
             } else if (inputId == "pDob") {
                 const dobRef = /^(19[0-9][0-9]|200[0-3])(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
                 confirmValue(dobRef);
@@ -58,7 +67,7 @@ $(document).ready(function() {
     $(".btn-complete").on("click", function() {
 
         let isValid = true;
-        $(".form-control").each(function(index, item) {
+        $(".form-control").not(".form-auth-code").each(function(index, item) {
 
             if($(item).val() == "" || $(item).hasClass(INVALID_CLASS)) {
                 $(item).focus();
@@ -68,8 +77,9 @@ $(document).ready(function() {
         });
 
         if(isValid === false) {return};
-
-        if($("[name=pGender]:checked").length < 1) {
+        if(mailAuth == false) {
+            alert("메일 인증은 필수입니다.")
+        }else if($("[name=pGender]:checked").length < 1) {
             $("[name=pGender]").focus();
             return;
         } else if ($("[name=license]:checked").length < 1) {
@@ -82,7 +92,7 @@ $(document).ready(function() {
 
     })
 
-    $("[name=profilename]").on("change", function(e) {
+    $("[name=profile]").on("change", function(e) {
         var str = $(this).val();
         var fileName = str.split('\\').pop().toLowerCase();
         //checkFileName(fileName);
@@ -112,13 +122,8 @@ $(document).ready(function() {
         } else {
             document.getElementById('preview').src = "";
         }
-
     })
-
-
 })
-
-
 
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -150,23 +155,100 @@ function checkFileName(str){
     }
 }
 
+let mailAuth = false;
+let mailCode;
 function checkPartnerMail(btn) {
-
     const emailInput = $("[name=pId]");
-    if(emailInput.val() != "") {
-
+    if(emailInput.val() != "" && !emailInput.hasClass("is-invalid")) {
         const email = emailInput.val();
-
-        console.log(email)
-
+        //console.log(email)
         $.ajax({
             url : "/sendIdCheckMail.do",
             data: {email : email},
             success : function(result) {
                 console.log(result);
+                if(result != "") {
+                    mailCode = result;
+                    mailAuth = false;
+                    if(intervalId != undefined) {
+                        clearInterval(intervalId);
+                    }
+                    $(".form-auth-code").parent().removeClass("d-none");
+                    $("#auth").show()
+                    authTime();
+                    $(".btn-check-mailcode").attr("onclick", "checkAuthCode()");
+                } else {
+                    mailAuth = false;
+                    alert("인증번호 발송 실패했습니다.")
+                }
             }
-
         })
     }
-
 }
+
+let intervalId;
+function authTime() {
+    $("#timeZone").html("<span id='min'>3</span> : <span id='sec'>00</span>");
+    intervalId = window.setInterval(function() {
+        timeCount();
+    }, 1000)
+}
+
+function timeCount() {
+    const min = Number($("#min").text());
+    const sec = $("#sec").text();
+
+    if(sec == "00") {
+        if (min == "00") {
+            mailCode = null;
+            clearInterval(intervalId);
+        } else {
+            $("#min").text(min-1);
+            $("#sec").text(59);
+        }
+    } else {
+        const newSec = Number(sec)-1;
+        if(newSec < 10) {
+            $("#sec").text("0" + newSec);
+        } else {
+            $("#sec").text(newSec);
+        }
+    }
+}
+
+function checkAuthCode(){
+    const inputValue = $(".form-auth-code").val();
+    if(mailCode != null) {
+
+        if(inputValue == mailCode) {
+            $("#authMsg").text("인증성공");
+            $("#authMsg").removeClass("text-danger");
+            $("#authMsg").addClass("text-success");
+            clearInterval(intervalId);
+            $("#timeZone").hide();
+            mailAuth = true;
+        } else {
+            $("#authMsg").text("인증실패");
+            $("#authMsg").removeClass("text-success");
+            $("#authMsg").addClass("text-danger");
+        }
+    } else {
+        $("#authMsg").text("인증시간만료");
+        $("#authMsg").css("color","red");
+    }
+}
+/*
+function resetAuth(){
+    mailCode = null;
+    mailAuth = false;
+    clearInterval(intervalId);
+    $("[name=pId]").val("");
+    $(".form-auth-code").val("");
+    $("#timeZone").show().empty();
+    $("#authMsg").text("");
+    //$(".form-auth-code").parent().addClass("d-none");
+    $(".btn-check-mail").attr("onclick", "checkPartnerMail(this)");
+}
+*/
+
+
