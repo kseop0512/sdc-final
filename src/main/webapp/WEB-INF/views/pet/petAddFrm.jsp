@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 </head>
 <style>
@@ -85,6 +86,7 @@
 }
 </style>
 <body>
+	<jsp:include page="/WEB-INF/views/main/common/header.jsp"/>
 	<div class="img_btn-wrap">
 		<button type="button" class="btn-img petBtn1" onclick="location.href='/petDogAddFrm.do'"><span class="petType textSpan1">강아지</span></button>
 		<button type="button" class="btn-img petBtn2" onclick="location.href='/petCatAddFrm.do'"><span class="petType textSpan2">고양이</span></button>
@@ -110,5 +112,8 @@
 		$(".textSpan2").addClass("petType");
 	});
 </script>
+	<jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
+	<!-- 마이페이지 JS -->
+	<script type="text/javascript" src="/resources/js/member/mypage_nav.js"></script>
 </body>
 </html>
