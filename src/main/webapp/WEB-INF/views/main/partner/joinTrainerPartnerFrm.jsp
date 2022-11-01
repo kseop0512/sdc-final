@@ -28,7 +28,7 @@
                     <li>
                         <a href="index.html">Home</a>
                     </li>
-                    <li>펫시터 지원하기</li>
+                    <li>훈련사 지원하기</li>
                 </ol>
             </div>
         </div>
@@ -42,28 +42,14 @@
                 <div class="col-lg-10 mt-lg-0">
                     <!-- <form action="forms/contact.php" method="post" role="form" class="php-email-form"> -->
                     <div class="row php-email-form">
-                        <div class="col col-md-8 mb-5">
-                            <label for="">지원 유형 <span class="text-warning">*</span></label>
-                            <div class="row mt-3">
-                                <div class="col">
-                                    <input type="checkbox" class="btn-check" name="partnerType" id="partnerType1" value="L">
-                                    <label class="btn col-md-12 btn-outline-secondary" for="partnerType1">위탁돌봄</label>
-                                </div>
-                                <div class="col">
-                                    <input type="checkbox" class="btn-check" name="partnerType" id="partnerType2" value="V">
-                                    <label class="btn col-md-12 btn-outline-secondary" for="partnerType2">방문돌봄</label>
-                                </div>
-                                <input type="hidden" name="category" value="">
-                            </div>
-                        </div>
                         <div class="section-title">
                             <!-- <h2>파트너 지원</h2> -->
                             <p>1. 기본정보</p>
                         </div>
                         <div class="col col-md-12 form-group">
-                            <label for="pId">지원자 이메일 <span class="text-warning">*</span></label>
+                            <label for="pId">지원자 이메일 <span class="text-warning">*</span><small class="msg-validation text-danger ms-3"></small></label>
                             <div class="input-group align-items-center position-relative">
-
+                                <input type="hidden" name="category" value="T">
                                 <input type="text" name="pId" class="form-control" id="pId" placeholder="name@example.com" required>
 
                                 <div class="input-group-append position-relative w-25 d-none">
@@ -120,109 +106,45 @@
                                     <label class="btn col-md-12 btn-outline-secondary" for="gender2">여자</label>
                                 </div>
                             </div>
-
-                        </div>
-
-                    </div>
-
-                    <%--
-                    <div class="row mt-5 php-email-form">
-
-                        <div class="section-title">
-                            <!-- <h2>파트너 지원</h2> -->
-                            <p>2. 활동 정보</p>
-                        </div>
-
-                        <div class="col col-md-12 form-group">
-                            <label for="">활동 가능한 일 수 <span class="text-warning">*</span></label>
-                            <div class="col mt-3">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="workAvail" id="workAvail1" value="option1" checked>
-                                    <label class="form-check-label" for="workAvail1">주말 포함한 30일 모두 가능합니다.</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="workAvail" id="workAvail2" value="option2">
-                                    <label class="form-check-label" for="workAvail2">평균 20일 이상 가능합니다.</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="workAvail" id="workAvail3" value="option3">
-                                    <label class="form-check-label" for="workAvail3">평균 20일 이하 가능합니다.</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="workAvail" id="workAvail4" value="option4">
-                                    <label class="form-check-label" for="workAvail4">주말만 가능합니다.</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 form-group mt-4">
-                            <label for="name">활동 가능한 시간대<span class="text-muted">(중복 선택가능)</span><span class="text-warning">*</span></label>
-                            <div class="col mt-3">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="timeAvail" id="timeAvail1" value="option1" checked>
-                                    <label class="form-check-label" for="timeAvail1">모두 가능합니다.</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="timeAvail" id="timeAvail2" value="option2">
-                                    <label class="form-check-label" for="timeAvail2">오전 타임(오전 8:00 ~ 오후 12:00)</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="timeAvail" id="timeAvail3" value="option3">
-                                    <label class="form-check-label" for="timeAvail3">오후 타임(오후 12:00 ~ 오후 6:00)</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="timeAvail" id="timeAvai4" value="option4">
-                                    <label class="form-check-label" for="timeAvai4">저녁 타임(오후 06:00 ~ 오후 10:00)</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="timeAvai" id="timeAvai5" value="option4">
-                                    <label class="form-check-label" for="timeAvai5">직접입력</label>
-                                </div>
-                            </div>
                         </div>
                     </div>
-                    --%>
+
                     <div class="row mt-5 php-email-form">
                         <div class="section-title">
                             <!-- <h2>파트너 지원</h2> -->
-                            <p>2. 반려 경험 및 경력</p>
+                            <p>2. 훈련 경험 및 경력</p>
                         </div>
 
                         <div class="col col-md-12 form-group">
                             <label for="">자격증 또는 교육수료 <span class="text-warning">*</span></label>
+
                             <div class="col mt-3">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="license" id="license1" value="반려동물행동교정사 자격증">
-                                    <label class="form-check-label" for="license1">반려동물행동교정사 자격증</label>
+                                    <input class="form-check-input" type="checkbox" name="license" id="license1" value="반려견지도사/훈련사 3급">
+                                    <label class="form-check-label" for="license1">반려견지도사/훈련사 3급</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="license" id="license2" value="반려동물관리사 1급 자격증">
-                                    <label class="form-check-label" for="license2">반려동물관리사 1급 자격증</label>
+                                    <input class="form-check-input" type="checkbox" name="license" id="license2" value="반려견지도사/훈련사 2급">
+                                    <label class="form-check-label" for="license2">반려견지도사/훈련사 2급</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="license" id="license3" value="반려동물행동상담사 2급 자격증">
-                                    <label class="form-check-label" for="license3">반려동물행동상담사 2급 자격증</label>
+                                    <input class="form-check-input" type="checkbox" name="license" id="license3" value="반려견지도사/훈련사 1급">
+                                    <label class="form-check-label" for="license3">반려견지도사/훈련사 1급</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="license" id="license4" value="반려동물목욕관리사 2급 자격증">
-                                    <label class="form-check-label" for="license4">반려동물목욕관리사 2급 자격증</label>
+                                    <input class="form-check-input" type="checkbox" name="license" id="license4" value="반려동물관리사/행동교정사">
+                                    <label class="form-check-label" for="license4">반려동물관리사/행동교정사</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="license" id="license5" value="전문 펫시터 자격증">
-                                    <label class="form-check-label" for="license5">전문 펫시터 자격증</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="license" id="license6" value="펫시터 전문가 교육 수료">
-                                    <label class="form-check-label" for="license6">펫시터 전문가 교육 수료</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="license" id="license7" value="펫시터 직업 훈련 교육 수료">
-                                    <label class="form-check-label" for="license7">펫시터 직업 훈련 교육 수료</label>
+                                    <input class="form-check-input" type="checkbox" name="license" id="license5" value="KPA 수료증 (CTP, Foundation 등)">
+                                    <label class="form-check-label" for="license5">KPA 수료증 (CTP, Foundation 등)</label>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-12 form-group mt-3">
-                            <label for="">펫시터 활동 경력 <span class="text-warning">*</span></label>
+                            <label for="">경력 사항 <span class="text-warning">*</span></label>
+                            <div class="col"><small class="text-muted">회사명/근무 기간/하신 업무 (작성해주신 경력에 대해서는 추후 사실 여부를 확인할 수 있습니다)</small></div>
                             <div class="col mt-3">
                                 <textarea class="form-control" id="workExp" name="workExp" rows="4"></textarea>
                             </div>
@@ -295,9 +217,9 @@
                                         <button type="button" class="btn btn-primary">테스트 시작</button>
                                     </div>
                                     <div class="resume-item">
-                                        <h4>펫시터 등록</h4>
+                                        <h4>훈련사 등록</h4>
                                         <p>
-                                            <em>본인 인증, 관리자 승인 메일을 받으신 분들만 SDC 펫시터로 활동할 수 있습니다.</em>
+                                            <em>본인 인증, 관리자 승인 메일을 받으신 분들만 SDC 훈련사로 활동할 수 있습니다.</em>
                                         </p>
                                     </div>
                                 </div>

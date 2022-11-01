@@ -2,10 +2,12 @@ package kr.or.main.partner.controller;
 
 import common.FileRename;
 import kr.or.main.partner.model.service.PartnerMainService;
+import kr.or.partner.model.service.PartnerService;
 import kr.or.partner.model.vo.Partner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,10 +18,14 @@ public class PartnerMainController {
 
     @Autowired
     private PartnerMainService service;
+
+    @Autowired
+    private PartnerService partnerService;
+
     @Autowired
     private FileRename fileRename;
-    @RequestMapping(value = "/joinPetSitterPartner.do")
-    public String joinPetSitterPartner(Partner p, MultipartFile profile, HttpServletRequest request) {
+    @RequestMapping(value = "/joinPartner.do")
+    public String joinPartner(Partner p, MultipartFile profile, HttpServletRequest request) {
         //if(!profile.isEmpty()) {
         String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/partner/profileImg/");
         String filename = profile.getOriginalFilename();
@@ -47,6 +53,24 @@ public class PartnerMainController {
 
         }
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "joinTrainerPartnerFrm.do")
+    public String joinTrainerPartnerFrm() {
+        return "main/partner/joinTrainerPartnerFrm";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "validationPartnerId.do")
+    public int validationPartnerId(Partner p) {
+        Partner partner = partnerService.selectOnePartNer(p);
+
+        if(partner != null){
+            return 0;
+        } else {
+            return 1;
+        }
+
     }
 
 }
