@@ -32,14 +32,26 @@ $(document).ready(function() {
             }
             if(inputId == "pId") {
 
-                // $.ajax({
-                //     url : "/ajaxCheckPartnerId.do",
-                //     success: function() {
-                //
-                //     }
-                // })
+                const pId = inputVal;
+                const msg = input.closest(".form-group").find(".msg-validation");
                 const idRef = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
                 confirmValue(idRef);
+
+                $.ajax({
+                    url : "/validationPartnerId.do",크
+                    data : {pId : pId},
+                    async : false,
+                    success: function(result) {
+                        console.log(result);
+                        if(result>0) {
+                            input.removeClass(INVALID_CLASS);
+                            msg.text("");
+                        } else {
+                            input.addClass(INVALID_CLASS);
+                            msg.text("중복된 아이디입니다.");
+                        }
+                    }
+                })
 
             } else if (inputId == "pPw" || inputId == "rePw") {
                 const pwReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;

@@ -58,7 +58,8 @@
                             </ul>
                         </li>
                         <li><a href="/joinPetSitterPartnerFrm.do">파트너(펫시터) 지원</a></li>
-                        <li><a href="#">파트너(훈련사) 지원</a></li>
+                        <li><a href="/joinTrainerPartnerFrm.do">파트너(훈련사) 지원</a></li>
+                        <li><a href="/adminMemberList.do">Drop Down 4</a></li>
                     </ul>
                 </li>
      <c:choose>
@@ -79,7 +80,7 @@
         </nav><!-- .navbar -->
         <a href="/logoutPartner.do" class="book-a-table-btn scrollto d-none d-lg-flex">LOGOUT</a>
       </c:when>
-	  
+
 	  <c:when test="${not empty sessionScope.g }">
             <li><a class="nav-link scrollto" href="/selectUserList.do">마이페이지</a></li>
             <li><a class="nav-link scrollto" href="#contact">문의하기</a></li>
@@ -87,7 +88,7 @@
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
         <a href="/logoutPartner.do" class="book-a-table-btn scrollto d-none d-lg-flex">LOGOUT</a>
-      </c:when>	
+      </c:when>
 
       <c:otherwise>
          <li><a class="nav-link scrollto" href="/beforeLogin.do">마이페이지</a></li>
