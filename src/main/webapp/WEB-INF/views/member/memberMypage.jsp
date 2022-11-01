@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>똑독캣 (SDC) | 펫시터, 훈련사, 그루머 예약서비스</title>
+<title>똑독캣 마이페이지</title>
 <jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
 <!-- 마이페이지 CSS -->
 <link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_nav.css">
@@ -39,16 +39,16 @@
 						<div id="content">
 							<form action="/memberUpdate.do" method="post">
 								<div>
-									<label for="memberId">아이디</label>
+									<label for="mId">아이디</label>
 									<input type="text" id="mId" name="memberId" value="${sessionScope.m.memberId}" readonly autocomplete="off">
 								</div>
 								<div>
-									<label for="memberPw">비밀번호</label>
-									<input type="password" id="mPw" name="memberPw" placeholder="* 정보를 수정하려면 비밀번호를 입력하세요." autocomplete="off">
+									<label for="mPw">비밀번호</label>
+									<input type="password" id="mPw" name="memberPw" placeholder="* 현재 비밀번호 혹은 새 비밀번호를 입력하세요" autocomplete="off">
 									<span id="pwSpan"></span>
 								</div>
 								<div>
-									<label for="memberName">이름</label>
+									<label for="mName">이름</label>
 									<input type="text" id="mName" name="memberName" value="${sessionScope.m.memberName}" autocomplete="off">
 								</div>
 								<div id="gender-div">
@@ -60,16 +60,16 @@
 									<label for="f" class="radio-label">여</label>
 								</div>
 								<div>
-									<label for="memberBdate">생년월일</label>
+									<label for="mBdate">생년월일</label>
 									<input type="text" id="mBdate" name="memberBdate" value="${sessionScope.m.memberBdate}" autocomplete="off">
 									<span id="bdateSpan"></span>
 								</div>
 								<div>
-									<label for="memberAddr">주소</label>
-									<input type="text" id="mAddr" name="memberAddr" value="${sessionScope.m.memberAddr}" autocomplete="off">
+									<label for="mAddr">주소</label>
+									<input type="text" id="mAddr" name="memberAddr" value="${sessionScope.m.memberAddr}" autocomplete="off" readonly>
 								</div>
 								<div>
-									<label for="memberPhone">전화번호</label>
+									<label for="mPhone">전화번호</label>
 									<input type="text" id="mPhone" name="memberPhone" value="${sessionScope.m.memberPhone}" autocomplete="off">
 									<span id="phoneSpan"></span>
 								</div>
@@ -90,5 +90,6 @@
 	<!-- 마이페이지 JS -->
 	<script type="text/javascript" src="/resources/js/member/mypage_nav.js"></script>
 	<script type="text/javascript" src="/resources/js/member/mypage_myinfo.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>
