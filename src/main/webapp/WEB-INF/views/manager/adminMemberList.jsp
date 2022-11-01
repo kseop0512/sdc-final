@@ -48,7 +48,7 @@
                             <div class="sb-sidenav-menu-heading">홈</div>
                             <a class="nav-link" href="/selectUserList.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                마이페이지
+                                	마이페이지
                             </a>
                             <div class="sb-sidenav-menu-heading">메뉴</div>
                             <a class="nav-link collapsed" href="memberList.html" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -126,18 +126,17 @@
                                             <code>[${memberCount}]</code>명
                                         </p>
                                         <div id="nameIdSerarch-Box" style="float: right;">
-                                            <form action="#" post="post">
-                                                <select>
-                                                    <option>전체</option>
-                                                    <option>파트너</option>
-                                                    <option>이용자</option>
+                                            <form action="/searcMember.do" post="post">
+                                                <select name="memberType">
+                                                    <option value="partner">파트너</option>
+                                                    <option value="member">이용자</option>
                                                 </select>
-                                                <select>
-                                                    <option>이름</option>
-                                                    <option>아이디</option>
+                                                <select name="type">
+                                                    <option value="name">이름</option>
+                                                    <option value="id">아이디</option>
                                                 </select>
-                                                    <input class="input-form2" type="text" placeholder="입력하세요" style="width: 500px;">
-                                                    <but8ton class="bc22">검색</button>
+                                                    <input class="input-form2" type="text" name="keyword" placeholder="입력하세요" style="width: 500px;">
+                                                    <button class="bc22" type="submit">검색</button>
                                             </form>
                                         </div>
                                     </div>
