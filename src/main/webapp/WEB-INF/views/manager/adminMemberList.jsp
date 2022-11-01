@@ -53,7 +53,7 @@
                             <div class="sb-sidenav-menu-heading">메뉴</div>
                             <a class="nav-link collapsed" href="memberList.html" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                유저관리
+                                	유저관리
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
@@ -64,13 +64,13 @@
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                신고내역
+                              	 신고내역
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link collapsed" href="reportList.html" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        리뷰신고
+                                       	 리뷰신고
                                     </a>
                                     <a class="nav-link collapsed" href="reportList.html" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                         Q&A신고
@@ -79,11 +79,7 @@
                             </div>
                             <a class="nav-link" href="reservationList.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                예약내역
-                            </a>
-                            <a class="nav-link" href="pay_cancel.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                결제관리
+                                	예약내역
                             </a>
                             <a class="nav-link" href="dm_message.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
@@ -92,7 +88,7 @@
                             <div class="sb-sidenav-menu-heading">게시판</div>
                             <a class="nav-link" href="/adminNotice.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                공지사항
+                               	 공지사항
                             </a>
                         </div>
                     </div>
@@ -117,7 +113,7 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                전체회원리스트
+                                	전체회원리스트
                             </div>
                             <div class="card-body">
                                 <div class="card mb-4">
@@ -152,6 +148,7 @@
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
+                                        	<th>No</th>
                                             <th>이름</th>
                                             <th>아이디</th>
                                             <th>생년월일</th>
@@ -163,6 +160,7 @@
                                     </thead>
                                     <tfoot>
                                      	<tr>
+                                     		<th>No</th>
                                             <th>이름</th>
                                             <th>아이디</th>
                                             <th>생년월일</th>
@@ -175,6 +173,7 @@
                                     <tbody>
                                     <c:forEach items="${list }" var="m">
                                         <tr>
+                                        	<td>1</td>
                                             <td>${m.memberName }</td>
                                             <td>${m.memberId }</td>
                                             <td>${m.memberBdate}</td>
