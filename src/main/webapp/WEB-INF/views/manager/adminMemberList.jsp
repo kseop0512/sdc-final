@@ -141,15 +141,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="memberlist-btn">
-                                    <button class="btn bc22 bs4">다운로드</button>
-                                </div>
+                                <form action="/excelDown.do">
+	                                <div id="memberlist-btn">
+	                                    <button type="submit" class="btn bc22 bs4">다운로드</button>
+	                                </div>
+                                </form>
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                        	<th>No</th>
-                                            <th>이름</th>
                                             <th>아이디</th>
+                                            <th>이름</th>
                                             <th>생년월일</th>
                                             <th>전화번호</th>
                                             <th>주소</th>
@@ -159,9 +160,8 @@
                                     </thead>
                                     <tfoot>
                                      	<tr>
-                                     		<th>No</th>
-                                            <th>이름</th>
                                             <th>아이디</th>
+                                            <th>이름</th>
                                             <th>생년월일</th>
                                             <th>전화번호</th>
                                             <th>주소</th>
@@ -172,9 +172,8 @@
                                     <tbody>
                                     <c:forEach items="${list }" var="m">
                                         <tr>
-                                        	<td>1</td>
-                                            <td>${m.memberName }</td>
                                             <td>${m.memberId }</td>
+                                            <td>${m.memberName }</td>
                                             <td>${m.memberBdate}</td>
                                             <td>${m.memberPhone}</td>
                                             <td>${m.memberAddr}</td>
