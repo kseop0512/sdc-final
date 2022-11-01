@@ -125,5 +125,16 @@ public class MemberController {
 		model.addAttribute("list",list);
 		return "manager/adminMemberList";
 	}
+	//관리자P 공지사항 이동
+	@RequestMapping(value="/adminNotice.do")
+	public String adminNotice() {
+		return "manager/adminNotice";
+	}
+	
+	//관리자P 공지사항 글쓰기 Frm
+	@RequestMapping(value="/adminNoticeWriteFrm.do")
+	public String adminNoticeFrm() {
+		return "manager/adminNoticeWrite";
+	}
 	
 }
