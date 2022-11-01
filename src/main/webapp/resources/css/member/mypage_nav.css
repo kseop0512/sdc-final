@@ -1,3 +1,4 @@
+/* 마이페이지 왼쪽 메뉴 */
 /* 창 높이 770px이상일 때 fixed효과*/
 @media(min-height : 775px){
 	#mypage-nav {
