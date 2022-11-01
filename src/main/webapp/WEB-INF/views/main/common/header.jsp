@@ -13,7 +13,14 @@
         <div class="languages d-none d-md-flex align-items-center">
             <ul>
                 <li>Kr</li>
-                <li><a href="#">Manager</a></li>
+                <c:choose>
+                <c:when test="${not empty sessionScope.g }">
+					<li><a href="/selectUserList.do">Manager</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="/loginManagerFrm.do">Manager</a></li>
+				</c:otherwise>
+            	</c:choose>
             </ul>
         </div>
     </div>
@@ -73,6 +80,15 @@
         </nav><!-- .navbar -->
         <a href="/logoutPartner.do" class="book-a-table-btn scrollto d-none d-lg-flex">LOGOUT</a>
       </c:when>
+	  
+	  <c:when test="${not empty sessionScope.g }">
+            <li><a class="nav-link scrollto" href="/selectUserList.do">마이페이지</a></li>
+            <li><a class="nav-link scrollto" href="#contact">문의하기</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+        <a href="/logoutPartner.do" class="book-a-table-btn scrollto d-none d-lg-flex">LOGOUT</a>
+      </c:when>	
 
       <c:otherwise>
          <li><a class="nav-link scrollto" href="/beforeLogin.do">마이페이지</a></li>

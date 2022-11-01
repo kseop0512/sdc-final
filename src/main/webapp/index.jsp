@@ -23,6 +23,9 @@
 					<c:when test="${not empty sessionScope.p }">
 						<h1>안녕하세요  ${sessionScope.p.PName }님 <span>똑독캣에 오신걸 환영합니다</span></h1>
 					</c:when>
+					<c:when test="${not empty sessionScope.g }">
+						<h1>안녕하세요  ${sessionScope.g.adminId }님 <span>똑독캣에 오신걸 환영합니다</span></h1>
+					</c:when>
 					<c:otherwise>
 						<h1>안녕하세요  <span>똑독캣에 오신걸 환영합니다</span></h1>
 					</c:otherwise>
