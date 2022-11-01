@@ -38,7 +38,7 @@ $(document).ready(function() {
                 confirmValue(idRef);
 
                 $.ajax({
-                    url : "/validationPartnerId.do",크
+                    url : "/validationPartnerId.do",
                     data : {pId : pId},
                     async : false,
                     success: function(result) {
