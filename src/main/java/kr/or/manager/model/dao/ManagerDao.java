@@ -1,6 +1,7 @@
 package kr.or.manager.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.manager.model.vo.Manager;
 import kr.or.member.model.vo.Member;
+import kr.or.partner.model.vo.Partner;
 
 @Repository
 public class ManagerDao {
@@ -44,4 +46,14 @@ public class ManagerDao {
 	      List list = sqlSession.selectList("member.selectMemberPartnerList",m);
 	      return (ArrayList<Member>)list;
 	   }
+//관리자P 유저관리 검색 - 이용자검색
+	public ArrayList<Member> searchMember(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("manager.searchMember",map);
+		return (ArrayList<Member>) list;
+	}
+//관리자P 유저검색 - 파트너 검색
+	public ArrayList<Member> serchPartner(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("manager.searchPartner",map);
+		return (ArrayList<Member>)list;
+	}
 }
