@@ -60,7 +60,7 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/">SDC홈페이지</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">로그아웃</a></li>
+                        <li><a class="dropdown-item" href="/logoutPartner.do">로그아웃</a></li>
                     </ul>
                 </li>
             </ul>
@@ -130,7 +130,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        	${sessionScope.p.pId }
+                        	${sessionScope.p.PName }
                     </div>
                 </nav>
             </div>
@@ -139,40 +139,40 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">파트너 프로필 수정</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">${sessionScope.p.pId }님 환영합니다.</li>
+                            <li class="breadcrumb-item active">${sessionScope.p.PName }님 환영합니다.</li>
                         </ol>
                   	<div>
                   	<form action="/updateProfile.do" method="post" enctype="multipart/form-data">
                       <table class="table table-bordered table-dark profileTable">
                           <tr>
                               <td rowspan="5" style="width: 20%;">
-                              	<img id="profileImg" src="/resources/img/dog.png" style="width:100%;">
+                              	<img id="profileImg" src="/resources/upload/partner/profileImg/${sessionScope.p.profilePath }" style="width:100%;">
 							    <input type="file" class="custom-file-input" name="profileFile" style="width: 100%;" accept=".jpg,.png,.jpeg,gif" onchange="loadImg(this);" aria-describedby="inputGroupFileAddon01">
                               </td>
                               <th>이름</th>
                               <td colspan="2">
-                              	<input type="hidden" name="pNo" value="${sessionScope.p.pNo }">
-                              	신혜규${sessionScope.p.pName }
+                              	<input type="hidden" name="pNo" value="${sessionScope.p.PNo }">
+                              	${sessionScope.p.PName }
                               </td>
                           </tr>
                           <tr>
                           	<th>생년월일</th>
-                          	<td colspan="2">${sessionScope.p.pDob }</td>
+                          	<td colspan="2">${sessionScope.p.PDob }</td>
                           </tr>
                           <tr>
                           	<th>주소</th>
-                          	<td><input type="text" name="pAddr" class="inputStyle" placeholder="css천재한테물어봐야징${sessionScope.p.pAddr }" value="${sessionScope.p.pAddr }"></td>
+                          	<td><input type="text" name="pAddr" class="inputStyle" placeholder="${sessionScope.p.PAddr }" value="${sessionScope.p.PAddr }"></td>
                          	<td style="width:8%;padding: 0px; vertical-align: middle;"><button type="button"class="btn btn-secondary btn-addr-search" style="width: 100%;">찾기</button></td>
                           </tr>
                           <tr>
                           	<th>전화번호</th>
                           	<td style="padding: 0px;" colspan="2">
-                          	<input type="text" name="pPhone" placeholder="01027850281${sessionScope.p.pPhone }" class="inputStyle">
+                          	<input type="text" name="pPhone" placeholder="${sessionScope.p.PPhone }" value="${sessionScope.p.PPhone }" class="inputStyle">
                           	</td>
                           </tr>
                           <tr>
                           	<th>E-Mail</th>
-                          	<td colspan="2" style="padding: 0px;"><input type="text" name="pEmail" placeholder="${sessionScope.p.pEmail }" class="inputStyle"></td>
+                          	<td colspan="2" style="padding: 0px;"><input type="text" name="pEmail" placeholder="${sessionScope.p.PEmail }" value="${sessionScope.p.PEmail }"class="inputStyle"></td>
                           </tr>
                       </table>
                       <table class="table table-bordered table-dark profileTable">
@@ -183,9 +183,9 @@
                       	</tr>
                       	<tr>
                       		<th>파트너 등급</th>
-                      		<td>${sessionScope.p.pGrade}</td>
+                      		<td>${sessionScope.p.PGrade}</td>
                       		<th>포인트</th>
-                      		<td>${sessionScope.p.pPoint}</td>
+                      		<td>${sessionScope.p.PPoint}</td>
                       	</tr>
                       </table>
                       <table class="table table-bordered table-dark profileTable">
