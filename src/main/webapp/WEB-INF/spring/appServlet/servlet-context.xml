@@ -51,7 +51,7 @@
 		<websocket:mapping path="/dm.do" handler="dmHandler"/>
 	</websocket:handlers> -->
 	
-	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<beans:bean  id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></beans:property>
 		<beans:property name="url" value="jdbc:oracle:thin:@1.220.236.74:15211:xe"></beans:property>
 		<beans:property name="username" value="sdc"></beans:property>
@@ -85,5 +85,6 @@
 	<context:component-scan base-package="common" />
 	<context:component-scan base-package="kr.or.member" />
 	<context:component-scan base-package="kr.or.mail" />
+	<context:component-scan base-package="kr.or.manager" />
 	<context:component-scan base-package="kr.or.main.partner" />
 </beans:beans>

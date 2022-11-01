@@ -27,6 +27,9 @@
 		<if test="pPw != null">
 		and p_pw = #{pPw}
 		</if>
+		<if test="pAddr != null">
+		and p_addr=#{pAddr}
+		</if>
 	</select>
 	<update id="changePw" parameterType="p">
 		update partner set p_pw = #{pPw} where p_id = #{pId}
@@ -56,10 +59,19 @@
 	</insert>
 
 	<update id="updateProfile" parameterType="p">
-		update partner
-			set p_addr = #{pAddr}, p_phone = #{pPhone}, p_email = #{pEmail}, license = #{license}, work_exp = #{workExp},
-				profile_nane = #{profileName}, profilePath = #{profilePath}
-		where p_no = #{pNo}
+		<choose>
+			<when test="profileName!=null">
+				update partner
+					set p_addr = #{pAddr}, p_phone = #{pPhone}, p_email = #{pEmail}, license = #{license}, work_exp = #{workExp},
+						profile_name = #{profileName}, profile_path = #{profilePath}
+				where p_no = #{pNo}
+			</when>
+			<when test="profileName == null">
+				update partner
+					set p_addr = #{pAddr}, p_phone = #{pPhone}, p_email = #{pEmail}, license = #{license}, work_exp = #{workExp}
+				where p_no = #{pNo}
+			</when>
+		</choose>
 	</update>
 	<select id="selectTrainers" resultType="p">
 		select
@@ -86,9 +98,9 @@
 		where category = 'T'
 	</select>
 
-
-	<!--
-	 파트너용 로그인
+	
+	<!--  
+	 파트너용 로그인 
 	<select id="selectOnepartner" parameterType="p" resultType="p">
 		select
 			p_no as pNo,

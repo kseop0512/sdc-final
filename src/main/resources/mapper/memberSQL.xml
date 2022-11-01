@@ -59,4 +59,30 @@
 	<select id="selectUserList" resultType="int">
 		select count(*) as cnt from member_tbl
 	</select>
+	<!-- 관리자 P 파트너+이용자 총회원수 -->
+	<select id="selectTotal" resultType="int">
+		SELECT (SELECT COUNT(*) FROM member_tbl)
+		 + 
+		(SELECT COUNT(*) FROM partner) FROM dual
+	</select>
+	<!-- 관리자 P 전체회원리스트 -->
+	<select id="selectMemberPartnerList" parameterType="m" resultType="m">
+		select 
+		    member_name as memberName,
+		    member_id as memberId,
+		    member_bday as memberBdate,
+		    member_phone as memberPhone,
+		    member_addr as memberAddr,
+		    enroll_date as memberEnrollDate
+		from member_tbl
+		union all
+		select 
+		    p_name as mname,
+		    p_id as mid,
+		    p_dob as mdob,
+		    p_phone as mphone,
+		    p_addr as maddr,
+		    apply_date as enrolldate
+		from partner
+	</select>
 </mapper>
