@@ -36,10 +36,19 @@
 	</update>
 
 	<update id="updateProfile" parameterType="p">
-		update partner 
-			set p_addr = #{pAddr}, p_phone = #{pPhone}, p_email = #{pEmail}, license = #{license}, work_exp = #{workExp},
-				profile_nane = #{profileName}, profilePath = #{profilePath}
-		where p_no = #{pNo}
+		<choose> 
+			<when test="profileName!=null">
+				update partner 
+					set p_addr = #{pAddr}, p_phone = #{pPhone}, p_email = #{pEmail}, license = #{license}, work_exp = #{workExp},
+						profile_name = #{profileName}, profile_path = #{profilePath}
+				where p_no = #{pNo}
+			</when>
+			<when test="profileName == null">
+				update partner 
+					set p_addr = #{pAddr}, p_phone = #{pPhone}, p_email = #{pEmail}, license = #{license}, work_exp = #{workExp}
+				where p_no = #{pNo}
+			</when>
+		</choose>
 	</update>
 	<select id="selectTrainers" resultType="p">
 		select

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.member.model.vo.Member;
 import kr.or.partner.model.dao.PartnerDao;
@@ -23,7 +24,7 @@ public class PartnerService {
 		// TODO Auto-generated method stub
 		return dao.changePwPartNer(p);
 	}
-
+	@Transactional
 	public int updateProfile(Partner p) {
 		// TODO Auto-generated method stub
 		return dao.updateProfile(p);
