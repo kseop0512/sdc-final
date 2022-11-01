@@ -51,12 +51,6 @@ public class MemberController {
 		return result;
 	}
 	
-
-	@RequestMapping(value="/memberMypage.do")
-	public String memberMypage() {
-		return "member/memberMypage";
-	}
-	
 	//메인에서 로그인 버튼 누르면 나오는 첫 페이지 이동
 	@RequestMapping(value="/beforeLogin.do")
 	public String beforeLogin(){
@@ -84,6 +78,12 @@ public class MemberController {
 	public String logoutUser(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
+	}
+	
+	//유저 마이페이지 이동
+	@RequestMapping(value="/memberMypage.do")
+	public String memberMypage() {
+		return "member/memberMypage";
 	}
 	
 	//유저 정보수정
