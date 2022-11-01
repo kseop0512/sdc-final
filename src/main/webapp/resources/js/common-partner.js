@@ -123,6 +123,17 @@ $(document).ready(function() {
             document.getElementById('preview').src = "";
         }
     })
+
+
+    $("[name=partnerType]").on("change", function() {
+        const category = $("[name=category]");
+
+        if($("[name=partnerType]:checked").length < 2) {
+            category.val($(this).val());
+        } else {
+            category.val("VL");
+        }
+    })
 })
 
 function readURL(input) {
@@ -166,7 +177,7 @@ function checkPartnerMail(btn) {
             url : "/sendIdCheckMail.do",
             data: {email : email},
             success : function(result) {
-                console.log(result);
+                // console.log(result);
                 if(result != "") {
                     mailCode = result;
                     mailAuth = false;

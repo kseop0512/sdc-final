@@ -42,6 +42,20 @@
                 <div class="col-lg-10 mt-lg-0">
                     <!-- <form action="forms/contact.php" method="post" role="form" class="php-email-form"> -->
                     <div class="row php-email-form">
+                        <div class="col col-md-8 mb-5">
+                            <label for="">지원 유형 <span class="text-warning">*</span></label>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <input type="checkbox" class="btn-check" name="partnerType" id="partnerType1" value="L">
+                                    <label class="btn col-md-12 btn-outline-secondary" for="partnerType1">위탁돌봄</label>
+                                </div>
+                                <div class="col">
+                                    <input type="checkbox" class="btn-check" name="partnerType" id="partnerType2" value="V">
+                                    <label class="btn col-md-12 btn-outline-secondary" for="partnerType2">방문돌봄</label>
+                                </div>
+                                <input type="hidden" name="category" value="">
+                            </div>
+                        </div>
                         <div class="section-title">
                             <!-- <h2>파트너 지원</h2> -->
                             <p>1. 기본정보</p>
@@ -74,6 +88,10 @@
                             <input type="password" class="form-control" id="rePw" placeholder="비밀번호 확인" required>
                         </div>
                         <div class="col-md-6 form-group mt-3">
+                            <label for="pName">이름 <span class="text-warning">*</span></label>
+                            <input type="text" name="pName" class="form-control" id="pName" placeholder="" required>
+                        </div>
+                        <div class="col-md-6 form-group mt-3">
                             <label for="pDob">생년월일 <span class="text-warning">*</span> <small class="text-muted">03년 생부터 (만 18세이상)지원이 가능합니다.</small></label>
                             <input type="text" name="pDob" class="form-control" id="pDob" placeholder="예) 19940101" required>
                         </div>
@@ -94,11 +112,11 @@
                             <label for="">성별 <span class="text-warning">*</span></label>
                             <div class="row">
                                 <div class="col">
-                                    <input type="radio" class="btn-check" name="pGender" id="gender1">
+                                    <input type="radio" class="btn-check" name="pGender" id="gender1" value="M">
                                     <label class="btn col-md-12 btn-outline-secondary" for="gender1">남자</label>
                                 </div>
                                 <div class="col">
-                                    <input type="radio" class="btn-check " name="pGender" id="gender2">
+                                    <input type="radio" class="btn-check " name="pGender" id="gender2" value="F">
                                     <label class="btn col-md-12 btn-outline-secondary" for="gender2">여자</label>
                                 </div>
                             </div>
@@ -225,8 +243,15 @@
 
                         <div class="col-md-12 form-group mt-4">
                             <label for="">프로필 사진 <span class="text-warning">*</span></label>
-                            <div class="col mt-3">
+                            <%--<div class="col mt-3">
                                 <input type="file" name="profile" onchange="">
+                                <img src="" alt="" id="preview">
+                            </div>--%>
+                            <div class="col-6 mb-3 mt-3">
+                                <label for="profile" class="form-label d-none"></label>
+                                <input class="form-control h-auto" type="file" name="profile" id="profile">
+                            </div>
+                            <div class="col-auto">
                                 <img src="" alt="" id="preview">
                             </div>
                         </div>
@@ -236,7 +261,7 @@
                             <div class="col mt-3">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="agreement" id="agreement1" value="c1">
-                                    <label class="form-check-label" for="agreement1">개인정보 <a href="">수집/이용에 동의</a>합니다.</label>
+                                    <label class="form-check-label" for="agreement1">개인정보 <a href="javascript:void(0)">수집/이용에 동의</a>합니다.</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="agreement" id="agreement2" value="c2">

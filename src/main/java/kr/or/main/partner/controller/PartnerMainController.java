@@ -1,6 +1,6 @@
 package kr.or.main.partner.controller;
 
-import kr.or.common.FileRename;
+import common.FileRename;
 import kr.or.main.partner.model.service.PartnerMainService;
 import kr.or.partner.model.vo.Partner;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class PartnerMainController {
     @RequestMapping(value = "/joinPetSitterPartner.do")
     public String joinPetSitterPartner(Partner p, MultipartFile profile, HttpServletRequest request) {
         //if(!profile.isEmpty()) {
-        String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/partner/");
+        String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/partner/profileImg/");
         String filename = profile.getOriginalFilename();
         String filepath = fileRename.fileRename(savePath, filename);
 
@@ -41,8 +41,12 @@ public class PartnerMainController {
         p.setProfilePath(filepath);
 
         int result = service.insertPartner(p);
+        if(result>0) {
 
-        return "redirect:/joinPetSitterPartnerFrm.do";
+        } else {
+
+        }
+        return "redirect:/";
     }
 
 }

@@ -31,8 +31,28 @@
 	<update id="changePw" parameterType="p">
 		update partner set p_pw = #{pPw} where p_id = #{pId}
 	</update>
-	<insert id="insertPartner" parameterMap="p">
-
+	<insert id="insertPartner" parameterType="p">
+		insert into partner values(
+			'P-' || p_seq.nextval,
+			#{category},
+		    #{pId},
+			#{pPw},
+			#{pName},
+		    #{pDob},
+		    #{pPhone},
+		    #{pGender},
+		    #{pId},
+		    #{pAddr},
+		    'N',
+		    0,
+		    #{profileName},
+		    #{profilePath},
+			#{applyMotiv},
+		    sysdate,
+		    null,
+		    #{license},
+		    #{workExp}
+		)
 	</insert>
 
 	<update id="updateProfile" parameterType="p">
