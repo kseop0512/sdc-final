@@ -30,7 +30,7 @@
 			member_name as memberName,
 			member_id as memberId,
 	  		member_pw as memberPw,
-	  		member_bday as memberBday,
+	  		member_bday as memberBdate,
 	  		member_phone as memberPhone,
 	  		member_addr as memberAddr,
 	  		member_gender as memberGender,
@@ -55,5 +55,8 @@
 			member_gender = #{memberGender}
 		where member_id = #{memberId}
 	</update>
-	
+	<!-- 관리자 P 관리자회원수 -->
+	<select id="selectUserList" resultType="int">
+		select count(*) as cnt from member_tbl
+	</select>
 </mapper>

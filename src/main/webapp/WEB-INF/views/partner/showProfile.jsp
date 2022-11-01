@@ -10,10 +10,31 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>파트너메인페이지</title>
+        <script src="http://code.jquery.com/jquery-3.6.1.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="/resources/css/partnerStyles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
+    <style>
+    	.profileTable{
+    		width: 1000px;
+    		margin: 0 auto;
+    		margin-top: 20px;
+    	}
+    	.profileTable th{
+    		width: 20%;
+    		text-align: center;
+    	}
+    	.updateBtn{
+    		display: block;
+    		margin: 0 auto;
+    	}
+    	.gradeTable{
+    		display: none;
+    		margin-top: 10px;
+    		text-align: center;
+    	}
+    </style>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
@@ -60,7 +81,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="/updatePartnerProfileFrm.do">프로필 변경</a>
                                     <a class="nav-link" href="/chkPwFrm.do">비밀번호 변경</a>
-                                    <a class="nav-link" href="login.html">파트너 탈퇴신청</a>
+                                    <a class="nav-link" href="/unregisterFrm.do">파트너 탈퇴신청</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -105,7 +126,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        	${sessionScope.m.pId }
+                        	${sessionScope.p.pId }
                     </div>
                 </nav>
             </div>
@@ -114,14 +135,14 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">파트너 프로필</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">${sessionScope.m.pId }님 환영합니다.</li>
+                            <li class="breadcrumb-item active">${sessionScope.p.pId }님 환영합니다.</li>
                         </ol>
                   	<div>
-                      <table class="table table-bordered table-dark" style="width: 1200px; margin: 0 auto;">
+                      <table class="table table-bordered table-dark profileTable">
                           <tr>
-                              <td rowspan="5" style="width: 20%;">프로필사진</td>
-                              <th style="width: 30%;">이름</th>
-                              <td>신혜규</td>
+                              <td rowspan="5" style="width: 20%; background-color: #fff"><img src="/resources/img/dog.png"></td>
+                              <th>이름</th>
+                              <td>신혜규${sessionScope.p.pName }</td>
                           </tr>
                           <tr>
                           	<th>생년월일</th>
@@ -135,7 +156,58 @@
                           	<th>전화번호</th>
                           	<td>${sessionScope.p.pPhone }</td>
                           </tr>
+                          <tr>
+                          	<th>E-Mail</th>
+                          	<td>${sessionScope.p.pEmail }</td>
+                          </tr>
                       </table>
+                      <table class="table table-bordered table-dark profileTable">
+                      	<tr>
+                      		<th>파트너 가입일</th>
+                      		<td colspan="3">${sessionScope.p.approveDate }</td>
+                      		
+                      	</tr>
+                      	<tr>
+                      		<th id="gradeTbl">파트너 등급    *</th>
+                      		<td>${sessionScope.p.pGrade}</td>
+                      		<th id="gradeTbl">포인트    *</th>
+                      		<td>${sessionScope.p.pPoint}</td>
+                      	</tr>
+                      </table>
+                      <table class="table profileTable gradeTable">
+                      	<tr style="background-color: #f8f9fa;">
+                      		<th colspan="2" style="border-right: 1px solid">파트너 등급 기준</th>
+                      		<th>포인트 적립 기준</th>
+                      	</tr>
+                      	<tr>
+                      		<td>등급 C</td>
+                      		<td>0 point ~ 300 point</td>
+                      		<td style="border-left: 1px solid ;">서비스제공 마다 <span><strong>50</strong></span> point!</td>
+                      	</tr>
+                      	<tr>
+                      		<td>등급 B</td>
+                      		<td>301 point ~ 700 point</td>
+                      		<td style="border-left: 1px solid ;">이용자가 후기작성하면 <span><strong>30</strong></span> point!</td>
+                      	</tr>
+                      	<tr>
+                      		<td>등급 A</td>
+                      		<td>701 point ~</td>
+                      		<td style="border-left: 1px solid ;">파트너가 훈련일지/돌봄일지 <span><strong>30</strong></span> point!</td>
+                      	</tr>
+                      </table>
+                      <table class="table table-bordered table-dark profileTable">
+                      	<tr>
+                      		<th>자격증</th>
+                      		<td>for문으로 sessionScope.p.licenseArra 출력하기 / for문으로 sessionScope.p.licenseArra 출력하기 / for문으로 sessionScope.p.licenseArra 출력하기 / for문으로 sessionScope.p.licenseArra 출력하기</td>
+                      	</tr>
+                      	<tr>
+                      		<th>경력 사항</th>
+                      		<td>${sessionScope.p.workExp }</td>
+                      	</tr>
+                      </table>
+                      <div class="profileTable">
+                      	<button type="button" class="btn btn-warning updateBtn" onClick="location.href='/updateProfileFrm.do'">내 정보 수정</button>
+                      </div>
                   </div>
                   </div>
                 </main>

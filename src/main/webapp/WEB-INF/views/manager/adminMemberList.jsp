@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
  <head>
@@ -57,7 +58,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="memberList.html">유저리스트</a>
+                                    <a class="nav-link" href="/selectUserList.do">유저리스트</a>
                                     <a class="nav-link" href="partnerList.html">파트너관리</a>
                                 </nav>
                             </div>
@@ -122,11 +123,11 @@
                                 <div class="card mb-4">
                                     <div class="card-body">
                                         <p class="mb-0">
-                                            파트너
-                                            <code>[0]</code> 
+                                           	 파트너
+                                            <code>[${pCount}]</code> 
                                             <span>/</span>
-                                            이용자
-                                            <code>[0]</code>명
+                                            	이용자
+                                            <code>[${count }]</code>명
                                         </p>
                                         <div id="nameIdSerarch-Box" style="float: right;">
                                             <form action="#" post="post">

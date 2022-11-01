@@ -55,6 +55,12 @@ public class MemberController {
 		return "member/memberMypage";
 	}
 	
+	//메인에서 로그인 버튼 누르면 나오는 첫 페이지 이동
+	@RequestMapping(value="/beforeLogin.do")
+	public String beforeLogin(){
+		return "main/common/beforeLogin";
+	}
+	
 	//로그인 폼 이동
 	@RequestMapping(value="/loginUserFrm.do")
 	public String loginUserFrm(){
@@ -102,4 +108,16 @@ public class MemberController {
 	public String adminMemberList() {
 		return "manager/adminMemberList";
 	}
+	
+	//유저리스트 회원 수 
+	@RequestMapping(value="/selectUserList.do")
+	public String selectUserList(Model model) {
+		int result = service.selectMemberList();
+		int result2 = service.selectPartnerList();
+		model.addAttribute("count", result);
+		model.addAttribute("pCount", result2);
+		return "manager/adminMemberList";
+	}
+	
+	
 }

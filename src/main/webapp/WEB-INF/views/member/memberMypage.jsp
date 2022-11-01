@@ -40,36 +40,37 @@
 							<form action="/memberUpdate.do" method="post">
 								<div>
 									<label for="memberId">아이디</label>
-									<input type="text" id="memberId" name="memberId" value="memberId" readonly autocomplete="off">
+									<input type="text" id="mId" name="memberId" value="${sessionScope.m.memberId}" readonly autocomplete="off">
 								</div>
 								<div>
 									<label for="memberPw">비밀번호</label>
-									<input type="password" id="memberPw" name="memberPw" value="memberPw" autocomplete="off">
-									<span id="pwSpan"></span>
+									<input type="password" id="mPw" name="memberPw" value="${sessionScope.m.memberPw}" autocomplete="off">
+									<span id="pwSpan">* 정보를 수정하려면 비밀번호를 재입력하세요.</span>
 								</div>
 								<div>
 									<label for="memberName">이름</label>
-									<input type="text" id="memberName" name="memberName" value="memberName" autocomplete="off">
+									<input type="text" id="mName" name="memberName" value="${sessionScope.m.memberName}" autocomplete="off">
 								</div>
 								<div id="gender-div">
 									<label>성별</label>
-									<input type="radio" id="m" name="memberGender" value="m">
+									<input type="hidden" value="${sessionScope.m.memberGender }" id="mGender">
+									<input type="radio" id="m" name="memberGender" value="M">
 									<label for="m" class="radio-label">남</label>
-									<input type="radio" id="f" name="memberGender" value="f">
+									<input type="radio" id="f" name="memberGender" value="F"> 
 									<label for="f" class="radio-label">여</label>
 								</div>
 								<div>
 									<label for="memberBdate">생년월일</label>
-									<input type="text" id="memberBdate" name="memberBdate" value="memberBdate" autocomplete="off">
+									<input type="text" id="mBdate" name="memberBdate" value="${sessionScope.m.memberBdate}" autocomplete="off">
 									<span id="bdateSpan"></span>
 								</div>
 								<div>
 									<label for="memberAddr">주소</label>
-									<input type="text" id="memberAddr" name="memberAddr" value="memberAddr" autocomplete="off">
+									<input type="text" id="mAddr" name="memberAddr" value="${sessionScope.m.memberAddr}" autocomplete="off">
 								</div>
 								<div>
 									<label for="memberPhone">전화번호</label>
-									<input type="text" id="memberPhone" name="memberPhone" value="memberPhone" autocomplete="off">
+									<input type="text" id="mPhone" name="memberPhone" value="${sessionScope.m.memberPhone}" autocomplete="off">
 									<span id="phoneSpan"></span>
 								</div>
 								<div>

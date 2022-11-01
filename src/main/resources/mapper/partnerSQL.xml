@@ -19,14 +19,87 @@
 			profile_path as profilePath,
 			apply_motiv as applyMotiv,
 			apply_date as applyDate,
-			approve_date as approveDate
+			approve_date as approveDate,
+			license,
+			work_exp as workExp
 		from partner
 		where p_id = #{pId}
 		<if test="pPw != null">
 		and p_pw = #{pPw}
 		</if>
+		<if test="pAddr != null">
+		and p_addr=#{pAddr}
+		</if>
 	</select>
 	<update id="changePw" parameterType="p">
 		update partner set p_pw = #{pPw} where p_id = #{pId}
 	</update>
+
+	<update id="updateProfile" parameterType="p">
+		update partner 
+			set p_addr = #{pAddr}, p_phone = #{pPhone}, p_email = #{pEmail}, license = #{license}, work_exp = #{workExp},
+				profile_nane = #{profileName}, profilePath = #{profilePath}
+		where p_no = #{pNo}
+	</update>
+	<select id="selectTrainers" resultType="p">
+		select
+			p_no as pNo,
+			category,
+			p_id as pId,
+			p_pw as pPw,
+			p_name as pName,
+			p_dob as pDob,
+			p_phone as pPhone,
+			p_gender as pGender,
+			p_email as pEmail,
+			p_addr as pAddr,
+			p_grade as pGrade,
+			p_point as pPoint,
+			profile_name as profileName,
+			profile_path as profilePath,
+			apply_motiv as applyMotiv,
+			apply_date as applyDate,
+			approve_date as approveDate,
+			license,
+			work_exp as workExp
+		from partner
+		where category = 'T'
+	</select>
+
+	
+	<!--  
+	 파트너용 로그인 
+	<select id="selectOnepartner" parameterType="p" resultType="p">
+		select
+			p_no as pNo,
+			category,
+			p_id as pId,
+			p_pw as pPw,
+			p_name as pName,
+			p_dob as pDob,
+			p_phone as pPhone,
+			p_gender as pGender,
+			p_email as pEmail,
+			p_addr as pAddr,
+			p_grade as pGrade,
+			p_point as pPoint,
+			profile_name as profileName,
+			profile_path as profilePath,
+			apply_motiv as applyMotiv,
+			apply_date as applyDate,
+			approve_date as approveDate
+		from partner
+		where p_id=#{pId}
+		<if test="pPw != null">
+		and p_pw=#{pPw}
+		</if>
+		<if test="pAddr != null">
+		and p_addr=#{pAddr}
+		</if>
+	</select>
+	-->
+	<!-- 관리자P 파트너 회원수 -->
+	<select id="selectPartner" resultType="int">
+		select count(*) as cnt from partner
+	</select>
 </mapper>

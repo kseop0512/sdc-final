@@ -82,6 +82,7 @@
 	<context:component-scan base-package="kr.or.pet" />
 	<context:component-scan base-package="kr.or.partner" />
 	<context:component-scan base-package="kr.or.common" />
+	<context:component-scan base-package="common" />
 	<context:component-scan base-package="kr.or.member" />
 	<context:component-scan base-package="kr.or.mail" />
 </beans:beans>
