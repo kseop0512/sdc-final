@@ -43,5 +43,10 @@ public class MemberDao {
 		int result = sqlSession.selectOne("partner.selectPartner");
 		return result;
 	}
+	//관리자 P 총 인원
+	public int selectTotalMember() {
+		int result = sqlSession.selectOne("member.selectTotal");
+		return result;
+	}
 
 }

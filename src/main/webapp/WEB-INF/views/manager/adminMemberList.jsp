@@ -110,7 +110,7 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active" style="padding-left: 8px;">
                                 <span>전체사용자 총</span>
-                                <code id="dmMax_Count">[0]</code>명
+                                <code>[${totalCount}]</code>명
                             </li>
                         </ol>
                         <hr>
@@ -124,10 +124,10 @@
                                     <div class="card-body">
                                         <p class="mb-0">
                                            	 파트너
-                                            <code>[${pCount}]</code> 
+                                            <code>[${partnerCount}]</code>명 
                                             <span>/</span>
                                             	이용자
-                                            <code>[${count }]</code>명
+                                            <code>[${memberCount}]</code>명
                                         </p>
                                         <div id="nameIdSerarch-Box" style="float: right;">
                                             <form action="#" post="post">
@@ -141,7 +141,7 @@
                                                     <option>아이디</option>
                                                 </select>
                                                     <input class="input-form2" type="text" placeholder="입력하세요" style="width: 500px;">
-                                                    <button class="bc22">검색</button>
+                                                    <but8ton class="bc22">검색</button>
                                             </form>
                                         </div>
                                     </div>
