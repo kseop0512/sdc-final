@@ -273,18 +273,18 @@ input+span{
 input[type=radio]:checked+.modal-label{
     background-color: #ffb347;
 }
-.q1>h2{
+.qNumber{
 	padding-left: 68px;
 	float: left;
 	padding-top: 18px;
 	padding-bottom: 15px;
 }
-.q1>h4{
+.qqNumber{
 	padding-right: 45px;
 	float: right;
 	font-size: 15px;
 }
-.q1 p{
+.chkQuestion{
 	float: left;
 	padding-left: 65px;
 	font-weight: bolder;
@@ -304,11 +304,14 @@ input[type=radio]:checked+.modal-label{
 	background-color: #fff;
 	color: black;
 }
-.q1exit:hover{
+.exitBtn:hover{
 	background-color: #ccc;
 	color: #fff;
 }
-.q1next:hover{
+.nextBtn:hover{
 	background-color: #ffb347;
 	color: #fff;
+}
+.shortQ{
+	padding-left: 20px;
 }
