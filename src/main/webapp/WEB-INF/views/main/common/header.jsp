@@ -12,7 +12,20 @@
 
         <div class="languages d-none d-md-flex align-items-center">
             <ul>
-                <li>Kr</li>
+                <c:choose>
+                <c:when test="${not empty sessionScope.m }">
+                    <li><a href="/memberMypage.do">마이페이지</a></li>
+                </c:when>
+                <c:when test="${not empty sessionScope.p }">
+                    <li><a href="/partnerMain.do">마이페이지</a></li>
+                </c:when>
+                <c:when test="${not empty sessionScope.g }">
+                    <li><a href="/selectUserList.do">마이페이지</a></li>
+                </c:when>
+                <c:otherwise>
+                    <li><a href="javascript:void(0)">회원가입</a></li>
+                </c:otherwise>
+                </c:choose>
                 <c:choose>
                 <c:when test="${not empty sessionScope.g }">
 					<li><a href="/selectUserList.do">Manager</a></li>
@@ -44,6 +57,15 @@
                 <li><a class="nav-link scrollto" href="/#specials">세부정보</a></li>
                 <li><a class="nav-link scrollto" href="/#chefs">훈련사정보</a></li>
                 <li><a class="nav-link scrollto" href="/#gallery">갤러리</a></li>
+                <li class="dropdown"><a href="#"><span>파트너 찾기</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="javascript:void(0)">펫시터 매칭</a></li>
+                        <li><a href="/petSitterList.do">위탁 펫시터 찾기</a></li>
+                        <li><a href="/trainerList.do">훈련사 프로필</a></li>
+                        <li><a href="/joinPetSitterPartnerFrm.do">파트너(펫시터) 지원</a></li>
+                        <li><a href="/joinTrainerPartnerFrm.do">파트너(훈련사) 지원</a></li>
+                    </ul>
+                </li>
                 <li class="dropdown"><a href="#"><span>게시판</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li><a href="#">공지사항</a></li>
@@ -53,18 +75,15 @@
                                 <li><a href="#">펫시팅 후기</a></li>
                                 <li><a href="#">훈련 후기</a></li>
                                 <li><a href="#">위탁 후기</a></li>
-                                <!--<li><a href="#">파트너(펫시터) 지원</a></li>
-                                <li><a href="#">파트너(훈련사) 지원</a></li>-->
                             </ul>
                         </li>
-                        <li><a href="/joinPetSitterPartnerFrm.do">파트너(펫시터) 지원</a></li>
-                        <li><a href="/joinTrainerPartnerFrm.do">파트너(훈련사) 지원</a></li>
+                        <%--<li><a href="/joinPetSitterPartnerFrm.do">파트너(펫시터) 지원</a></li>
+                        <li><a href="/joinTrainerPartnerFrm.do">파트너(훈련사) 지원</a></li>--%>
                         <li><a href="/adminMemberList.do">Drop Down 4</a></li>
                     </ul>
                 </li>
      <c:choose>
         <c:when test="${not empty sessionScope.m }">
-            <li><a class="nav-link scrollto" href="/memberMypage.do">마이페이지</a></li>
             <li><a class="nav-link scrollto" href="#contact">문의하기</a></li>
          </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
@@ -73,7 +92,6 @@
       </c:when>
       
       <c:when test="${not empty sessionScope.p }">
-            <li><a class="nav-link scrollto" href="/partnerMain.do">마이페이지</a></li>
             <li><a class="nav-link scrollto" href="#contact">문의하기</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
@@ -82,7 +100,6 @@
       </c:when>
 
 	  <c:when test="${not empty sessionScope.g }">
-            <li><a class="nav-link scrollto" href="/selectUserList.do">마이페이지</a></li>
             <li><a class="nav-link scrollto" href="#contact">문의하기</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
@@ -91,7 +108,6 @@
       </c:when>
 
       <c:otherwise>
-         <li><a class="nav-link scrollto" href="/beforeLogin.do">마이페이지</a></li>
          <li><a class="nav-link scrollto" href="#contact">문의하기</a></li>
          </ul>
          <i class="bi bi-list mobile-nav-toggle"></i>

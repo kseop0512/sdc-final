@@ -96,8 +96,6 @@ $("#mAddr").on("click", function() {
 			if(getAddr != null){
 				const detailAddr = data.address+", "+getAddr;
             	$("#mAddr").val(detailAddr);
-			}else{
-				alert("상세주소를 입력하세요.");
 			}
         }
     }).open();

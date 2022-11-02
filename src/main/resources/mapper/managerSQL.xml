@@ -14,5 +14,60 @@
 		and admin_pw=#{adminPw}
 		</if>
 	</select>      
-	
+	<!-- 회원관리 회원리스트  검색-->
+	<select id="searchMember" parameterType="map" resultType="m">
+		select 
+		    member_name as memberName,
+		    member_id as memberId,
+		    member_bday as memberBday,
+		    member_phone as memberPhone,
+		    member_addr as memberAddr,
+		    enroll_date as memberEnrollDate
+		from member_tbl
+		<choose>
+			<when test="type.equals('id')">
+				where member_id '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('name')">
+				where member_name like '%'||#{keyword}||'%'
+			</when>
+		</choose>
+	</select>
+	<select id="searchPartner" parameterType="map" resultType="m">
+		select 
+			p_name as memberName,
+			p_id as memberId,
+			p_dob as memberBday,
+			p_phone as memberPhone,
+			p_addr as memberAddr,
+			apply_date as memberEnrollDate
+		from partner
+			<choose>
+			<when test="type.equals('id')">
+				where p_id like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('name')">
+				 where p_name like '%'||#{keyword}||'%'
+			</when>
+		</choose>
+	</select>
+	<select id="memberPartnerList" resultType="m">
+				select 
+		    member_name as memberName,
+		    member_id as memberId,
+		    member_bday as memberBdate,
+		    member_phone as memberPhone,
+		    member_addr as memberAddr,
+		    enroll_date as memberEnrollDate
+		from member_tbl
+		union all
+		select 
+		    p_name as mname,
+		    p_id as mid,
+		    p_dob as mdob,
+		    p_phone as mphone,
+		    p_addr as maddr,
+		    apply_date as enrolldate
+		from partner
+	</select>
 </mapper>

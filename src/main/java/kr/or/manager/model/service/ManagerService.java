@@ -1,13 +1,29 @@
 package kr.or.manager.model.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import kr.or.manager.model.dao.ManagerDao;
 import kr.or.manager.model.vo.Manager;
 import kr.or.member.model.vo.Member;
+import kr.or.partner.model.vo.Partner;
 
 @Service
 public class ManagerService {
@@ -37,6 +53,118 @@ public class ManagerService {
 		ArrayList<Member> list = dao.selectMemberPartnerList(m);
 		return list;
 	}
+//유저리스트 검색
+	public ArrayList<Member> searchMember(String memberType, String type, String keyword) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		map.put("memberType",memberType);
+		ArrayList<Member> list = null;
+		if(memberType.equals("partner")) {
+			list = dao.serchPartner(map);			
+		}else {
+			list = dao.searchMember(map);			
+		}
+		return list;
+	}
+
+	//유저 리스트 엑셀다운
+	public void excelDown(HttpServletResponse response) throws IOException{
+		//회원목록조회
+		ArrayList<Member> list = dao.selectMemberPartnerList();
+		
+		// 워크북 생성
+		Workbook wb = new XSSFWorkbook();
+		//시트생성
+		Sheet sheet = wb.createSheet("회원관리");
+		//	3. 열 너비 설정
+		sheet.setColumnWidth(0, 5500);
+		sheet.setColumnWidth(1, 5500);
+		sheet.setColumnWidth(2, 5500);
+		sheet.setColumnWidth(3, 5500);
+		sheet.setColumnWidth(4, 5500);
+		
+		//4.테이블 헤더 스타일 지정
+		CellStyle headStyle = wb.createCellStyle();
+		//데이터 가운데 정렬
+		headStyle.setAlignment(HorizontalAlignment.CENTER);
+			//경계선
+	   	headStyle.setBorderTop(BorderStyle.THIN);
+	   	headStyle.setBorderBottom(BorderStyle.THIN);
+	   	headStyle.setBorderLeft(BorderStyle.THIN);
+	   	headStyle.setBorderRight(BorderStyle.THIN);
+	   		// 배경색은 연두색
+	   	headStyle.setFillForegroundColor(HSSFColorPredefined.LIGHT_GREEN.getIndex());
+	   	headStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+		
+		
+		//row 행 순서
+		int rowNum = 0;
+		Cell cell = null;
+		Row row = null;
+		
+		//header
+		int cellNum = 0;
+		row = sheet.createRow(rowNum++);
+		cell=row.createCell(cellNum++);
+		cell.setCellStyle(headStyle);
+		cell.setCellValue("아이디");
+		cell=row.createCell(cellNum++);
+		cell.setCellStyle(headStyle);
+		cell.setCellValue("이름");		
+		cell=row.createCell(cellNum++);
+		cell.setCellStyle(headStyle);
+		cell.setCellValue("생년월일");
+		cell=row.createCell(cellNum++);
+		cell.setCellStyle(headStyle);
+		cell.setCellValue("전화번호");
+		cell=row.createCell(cellNum++);
+		cell.setCellStyle(headStyle);
+		cell.setCellValue("주소");
+		cell=row.createCell(cellNum++);
+		cell.setCellStyle(headStyle);
+		cell.setCellValue("가입일");
+		
+		//6. 테이블 바디 스타일 지정
+		CellStyle bodyStyle = wb.createCellStyle();
+		//데이터 가운데 정렬
+		bodyStyle.setAlignment(HorizontalAlignment.CENTER);
+		
+
+		//테이블 바디 내용
+		for(Member m : list) {
+			row = sheet.createRow(rowNum++);
+			
+			cell = row.createCell(0);
+			cell.setCellStyle(bodyStyle); //가운데 정렬
+			cell.setCellValue(m.getMemberId());
+			cell = row.createCell(1);
+			cell.setCellStyle(bodyStyle); //가운데 정렬
+			cell.setCellValue(m.getMemberName());
+			cell = row.createCell(2);
+			cell.setCellStyle(bodyStyle); //가운데 정렬
+			cell.setCellValue(m.getMemberBdate());
+			cell = row.createCell(3);
+			cell.setCellStyle(bodyStyle); //가운데 정렬
+			cell.setCellValue(m.getMemberPhone());
+			cell = row.createCell(4);
+			cell.setCellStyle(bodyStyle); //가운데 정렬
+			cell.setCellValue(m.getMemberAddr());
+			cell = row.createCell(5);
+			cell.setCellStyle(bodyStyle); //가운데 정렬
+			cell.setCellValue(m.getMemberEnrollDate());
+		}
+		
+	      // 다운로드
+        response.setContentType("ms-vnd/excel");
+        response.setHeader("Content-Disposition", "attachment;filename=SCDmember.xlsx");
+        try {
+            wb.write(response.getOutputStream());
+        } finally {
+            wb.close();
+        }
+	}
 	
+
 	
 }
