@@ -312,6 +312,11 @@ input[type=radio]:checked+.modal-label{
 	background-color: #ffb347;
 	color: #fff;
 }
-.shortQ{
-	padding-left: 20px;
+
+
+.qstn{
+	display: none;
+}
+.chkQuestion+input+label{
+	margin-top: 20px;	
 }
