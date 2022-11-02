@@ -239,48 +239,84 @@ input+span{
 }
 .modal-body{
 	color: black;
-	width:50%; 
-	height:70%;
-  	background:#fff; 
+	width:520px; 
+	height:550px;
+  	background: #e8e7e3; 
   	border-radius:10px;
   	position:relative; 
-  	top:30%; 
+  	top:10%; 
   	left:50%;
-  	margin-top:-100px; 
-  	margin-left:-260px;
+  	margin-top: 4%; 
+  	margin-left:-220px;
   	text-align:center;
   	box-sizing:border-box; 
   	padding:30px 0;
   	line-height:23px; 
   	overflow: auto;
+  	position: fixed;
 }
 .modal-label{
     width: 400px;
     line-height: 30px;
     text-align: left;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    border-radius: 7px;
     font-weight: bold;
     padding-left: 5px;
+	margin-top: 7px;
 }
 .modal-label:hover{
     background-color: #ffb347;
     transition-duration: 0.3s;
 }
-.modal-labelchecked{
+
+input[type=radio]:checked+.modal-label{
     background-color: #ffb347;
 }
-.q1>p{
-	margin-left: -2px;
-	font-weight: bolder;
+.qNumber{
+	padding-left: 68px;
+	float: left;
+	padding-top: 18px;
+	padding-bottom: 15px;
 }
-.modal-question>h4{
-	font-weight: bolder;
-	left: 50px;
+.qqNumber{
+	padding-right: 45px;
+	float: right;
+	font-size: 15px;
 }
-.modal-question{
+.chkQuestion{
+	float: left;
+	padding-left: 65px;
+	font-weight: bolder;
+	font-size: 20px;
+}
+
+.modal-btn{
+	padding-top: 50px;
+}
+.botBtn{
+	border: none;
+	width: 190px;
+	height: 60px;
+	margin-right: 10px;
+	margin-left: 10px;
+	font-size: 25px;
+	background-color: #fff;
+	color: black;
+}
+.exitBtn:hover{
+	background-color: #ccc;
+	color: #fff;
+}
+.nextBtn:hover{
+	background-color: #ffb347;
+	color: #fff;
+}
+
+
+.qstn{
 	display: none;
 }
-.active-question{
-	display: block;
+.chkQuestion+input+label{
+	margin-top: 20px;	
 }
