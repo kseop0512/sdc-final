@@ -35,20 +35,20 @@ public class MailSender {
                 sb.append(randomChar);
             }
         }
-
+        System.out.println(sb);
         //이메일 통신설정
-        Properties prop = System.getProperties();
-        //Properties prop = new Properties();
-        prop.put("mail.smtp.host","smtp.gmail.com");
+        //Properties prop = System.getProperties();
+        Properties prop = new Properties();
+        prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", 465);
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.ssl.enable", "true");
-        prop.put("mail.smtp.ssl.trust","smtp.gmail.com");
+        prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+
         //prop.put("mail.smtp.user", "sdcmaster1");
 
         //인증정보설정(로그인)
-        Session session = Session.getDefaultInstance(prop,
-            new Authenticator() {
+        /*Session session = Session.getDefaultInstance(prop, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
                     PasswordAuthentication pa
                         = new PasswordAuthentication("sdcmaster1","zgzocugfmymqzofs");
@@ -56,8 +56,12 @@ public class MailSender {
                     return pa;
                 }
             }
-        );
-
+        );*/
+        Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("sdcmaster1", "zgzocugfmymqzofs");
+            }
+        });
         //이메일을 작성해서 전송하는 객체
         MimeMessage msg = new MimeMessage(session);
 
@@ -67,14 +71,14 @@ public class MailSender {
             msg.setSentDate(new Date());
             //보내는사람 정보
             msg.setFrom(new InternetAddress
-                    ("testkimtest11@gmail.com", "KH 당산 A클래스"));
+                    ("testkimtest11@gmail.com", "SDC 관리자"));
             //받는사람정보
             InternetAddress to = new InternetAddress(email);
             msg.setRecipient(Message.RecipientType.TO, to);
             //이메일 제목설정
-            msg.setSubject("SEOP 인증메일입니다.","UTF-8");
+            msg.setSubject("SDC 파트너 지원 인증메일입니다.","UTF-8");
             //이메일 본문설정
-            msg.setContent("<h1>안녕하세요. SEOP 입니다.</h1>"
+            msg.setContent("<h1>안녕하세요. SDC 관리자 입니다.</h1>"
                             + "<h3>인증번호는 [<span style='color:red'>"
                             + sb.toString() + "</span>] 입니다.</h3>"
                     ,"text/html;charset=utf-8");
@@ -88,10 +92,12 @@ public class MailSender {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        if(result) {
+
+        /*if(result) {
             return sb.toString();
         } else {
             return null;
-        }
+        }*/
+        return sb.toString();
     }
 }

@@ -1,5 +1,7 @@
 package kr.or.member.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,12 +51,6 @@ public class MemberController {
 		return result;
 	}
 	
-
-	@RequestMapping(value="/memberMypage.do")
-	public String memberMypage() {
-		return "member/memberMypage";
-	}
-	
 	//메인에서 로그인 버튼 누르면 나오는 첫 페이지 이동
 	@RequestMapping(value="/beforeLogin.do")
 	public String beforeLogin(){
@@ -84,6 +80,12 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	//유저 마이페이지 이동
+	@RequestMapping(value="/memberMypage.do")
+	public String memberMypage() {
+		return "member/memberMypage";
+	}
+	
 	//유저 정보수정
 	@RequestMapping(value="/memberUpdate.do")
 	public String memberUpdate(Member m, Model model, HttpSession session) {
@@ -103,21 +105,7 @@ public class MemberController {
 		return "common/msg";
 	}
 	
-	//관리자 페이지 확인용
-	@RequestMapping(value="/adminMemberList.do")
-	public String adminMemberList() {
-		return "manager/adminMemberList";
-	}
 	
-	//유저리스트 회원 수 
-	@RequestMapping(value="/selectUserList.do")
-	public String selectUserList(Model model) {
-		int result = service.selectMemberList();
-		int result2 = service.selectPartnerList();
-		model.addAttribute("count", result);
-		model.addAttribute("pCount", result2);
-		return "manager/adminMemberList";
-	}
-	
+
 	
 }

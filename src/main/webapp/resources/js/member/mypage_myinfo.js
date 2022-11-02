@@ -26,6 +26,7 @@ $("[name=memberPw]").on("keyup", function () {
 	console.log("updateFinalChk(Password): "+updateFinalChk);
 });
 
+//생년월일 유효성 검사
 $("[name=memberBdate]").on("keyup",function(){
 	const dateReg=/^[0-9]{8}$/;
 	$("#bdateSpan").text("");
@@ -43,6 +44,7 @@ $("[name=memberBdate]").on("keyup",function(){
 	console.log("updateFinalChk(Bdate): "+updateFinalChk);
 });
 
+//전화번호 유효성 검사
 $("[name=memberPhone]").on("keyup",function(){
 	const phoneReg=/^[0-9]{10,11}$/;
 	$("#phoneSpan").text("");
@@ -60,12 +62,13 @@ $("[name=memberPhone]").on("keyup",function(){
 	console.log(updateFinalChk);
 });
 
+//유효성 검사 모두 통과하면 submit(정보수정)
 $("[type=submit]").click(function(e){
 	if((updateFinalChk >= 3) && (pwChk == 1) && (bdateChk == 1) && (phoneChk == 1) && (!$("#mAddr").val()=="") && (!$("#mName").val()=="") && (!$("#mPw").val()=="")){
 	}else{
 		e.preventDefault();
 		alert("입력값을 확인해주세요");
-		if(pwChk != 1){
+		if(pwChk != 1 || $("[name=memberPw]").val()==""){
 			$("[name=memberPw]").focus();
 		}else if(bdateChk != 1){
 			$("[name=memberBdate]").focus();
@@ -75,6 +78,7 @@ $("[type=submit]").click(function(e){
 	}
 });
 
+//세션에 저장된 회원 성별 체크
 $(function genderCheck(){
 	const mGender = $("#mGender").val();
 	if(mGender=='M'){
@@ -83,3 +87,22 @@ $(function genderCheck(){
 		$("#f").attr('checked',true);
 	}
 });
+
+//우편번호 주소 검색 api
+$("#mAddr").on("click", function() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+        	const getAddr = getDetailAddr();
+			if(getAddr != null){
+				const detailAddr = data.address+", "+getAddr;
+            	$("#mAddr").val(detailAddr);
+			}
+        }
+    }).open();
+})
+
+//상세주소 입력창
+function getDetailAddr(){
+	const getAddr = prompt("상세주소를 입력하세요");
+	return getAddr;
+}

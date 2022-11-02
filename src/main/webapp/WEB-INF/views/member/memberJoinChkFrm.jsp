@@ -5,9 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/main/common/header.jsp"/>
 	<h1>이용자 회원가입</h1>
 	<hr>
 	<div id="joinAllCheck" >전체동의<span>이용약관(필수), 개인정보 수집 및 이용 안내(필수), 개인정보 수집 및 이용 안내(선택)에 모두 동의합니다.</span><input type="checkbox" id="allChk"></div>
@@ -338,5 +340,8 @@
 			location.href="/index.jsp";
 		});
 	</script>
+	<jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
+	<!-- 마이페이지 JS -->
+	<script type="text/javascript" src="/resources/js/member/mypage_nav.js"></script>
 </body>
 </html>

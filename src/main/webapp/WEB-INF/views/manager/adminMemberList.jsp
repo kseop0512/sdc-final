@@ -18,7 +18,7 @@
 <body class="sb-nav-fixed">
  	 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index_my.html">똑독캣 관리자페이지</a>
+            <a class="navbar-brand ps-3" href="/selectUserList.do">똑독캣 관리자페이지</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -35,7 +35,7 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <!--<li><a class="dropdown-item" href="#!">Settings</a></li>
                         <li><hr class="dropdown-divider" /></li>-->
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                        <li><a class="dropdown-item" href="/logoutManager.do">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -46,14 +46,14 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">홈</div>
-                            <a class="nav-link" href="index_my.html">
+                            <a class="nav-link" href="/selectUserList.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                마이페이지
+                                	마이페이지
                             </a>
                             <div class="sb-sidenav-menu-heading">메뉴</div>
                             <a class="nav-link collapsed" href="memberList.html" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                유저관리
+                                	유저관리
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
@@ -64,13 +64,13 @@
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                신고내역
+                              	 신고내역
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link collapsed" href="reportList.html" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        리뷰신고
+                                       	 리뷰신고
                                     </a>
                                     <a class="nav-link collapsed" href="reportList.html" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                         Q&A신고
@@ -79,20 +79,16 @@
                             </div>
                             <a class="nav-link" href="reservationList.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                예약내역
-                            </a>
-                            <a class="nav-link" href="pay_cancel.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                결제관리
+                                	예약내역
                             </a>
                             <a class="nav-link" href="dm_message.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 1:1문의내역
                             </a>
                             <div class="sb-sidenav-menu-heading">게시판</div>
-                            <a class="nav-link" href="notice.html">
+                            <a class="nav-link" href="/adminNotice.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                공지사항
+                               	 공지사항
                             </a>
                         </div>
                     </div>
@@ -110,87 +106,81 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active" style="padding-left: 8px;">
                                 <span>전체사용자 총</span>
-                                <code id="dmMax_Count">[0]</code>명
+                                <code>[${totalCount}]</code>명
                             </li>
                         </ol>
                         <hr>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                전체회원리스트
+                                	전체회원리스트
                             </div>
                             <div class="card-body">
                                 <div class="card mb-4">
                                     <div class="card-body">
                                         <p class="mb-0">
                                            	 파트너
-                                            <code>[${pCount}]</code> 
+                                            <code>[${partnerCount}]</code>명 
                                             <span>/</span>
                                             	이용자
-                                            <code>[${count }]</code>명
+                                            <code>[${memberCount}]</code>명
                                         </p>
                                         <div id="nameIdSerarch-Box" style="float: right;">
-                                            <form action="#" post="post">
-                                                <select>
-                                                    <option>전체</option>
-                                                    <option>파트너</option>
-                                                    <option>이용자</option>
+                                            <form action="/searcMember.do" post="post">
+                                                <select name="memberType">
+                                                    <option value="partner">파트너</option>
+                                                    <option value="member">이용자</option>
                                                 </select>
-                                                <select>
-                                                    <option>이름</option>
-                                                    <option>아이디</option>
+                                                <select name="type">
+                                                    <option value="name">이름</option>
+                                                    <option value="id">아이디</option>
                                                 </select>
-                                                    <input class="input-form2" type="text" placeholder="입력하세요" style="width: 500px;">
-                                                    <button class="bc22">검색</button>
+                                                    <input class="input-form2" type="text" name="keyword" placeholder="입력하세요" style="width: 500px;">
+                                                    <button class="bc22" type="submit">검색</button>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="memberlist-btn">
-                                    <button class="btn bc22 bs4">다운로드</button>
-                                </div>
+                                <form action="/excelDown.do">
+	                                <div id="memberlist-btn">
+	                                    <button type="submit" class="btn bc22 bs4">다운로드</button>
+	                                </div>
+                                </form>
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>번호</th>
-                                            <th>이름</th>
                                             <th>아이디</th>
+                                            <th>이름</th>
+                                            <th>생년월일</th>
                                             <th>전화번호</th>
-                                            <th>구분</th>
+                                            <th>주소</th>
                                             <th>가입일</th>
                                             <th>관리</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
-                                        <tr>
-                                            <th>번호</th>
-                                            <th>이름</th>
+                                     	<tr>
                                             <th>아이디</th>
+                                            <th>이름</th>
+                                            <th>생년월일</th>
                                             <th>전화번호</th>
-                                            <th>구분</th>
+                                            <th>주소</th>
                                             <th>가입일</th>
                                             <th>관리</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                    <c:forEach items="${list }" var="m">
                                         <tr>
-                                            <td>1</td>
-                                            <td>김정환</td>
-                                            <td>user01</td>
-                                            <td>01088776625</td>
-                                            <td>파트너/펫시터</td>
-                                            <td>2011/04/25</td>
+                                            <td>${m.memberId }</td>
+                                            <td>${m.memberName }</td>
+                                            <td>${m.memberBdate}</td>
+                                            <td>${m.memberPhone}</td>
+                                            <td>${m.memberAddr}</td>
+                                            <td>${m.memberEnrollDate}</td>
                                             <td><button class="bc77">관리</button></td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>이수진</td>
-                                            <td>user02</td>
-                                            <td>01099999999</td>
-                                            <td>이용자</td>
-                                            <td>2019/05/21</td>
-                                            <td><button class="bc77">관리</button></td>
-                                        </tr>
+                                     </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
@@ -202,9 +192,9 @@
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted">Copyright &copy; 똑독캣 2022</div>
                             <div>
-                                <a href="index.html">메인으로 돌아가기</a>
+                                <a href="/">메인으로 돌아가기</a>
                                 &middot;
-                                <a href="index.html#menu">산책 &amp; 돌봄 서비스</a>
+                                <a href="/#menu">산책 &amp; 돌봄 서비스</a>
                             </div>
                         </div>
                     </div>
@@ -212,7 +202,7 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
+        <script src="/resources/js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="/resources/assets/demo/chart-area-demo.js"></script>
         <script src="/resources/assets/demo/chart-bar-demo.js"></script>

@@ -13,7 +13,14 @@
         <div class="languages d-none d-md-flex align-items-center">
             <ul>
                 <li>Kr</li>
-                <li><a href="#">Manager</a></li>
+                <c:choose>
+                <c:when test="${not empty sessionScope.g }">
+					<li><a href="/selectUserList.do">Manager</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="/loginManagerFrm.do">Manager</a></li>
+				</c:otherwise>
+            	</c:choose>
             </ul>
         </div>
     </div>
@@ -50,8 +57,8 @@
                                 <li><a href="#">파트너(훈련사) 지원</a></li>-->
                             </ul>
                         </li>
-                        <li><a href="#">파트너(펫시터) 지원</a></li>
-                        <li><a href="#">파트너(훈련사) 지원</a></li>
+                        <li><a href="/joinPetSitterPartnerFrm.do">파트너(펫시터) 지원</a></li>
+                        <li><a href="/joinTrainerPartnerFrm.do">파트너(훈련사) 지원</a></li>
                         <li><a href="/adminMemberList.do">Drop Down 4</a></li>
                     </ul>
                 </li>
@@ -67,6 +74,15 @@
       
       <c:when test="${not empty sessionScope.p }">
             <li><a class="nav-link scrollto" href="/partnerMain.do">마이페이지</a></li>
+            <li><a class="nav-link scrollto" href="#contact">문의하기</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+        <a href="/logoutPartner.do" class="book-a-table-btn scrollto d-none d-lg-flex">LOGOUT</a>
+      </c:when>
+
+	  <c:when test="${not empty sessionScope.g }">
+            <li><a class="nav-link scrollto" href="/selectUserList.do">마이페이지</a></li>
             <li><a class="nav-link scrollto" href="#contact">문의하기</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>

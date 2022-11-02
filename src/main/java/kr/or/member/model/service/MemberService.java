@@ -1,5 +1,7 @@
 package kr.or.member.model.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,12 +41,5 @@ public class MemberService {
 		}
 	}
 
-	//관리자 P 회원 수
-	public int selectMemberList() {
-		 return dao.selectUserList();
-	}
-	//관리자 P 파트너 수 
-	public int selectPartnerList() {
-		return dao.selectPartnerCount() ;
-	}
+	
 }

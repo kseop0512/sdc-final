@@ -1,5 +1,5 @@
 /* 리모컨 메뉴가 푸터에서 멈추는 함수 */
-function stopAtFooter() {
+$(function stopAtFooter() {
     const win = $(window);
     const footerH = $('#footer').outerHeight();
     const mypageNav = $('#mypage-nav');
@@ -12,5 +12,4 @@ function stopAtFooter() {
             mypageNav.removeClass('on');
         }
     });
-};
-stopAtFooter();
+});

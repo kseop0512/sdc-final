@@ -6,12 +6,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>똑독캣</title>
+<jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <link rel="stylesheet" type="text/css" href="https://demo.plantpot.works/assets/css/normalize.css">
 <link rel="stylesheet" href="https://use.typekit.net/opg3wle.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/member/memberJoin.css">
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/main/common/header.jsp"/>
 	<form action="/memberJoin.do" method="post">
 		<fieldset>
 			<h3>회원가입<br><span style="font-size: 12px">똑독캣의 회원이 되어보세요!</span></h3>
@@ -47,5 +49,8 @@
 	</form>
 	<script type="text/javascript" src="/resources/js/member/memberJoinFrm.js">
 	</script>
+	<jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
+	<!-- 마이페이지 JS -->
+	<script type="text/javascript" src="/resources/js/member/mypage_nav.js"></script>
 </body>
 </html>
