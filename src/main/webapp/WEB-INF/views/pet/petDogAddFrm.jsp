@@ -46,7 +46,7 @@
 								</div>
 								<div id="gender-div">
 									<label>성별</label>
-									<input type="radio" id="m" name="petGender" value="M" checked>
+									<input type="radio" id="m" name="petGender" value="M">
 									<label for="m" class="radio-label">남자아이</label>
 									<input type="radio" id="f" name="petGender" value="F"> 
 									<label for="f" class="radio-label">여자아이</label>
@@ -107,17 +107,23 @@
 		<div class="modal-body">
 			<form action="" method="post">
 				<div class="q1">
-					<p>Q1. 집에 낯선 사람이 들어오면 어떤 반응을 보이나요?</p>
-					<input type="radio" name="a1" value="좋아하며 가까이 다가가 반겨요">
+					<h2>Q1</h2><h4>1/5</h4>
+					<br><br><br>
+					<p>집에 낯선 사람이 들어오면 어떤 반응을 보이나요?</p>
+					<input type="radio" id="a1" name="question1" value="좋아하며 가까이 다가가 반겨요">
 					<label for="a1" class="modal-label">1) 좋아하며 가까이 다가가 반겨요</label>
-					<input type="radio" name="a2" value="초반에 짖기는 하지만 물지는 않아요"><br>
+					<input type="radio" id="a2" name="question1" value="초반에 짖기는 하지만 물지는 않아요">
 					<label for="a2" class="modal-label">2) 초반에 짖기는 하지만 물지는 않아요</label>
-					<input type="radio" name="a3" value="무서워하며 뒤로 물러나거나 피하려고 해요"><br>
+					<input type="radio" id="a3" name="question1" value="무서워하며 뒤로 물러나거나 피하려고 해요">
 					<label for="a3" class="modal-label">3) 무서워하며 뒤로 물러나거나 피하려고 해요</label>
-					<input type="radio" name="a4" value="짖거나 으르렁대며 경계를 하고, 물 수도 있어요"><br>
+					<input type="radio" id="a4" name="question1" value="짖거나 으르렁대며 경계를 하고, 물 수도 있어요">
 					<label for="a4" class="modal-label">4) 짖거나 으르렁대며 경계를 하고, 물 수도 있어요</label>
-					<input type="radio" name="a5" value="별로 관심이 없어요"><br>
+					<input type="radio" id="a5" name="question1" value="별로 관심이 없어요">
 					<label for="a5" class="modal-label">5) 별로 관심이 없어요</label>
+					<div class="modal-btn">
+						<button type="button" class="botBtn q1exit">취소</button>
+						<button type="button" class="botBtn q1next">다음▶</button>
+					</div>
 				</div>
 			</form>
 		</div>
