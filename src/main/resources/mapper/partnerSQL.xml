@@ -133,4 +133,49 @@
 			trainer_img as trainerImg
 		from trainer_board
 	</select>
+	<select id="selectOneTrainerBoard" parameterType="string" resultType="tb">
+		select
+			t_board_no as tBoardNo,
+			p_no as pNo,
+			board_title as boardTitle,
+			top_exp as topExp,
+			prof_field as profField,
+			visit_area as visitArea,
+			about_me as aboutMe,
+			hashtag as hashTag,
+			trainer_name as trainerName,
+			trainer_img as trainerImg
+		from trainer_board where t_board_no=#{_parameter}
+	</select>
+	<select id="selectFileList" parameterType="string" resultType='pfv'>
+		select
+			file_no as fileNo,
+			t_board_no as tBoardNo,
+			img_name as imgName,
+			img_path as imgPath
+		from partner_files where t_board_no=#{_parameter}
+	</select>
+	<select id="selectOne" parameterType="string" resultType="p">
+		select
+			p_no as pNo,
+			category,
+			p_id as pId,
+			p_pw as pPw,
+			p_name as pName,
+			p_dob as pDob,
+			p_phone as pPhone,
+			p_gender as pGender,
+			p_email as pEmail,
+			p_addr as pAddr,
+			p_grade as pGrade,
+			p_point as pPoint,
+			profile_name as profileName,
+			profile_path as profilePath,
+			apply_motiv as applyMotiv,
+			apply_date as applyDate,
+			approve_date as approveDate,
+			license,
+			work_exp as workExp
+		from partner where p_no = #{_parameter}
+	</select>
 </mapper>

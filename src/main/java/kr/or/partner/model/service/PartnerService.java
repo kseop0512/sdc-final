@@ -47,7 +47,27 @@ public class PartnerService {
 
 	public ArrayList<TrainerBoard> selectAllBoard() {
 		// TODO Auto-generated method stub
-		return dao.selectAllBoard();
+		
+		ArrayList<TrainerBoard> boardList = dao.selectAllBoard();
+		for(int i=0; i<boardList.size();i++) {
+			String tBoardNo = boardList.get(i).getTBoardNo();
+			ArrayList<PartnerFileVO> list = dao.selectFileList(tBoardNo);
+			boardList.get(i).setFileList(list);
+		}
+		return boardList;
+	}
+
+	public TrainerBoard selectOneTrainerBoard(String tBoardNo) {
+		// TODO Auto-generated method stub
+		TrainerBoard tb = dao.selectOneTrainerBoard(tBoardNo);
+		ArrayList<PartnerFileVO> files = dao.selectFileList(tBoardNo);
+		tb.setFileList(files);
+		return tb;
+	}
+
+	public Partner selectOnePartner(String pNo) {
+		// TODO Auto-generated method stub
+		return dao.selectOnePartner(pNo);
 	}
 
 
