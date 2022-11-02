@@ -92,11 +92,23 @@ public class ManagerController {
 		return "manager/adminMemberList";
 			
 	}
+	
 	//유저리스트 회원 엑셀다운로드
 	@RequestMapping(value="/excelDown.do")
 	@ResponseBody
 	public void excelDown(HttpServletResponse response, HttpServletRequest request) throws IOException{
 		service.excelDown(response);
+	}
+	
+	//1:1문의내역 P 이동
+	@RequestMapping(value="/adminDmMessage.do")
+	public String adminDmPage() {
+		return "manager/adminDmMessage";
+	}
+	//관리자 index P이동
+	@RequestMapping(value="/adminIndex.do")
+	public String adminIndex() {
+		return "manager/adminIndex";
 	}
 	
 }

@@ -46,17 +46,17 @@ public class ManagerDao {
 	      List list = sqlSession.selectList("member.selectMemberPartnerList",m);
 	      return (ArrayList<Member>)list;
 	   }
-//관리자P 유저관리 검색 - 이용자검색
+	   //관리자P 유저관리 검색 - 이용자검색
 	public ArrayList<Member> searchMember(HashMap<String, Object> map) {
 		List list = sqlSession.selectList("manager.searchMember",map);
 		return (ArrayList<Member>) list;
 	}
-//관리자P 유저검색 - 파트너 검색
+	//관리자P 유저검색 - 파트너 검색
 	public ArrayList<Member> serchPartner(HashMap<String, Object> map) {
 		List list = sqlSession.selectList("manager.searchPartner",map);
 		return (ArrayList<Member>)list;
 	}
-
+	//엑셀 다운 회원전체 조회
 	public ArrayList<Member> selectMemberPartnerList() {
 		List list = sqlSession.selectList("manager.memberPartnerList");
 		return (ArrayList<Member>) list;
