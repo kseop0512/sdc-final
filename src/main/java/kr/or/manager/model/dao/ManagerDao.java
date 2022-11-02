@@ -56,4 +56,9 @@ public class ManagerDao {
 		List list = sqlSession.selectList("manager.searchPartner",map);
 		return (ArrayList<Member>)list;
 	}
+
+	public ArrayList<Member> selectMemberPartnerList() {
+		List list = sqlSession.selectList("manager.memberPartnerList");
+		return (ArrayList<Member>) list;
+	}
 }

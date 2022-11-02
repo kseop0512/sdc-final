@@ -141,11 +141,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <form action="/excelDown.do">
+                                <form action="/excelDown.do" method="get">
 	                                <div id="memberlist-btn">
 	                                    <button type="submit" class="btn bc22 bs4">다운로드</button>
 	                                </div>
-                                </form>
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
@@ -183,6 +182,7 @@
                                      </c:forEach>
                                     </tbody>
                                 </table>
+                                </form>
                             </div>
                         </div>
                     </div>
