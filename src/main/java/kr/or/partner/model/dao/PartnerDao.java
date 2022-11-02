@@ -31,12 +31,6 @@ public class PartnerDao {
 		return sqlSession.update("partner.updateProfile",p);
 	}
 
-	public ArrayList<Partner> selectTrainers() {
-		// TODO Auto-generated method stub
-		List list = sqlSession.selectList("partner.selectTrainers");
-		return (ArrayList<Partner>) list;
-	}
-
 	public int uploadTrainerBoard(TrainerBoard tb) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("partner.uploadTrainerBoard",tb);
@@ -47,7 +41,13 @@ public class PartnerDao {
 		return sqlSession.insert("partner.insertPartnerFiles",pfv);
 	}
 
-	
+	public ArrayList<TrainerBoard> selectAllBoard() {
+		// TODO Auto-generated method stub
+		List list = sqlSession.selectList("partner.selectAllBoard");
+		return (ArrayList<TrainerBoard>)list;
+	}
+
+
 	/*
 	public Partner selectOnepartner(Partner partner) {
 		Partner p = sqlSession.selectOne("partner.selectOnepartner",partner);

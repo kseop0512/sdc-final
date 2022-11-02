@@ -73,32 +73,6 @@
 			</when>
 		</choose>
 	</update>
-	<select id="selectTrainers" resultType="p">
-		select
-			p_no as pNo,
-			category,
-			p_id as pId,
-			p_pw as pPw,
-			p_name as pName,
-			p_dob as pDob,
-			p_phone as pPhone,
-			p_gender as pGender,
-			p_email as pEmail,
-			p_addr as pAddr,
-			p_grade as pGrade,
-			p_point as pPoint,
-			profile_name as profileName,
-			profile_path as profilePath,
-			apply_motiv as applyMotiv,
-			apply_date as applyDate,
-			approve_date as approveDate,
-			license,
-			work_exp as workExp
-		from partner
-		where category = 'T'
-	</select>
-
-	
 	<!--  
 	 파트너용 로그인 
 	<select id="selectOnepartner" parameterType="p" resultType="p">
@@ -137,7 +111,7 @@
 	
 	<insert id="uploadTrainerBoard" parameterType="tb">
 		insert into trainer_board values 
-		('TBOARD-'||T_BOARD_SEQ.NEXTVAL,#{pNo},#{boardTitle},#{topExp},#{profField},#{visitArea},#{aboutMe},#{hashTag} )
+		('TBOARD-'||T_BOARD_SEQ.NEXTVAL,#{pNo},#{boardTitle},#{topExp},#{profField},#{visitArea},#{aboutMe},#{hashTag},#{trainerName},#{trainerImg} )
 		<selectKey resultType="string" order="AFTER" keyProperty = "tBoardNo">
 			select max(t_board_no) from trainer_board
 		</selectKey>
@@ -145,4 +119,18 @@
 	<insert id="insertPartnerFiles" parameterType="pfv">
 		insert into partner_files values ('FileNo-'||p_files_seq.nextval, #{tBoardNo},#{imgName},#{imgPath})
 	</insert>
+	<select id="selectAllBoard" resultType="tb">
+		select
+			t_board_no as tBoardNo,
+			p_no as pNo,
+			board_title as boardTitle,
+			top_exp as topExp,
+			prof_field as profField,
+			visit_area as visitArea,
+			about_me as aboutMe,
+			hashtag as hashTag,
+			trainer_name as trainerName,
+			trainer_img as trainerImg
+		from trainer_board
+	</select>
 </mapper>

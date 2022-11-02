@@ -74,6 +74,8 @@
 							<th colspan="2">
 							<input type="submit" value="글 작성 완료" class="btn btn-outline-warning uploadBtn">
 							<input type="hidden" name="pNo" value="${sessionScope.p.PNo }">
+							<input type="hidden" name="trainerName" value="${sessionScope.p.PName }">
+							<input type="hidden" name="trainerImg" value="${sessionScope.p.profilePath }">
 							</th>
 						</tr>
 					</table>

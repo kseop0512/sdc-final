@@ -22,19 +22,20 @@
 		</div>
 	</section>	
 	<section class="inner-page">
-      <div class="container">
+      <div class="container trainerList">
+      	<c:forEach items="${boardList }" var="bl">
 		<div class="box-wrapper">
 			<div class="trainerBox">
-				<div class="trainerImg"><img src="/resources/upload/partner/boardFiles/훈련사게시글사진.jpeg"></div>
-				<a class="trainerExp" href="/onePartner.do?p_no=pNo" target="_blank">
+				<div class="trainerImg"><img src="/resources/upload/partner/trainerFiles/${bl.fileList[0] }"></div>
+				<a class="trainerExp" href="/oneTrainer.do?tBoardNo=${bl.TBoardNo }" target="_blank">
 					<div class="box-upper">
 						<div class="upper-left">
-							<p class="tName">신혜규 훈련사</p>
-							<h2 class="tTitle">우리 아이들의 마음을 이해하는 소통의 창이 되어드릴게요</h2>
+							<p class="tName">${bl.trainerName } 훈련사</p>
+							<h2 class="tTitle">${bl.boardTitle }</h2>
 						</div>
-						<img class="upper-right" src="/resources/upload/partner/profileImg/훈련사사진1.png">
+						<img class="upper-right" src="/resources/upload/partner/profileImg/${bl.trainerImg }">
 					</div>
-					<div class="box-middle">#반려견전문가 #행동교정전문가</div>
+					<div class="box-middle">${bl.hashTag }</div>
 					<div class="box-bottom">
 						<div class="bottom-wrapper">
 							<div class="bottom-content">
@@ -46,54 +47,9 @@
 				</a>
 			</div>
 		</div>
-		<div class="box-wrapper">
-			<div class="trainerBox">
-				<div class="trainerImg"><img src="/resources/upload/partner/boardFiles/훈련사게시글사진.jpeg"></div>
-				<a class="trainerExp" href="/onePartner.do?p_no=pNo" target="_blank">
-					<div class="box-upper">
-						<div class="upper-left">
-							<p class="tName">신혜규 훈련사</p>
-							<h2 class="tTitle">우리 아이들의 마음을 이해하는 소통의 창이 되어드릴게요</h2>
-						</div>
-						<img class="upper-right" src="/resources/upload/partner/profileImg/훈련사사진1.png">
-					</div>
-					<div class="box-middle">#반려견전문가 #행동교정전문가</div>
-					<div class="box-bottom">
-						<div class="bottom-wrapper">
-							<div class="bottom-content">
-								<div class="bt-content-left">별점</div>
-								<div class="bt-content-right">₩150,000</div>
-							</div>
-						</div>
-					</div>
-				</a>
-			</div>
-		</div>
-		<div class="box-wrapper">
-			<div class="trainerBox">
-				<div class="trainerImg"><img src="/resources/upload/partner/boardFiles/훈련사게시글사진.jpeg"></div>
-				<a class="trainerExp" href="/onePartner.do?p_no=pNo" target="_blank">
-					<div class="box-upper">
-						<div class="upper-left">
-							<p class="tName">신혜규 훈련사</p>
-							<h2 class="tTitle">우리 아이들의 마음을 이해하는 소통의 창이 되어드릴게요</h2>
-						</div>
-						<img class="upper-right" src="/resources/upload/partner/profileImg/훈련사사진1.png">
-					</div>
-					<div class="box-middle">#반려견전문가 #행동교정전문가</div>
-					<div class="box-bottom">
-						<div class="bottom-wrapper">
-							<div class="bottom-content">
-								<div class="bt-content-left">별점</div>
-								<div class="bt-content-right">₩150,000</div>
-							</div>
-						</div>
-					</div>
-				</a>
-			</div>
-		</div>
+		</c:forEach>
 		<c:choose>
-		<c:when test="${sessionScop.p.PGrade != 'N'}"> <!-- 준회원이 아닌 파트너만 글 작성 버튼 활성화 -->
+		<c:when test="${sessionScope.p.PGrade != 'N'}"> <!-- 준회원이 아닌 파트너만 글 작성 버튼 활성화 -->
 		<input type="button" class="btn btn-outline-warning uploadBtn" onclick="location.href='/trainerBoardFrm.do'" value="훈련사 소개글 작성">
 		</c:when>
 		</c:choose>

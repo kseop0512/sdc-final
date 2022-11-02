@@ -157,8 +157,8 @@ public class PartnerController {
 	// 훈련사 리스트 페이지 이동
 	@RequestMapping(value="/trainerList.do")
 	public String trainerList(Model model) {
-		ArrayList<Partner> list = service.selectTrainers() ;
-		model.addAttribute("list",list);
+		ArrayList<TrainerBoard> boardList = service.selectAllBoard();
+		model.addAttribute("boardList",boardList);
 		return "main/partner/trainerList";
 	}
 	
@@ -198,8 +198,6 @@ public class PartnerController {
 	// 훈련사 게시글 upload
 	@RequestMapping(value="/uploadTrainerBoard.do")
 	public String uploadTrainerBoard(TrainerBoard tb, MultipartFile[] boardFile, HttpServletRequest request, Model model) {
-		System.out.println(tb);
-		System.out.println(boardFile);
 		ArrayList<PartnerFileVO> list = new ArrayList<PartnerFileVO>();
 		if(!boardFile[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/partner/trainerFiles/");
@@ -242,4 +240,9 @@ public class PartnerController {
 			return "common/msg";
 		}
 	}
+	@RequestMapping(value="/oneTrainer.do")
+	public String oneTrainer(String tBoardNo) {
+		return "partner/oneTrainer";
+	}
+
 }

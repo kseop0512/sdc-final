@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import kr.or.member.model.vo.Member;
 import kr.or.partner.model.dao.PartnerDao;
 import kr.or.partner.model.vo.Partner;
 import kr.or.partner.model.vo.PartnerFileVO;
@@ -32,11 +31,6 @@ public class PartnerService {
 		return dao.updateProfile(p);
 	}
 
-	public ArrayList<Partner> selectTrainers() {
-		// TODO Auto-generated method stub
-		return dao.selectTrainers();
-	}
-
 	public int uploadTrainerBoard(TrainerBoard tb) {
 		// TODO Auto-generated method stub
 		int result = dao.uploadTrainerBoard(tb);
@@ -50,6 +44,12 @@ public class PartnerService {
 		}
 		return result;
 	}
+
+	public ArrayList<TrainerBoard> selectAllBoard() {
+		// TODO Auto-generated method stub
+		return dao.selectAllBoard();
+	}
+
 
 	/*
 	public Partner selectOnepartner(Partner partner) {
