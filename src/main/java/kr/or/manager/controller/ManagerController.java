@@ -1,13 +1,17 @@
 package kr.or.manager.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.manager.model.service.ManagerService;
 import kr.or.manager.model.vo.Manager;
@@ -89,6 +93,23 @@ public class ManagerController {
 			
 	}
 	
+	//유저리스트 회원 엑셀다운로드
+	@RequestMapping(value="/excelDown.do")
+	@ResponseBody
+	public void excelDown(HttpServletResponse response, HttpServletRequest request) throws IOException{
+		service.excelDown(response);
+	}
+	
+	//1:1문의내역 P 이동
+	@RequestMapping(value="/adminDmMessage.do")
+	public String adminDmPage() {
+		return "manager/adminDmMessage";
+	}
+	//관리자 index P이동
+	@RequestMapping(value="/adminIndex.do")
+	public String adminIndex() {
+		return "manager/adminIndex";
+	}
 	
 }
 

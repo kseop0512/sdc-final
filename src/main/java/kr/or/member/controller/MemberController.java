@@ -80,10 +80,10 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	//유저 마이페이지 이동
+	//유저 마이페이지-나의정보 이동
 	@RequestMapping(value="/memberMypage.do")
 	public String memberMypage() {
-		return "member/memberMypage";
+		return "member/mypageMyInfo";
 	}
 	
 	//유저 정보수정
@@ -105,7 +105,8 @@ public class MemberController {
 		return "common/msg";
 	}
 	
-	
-
-	
+	@RequestMapping(value="/mypageMessage.do")
+	public String mypageMessage() {
+		return "member/mypageMessage";
+	}
 }
