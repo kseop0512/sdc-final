@@ -130,7 +130,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        	${sessionScope.p.PName }
+                        	${sessionScope.p.PId }
                     </div>
                 </nav>
             </div>
@@ -191,7 +191,7 @@
                       <table class="table table-bordered table-dark profileTable">
                       	<tr>
                       		<th>자격증</th>
-                      		<td><input type="hidden" name="license">for문으로 sessionScope.p.licenseArr 출력하기</td>
+                      		<td><input type="hidden" name="license" value="${sessionScope.p.license }">${sessionScope.p.license }</td>
                       		<td style="width: 8%; padding: 0px;vertical-align: middle;"><button type="button"class="btn btn-secondary" style="width:100%;">추가</button></td>
                       	</tr>
                       	<tr>

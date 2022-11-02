@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.member.model.vo.Member;
 import kr.or.partner.model.dao.PartnerDao;
 import kr.or.partner.model.vo.Partner;
+import kr.or.partner.model.vo.PartnerFileVO;
+import kr.or.partner.model.vo.TrainerBoard;
 
 @Service
 public class PartnerService {
@@ -33,6 +35,20 @@ public class PartnerService {
 	public ArrayList<Partner> selectTrainers() {
 		// TODO Auto-generated method stub
 		return dao.selectTrainers();
+	}
+
+	public int uploadTrainerBoard(TrainerBoard tb) {
+		// TODO Auto-generated method stub
+		int result = dao.uploadTrainerBoard(tb);
+		if(result>0) {
+			if(!tb.getFileList().isEmpty()) {
+				for(PartnerFileVO fv : tb.getFileList()) {
+					fv.setTBoardNo(tb.getTBoardNo());
+					result += dao.insertPartnerFiles(fv);
+				}
+			}
+		}
+		return result;
 	}
 
 	/*

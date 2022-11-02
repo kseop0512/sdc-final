@@ -106,7 +106,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        파트너 아이디 출력하기
+                        ${sessionScope.p.PId }
                     </div>
                 </nav>
             </div>
@@ -128,7 +128,7 @@
                                             <div class="form-floating mb-3">
                                                 <input type="password" class="form-control" id="inputPw" name="pPw" placeholder="password"/>
                                                 <label for="inputPw">Enter your current password</label>
-                                                <input type="hidden" name="pId" value="zoeshin">
+                                                <input type="hidden" name="pId" value="${sessionScope.p.PId }">
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a class="small" href="/partnerMain.do">마이페이지</a>

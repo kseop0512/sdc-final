@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+.uploadBtn{	
+	display: block;
+	margin: 50px auto 0 auto;
+	height: 50px;
+}
+
 /* trainerList.jsp */
 
 * {
@@ -123,6 +129,42 @@ a{
 	margin-top: 30px;
 }
 /* trainerBoardFrm.jsp */
-.note-editable > *{
-	color: #fff;
+	/*첨부파일*/
+.fileZone{
+	width: 300px;
+	height: 100px;
+	box-sizing: border-box;
+	display: flex;
+	flex-wrap: wrap;
+	border: 2px solid #0b85a1;
+	align-content: flex-start;
+	background-color: #fff;
+	color: black;
+}
+.fileMsg{
+	color: #0b85a1;
+	font-size: 13px;
+	width: 100%;
+	text-align: center;
+	align-self: center;
+}
+.fileName{
+	width: 100%;
+	position: relative;
+	height: 18px;
+	padding: 10px 10px;
+}
+.fileName>span{
+	font-size: 16px;
+	line-height: 18px;
+}
+.closeBtn{
+	position: absolute;
+	right: 10px;
+	cursor: pointer;
+}
+	/*summernote*/
+.note-editable{
+	background-color: #fff;
+	color: black;
 }

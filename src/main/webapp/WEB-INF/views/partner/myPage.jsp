@@ -105,7 +105,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        	 ${sessionScope.p.PName }
+                        	 ${sessionScope.p.PId }
                     </div>
                 </nav>
             </div>

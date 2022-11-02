@@ -126,7 +126,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        	${sessionScope.p.PName }
+                        	${sessionScope.p.PId }
                     </div>
                 </nav>
             </div>
@@ -198,7 +198,7 @@
                       <table class="table table-bordered table-dark profileTable">
                       	<tr>
                       		<th>자격증</th>
-                      		<td>for문으로 sessionScope.p.licenseArra 출력하기 / for문으로 sessionScope.p.licenseArra 출력하기 / for문으로 sessionScope.p.licenseArra 출력하기 / for문으로 sessionScope.p.licenseArra 출력하기</td>
+                      		<td>${sessionScope.p.license }</td>
                       	</tr>
                       	<tr>
                       		<th>경력 사항</th>
@@ -206,7 +206,7 @@
                       	</tr>
                       </table>
                       <div class="profileTable">
-                      	<button type="button" class="btn btn-warning updateBtn" onClick="location.href='/updateProfileFrm.do'">내 정보 수정</button>
+                      	<button type="button" class="btn btn-warning updateBtn" onclick="location.href='/updateProfileFrm.do'">내 정보 수정</button>
                       </div>
                   </div>
                   </div>

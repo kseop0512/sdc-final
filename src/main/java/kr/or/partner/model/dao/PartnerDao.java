@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.partner.model.vo.Partner;
+import kr.or.partner.model.vo.PartnerFileVO;
+import kr.or.partner.model.vo.TrainerBoard;
 
 @Repository
 public class PartnerDao {
@@ -33,6 +35,16 @@ public class PartnerDao {
 		// TODO Auto-generated method stub
 		List list = sqlSession.selectList("partner.selectTrainers");
 		return (ArrayList<Partner>) list;
+	}
+
+	public int uploadTrainerBoard(TrainerBoard tb) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("partner.uploadTrainerBoard",tb);
+	}
+
+	public int insertPartnerFiles(PartnerFileVO pfv) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("partner.insertPartnerFiles",pfv);
 	}
 
 	

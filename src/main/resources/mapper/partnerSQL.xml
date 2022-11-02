@@ -111,4 +111,15 @@
 	<select id="selectPartner" resultType="int">
 		select count(*) as cnt from partner
 	</select>
+	
+	<insert id="uploadTrainerBoard" parameterType="tb">
+		insert into trainer_board values 
+		('TBOARD-'||T_BOARD_SEQ.NEXTVAL,#{pNo},#{boardTitle},#{topExp},#{profField},#{visitArea},#{aboutMe},#{hashTag} )
+		<selectKey resultType="string" order="AFTER" keyProperty = "tBoardNo">
+			select max(t_board_no) from trainer_board
+		</selectKey>
+	</insert>
+	<insert id="insertPartnerFiles" parameterType="pfv">
+		insert into partner_files values ('FileNo-'||p_files_seq.nextval, #{tBoardNo},#{imgName},#{imgPath})
+	</insert>
 </mapper>

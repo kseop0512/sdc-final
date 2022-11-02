@@ -95,12 +95,22 @@ function loadImg(f){
 // trainerBoardFrm.jsp  - summernote
 $(document).ready(function(){
 	$("#summernote").summernote({
-		height: 300,
+		height: 200,
 		minHeight: null,
 		maxHeight: null,
 		focus: true,
 		lang: "ko-KR",
-		placeholder: '어디한번작성해보자'
+		placeholder: '자기소개글을 작성해주세요'
 	});
 }); 
 
+
+// required alert
+ $(".uploadBtn").on("click",function(){
+	const title = $("input[name=boardTitle]").val();
+	
+if(title == ''){
+	alert("제목을 입력해주세요");
+	event.preventDefault();
+	}
+});
