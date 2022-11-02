@@ -18,7 +18,7 @@ public class DirectMessageDao {
 	public ArrayList<DirectMessage> selectDmList(DirectMessage dm) {
 		// TODO Auto-generated method stub
 		List list = sqlSession.selectList("dm.selectMyDm",dm);
-		return null;
+		return (ArrayList<DirectMessage>) list;
 	}
 	
 	

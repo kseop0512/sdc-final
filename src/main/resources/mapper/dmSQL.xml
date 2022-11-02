@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="dm">
-
+	<select id="selectMyDm" parameterType="dm" resultType="dm">
+		select
+			dm_no as dmNo,
+			sender,
+			sender_category as senderCategory,
+			receiver,
+			dm_content as dmContent,
+			dm_date as dmDate,
+			read_check as readCheck,
+			dm_type as dmType,
+		from direct_message
+		<if test="sender !=null">
+			where sender=#{sender}
+		</if>
+		<if test="receiver !=null"> <!--  ajax에서 키값이 receiver -->
+			where receiver = #{receiver}
+		</if>
+		order by read_check, dm_no desc
+	</select>
 </mapper>
