@@ -10,9 +10,9 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>똑독캣 마이페이지 - 관리자용</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link rel="stylesheet" href="/resources/css/admin/style-admin.css">
         <link rel="stylesheet" href="/resources/css/admin/gdm_message.css">
+         <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
   <body>
@@ -144,12 +144,12 @@
                                     <thead>
                                         <tr>
                                             <th>번호</th>
-                                            <th>구분</th>
-                                            <th>이름</th>
+                                           <%--<th>구분</th> --%> 
+                                          <%-- <th>이름</th> --%> 
                                             <th>아이디</th>
                                             <th>전화번호</th>
                                             <th>문의유형</th>
-                                            <th>문의제목</th>
+                                            <th>문의내용</th>
                                             <th>시간</th>
                                             <th>답변여부</th>
                                         </tr>
@@ -157,83 +157,17 @@
                                     <tfoot>
                                         <tr>
                                             <th>번호</th>
-                                            <th>구분</th>
-                                            <th>이름</th>
+                                           <%--<th>구분</th> --%>
+                                           <%-- <th>이름</th> --%>
                                             <th>아이디</th>
                                             <th>전화번호</th>
                                             <th>문의유형</th>
-                                            <th>문의제목</th>
+                                            <th>문의내용</th>
                                             <th>시간</th>
                                             <th>답변여부</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>이용자</td>
-                                            <td>이수진</td>
-                                            <td>user01</td>
-                                            <td>010-8712-8451</td>
-                                            <td>취소/결제</td>
-                                            <td id="title-content" onclick="modal();">하루하고 반나절 걸렸어요</td>
-                                            <td>2022-10-25 11:44:27</td>
-                                            <td>답변대기</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>파트너</td>
-                                            <td>김정환</td>
-                                            <td>user01</td>
-                                            <td>010-1112-2221</td>
-                                            <td>취소/결제</td>
-                                            <td id="title-content" onclick="modal();">js 진짜..</td>
-                                            <td>2022-10-25 11:44:27</td>
-                                            <td>답변대기</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>파트너</td>
-                                            <td>부가원</td>
-                                            <td>user03</td>
-                                            <td>010-3243-3355</td>
-                                            <td>파트너승인</td>
-                                            <td id="title-content" onclick="modal();">언제되나요</td>
-                                            <td>2022-10-25 11:44:27</td>
-                                            <td>답변완료</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>이용자</td>
-                                            <td>김구원</td>
-                                            <td>user04</td>
-                                            <td>010-8712-8451</td>
-                                            <td>취소/결제</td>
-                                            <td id="title-content" onclick="modal();">집에가고싶어요</td>
-                                            <td>2022-10-25 11:44:27</td>
-                                            <td>답변대기</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>이용자</td>
-                                            <td>신혜규</td>
-                                            <td>user05</td>
-                                            <td>010-8712-8451</td>
-                                            <td>취소/결제</td>
-                                            <td id="title-content" onclick="modal();">하이라이트</td>
-                                            <td>2022-10-25 11:44:27</td>
-                                            <td>답변대기</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>이용자</td>
-                                            <td>김광섭</td>
-                                            <td>user06</td>
-                                            <td>010-8712-8451</td>
-                                            <td>취소/결제</td>
-                                            <td id="title-content" onclick="modal();">파트너분</td>
-                                            <td>2022-10-25 11:44:27</td>
-                                            <td>답변대기</td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -261,6 +195,7 @@
                                                     <td style="text-align: center;"><span id="detailSender">이수작</span></td>
                                                     <th style="text-align: center;">연락처</th>
                                                     <td style="text-align: center;"><span id="detailPhone">010-8712-8451</span></td>
+                                                    <input type="hidden" id="sender" value="${sessionScope.m.memberId}">
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -279,7 +214,7 @@
                                             </tbody>
                                         </table>
                                         <div id="modalmodal-Btn">
-                                            <button class="btn bc11">답장</button>
+                                            <button class="btn bc11" onclick="dmSend();">답장</button>
                                             <button class="btn bc11" onclick="closeModal();">닫기</button>
                                         </div>
                                     </div>
@@ -309,5 +244,6 @@
         <script src="/resources/js/datatables-simple-demo.js"></script>
         <script src="/resources/js/scripts.js"></script>
         <script src="/resources/js/admin/dm_message.js"></script>
+         <script src="/resources/js/admin/dm.js"></script>
     </body>
 </html>
