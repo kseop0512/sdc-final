@@ -144,8 +144,8 @@
                                     <thead>
                                         <tr>
                                             <th>번호</th>
-                                            <th>구분</th>
-                                            <th>이름</th>
+                                           <%--<th>구분</th> --%> 
+                                          <%-- <th>이름</th> --%> 
                                             <th>아이디</th>
                                             <th>전화번호</th>
                                             <th>문의유형</th>
@@ -157,8 +157,8 @@
                                     <tfoot>
                                         <tr>
                                             <th>번호</th>
-                                            <th>구분</th>
-                                            <th>이름</th>
+                                           <%--<th>구분</th> --%>
+                                           <%-- <th>이름</th> --%>
                                             <th>아이디</th>
                                             <th>전화번호</th>
                                             <th>문의유형</th>
@@ -168,72 +168,6 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>이용자</td>
-                                            <td>이수진</td>
-                                            <td>user01</td>
-                                            <td>010-8712-8451</td>
-                                            <td>취소/결제</td>
-                                            <td id="title-content" onclick="modal();">하루하고 반나절 걸렸어요</td>
-                                            <td>2022-10-25 11:44:27</td>
-                                            <td>답변대기</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>파트너</td>
-                                            <td>김정환</td>
-                                            <td>user01</td>
-                                            <td>010-1112-2221</td>
-                                            <td>취소/결제</td>
-                                            <td id="title-content" onclick="modal();">js 진짜..</td>
-                                            <td>2022-10-25 11:44:27</td>
-                                            <td>답변대기</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>파트너</td>
-                                            <td>부가원</td>
-                                            <td>user03</td>
-                                            <td>010-3243-3355</td>
-                                            <td>파트너승인</td>
-                                            <td id="title-content" onclick="modal();">언제되나요</td>
-                                            <td>2022-10-25 11:44:27</td>
-                                            <td>답변완료</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>이용자</td>
-                                            <td>김구원</td>
-                                            <td>user04</td>
-                                            <td>010-8712-8451</td>
-                                            <td>취소/결제</td>
-                                            <td id="title-content" onclick="modal();">집에가고싶어요</td>
-                                            <td>2022-10-25 11:44:27</td>
-                                            <td>답변대기</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>이용자</td>
-                                            <td>신혜규</td>
-                                            <td>user05</td>
-                                            <td>010-8712-8451</td>
-                                            <td>취소/결제</td>
-                                            <td id="title-content" onclick="modal();">하이라이트</td>
-                                            <td>2022-10-25 11:44:27</td>
-                                            <td>답변대기</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>이용자</td>
-                                            <td>김광섭</td>
-                                            <td>user06</td>
-                                            <td>010-8712-8451</td>
-                                            <td>취소/결제</td>
-                                            <td id="title-content" onclick="modal();">파트너분</td>
-                                            <td>2022-10-25 11:44:27</td>
-                                            <td>답변대기</td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

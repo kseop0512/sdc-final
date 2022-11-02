@@ -77,14 +77,14 @@
 	<!-- AOP 어노테이션 활성화 -->
 	<aop:aspectj-autoproxy/>
 	
-	<!-- 쪽지 소켓 처리할 객체 생성 -->
+	<!-- 쪽지 소켓 처리할 객체 생성 
 	<beans:bean id="dmHandler" class="kr.or.dm.model.service.DirectMessageHandler"/>
-	
-	<!-- 웹소켓 매핑 -->
+	-->
+	<!-- 웹소켓 매핑 
 	<websocket:handlers>
 		<websocket:mapping handler="dmHandler" path="/dm.do"/>
 	</websocket:handlers>	
-	
+	-->
 	
 	<context:component-scan base-package="kr.or.sdc" />
 	<context:component-scan base-package="kr.or.pet" />

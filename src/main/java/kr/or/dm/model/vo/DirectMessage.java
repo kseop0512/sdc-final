@@ -16,5 +16,4 @@ public class DirectMessage {
 	private String dmDate;
 	private int readCheck;  // 읽지 않음 : 0, 읽음 : 1
 	private String dmType; 
-	
 }
