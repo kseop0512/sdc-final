@@ -9,13 +9,6 @@
     <jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
     <link href="/resources/css/partner/trainerStyles.css" rel="stylesheet" />
 </head>
-<style>
-	.uploadBtn{	
-		display: block;
-		margin: 50px auto 0 auto;
-		height: 50px;
-	}
-</style>
 <body>
 <jsp:include page="/WEB-INF/views/main/common/header.jsp"/>
 <main id="main">
@@ -100,7 +93,7 @@
 			</div>
 		</div>
 		<c:choose>
-		<c:when test="${not empty sessionScope.p }">
+		<c:when test="${sessionScop.p.PGrade != 'N'}"> <!-- 준회원이 아닌 파트너만 글 작성 버튼 활성화 -->
 		<input type="button" class="btn btn-outline-warning uploadBtn" onclick="location.href='/trainerBoardFrm.do'" value="훈련사 소개글 작성">
 		</c:when>
 		</c:choose>

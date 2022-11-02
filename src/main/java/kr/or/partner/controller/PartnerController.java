@@ -10,23 +10,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-
 import javax.servlet.http.HttpSession;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import common.FileRename;
-
-import kr.or.member.model.vo.Member;
 import kr.or.partner.model.service.PartnerService;
 import kr.or.partner.model.vo.Partner;
+import kr.or.partner.model.vo.PartnerFileVO;
+import kr.or.partner.model.vo.TrainerBoard;
 
 @Controller
 public class PartnerController {
@@ -91,7 +87,6 @@ public class PartnerController {
 	// 파트너 프로필 이동
 	@RequestMapping(value="/showProfile.do")
 	public String showProfile() {
-		System.out.println("session...");
 		return "partner/showProfile";
 	}
 	// 파트너 프로필변경 이동
@@ -199,5 +194,52 @@ public class PartnerController {
 		session.invalidate();
 		return "redirect:/";
 	}
-
+	
+	// 훈련사 게시글 upload
+	@RequestMapping(value="/uploadTrainerBoard.do")
+	public String uploadTrainerBoard(TrainerBoard tb, MultipartFile[] boardFile, HttpServletRequest request, Model model) {
+		System.out.println(tb);
+		System.out.println(boardFile);
+		ArrayList<PartnerFileVO> list = new ArrayList<PartnerFileVO>();
+		if(!boardFile[0].isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/partner/trainerFiles/");
+			for(MultipartFile file : boardFile) {
+				String filename = file.getOriginalFilename();
+				String filepath = fileRename.fileRename(savePath, filename);
+				
+				try {
+					FileOutputStream fos = new FileOutputStream(new File(savePath + filepath));
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = file.getBytes();
+					bos.write(bytes);
+					bos.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				PartnerFileVO fileVO = new PartnerFileVO();
+				fileVO.setImgName(filename);
+				fileVO.setImgPath(filepath);
+				list.add(fileVO);
+			}
+		}
+		tb.setFileList(list);
+		int result = service.uploadTrainerBoard(tb);
+		if(result>0) {
+			model.addAttribute("title","게시글 등록 완료");
+			model.addAttribute("msg","훈련사 찾기 글이 등록되었습니다.");
+			model.addAttribute("icon","success");
+			model.addAttribute("loc","/trainerList.do");
+			return "common/msg";
+		}else {
+			model.addAttribute("title","게시글 등록 실패");
+			model.addAttribute("msg","등록 중 문제가 발생했습니다.");
+			model.addAttribute("icon","error");
+			model.addAttribute("loc","/trainerBoardFrm.do");
+			return "common/msg";
+		}
+	}
 }

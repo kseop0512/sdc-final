@@ -126,7 +126,7 @@
                                     	<div class="small mb-3 text-muted">8~16자의 영문 대문자,소문자, 숫자, 특수문자 포함</div>
                                        
                                             <div class="form-floating mb-3">
-                                            	<input type="hidden" id="partnerId" value="zoeshin">
+                                            	<input type="hidden" id="partnerId" value="${sessionScope.p.PId }">
                                                 <input class="form-control" id="password1" type="password" placeholder="New password" />
                                                 <label for="password1" id="pwComment">Enter your new password</label>
                                             </div>
