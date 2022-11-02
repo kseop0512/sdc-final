@@ -47,6 +47,23 @@ public class PartnerDao {
 		return (ArrayList<TrainerBoard>)list;
 	}
 
+	public ArrayList<PartnerFileVO> selectFileList(String tBoardNo) {
+		// TODO Auto-generated method stub
+		List list = sqlSession.selectList("partner.selectFileList",tBoardNo);
+		return (ArrayList<PartnerFileVO>)list;
+	}
+
+	public TrainerBoard selectOneTrainerBoard(String tBoardNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("partner.selectOneTrainerBoard",tBoardNo);
+	}
+
+	public Partner selectOnePartner(String pNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("partner.selectOne",pNo);
+	}
+
+
 
 	/*
 	public Partner selectOnepartner(Partner partner) {

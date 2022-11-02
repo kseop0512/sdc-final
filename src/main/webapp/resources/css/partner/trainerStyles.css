@@ -168,3 +168,159 @@ a{
 	background-color: #fff;
 	color: black;
 }
+/* oneTrainer.jsp */
+.page-top{
+	z-index: 0;
+	flex-direction: row;
+	width: 100%;
+	height: 500px;
+	position: relative;
+	margin-top: 150px;
+	overflow: hidden;
+}
+.page-top img{
+	width: 100%;
+	height: 100%;
+}
+.top-left{
+	width: 62.5%;
+	height: 100%;
+	overflow: hidden;
+	float: left;
+	background-color: lightgrey;
+}
+.top-right{
+	float: left;
+	display: flex;
+	flex-grow: 1;
+	width: 37.5%;
+	height: 100%;
+	flex-direction: column;
+}
+.right-top, .right-bottom{
+	width: 100%;
+	height: 250px;
+	overflow: hidden;
+}
+.right-top{
+	background-color: pink;
+}
+.right-bottom{
+	background-color: yellow;
+}
+.page-main{
+	margin-left: auto;
+	margin-right: auto;
+	width: 1027px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.main-left{
+	width: 570px;
+	position: relative;
+	padding-bottom: 150px;
+}
+.prof-img{
+	position: absolute;
+	top: -60px;
+}
+.prof-img > img{
+	width: 120px;
+	height: 120px;
+	border-radius: 60px;
+}
+.title-wrapper{
+	padding-bottom: 50px;
+	border-bottom: 1px solid #625b4b;
+}
+.title-wrapper>h2{
+	font-size: 27px;
+	font-weight: 500;
+	color: #fff;
+	letter-spacing: -0.2px;
+	margin-top: 105px;
+	line-height: 38px;
+}
+.title-wrapper>div{
+	margin-top: 23px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.carrers{
+	margin-top: 39px;
+	padding-bottom: 48px;
+	border-bottom: 1px solid #625b4b;
+}
+.top-career{
+	display: flex;
+	flex-direction: row;
+}
+.prof-field, .visit-area{
+	display: flex;
+	flex-direction: row;
+	margin-top: 27px;
+}
+
+.experiences>div:first-child>p, .about-me>div:first-child>p{
+	font-size: 20px;
+	font-weight: 600;
+	color: #fff;
+	letter-spacing: -0.2px;
+}
+.experiences>div:last-child{
+	padding-bottom: 45px;
+	border-bottom: 1px solid #625b4b;
+}
+
+.about-me{
+	border-bottom: 1px solid #625b4b;
+}
+.about-me>div:last-child>p{
+	font-size: 17px;
+	color: #fff;
+	line-height: 28px;
+}
+
+/* main-right */
+.askBox-wrapper, .fee-wrapper, .schedule-wrapper{
+	width: 375px;
+	border-radius: 8px;
+	border: 1px solid #625b4b;
+}
+.askBox-wrapper{
+	padding: 38px 32px 32px 32px;
+	margin-top: 105px;
+}
+
+.fee-wrapper{
+	padding: 43px 32px 38px 32px;
+	margin-top: 38px;
+}
+.schedule-wrapper{
+	padding: 32px 32px 38px 32px;
+	margin-top: 38px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

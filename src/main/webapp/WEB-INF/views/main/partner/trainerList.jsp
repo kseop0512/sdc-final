@@ -26,7 +26,7 @@
       	<c:forEach items="${boardList }" var="bl">
 		<div class="box-wrapper">
 			<div class="trainerBox">
-				<div class="trainerImg"><img src="/resources/upload/partner/trainerFiles/${bl.fileList[0] }"></div>
+				<div class="trainerImg"><img src="/resources/upload/partner/trainerFiles/${bl.fileList[0].imgPath }" style="width:100%; height: 100%"></div>
 				<a class="trainerExp" href="/oneTrainer.do?tBoardNo=${bl.TBoardNo }" target="_blank">
 					<div class="box-upper">
 						<div class="upper-left">
@@ -49,7 +49,7 @@
 		</div>
 		</c:forEach>
 		<c:choose>
-		<c:when test="${sessionScope.p.PGrade != 'N'}"> <!-- 준회원이 아닌 파트너만 글 작성 버튼 활성화 -->
+		<c:when test="${not empty sessionScope.p && sessionScope.p.PGrade != 'N'}"> <!-- 준회원이 아닌 파트너만 글 작성 버튼 활성화 -->
 		<input type="button" class="btn btn-outline-warning uploadBtn" onclick="location.href='/trainerBoardFrm.do'" value="훈련사 소개글 작성">
 		</c:when>
 		</c:choose>

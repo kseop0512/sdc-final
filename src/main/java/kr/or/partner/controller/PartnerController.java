@@ -240,8 +240,14 @@ public class PartnerController {
 			return "common/msg";
 		}
 	}
+	// 훈련사 상세 페이지 이동
 	@RequestMapping(value="/oneTrainer.do")
-	public String oneTrainer(String tBoardNo) {
+	public String oneTrainer(String tBoardNo, Model model) {
+		TrainerBoard tb = service.selectOneTrainerBoard(tBoardNo);
+		String pNo = tb.getPNo();
+		Partner p = service.selectOnePartner(pNo);
+		model.addAttribute("tb",tb);
+		model.addAttribute("p",p);
 		return "partner/oneTrainer";
 	}
 
