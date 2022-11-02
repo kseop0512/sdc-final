@@ -10,9 +10,9 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>똑독캣 마이페이지 - 관리자용</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link rel="stylesheet" href="/resources/css/admin/style-admin.css">
         <link rel="stylesheet" href="/resources/css/admin/gdm_message.css">
+         <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
   <body>
@@ -149,7 +149,7 @@
                                             <th>아이디</th>
                                             <th>전화번호</th>
                                             <th>문의유형</th>
-                                            <th>문의제목</th>
+                                            <th>문의내용</th>
                                             <th>시간</th>
                                             <th>답변여부</th>
                                         </tr>
@@ -162,7 +162,7 @@
                                             <th>아이디</th>
                                             <th>전화번호</th>
                                             <th>문의유형</th>
-                                            <th>문의제목</th>
+                                            <th>문의내용</th>
                                             <th>시간</th>
                                             <th>답변여부</th>
                                         </tr>
@@ -261,6 +261,7 @@
                                                     <td style="text-align: center;"><span id="detailSender">이수작</span></td>
                                                     <th style="text-align: center;">연락처</th>
                                                     <td style="text-align: center;"><span id="detailPhone">010-8712-8451</span></td>
+                                                    <input type="hidden" id="sender" value="${sessionScope.m.memberId}">
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -279,7 +280,7 @@
                                             </tbody>
                                         </table>
                                         <div id="modalmodal-Btn">
-                                            <button class="btn bc11">답장</button>
+                                            <button class="btn bc11" onclick="dmSend();">답장</button>
                                             <button class="btn bc11" onclick="closeModal();">닫기</button>
                                         </div>
                                     </div>
@@ -309,5 +310,6 @@
         <script src="/resources/js/datatables-simple-demo.js"></script>
         <script src="/resources/js/scripts.js"></script>
         <script src="/resources/js/admin/dm_message.js"></script>
+         <script src="/resources/js/admin/dm.js"></script>
     </body>
 </html>
