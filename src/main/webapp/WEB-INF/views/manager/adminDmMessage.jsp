@@ -117,11 +117,11 @@
                                 <div class="card mb-4">
                                     <div class="card-body">
                                         <p class="mb-0">
-                                            	답변대기
-                                            <code>[0]</code> 
+                                            <span>답변대기</span>
+                                            <code>[<code id="dm_check"></code>]</code> 
                                             <span>/</span>
-                                            	답변완료
-                                            <code>[0]</code>건
+                                           	<span>답변완료</span>
+                                            <code>[<code id="dm_checkRead"></code>]</code>건
                                         </p>
                                         <div id="nameIdSerarch-Box" style="float: right;">
                                             <form action="#" post="post">
@@ -186,10 +186,11 @@
                                                     <th scope="row" style="text-align: center;">아이디</th>
                                                     <td style="text-align: center;"><span id="detailId"></span></td>
                                                     <th style="text-align: center;">이름</th>
-                                                    <td style="text-align: center;"><span id="detailSender">이수진</span></td>
+                                                    <td style="text-align: center;"><span id="detailSender"></span></td>
                                                     <th style="text-align: center;">연락처</th>
                                                     <td style="text-align: center;"><span id="detailPhone"></span></td>
                                                     <input type="hidden" id="sender" value="${sessionScope.g.adminId}">
+                                                    <input type="hidden" id="receiver">
                                                 </tr>
                                             </thead>
                                             <tbody>
