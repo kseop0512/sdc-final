@@ -27,6 +27,10 @@ public class DirectMessageService {
 	public DirectMessage dmDetail(int dmNo) {
 		return dao.dmDetail(dmNo);
 	}
+	//dm 총 갯수 
+	public int dmCount() {
+		return dao.dmCount();
+	}
 
 
 

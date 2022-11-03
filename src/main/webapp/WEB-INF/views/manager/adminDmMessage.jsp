@@ -105,7 +105,7 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active" style="padding-left: 8px;">
                                 <span>1:1문의 총</span>
-                                <code id="dmMax_Count">[0]</code>건
+                                <code>[<code id="dmMax_Count"></code>]</code>건
                             </li>
                         </ol>
                         <div class="card mb-4">
@@ -126,12 +126,12 @@
                                         <div id="nameIdSerarch-Box" style="float: right;">
                                             <form action="#" post="post">
                                                 <select>
-                                                    <option>전체</option>
-                                                    <option>파트너</option>
-                                                    <option>이용자</option>
+                                                    <option>문의유형</option>
+                                                    <option>취소/결제</option>
+                                                    <option>예약</option>
+                                                    <option>기타문의</option>
                                                 </select>
                                                 <select>
-                                                    <option>이름</option>
                                                     <option>아이디</option>
                                                 </select>
                                                     <input class="input-form2" type="text" placeholder="입력하세요" style="width: 500px;">
@@ -233,7 +233,7 @@
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="/resources/js/datatables-simple-demo.js"></script>
         <script src="/resources/js/scripts.js"></script>
-        <script src="/resources/js/admin/dm_message.js"></script>
+    <!--<script src="/resources/js/admin/dm_message.js"></script> -->
          <script src="/resources/js/admin/dm.js"></script>
     </body>
 </html>

@@ -2,7 +2,7 @@
 
 $(function(){
 	getReceiveDm(); 
-	
+	getdmMaxCount();
 });
 
 
@@ -42,14 +42,19 @@ function getReceiveDm(){
 				
 				//문의내용
 				const contentTd = $("<td>");
-				contentTd.addClass("tdContent");
-				contentTd.text(dm.dmContent);
-				contentTd.css("fontWeight","900");
-				contentTd.css("cursor","pointer");	
-				contentTd.css("overflow","hidden");
-				contentTd.css("text-overflow","ellipsis");
+				const div = $("<div>");
+				contentTd.append(div);
 				
-				contentTd.attr("onclick","modal(this,'"+dm.sender+"')");  //자기자신을 보내주고
+				div.addClass("tdContent");
+				div.text(dm.dmContent);
+				div.css("fontWeight","900");
+				div.css("cursor","pointer");	
+				div.css("width","300");
+				div.css("overflow","hidden");
+				div.css("text-overflow","ellipsis");
+				div.css("white-space","nowrap");
+				
+				div.attr("onclick","modal(this,'"+dm.sender+"')");  //자기자신을 보내주고
 				
 				//날짜
 				const dmDateTd = $("<td>");
@@ -84,10 +89,10 @@ function getReceiveDm(){
 			 $("#detailId").text(sender);//아이디	
 			 $("#detailPhone").text(data.memberPhone);//핸드폰	
 			 //문의유형
-			 const detailType= $(obj).prev().text();  //자기자신을 기준으로 문의유형을 가지고옴 
+			 const detailType= $(obj).parent().prev().text();  //자기자신(리스트문의내용)을 기준으로  문의유형을 가지고옴.
 			 $("#detailType").text(detailType);
 			//날짜	
-			const detailDate = $(obj).next().text(); 
+			const detailDate = $(obj).parent().next().text(); //자기자신(리스트문의내용)을 기준으로  다음요소인 날짜를 가지고-> modal에 띄워줌
 			$("#detailDate").text(detailDate);
 			//내용
 			const detailContent = $(obj).text();
@@ -97,15 +102,29 @@ function getReceiveDm(){
 			 $(".modalmodel-wrap").show();
 			 $(".modal-modal").show();
 			 
-			 }
+			 },
+
 		});
 	}
 
 
-	
-	
-	
-	
+//1:1 문의 총 카운트 
+ function getdmMaxCount(){
+	$.ajax({
+		url : "/dmCount.do",
+		success: function(data){
+			console.log(data);
+			$("#dmMax_Count").append(data);
+		},
+		error : function(){
+			console.log("err");
+		}
+	});
+}
+
+
+
+
 
  /* 모달 닫기 버튼 눌렀을때 */
 function closeModal(){

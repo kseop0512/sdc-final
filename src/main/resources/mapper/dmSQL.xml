@@ -39,4 +39,7 @@
 			dm_type as dmType
 		from direct_msg where dm_no=#{_parameter}
 	 </select>
+	 <select id="dmCount" resultType="int">
+	 	SELECT COUNT(*) FROM direct_msg
+	 </select>
 </mapper>

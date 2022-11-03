@@ -33,6 +33,11 @@ public class DirectMessageDao {
 		DirectMessage dm = sqlSession.selectOne("dm.dmDetail",dmNo);
 		return dm;
 	}
+	//dm 총 수 
+	public int dmCount() {
+		int result = sqlSession.selectOne("dm.dmCount");
+		return result;
+	}
 
 
 	

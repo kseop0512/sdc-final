@@ -32,6 +32,14 @@ public String detailMember(String sender) {
 	Member m  = service.selectOneMember(sender);
 	return new Gson().toJson(m);
 	}
+
+	@ResponseBody
+	@RequestMapping(value="/dmCount.do", produces="application/json;charset=utf-8")
+	public int dmCount() {
+		int result = service.dmCount();
+		return result;
+		
+	}
 	
 
 	
