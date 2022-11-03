@@ -144,26 +144,20 @@
                                     <thead>
                                         <tr>
                                             <th>번호</th>
-                                           <%--<th>구분</th> --%> 
-                                          <%-- <th>이름</th> --%> 
                                             <th>아이디</th>
-                                            <th>전화번호</th>
                                             <th>문의유형</th>
                                             <th>문의내용</th>
-                                            <th>시간</th>
+                                            <th>날짜</th>
                                             <th>답변여부</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>번호</th>
-                                           <%--<th>구분</th> --%>
-                                           <%-- <th>이름</th> --%>
                                             <th>아이디</th>
-                                            <th>전화번호</th>
                                             <th>문의유형</th>
                                             <th>문의내용</th>
-                                            <th>시간</th>
+                                            <th>날짜</th>
                                             <th>답변여부</th>
                                         </tr>
                                     </tfoot>
@@ -184,32 +178,28 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col" style="text-align: center;">문의유형</th>
-                                                    <td scope="col" colspan="2" style="text-align: center;"><span id="detailType">결제/취소</span></td>
+                                                    <td scope="col" colspan="2" style="text-align: center;"><span id="detailType"></span></td>
                                                     <th scope="col" style="text-align: center;">날짜</th>
-                                                    <td scope="col" colspan="2" style="text-align: center;"><span id="detailDate">2022/10/26</span></td>
+                                                    <td scope="col" colspan="2" style="text-align: center;"><span id="detailDate"></span></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row" style="text-align: center;">아이디</th>
-                                                    <td style="text-align: center;"><span id="detailId">user01</span></td>
+                                                    <td style="text-align: center;"><span id="detailId"></span></td>
                                                     <th style="text-align: center;">이름</th>
-                                                    <td style="text-align: center;"><span id="detailSender">이수작</span></td>
+                                                    <td style="text-align: center;"><span id="detailSender">이수진</span></td>
                                                     <th style="text-align: center;">연락처</th>
-                                                    <td style="text-align: center;"><span id="detailPhone">010-8712-8451</span></td>
-                                                    <input type="hidden" id="sender" value="${sessionScope.m.memberId}">
+                                                    <td style="text-align: center;"><span id="detailPhone"></span></td>
+                                                    <input type="hidden" id="sender" value="${sessionScope.g.adminId}">
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <th style="text-align: center;">제목</th>
-                                                    <td colspan="5" style="text-align: center;"><span id="detailTitle">취소하고 싶어요</span></td>
-                                                </tr>
-                                                <tr>
                                                     <th style="line-height: 130px;">문의내용</th>
-                                                    <td colspan="5"><textarea id="detailText" style="resize: none;">취소할 수 있나요?</textarea></td>
+                                                    <td colspan="5"><textarea id="detailContent" style="resize: none;" readonly></textarea></td>
                                                 </tr>
                                                 <tr>
                                                     <th style="line-height: 130px;">답변하기</th>
-                                                    <td colspan="5"><textarea id="detailText" style="resize: none;">취소완료되었습니다.</textarea></td>
+                                                    <td colspan="5"><textarea id="detailText" style="resize: none;"></textarea></td>
                                                 </tr>
                                             </tbody>
                                         </table>
