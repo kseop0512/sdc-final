@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.dm.model.dao.DirectMessageDao;
 import kr.or.dm.model.vo.DirectMessage;
+import kr.or.member.model.vo.Member;
 
 @Service
 public class DirectMessageService {
@@ -17,8 +18,18 @@ public class DirectMessageService {
 	public ArrayList<DirectMessage> myDmList(DirectMessage dm) {		
 		return dao.selectDmList(dm);
 	}
+	//회원 한명 조회
+	public Member selectOneMember(String sender) {
+		return dao.selectOneMember(sender);
+	}
 	
-	
+	//dm.js에 모달 띄워줄때 아이디를 준 회원정보조회	
+	public DirectMessage dmDetail(int dmNo) {
+		return dao.dmDetail(dmNo);
+	}
+
+
+
 	
 	
 }

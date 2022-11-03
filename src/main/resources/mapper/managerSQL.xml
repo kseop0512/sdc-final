@@ -70,4 +70,10 @@
 		    apply_date as enrolldate
 		from partner
 	</select>
+	<select id="memberOne"  parameterType="string" resultType="m">
+		select 
+		    member_name as memberName,
+		    member_phone as memberPhone
+		from member_tbl where member_id=#{_parameter}
+	</select>
 </mapper>

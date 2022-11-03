@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.dm.model.vo.DirectMessage;
+import kr.or.member.model.vo.Member;
 
 @Repository
 public class DirectMessageDao {
@@ -20,7 +21,20 @@ public class DirectMessageDao {
 		List list = sqlSession.selectList("dm.selectMyDm",dm);
 		return (ArrayList<DirectMessage>) list;
 	}
+//회원 한명 조회
+	public Member selectOneMember(String sender) {
+		System.out.println(sender);
+		Member m = sqlSession.selectOne("manager.memberOne",sender);
+		return m;
+	}
 	
+	//dm 조회
+	public DirectMessage dmDetail(int dmNo) {
+		DirectMessage dm = sqlSession.selectOne("dm.dmDetail",dmNo);
+		return dm;
+	}
+
+
 	
 	
 }
