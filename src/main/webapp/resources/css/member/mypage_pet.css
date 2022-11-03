@@ -308,15 +308,41 @@ input[type=radio]:checked+.modal-label{
 	background-color: #ccc;
 	color: #fff;
 }
+.h-exitBtn:hover{
+	background-color: #ccc;
+	color: #fff;
+}
 .nextBtn:hover{
 	background-color: #ffb347;
 	color: #fff;
 }
-
+.h-nextBtn:hover{
+	background-color: #ffb347;
+	color: #fff;
+}
 
 .qstn{
 	display: none;
 }
 .chkQuestion+input+label{
 	margin-top: 20px;	
+}
+.hchkQuestion{
+	text-align: left;
+}
+.sub-texts{
+	color: #a4a1a1;
+	font-size: 15px;
+}
+.sub-texts1{
+	margin-left: -145px;
+}
+#hq3a1{
+	resize: none;
+    width: 400px;
+    height: 200px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+#hq3a1:focus{
+	outline:none;
 }
