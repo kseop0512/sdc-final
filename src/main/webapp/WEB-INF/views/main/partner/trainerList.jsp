@@ -40,7 +40,7 @@
 						<div class="bottom-wrapper">
 							<div class="bottom-content">
 								<div class="bt-content-left">별점</div>
-								<div class="bt-content-right">₩150,000</div>
+								<div class="bt-content-right">₩120,000</div>
 							</div>
 						</div>
 					</div>
