@@ -18,7 +18,7 @@
 	<div class="content-wrap">
 		<form action="/memberJoin.do" method="post">
 			<fieldset class="content-field">
-				<h3>회원가입<br><span style="font-size: 12px">똑독캣의 회원이 되어보세요!</span></h3>
+				<h3>회원가입<br><span style="font-size: 20px; color: #ccc">똑독캣의 회원이 되어보세요!</span></h3>
 				<label for="mId">아이디</label><span id="idSpan"></span><br>
 				<input type="text" name="memberId" id="mId" placeholder="아이디 입력(6~10자)"><br>
 				<label for="mPw">비밀번호</label><span id="pwSpan"></span><br>

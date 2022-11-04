@@ -12,10 +12,14 @@
 
 #genderWrap{
 	margin-top: 3px;
+	margin-left: 5%;
 }
 
 .content-wrap{
 	display:flex;
+}
+.content-wrap>form{
+	width: 80%;
 }
 .personImg{
 	padding-left: 5px;
@@ -45,6 +49,31 @@
   margin-right: 15px;
 }
 
-.content-field{
-	margin-top: 50%;
+.content-field {
+    margin-top: 15%;
+    margin-left: 50%;
+    margin-bottom: 15%;
+    width: 80%;
+}
+.content-field label{
+    font-size: 20px;
+    margin-top: 15px;
+}
+.content-field input{
+	width: 45%;	
+	height: 50px;
+	background-color: transparent;
+	color: #fff;
+	border-radius: 0;
+    box-shadow: none;
+    font-size: 14px;
+    background: #0c0b09;
+    border: 2px solid #625b4b;
+}
+.content-field input:focus{
+	border: 2px solid #cda45e;
+	outline: 0;
+}
+.content-field input::placeholder{
+	color: #cda45e;
 }
