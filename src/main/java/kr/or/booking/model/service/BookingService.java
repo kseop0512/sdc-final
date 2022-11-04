@@ -1,0 +1,18 @@
+package kr.or.booking.model.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kr.or.booking.model.dao.BookingDao;
+import kr.or.booking.model.vo.Booking;
+
+@Service
+public class BookingService {
+	@Autowired
+	private BookingDao dao;
+
+	public int insertBooking(Booking b) {
+		// TODO Auto-generated method stub
+		return dao.insertBooking(b);
+	}
+}

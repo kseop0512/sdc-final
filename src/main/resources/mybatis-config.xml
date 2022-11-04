@@ -13,5 +13,7 @@
 		<typeAlias type="kr.or.partner.model.vo.TrainerBoard" alias="tb"/>
 		<typeAlias type="kr.or.partner.model.vo.PartnerFileVO" alias="pfv"/>
 		<typeAlias type="kr.or.dm.model.vo.DirectMessage" alias="dm"/> 
+		<typeAlias type="kr.or.booking.model.vo.Booking" alias="b"/> 
+		
 	</typeAliases>
 </configuration>

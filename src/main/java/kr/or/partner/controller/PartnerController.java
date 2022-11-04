@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import common.FileRename;
-import kr.or.member.model.vo.Member;
 import kr.or.partner.model.service.PartnerService;
 import kr.or.partner.model.vo.Partner;
 import kr.or.partner.model.vo.PartnerFileVO;

@@ -132,6 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const showDate = $(".showDate");
       showDate.empty();
       showDate.append(selectedDate);
+      input[name=bookingDate].attr("value",selectedDate);
     },
    
   });
@@ -150,8 +151,8 @@ $(".time").on("click",function(){
 	timeArr.push(selectedTime);
 	const timeSpan = $(".showTime");
 	timeSpan.append("["+selectedTime+"] ");
+	input[name=bookingTime].attr("value",selectedTime);
 	// 돈계산
-	
 	const totalFee = timeArr.length*120000;
 	$("#totalFee").empty();
 	$("#totalFee").append(totalFee);

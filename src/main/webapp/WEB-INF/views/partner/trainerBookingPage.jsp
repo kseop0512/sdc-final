@@ -47,25 +47,55 @@
 					</ul>
 				</div>
 			</div>
-			<h3 class="section-title">예약 내용을 확인해주세요</h3>
-				<div class="booking-summary">
-					<table class="sum">
-						<tr>
-							<th>일정</th>
-							<td class="showDate"></td>
-						</tr>
-						<tr>
-							<th>시간</th>
-							<td class="showTime"></td>
-						</tr>
-						<tr>
-							<th style="height: 60px;"><span style="font-size: 24px; color: #565655">결제 금액</span></th>
-							<td style="text-align: right;"><span id="totalFee">0</span><span>원</span></td>
-						</tr>
-					</table>
-				</div>
-			<h3 class="section-title">회원 정보</h3>
-			
+			<div class="section-title">예약 내용을 확인해주세요</div>
+			<div class="booking-summary">
+				<table class="sum">
+					<tr>
+						<th>일정</th>
+						<td class="showDate"></td>
+					</tr>
+					<tr>
+						<th>시간</th>
+						<td class="showTime"></td>
+					</tr>
+					<tr>
+						<th style="height: 60px;"><span style="font-size: 24px; color: #565655">결제 금액</span></th>
+						<td style="text-align: right;"><span id="totalFee">0</span><span>원</span></td>
+					</tr>
+				</table>
+			</div>
+			<div class="section-title" style="border-top: 2px solid #565655;">회원 정보</div>
+			<div class="infoTbl">
+			<form action="/bookingMemberInfo.do">
+				<table class="table bookingInfo">
+					<tr>
+						<th>회원 이름</th>
+						<td>${sessionScope.m.memberName }</td>
+					</tr>
+					<tr>
+						<th>반려견 이름</th>
+						<td><input type="text" name="petNo" class="inputStyle"> 회원의 반려견 selectbox로 구현하기</td>
+					</tr>
+					<tr>
+						<th>연락처</th>
+						<td><input type="text" name="bookingPhone" class="inputStyle" value="${sessionScope.m.memberPhone }"></td>
+					</tr>
+					<tr>
+						<th>훈련사께 남기실 말씀</th>
+						<td><textarea name="specialRequest" placeholder="Enter any additional instruction to this Trainer"></textarea></td>
+					</tr>
+					<tr>
+						<td colspan="2" style="border: none; text-align: center">
+							<input type="submit" class="payBtn" value="결제하기">
+							<input type="hidden" name="startDate">
+							<input type="hidden" name="bookingTime">
+							<input type="hidden" name="pNo" value="${trainer.PNo }">
+							<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+						</td>
+					</tr>
+				</table>
+			</form>
+			</div>
 		</div>
 		
 	</div>
