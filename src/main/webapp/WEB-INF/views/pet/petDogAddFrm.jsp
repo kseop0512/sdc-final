@@ -9,11 +9,28 @@
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_nav.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_pet.css">
+<style>
+.fileZone{
+		width:400px;
+		height : 300px
+		box-sizing : border-box;
+		display : flex;
+		flex-wrap: wrap;
+		border : 2px dotted #0b85a1;
+		/*align-content 위에서부터 하나씩 아래로 내리기 위한것*/
+		align-content : flex-start;
+	}
+	.fileMsg{
+		color:#0b85a1
+		font-size : 13px;
+		width: 100%;
+		text-align: center;
+		/*align-self 보조축 가운데정렬*/
+		align-self:center;
+	}
+</style>
 </head>
 <body>
-<style>
-
-</style>
 	<jsp:include page="/WEB-INF/views/main/common/header.jsp"/>
 	<main id="main">
 		<section class="mypage">
@@ -37,7 +54,10 @@
 					</div>
 					<div id="content-wrap">
 						<div id="content">
-							<form action="/petDogAdd.do" method="post">
+							<form action="/petDogAdd.do" method="post" enctype="multipart/form-data">
+							<div class="fileZone">
+								<div class="fileMsg">사진등록</div>
+							</div>
 							<span>기본사항*</span>
 								<input type="hidden" name="petType" value="1">
 								<div>
@@ -61,7 +81,7 @@
 								</div>
 								<div class="weightDiv">
 									<label for="pWeight">무게</label>
-									<span class="weightSpan" >kg</span>
+									<span class="weightSpan">kg</span>
 									<input type="text" id="pWeight" name="petWeight" placeholder="예) 1.2">
 								</div>
 								<div id="gender-div">
@@ -93,7 +113,7 @@
 								<div>
 									<input type="submit" value="강아지등록!">
 								</div>
-								<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+								<br><br><br><br>
 							</form>
 						</div>
 					</div>

@@ -71,7 +71,7 @@
 	</beans:bean>
 	<!-- 파일 업로드용 객체 생성 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<beans:property name="maxUploadSize" value="10485760" />
+		<beans:property name="maxUploadSize" value="11381255" />
 	</beans:bean>
 	
 	<!-- AOP 어노테이션 활성화 -->

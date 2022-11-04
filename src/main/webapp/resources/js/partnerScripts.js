@@ -114,3 +114,47 @@ if(title == ''){
 	event.preventDefault();
 	}
 });
+
+// trainerBookingPage.jsp
+// 달력
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    selectable: true,
+    headerToolbar: {
+      left: 'prev,next',
+      center: 'title',
+      right: 'today'
+    },
+    select: function(info) {
+      const selectedDate = info.startStr;
+      const showDate = $(".showDate");
+      showDate.empty();
+      showDate.append(selectedDate);
+    },
+   
+  });
+
+  calendar.render();
+  
+});
+// 시간 출력
+let timeArr = new Array();
+$(".time").on("click",function(){
+	if($(".showDate").text()==''){
+		alert("예약 날짜를 선택해주세요");
+		event.preventDefault();
+	}else{
+	const selectedTime = $(this).text();
+	timeArr.push(selectedTime);
+	const timeSpan = $(".showTime");
+	timeSpan.append("["+selectedTime+"] ");
+	// 돈계산
+	
+	const totalFee = timeArr.length*120000;
+	$("#totalFee").empty();
+	$("#totalFee").append(totalFee);
+	}
+});
+

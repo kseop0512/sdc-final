@@ -131,7 +131,7 @@
 			hashtag as hashTag,
 			trainer_name as trainerName,
 			trainer_img as trainerImg
-		from trainer_board
+		from trainer_board order by t_board_no desc
 	</select>
 	<select id="selectOneTrainerBoard" parameterType="string" resultType="tb">
 		select
