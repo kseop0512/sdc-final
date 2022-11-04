@@ -49,7 +49,7 @@
 	transition-duration: 0.3s;
 }
 .petBtn1{
-	background: url("/resources/img/dog.png") center / 70% no-repeat;
+	background: url("/resources/img/dogBlack.png") center / 70% no-repeat;
 	transition-duration: 0.3s;
 	
 }
@@ -81,7 +81,7 @@
 	z-index: 0;
 }
 .petBtn2{
-	background: url("/resources/img/cat.png") center / 70% no-repeat;
+	background: url("/resources/img/catBlack.png") center / 70% no-repeat;
 	transition-duration: 0.4s;
 }
 </style>

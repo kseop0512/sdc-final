@@ -9,6 +9,23 @@
   background-color: #42586A;
 }
 
+
+#genderWrap{
+	margin-top: 3px;
+}
+
+.content-wrap{
+	display:flex;
+}
+.personImg{
+	padding-left: 5px;
+	width: 50%;
+	margin-left: 23px;
+}
+.custom-radio-button__container input[type="radio"]:checked + .custom-radio-button {
+  border: 4px solid #e94174;
+  box-shadow: 0px 0px 16px -6px rgba(0, 0, 0, .5);
+}
 .custom-radio-button__container input[type="radio"] {
   display: none;
 }
@@ -17,7 +34,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 5%;
+  width: 110px;
   padding: 15px 5px 25px;
   border: 2px solid #979797;
   border-radius: 4px;
@@ -25,18 +42,9 @@
   cursor: pointer;
   height: 8%;
   box-sizing: content-box;
+  margin-right: 15px;
 }
 
-#genderWrap{
-	margin-top: 3px;
-}
-
-.custom-radio-button__container input[type="radio"]:checked + .custom-radio-button {
-  border: 2px solid #e94174;
-  box-shadow: 0px 0px 16px -6px rgba(0, 0, 0, .5);
-}
-
-.personImg{
-	padding-left: 19px;
-	width: 50%;
+.content-field{
+	margin-top: 50%;
 }
