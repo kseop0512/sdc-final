@@ -30,8 +30,8 @@
 #mypage-nav{
     width: 200px;
     position: fixed;
-    bottom: 15vh;
     transition-duration: 0.5s;
+    top: 210px;
 }
 #mypage-nav.on{
     position: absolute;
