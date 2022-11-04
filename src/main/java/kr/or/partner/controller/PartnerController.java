@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import common.FileRename;
-import kr.or.member.model.vo.Member;
 import kr.or.partner.model.service.PartnerService;
 import kr.or.partner.model.vo.Partner;
 import kr.or.partner.model.vo.PartnerFileVO;
@@ -251,12 +250,5 @@ public class PartnerController {
 		model.addAttribute("p",p);
 		return "partner/oneTrainer";
 	}
-	// 훈련사 예약페이지 이동
-	@RequestMapping(value="/bookTrainerFrm.do")
-	public String bookingFrm(String pNo, Model model) {
-		Partner trainer = service.selectOnePartner(pNo);
-		model.addAttribute("trainer",trainer);
-		return "partner/trainerBookingPage";
-	}
-	
+
 }
