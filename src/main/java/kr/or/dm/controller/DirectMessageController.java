@@ -37,22 +37,22 @@ public class DirectMessageController {
 @RequestMapping(value="/detailMember.do", produces="application/json;charset=utf-8")
 public String detailMember(String sender) {
 	Member m  = service.selectOneMember(sender);
-	System.out.println(m);
 	return new Gson().toJson(m);
 	}
+
  // 총 카운트 
 	@ResponseBody
 	@RequestMapping(value="/dmCount.do", produces="application/json;charset=utf-8")
-	public int dmCount() {
-		int result = service.dmCount();
+	public int dmCount(@SessionAttribute Manager g) {
+		int result = service.dmCount(g);
 		return result;
 		
 	}
 	//답변대기 카운트 
 	@ResponseBody
 	@RequestMapping(value="/dmReadCount.do",produces="application/json;charset=utf-8")
-	public int dmReadCount() {
-		int result = service.dmReadCount();
+	public int dmReadCount(@SessionAttribute Manager g) {
+		int result = service.dmReadCount(g);
 		return result;
 	}
 	
@@ -68,7 +68,6 @@ public String detailMember(String sender) {
 	@RequestMapping(value="/insertDm.do",produces="application/json;charset=utf-8")
 	public String insertDm(DirectMessage dm){
 		int result = service.insertDm(dm);
-		System.out.println(dm);
 		if(result>0) {
 			//답변 성공시 -> dm.js (dmsend()에  data가 1로 들어감)
 			return "1";
@@ -76,6 +75,10 @@ public String detailMember(String sender) {
 			return "0";
 		}
 	}
+	
+	
+	
+	
 }
 	
 

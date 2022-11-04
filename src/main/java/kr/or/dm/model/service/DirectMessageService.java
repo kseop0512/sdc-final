@@ -5,9 +5,11 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.dm.model.dao.DirectMessageDao;
 import kr.or.dm.model.vo.DirectMessage;
+import kr.or.manager.model.vo.Manager;
 import kr.or.member.model.vo.Member;
 
 @Service
@@ -24,17 +26,13 @@ public class DirectMessageService {
 		return dao.selectOneMember(sender);
 	}
 	
-	//dm.js에 모달 띄워줄때 아이디를 준 회원정보조회	
-//	public DirectMessage dmDetail(int dmNo) {
-//		return dao.dmDetail(dmNo);
-//	}
 	//dm 총 갯수 
-	public int dmCount() {
-		return dao.dmCount();
+	public int dmCount(Manager g) {
+		return dao.dmCount(g);
 	}
 	//답변대기 카운트
-	public int dmReadCount() {
-		return dao.dmReadCount();
+	public int dmReadCount(Manager g) {
+		return dao.dmReadCount(g);
 	}
 	//답변완료 카운트
 	public int dmCheckRead() {
@@ -42,12 +40,16 @@ public class DirectMessageService {
 		return dao.dmCheckRead();
 	}
 	// 답장하기 
+	@Transactional
 	public int insertDm(DirectMessage dm) {
-		return dao.insertDm(dm);
+		int result = dao.insertDm(dm);
+		if (dm.getReadCheck() == 0) {
+			dao.updateReadCheck(dm.getDmNo());
+		}
+		return result;
 	}
 
 
 
-	
 	
 }

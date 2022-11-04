@@ -15,5 +15,6 @@ public class DirectMessage {
 	private String dmContent;
 	private String dmDate;
 	private int readCheck;  // 읽지 않음 : 0, 읽음 : 1
-	private String dmType; 
+	private int dmType; // 문의사항 -> 0 : 결제/취소, 1: 예약/취소  , 2: 기타문의   
+	private int apply; // 관리자 - 몇번글에 대한 답변인지
 }

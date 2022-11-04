@@ -34,7 +34,7 @@ function getdmRead(){
 		}
 	});
 }
-
+//답변완료 카운트
 function getcheckRead(){
 	$.ajax({
 		url:"/dmCheckRead.do",
@@ -50,7 +50,7 @@ function getcheckRead(){
 function closeModal(){
     $(".modal-modal").hide();
     $(".modalmodel-wrap").hide();
-    $("#detailText").val(""); 
+ //   $("#detailText").val(""); 
 }
 
 
@@ -80,6 +80,7 @@ function getReceiveDm(){
 				//문의유형
 				const typeTd = $("<td>");
 				typeTd.text(dm.dmType);
+				
 			//	if(dm.dmType == 0){
 			//		typeTd.text("결제/취소")
 			//	}else if(dm.dmType==1){
@@ -110,12 +111,14 @@ function getReceiveDm(){
 				
 				//답변여부
 				const readTd = $("<td>");
+				console.log(dm.readCheck);
 				if(dm.readCheck == 0){
 					readTd.css("fontWeight","900");
 					readTd.css("color","blue");
 					readTd.text("답변대기");
 				}else{
 					readTd.text("답변완료");
+					readTd.css("color","black");
 				}
 				tr.append(noTd).append(senderTd).append(typeTd).append(contentTd).append(dmDateTd).append(readTd);
 				tbody.append(tr);
@@ -128,6 +131,7 @@ function getReceiveDm(){
 
 	}
 	
+	//모달 띄워서 admin한테 메세지를 보낸 사람의 정보 가져오기 
 	function modal(obj,sender){			//자기자신을 obj로 받음 	
 		$.ajax({
 			url:"/detailMember.do",
@@ -170,8 +174,8 @@ function dmSend(){
 		success : function(data){
 		 if(data == 1 ){
 		 	alert("답변성공");
-		 	    $(".modal-modal").hide();
-    			$(".modalmodel-wrap").hide();
+		 	 closeModal(); //모달 닫기
+		 	 getReceiveDm(); 
 		 }else{
 		 	alert("실패");
 		 }
@@ -183,5 +187,6 @@ function dmSend(){
 }
 
 
-		
+
+
 	

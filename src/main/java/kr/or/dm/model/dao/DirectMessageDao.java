@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.dm.model.vo.DirectMessage;
+import kr.or.manager.model.vo.Manager;
 import kr.or.member.model.vo.Member;
 
 @Repository
@@ -29,19 +30,14 @@ public class DirectMessageDao {
 		return m;
 	}
 	
-	//dm 조회
-//	public DirectMessage dmDetail(int dmNo) {
-//		DirectMessage dm = sqlSession.selectOne("dm.dmDetail",dmNo);
-//		return dm;
-//	}
 	//dm 총 수 
-	public int dmCount() {
-		int result = sqlSession.selectOne("dm.dmCount");
+	public int dmCount(Manager g) {
+		int result = sqlSession.selectOne("dm.dmCount",g);
 		return result;
 	}
 	//dm 답변대기 수
-	public int dmReadCount() {
-		int result = sqlSession.selectOne("dm.dmReadCount");
+	public int dmReadCount(Manager g) {
+		int result = sqlSession.selectOne("dm.dmReadCount",g);
 		return result;
 	}
 	//dm 답변완료 카운트
@@ -52,6 +48,10 @@ public class DirectMessageDao {
 	//답장하기
 	public int insertDm(DirectMessage dm) {
 		return sqlSession.insert("dm.insertDm",dm);
+	}
+	//답장한 read_Check 변경하기 
+	public int updateReadCheck(int dmNo) {
+		 return sqlSession.update("dm.updateReadCheck",dmNo);
 	}
 
 
