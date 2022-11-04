@@ -83,7 +83,14 @@
 #detailText{
     width:44vw;
     height: 17vh;
+    border: none;
 }
+#detailContent{
+	width:44vw;
+    height: 17vh;
+    border: none;
+}
+
 
 #modalmodal-Btn{
     float: right;
@@ -121,9 +128,6 @@ tbody>tr>td:nth-child(7){
     font-family: ns-bold;
 }
 
-#detailText{
-    border: none;
-}
 
 .bc22 {
     color: #fff;

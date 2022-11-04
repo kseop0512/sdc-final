@@ -2,11 +2,59 @@
 
 $(function(){
 	getReceiveDm(); 
+	getdmMaxCount();
+	getdmRead();
+	getcheckRead();
 });
 
 
-/* 받은 쪽지 가져오기*/
+//1:1 문의 총 카운트 
+ function getdmMaxCount(){
+	$.ajax({
+		url : "/dmCount.do",
+		success: function(data){
+			$("#dmMax_Count").append(data);
+		},
+		error : function(){
+			console.log("err");
+		}
+	});
+}
 
+//답변대기 총 카운트
+function getdmRead(){
+	$.ajax({
+		url: "/dmReadCount.do",
+		success: function(data){
+			console.log(data);
+			$("#dm_check").append(data);
+		},
+		error : function(){
+			console.log("답변대기err");
+		}
+	});
+}
+
+function getcheckRead(){
+	$.ajax({
+		url:"/dmCheckRead.do",
+		success: function(data){
+			console.log(data);
+		 $("#dm_checkRead").append(data);
+		}
+	});
+}
+
+
+ /* 모달 닫기 버튼 눌렀을때 */
+function closeModal(){
+    $(".modal-modal").hide();
+    $(".modalmodel-wrap").hide();
+    $("#detailText").val(""); 
+}
+
+
+/* 사용자/파트너가 보낸  문의내용 가져오기 리스트 불러오기 */
 function getReceiveDm(){
 	const receiver = $("#sender").val(); 
 	$.ajax({
@@ -17,7 +65,8 @@ function getReceiveDm(){
 			tbody.empty();
 			for(let i=0;i<list.length;i++){
 				const dm = list[i];
-			console.log(dm);
+				
+				console.log(dm);
 				const tr = $("<tr>");
 				
 				// 번호, 아이디, 전화번호, 문의유형, 문의내용, 날짜, 답변여부
@@ -26,16 +75,34 @@ function getReceiveDm(){
 				
 				//아이디
 				const senderTd = $("<td>");
-				senderTd.text(dm.sender);				
+				senderTd.text(dm.sender);
 				
 				//문의유형
 				const typeTd = $("<td>");
 				typeTd.text(dm.dmType);
+			//	if(dm.dmType == 0){
+			//		typeTd.text("결제/취소")
+			//	}else if(dm.dmType==1){
+			//		typeTd.text("예약")
+			//	}else{
+			//		typeTd.text("기타문의")
+			//	}
 				
 				//문의내용
 				const contentTd = $("<td>");
-				contentTd.text(dm.dmContent);
-				contentTd.attr("onclick","modal("+dm.dmNo+")"); 
+				const div = $("<div>");
+				contentTd.append(div);
+				
+				div.addClass("tdContent");
+				div.text(dm.dmContent);
+				div.css("fontWeight","900");
+				div.css("cursor","pointer");	
+				div.css("width","300");
+				div.css("overflow","hidden");
+				div.css("text-overflow","ellipsis");
+				div.css("white-space","nowrap");
+				
+				div.attr("onclick","modal(this,'"+dm.sender+"')");  //자기자신을 보내주고
 				
 				//날짜
 				const dmDateTd = $("<td>");
@@ -44,21 +111,77 @@ function getReceiveDm(){
 				//답변여부
 				const readTd = $("<td>");
 				if(dm.readCheck == 0){
-					tr.addclass("blod");
-					readTd.text("답변하기");
-				}else{
+					readTd.css("fontWeight","900");
+					readTd.css("color","blue");
 					readTd.text("답변대기");
+				}else{
+					readTd.text("답변완료");
 				}
 				tr.append(noTd).append(senderTd).append(typeTd).append(contentTd).append(dmDateTd).append(readTd);
-				tbody,append(tr);
-			
+				tbody.append(tr);
 			}
 		},
 		error : function(){
-		
+			alert("err");
 		}
-	
 	});
 
-	
 	}
+	
+	function modal(obj,sender){			//자기자신을 obj로 받음 	
+		$.ajax({
+			url:"/detailMember.do",
+			data : {sender : sender},
+			success : function(data) {
+			
+			 $("#detailSender").text(data.memberName);//이름
+			 $("#detailId").text(sender);//아이디	
+			 $("#detailPhone").text(data.memberPhone);//핸드폰	
+			
+			 //문의유형
+			 const detailType= $(obj).parent().prev().text();  //자기자신(리스트문의내용)을 기준으로  문의유형을 가지고옴.
+			 $("#detailType").text(detailType);
+			
+			//날짜	
+			const detailDate = $(obj).parent().next().text(); //자기자신(리스트문의내용)을 기준으로  다음요소인 날짜를 가지고-> modal에 띄워줌
+			$("#detailDate").text(detailDate);
+			
+			//내용
+			const detailContent = $(obj).text();
+			$("#detailContent").text(detailContent);
+			
+			//모달을 보여줌 
+			 $(".modalmodel-wrap").show();
+			 $(".modal-modal").show();
+			 },
+		});
+	}
+
+//답장보내기
+function dmSend(){
+	 const sender = $("#sender").val(); //보내는 사람 
+	 const dmContent = $("#detailText").val(); // 내용
+	 const receiver = $("#detailId").text(); //받는 사람
+	 // console.log(receiver);
+	  
+	$.ajax({
+		url:"/insertDm.do",
+		data :{sender : sender, dmContent: dmContent , receiver:receiver},
+		success : function(data){
+		 if(data == 1 ){
+		 	alert("답변성공");
+		 	    $(".modal-modal").hide();
+    			$(".modalmodel-wrap").hide();
+		 }else{
+		 	alert("실패");
+		 }
+		},
+		function(){
+			alert("관리자에게 문의하세요");
+		}
+	});
+}
+
+
+		
+	

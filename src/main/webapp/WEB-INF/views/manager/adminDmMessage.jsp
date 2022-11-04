@@ -105,7 +105,7 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active" style="padding-left: 8px;">
                                 <span>1:1문의 총</span>
-                                <code id="dmMax_Count">[0]</code>건
+                                <code>[<code id="dmMax_Count"></code>]</code>건
                             </li>
                         </ol>
                         <div class="card mb-4">
@@ -117,21 +117,21 @@
                                 <div class="card mb-4">
                                     <div class="card-body">
                                         <p class="mb-0">
-                                            	답변대기
-                                            <code>[0]</code> 
+                                            <span>답변대기</span>
+                                            <code>[<code id="dm_check"></code>]</code> 
                                             <span>/</span>
-                                            	답변완료
-                                            <code>[0]</code>건
+                                           	<span>답변완료</span>
+                                            <code>[<code id="dm_checkRead"></code>]</code>건
                                         </p>
                                         <div id="nameIdSerarch-Box" style="float: right;">
                                             <form action="#" post="post">
                                                 <select>
-                                                    <option>전체</option>
-                                                    <option>파트너</option>
-                                                    <option>이용자</option>
+                                                    <option>문의유형</option>
+                                                    <option>취소/결제</option>
+                                                    <option>예약</option>
+                                                    <option>기타문의</option>
                                                 </select>
                                                 <select>
-                                                    <option>이름</option>
                                                     <option>아이디</option>
                                                 </select>
                                                     <input class="input-form2" type="text" placeholder="입력하세요" style="width: 500px;">
@@ -144,26 +144,20 @@
                                     <thead>
                                         <tr>
                                             <th>번호</th>
-                                           <%--<th>구분</th> --%> 
-                                          <%-- <th>이름</th> --%> 
                                             <th>아이디</th>
-                                            <th>전화번호</th>
                                             <th>문의유형</th>
                                             <th>문의내용</th>
-                                            <th>시간</th>
+                                            <th>날짜</th>
                                             <th>답변여부</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>번호</th>
-                                           <%--<th>구분</th> --%>
-                                           <%-- <th>이름</th> --%>
                                             <th>아이디</th>
-                                            <th>전화번호</th>
                                             <th>문의유형</th>
                                             <th>문의내용</th>
-                                            <th>시간</th>
+                                            <th>날짜</th>
                                             <th>답변여부</th>
                                         </tr>
                                     </tfoot>
@@ -184,32 +178,29 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col" style="text-align: center;">문의유형</th>
-                                                    <td scope="col" colspan="2" style="text-align: center;"><span id="detailType">결제/취소</span></td>
+                                                    <td scope="col" colspan="2" style="text-align: center;"><span id="detailType"></span></td>
                                                     <th scope="col" style="text-align: center;">날짜</th>
-                                                    <td scope="col" colspan="2" style="text-align: center;"><span id="detailDate">2022/10/26</span></td>
+                                                    <td scope="col" colspan="2" style="text-align: center;"><span id="detailDate"></span></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row" style="text-align: center;">아이디</th>
-                                                    <td style="text-align: center;"><span id="detailId">user01</span></td>
+                                                    <td style="text-align: center;"><span id="detailId"></span></td>
                                                     <th style="text-align: center;">이름</th>
-                                                    <td style="text-align: center;"><span id="detailSender">이수작</span></td>
+                                                    <td style="text-align: center;"><span id="detailSender"></span></td>
                                                     <th style="text-align: center;">연락처</th>
-                                                    <td style="text-align: center;"><span id="detailPhone">010-8712-8451</span></td>
-                                                    <input type="hidden" id="sender" value="${sessionScope.m.memberId}">
+                                                    <td style="text-align: center;"><span id="detailPhone"></span></td>
+                                                    <input type="hidden" id="sender" value="${sessionScope.g.adminId}">
+                                                    <input type="hidden" id="receiver">
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <th style="text-align: center;">제목</th>
-                                                    <td colspan="5" style="text-align: center;"><span id="detailTitle">취소하고 싶어요</span></td>
-                                                </tr>
-                                                <tr>
                                                     <th style="line-height: 130px;">문의내용</th>
-                                                    <td colspan="5"><textarea id="detailText" style="resize: none;">취소할 수 있나요?</textarea></td>
+                                                    <td colspan="5"><textarea id="detailContent" style="resize: none;" readonly></textarea></td>
                                                 </tr>
                                                 <tr>
                                                     <th style="line-height: 130px;">답변하기</th>
-                                                    <td colspan="5"><textarea id="detailText" style="resize: none;">취소완료되었습니다.</textarea></td>
+                                                    <td colspan="5"><textarea id="detailText" style="resize: none;"></textarea></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -243,7 +234,7 @@
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="/resources/js/datatables-simple-demo.js"></script>
         <script src="/resources/js/scripts.js"></script>
-        <script src="/resources/js/admin/dm_message.js"></script>
+    <!--<script src="/resources/js/admin/dm_message.js"></script> -->
          <script src="/resources/js/admin/dm.js"></script>
     </body>
 </html>
