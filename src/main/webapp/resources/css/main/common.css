@@ -59,3 +59,25 @@
     font-style: normal;
 }
 
+.input-chk-btn{
+    display:none;
+    width:0;
+    height:0;
+}
+.input-chk-btn + label{
+    position:relative;
+    padding:6px 14px;
+    margin: 0 6px 8px 0;
+    box-sizing:border-box;
+    border:1px solid #96a2af;
+    color:#96a2af;
+    font-size:14px;
+    cursor: pointer;
+    transition:.3s;
+
+}
+.input-chk-btn:checked + label{
+    background:var(--sdc-main-color);
+    border-color:var(--sdc-main-color);
+    color:#fff;
+}
