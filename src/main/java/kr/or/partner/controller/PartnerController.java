@@ -251,5 +251,12 @@ public class PartnerController {
 		model.addAttribute("p",p);
 		return "partner/oneTrainer";
 	}
+	// 훈련사 예약페이지 이동
+	@RequestMapping(value="/bookTrainerFrm.do")
+	public String bookingFrm(String pNo, Model model) {
+		Partner trainer = service.selectOnePartner(pNo);
+		model.addAttribute("trainer",trainer);
+		return "partner/trainerBookingPage";
+	}
 
 }

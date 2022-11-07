@@ -28,7 +28,7 @@
 			</div>
 			<div class="title-wrapper">
 				<h2>${tb.boardTitle }</h2>
-				<div>${tb.trainerName }훈련사 5점!</div>
+				<div>${tb.trainerName }훈련사 !5!점</div>
 			</div>
 			<div class="carrers">
 				<div class="top-career">
@@ -67,12 +67,24 @@
 				<div style="margin-top: 50px;"><p>자기소개</p></div>
 				<div style="margin-top: 28px;"><p>${tb.aboutMe }</p></div>
 			</div>
-			<div class="user-comments">!고객후기!</div>
+			<div class="comments-wrapper" style="padding-top: 50px;">
+				<div class="comments-title">
+					<p>고객 후기</p>
+				</div>
+				<!-- forEach로 후기 호출하기 -->
+				<div class="comments-main">
+					<div></div>
+					<div style="margin-top: 32px;">
+						<p>!훈련 너무 좋은시간이었어요~~!! 전에 훈련사님은 어쩌고저쩌고 ㅠㅠ 근데 너무 좋아요!</p>
+					</div>
+					<div class="file-wrapper">
+						<!-- forEach로 후기사진 호출하기 -->
+						<div><img src=""></div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="main-right">
-			<div class="askBox-wrapper"></div>
-			<div class="fee-wrapper"></div>
-			<div class="schedule-wrapper"></div>
 			<div class="askBox-wrapper">
 				<p>궁금한 내용이 있다면, <strong>${tb.trainerName }</strong> 훈련사님께 교육 문의를 보내보세요!</p>
 				<div>
