@@ -44,7 +44,7 @@ public class DirectMessageService {
 	public int insertDm(DirectMessage dm) {
 		int result = dao.insertDm(dm);
 		if (dm.getReadCheck() == 0) {
-			dao.updateReadCheck(dm.getDmNo());
+			dao.updateReadCheck(dm.getReply());
 		}
 		return result;
 	}

@@ -177,10 +177,12 @@
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
+                                                	<th scope="col" style="text-align: center;">No</th>
+                                                    <td scope="col" style="text-align: center;"><span id="detailNo"></span></td>
                                                     <th scope="col" style="text-align: center;">문의유형</th>
-                                                    <td scope="col" colspan="2" style="text-align: center;"><span id="detailType"></span></td>
+                                                    <td scope="col" style="text-align: center;"><span id="detailType"></span></td>
                                                     <th scope="col" style="text-align: center;">날짜</th>
-                                                    <td scope="col" colspan="2" style="text-align: center;"><span id="detailDate"></span></td>
+                                                    <td scope="col" " style="text-align: center;"><span id="detailDate"></span></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row" style="text-align: center;">아이디</th>

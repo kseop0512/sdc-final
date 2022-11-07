@@ -81,13 +81,13 @@ function getReceiveDm(){
 				const typeTd = $("<td>");
 				typeTd.text(dm.dmType);
 				
-			//	if(dm.dmType == 0){
-			//		typeTd.text("결제/취소")
-			//	}else if(dm.dmType==1){
-			//		typeTd.text("예약")
-			//	}else{
-			//		typeTd.text("기타문의")
-			//	}
+				if(dm.dmType == 0){
+					typeTd.text("결제/취소")
+				}else if(dm.dmType==1){
+					typeTd.text("예약")
+				}else{
+					typeTd.text("기타문의")
+				}
 				
 				//문의내용
 				const contentTd = $("<td>");
@@ -111,7 +111,6 @@ function getReceiveDm(){
 				
 				//답변여부
 				const readTd = $("<td>");
-				console.log(dm.readCheck);
 				if(dm.readCheck == 0){
 					readTd.css("fontWeight","900");
 					readTd.css("color","blue");
@@ -150,13 +149,18 @@ function getReceiveDm(){
 			const detailDate = $(obj).parent().next().text(); //자기자신(리스트문의내용)을 기준으로  다음요소인 날짜를 가지고-> modal에 띄워줌
 			$("#detailDate").text(detailDate);
 			
-			//내용
+			//다른사람이 나한테 문의한 내용
 			const detailContent = $(obj).text();
 			$("#detailContent").text(detailContent);
+			
+			 const detailNo= $(obj).parent().prev().prev().prev().text();
+			 $("#detailNo").text(detailNo);
+			
 			
 			//모달을 보여줌 
 			 $(".modalmodel-wrap").show();
 			 $(".modal-modal").show();
+			 
 			 },
 		});
 	}
@@ -166,11 +170,10 @@ function dmSend(){
 	 const sender = $("#sender").val(); //보내는 사람 
 	 const dmContent = $("#detailText").val(); // 내용
 	 const receiver = $("#detailId").text(); //받는 사람
-	 // console.log(receiver);
-	  
+	 const reply = $("#detailNo").text();//글 번호
 	$.ajax({
 		url:"/insertDm.do",
-		data :{sender : sender, dmContent: dmContent , receiver:receiver},
+		data :{sender : sender, dmContent: dmContent , receiver:receiver, reply:reply},
 		success : function(data){
 		 if(data == 1 ){
 		 	alert("답변성공");
