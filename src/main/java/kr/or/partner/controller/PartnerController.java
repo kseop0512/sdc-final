@@ -182,11 +182,11 @@ public class PartnerController {
 		Partner p = service.selectOnePartNer(partner);
 		if(p!=null) {
 			session.setAttribute("p", p);
-			System.out.println(session);
+			return "redirect:/";
 		}else {
-			System.out.println("값이 없어요");
+			return "redirect:/loginPartnerFrm.do";
 		}
-		return "redirect:/";
+		
 	}
 	
 	//파트너 로그아웃

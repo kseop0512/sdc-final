@@ -28,7 +28,6 @@ public class MemberDao {
 	public Member selectOneMember(Member member) {
 		Member m = sqlSession.selectOne("member.selectOneMember",member);
 		System.out.println("로그인완료");
-		System.out.println(m.getMemberId());
 		return m;
 	}
 
