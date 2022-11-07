@@ -75,8 +75,10 @@ public class MemberController {
 		Member m = service.selectOneMember(member);
 		if(m!=null) {
 			session.setAttribute("m", m);
+			return "redirect:/";
+		}else {
+			return "redirect:/loginUserFrm.do";
 		}
-		return "redirect:/";
 	}
 	
 	//유저 로그아웃

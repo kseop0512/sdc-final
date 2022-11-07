@@ -16,6 +16,17 @@
     color: #282F44;
 }
 
+.bc99 {
+    color: #fff;
+    background-color: #282F44;
+    border: 2px solid #282F44;
+}
+.bc99:hover {
+    background-color:#fff;
+    cursor: pointer;
+    color: red;
+}
+
 #notice-write{
     padding-right: 10px;
 }
@@ -182,14 +193,14 @@ tbody>tr>td:nth-child(6){
 #admin-noticeTitle{
     font-family: ns-blod;
 }
-
+/*
 tbody>tr>td:nth-child(2):hover{
     cursor: pointer;
     text-decoration: underline;
     color: #E6AF2E;
 
 }
-
+*/
 /* 이전 다음글 버튼 */
 #pre-btn{
     margin-bottom: 10px;

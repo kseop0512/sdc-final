@@ -15,4 +15,91 @@
 		</if>
 	</select>      
 	
+	<select id="selectAdminNotice" parameterType="map" resultType="ng">
+		select * from
+		(select rownum as rnum, ng.* from
+		(select
+			notice_g_no as noticeGNo,
+			notice_g_title as noticeGTitle,
+			notice_g_writer as noticeGWriter,
+			notice_g_date as noticeGDate,
+			read_g_count as readGCount
+		from notice_g order by 1 desc)ng)
+		where rnum between #{start} and #{end}
+	</select>
+	 
+	<select id="totalCount" resultType="int">
+  	select count(*) from notice_g
+  	</select>
+  	
+  	
+  	<update id="readGCountUpdate" parameterType="int">
+  		update notice_g set read_g_count=read_g_count+1 where notice_g_no=#{notice_g_no}
+  	</update>
+  	
+  	
+  	<select id="selectOneNoticeG" parameterType="_int" resultMap="getNoticeG">
+  	select
+  		*
+    from notice_g where notice_g_no = #{_parameter}	
+  </select>
+  
+  <select id="selectFileList" parameterType="_int" resultType="fvg">
+  	select
+  		file_g_no as fileGNo,
+    	notice_g_no as noticeGNo,
+    	filename_g as filenameG,
+    	filepath_g as filepathG
+    from file_g_tbl where notice_g_no = #{_parameter}	
+  </select>
+  
+  
+  <resultMap type="ng" id="getNoticeG">
+  	<result column="notice_g_no" property="noticeGNo"/>
+  	<result column="notice_g_title" property="noticeGTitle"/>
+  	<result column="notice_g_writer" property="noticeGWriter"/>
+  	<result column="notice_g_content" property="noticeGContent"/>
+  	<result column="notice_g_date" property="noticeGDate"/>
+  	<result column="read_g_count" property="readGCount"/>
+  	<collection property="fileList"
+  			select="selectFileList"
+  			column="notice_g_no"
+  			ofType="fvg"
+  			javaType="java.util.ArrayList"
+  	/>
+  </resultMap>
+  
+  
+  <insert id="insertNoticeG" parameterType="ng">
+  	insert into notice_g values
+  	(
+  		notice_g_seq.nextval, 
+  		#{noticeGTitle}, 
+  		#{noticeGContent},
+  		#{noticeGWriter},
+  		to_char(sysdate,'yyyy-mm-dd'),
+  		0
+  	)
+  	<selectKey resultType="_int" order="AFTER" keyProperty="noticeGNo">
+  		select max(notice_g_no) from notice_g
+  	</selectKey>
+  </insert>
+  <select id="selectNoticeGNo" resultType="_int">
+  	select max(notice_g_no) from notice_g
+  </select>
+  <insert id="insertFile" parameterType="fvg">
+  	insert into file_g_tbl values
+  	(
+  		file_g_seq.nextval, 
+  		#{noticeGNo}, 
+  		#{filenameG}, 
+  		#{filepathG}
+  	)
+  </insert>
+  
+  <delete id="deleteNotice" parameterType="ng">
+  	delete
+  		from notice_g
+  	where notice_g_no = #{noticeGNo}
+  </delete>
 </mapper>
