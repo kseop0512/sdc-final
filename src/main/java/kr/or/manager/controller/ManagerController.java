@@ -110,6 +110,10 @@ public class ManagerController {
 	public String adminIndex() {
 		return "manager/adminIndex";
 	}
+	@RequestMapping(value="/partnerList.do")
+	public String partnerList() {
+		return "manager/partnerList";
+	}
 	
 }
 
