@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
+import kr.or.dm.model.vo.DirectMessage;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 
@@ -107,8 +110,25 @@ public class MemberController {
 		return "common/msg";
 	}
 	
+	//유저 1:1문의내역
 	@RequestMapping(value="/mypageMessage.do")
-	public String mypageMessage() {
+	public String mypageMessage(String memberId, Model model) {
+		ArrayList<DirectMessage> rdm = service.selectMemberReceiveDm(memberId);
+		model.addAttribute("rdm", rdm);
 		return "member/mypageMessage";
+	}
+	//유저 받은메시지 조회
+	@ResponseBody
+	@RequestMapping(value="/getMemberRDm.do",produces="application/json;charset=utf-8")
+	public String getMemberRdm(String memberId) {
+		ArrayList<DirectMessage> rdm = service.selectMemberReceiveDm(memberId);
+		return new Gson().toJson(rdm);
+	}
+	//유저 보낸메시지 조회
+	@ResponseBody
+	@RequestMapping(value="/getMemberSDm.do",produces="application/json;charset=utf-8")
+	public String getMemberSdm(String memberId) {
+		ArrayList<DirectMessage> sdm = service.selectMemberSendDm(memberId);
+		return new Gson().toJson(sdm);
 	}
 }
