@@ -159,30 +159,3 @@ $(".time").on("click",function(){
 	}
 });
 
-// 결제api
-const IMP = window.IMP; // 생략 가능
-IMP.init("imp24425337");
-
-function requestPay() {
-    // IMP.request_pay(param, callback) 결제창 호출
-    const d = new Date();
-    const date = d.getFullYear()+""+(d.getMonth()+1) + "" + d.getDate() + "" + d.getHours() + "" + d.getMinutes() + "" + d.getSeconds();
-    IMP.request_pay({ // param
-        pg: "html5_inicis",
-        pay_method: "card",
-        merchant_uid: "PLG-" + date,
-        name: "똑독캣 결제하기",
-        amount: $("#totalFee").val(),
-        buyer_email: $("input[name=buyer_email").val(),
-        buyer_name: $("#buyer_name").val(),
-        buyer_tel: $("input[name=bookingPhone").val(),
-        //buyer_addr: "인천시 서구 청라커낼로 163",
-        buyer_postcode: "01181"
-    }, function (rsp) { // callback
-        if (rsp.success) {
-            $("form[name=booking_form]").submit();
-        } else {
-            alert("예약 실패 관리자에게 문의하세요")
-        }
-    });
-}

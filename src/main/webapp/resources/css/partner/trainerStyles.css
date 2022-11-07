@@ -190,11 +190,9 @@ a{
 	height: 100%;
 	overflow: hidden;
 	float: left;
-	background-color: lightgrey;
 }
 .top-right{
 	float: left;
-	display: flex;
 	flex-grow: 1;
 	width: 37.5%;
 	height: 100%;
@@ -205,12 +203,7 @@ a{
 	height: 250px;
 	overflow: hidden;
 }
-.right-top{
-	background-color: pink;
-}
-.right-bottom{
-	background-color: yellow;
-}
+
 .page-main{
 	margin-left: auto;
 	margin-right: auto;
@@ -235,12 +228,8 @@ a{
 }
 .title-wrapper{
 	padding-bottom: 50px;
-<<<<<<< HEAD
-	border-bottom: 1px solid #625b4b;
-=======
 	border-bottom: 2px solid #625b4b;
 	color: #333333;
->>>>>>> refs/heads/Zoe
 }
 .title-wrapper>h2{
 	font-size: 27px;
@@ -285,12 +274,8 @@ a{
 	margin-top: 27px;
 }
 
-<<<<<<< HEAD
-.experiences>div:first-child>p, .about-me>div:first-child>p{
-=======
 
 .experiences>div:first-child>p, .about-me>div:first-child>p, .comments-title>p{
->>>>>>> refs/heads/Zoe
 	font-size: 20px;
 	font-weight: 600;
 	color: #333333;
@@ -298,11 +283,11 @@ a{
 }
 .experiences>div:last-child{
 	padding-bottom: 45px;
-	border-bottom: 1px solid #625b4b;
+	border-bottom: 2px solid #625b4b;
 }
 
 .about-me{
-	border-bottom: 1px solid #625b4b;
+	border-bottom: 2px solid #625b4b;
 }
 .about-me>div:last-child>p{
 	font-size: 17px;
@@ -310,8 +295,6 @@ a{
 	line-height: 28px;
 	padding-bottom: 20px;
 }
-<<<<<<< HEAD
-=======
 .comments-title{
 	display: flex;
 	align-items: center;
@@ -348,7 +331,6 @@ a{
 	margin-right: 8px;
 	border-radius: 3px;
 }
->>>>>>> refs/heads/Zoe
 
 /* main-right */
 
@@ -356,39 +338,62 @@ a{
 	width: 375px;
 	border-radius: 8px;
 	border: 1px solid #625b4b;
+	background-color: #FFF5E4;
 }
 .askBox-wrapper{
-	padding: 38px 32px 32px 32px;
+	padding: 30px 32px 32px 32px;
 	margin-top: 105px;
+	
+}
+.askBox-wrapper>p, .fee-wrapper>div:first-child>p{
+	font-size: 17px;
+	font-weight: 500;
+	letter-spacing: -0.2px;
+	line-height: 25px;
+	color: #625b4b;
+}
+.askBox-wrapper>div{
+	display: flex;
+	width: 312px;
+	height: 60px;
+	background-color: #625b4b;
+	border-radius: 5px;
+	justify-content: center;
+	align-items: center;
+	margin-top: 32px;
 }
 
+.askBox-wrapper>div>span{
+	font-size: 18px;
+	font-weight: 600;
+	color: #fff;
+	letter-spacing: -0.2px;
+}
 .fee-wrapper{
-	padding: 43px 32px 38px 32px;
+	padding: 30px 32px 20px 32px;
 	margin-top: 38px;
 }
+.fee-wrapper>div:first-child{
+	display: flex;
+	border-bottom: 1px solid #625b4b;
+}
+
+.fee-wrapper>div:last-child{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 24px;
+}
+.fee-wrapper p{
+	font-size: 15px;
+	font-weight: 500;
+	line-height: 19px;
+	color: black;
+	margin-left: 12px;
+}
+
 .schedule-wrapper{
 	padding: 32px 32px 38px 32px;
 	margin-top: 38px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
