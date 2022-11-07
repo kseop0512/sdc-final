@@ -15,20 +15,25 @@
 	min-width:400px !important;
 	height : 300px !important;
 	box-sizing : border-box;
-	display : flex;
-	flex-wrap: wrap;
 	border : 2px dotted #0b85a1;
 	/*align-content 위에서부터 하나씩 아래로 내리기 위한것*/
-	align-content : flex-start;
 	margin-bottom: 10px !important;
+	display: grid;
+    align-items: center;
+    justify-items: center;
+}
+#img-view{
+	width: 34vw !important;
+	min-width:400px !important;
+	height : 300px !important;
 }
 .fileMsg{
 	font-size : 18px;
 	width: 100%;
 	text-align: center;
-	line-height: 300px;
 	/*align-self 보조축 가운데정렬*/
 	align-self:center;
+	line-height: 300px;
 }
 .imageFile{
 	margin-bottom: 10px;
@@ -37,6 +42,10 @@
 	font-size: 18px;
 	font-weight: bold;
     color: #cda45e;
+    margin-right: 38%;
+}
+.profileSpan+input{
+	width: 200px;
 }
 </style>
 </head>
@@ -66,8 +75,9 @@
 						<div id="content">
 							<form action="/petDogAdd.do" method="post" enctype="multipart/form-data">
 							<span class="profileSpan">프로필사진</span>
+							<input type="file" name="imageFile" accept=".jpg,.png,.jpeg" onchange="loadImg(this);">
 							<div class="fileZone">
-								<div class="fileMsg">여기에 파일을 올리세요</div>
+								<img id="img-view">
 							</div>
 							<span>기본사항*</span>
 								<input type="hidden" name="petType" value="1">
@@ -316,69 +326,23 @@
 		</div>
 	</div>
 	<script>
-		const fileZone = $(".fileZone");
-		const files = new Array();
-		//드래그되는 영역에 들어올때
-		fileZone.on("dragenter",function(e){
-			e.stopPropagation();//이벤트버블링제거
-			e.preventDefault();//기본이벤트제거
-			$(this).css("border","2px dashed #fff");
-		});
-		//드래그 영역에서 나갈때
-		fileZone.on("dragleave",function(e){
-			e.stopPropagation();//이벤트버블링제거
-			e.preventDefault();//기본이벤트제거
-			$(this).css("border","2px dotted #0b85a1");
-		});
-		//드래그영역에 올라와 있을때
-		fileZone.on("dragover",function(e){
-			e.stopPropagation();//이벤트버블링제거
-			e.preventDefault();//기본이벤트제거
-		});
-		//드래그영역에 내려놓을때
-		fileZone.on("drop",function(e){
-			e.stopPropagation();//이벤트버블링제거
-			e.preventDefault();//기본이벤트제거
-			for(let i = 0;i<e.originalEvent.dataTransfer.files.length;i++){
-				files.push(e.originalEvent.dataTransfer.files[i]);
+	function loadImg(f){
+		//첨부파일이 여러개일 수 있으므로 항상 배열 처리
+		console.log(f.files);//input에서 file을 선택하면 해당 파일이 들어있는 배열
+		if(f.files.length !=0 && f.files[0] != 0){
+			const reader = new FileReader(); //파일 정보를 읽어올 수 있는 객체
+			reader.readAsDataURL(f.files[0]); //선택한 파일 정보 읽어옴
+			//파일리더가 파일을 다 읽어오면 동작할 함수 작성
+			reader.onload = function(e){
+				$("#img-view").attr("src",e.target.result);
 			}
-			console.log(files.value);
-			$(".fileMsg").hide();
-			//이 코드를 추가함으로써 a를 넣고 b를 넣으면 a,b가 뜨는것이다.
-			
-			const fileNameDiv = $("<div>");
-			$(this).append(fileNameDiv);
-			fileSetting();
-		});
-		//배열에서 빼주는 작업
-		function deleteFile(obj){
-			const deleteFilename = $(obj).prev().text();
-			for(let i=0;i<files.length;i++){
-				if(files[i].name == deleteFilename){
-					files.splice(i,1);
-					break;
-				}
-			}
-			if(files.length==0){
-				$(".fileMsg").show();
-				fileZone.css("border","2px dotted #0b85a1");
-			}
-			//div자체를 날리는것
-			$(obj).parent().remove();
-			fileSetting();
+		}else{
+			//이미지 교체되면 src 비움
+			$("#img-view").attr("src","");
 		}
-		function fileSetting(){
-			//input[type=file] value 는 보안상 변경이 불가능
-			//$("input").val(); 이렇게 하는것이 불가능
-			//input[type=file] 변경용 객체 필요
-			//dataTransfer를 통해서만 변경이 가능하다
-			const dataTransfer = new DataTransfer();
-			for(let i=0;i<files.length;i++){
-				dataTransfer.items.add(files[i]);
-			}
-			//prop 속성
-			$("input[name=boardFile]").prop("files",dataTransfer.files);
-		}
+		
+		
+	}
 	</script>
 	<jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
 	<!-- 모달JS -->
