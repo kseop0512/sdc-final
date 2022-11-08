@@ -110,6 +110,7 @@ public class ManagerController {
 	public String adminIndex() {
 		return "manager/adminIndex";
 	}
+	//관리자 - 파트너 P로 이동 
 	@RequestMapping(value="/partnerList.do")
 	public String partnerList() {
 		return "manager/partnerList";
