@@ -100,35 +100,40 @@ public class MemberController {
 			model.addAttribute("title","정보수정 완료");
 			model.addAttribute("msg","입력하신 정보로 수정을 완료했습니다.");
 			model.addAttribute("icon","success");
-			model.addAttribute("loc","/memberMypage.do");
 		}else {
 			model.addAttribute("title","정보수정 실패");
 			model.addAttribute("msg","정보수정 중 오류가 발생했습니다.");
 			model.addAttribute("icon","error");
-			model.addAttribute("loc","/memberMypage.do");
 		}
+		model.addAttribute("loc","/memberMypage.do");
 		return "common/msg";
 	}
 	
-	//유저 1:1문의내역
+	//유저 1:1문의내역 이동
 	@RequestMapping(value="/mypageMessage.do")
-	public String mypageMessage(String memberId, Model model) {
-		ArrayList<DirectMessage> rdm = service.selectMemberReceiveDm(memberId);
-		model.addAttribute("rdm", rdm);
+	public String mypageMessage() {
 		return "member/mypageMessage";
 	}
 	//유저 받은메시지 조회
 	@ResponseBody
 	@RequestMapping(value="/getMemberRDm.do",produces="application/json;charset=utf-8")
 	public String getMemberRdm(String memberId) {
-		ArrayList<DirectMessage> rdm = service.selectMemberReceiveDm(memberId);
-		return new Gson().toJson(rdm);
+		ArrayList<DirectMessage> list = service.selectMemberReceiveDm(memberId);
+		return new Gson().toJson(list);
 	}
 	//유저 보낸메시지 조회
 	@ResponseBody
 	@RequestMapping(value="/getMemberSDm.do",produces="application/json;charset=utf-8")
 	public String getMemberSdm(String memberId) {
-		ArrayList<DirectMessage> sdm = service.selectMemberSendDm(memberId);
-		return new Gson().toJson(sdm);
+		ArrayList<DirectMessage> list = service.selectMemberSendDm(memberId);
+		return new Gson().toJson(list);
 	}
+	//유저 받은메시지 읽음처리
+	@ResponseBody
+	@RequestMapping(value="/updateReadCheck.do")
+	public int updateReadCheck(int dmNo) {
+		int result = service.updateReadCheck(dmNo);
+		return result;
+	}
+	
 }

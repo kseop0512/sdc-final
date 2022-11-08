@@ -49,5 +49,10 @@ public class MemberDao {
 	}
 
 
+	public int updateReadCheck(int dmNo) {
+		return sqlSession.update("dm.updateMemberReadCheck",dmNo);
+	}
+
+
 
 }

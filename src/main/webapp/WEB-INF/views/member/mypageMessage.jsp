@@ -54,8 +54,8 @@
 		                  <span class="all filter">전체 <span class="count">3</span></span>
 		                </div>
 		              </div>
-		              <!-- 받은메시지함 -->
 		              <input type="hidden" id="memberId" value="${sessionScope.m.memberId }">
+		              <!-- 받은메시지함 -->
 		              <div class="msg-box receive">
 		                <table>
 		                  <thead>
@@ -78,33 +78,34 @@
 		                    </tr>
 		                  </thead>
 		                  <tbody>
+		                  <!-- 
 		                  <c:forEach items="${rdm}" var="rdm">
 		                    <tr>
-		                    	<td><input class="form-check-input check-msg" type="checkbox"></td>
+		                    	<td><input class="form-check-input check-r" type="checkbox"></td>
 		                    	<td>
 		                    	<c:choose>
 		                    		<c:when test="${rdm.dmType ==0}">결제/취소</c:when>
-		                    		<c:when test="${rdm.dmType ==1}">예약/취소</c:when>
+		                    		<c:when test="${rdm.dmType ==1}">예약</c:when>
 		                    		<c:when test="${rdm.dmType ==2}">기타문의</c:when>
 		                    		<c:otherwise>오잉</c:otherwise>
 		                    	</c:choose>
 		                    	</td>
 			                    <td>
 			                    <c:choose>
-		                    		<c:when test="${rdm.senderCategory ==A}">관리자</c:when>
-		                    		<c:when test="${rdm.senderCategory ==P}">펫시터/훈련사</c:when>
+		                    		<c:when test="${rdm.senderCategory eq 'A'}">관리자</c:when>
+		                    		<c:when test="${rdm.senderCategory eq 'P'}">${rdm.sender }</c:when>
 		                    		<c:otherwise>오잉</c:otherwise>
 		                    	</c:choose>
 			                    </td>
 				                <td class="td-content">
-				                	<input type="hidden" value="${rdm.dmNo }">
-				                	<a href='javascript:void(0);' onclick="receiveModal();">${rdm.dmContent }</a>
+				                	<a href='javascript:void(0);' onclick="receiveModal(${rdm.dmNo},'${rdm.sender }','${rdm.dmContent }','${rdm.dmDate }');">${rdm.dmContent }</a>
 				                </td>
 				                <td>${rdm.dmDate }</td>
 				                <input type="hidden" class="sender-category" value="${rdm.senderCategory }">
 				                <input type="hidden" class="read-check" value="${rdm.readCheck }">
 		                    </tr>
 		                   </c:forEach>
+		                    -->
 		                  </tbody>
 		                </table>
 		              </div><!-- .msg-box receive종료 -->
@@ -122,33 +123,7 @@
 		                    </tr>
 		                  </thead>
 		                  <tbody>
-		                    <tr>
-		                      <td><input class="form-check-input check-msg" type="checkbox"></td>
-		                      <td>결제/취소</td>
-		                      <td>관리자</td>
-		                      <td class="td-content"><a href='javascript:void(0);' onclick="sendModal();">사이트가 이상합니다</a></td>
-		                      <td>2022-11-01 [17:50]</td>
-		                      <td class="td-readcheck"></td>
-		                      <input type="hidden" class="read-check" value="1">
-		                    </tr>
-		                    <tr>
-		                      <td><input class="form-check-input check-msg" type="checkbox" readonly></td>
-		                      <td>예약</td>
-		                      <td>강형욱 훈련사</td>
-		                      <td class="td-content"><a href='javascript:void(0);' onclick="sendModal();">사람도 훈련이 가능합니까ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ</a></td>
-		                      <td>2022-10-02 [11:40]</td>
-		                      <td class="td-readcheck"></td>
-		                      <input type="hidden" class="read-check" value="1">
-		                    </tr>
-		                    <tr>
-		                      <td><input class="form-check-input check-msg" type="checkbox" readonly></td>
-		                      <td>기타문의</td>
-		                      <td>박박이 펫시터</td>
-		                      <td class="td-content"><a href='javascript:void(0);' onclick="sendModal();">어쩌다 그런 이름을 쓰게 되셨는지요 너무나 궁금</a></td>
-		                      <td>2022-10-01 [16:30]</td>
-		                      <td class="td-readcheck"></td>
-		                      <input type="hidden" class="read-check" value="0">
-		                    </tr>
+		                  <!-- ajax로 처리 -->
 		                  </tbody>
 		                </table>
 		              </div><!-- .msg-box send -->
@@ -163,24 +138,27 @@
 	<!-- 메시지 상세보기 모달 -->
 	<div class="msg-modal" style="display: none;">
 		<div class="msg-modal-head">
-			<span id="msg-modal-title">받은메시지</span> <span id="close-btn"
-				class="material-symbols-outlined">close</span>
+			<span id="msg-modal-title">받은메시지</span>
+			<span id="close-btn" class="material-symbols-outlined">close</span>
 		</div>
-		<form action="/replyMsg.html" method="post">
+		<form action="/replyMsg.do" method="post">
 			<div class="msg-modal-content">
 				<div class="msg-info msg-sender">
-					<span>보낸사람</span> <input type="text" value="으아악 펫시터" disabled>
+					<span>보낸사람</span>
+					<input type="text" id="receiver-view" value="하하하하" readonly>
+					<input type="hidden" name="receiver" value="">
 				</div>
 				<div class="msg-info msg-date">
-					<span>받은날짜</span> <input type="text" value="22-11-03 [16:58]"
-						disabled>
+					<span>받은날짜</span>
+					<input type="text" value="" disabled>
 				</div>
 				<div class="msg-content">
 					<textarea id="reply-msg" name="dmContent" style="display: none;"></textarea>
-					<textarea id="receive-msg" disabled>투명하되 얼음과 같으며 지혜는 날카로우나 갑 속에 든 칼이다 청춘의 끓는 피가 아니더면 인간이 얼마나 쓸쓸하랴? 얼음에 싸인 만물은 얼음이 있을 뿐이다 그들에게 생명을 불어 넣는 것은 따뜻한 봄바람이다 풀밭에 속잎나고 가지에</textarea>
+					<textarea id="receive-msg" disabled></textarea>
 				</div>
 				<div class="msg-btn-wrap">
-					<input type="text" id="reply-btn" value="답장">
+					<input type="button" id="reply-btn" value="답장">
+					<input type="submit" id="submit-btn" value="보내기" style="display: none">
 				</div>
 			</div>
 		</form>

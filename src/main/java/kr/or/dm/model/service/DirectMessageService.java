@@ -11,6 +11,7 @@ import kr.or.dm.model.dao.DirectMessageDao;
 import kr.or.dm.model.vo.DirectMessage;
 import kr.or.manager.model.vo.Manager;
 import kr.or.member.model.vo.Member;
+import kr.or.partner.model.vo.Partner;
 
 @Service
 public class DirectMessageService {
@@ -47,6 +48,12 @@ public class DirectMessageService {
 			dao.updateReadCheck(dm.getReply());
 		}
 		return result;
+	}
+	public Partner selectDmPartner(String pId) {
+		return dao.selectDmPartner(pId);
+	}
+	public int deleteDm(int dmNo) {
+		return dao.deleteDm(dmNo);
 	}
 
 
