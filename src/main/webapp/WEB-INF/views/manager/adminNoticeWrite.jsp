@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,7 +49,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">홈</div>
-                            <a class="nav-link" href="index_my.html">
+                            <a class="nav-link" href="/selectUserList.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 마이페이지
                             </a>
@@ -60,7 +61,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="memberList.html">유저리스트</a>
+                                    <a class="nav-link" href="/selectUserList.do">유저리스트</a>
                                     <a class="nav-link" href="partnerList.html">파트너관리</a>
                                 </nav>
                             </div>
@@ -92,7 +93,7 @@
                                 1:1문의내역
                             </a>
                             <div class="sb-sidenav-menu-heading">게시판</div>
-                            <a class="nav-link" href="notice.html">
+                            <a class="nav-link" href="/adminNotice.do?reqPage=1">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 공지사항
                             </a>
@@ -130,22 +131,29 @@
                                             <tr>
                                                 <th scope="row" style="vertical-align: middle;">제목</th>
                                                 <td colspan="3">
-                                                    <input type="text" id="admin-noticeTitle" class="input-form" placeholder="제목을 입력하세요">
+                                                    <input type="text" id="admin-noticeTitle" name="noticeGTitle" class="input-form" placeholder="제목을 입력하세요">
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row">작성자</th>
-                                                <td>Jacob</td>
-                                                <th scope="row">작성일</th>
-                                                <td>@fat</td>
-                                            </tr>
+                                           <!--  
                                             <tr class="tr-1">                                                <th class="td-3">첨부파일</th>
-                                                <td colspan="3"><input type="file" name="upfile"></td> <!--파일 name중요 -->
+                                                <td colspan="3"><input type="file" name="boardFileG"></td> 
+                                                <input type="file" name="boardFileG" multiple style="display:none;">
                                             </tr>
+                                            -->
+                                            
+                                            <tr>
+												<th>첨부파일</th>
+												<td>
+													<div class="fileZone">
+														<div class="fileMsg">여기에 파일을 두세요</div>
+													</div>
+												</td>
+											</tr>
+                                            
                                             <tr>
                                                 <th scope="row" style="vertical-align: middle;">내용</th>
                                                 <td colspan="4">
-                                                    <textarea id="admin-noticeContent" class="input-form"  placeholder=" 내용을 입력하세요"></textarea>
+                                                    <textarea id="admin-noticeContent" name="noticeGContent" class="input-form"  placeholder=" 내용을 입력하세요"></textarea>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -155,8 +163,10 @@
                                                 </td>
                                             </tr>
                                                 <td colspan="4">
-                                                    <button type="submit" class="btn bc22 bs4" id="writeBtn">작성</button>
-                                                    <button class="btn bc22 bs4">취소</button><!--공지사항 리스트로이동-->
+                                                	<input type="file" name="boardFileG" multiple style="display:none;">
+													<input type="hidden" name="noticeGWriter" value="${sessionScope.g.adminId }">
+													<input type="submit" value="게시글작성" class="btn bc22 bs4" id="writeBtn">
+                                                    <button class="btn bc22 bs4"><a href="/adminNotice.do?reqPage=1" class="bc99" style="color: #fff;text-decoration: none;">취소</a></button><!--공지사항 리스트로이동-->
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -172,15 +182,86 @@
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted">Copyright &copy; 똑독캣 2022</div>
                             <div>
-                                <a href="index.html">메인으로 돌아가기</a>
+                                <a href="/">메인으로 돌아가기</a>
                                 &middot;
-                                <a href="index.html#menu">산책 &amp; 돌봄 서비스</a>
+                                <a href="/#menu">산책 &amp; 돌봄 서비스</a>
                             </div>
                         </div>
                     </div>
                 </footer>
             </div>
         </div>
+        
+        <script>
+        const fileZone = $(".fileZone");
+		const files = new Array();
+		//드래그되는 영역에 들어올 때
+		fileZone.on("dragenter",function(e){
+			e.stopPropagation();//이벤트버블링제거
+			e.preventDefault();//기본이벤트제거
+			$(this).css("border","2px dashed #0b85a1");
+		});
+		//드래그영역에서 나갈때
+		fileZone.on("dragleave",function(e){
+			e.stopPropagation();//이벤트버블링제거
+			e.preventDefault();//기본이벤트제거
+			$(this).css("border","2px dotted #0b85a1");
+		});
+		//드래그영역에 올라와 있을 때
+		fileZone.on("dragover",function(e){
+			e.stopPropagation();//이벤트버블링제거
+			e.preventDefault();//기본이벤트제거
+		});
+		//드래그영역에 내려놓을 때
+		fileZone.on("drop",function(e){
+			e.stopPropagation();//이벤트버블링제거
+			e.preventDefault();//기본이벤트제거
+			//e.originalEvent.dataTransfer.files
+			for(let i=0;i<e.originalEvent.dataTransfer.files.length;i++){
+				files.push(e.originalEvent.dataTransfer.files[i]);
+			}
+			$(".fileMsg").hide();
+			$(this).find(".fileName").remove();
+			for(let i=0;i<files.length;i++){
+				const fileNameDiv = $("<div>");
+				fileNameDiv.addClass("fileName");
+				const fileNameSpan = $("<span>");
+				fileNameSpan.text(files[i].name);
+				const closeBtn = $("<span>");
+				closeBtn.addClass("closeBtn");
+				closeBtn.text("X");
+				closeBtn.attr("onclick","deleteFile(this)");
+				fileNameDiv.append(fileNameSpan).append(closeBtn);
+				$(this).append(fileNameDiv);
+			}
+			fileSetting();
+		});
+		function deleteFile(obj){
+			const deleteFilename = $(obj).prev().text();
+			for(let i=0;i<files.length;i++){
+				if(files[i].name == deleteFilename){
+					files.splice(i,1);
+					break;
+				}
+			}
+			if(files.length == 0){
+				$(".fileMsg").show();
+				fileZone.css("border", "2px dotted #0b85a1");
+			}
+			$(obj).parent().remove();
+			fileSetting();
+		}
+		function fileSetting(){
+			//input[type=file] value 는 보안상 변경이 불가능
+			//input[type=file] 변경용 객체 필요
+			const dataTransfer = new DataTransfer();
+			for(let i=0;i<files.length;i++){
+				dataTransfer.items.add(files[i]);
+			}
+			$("input[name=boardFileG]").prop("files",dataTransfer.files);
+		}
+        </script>
+        
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="/resources/js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>

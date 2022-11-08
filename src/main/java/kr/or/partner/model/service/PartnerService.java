@@ -6,12 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import kr.or.member.model.vo.Member;
 import kr.or.partner.model.dao.PartnerDao;
 import kr.or.partner.model.vo.Partner;
 import kr.or.partner.model.vo.PartnerFileVO;
 import kr.or.partner.model.vo.TrainerBoard;
-import kr.or.pet.model.vo.Pet;
 
 @Service
 public class PartnerService {
@@ -70,11 +68,6 @@ public class PartnerService {
 	public Partner selectOnePartner(String pNo) {
 		// TODO Auto-generated method stub
 		return dao.selectOnePartner(pNo);
-	}
-
-	public ArrayList<Pet> selectAllPets(Member m) {
-		// TODO Auto-generated method stub
-		return dao.selectAllPets(m);
 	}
 
 

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Pet {
 	private int petNo;
+	private int memberNo; //주인
 	private int petType;   //1. 강아지  2. 고양이
 	private String petName;
 	private char petGender; //M, F

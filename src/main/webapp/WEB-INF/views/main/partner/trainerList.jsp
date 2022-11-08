@@ -9,10 +9,6 @@
     <jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
     <link href="/resources/css/partner/trainerStyles.css" rel="stylesheet" />
 </head>
-<style>
-	.trainerBox{
-	}
-</style>
 <body>
 <jsp:include page="/WEB-INF/views/main/common/header.jsp"/>
 <main id="main">
@@ -43,12 +39,7 @@
 					<div class="box-bottom">
 						<div class="bottom-wrapper">
 							<div class="bottom-content">
-								<div class="bt-content-left">
-									<span class="review-count">후기 !!개</span>
-									<div class="starts">
-										<i class="bi bi-start-fill"></i>
-									</div>
-								</div>
+								<div class="bt-content-left">별점</div>
 								<div class="bt-content-right">₩120,000</div>
 							</div>
 						</div>

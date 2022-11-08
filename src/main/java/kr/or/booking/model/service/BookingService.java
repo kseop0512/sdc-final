@@ -15,11 +15,4 @@ public class BookingService {
 		// TODO Auto-generated method stub
 		return dao.insertBooking(b);
 	}
-
-	public String selectBookingTime(Booking b) {
-		// TODO Auto-generated method stub
-		return dao.selectBookingTime(b);
-	}
-
-	
 }

@@ -23,7 +23,7 @@
                     <li><a href="/selectUserList.do">마이페이지</a></li>
                 </c:when>
                 <c:otherwise>
-                    <li><a href="javascript:void(0)">회원가입</a></li>
+                    <li><a href="/memberJoinFrm.do">회원가입</a></li>
                 </c:otherwise>
                 </c:choose>
                 <c:choose>

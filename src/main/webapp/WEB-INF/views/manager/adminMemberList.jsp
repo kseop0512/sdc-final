@@ -86,7 +86,7 @@
                                 1:1문의내역
                             </a>
                             <div class="sb-sidenav-menu-heading">게시판</div>
-                            <a class="nav-link" href="/adminNotice.do">
+                            <a class="nav-link" href="/adminNotice.do?reqPage=1">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                	 공지사항
                             </a>

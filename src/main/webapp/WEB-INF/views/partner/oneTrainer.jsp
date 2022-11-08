@@ -105,7 +105,7 @@
 				<div style="margin-top: 0; font-size: 18px; font-weight: 600;">예약 요청(회원전용)</div>
 				</c:when>
 				<c:when test="${not empty sessionScope.m}">
-				<div id="bookingBtn" onclick="location.href='/bookTrainerFrm.do?pNo=${tb.PNo}&&memberNo=${sessionScope.m.memberNo }'" style="margin-top: 0; font-size: 18px; font-weight: 600; cursor: pointer;">실시간 예약하기</div>
+				<div id="bookingBtn" onclick="location.href='/bookTrainerFrm.do?pNo=${tb.PNo}'" style="margin-top: 0; font-size: 18px; font-weight: 600; cursor: pointer;">실시간 예약하기</div>
 				</c:when>
 				</c:choose>
 			</div>

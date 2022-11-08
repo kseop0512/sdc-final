@@ -62,19 +62,7 @@
 	margin: 0; padding: 0;
 	overflow: hidden;
 }
-.unAvailable_time{
-	float: left;
-	width: 20%;
-	height: 50px;
-	line-height: 50px;
-	background-color: #e2e5e8;
-	border: 1px solid #e2e5e8;
-	margin: 10px 10px;
-	text-align: center;
-	font-size: 18px;
-	color: #ccc;
-}
-.available_time{
+.list_time li{
 	float: left;
 	width: 20%;
 	height: 50px;
@@ -158,23 +146,3 @@
 	font-weight: bold;
 	background-color: #F0A500;
 }
-
-<!-- 시간선택비활성화 -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
