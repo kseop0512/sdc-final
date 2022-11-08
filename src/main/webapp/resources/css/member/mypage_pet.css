@@ -150,12 +150,8 @@ input[type=radio]:checked+.radio-label{
 input+span{
     display: block;
     width: 400px;
-    font-size: 13px;
-    margin-left: 150px;
+    font-size: 16px;
 }
-
-
-
 
 .hrCss{
 	border: 0;

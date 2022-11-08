@@ -12,7 +12,7 @@ public class Booking {
 	private String memberId;
 	private String pNo;
 	private int petNo;
-	private String bookedDate;
+	private String bookingDate;
 	private String bookingPhone;
 	private String startDate;
 	private String endDate;
