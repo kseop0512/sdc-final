@@ -10,43 +10,7 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_nav.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_pet.css">
 <style>
-.fileZone{
-	width: 34vw !important;
-	min-width:400px !important;
-	height : 300px !important;
-	box-sizing : border-box;
-	border : 2px dotted #0b85a1;
-	/*align-content 위에서부터 하나씩 아래로 내리기 위한것*/
-	margin-bottom: 10px !important;
-	display: grid;
-    align-items: center;
-    justify-items: center;
-}
-#img-view{
-	width: 34vw !important;
-	min-width:400px !important;
-	height : 300px !important;
-}
-.fileMsg{
-	font-size : 18px;
-	width: 100%;
-	text-align: center;
-	/*align-self 보조축 가운데정렬*/
-	align-self:center;
-	line-height: 300px;
-}
-.imageFile{
-	margin-bottom: 10px;
-}
-.profileSpan{
-	font-size: 18px;
-	font-weight: bold;
-    color: #cda45e;
-    margin-right: 38%;
-}
-.profileSpan+input{
-	width: 200px;
-}
+
 </style>
 </head>
 <body>
@@ -70,6 +34,8 @@
 				<div id="mypage-content">
 					<div id="title">
 						<h4>강아지 등록</h4><img class="dogLogo" src="/resources/img/dogBlack.png">
+						<input type="hidden" name="petType" value="1">
+						<input type="hidden" name="memberNo" value="${sessionScope.memberNo }">
 					</div>
 					<div id="content-wrap">
 						<div id="content">
@@ -80,7 +46,6 @@
 								<img id="img-view">
 							</div>
 							<span>기본사항*</span>
-								<input type="hidden" name="petType" value="1">
 								<div>
 									<label for="pName">이름</label>
 									<input type="text" id="pName" name="petName" placeholder="예) 댕댕이">

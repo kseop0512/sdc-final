@@ -30,7 +30,7 @@
 #mypage-nav{
     width: 200px;
     position: fixed;
-    bottom: 15vh;
+    margin-top: 10vh;
     transition-duration: 0.5s;
 }
 #mypage-nav.on{
@@ -341,4 +341,43 @@ input[type=radio]:checked+.modal-label{
 }
 #hq3a1:focus{
 	outline:none;
+}
+
+/*프로필 사진부분 */
+.fileZone{
+	width: 34vw !important;
+	min-width:400px !important;
+	height : 300px !important;
+	box-sizing : border-box;
+	border : 2px dotted #0b85a1;
+	/*align-content 위에서부터 하나씩 아래로 내리기 위한것*/
+	margin-bottom: 10px !important;
+	display: grid;
+    align-items: center;
+    justify-items: center;
+}
+#img-view{
+	width: 34vw !important;
+	min-width:400px !important;
+	height : 300px !important;
+}
+.fileMsg{
+	font-size : 18px;
+	width: 100%;
+	text-align: center;
+	/*align-self 보조축 가운데정렬*/
+	align-self:center;
+	line-height: 300px;
+}
+.imageFile{
+	margin-bottom: 10px;
+}
+.profileSpan{
+	font-size: 18px;
+	font-weight: bold;
+    color: #cda45e;
+    margin-right: 38%;
+}
+.profileSpan+input{
+	width: 200px;
 }

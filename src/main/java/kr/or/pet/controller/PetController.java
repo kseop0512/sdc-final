@@ -45,9 +45,13 @@ public class PetController {
 		return "pet/petCatAddFrm";
 	}
 	
+	@RequestMapping(value="/mypageMyPet.do")
+	public String mypageMyPet() {
+		return "pet/mypageMyPet";
+	}
 	
 	@RequestMapping(value="/petDogAdd.do")
-	public String petDogAdd(Pet p, DogCheckList dogChk, MultipartFile[] profileFile, HttpServletRequest request) {
+	public String petDogAdd(Pet p, DogCheckList dogChk, MultipartFile[] profileFile, HttpServletRequest request, HttpSession session) {
 		if(!profileFile[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/pet/petProfile/");
 			for(MultipartFile file : profileFile) {
@@ -73,7 +77,7 @@ public class PetController {
 		}
 		int result = service.insertPetDog(p, dogChk);
 		if(result>0) {
-			return "mypage/mypet";
+			return "pet/mypageMyPet";
 		}else {
 			return null;
 		}

@@ -17,6 +17,7 @@ public class PetService {
 	public int insertPetDog(Pet p, DogCheckList dogChk) {
 		int result = dao.insertPetDog(p);
 		if(result > 0) {
+			dogChk.setPetNo(p.getPetNo());
 			result = dao.insertDogChk(dogChk);			
 			return result;
 		}else {
