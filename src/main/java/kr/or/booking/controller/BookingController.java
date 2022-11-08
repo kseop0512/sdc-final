@@ -55,5 +55,14 @@ public class BookingController {
 			return new Gson().toJson(timeList);
 		}
 	}
+	@ResponseBody
+	@RequestMapping(value="/disabled-dates.do", produces="application/json;charset=utf-8")
+	public String disabledDatesBookingTime() {
+		ArrayList<String> dates = new ArrayList<String>();
+		// ex) 11월 10일, 11월 20일 선택 못하게
+		dates.add("2022-11-10");
+		dates.add("2022-11-20");
+		return new Gson().toJson(dates);
+	}
 	
 }

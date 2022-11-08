@@ -120,14 +120,50 @@ if(title == ''){
 // 달력
 document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
+	
+	// 오늘 yyyy-MM-dd
+	const todayYmd = new Date().toISOString().substring(0, 10)
+	let disabledDates = []
 
+	// 비활성화할 날짜 목록 로드
+	$.ajax({
+		url: "/disabled-dates.do",
+		data: {},
+		success: function (data) {
+			console.log('loaded disabled-dates', data);
+			disabledDates = data;
+		}
+	});
+  
   var calendar = new FullCalendar.Calendar(calendarEl, {
+    locale: 'ko', // 한국어 설정
     selectable: true,
     headerToolbar: {
       left: 'prev,next',
       center: 'title',
-      right: 'today'
+      right: 'today',
     },
+    
+ 	selectAllow: function (evt) {
+			console.log('selectAllow', evt)
+			const clickedYmd = evt.startStr; // ex) clickedDay = '2022-11-08'
+			console.log("clickedYmd="+clickedYmd);
+			console.log(todayYmd);
+			// 선택한 날짜가 오늘 날짜보다 작으면 선택 불가능
+			if (clickedYmd < todayYmd) {
+				
+				return false
+			}
+
+			// 선택한 날짜가 disabledDates에 포함되어 있으면 불가능
+			if (disabledDates.includes(clickedYmd)) {
+				return false
+			}
+
+			// 그 외에는 선택 허용
+			return true
+		},
+    
     select: function(info) {
       const selectedDate = info.startStr;
       const showDate = $(".showDate");
@@ -159,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
       
      //end 시간조회하기
-    },
+    }
   });
 
   calendar.render();
