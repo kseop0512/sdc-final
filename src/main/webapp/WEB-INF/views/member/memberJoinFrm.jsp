@@ -27,16 +27,18 @@
 				<input type="password" name="memberPwRe" id="mPwRe" placeholder="비밀번호 재입력"><br>
 				<label for="mName">이름</label><br>
 				<input type="text" name="memberName" id="mName" placeholder="본명을 입력해주세요"><br>
-				성별<br>
 				<div id="genderWrap">
-		          <label class="custom-radio-button__container">
-		            <input type="radio" id="RadioM" name="genderRadio" value="M" checked>
-		            <span class="custom-radio-button designer"><img class="personImg" src="/resources/img/man.png"></span>
-		          </label>
-		          <label class="custom-radio-button__container">
-		            <input type="radio" id="RadioF" name="genderRadio" value="F">
-		            <span class="custom-radio-button"><img class="personImg" src="/resources/img/woman.png"></span>
-		          </label><br>
+					<span class="genderT">성별</span>
+						<div class="genderImgWrap">
+				          	<label class="custom-radio-button__container">
+				            <input type="radio" id="RadioM" name="genderRadio" value="M" checked>
+				            <span class="custom-radio-button designer"><img class="personImg" src="/resources/img/man.png"></span>
+				          </label>
+				          <label class="custom-radio-button__container">
+				            <input type="radio" id="RadioF" name="genderRadio" value="F">
+				            <span class="custom-radio-button"><img class="personImg" src="/resources/img/woman.png"></span>
+				          </label>
+			          </div>
 		        </div>	
 		        
 				<label for="mBdate">생년월일</label><span id="bdateSpan"></span><br>
