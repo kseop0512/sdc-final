@@ -20,10 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import common.FileRename;
+import kr.or.member.model.vo.Member;
 import kr.or.partner.model.service.PartnerService;
 import kr.or.partner.model.vo.Partner;
 import kr.or.partner.model.vo.PartnerFileVO;
 import kr.or.partner.model.vo.TrainerBoard;
+import kr.or.pet.model.vo.Pet;
 
 @Controller
 public class PartnerController {
@@ -253,9 +255,11 @@ public class PartnerController {
 	}
 	// 훈련사 예약페이지 이동
 	@RequestMapping(value="/bookTrainerFrm.do")
-	public String bookingFrm(String pNo, Model model) {
+	public String bookingFrm(String pNo, Member m, Model model) {
 		Partner trainer = service.selectOnePartner(pNo);
+		ArrayList<Pet> pets = service.selectAllPets(m);
 		model.addAttribute("trainer",trainer);
+		model.addAttribute("petList",pets);
 		return "partner/trainerBookingPage";
 	}
 
