@@ -121,16 +121,31 @@
 								<div class="chk-wrap">
 									<div class="socialChk">
 										<button type="button" class="socialBtn chksBtn">사회성 및 성향</button>
+										<input type="hidden" id="character1" name="character1">
+										<input type="hidden" id="character2" name="character2">
+										<input type="hidden" id="character3" name="character3">
+										<input type="hidden" id="character4" name="character4">
+										<input type="hidden" id="character5" name="character5">
+										<input type="hidden" id="character6" name="character6">
+										<input type="hidden" id="character7" name="character7">
+										<input type="hidden" id="character8" name="character8">
+										<input type="hidden" id="socialInput" name="social">
+										<input type="hidden" id="senselInput" name="sense">
+										<input type="hidden" id="activeInput" name="active">
+										<input type="hidden" id="indeInput" name="inde">
 									</div>
 									<div class="healthChk">
 										<button type="button" class="healthBtn chksBtn">접종 및 건강상태</button>
+										<input type="hidden" id="health1" name="health1">
+										<input type="hidden" id="health2" name="health2">
+										<input type="hidden" id="health3" name="health3">
 									</div>								
 								</div>
 								
 								<br><br>
 								<hr class="hrCss">
-								<label class="noteSpan" for="pNotes">기타 참고사항</label>
-								<textarea id="pNotes" name="petNotes" placeholder="300자 이내로 추가사항들을 적어주세요"></textarea>
+								<label class="noteSpan" for="pNote">기타 참고사항</label>
+								<textarea id="pNote" name="petNote" placeholder="300자 이내로 추가사항들을 적어주세요"></textarea>
 								<div>
 									<input type="submit" value="강아지등록!">
 								</div>
@@ -264,11 +279,11 @@
 				<h2 class="qNumber">Q8</h2><h4 class="qqNumber">8/8</h4>
 				<p class="chkQuestion">주로 어떤 보호자를 따르는 편인가요?　　　　　　　　</p>
 				<input type="radio" id="q8a1" name="question8" value="보호자 한 명만 유독 잘 따르고 다른 가족에게는 관심이 덜 해요 ">
-				<label for="q8a1" class="modal-label">1) 보호자 한 명만 유독 잘 따르고 다른 가족에게는 관심이 덜 해요 </label><!-- 독립성+2 -->
+<!-- 독립성+2 --><label for="q8a1" class="modal-label">1) 보호자 한 명만 유독 잘 따르고 다른 가족에게는 관심이 덜 해요 </label>
 				<input type="radio" id="q8a2" name="question8" value="두루두루 잘 따르는 편이에요 ">
-				<label for="q8a2" class="modal-label">2) 두루두루 잘 따르는 편이에요 </label><!-- 영향없음 -->
+<!-- 영향없음 --><label for="q8a2" class="modal-label">2) 두루두루 잘 따르는 편이에요 </label>
 				<input type="radio" id="q8a3" name="question8" value="반려동물을 혼자 키우고 있어요 ">
-				<label for="q8a3" class="modal-label">3) 반려동물을 혼자 키우고 있어요 </label><!-- 영향없음 -->
+<!-- 영향없음 --><label for="q8a3" class="modal-label">3) 반려동물을 혼자 키우고 있어요 </label>
 				<div class="modal-btn">
 					<button type="button" class="botBtn exitBtn">◀이전</button>
 					<button type="button" class="botBtn nextBtn">완료</button>
@@ -326,23 +341,7 @@
 		</div>
 	</div>
 	<script>
-	function loadImg(f){
-		//첨부파일이 여러개일 수 있으므로 항상 배열 처리
-		console.log(f.files);//input에서 file을 선택하면 해당 파일이 들어있는 배열
-		if(f.files.length !=0 && f.files[0] != 0){
-			const reader = new FileReader(); //파일 정보를 읽어올 수 있는 객체
-			reader.readAsDataURL(f.files[0]); //선택한 파일 정보 읽어옴
-			//파일리더가 파일을 다 읽어오면 동작할 함수 작성
-			reader.onload = function(e){
-				$("#img-view").attr("src",e.target.result);
-			}
-		}else{
-			//이미지 교체되면 src 비움
-			$("#img-view").attr("src","");
-		}
-		
-		
-	}
+	
 	</script>
 	<jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
 	<!-- 모달JS -->

@@ -12,10 +12,10 @@ const q8=$(".q8");
 const hq1=$(".hq1");
 const hq2=$(".hq2");
 const hq3=$(".hq3");
-var social; //사회성 점수
-var sense; //예민성
-var active; //활동성
-var inde; //독립성
+var social //사회성 점수
+var sense //예민성
+var active //활동성
+var inde //독립성
 $('input:radio[name=petNeut]').click(function(){
 	console.log($('input:radio[name=petNeut]:checked').val());
 });
@@ -24,12 +24,23 @@ $('input:radio[name=petNeut]').click(function(){
 
 $(".socialBtn").click(function(){
 	$(".psnModal").fadeIn();
+	social = 0;
+	sense = 0;
+	active = 0;
+	inde = 0;
+	$("socialInput").val("");
+	$("senseInput").val("");
+	$("activeInput").val("");
+	$("indeInput").val("");
 	q1.show();
 	qNo = 1;
 });
 $(".healthBtn").click(function(){
 	$(".hltModal").fadeIn();
 	hq1.show();
+	$("#health1").val("");
+	$("#health2").val("");
+	$("#health3").val("");
 	hqNo = 1;
 });
 $(".nextBtn").click(function(){
@@ -113,6 +124,108 @@ $(".nextBtn").click(function(){
 		}else{
 			alert("답변을 선택해주세요");
 		}
+		//q1
+		if($("#q1a1").is(":checked")){
+			social += 2;
+		}else if($("#q1a2").is(":checked")){
+			sense += 1;
+		}else if($("#q1a3").is(":checked")){
+			sense += 1;
+			social -= 1;
+		}else if($("#q1a4").is(":checked")){
+			sense += 1;
+			social -= 2;
+		}else if($("#q1a5").is(":checked")){
+			sense += 1;
+			social += 1;
+		};
+		//q2
+		if($("#q2a1").is(":checked")){
+			social += 2;
+		}else if($("#q2a2").is(":checked")){
+			sense += 1;
+			social -= 1;
+		}else if($("#q2a3").is(":checked")){
+			sense += 1;
+			social -= 1;
+		}else if($("#q2a4").is(":checked")){
+			inde += 1;
+			social += 1;
+		}
+		//q3
+		if($("#q3a1").is(":checked")){
+			sense -= 2;
+			social += 1;
+		}else if($("#q3a2").is(":checked")){
+			social += 1;
+		}else if($("#q3a3").is(":checked")){
+			inde += 1;
+		}else if($("#q3a4").is(":checked")){
+			sense += 2;
+			social -= 1;
+		}
+		//q4
+		if($("#q4a1").is(":checked")){
+			sense -= 2;
+		}else if($("#q4a2").is(":checked")){
+			
+		}else if($("#q4a3").is(":checked")){
+			sense += 2;
+		}else if($("#q4a4").is(":checked")){
+			sense -= 2;
+			inde += 1;
+		}
+		//q5
+		if($("#q5a1").is(":checked")){
+			active += 1;
+		}else if($("#q5a2").is(":checked")){
+			active += 2;
+		}else if($("#q5a3").is(":checked")){
+			active -= 1;
+		}else if($("#q5a4").is(":checked")){
+			active += 1;
+		}else if($("#q5a5").is(":checked")){
+			active += 2;
+		}else if($("#q5a6").is(":checked")){
+			active -= 1;
+		}
+		//q6
+		if($("#q6a1").is(":checked")){
+			active += 2;
+		}else if($("#q6a2").is(":checked")){
+			active += 1;
+		}else if($("#q6a3").is(":checked")){
+			active -= 1;
+			social += 1;
+		}else if($("#q6a4").is(":checked")){
+			active -= 2;
+		}
+		//q7
+		if($("#q7a1").is(":checked")){
+			inde += 1;
+		}else if($("#q7a2").is(":checked")){
+			inde += 2;
+		}
+		//q8
+		if($("#q8a1").is(":checked")){
+			inde += 2;
+		}else if($("#q1a2").is(":checked")){
+			
+		}else if($("#q1a3").is(":checked")){
+		
+		}
+		$("#socialInput").val(social);
+		$("#senseInput").val(sense);
+		$("#activeInput").val(active);
+		$("#indeInput").val(inde);
+		$("#character1").val($("input[name=question1]:checked").val());
+		$("#character2").val($("input[name=question2]:checked").val());
+		$("#character3").val($("input[name=question3]:checked").val());
+		$("#character4").val($("input[name=question4]:checked").val());
+		$("#character5").val($("input[name=question5]:checked").val());
+		$("#character6").val($("input[name=question6]:checked").val());
+		$("#character7").val($("input[name=question7]:checked").val());
+		$("#character8").val($("input[name=question8]:checked").val());
 		break;
 	}
 });
@@ -195,6 +308,15 @@ $(".h-nextBtn").click(function(){
 		$(".hltModal").fadeOut();
 		$(".healthBtn").css("background-color","#ffb347");
 		hq3.hide();
+		var h1Answer = $("input[name=hquestion1-1]:checked").val() + $("input[name=hquestion1-2]:checked").val() + $("input[name=hquestion1-3]:checked").val() + $("input[name=hquestion1-4]:checked").val() + $("input[name=hquestion1-5]:checked").val();
+		h1Answer = h1Answer.replace(/undefined/gi, "");
+		h1Answer = h1Answer.replace(/NaN/gi, "");
+		var h2Answer = $("input[name=hquestion2-1]:checked").val() + $("input[name=hquestion2-2]:checked").val() + $("input[name=hquestion2-3]:checked").val();
+		h2Answer = h2Answer.replace(/undefined/gi, "");
+		h2Answer = h2Answer.replace(/NaN/gi, "");
+		$("#health1").val(h1Answer);
+		$("#health2").val(h2Answer);
+		$("#health3").val($("#hq3a1").val());
 		break;
 	}
 });
@@ -274,7 +396,7 @@ $("#hq2a2").click(function(){
 
 //프로필 사진
 function loadImg(f){
-
+	//첨부파일이 여러개일 수 있으므로 항상 배열 처리
 	console.log(f.files);//input에서 file을 선택하면 해당 파일이 들어있는 배열
 	if(f.files.length !=0 && f.files[0] != 0){
 		const reader = new FileReader(); //파일 정보를 읽어올 수 있는 객체
@@ -287,6 +409,4 @@ function loadImg(f){
 		//이미지 교체되면 src 비움
 		$("#img-view").attr("src","");
 	}
-	
-	
 }
