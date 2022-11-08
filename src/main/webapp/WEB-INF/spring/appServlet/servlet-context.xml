@@ -97,4 +97,5 @@
 	<context:component-scan base-package="kr.or.main.partner" />
 	<context:component-scan base-package="kr.or.dm"/>
 	<context:component-scan base-package="kr.or.booking"/>
+	<context:component-scan base-package="kr.or.pet"/>
 </beans:beans>

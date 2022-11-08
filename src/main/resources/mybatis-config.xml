@@ -16,5 +16,6 @@
 		<typeAlias type="kr.or.booking.model.vo.Booking" alias="b"/> 
 		<typeAlias type="kr.or.manager.model.vo.NoticeG" alias="ng"/>
 		<typeAlias type="kr.or.manager.model.vo.FileVOG" alias="fvg"/>
+		<typeAlias type="kr.or.pet.model.vo.Pet" alias="pet"/>
 	</typeAliases>
 </configuration>
