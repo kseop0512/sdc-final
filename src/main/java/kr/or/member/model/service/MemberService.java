@@ -52,5 +52,10 @@ public class MemberService {
 		return dao.selectMemberSendDm(memberId);
 	}
 
+
+	public int updateReadCheck(int dmNo) {
+		return dao.updateReadCheck(dmNo);
+	}
+
 	
 }

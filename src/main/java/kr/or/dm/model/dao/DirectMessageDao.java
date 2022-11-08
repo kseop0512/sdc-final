@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.dm.model.vo.DirectMessage;
 import kr.or.manager.model.vo.Manager;
 import kr.or.member.model.vo.Member;
+import kr.or.partner.model.vo.Partner;
 
 @Repository
 public class DirectMessageDao {
@@ -52,6 +53,14 @@ public class DirectMessageDao {
 	//답장한 read_Check 변경하기 
 	public int updateReadCheck(int reply) {
 		 return sqlSession.update("dm.updateReadCheck", reply);
+	}
+	
+	//파트너 정보 불러오기
+	public Partner selectDmPartner(String pId) {
+		return sqlSession.selectOne("dm.selectDmPartner", pId);
+	}
+	public int deleteDm(int dmNo) {
+		return sqlSession.delete("dm.deleteDm",dmNo);
 	}
 
 

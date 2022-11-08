@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,6 +17,7 @@ import kr.or.dm.model.service.DirectMessageService;
 import kr.or.dm.model.vo.DirectMessage;
 import kr.or.manager.model.vo.Manager;
 import kr.or.member.model.vo.Member;
+import kr.or.partner.model.vo.Partner;
 
 @Controller
 public class DirectMessageController {
@@ -75,7 +77,26 @@ public String detailMember(String sender) {
 			return "0";
 		}
 	}
-	
-}
-	
 
+	//1:1문의 남긴 파트너 정보 가져오기
+	@ResponseBody
+	@RequestMapping(value="/selectDmPartner.do",produces="application/json;charset=utf-8")
+	public String selectDmPartner(String pId) {
+		Partner p = service.selectDmPartner(pId);
+		return new Gson().toJson(p);
+	}
+	
+	//1:1문의 삭제
+	@ResponseBody
+	@RequestMapping(value="/deleteDm.do")
+	public String deleteDm(int dmNo) {
+		int result = service.deleteDm(dmNo);
+		String resultMsg;
+		if(result>0) {
+			resultMsg = "success";
+		}else {
+			resultMsg = "fail";
+		}
+		return resultMsg;
+	}
+}

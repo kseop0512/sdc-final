@@ -49,8 +49,8 @@
 			dm_type as dmType
 	 	from direct_msg
 	 	where receiver = #{_parameter}
-	 </select>
-	 
+	 	order by 1 desc
+	 </select> 
 	 <select id="selectMemberSendDm" parameterType="string" resultType="dm">
 	 	select
 	 		dm_no as dmNo,
@@ -63,5 +63,43 @@
 			dm_type as dmType
 	 	from direct_msg
 	 	where sender = #{_parameter}
+	 	order by 1 desc
 	 </select>
+	 
+	 <!-- 유저 받은메시지 읽음 체크 -->
+	 <update id="updateMemberReadCheck" parameterType="_int">
+	 	update direct_msg
+	 	set read_check = 1
+	 	where dm_no = #{_parameter}
+	 </update>
+	 
+	 <!-- 파트너 정보 불러오기 -->
+	 <select id="selectDmPartner" parameterType="string" resultType="p">
+	 	select
+			p_no as pNo,
+			category,
+			p_id as pId,
+			p_pw as pPw,
+			p_name as pName,
+			p_dob as pDob,
+			p_phone as pPhone,
+			p_gender as pGender,
+			p_email as pEmail,
+			p_addr as pAddr,
+			p_grade as pGrade,
+			p_point as pPoint,
+			profile_name as profileName,
+			profile_path as profilePath,
+			apply_motiv as applyMotiv,
+			apply_date as applyDate,
+			approve_date as approveDate,
+			license,
+			work_exp as workExp
+		from partner
+		where p_id = #{_parameter}
+	 </select>
+	 
+	 <delete id="deleteDm" parameterType="_int">
+	 	delete from direct_msg where dm_no=#{_parameter}
+	 </delete>
 </mapper>
