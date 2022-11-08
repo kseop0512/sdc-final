@@ -21,9 +21,15 @@ public class DirectMessageService {
 	public ArrayList<DirectMessage> myDmList(HashMap<String, Object> map) {		
 		return dao.selectDmList(map);
 	}
-	//회원 한명 조회
-	public Member selectOneMember(String sender) {
-		return dao.selectOneMember(sender);
+	//회원 한명 조회 , 답변조회
+	public HashMap<String, Object> selectOneMember(String sender,int dmNo) {
+		Member m = dao.selectOneMember(sender);
+		DirectMessage dm = dao.selectReply(dmNo);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("m", m);
+		map.put("dm",dm);
+		return map;
 	}
 	
 	//dm 총 갯수 
@@ -39,17 +45,24 @@ public class DirectMessageService {
 		// TODO Auto-generated method stub
 		return dao.dmCheckRead();
 	}
-	// 답장하기 
+	//답장하기 
 	@Transactional
 	public int insertDm(DirectMessage dm) {
 		int result = dao.insertDm(dm);
 		if (dm.getReadCheck() == 0) {
-			dao.updateReadCheck(dm.getReply());
+			dao.updateReadCheck(dm.getReply()); //답장한 메세지번호
 		}
 		return result;
 	}
+	
+	// dm 검색하기 
 
-
-
+	public ArrayList<DirectMessage> selectdmType(int dmType, String keyword) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("dmType", dmType);
+		map.put("keyword", keyword);
+		return dao.selectdmType(map);
+	}
+	
 	
 }

@@ -50,9 +50,17 @@ public class DirectMessageDao {
 		return sqlSession.insert("dm.insertDm",dm);
 	}
 	//답장한 read_Check 변경하기 
-	public int updateReadCheck(int reply) {
-		 return sqlSession.update("dm.updateReadCheck", reply);
+	public int updateReadCheck(int dmNo) {
+		 return sqlSession.update("dm.updateReadCheck", dmNo);
 	}
-
+	//답변보여주기 
+	public DirectMessage selectReply(int dmNo) {
+		return sqlSession.selectOne("dm.dmContent",dmNo);
+	}
+	//관리자P dm 결제/취소 검색
+	public ArrayList<DirectMessage> selectdmType(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("dm.selectdmType",map);
+		return (ArrayList<DirectMessage>)list;
+	}
 
 }

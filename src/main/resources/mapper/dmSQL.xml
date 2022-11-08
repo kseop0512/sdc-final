@@ -32,11 +32,42 @@
 	 	insert into direct_msg values
 	 	(dm_seq.nextval,#{sender},#{senderCategory},#{receiver},#{dmContent},sysdate,0,#{dmType},#{reply})
 	 </insert>
+	 <!-- 1:1 답변대기 -->
 	 <update id="updateReadCheck" parameterType="int">
 	 	update direct_msg set read_check=1 where dm_no=#{_parameter}
 	 </update>
+	 <!-- 답변보여주기 -->
+	 <select id="dmContent" parameterType="int" resultType="dm">
+	 	select
+			dm_no as dmNo,
+			sender,
+			sender_category as senderCategory,
+			receiver,
+			dm_content as dmContent,
+			dm_date as dmDate,
+			read_check as readCheck,
+			dm_type as dmType,
+			reply
+		from direct_msg where reply= #{_parameter}
+	 </select>
+	 <!-- 관리자P 검색 (취소/결제)  -->
+	 <select id="selectdmType" parameterType="map" resultType="dm">
+	 	select
+			dm_no as dmNo,
+			sender,
+			sender_category as senderCategory,
+			receiver,
+			dm_content as dmContent,
+			dm_date as dmDate,
+			read_check as readCheck,
+			dm_type as dmType,
+            reply
+		from direct_msg 
+		where sender like '%'||#{keyword}||'%'
+		and dm_type = #{dmType} and sender != 'admin'
+	 </select>
 	 
-	 <!-- 유저 1:1문의내역 조회 -->
+	  <!-- 유저 1:1문의내역 조회 -->
 	 <select id="selectMemberReceiveDm" parameterType="string" resultType="dm">
 	 	select
 	 		dm_no as dmNo,
