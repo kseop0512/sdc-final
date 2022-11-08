@@ -15,4 +15,9 @@ public class BookingDao {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("booking.insertBooking",b);
 	}
+
+	public String selectBookingTime(Booking b) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("booking.selectBookingTime",b);
+	}
 }

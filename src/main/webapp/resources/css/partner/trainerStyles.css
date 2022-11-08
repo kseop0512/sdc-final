@@ -7,7 +7,9 @@
 }
 
 /* trainerList.jsp */
-
+.inner-page{
+	background-color: #fff;
+}
 * {
 	box-sizing: border-box;
 }
@@ -29,10 +31,9 @@ a{
 	display: flex;
 	border-radius: 8px;
 	position: relative;
-	background-color: #fff;
 	align-items: center;
 	justify-content: center;
-
+	box-shadow: 0 4px 16px rgba(0 0 0 / 10%);
 }
 .trainerImg{
 	width: 433px;
@@ -396,4 +397,3 @@ a{
 	padding: 32px 32px 38px 32px;
 	margin-top: 38px;
 }
-
