@@ -182,11 +182,11 @@ public class PartnerController {
 		Partner p = service.selectOnePartNer(partner);
 		if(p!=null) {
 			session.setAttribute("p", p);
-			System.out.println(session);
+			return "redirect:/";
 		}else {
-			System.out.println("값이 없어요");
+			return "redirect:/loginPartnerFrm.do";
 		}
-		return "redirect:/";
+		
 	}
 	
 	//파트너 로그아웃
@@ -250,6 +250,13 @@ public class PartnerController {
 		model.addAttribute("tb",tb);
 		model.addAttribute("p",p);
 		return "partner/oneTrainer";
+	}
+	// 훈련사 예약페이지 이동
+	@RequestMapping(value="/bookTrainerFrm.do")
+	public String bookingFrm(String pNo, Model model) {
+		Partner trainer = service.selectOnePartner(pNo);
+		model.addAttribute("trainer",trainer);
+		return "partner/trainerBookingPage";
 	}
 
 }

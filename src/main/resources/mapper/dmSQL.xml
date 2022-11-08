@@ -12,7 +12,8 @@
 			read_check as readCheck,
 			dm_type as dmType,
 			reply
-		from direct_msg where sender != #{adminId}
+		from direct_msg
+		where receiver = #{adminId}
 	</select>
 	 <!-- 1:1 문의 총 카운트  -->
 	 <select id="dmCount" parameterType="g" resultType="int">
@@ -64,5 +65,34 @@
 		from direct_msg 
 		where sender like '%'||#{keyword}||'%'
 		and dm_type = #{dmType} and sender != 'admin'
+	 </select>
+	 
+	  <!-- 유저 1:1문의내역 조회 -->
+	 <select id="selectMemberReceiveDm" parameterType="string" resultType="dm">
+	 	select
+	 		dm_no as dmNo,
+			sender,
+			sender_category as senderCategory,
+			receiver,
+			dm_content as dmContent,
+			dm_date as dmDate,
+			read_check as readCheck,
+			dm_type as dmType
+	 	from direct_msg
+	 	where receiver = #{_parameter}
+	 </select>
+	 
+	 <select id="selectMemberSendDm" parameterType="string" resultType="dm">
+	 	select
+	 		dm_no as dmNo,
+			sender,
+			sender_category as senderCategory,
+			receiver,
+			dm_content as dmContent,
+			dm_date as dmDate,
+			read_check as readCheck,
+			dm_type as dmType
+	 	from direct_msg
+	 	where sender = #{_parameter}
 	 </select>
 </mapper>

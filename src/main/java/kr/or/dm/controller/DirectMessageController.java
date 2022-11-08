@@ -88,8 +88,6 @@ public String detailMember(String sender, int dmNo) {
 		model.addAttribute("list",list);
 		return new Gson().toJson(list);
 	}
-
-
 }
 	
 

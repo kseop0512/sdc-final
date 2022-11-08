@@ -21,7 +21,7 @@ import kr.or.member.model.vo.Member;
 public class ManagerController {
 	@Autowired
 	private ManagerService service;
-	
+
 	//관리자 로그인 폼 이동
 	@RequestMapping(value="/loginManagerFrm.do")
 	public String loginManagerFrm() {

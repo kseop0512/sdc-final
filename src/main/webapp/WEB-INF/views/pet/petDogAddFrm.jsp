@@ -11,23 +11,33 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_pet.css">
 <style>
 .fileZone{
-		width:400px;
-		height : 300px
-		box-sizing : border-box;
-		display : flex;
-		flex-wrap: wrap;
-		border : 2px dotted #0b85a1;
-		/*align-content 위에서부터 하나씩 아래로 내리기 위한것*/
-		align-content : flex-start;
-	}
-	.fileMsg{
-		color:#0b85a1
-		font-size : 13px;
-		width: 100%;
-		text-align: center;
-		/*align-self 보조축 가운데정렬*/
-		align-self:center;
-	}
+	width: 34vw !important;
+	min-width:400px !important;
+	height : 300px !important;
+	box-sizing : border-box;
+	display : flex;
+	flex-wrap: wrap;
+	border : 2px dotted #0b85a1;
+	/*align-content 위에서부터 하나씩 아래로 내리기 위한것*/
+	align-content : flex-start;
+	margin-bottom: 10px !important;
+}
+.fileMsg{
+	font-size : 18px;
+	width: 100%;
+	text-align: center;
+	line-height: 300px;
+	/*align-self 보조축 가운데정렬*/
+	align-self:center;
+}
+.imageFile{
+	margin-bottom: 10px;
+}
+.profileSpan{
+	font-size: 18px;
+	font-weight: bold;
+    color: #cda45e;
+}
 </style>
 </head>
 <body>
@@ -55,13 +65,14 @@
 					<div id="content-wrap">
 						<div id="content">
 							<form action="/petDogAdd.do" method="post" enctype="multipart/form-data">
+							<span class="profileSpan">프로필사진</span>
 							<div class="fileZone">
-								<div class="fileMsg">사진등록</div>
+								<div class="fileMsg">여기에 파일을 올리세요</div>
 							</div>
 							<span>기본사항*</span>
 								<input type="hidden" name="petType" value="1">
 								<div>
-									<label for="">이름</label>
+									<label for="pName">이름</label>
 									<input type="text" id="pName" name="petName" placeholder="예) 댕댕이">
 								</div>
 								<div id="gender-div">
@@ -304,6 +315,71 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		const fileZone = $(".fileZone");
+		const files = new Array();
+		//드래그되는 영역에 들어올때
+		fileZone.on("dragenter",function(e){
+			e.stopPropagation();//이벤트버블링제거
+			e.preventDefault();//기본이벤트제거
+			$(this).css("border","2px dashed #fff");
+		});
+		//드래그 영역에서 나갈때
+		fileZone.on("dragleave",function(e){
+			e.stopPropagation();//이벤트버블링제거
+			e.preventDefault();//기본이벤트제거
+			$(this).css("border","2px dotted #0b85a1");
+		});
+		//드래그영역에 올라와 있을때
+		fileZone.on("dragover",function(e){
+			e.stopPropagation();//이벤트버블링제거
+			e.preventDefault();//기본이벤트제거
+		});
+		//드래그영역에 내려놓을때
+		fileZone.on("drop",function(e){
+			e.stopPropagation();//이벤트버블링제거
+			e.preventDefault();//기본이벤트제거
+			for(let i = 0;i<e.originalEvent.dataTransfer.files.length;i++){
+				files.push(e.originalEvent.dataTransfer.files[i]);
+			}
+			console.log(files.value);
+			$(".fileMsg").hide();
+			//이 코드를 추가함으로써 a를 넣고 b를 넣으면 a,b가 뜨는것이다.
+			
+			const fileNameDiv = $("<div>");
+			$(this).append(fileNameDiv);
+			fileSetting();
+		});
+		//배열에서 빼주는 작업
+		function deleteFile(obj){
+			const deleteFilename = $(obj).prev().text();
+			for(let i=0;i<files.length;i++){
+				if(files[i].name == deleteFilename){
+					files.splice(i,1);
+					break;
+				}
+			}
+			if(files.length==0){
+				$(".fileMsg").show();
+				fileZone.css("border","2px dotted #0b85a1");
+			}
+			//div자체를 날리는것
+			$(obj).parent().remove();
+			fileSetting();
+		}
+		function fileSetting(){
+			//input[type=file] value 는 보안상 변경이 불가능
+			//$("input").val(); 이렇게 하는것이 불가능
+			//input[type=file] 변경용 객체 필요
+			//dataTransfer를 통해서만 변경이 가능하다
+			const dataTransfer = new DataTransfer();
+			for(let i=0;i<files.length;i++){
+				dataTransfer.items.add(files[i]);
+			}
+			//prop 속성
+			$("input[name=boardFile]").prop("files",dataTransfer.files);
+		}
+	</script>
 	<jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
 	<!-- 모달JS -->
 	<script type="text/javascript" src="/resources/js/member/petDogAddFrm.js"></script>

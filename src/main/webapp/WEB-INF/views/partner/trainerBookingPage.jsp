@@ -66,15 +66,19 @@
 			</div>
 			<div class="section-title" style="border-top: 2px solid #565655;">회원 정보</div>
 			<div class="infoTbl">
-			<form action="/bookingMemberInfo.do">
+			<form action="/bookingMemberInfo.do" name="booking_form">
 				<table class="table bookingInfo">
 					<tr>
 						<th>회원 이름</th>
-						<td>${sessionScope.m.memberName }</td>
+						<td id="buyer_name">${sessionScope.m.memberName }</td>
 					</tr>
 					<tr>
 						<th>반려견 이름</th>
 						<td><input type="text" name="petNo" class="inputStyle"> 회원의 반려견 selectbox로 구현하기</td>
+					</tr>
+					<tr>
+						<th>이메일</th>
+						<td><input type="email" name="buyer_email" class="inputStyle" required></td>
 					</tr>
 					<tr>
 						<th>연락처</th>
@@ -86,7 +90,7 @@
 					</tr>
 					<tr>
 						<td colspan="2" style="border: none; text-align: center">
-							<input type="submit" class="payBtn" value="결제하기">
+							<input type="button" class="payBtn" onclick="requestPay()"value="결제하기">
 							<input type="hidden" name="startDate">
 							<input type="hidden" name="bookingTime">
 							<input type="hidden" name="pNo" value="${trainer.PNo }">
@@ -100,6 +104,7 @@
 		
 	</div>
 </main>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
 <script src="/resources/js/partnerScripts.js"></script>
 <script src='/resources/fullcalendar-5.11.3/lib/main.min.js'></script>
