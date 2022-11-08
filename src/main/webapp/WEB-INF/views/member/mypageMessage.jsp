@@ -8,10 +8,8 @@
 <title>똑독캣 쪽지함</title>
 <jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
 <!-- 마이페이지 CSS -->
-	<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_nav.css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_message.css">
-<!-- 아이콘-->
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_nav.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_message.css">
 </head>
 <body>
 	<!-- 헤더 -->
@@ -25,7 +23,7 @@
 					<ul>
 						<li><a href="/memberMypage.do">나의 정보</a></li>
 						<li><a href="/mypagePet.do">나의 똑독캣</a></li>
-						<li><a href="/mypageMessage.do?memberId=${sessionScope.m.memberId }" class="active">1:1 문의내역</a></li>
+						<li><a href="/mypageMessage.do" class="active">1:1 문의내역</a></li>
 						<li><a href="/mypageService.do">이용내역</a></li>
 						<li><a href="/mypagePetDiary.do">돌봄·훈련일지</a></li>
 						<li><a href="/mypageQnA.do">훈련사Q&A</a></li>
@@ -33,158 +31,20 @@
 					</ul>
 				</div>
 				<!-- 마이페이지 컨텐츠 -->
-		        <div id="mypage-content">
-		          <div id="title">
-		            <h4>1:1 문의내역</h4>
-		          </div>
-		          <div id="content-wrap">
-		            <div id="content">
-		              <!-- 탭 -->
-		              <div id="tab-wrap">
-		                <div id="tab-receive" class="active-tap">받은메시지</div>
-		                <div id="tab-send">보낸메시지</div>
-		              </div>
-		              <!-- 읽지않음 수 표시 & 버튼 -->
-		              <div id="btn-wrap">
-		                <button type="button" id="delete">삭제</button>
-		                <button type="button" id="reading">읽음</button>
-		                <div id="msg-filter">
-		                  <span class="unread filter">읽지않음 <span class="count">1</span></span>
-		                  <span id="filter-div">/ </span>
-		                  <span class="all filter">전체 <span class="count">3</span></span>
-		                </div>
-		              </div>
-		              <!-- 받은메시지함 -->
-		              <input type="hidden" id="memberId" value="${sessionScope.m.memberId }">
-		              <div class="msg-box receive">
-		                <table>
-		                  <thead>
-		                    <tr>
-		                      <td class="th-checkbox"><input class="form-check-input" type="checkbox" id="check-all-r"></td>
-		                      <td class="th-category">문의유형</td>
-		                      <td class="th-sender">
-		                        <button type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-		                          	보낸사람<span class="visually-hidden">Toggle Dropdown</span>
-		                        </button>
-		                        <ul class="dropdown-menu">
-		                          <li><a class="dropdown-item" href='javascript:void(0);' onclick="showAdminMsg();">관리자</a></li>
-		                          <li><a class="dropdown-item" href='javascript:void(0);' onclick="showPartnerMsg();">펫시터·훈련사</a></li>
-		                          <li><hr class="dropdown-divider"></li>
-		                          <li><a class="dropdown-item" href='javascript:void(0);' onclick="showAllMsg();">전체보기</a></li>
-		                        </ul>
-		                      </td>
-		                      <td class="th-content">내용</td>
-		                      <td class="th-date">받은날짜</td>
-		                    </tr>
-		                  </thead>
-		                  <tbody>
-		                  <c:forEach items="${rdm}" var="rdm">
-		                    <tr>
-		                    	<td><input class="form-check-input check-msg" type="checkbox"></td>
-		                    	<td>
-		                    	<c:choose>
-		                    		<c:when test="${rdm.dmType ==0}">결제/취소</c:when>
-		                    		<c:when test="${rdm.dmType ==1}">예약/취소</c:when>
-		                    		<c:when test="${rdm.dmType ==2}">기타문의</c:when>
-		                    		<c:otherwise>오잉</c:otherwise>
-		                    	</c:choose>
-		                    	</td>
-			                    <td>
-			                    <c:choose>
-		                    		<c:when test="${rdm.senderCategory ==A}">관리자</c:when>
-		                    		<c:when test="${rdm.senderCategory ==P}">펫시터/훈련사</c:when>
-		                    		<c:otherwise>오잉</c:otherwise>
-		                    	</c:choose>
-			                    </td>
-				                <td class="td-content">
-				                	<input type="hidden" value="${rdm.dmNo }">
-				                	<a href='javascript:void(0);' onclick="receiveModal();">${rdm.dmContent }</a>
-				                </td>
-				                <td>${rdm.dmDate }</td>
-				                <input type="hidden" class="sender-category" value="${rdm.senderCategory }">
-				                <input type="hidden" class="read-check" value="${rdm.readCheck }">
-		                    </tr>
-		                   </c:forEach>
-		                  </tbody>
-		                </table>
-		              </div><!-- .msg-box receive종료 -->
-		              <!-- 보낸메시지함 -->
-		              <div class="msg-box send" style="display: none;">
-		                <table>
-		                  <thead>
-		                    <tr>
-		                      <td class="th-checkbox"><input class="form-check-input" type="checkbox" id="check-all-s"></td>
-		                      <td class="th-category">문의유형</td>
-		                      <td class="th-receiver">받는사람</td>
-		                      <td class="th-content">내용</td>
-		                      <td class="th-date">보낸날짜</td>
-		                      <td class="th-readcheck">읽음여부</td>
-		                    </tr>
-		                  </thead>
-		                  <tbody>
-		                    <tr>
-		                      <td><input class="form-check-input check-msg" type="checkbox"></td>
-		                      <td>결제/취소</td>
-		                      <td>관리자</td>
-		                      <td class="td-content"><a href='javascript:void(0);' onclick="sendModal();">사이트가 이상합니다</a></td>
-		                      <td>2022-11-01 [17:50]</td>
-		                      <td class="td-readcheck"></td>
-		                      <input type="hidden" class="read-check" value="1">
-		                    </tr>
-		                    <tr>
-		                      <td><input class="form-check-input check-msg" type="checkbox" readonly></td>
-		                      <td>예약</td>
-		                      <td>강형욱 훈련사</td>
-		                      <td class="td-content"><a href='javascript:void(0);' onclick="sendModal();">사람도 훈련이 가능합니까ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ</a></td>
-		                      <td>2022-10-02 [11:40]</td>
-		                      <td class="td-readcheck"></td>
-		                      <input type="hidden" class="read-check" value="1">
-		                    </tr>
-		                    <tr>
-		                      <td><input class="form-check-input check-msg" type="checkbox" readonly></td>
-		                      <td>기타문의</td>
-		                      <td>박박이 펫시터</td>
-		                      <td class="td-content"><a href='javascript:void(0);' onclick="sendModal();">어쩌다 그런 이름을 쓰게 되셨는지요 너무나 궁금</a></td>
-		                      <td>2022-10-01 [16:30]</td>
-		                      <td class="td-readcheck"></td>
-		                      <input type="hidden" class="read-check" value="0">
-		                    </tr>
-		                  </tbody>
-		                </table>
-		              </div><!-- .msg-box send -->
-		            </div><!-- End #content -->
-		          </div><!-- End #content-wrap -->
-		        </div><!-- End #mypage-content -->
+				<div id="mypage-content">
+					<div id="title">
+						<h4>1:1 문의내역</h4>
+					</div>
+					<div id="content-wrap">
+						<div id="content">
+							
+						</div>
+					</div>
+				</div>
 			</div>
 		</section>
 	</main>
 	<!-- End #main -->
-
-	<!-- 메시지 상세보기 모달 -->
-	<div class="msg-modal" style="display: none;">
-		<div class="msg-modal-head">
-			<span id="msg-modal-title">받은메시지</span> <span id="close-btn"
-				class="material-symbols-outlined">close</span>
-		</div>
-		<form action="/replyMsg.html" method="post">
-			<div class="msg-modal-content">
-				<div class="msg-info msg-sender">
-					<span>보낸사람</span> <input type="text" value="으아악 펫시터" disabled>
-				</div>
-				<div class="msg-info msg-date">
-					<span>받은날짜</span> <input type="text" value="22-11-03 [16:58]"
-						disabled>
-				</div>
-				<div class="msg-content">
-					<textarea id="reply-msg" name="dmContent" style="display: none;"></textarea>
-					<textarea id="receive-msg" disabled>투명하되 얼음과 같으며 지혜는 날카로우나 갑 속에 든 칼이다 청춘의 끓는 피가 아니더면 인간이 얼마나 쓸쓸하랴? 얼음에 싸인 만물은 얼음이 있을 뿐이다 그들에게 생명을 불어 넣는 것은 따뜻한 봄바람이다 풀밭에 속잎나고 가지에</textarea>
-				</div>
-				<div class="msg-btn-wrap">
-					<input type="text" id="reply-btn" value="답장">
-				</div>
-			</div>
-		</form>
-	</div>
 
 	<!-- 푸터 -->
 	<jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>

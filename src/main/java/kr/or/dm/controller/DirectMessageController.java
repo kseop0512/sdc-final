@@ -76,6 +76,9 @@ public String detailMember(String sender) {
 		}
 	}
 	
+	
+	
+	
 }
 	
 

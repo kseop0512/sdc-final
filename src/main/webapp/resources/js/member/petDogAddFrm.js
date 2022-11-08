@@ -16,12 +16,6 @@ var social; //사회성 점수
 var sense; //예민성
 var active; //활동성
 var inde; //독립성
-$('input:radio[name=petNeut]').click(function(){
-	console.log($('input:radio[name=petNeut]:checked').val());
-});
-
-
-
 $(".socialBtn").click(function(){
 	$(".psnModal").fadeIn();
 	q1.show();
@@ -270,23 +264,3 @@ $("#hq2a2").click(function(){
 	$("#hq2a3").prop("checked", false);
 	$("#hq2a3").removeClass("is-active");
 });
-
-
-//프로필 사진
-function loadImg(f){
-
-	console.log(f.files);//input에서 file을 선택하면 해당 파일이 들어있는 배열
-	if(f.files.length !=0 && f.files[0] != 0){
-		const reader = new FileReader(); //파일 정보를 읽어올 수 있는 객체
-		reader.readAsDataURL(f.files[0]); //선택한 파일 정보 읽어옴
-		//파일리더가 파일을 다 읽어오면 동작할 함수 작성
-		reader.onload = function(e){
-			$("#img-view").attr("src",e.target.result);
-		}
-	}else{
-		//이미지 교체되면 src 비움
-		$("#img-view").attr("src","");
-	}
-	
-	
-}

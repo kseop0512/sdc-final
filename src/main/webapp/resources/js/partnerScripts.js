@@ -116,6 +116,7 @@ if(title == ''){
 });
 
 // trainerBookingPage.jsp
+
 // 달력
 document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
@@ -132,9 +133,33 @@ document.addEventListener('DOMContentLoaded', function() {
       const showDate = $(".showDate");
       showDate.empty();
       showDate.append(selectedDate);
-      input[name=bookingDate].attr("value",selectedDate);
+      $("input[name=startDate]").attr("value",selectedDate);
+      // 시간 조회하기
+      var pNo = $("input[name=pNo]").val();
+    	const times = $(".list_time>li");
+    	times.removeClass("unAvailable_time");
+    	times.addClass("available_time");  
+      $.ajax({
+      	url: "/selectBookingTime.do",
+      	data: {PNo:pNo, startDate:selectedDate},
+      	success: function(data){
+      		console.log(data);
+      		if(data != 0){
+      			for(let i=0;i<times.length;i++){
+      				for(let j=0;j<data.length;j++){
+	      				if(times.eq(i).text() === data[j]){
+	      					times.eq(i).removeClass("available_time");
+	      					times.eq(i).addClass("unAvailable_time");
+	      				} 
+      				
+      				}
+      			}
+			}
+		}
+      });
+      
+     //end 시간조회하기
     },
-   
   });
 
   calendar.render();
@@ -142,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 // 시간 출력
 let timeArr = new Array();
-$(".time").on("click",function(){
+$(".available_time").on("click",function(){
 	if($(".showDate").text()==''){
 		alert("예약 날짜를 선택해주세요");
 		event.preventDefault();
@@ -151,11 +176,39 @@ $(".time").on("click",function(){
 	timeArr.push(selectedTime);
 	const timeSpan = $(".showTime");
 	timeSpan.append("["+selectedTime+"] ");
-	input[name=bookingTime].attr("value",selectedTime);
+	$("input[name=bookingTime]").attr("value",timeArr);
+	
 	// 돈계산
 	const totalFee = timeArr.length*120000;
 	$("#totalFee").empty();
 	$("#totalFee").append(totalFee);
 	}
 });
+
+// 결제 
+const IMP = window.IMP; // 생략 가능
+        IMP.init("imp41006251");
+        function requestPay() {
+            // IMP.request_pay(param, callback) 결제창 호출
+            const d = new Date();
+            const date = d.getFullYear()+""+(d.getMonth()+1) + "" + d.getDate() + "" + d.getHours() + "" + d.getMinutes() + "" + d.getSeconds();
+            IMP.request_pay({ // param
+                pg: "html5_inicis",
+                pay_method: "card",
+                merchant_uid: "PLG-" + date,
+                name: "똑독캣 예약하기",
+                amount: $("#totalFee").text(),
+                buyer_email: $("input[name=buyer_email]").val(),
+                buyer_name: $("#buyer_name").val(),
+                buyer_tel: $("input[name=bookingPhone]").val(),
+                //buyer_addr: "인천시 서구 청라커낼로 163",
+                buyer_postcode: "01181"
+            }, function (rsp) { // callback
+                if (rsp.success) {
+                    $("form[name=booking_form]").submit();
+                } else {
+                    alert("예약 실패! 관리자에게 문의하세요")
+                }
+            });
+        }
 

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import kr.or.dm.model.vo.DirectMessage;
 import kr.or.member.model.dao.MemberDao;
 import kr.or.member.model.vo.Member;
 
@@ -40,16 +39,6 @@ public class MemberService {
 		}else {
 			return null;
 		}
-	}
-
-
-	public ArrayList<DirectMessage> selectMemberReceiveDm(String memberId) {
-		return dao.selectMemberReceiveDm(memberId);
-	}
-
-
-	public ArrayList<DirectMessage> selectMemberSendDm(String memberId) {
-		return dao.selectMemberSendDm(memberId);
 	}
 
 	

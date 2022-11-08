@@ -7,7 +7,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kr.or.dm.model.vo.DirectMessage;
 import kr.or.member.model.vo.Member;
 
 @Repository
@@ -29,23 +28,12 @@ public class MemberDao {
 	public Member selectOneMember(Member member) {
 		Member m = sqlSession.selectOne("member.selectOneMember",member);
 		System.out.println("로그인완료");
+		System.out.println(m.getMemberId());
 		return m;
 	}
 
 	public int updateMember(Member m) {
 		return sqlSession.update("member.updateMember",m);
-	}
-
-
-	public ArrayList<DirectMessage> selectMemberReceiveDm(String memberId) {
-		List rdm = sqlSession.selectList("dm.selectMemberReceiveDm",memberId);
-		return (ArrayList<DirectMessage>) rdm;
-	}
-
-
-	public ArrayList<DirectMessage> selectMemberSendDm(String memberId) {
-		List sdm = sqlSession.selectList("dm.selectMemberSendDm",memberId);
-		return (ArrayList<DirectMessage>) sdm;
 	}
 
 

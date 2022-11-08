@@ -2,7 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="booking">
 	<insert id="insertBooking" parameterType="b">
-		insert into booking_tbl values ('BOOKING-'||BOOKING_NO_SEQ.NEXTVAL, #{b.memberId}, #{b.pNo}, #{b.petNo}, sysdate, #{b.bookingPhone},
-		#{b.startDate},null,#{bookingTime},#{b.specialRequest},0,C)
+		insert into booking_tbl values ('BOOKING-'||BOOKING_NO_SEQ.NEXTVAL, #{memberId}, #{pNo}, #{petNo}, sysdate, #{bookingPhone},
+		#{startDate},null,#{bookingTime},#{specialRequest},0,'C')
 	</insert>
+	<select id="selectBookingTime" parameterType="b" resultType="string">
+		SELECT BOOKING_TIME FROM BOOKING_TBL 
+		WHERE P_NO=#{PNo} AND START_DATE=#{startDate}
+	</select>
 </mapper>

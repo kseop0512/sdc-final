@@ -7,9 +7,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.member.model.vo.Member;
 import kr.or.partner.model.vo.Partner;
 import kr.or.partner.model.vo.PartnerFileVO;
 import kr.or.partner.model.vo.TrainerBoard;
+import kr.or.pet.model.vo.Pet;
 
 @Repository
 public class PartnerDao {
@@ -61,6 +63,12 @@ public class PartnerDao {
 	public Partner selectOnePartner(String pNo) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("partner.selectOne",pNo);
+	}
+
+	public ArrayList<Pet> selectAllPets(Member m) {
+		// TODO Auto-generated method stub
+		List list = sqlSession.selectList("pet.selectAllPet",m);
+		return (ArrayList<Pet>)list;
 	}
 
 

@@ -8,9 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kr.or.manager.model.vo.FileVOG;
 import kr.or.manager.model.vo.Manager;
-import kr.or.manager.model.vo.NoticeG;
 import kr.or.member.model.vo.Member;
 import kr.or.partner.model.vo.Partner;
 
@@ -24,6 +22,7 @@ public class ManagerDao {
 		Manager g = sqlSession.selectOne("manager.selectOneManager",manager);
 		System.out.println("관리자 로그인완료");
 		System.out.println(manager.getAdminId());
+		System.out.println(g.getAdminId());
 		return g;
 	}
 	
@@ -47,7 +46,6 @@ public class ManagerDao {
 	      List list = sqlSession.selectList("member.selectMemberPartnerList",m);
 	      return (ArrayList<Member>)list;
 	   }
-
 	   //관리자P 유저관리 검색 - 이용자검색
 	public ArrayList<Member> searchMember(HashMap<String, Object> map) {
 		List list = sqlSession.selectList("manager.searchMember",map);
@@ -63,37 +61,4 @@ public class ManagerDao {
 		List list = sqlSession.selectList("manager.memberPartnerList");
 		return (ArrayList<Member>) list;
 	}
-
-	   
-	//관리자 공지사항 리스트
-	public ArrayList<NoticeG> selectAdminNotice(HashMap<String, Object> map) {
-		List list = sqlSession.selectList("manager.selectAdminNotice",map);
-		return (ArrayList<NoticeG>)list;
-	}
-
-	public int selectNoticeGCount() {
-		int totalCount = sqlSession.selectOne("manager.totalCount");
-		return totalCount;
-	}
-
-	public NoticeG selectOneNoticeG(int noticeGNo) {
-		return sqlSession.selectOne("manager.selectOneNoticeG",noticeGNo);
-	}
-
-	public int insertNoticeG(NoticeG ng) {
-		return sqlSession.insert("manager.insertNoticeG",ng);
-	}
-
-	public int insertFile(FileVOG fvg) {
-		return sqlSession.insert("manager.insertFile",fvg);
-	}
-
-	public int deleteNotice(NoticeG noticeGNo) {
-		return sqlSession.delete("manager.deleteNotice",noticeGNo);
-	}
-	
-	public Object readGCountUpdate(int noticeGNo) {
-		return sqlSession.update("readGCountUpdate", noticeGNo);
-	}
-
 }

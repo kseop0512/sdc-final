@@ -11,42 +11,23 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_pet.css">
 <style>
 .fileZone{
-	width: 34vw !important;
-	min-width:400px !important;
-	height : 300px !important;
-	box-sizing : border-box;
-	border : 2px dotted #0b85a1;
-	/*align-content 위에서부터 하나씩 아래로 내리기 위한것*/
-	margin-bottom: 10px !important;
-	display: grid;
-    align-items: center;
-    justify-items: center;
-}
-#img-view{
-	width: 34vw !important;
-	min-width:400px !important;
-	height : 300px !important;
-}
-.fileMsg{
-	font-size : 18px;
-	width: 100%;
-	text-align: center;
-	/*align-self 보조축 가운데정렬*/
-	align-self:center;
-	line-height: 300px;
-}
-.imageFile{
-	margin-bottom: 10px;
-}
-.profileSpan{
-	font-size: 18px;
-	font-weight: bold;
-    color: #cda45e;
-    margin-right: 38%;
-}
-.profileSpan+input{
-	width: 200px;
-}
+		width:400px;
+		height : 300px
+		box-sizing : border-box;
+		display : flex;
+		flex-wrap: wrap;
+		border : 2px dotted #0b85a1;
+		/*align-content 위에서부터 하나씩 아래로 내리기 위한것*/
+		align-content : flex-start;
+	}
+	.fileMsg{
+		color:#0b85a1
+		font-size : 13px;
+		width: 100%;
+		text-align: center;
+		/*align-self 보조축 가운데정렬*/
+		align-self:center;
+	}
 </style>
 </head>
 <body>
@@ -74,15 +55,13 @@
 					<div id="content-wrap">
 						<div id="content">
 							<form action="/petDogAdd.do" method="post" enctype="multipart/form-data">
-							<span class="profileSpan">프로필사진</span>
-							<input type="file" name="imageFile" accept=".jpg,.png,.jpeg" onchange="loadImg(this);">
 							<div class="fileZone">
-								<img id="img-view">
+								<div class="fileMsg">사진등록</div>
 							</div>
 							<span>기본사항*</span>
 								<input type="hidden" name="petType" value="1">
 								<div>
-									<label for="pName">이름</label>
+									<label for="">이름</label>
 									<input type="text" id="pName" name="petName" placeholder="예) 댕댕이">
 								</div>
 								<div id="gender-div">
@@ -325,25 +304,6 @@
 			</div>
 		</div>
 	</div>
-	<script>
-	function loadImg(f){
-		//첨부파일이 여러개일 수 있으므로 항상 배열 처리
-		console.log(f.files);//input에서 file을 선택하면 해당 파일이 들어있는 배열
-		if(f.files.length !=0 && f.files[0] != 0){
-			const reader = new FileReader(); //파일 정보를 읽어올 수 있는 객체
-			reader.readAsDataURL(f.files[0]); //선택한 파일 정보 읽어옴
-			//파일리더가 파일을 다 읽어오면 동작할 함수 작성
-			reader.onload = function(e){
-				$("#img-view").attr("src",e.target.result);
-			}
-		}else{
-			//이미지 교체되면 src 비움
-			$("#img-view").attr("src","");
-		}
-		
-		
-	}
-	</script>
 	<jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
 	<!-- 모달JS -->
 	<script type="text/javascript" src="/resources/js/member/petDogAddFrm.js"></script>
