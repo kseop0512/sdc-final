@@ -1,152 +1,3 @@
-//초기화면 - 받은메시지 목록조회, 읽지않음 카운트
-getMemberRDm();
-msgFilter();
-
-//받은메시지 - 목록 불러오기
-function getMemberRDm(){
-	const memberId = $("#memberId").val();
-	$.ajax({
-		url : "/getMemberRDm.do",
-		data : {memberId : memberId},
-		success: function(list){
-			const tbody = $(".receive tbody");
-			tbody.empty();
-			for(let i=0;i<list.length;i++){
-				const dm = list[i];
-				const tr = $("<tr>");
-				//체크박스
-				const checkboxTd = $("<td><input class='form-check-input check-r' type='checkbox'></td>");
-				const dmNoInput = $("<input type='hidden' value='"+dm.dmNo+"'>");
-				checkboxTd.append(dmNoInput);
-				
-				//문의유형
-				const typeTd = $("<td>");
-				if(dm.dmType == 0){
-					typeTd.text("결제/취소")
-				}else if(dm.dmType==1){
-					typeTd.text("예약")
-				}else{
-					typeTd.text("기타문의")
-				}
-				
-				//보낸사람
-				const senderTd = $("<td>");
-				if(dm.senderCategory == 'A'){
-		    		senderTd.text("관리자")
-		    	}else{
-		    		$.ajax({
-			    		url : "/selectDmPartner.do",
-			    		data : {pId:dm.sender},
-			    		success : function(p){
-			    			if(p.category == 'T'){
-					    		senderTd.text(p.pName+" 훈련사");
-					    	}else{
-					    		senderTd.text(p.pName+" 펫시터");
-					    	}
-			    		}
-		    		});
-		    	} 
-				
-				//문의내용
-				const contentTd = $("<td class='td-content'>");
-				const aTag = $("<a href='javascript:void(0);'>");
-				aTag.text(dm.dmContent);
-				contentTd.append(aTag);	
-				aTag.attr("onclick","receiveModal("+dm.dmNo+",'"+dm.sender+"','"+dm.dmContent+"','"+dm.dmDate+"')");
-				
-				//날짜
-				const dmDateTd = $("<td>");
-				dmDateTd.text(dm.dmDate);
-				
-				//보낸사람구분
-				const senderCategory = $("<input type='hidden' class='sender-category'>");
-				senderCategory.val(dm.senderCategory);
-				
-				//읽음여부
-				const readCheckInput = $("<input type='hidden' class='read-check'>");
-				readCheckInput.val(dm.readCheck);
-				
-				//합치기
-				tr.append(checkboxTd).append(typeTd).append(senderTd).append(contentTd).append(dmDateTd).append(senderCategory).append(readCheckInput);
-				tbody.append(tr);
-			}
-		unreadR();
-		msgFilter();
-		}
-	});
-}
-
-//보낸메시지 - 목록 불러오기
-function getMemberSDm(){
-	const memberId = $("#memberId").val();
-	$.ajax({
-		url : "/getMemberSDm.do",
-		data : {memberId : memberId},
-		success: function(list){
-			const tbody = $(".send tbody");
-			tbody.empty();
-			for(let i=0;i<list.length;i++){
-				const dm = list[i];
-				const tr = $("<tr>");
-				
-				//체크박스
-				const checkboxTd = $("<td><input class='form-check-input check-s' type='checkbox'></td>");
-				const dmNoInput = $("<input type='hidden' value='"+dm.dmNo+"'>");
-				checkboxTd.append(dmNoInput);
-				
-				//문의유형
-				const typeTd = $("<td>");
-				if(dm.dmType == 0){
-					typeTd.text("결제/취소")
-				}else if(dm.dmType==1){
-					typeTd.text("예약")
-				}else{
-					typeTd.text("기타문의")
-				}
-				
-				//받는사람
-				const receiverTd = $("<td>");
-				if(dm.receiver == 'admin'){
-		    		receiverTd.text("관리자")
-		    	}else{
-		    		$.ajax({
-			    		url : "/selectDmPartner.do",
-			    		data : {pId:dm.receiver},
-			    		success : function(p){
-			    			if(p.cartgory == 'T'){
-					    		receiverTd.text(p.pName+" 훈련사");
-					    	}else{
-					    		receiverTd.text(p.pName+" 펫시터");
-					    	}
-			    		}
-		    		});
-		    	} 
-				
-				//문의내용
-				const contentTd = $("<td class='td-content'>");
-				const aTag = $("<a href='javascript:void(0);'>");
-				aTag.text(dm.dmContent);
-				contentTd.append(aTag);	
-				aTag.attr("onclick","sendModal('"+dm.receiver+"','"+dm.dmContent+"','"+dm.dmDate+"')");
-				
-				//날짜
-				const dmDateTd = $("<td>");
-				dmDateTd.text(dm.dmDate);
-				
-				//읽음여부
-				const readCheckTd = $("<td class='td-readcheck'>");
-				const readCheckInput = $("<input type='hidden' class='read-check'>");
-				readCheckInput.val(dm.readCheck);
-				
-				//합치기
-				tr.append(checkboxTd).append(typeTd).append(receiverTd).append(contentTd).append(dmDateTd).append(readCheckTd).append(readCheckInput);
-				tbody.append(tr);
-			}
-		unreadS();
-		}
-	});
-}
-
 //메시지 전체체크
 $("#check-all-r").on("change",function(){
     if($(this).prop("checked")){
@@ -205,7 +56,7 @@ $("#reading").on("click", function(){
 		const chkNo = $(item).next().val();
 		console.log(chkNo);
 		$.ajax({
-			url : "/updateReadCheck.do",
+			url : "/updateMemberReadCheck.do",
 			data : {dmNo : chkNo},
 			success: function(data){
 				if(data>0){
@@ -271,7 +122,7 @@ $(".unread").on("click",function(){
             $(item).parent().hide();
         }
     });
-    filter();
+    msgFilter();
 });
 $(".all").on("click",function(){
     $(".unread").removeClass("active-tap");
@@ -286,10 +137,11 @@ function unreadR(){
         const readCheck = $(item).parent().siblings(".read-check").val();
         if(readCheck == 0){
             $(item).css("font-weight","bold");
+        	console.log("rMsg "+$(item).text());
         }
     });
+    msgFilter();
 }
-unreadR();
 
 //보낸메시지 - 읽음여부 표시
 function unreadS(){
@@ -303,7 +155,6 @@ function unreadS(){
         }
     });
 }
-unreadS();
 
 //받은메시지 - 보낸사람 필터
 //관리자만 보기
@@ -338,23 +189,163 @@ function showAllMsg(){
     });
 }
 
+//받은메시지 - 목록 불러오기
+function getMemberRDm(){
+	const memberId = $("#memberId").val();
+	$.ajax({
+		url : "/getMemberRDm.do",
+		data : {memberId : memberId},
+		success: function(list){
+			const tbody = $(".receive tbody");
+			tbody.empty();
+			for(let i=0;i<list.length;i++){
+				const dm = list[i];
+				const tr = $("<tr>");
+				//체크박스
+				const checkboxTd = $("<td><input class='form-check-input check-r' type='checkbox'></td>");
+				const dmNoInput = $("<input type='hidden' value='"+dm.dmNo+"'>");
+				checkboxTd.append(dmNoInput);
+				
+				//문의유형
+				const typeTd = $("<td>");
+				if(dm.dmType == 0){
+					typeTd.text("결제/취소")
+				}else if(dm.dmType==1){
+					typeTd.text("예약")
+				}else{
+					typeTd.text("기타문의")
+				}
+				
+				//보낸사람
+				const senderTd = $("<td>");
+				if(dm.senderCategory == 'A'){
+		    		senderTd.text("관리자")
+		    	}else{
+		    		$.ajax({
+			    		url : "/selectDmPartner.do",
+			    		data : {pId:dm.sender},
+			    		success : function(p){
+			    			if(p.category == 'T'){
+					    		senderTd.text(p.pName+" 훈련사");
+					    	}else{
+					    		senderTd.text(p.pName+" 펫시터");
+					    	}
+			    		}
+		    		});
+		    	} 
+				
+				//문의내용
+				const contentTd = $("<td class='td-content'>");
+				const aTag = $("<a href='javascript:void(0);'>");
+				aTag.text(dm.dmContent);
+				contentTd.append(aTag);	
+				aTag.attr("onclick","receiveModal(this, '"+dm.dmNo+"', '"+dm.sender+"', '"+dm.dmDate+"', '"+dm.dmType+"')");
+				//날짜
+				const dmDateTd = $("<td>");
+				dmDateTd.text(dm.dmDate);
+				
+				//보낸사람구분
+				const senderCategory = $("<input type='hidden' class='sender-category'>");
+				senderCategory.val(dm.senderCategory);
+				
+				//읽음여부
+				const readCheckInput = $("<input type='hidden' class='read-check'>");
+				readCheckInput.val(dm.readCheck);
+				
+				//합치기
+				tr.append(checkboxTd).append(typeTd).append(senderTd).append(contentTd).append(dmDateTd).append(senderCategory).append(readCheckInput);
+				tbody.append(tr);
+			}
+		unreadR();
+		}
+	});
+}
+
+//보낸메시지 - 목록 불러오기
+function getMemberSDm(){
+	const memberId = $("#memberId").val();
+	$.ajax({
+		url : "/getMemberSDm.do",
+		data : {memberId : memberId},
+		success: function(list){
+			const tbody = $(".send tbody");
+			tbody.empty();
+			for(let i=0;i<list.length;i++){
+				const dm = list[i];
+				const tr = $("<tr>");
+				
+				//체크박스
+				const checkboxTd = $("<td><input class='form-check-input check-s' type='checkbox'></td>");
+				const dmNoInput = $("<input type='hidden' value='"+dm.dmNo+"'>");
+				checkboxTd.append(dmNoInput);
+				
+				//문의유형
+				const typeTd = $("<td>");
+				if(dm.dmType == 0){
+					typeTd.text("결제/취소")
+				}else if(dm.dmType==1){
+					typeTd.text("예약")
+				}else{
+					typeTd.text("기타문의")
+				}
+				
+				//받는사람
+				const receiverTd = $("<td>");
+				if(dm.receiver == 'admin'){
+		    		receiverTd.text("관리자")
+		    	}else{
+		    		$.ajax({
+			    		url : "/selectDmPartner.do",
+			    		data : {pId:dm.receiver},
+			    		success : function(p){
+			    			if(p.category == 'T'){
+					    		receiverTd.text(p.pName+" 훈련사");
+					    	}else{
+					    		receiverTd.text(p.pName+" 펫시터");
+					    	}
+			    		}
+		    		});
+		    	} 
+				
+				//문의내용
+				const contentTd = $("<td class='td-content'>");
+				const aTag = $("<a href='javascript:void(0);'>");
+				aTag.text(dm.dmContent);
+				contentTd.append(aTag);	
+				aTag.attr("onclick","sendModal(this, '"+dm.receiver+"', '"+dm.dmDate+"')");
+				
+				//날짜
+				const dmDateTd = $("<td>");
+				dmDateTd.text(dm.dmDate);
+				
+				//읽음여부
+				const readCheckTd = $("<td class='td-readcheck'>");
+				const readCheckInput = $("<input type='hidden' class='read-check'>");
+				readCheckInput.val(dm.readCheck);
+				
+				//합치기
+				tr.append(checkboxTd).append(typeTd).append(receiverTd).append(contentTd).append(dmDateTd).append(readCheckTd).append(readCheckInput);
+				tbody.append(tr);
+			}
+		unreadS();
+		}
+	});
+}
+
 //받은메시지 - 상세보기 모달창
-function receiveModal(dmNo,dmSender,dmContent,dmDate){
+function receiveModal(obj,dmNo,dmSender,dmDate,dmType){
 	//읽음 반영
 	$.ajax({
-		url : "/updateReadCheck.do",
+		url : "/updateMemberReadCheck.do",
 		data : {dmNo : dmNo},
 		success: function(data){
 			if(data>0){
-				console.log("O(-<");
+				console.log("읽음 업데이트");
 			}else{
 				console.log("(ㄱ-)");
 			}
 		}
 	});
-	//받은메시지 재출력
-	getMemberRDm();
-	
 	//기본 세팅으로 복구
 	$("#submit-btn").hide();
     $("#reply-btn").show();
@@ -368,8 +359,10 @@ function receiveModal(dmNo,dmSender,dmContent,dmDate){
     $(".msg-sender>span").text("보낸사람");
     $(".msg-date>span").text("받은날짜");
     
-    //보낸사람, 날짜, 내용 세팅
+    //보낸사람 표시값, receiver, dmType, reply값 세팅
     $("[name=receiver]").val(dmSender);
+    $("[name=reply]").val(dmNo);
+    $("[name=dmType]").val(dmType);
     if(dmSender=="admin"){
     	$("#receiver-view").val("관리자");
     }else{
@@ -387,9 +380,14 @@ function receiveModal(dmNo,dmSender,dmContent,dmDate){
     		}
     	});
     }
+    //내용, 받은날짜 표시
+    const dmContent = $(obj).text();
+    $("#receive-msg").text(dmContent);
     $(".msg-date>input").val(dmDate);
-    $("#receive-msg").text(dmContent);  
-      
+    
+    //받은메시지 재출력
+	getMemberRDm();
+    
     //이후 모달창 보여주기
     $(".msg-modal").show();
     //ESC키 누르면 닫기
@@ -400,19 +398,18 @@ function receiveModal(dmNo,dmSender,dmContent,dmDate){
     });
 }
 
-//받은메시지 - 답장 버튼
+//받은메시지 - 답장
 $("#reply-btn").on("click",function(){
-	//답변창 숨기기, 입력창 표시, 버튼 텍스트 변경, 버튼에 submit가능한 id부여
+	//답장(reply)버튼 숨기고 보내기(submit)버튼 표시
     $("#receive-msg").hide();
     $("#reply-msg").show();
     $("#reply-msg").focus();
     $(this).hide();
     $("#submit-btn").show();
-    //버튼 한번 더 클릭하면 타입 submit으로 변경, 모달창 숨기기
 });
 
 //보낸메시지 - 상세보기 모달창
-function sendModal(dmReceiver,dmContent,dmDate){
+function sendModal(obj,dmReceiver,dmDate){
 	//기본세팅으로 복구
 	$("#reply-msg").hide();
     $("#receive-msg").show();
@@ -423,7 +420,7 @@ function sendModal(dmReceiver,dmContent,dmDate){
     $(".msg-btn-wrap").hide();
     $(".msg-sender>span").text("받는사람");
     $(".msg-date>span").text("보낸날짜");
-    //받는사람, 내용 세팅
+    //받는사람 표시값, receiver 세팅
     $("[name=receiver]").val(dmReceiver);
     if(dmReceiver=="admin"){
     	$("#receiver-view").val("관리자");
@@ -442,10 +439,14 @@ function sendModal(dmReceiver,dmContent,dmDate){
     		}
     	});
     }
+    //보낸날짜, 내용 세팅
     $(".msg-date>input").val(dmDate);
+    const dmContent = $(obj).text();
     $("#receive-msg").text(dmContent);
     //이후 모달창 보여주기
     $(".msg-modal").show();
+	//
+    unreadS();
     //ESC키 누르면 닫기
     $(this).keydown(function(event) {
         if ( event.keyCode == 27 || event.which == 27 ) {
@@ -459,3 +460,6 @@ $("#close-btn").on("click",function(){
     $("#reply-msg").hide();
     $(".msg-modal").hide();
 });
+
+//초기화면
+getMemberRDm();

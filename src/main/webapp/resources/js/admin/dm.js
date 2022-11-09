@@ -88,6 +88,9 @@ function getReceiveDm(){
 				}else{
 					typeTd.text("기타문의")
 				}
+				const typeHidden = $("<input type='hidden' class='dm-type-hidden'>");
+				typeHidden.val(dm.dmType);
+				typeTd.append(typeHidden);
 				
 				//문의내용
 				const contentTd = $("<td>");
@@ -144,6 +147,8 @@ function getReceiveDm(){
 			 //문의유형
 			 const detailType= $(obj).parent().prev().text();  //자기자신(리스트문의내용)을 기준으로  문의유형을 가지고옴.
 			 $("#detailType").text(detailType);
+			 const hiddenDmType = $(obj).parent().prev().find(".dm-type-hidden").val();
+			 $("#dm-type").val(hiddenDmType);
 			
 			//날짜	
 			const detailDate = $(obj).parent().next().text(); //자기자신(리스트문의내용)을 기준으로  다음요소인 날짜를 가지고-> modal에 띄워줌
@@ -168,12 +173,14 @@ function getReceiveDm(){
 //답장보내기
 function dmSend(){
 	 const sender = $("#sender").val(); //보내는 사람 
+	 const senderCategory = $("#sender-category").val();//보내는사람 구분(관리자라서'A')
+	 const dmType = $("#dm-type").val();//문의유형
 	 const dmContent = $("#detailText").val(); // 내용
 	 const receiver = $("#detailId").text(); //받는 사람
 	 const reply = $("#detailNo").text();//글 번호
 	$.ajax({
 		url:"/insertDm.do",
-		data :{sender : sender, dmContent: dmContent , receiver:receiver, reply:reply},
+		data :{sender : sender, dmContent: dmContent , receiver:receiver, reply:reply, senderCategory:senderCategory, dmType:dmType},
 		success : function(data){
 		 if(data == 1 ){
 		 	alert("답변성공");

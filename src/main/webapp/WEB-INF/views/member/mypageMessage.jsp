@@ -82,6 +82,7 @@
 		                  <c:forEach items="${rdm}" var="rdm">
 		                    <tr>
 		                    	<td><input class="form-check-input check-r" type="checkbox"></td>
+		                    	<input type="hidden" value="${rdm.dmNo}">
 		                    	<td>
 		                    	<c:choose>
 		                    		<c:when test="${rdm.dmType ==0}">결제/취소</c:when>
@@ -98,7 +99,7 @@
 		                    	</c:choose>
 			                    </td>
 				                <td class="td-content">
-				                	<a href='javascript:void(0);' onclick="receiveModal(${rdm.dmNo},'${rdm.sender }','${rdm.dmContent }','${rdm.dmDate }');">${rdm.dmContent }</a>
+				                	<a href='javascript:void(0);' onclick="receiveModal(this, ${rdm.dmNo},${rdm.sender },${rdm.dmContent },${rdm.dmDate },${rdm.dmType });">${rdm.dmContent }</a>
 				                </td>
 				                <td>${rdm.dmDate }</td>
 				                <input type="hidden" class="sender-category" value="${rdm.senderCategory }">
@@ -141,12 +142,16 @@
 			<span id="msg-modal-title">받은메시지</span>
 			<span id="close-btn" class="material-symbols-outlined">close</span>
 		</div>
-		<form action="/replyMsg.do" method="post">
+		<form action="/insertMemberDm.do" method="post">
 			<div class="msg-modal-content">
 				<div class="msg-info msg-sender">
 					<span>보낸사람</span>
 					<input type="text" id="receiver-view" value="하하하하" readonly>
 					<input type="hidden" name="receiver" value="">
+					<input type="hidden" name="sender" value="${sessionScope.m.memberId }">
+					<input type="hidden" name="senderCategory" value="M">
+					<input type="hidden" name="dmType" value="">
+					<input type="hidden" name="reply" value="">
 				</div>
 				<div class="msg-info msg-date">
 					<span>받은날짜</span>

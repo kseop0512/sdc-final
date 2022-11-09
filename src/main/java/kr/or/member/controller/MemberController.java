@@ -85,13 +85,13 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	//유저 마이페이지-나의정보 이동
+	//유저 마이페이지 - 나의정보 이동
 	@RequestMapping(value="/memberMypage.do")
 	public String memberMypage() {
 		return "member/mypageMyInfo";
 	}
 	
-	//유저 정보수정
+	//유저 마이페이지 - 나의정보 - 정보수정
 	@RequestMapping(value="/memberUpdate.do")
 	public String memberUpdate(Member m, Model model, HttpSession session) {
 		Member updateM = service.updateMember(m);
@@ -109,31 +109,10 @@ public class MemberController {
 		return "common/msg";
 	}
 	
-	//유저 1:1문의내역 이동
+	//유저 마이페이지 - 1:1문의내역 이동 (메시지 관련 CRUD는 DirectMessageController에서 처리)
 	@RequestMapping(value="/mypageMessage.do")
 	public String mypageMessage() {
 		return "member/mypageMessage";
-	}
-	//유저 받은메시지 조회
-	@ResponseBody
-	@RequestMapping(value="/getMemberRDm.do",produces="application/json;charset=utf-8")
-	public String getMemberRdm(String memberId) {
-		ArrayList<DirectMessage> list = service.selectMemberReceiveDm(memberId);
-		return new Gson().toJson(list);
-	}
-	//유저 보낸메시지 조회
-	@ResponseBody
-	@RequestMapping(value="/getMemberSDm.do",produces="application/json;charset=utf-8")
-	public String getMemberSdm(String memberId) {
-		ArrayList<DirectMessage> list = service.selectMemberSendDm(memberId);
-		return new Gson().toJson(list);
-	}
-	//유저 받은메시지 읽음처리
-	@ResponseBody
-	@RequestMapping(value="/updateReadCheck.do")
-	public int updateReadCheck(int dmNo) {
-		int result = service.updateReadCheck(dmNo);
-		return result;
 	}
 	
 }

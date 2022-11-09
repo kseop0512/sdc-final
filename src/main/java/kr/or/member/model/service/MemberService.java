@@ -19,7 +19,7 @@ public class MemberService {
 		return dao.selectOneMemberId(memberId);
 	}
 	
-
+	//유저 회원가입
 	@Transactional
 	public int insertMember(Member m) {
 		return dao.insertMember(m);
@@ -31,6 +31,7 @@ public class MemberService {
 		return m;
 	}
 	
+	//유저 마이페이지 정보수정
 	@Transactional
 	public Member updateMember(Member m) {
 		int result = dao.updateMember(m);
@@ -41,21 +42,5 @@ public class MemberService {
 			return null;
 		}
 	}
-
-
-	public ArrayList<DirectMessage> selectMemberReceiveDm(String memberId) {
-		return dao.selectMemberReceiveDm(memberId);
-	}
-
-
-	public ArrayList<DirectMessage> selectMemberSendDm(String memberId) {
-		return dao.selectMemberSendDm(memberId);
-	}
-
-
-	public int updateReadCheck(int dmNo) {
-		return dao.updateReadCheck(dmNo);
-	}
-
 	
 }

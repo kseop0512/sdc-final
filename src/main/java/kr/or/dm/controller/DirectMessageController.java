@@ -65,6 +65,7 @@ public String detailMember(String sender) {
 		int result = service.dmCheckRead();
 		return result;
 	}
+	
 	//답장하기
 	@ResponseBody
 	@RequestMapping(value="/insertDm.do",produces="application/json;charset=utf-8")
@@ -77,13 +78,54 @@ public String detailMember(String sender) {
 			return "0";
 		}
 	}
+	
+	//유저 받은메시지 조회
+	@ResponseBody
+	@RequestMapping(value = "/getMemberRDm.do", produces = "application/json;charset=utf-8")
+	public String getMemberRdm(String memberId) {
+		ArrayList<DirectMessage> list = service.selectMemberReceiveDm(memberId);
+		return new Gson().toJson(list);
+	}
 
-	//1:1문의 남긴 파트너 정보 가져오기
+	//유저 보낸메시지 조회
+	@ResponseBody
+	@RequestMapping(value = "/getMemberSDm.do", produces = "application/json;charset=utf-8")
+	public String getMemberSdm(String memberId) {
+		ArrayList<DirectMessage> list = service.selectMemberSendDm(memberId);
+		return new Gson().toJson(list);
+	}
+
+	//이름 표시를 위해 파트너 정보 불러오기
 	@ResponseBody
 	@RequestMapping(value="/selectDmPartner.do",produces="application/json;charset=utf-8")
 	public String selectDmPartner(String pId) {
 		Partner p = service.selectDmPartner(pId);
 		return new Gson().toJson(p);
+	}
+	
+	//유저 받은메시지 읽음처리
+	@ResponseBody
+	@RequestMapping(value = "/updateMemberReadCheck.do")
+	public int updateMemberReadCheck(int dmNo) {
+		int result = service.updateMemberReadCheck(dmNo);
+		return result;
+	}
+	
+	//유저 받은메시지에 답장
+	@RequestMapping(value = "/insertMemberDm.do")
+	public String insertMemberDm(DirectMessage dm, Model model) {
+		int result = service.insertDm(dm);
+		if(result>0) {
+			model.addAttribute("title","메시지 전송 완료");
+			model.addAttribute("msg","입력하신 내용으로 메시지를 전송했습니다.");
+			model.addAttribute("icon","success");
+		}else {
+			model.addAttribute("title","메시지 전송 실패");
+			model.addAttribute("msg","메시지가 성공적으로 전송되지 않았습니다.");
+			model.addAttribute("icon","error");
+		}
+		model.addAttribute("loc","/mypageMessage.do");
+		return "common/msg";
 	}
 	
 	//1:1문의 삭제

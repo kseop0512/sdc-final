@@ -55,10 +55,29 @@ public class DirectMessageDao {
 		 return sqlSession.update("dm.updateReadCheck", reply);
 	}
 	
+	//유저 받은메시지 조회
+	public ArrayList<DirectMessage> selectMemberReceiveDm(String memberId) {
+		List rdm = sqlSession.selectList("dm.selectMemberReceiveDm",memberId);
+		return (ArrayList<DirectMessage>) rdm;
+	}
+
+	//유저 보낸메시지 조회
+	public ArrayList<DirectMessage> selectMemberSendDm(String memberId) {
+		List sdm = sqlSession.selectList("dm.selectMemberSendDm",memberId);
+		return (ArrayList<DirectMessage>) sdm;
+	}
+
+	//메시지 상세조회 시 읽음 상태로 변경
+	public int updateMemberReadCheck(int dmNo) {
+		return sqlSession.update("dm.updateMemberReadCheck",dmNo);
+	}
+	
 	//파트너 정보 불러오기
 	public Partner selectDmPartner(String pId) {
 		return sqlSession.selectOne("dm.selectDmPartner", pId);
 	}
+	
+	//메시지 삭제
 	public int deleteDm(int dmNo) {
 		return sqlSession.delete("dm.deleteDm",dmNo);
 	}
