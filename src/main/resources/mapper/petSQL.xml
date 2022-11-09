@@ -40,9 +40,9 @@
 		</selectKey>
 	</insert>
 	
-	<insert id="insertDogChk" parameterType="dogChk">
+	<insert id="insertPetChk" parameterType="petChk">
 		
-		insert into dog_chklist values(
+		insert into pet_chklist values(
 			#{petNo},
 			#{character1},
 			#{character2},

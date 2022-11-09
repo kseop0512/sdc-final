@@ -38,6 +38,7 @@
     position: absolute;
     bottom: 10vh;
     transition-duration: 0.5s;
+    left: 1vw;
 }
 #mypage-nav>ul{
     list-style-type: none;
@@ -128,7 +129,7 @@ input[type=submit]:hover{
 }
 
 
-/* input[radio]디자인 수정 구원님이미지넣기*/
+/* input[radio]디자인 수정*/
 input[type=radio]{
     display: none;
 }
@@ -166,7 +167,7 @@ input+span{
 }
 .weightSpan{
 	position: absolute;
-	right: 135px;
+	right: 90px;
 	top: 8px;
 }
 .noteSpan{
@@ -216,7 +217,7 @@ input+span{
 #title>h4{
 	display: inline-block;
 }
-.dogLogo{
+.petLogo{
 	width: 28px;
 	height: 28px;
 	margin: 3px;

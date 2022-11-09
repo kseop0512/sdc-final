@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DogCheckList {
+public class PetCheckList {
 	private int petNo;
 	private String character1;
 	private String character2;

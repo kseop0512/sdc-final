@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import common.FileRename;
 import kr.or.partner.model.vo.Partner;
 import kr.or.pet.model.service.PetService;
-import kr.or.pet.model.vo.DogCheckList;
+import kr.or.pet.model.vo.PetCheckList;
 import kr.or.pet.model.vo.Pet;
 
 @Controller
@@ -50,9 +50,8 @@ public class PetController {
 		return "pet/mypageMyPet";
 	}
 	
-	@RequestMapping(value="/petDogAdd.do")
-	public String petDogAdd(Pet p, DogCheckList dogChk, MultipartFile[] imageFile, HttpServletRequest request, HttpSession session) {
-		System.out.println(p);
+	@RequestMapping(value="/petAdd.do")
+	public String petAdd(Pet p, PetCheckList petChk, MultipartFile[] imageFile, HttpServletRequest request, HttpSession session) {
 		if(!imageFile[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/pet/petProfile/");
 			for(MultipartFile file : imageFile) {
@@ -73,11 +72,9 @@ public class PetController {
 				}
 				p.setPetFilename(petFilename);
 				p.setPetFilepath(petFilepath);
-				System.out.println(petFilename);
-				System.out.println(petFilepath);
 			}
 		}
-		int result = service.insertPetDog(p, dogChk);
+		int result = service.insertPet(p, petChk);
 		if(result>0) {
 			return "pet/mypageMyPet";
 		}else {
