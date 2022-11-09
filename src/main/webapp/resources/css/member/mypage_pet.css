@@ -20,7 +20,7 @@
     display: none; /* Chrome, Safari, Opera*/
 }
 .mypage-container{
-    width: 70%;
+    width: 920px;
     margin: 0;
     padding: 0;
     position: relative;
@@ -30,8 +30,9 @@
 #mypage-nav{
     width: 200px;
     position: fixed;
-    margin-top: 10vh;
+    margin-top: 13vh;
     transition-duration: 0.5s;
+    left: 10vw;
 }
 #mypage-nav.on{
     position: absolute;
@@ -67,6 +68,7 @@
     height: 80px;
     padding-top: 35px;
     border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+    width: 600px;
 }
 #title>h4{
     font-family: "Open Sans", sans-serif;
@@ -79,7 +81,7 @@
 }
 #content{
     padding-top: 20px;
-    padding-left: 15%;
+    padding-left: 5%;
 }
 #content>form>div{
     height: 40px;
@@ -345,21 +347,22 @@ input[type=radio]:checked+.modal-label{
 
 /*프로필 사진부분 */
 .fileZone{
-	width: 34vw !important;
-	min-width:400px !important;
+	width:400px !important;
 	height : 300px !important;
 	box-sizing : border-box;
-	border : 2px dotted #0b85a1;
+	border : none;
 	/*align-content 위에서부터 하나씩 아래로 내리기 위한것*/
-	margin-bottom: 10px !important;
 	display: grid;
     align-items: center;
     justify-items: center;
 }
 #img-view{
-	width: 34vw !important;
-	min-width:400px !important;
+	width:400px !important;
 	height : 300px !important;
+	margin-left: 30%;
+	margin-top: 10px;
+	outline: auto;
+    outline-color: #cda45e;
 }
 .fileMsg{
 	font-size : 18px;
@@ -373,10 +376,11 @@ input[type=radio]:checked+.modal-label{
 	margin-bottom: 10px;
 }
 .profileSpan{
-	font-size: 18px;
-	font-weight: bold;
+	font-size: 20px;
+    font-weight: bold;
     color: #cda45e;
-    margin-right: 38%;
+    margin-right: 115px;
+    margin-left: 57px;
 }
 .profileSpan+input{
 	width: 200px;

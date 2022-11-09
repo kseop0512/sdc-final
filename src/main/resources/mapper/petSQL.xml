@@ -42,7 +42,7 @@
 	
 	<insert id="insertDogChk" parameterType="dogChk">
 		
-		insert into pet_tbl values(
+		insert into dog_chklist values(
 			#{petNo},
 			#{character1},
 			#{character2},

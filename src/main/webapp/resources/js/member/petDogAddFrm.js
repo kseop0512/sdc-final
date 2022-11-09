@@ -16,9 +16,6 @@ var social //사회성 점수
 var sense //예민성
 var active //활동성
 var inde //독립성
-$('input:radio[name=petNeut]').click(function(){
-	console.log($('input:radio[name=petNeut]:checked').val());
-});
 
 
 
@@ -28,10 +25,10 @@ $(".socialBtn").click(function(){
 	sense = 0;
 	active = 0;
 	inde = 0;
-	$("socialInput").val("");
-	$("senseInput").val("");
-	$("activeInput").val("");
-	$("indeInput").val("");
+	$("#socialInput").val(social);
+	$("#senseInput").val(sense);
+	$("#activeInput").val(active);
+	$("#indeInput").val(inde);
 	q1.show();
 	qNo = 1;
 });
