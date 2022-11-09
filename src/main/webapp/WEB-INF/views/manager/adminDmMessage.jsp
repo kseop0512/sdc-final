@@ -193,6 +193,8 @@
                                                     <td style="text-align: center;"><span id="detailPhone"></span></td>
                                                     <input type="hidden" id="sender" value="${sessionScope.g.adminId}">
                                                     <input type="hidden" id="receiver">
+                                                    <input type="hidden" id="sender-category" value="A">
+                                                    <input type="hidden" id="dm-type" value="">
                                                 </tr>
                                             </thead>
                                             <tbody>

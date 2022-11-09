@@ -19,7 +19,7 @@ public class MemberDao {
 		return sqlSession.selectOne("member.selectOneMemberId", memberId);
 	}
 
-
+	//유저 회원가입
 	public int insertMember(Member m) {
 		return sqlSession.insert("member.insertMember", m);
 
@@ -31,28 +31,10 @@ public class MemberDao {
 		System.out.println("로그인완료");
 		return m;
 	}
-
+	
+	//유저 정보수정
 	public int updateMember(Member m) {
 		return sqlSession.update("member.updateMember",m);
 	}
-
-
-	public ArrayList<DirectMessage> selectMemberReceiveDm(String memberId) {
-		List rdm = sqlSession.selectList("dm.selectMemberReceiveDm",memberId);
-		return (ArrayList<DirectMessage>) rdm;
-	}
-
-
-	public ArrayList<DirectMessage> selectMemberSendDm(String memberId) {
-		List sdm = sqlSession.selectList("dm.selectMemberSendDm",memberId);
-		return (ArrayList<DirectMessage>) sdm;
-	}
-
-
-	public int updateReadCheck(int dmNo) {
-		return sqlSession.update("dm.updateMemberReadCheck",dmNo);
-	}
-
-
 
 }
