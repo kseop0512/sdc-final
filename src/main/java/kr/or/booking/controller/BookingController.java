@@ -28,7 +28,7 @@ public class BookingController {
 			model.addAttribute("title","예약 요청 성공");
 			model.addAttribute("msg","훈련사님께 예약 요청이 성공적으로 이루어졌습니다. 훈련사님으로부터 회신을 기다립니다");
 			model.addAttribute("icon","success");
-			model.addAttribute("loc","/memberMypage.do");
+			model.addAttribute("loc","/trainerList.do");
 			return "common/msg";
 		}else {
 			model.addAttribute("title","예약 요청 실패");
@@ -41,20 +41,24 @@ public class BookingController {
 	@ResponseBody
 	@RequestMapping(value="/selectBookingTime.do", produces="application/json;charset=utf-8")
 	public String selectBookingTime(Booking b) {
-		String times = service.selectBookingTime(b);
-		System.out.println(times);
-		if(times == null) {
+		ArrayList<String> times = service.selectBookingTime(b);
+		// System.out.println(times);
+		if(times.isEmpty()) {
 			return "0";
 		}else {
 			ArrayList<String> timeList = new ArrayList<String>();
-			StringTokenizer sT = new StringTokenizer(times,",");
-			while(sT.hasMoreTokens()) {
-				timeList.add(sT.nextToken());
+			for(int i=0; i<times.size();i++) {
+				StringTokenizer sT = new StringTokenizer(times.get(i),",");
+				while(sT.hasMoreTokens()) {
+					timeList.add(sT.nextToken());
+				}
 			}
+			
 			System.out.println(timeList);
 			return new Gson().toJson(timeList);
 		}
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/disabled-dates.do", produces="application/json;charset=utf-8")
 	public String disabledDatesBookingTime() {

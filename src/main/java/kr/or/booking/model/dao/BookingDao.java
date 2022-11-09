@@ -1,5 +1,8 @@
 package kr.or.booking.model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,8 +19,9 @@ public class BookingDao {
 		return sqlSession.insert("booking.insertBooking",b);
 	}
 
-	public String selectBookingTime(Booking b) {
+	public ArrayList<String> selectBookingTime(Booking b) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("booking.selectBookingTime",b);
+		List list = sqlSession.selectList("booking.selectBookingTime",b);
+		return (ArrayList<String>)list;
 	}
 }

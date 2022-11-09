@@ -17,6 +17,9 @@
 		width: 25%;
 		text-align: center;
 	}
+	*{
+		vertical-align: middle;
+	}
 </style>
 <body>
 <jsp:include page="/WEB-INF/views/main/common/header.jsp"/>
@@ -39,7 +42,7 @@
 	    		</div>
 				<!-- 요기부터 css 못건드리겠어요 -->
 				<form action="/uploadTrainerBoard.do" method="post" enctype="multipart/form-data">
-					<table class="table-dark">
+					<table class="table">
 						<tr>
 							<th>제목</th>
 							<td><input type="text" name="boardTitle" class="form-control" required></td>
@@ -67,15 +70,21 @@
 						<tr>
 							<th>첨부파일<br>(3개 올려주세요)</th>
 							<td>
-								<input type="file" class="custom-file-input" name="boardFile" multiple>
+								<div class="file-group">
+									<div class="input-group">
+										<input type="file" class="form-control add-file" name="boardFile" multiple aria-label="Upload">
+										<button class="btn btn-outline-danger" type="button" onclick="deleteFile(this)">삭제</button>
+									</div>
+								</div>
 							</td>
 						</tr>
 						<tr>
 							<th colspan="2">
-							<input type="submit" value="글 작성 완료" class="btn btn-outline-warning uploadBtn">
+							<input type="submit" value="훈련사 찾기 등록" class="btn btn-dark btn-lg uploadBtn" style="width: 100%;">
 							<input type="hidden" name="pNo" value="${sessionScope.p.PNo }">
 							<input type="hidden" name="trainerName" value="${sessionScope.p.PName }">
 							<input type="hidden" name="trainerImg" value="${sessionScope.p.profilePath }">
+							
 							</th>
 						</tr>
 					</table>
@@ -87,5 +96,42 @@
 	</main>
 	<jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
 	<script src="/resources/js/partnerScripts.js"></script>
+	<script>
+	let files=[];
+	$(document).ready(function(){
+		$("#summernote").summernote({
+			height: 200,
+			minHeight: null,
+			maxHeight: null,
+			focus: true,
+			lang: "ko-KR",
+			placeholder: '자기소개글을 작성해주세요'
+		});
+		$(".file-group").on("change", ".add-file", function(e) {
+            const idx = $(".add-file").index(this);
+            const str = $(this).val();
+            const fileName = str.split('\\').pop().toLowerCase();
+
+            const ext =  fileName.split('.').pop().toLowerCase();
+
+            if($.inArray(ext, ['jpg', 'pdf', 'png', 'jpeg', 'gif']) == -1) {
+                alert(ext+'파일은 업로드 하실 수 없습니다.');
+                $(this).val("");
+                return;
+            }
+
+            //files = [];
+            if($(".add-file").length == (idx+1) && $(".add-file").length < 3) {
+
+                $(this).parent().after("<div class='input-group mt-3'><input type='file' class='form-control add-file' name='boardFile' aria-label='Upload'> <button class='btn btn-outline-danger' type='button' id='' onclick='deleteFile(this)'>삭제</button></div>")
+                files.push(e.target.files[0]);
+            } else {
+                files[idx] = e.target.files[0];
+            }
+            $(this).addClass("has-file");
+            fileSetting();
+        })
+	}); 
+	</script>
 </body>
 </html>

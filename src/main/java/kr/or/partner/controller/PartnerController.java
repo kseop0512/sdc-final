@@ -126,6 +126,8 @@ public class PartnerController {
 		}
 		int result = service.updateProfile(p);
 		if(result>0) {
+			// trainer_board의 trainer_img컬럼도 변경
+			service.updateTrainerImg(p);
 			// 프로필 변경 시 기존 사진 삭제
 			Partner partner = (Partner)session.getAttribute("p");
 			if(!profileFile[0].isEmpty()) {
@@ -142,6 +144,8 @@ public class PartnerController {
 			partner.setPEmail(p.getPEmail());
 			partner.setLicense(p.getLicense());
 			partner.setWorkExp(p.getWorkExpBr());
+			partner.setProfilePath(p.getProfilePath());
+			partner.setProfileName(p.getProfileName());
 			session.setAttribute("p", partner);
 			model.addAttribute("title","프로필 변경 완료");
 			model.addAttribute("msg","프로필 내용이 업데이트 되었습니다.");
