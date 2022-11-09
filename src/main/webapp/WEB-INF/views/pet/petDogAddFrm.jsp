@@ -9,9 +9,6 @@
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_nav.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_pet.css">
-<style>
-
-</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/main/common/header.jsp"/>
@@ -34,8 +31,6 @@
 				<div id="mypage-content">
 					<div id="title">
 						<h4>강아지 등록</h4><img class="dogLogo" src="/resources/img/dogBlack.png">
-						<input type="hidden" name="petType" value="1">
-						<input type="hidden" name="memberNo" value="${sessionScope.memberNo }">
 					</div>
 					<div id="content-wrap">
 						<div id="content">
@@ -49,6 +44,8 @@
 								<div>
 									<label for="pName">이름</label>
 									<input type="text" id="pName" name="petName" placeholder="예) 댕댕이">
+									<input type="hidden" id="memNo" name="memberNo" value="${sessionScope.m.memberNo }">
+									<input type="hidden" name="petType" value="1">
 								</div>
 								<div id="gender-div">
 									<label>성별</label>
@@ -95,7 +92,7 @@
 										<input type="hidden" id="character7" name="character7">
 										<input type="hidden" id="character8" name="character8">
 										<input type="hidden" id="socialInput" name="social">
-										<input type="hidden" id="senselInput" name="sense">
+										<input type="hidden" id="senseInput" name="sense">
 										<input type="hidden" id="activeInput" name="active">
 										<input type="hidden" id="indeInput" name="inde">
 									</div>
@@ -305,9 +302,6 @@
 			</div>
 		</div>
 	</div>
-	<script>
-	
-	</script>
 	<jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
 	<!-- 모달JS -->
 	<script type="text/javascript" src="/resources/js/member/petDogAddFrm.js"></script>

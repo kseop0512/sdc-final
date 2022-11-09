@@ -15,6 +15,7 @@ public class PetService {
 	
 	@Transactional
 	public int insertPetDog(Pet p, DogCheckList dogChk) {
+		System.out.println("서비스들어옴");
 		int result = dao.insertPetDog(p);
 		if(result > 0) {
 			dogChk.setPetNo(p.getPetNo());

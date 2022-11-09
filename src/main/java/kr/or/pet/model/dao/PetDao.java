@@ -13,10 +13,12 @@ public class PetDao {
 	private SqlSessionTemplate sqlSession;
 
 	public int insertPetDog(Pet p) {
+		System.out.println("강아지추가dao");
 		return sqlSession.insert("pet.insertPet", p);
 	}
 
 	public int insertDogChk(DogCheckList dogChk) {
+		System.out.println("체크리스트추가dao");
 		return sqlSession.insert("pet.insertDogChk", dogChk);
 	}
 }

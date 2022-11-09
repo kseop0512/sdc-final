@@ -51,13 +51,13 @@ public class PetController {
 	}
 	
 	@RequestMapping(value="/petDogAdd.do")
-	public String petDogAdd(Pet p, DogCheckList dogChk, MultipartFile[] profileFile, HttpServletRequest request, HttpSession session) {
-		if(!profileFile[0].isEmpty()) {
+	public String petDogAdd(Pet p, DogCheckList dogChk, MultipartFile[] imageFile, HttpServletRequest request, HttpSession session) {
+		System.out.println(p);
+		if(!imageFile[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/pet/petProfile/");
-			for(MultipartFile file : profileFile) {
+			for(MultipartFile file : imageFile) {
 				String petFilename = file.getOriginalFilename();
 				String petFilepath = fileRename.fileRename(savePath, petFilename);
-				
 				try {
 					FileOutputStream fos = new FileOutputStream(new File(savePath + petFilepath));
 					BufferedOutputStream bos = new BufferedOutputStream(fos);
@@ -73,12 +73,15 @@ public class PetController {
 				}
 				p.setPetFilename(petFilename);
 				p.setPetFilepath(petFilepath);
+				System.out.println(petFilename);
+				System.out.println(petFilepath);
 			}
 		}
 		int result = service.insertPetDog(p, dogChk);
 		if(result>0) {
 			return "pet/mypageMyPet";
 		}else {
+			System.out.println("실패");
 			return null;
 		}
 	}
