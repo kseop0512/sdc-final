@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="partnerBoard">
+	<insert id="insertPartnerBoard" parameterType="pb">
+		<selectKey keyProperty="petsitterBoardNo" resultType="int" order="BEFORE">
+			select PETSITTER_BOARD_SEQ.nextval FROM dual
+		</selectKey>
+		INSERT INTO
+		    PARTNER_PETSITTER_BOARD
+		VALUES (
+		        #{petsitterBoardNo},
+		        #{petsitterBoardTitle},
+		        #{petsitterAboutMe},
+		        #{lat},
+		        #{lng},
+		        to_date(#{startDate}),
+		        to_date(#{endDate}) + 0.99999,
+		        #{pNo},
+				#{petsitterAddr},
+				#{petsitterAddrDetail}
+			   )
+	</insert>
+	<insert id="insertPartnerBoardOption" parameterType="map">
+		INSERT INTO
+			PETSITTER_OPTION_TBL
+		VALUES (
+		        #{petsitterBoardNo},
+		        #{pbo.noPet},
+		        #{pbo.pickup},
+		        #{pbo.largePet},
+		        #{pbo.yard},
+		        #{pbo.oldPet}
+			   )
+	</insert>
+	<insert id="insertPartnerBoardFile" parameterType="pbf">
+		INSERT INTO
+			PETSITTER_FILES
+		VALUES (
+				PETSITTER_FILE_SEQ.nextval,
+		        #{petsitterBoardNo},
+		        #{filename},
+		        #{filepath}
+			   )
+	</insert>
+</mapper>
