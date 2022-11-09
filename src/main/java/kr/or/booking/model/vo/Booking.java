@@ -20,6 +20,8 @@ public class Booking {
 	private String specialRequest;
 	private String reviewState;
 	private String partnerAccept;
+	private String category;
+	private int price;
 	
 	public String getSpecialRequestBr() {
 		return specialRequest.replaceAll("\r\n", "<br>");

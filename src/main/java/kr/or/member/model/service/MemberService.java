@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.booking.model.vo.Booking;
 import kr.or.dm.model.vo.DirectMessage;
 import kr.or.member.model.dao.MemberDao;
 import kr.or.member.model.vo.Member;
@@ -41,6 +42,10 @@ public class MemberService {
 		}else {
 			return null;
 		}
+	}
+
+	public ArrayList<Booking> selectBookingList(Member m) {
+		return dao.selectBookingList(m);
 	}
 	
 }

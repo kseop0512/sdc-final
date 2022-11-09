@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import kr.or.booking.model.vo.Booking;
 import kr.or.dm.model.vo.DirectMessage;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
@@ -117,7 +118,13 @@ public class MemberController {
 	
 	//유저 마이페이지 - 이용내역 이동
 	@RequestMapping(value="/mypageService.do")
-	public String mypageService() {
+	public String mypageService(Member m, Model model) {
+		ArrayList<Booking> list = service.selectBookingList(m);
+		System.out.println("리스트 있다!");
+		System.out.println(list.get(0).getBookingNo());
+		System.out.println(list.get(0).getPetNo());
+		System.out.println(list.get(0).getMemberId());
+		model.addAttribute("list",list);
 		return "member/mypageService";
 	}
 	

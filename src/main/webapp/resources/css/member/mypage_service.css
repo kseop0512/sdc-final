@@ -46,6 +46,7 @@
 
 /* input[type=text] border, 배경색 없애기 */
 #content input[type=text]{
+	width: 100px;
     border: none;
     background-color: transparent;
 }
@@ -125,22 +126,22 @@
 }
 
 /* 메시지함 */
-.msg-box{
+.service-box{
     margin: 10px;
 }
-.msg-box>table{
+.service-box>table{
     width: 100%;
     background-color: #fff;
     color: #000;
     border-radius: 20px;
 }
-.msg-box>table>thead{
+.service-box>table>thead{
     background-color: rgba(0, 0, 0, 0.2);
 }
-.msg-box>table>thead td{
+.service-box>table>thead td{
     font-weight: bold;
 }
-.msg-box>table td{
+.service-box>table td{
     padding: 10px 10px 10px 15px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     font-size: 15px;
@@ -148,7 +149,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.msg-box>table td>a{
+.service-box>table td>a{
     display: block;
     width: 220px;
     color: #000;
@@ -156,7 +157,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.msg-box>table td>a:hover{
+.service-box>table td>a:hover{
     color: #cda45e;
 }
 

@@ -47,7 +47,6 @@ public class DirectMessageService {
 	// 답장하기 
 	@Transactional
 	public int insertDm(DirectMessage dm) {
-		System.out.println(dm.getSenderCategory());
 		int result = dao.insertDm(dm);
 		if (dm.getReadCheck() == 0) {
 			dao.updateReadCheck(dm.getReply());
