@@ -81,7 +81,6 @@ public class PetController {
 		if(result>0) {
 			return "pet/mypageMyPet";
 		}else {
-			System.out.println("실패");
 			return null;
 		}
 	}
