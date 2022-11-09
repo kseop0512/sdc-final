@@ -115,4 +115,10 @@ public class MemberController {
 		return "member/mypageMessage";
 	}
 	
+	//유저 마이페이지 - 이용내역 이동
+	@RequestMapping(value="/mypageService.do")
+	public String mypageService() {
+		return "member/mypageService";
+	}
+	
 }
