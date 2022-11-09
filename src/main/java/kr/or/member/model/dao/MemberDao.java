@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.booking.model.vo.Booking;
 import kr.or.dm.model.vo.DirectMessage;
 import kr.or.member.model.vo.Member;
 
@@ -35,6 +36,11 @@ public class MemberDao {
 	//유저 정보수정
 	public int updateMember(Member m) {
 		return sqlSession.update("member.updateMember",m);
+	}
+
+	public ArrayList<Booking> selectBookingList(Member m) {
+		List list = sqlSession.selectList("booking.selectBookingList", m);
+		return (ArrayList<Booking>) list;
 	}
 
 }
