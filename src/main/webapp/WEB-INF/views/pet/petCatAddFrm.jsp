@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 <jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_nav.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_pet.css">
 </head>
 <body>
@@ -18,13 +17,13 @@
 				<!-- 마이페이지 메뉴 리모컨 -->
 				<div id="mypage-nav">
 					<ul>
-						<li><a href="/my_info.html">나의 정보</a></li>
-						<li><a href="/my_pet.html" class="active">나의 똑독캣</a></li>
-						<li><a href="/my_message.html">1:1 문의내역</a></li>
-						<li><a href="/my_service.html">이용내역</a></li>
-						<li><a href="/my_pet_diary.html">돌봄·훈련일지</a></li>
-						<li><a href="/my_qna.html">훈련사Q&A</a></li>
-						<li><a href="/withdraw.html">회원탈퇴</a></li>
+						<li><a href="/memberMypage.do">나의 정보</a></li>
+						<li><a href="/mypageMyPet.do" class="active">나의 똑독캣</a></li>
+						<li><a href="/mypageMessage.do?memberId=${sessionScope.m.memberId }">1:1 문의내역</a></li>
+						<li><a href="/mypageService.do">이용내역</a></li>
+						<li><a href="/mypagePetDiary.do">돌봄·훈련일지</a></li>
+						<li><a href="/mypageQnA.do">훈련사Q&A</a></li>
+						<li><a href="/withdraw.do">회원탈퇴</a></li>
 					</ul>
 				</div>
 				<!-- 마이페이지 컨텐츠 -->
