@@ -27,18 +27,21 @@
 }
 
 /* 마이페이지 왼쪽 메뉴 */
+.closeNav{
+	display: none !important;
+}
 #mypage-nav{
     width: 200px;
     position: fixed;
-    margin-top: 13vh;
+    margin-top: 5vh;
     transition-duration: 0.5s;
-    left: 10vw;
+    left: 5vw;
 }
 #mypage-nav.on{
-    position: absolute;
+    position: fixed;
     bottom: 10vh;
     transition-duration: 0.5s;
-    left: 1vw;
+    left: 5vw;
 }
 #mypage-nav>ul{
     list-style-type: none;
@@ -63,7 +66,7 @@
 
 /* 마이페이지 오른쪽 컨텐츠 */
 #mypage-content{
-    margin-left: 300px;
+    margin-left: 200px;
 }
 #title{
     height: 80px;
@@ -167,7 +170,7 @@ input+span{
 }
 .weightSpan{
 	position: absolute;
-	right: 90px;
+	right: 180px;
 	top: 8px;
 }
 .noteSpan{
