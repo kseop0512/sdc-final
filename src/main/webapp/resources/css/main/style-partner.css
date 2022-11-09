@@ -1081,3 +1081,6 @@
 .btn.btn-basic:active{
     background-color:var(--sdc-main-color);
 }
+.modal {
+    color:#000;
+}

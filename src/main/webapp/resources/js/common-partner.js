@@ -511,7 +511,6 @@ sdcJs.initResvCalendar = function (calendarEl) {
 
                 let selectPrevChkIn = false;
                 const dateSplit = date.split('.');
-
                 if (chkInDate != '' && date < chkInDate) {
                     selectPrevChkIn = true;
                 }
@@ -589,7 +588,8 @@ sdcJs.initResvCalendar = function (calendarEl) {
                         calendarEl.datepicker(
                             'option',
                             'maxDate',
-                            calendarEl.datepicker('option', 'maxDate')
+                            //calendarEl.datepicker('option', 'maxDate')
+                            _cid
                         );
                     } else {
                         calendarEl.datepicker('option', 'maxDate', _cid);
@@ -1099,6 +1099,7 @@ sdcJs.setSearchOption = function (container) {
 /**
  * 검색 주소 데이터출력
  */
+let saveAddr = "";
 $(".input-keyword").on("keyup", delay(function(){
     const dong = $(this).val();
     if(dong.length > 1) {
@@ -1114,6 +1115,10 @@ $(".input-keyword").on("keyup", delay(function(){
 
                 dropdown.empty();
                 listGroup.addClass("is-active");
+                if(saveAddr != dong.trim()) {
+                    $("[name=lng]").val("");
+                    $("[name=lat]").val("");
+                }
                 let emptyHtml = "";
                 if(meta.total_count > 0) {
                     for(let i=0; i<documents.length; i++) {
@@ -1131,7 +1136,7 @@ $(".input-keyword").on("keyup", delay(function(){
                                 continue;
                             }
                         }
-                        let liHtml = "<li><a class='dropdown-item' href='javascript:void(0)' onclick='selectAddr(this)'><i class='bi bi-geo-alt me-2'></i>" + documents[i].address_name + "</a></li>";
+                        let liHtml = "<li><a class='dropdown-item' href='javascript:void(0)' data-addr-lng='" + documents[i].x + "' data-addr-lat='" + documents[i].y + "' onclick='selectAddr(this)'><i class='bi bi-geo-alt me-2'></i>" + documents[i].address_name + "</a></li>";
                         dropdown.append(liHtml);
                     }
                     if(listGroup.find(">ul>li").length<1) {
@@ -1163,9 +1168,15 @@ function selectAddr(obj) {
     const inputAddr = $(".addr-wrap .input-keyword");
     const dropdown = $(obj).closest(".dropdown-menu");
     const listGroup = $(obj).closest(".list-group");
+    const lng = $(obj).attr("data-addr-lng");
+    const lat = $(obj).attr("data-addr-lat");
     inputAddr.val(selectedAddr);
+    saveAddr = selectedAddr;
+    $("[name=lng]").val(lng);
+    $("[name=lat]").val(lat);
     dropdown.empty();
     listGroup.removeClass("is-active");
+
 }
 
 

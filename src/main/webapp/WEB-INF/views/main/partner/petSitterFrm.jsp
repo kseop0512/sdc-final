@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: wasseop
-  Date: 2022/11/03
-  Time: 10:26 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -43,37 +36,40 @@
         <div class="container">
             <div  class="row justify-content-center" >
                 <div class="col-xl-8" >
-                    <form class="row g-3">
+                    <form action="" method="post" id="boardRegisterFrm" class="row g-3" enctype="multipart/form-data">
                         <div class="col-12">
-                            <label for="boardTitle" class="form-label col-form-label-lg">제목 <span class="text-warning">*</span></label>
-                            <input type="text" class="form-control form-control-lg" name="boardTitle" id="boardTitle" placeholder="게시물 제목 입니다.">
+                            <label for="petsitterBoardTitle" class="form-label col-form-label-lg">제목 <span class="text-warning">*</span></label>
+                            <input type="text" class="form-control form-control-lg" name="petsitterBoardTitle" id="petsitterBoardTitle" placeholder="게시물 제목 입니다.">
+                            <%--파트너 번호--%>
+                            <input type="hidden" name="pNo" value="P-1023">
+
                         </div>
                         <div class="col-12 mt-4">
-                            <label for="aboutMe" class="form-label col-form-label-lg">자기소개 <span class="text-warning">*</span></label>
-                            <textarea name="aboutMe" class="summernote" id="aboutMe"></textarea>
+                            <label for="petsitterAboutMe" class="form-label col-form-label-lg">자기소개 <span class="text-warning">*</span></label>
+                            <textarea name="petsitterAboutMe" class="summernote" id="petsitterAboutMe"></textarea>
                         </div>
                         <div class="col-12 mt-4">
                             <label for="" class="form-label col-form-label-lg">파트너 환경 / 서비스 <span class="text-warning">*</span> <small class="text-muted">(한가지 이상 선택)</small></label>
                             <div class="col">
-                                <input type="checkbox" class="btn-check" name="partnerOption" id="option1" autocomplete="off">
+                                <input type="checkbox" class="btn-check" name="noPet" id="option1" value="Y" autocomplete="off">
                                 <label class="btn btn-outline-secondary me-2" for="option1">반려동물 없음</label>
-                                <input type="checkbox" class="btn-check" name="partnerOption" id="option2" autocomplete="off">
+                                <input type="checkbox" class="btn-check" name="pickup" id="option2" value="Y" autocomplete="off">
                                 <label class="btn btn-outline-secondary me-2" for="option2">픽업 가능</label>
-                                <input type="checkbox" class="btn-check" name="partnerOption" id="option3" autocomplete="off">
+                                <input type="checkbox" class="btn-check" name="largePet" id="option3" value="Y" autocomplete="off">
                                 <label class="btn btn-outline-secondary me-2" for="option3">대형견 가능</label>
-
-                                <input type="checkbox" class="btn-check" name="partnerOption" id="option4" autocomplete="off">
+                                <input type="checkbox" class="btn-check" name="yard" id="option4" value="Y" autocomplete="off">
                                 <label class="btn btn-outline-secondary me-2" for="option4">마당 있음</label>
-                                <input type="checkbox" class="btn-check" name="partnerOption" id="option5" autocomplete="off">
+                                <input type="checkbox" class="btn-check" name="oldPet" id="option5" value="Y" autocomplete="off">
                                 <label class="btn btn-outline-secondary me-2" for="option5">노견 케어</label>
                             </div>
 
                         </div>
                         <div class="col-7">
-                            <label for="partnerAddr" class="form-label col-form-label-lg">주소 <span class="text-warning">*</span></label>
+                            <label for="petsitterAddr" class="form-label col-form-label-lg">주소 <span class="text-warning">*</span></label>
                             <div class="mb-3 addr-wrap">
-                                <input type="text" class="input-keyword form-control form-control-lg" name="partnerAddr" id="partnerAddr" placeholder="위탁 장소 주소 (동 이름 입력)" >
-                                <input type="hidden" name="" id=""><!-- 좌표값 -->
+                                <input type="text" class="input-keyword form-control form-control-lg" name="petsitterAddr" id="petsitterAddr" placeholder="위탁 장소 주소 (동 이름 입력)" >
+                                <input type="hidden" name="lng" id="lng"><!-- 좌표값 -->
+                                <input type="hidden" name="lat" id="lat">
                                 <div class="list-group">
                                     <ul class="dropdown-menu" id="placesList"></ul>
                                     <div id="pagination"></div>
@@ -81,8 +77,8 @@
                             </div>
                         </div>
                         <div class="col-5">
-                            <label for="partnerAddrDetail" class="form-label col-form-label-lg">상세주소</label>
-                            <input type="text" class="form-control form-control-lg" name="partnerAddrDetail" id="partnerAddrDetail">
+                            <label for="petsitterAddrDetail" class="form-label col-form-label-lg">상세주소 <span class="text-warning">*</span></label>
+                            <input type="text" class="form-control form-control-lg" name="petsitterAddrDetail" id="petsitterAddrDetail">
                         </div>
 
                         <div class="col-12 file-group">
@@ -142,8 +138,9 @@
 
                         </div>--%>
                         <div class="col-12 d-grid mt-5">
-                            <button type="submit" class="btn btn-dark btn-lg">펫시터 등록</button>
+                            <button type="button" class="btn btn-dark btn-lg" onclick="confirmBoardRegisterFrm()">펫시터 등록</button>
                         </div>
+
                     </form>
                 </div>
             </div>
@@ -151,35 +148,57 @@
 
     </section>
 
-    <section class="map_wrap" style="position: relative">
-<%--        <article id="map" style="width: 100%; height: 60vh"></article>--%>
-        <article id="">
-            <%--<form onsubmit="searchPlaces(); return false;" style="width:100%;">
-                <div class="input-group--keyword">
-                    <button
-                            type="button"
-                            class="btn-close--place-list hidden"
-                            onclick="handleCloseBtnClick()"
-                    >
-                        <img src="static/images/ico_btn_close.png" alt="닫기" />
-                    </button>
-                    <input
-                            type="text"
-                            id="keyword"
-                            class="input-keyword"
-                            value=""
-                    />
-                    <button type="submit" class="btn-search--keyword">검색</button>
-                </div>
-            </form>--%>
-        </article>
-        <%--<article class="list-group">
-
-            <ul id="placesList"></ul>
-            <div id="pagination"></div>
-        </article>--%>
-    </section>
 </main>
+<!-- 등록 확인 모달 -->
+<div class="modal fade" id="submitModal" tabindex="-1" aria-labelledby="submitModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="submitModalLabel">작성완료</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                위탁 펫시터 프로필을 등록 하시겠습니까?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary" onclick="submitBoardRegisterFrm()">확인</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 등록 완료 모달 -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">등록완료</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                위탁 펫시터 등록이 완료되었습니다.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 등록 실패 모달 -->
+<div class="modal fade" id="failedModal" tabindex="-1" aria-labelledby="failedModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="failedModalLabel">등록실패</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                등록되지 않았습니다.<br>
+                관리자에게 문의하세요.
+            </div>
+        </div>
+    </div>
+</div>
 <jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
 <script src="/resources/js/plugin.js"></script>
 <script src="/resources/js/common-partner.js"></script>
@@ -192,6 +211,7 @@
 ></script>
 <script src="/resources/js/map.js"></script>--%>
 <script>
+
     let files = [];
     $(document).ready(function(){
         $(".summernote").summernote({
@@ -229,6 +249,17 @@
         })
     });
 
+    const submitModal = new bootstrap.Modal(document.getElementById('submitModal'), {
+        keyboard: false
+    });
+    const failedModal = new bootstrap.Modal(document.getElementById('failedModal'), {
+        keyboard: false
+    });
+    const successModalEl = document.getElementById('successModal');
+    const successModal = new bootstrap.Modal(successModalEl, {
+        keyboard: false
+    });
+
     function deleteFile(btn) {
         const delBtn = $(btn);
         const inputFile = delBtn.prev();
@@ -256,9 +287,73 @@
         for(let i=0;i<files.length;i++) {
             dataTransfer.items.add(files[i]);
         }
-        $("input[name=partnerFile]").prop("files", dataTransfer.files);
+        $("#partnerFile").prop("files", dataTransfer.files);
+        const fi = $("#partnerFile")[0].files;
+
     }
 
+    function confirmBoardRegisterFrm() {
+
+        if($("[name=petsitterBoardTitle]").val().length < 5) {
+            alert("제목은 최소 5자 입니다.");
+            $("[name=petsitterBoardTitle]").focus();
+            return;
+        }else if($("[name=petsitterAboutMe]").val().length == ""){
+            alert("자기소개는 필수 항목 입니다.");
+            return;
+        } else if($(".btn-check:checked").length < 1) {
+            alert("파트너 환경 / 서비스 항목 한가지 이상 선택해주세요.");
+            return;
+        } else if($("#lng").val() == "" || $("#lat").val() == ""){
+            alert(" 주소를 올바르게 입력하세요.");
+            return;
+        } else if($("[name=petsitterAddrDetail]").val() == "") {
+            alert("상세 주소는 필수항목입니다.");
+            return;
+        } else if(files.length < 1) {
+            alert("사진은 한장이상 첨부하셔야 합니다.");
+            return;
+        } else if($("#startDate").val() == "" || $("#endDate").val() == "") {
+            alert("활동 기간을 선택하세요.");
+            return;
+        }
+
+        submitModal.show();
+
+    }
+
+    function submitBoardRegisterFrm() {
+        submitModal.hide();
+        const loader = $("<div id='preloader'></div>");
+        $("body").append(loader);
+        const form = $("#boardRegisterFrm")[0];
+        const formData = new FormData(form);
+
+        console.log(formData);
+        console.dir(formData);
+        $.ajax({
+            type: "POST",
+            url: "/petSitterBoardRegist.do",
+            enctype: 'multipart/form-data',
+            cache: false,
+            processData: false,
+            contentType: false,
+
+            data: formData,
+            success: function(res) {
+                loader.remove();
+                if(res > 2) {
+                    successModal.show();
+                    successModalEl.addEventListener('hidden.bs.modal', function (event) {
+                        window.location = "/petSitterList.do";
+                    });
+                } else {
+                    submitModal.hide();
+                    failedModal.show();
+                }
+            }
+        })
+    }
 
 </script>
 </body>
