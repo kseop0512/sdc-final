@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -46,7 +47,11 @@ public class PetController {
 	}
 	
 	@RequestMapping(value="/mypageMyPet.do")
-	public String mypageMyPet() {
+	public String mypageMyPet(Model model, int memberNo) {
+		ArrayList<Pet> petList = service.selectMyPet(memberNo);
+		ArrayList<PetCheckList> chkList = service.selectMyPetChk(memberNo);
+		model.addAttribute("petList", petList);
+		model.addAttribute("petChkList", chkList);
 		return "pet/mypageMyPet";
 	}
 	
@@ -76,7 +81,7 @@ public class PetController {
 		}
 		int result = service.insertPet(p, petChk);
 		if(result>0) {
-			return "pet/mypageMyPet";
+			return "redirect:/mypageMyPet.do";
 		}else {
 			return null;
 		}
