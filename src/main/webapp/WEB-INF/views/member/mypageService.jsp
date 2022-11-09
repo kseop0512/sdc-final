@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>똑독캣 1:1문의내역</title>
+<title>똑독캣 이용내역</title>
 <jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
 <!-- 마이페이지 CSS -->
 	<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_nav.css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_message.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_service.css">
 <!-- 아이콘-->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
@@ -25,8 +25,8 @@
 					<ul>
 						<li><a href="/memberMypage.do">나의 정보</a></li>
 						<li><a href="/mypagePet.do">나의 똑독캣</a></li>
-						<li><a href="/mypageMessage.do" class="active">1:1 문의내역</a></li>
-						<li><a href="/mypageService.do">이용내역</a></li>
+						<li><a href="/mypageMessage.do">1:1 문의내역</a></li>
+						<li><a href="/mypageService.do" class="active">이용내역</a></li>
 						<li><a href="/mypagePetDiary.do">돌봄·훈련일지</a></li>
 						<li><a href="/mypageQnA.do">훈련사Q&A</a></li>
 						<li><a href="/withdraw.do">회원탈퇴</a></li>
@@ -173,6 +173,6 @@
 	<jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
 	<!-- 마이페이지 JS -->
 	<script type="text/javascript" src="/resources/js/member/mypage_nav.js"></script>
-	<script type="text/javascript" src="/resources/js/member/mypage_message.js"></script>
+	<script type="text/javascript" src="/resources/js/member/mypage_service.js"></script>
 </body>
 </html>
