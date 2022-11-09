@@ -1,5 +1,7 @@
 package kr.or.pet.model.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +25,16 @@ public class PetService {
 		}else {
 			return result;
 		}
+	}
+
+	public ArrayList<Pet> selectMyPet(int memberNo) {
+		ArrayList<Pet> list = dao.selectMyPet(memberNo);
+		return list;
+	}
+
+	public ArrayList<PetCheckList> selectMyPetChk(int memberNo) {
+		ArrayList<PetCheckList> list = dao.selectMyPetChk(memberNo);
+		return list;
 	}
 	
 }

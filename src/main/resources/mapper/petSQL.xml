@@ -41,7 +41,6 @@
 	</insert>
 	
 	<insert id="insertPetChk" parameterType="petChk">
-		
 		insert into pet_chklist values(
 			#{petNo},
 			#{character1},
@@ -61,4 +60,44 @@
 			#{inde}
 		)
 	</insert>
+	
+	<select id="selectMyPet" parameterType="int" resultType="pet">
+		select
+			pet_no as petNo,
+			member_no as memberNo,
+			pet_type as petType,
+			pet_name as petName,
+			pet_gender as petGender,
+			pet_bdate as petBdate,
+			pet_kind as petKind,
+			pet_weight as petWeight,
+			pet_neut as petNeut,
+			pet_hospital as petHospital,
+			pet_note as petNote,
+			pet_filename as petFilename,
+			pet_filepath as petFilepath
+		from pet_tbl where member_no=#{memberNo}
+	</select>
+	
+	<select id="selectMyPetChk" parameterType="int" resultType="petChk">
+		select
+			pet_no as petNo,
+			character1,
+			character2,
+			character3,
+			character4,
+			character5,
+			character6,
+			character7,
+			character8,
+			health1,
+			health2,
+			health3,
+			social,
+			sense,
+			active,
+			inde
+		from pet_chklist where pet_no in (select pet_no from pet_tbl where member_no =#{memberNo})
+		
+	</select>
 </mapper>

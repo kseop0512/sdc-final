@@ -18,7 +18,7 @@
 				<div id="mypage-nav">
 					<ul>
 						<li><a href="/memberMypage.do">나의 정보</a></li>
-						<li><a href="/mypageMyPet.do" class="active">나의 똑독캣</a></li>
+						<li><a href="/mypageMyPet.do?memberNo=${sessionScope.m.memberNo}" class="active">나의 똑독캣</a></li>
 						<li><a href="/mypageMessage.do?memberId=${sessionScope.m.memberId }">1:1 문의내역</a></li>
 						<li><a href="/mypageService.do">이용내역</a></li>
 						<li><a href="/mypagePetDiary.do">돌봄·훈련일지</a></li>

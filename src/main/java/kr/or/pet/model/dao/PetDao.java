@@ -1,5 +1,8 @@
 package kr.or.pet.model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,5 +21,15 @@ public class PetDao {
 
 	public int insertPetChk(PetCheckList petChk) {
 		return sqlSession.insert("pet.insertPetChk", petChk);
+	}
+
+	public ArrayList<Pet> selectMyPet(int memberNo) {
+		List list = sqlSession.selectList("pet.selectMyPet", memberNo);
+		return (ArrayList<Pet>)list;
+	}
+
+	public ArrayList<PetCheckList> selectMyPetChk(int memberNo) {
+		List list = sqlSession.selectList("pet.selectMyPetChk", memberNo);
+		return (ArrayList<PetCheckList>)list;
 	}
 }
