@@ -71,6 +71,11 @@ public class PartnerDao {
 		return (ArrayList<Pet>)list;
 	}
 
+	public void updateTrainerImg(Partner p) {
+		// TODO Auto-generated method stub
+		sqlSession.update("partner.updateTrainerImg",p);
+	}
+
 
 
 	/*

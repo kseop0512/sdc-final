@@ -92,17 +92,18 @@ function loadImg(f){
 	}
 }
 
-// trainerBoardFrm.jsp  - summernote
-$(document).ready(function(){
-	$("#summernote").summernote({
-		height: 200,
-		minHeight: null,
-		maxHeight: null,
-		focus: true,
-		lang: "ko-KR",
-		placeholder: '자기소개글을 작성해주세요'
-	});
-}); 
+// trainerBoardFrm.jsp
+function deleteFile(btn){
+	const delBtn = $(btn);
+	const inputFile = delBtn.prev();
+	if(inputFile.val()==''){
+		return;
+	}else{
+		inputFile.val("");
+		// delBtn.closest(".input-group").remove();
+	}
+}
+
 
 //추가
 // required alert
@@ -150,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			console.log("clickedYmd="+clickedYmd);
 			console.log(todayYmd);
 			// 선택한 날짜가 오늘 날짜보다 작으면 선택 불가능
-			if (clickedYmd < todayYmd) {
+			if (clickedYmd <= todayYmd) {
 				
 				return false
 			}

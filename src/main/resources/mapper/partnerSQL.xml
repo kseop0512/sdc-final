@@ -178,4 +178,7 @@
 			work_exp as workExp
 		from partner where p_no = #{_parameter}
 	</select>
+	<update id="updateTrainerImg" parameterType="p">
+		UPDATE TRAINER_BOARD SET TRAINER_IMG=#{profilePath} WHERE P_NO=#{PNo}
+	</update>
 </mapper>

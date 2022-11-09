@@ -76,6 +76,10 @@ public class PartnerService {
 		// TODO Auto-generated method stub
 		return dao.selectAllPets(m);
 	}
+	public void updateTrainerImg(Partner p) {
+		// TODO Auto-generated method stub
+		dao.updateTrainerImg(p);
+	}
 
 
 	/*

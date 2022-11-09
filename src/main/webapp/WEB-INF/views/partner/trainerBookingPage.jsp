@@ -76,7 +76,7 @@
 					<tr>
 						<th>반려견 이름</th>
 						<td>
-							<select name="petNo" class="inputStyle">
+							<select name="petNo" class="inputStyle" required>
 								<c:forEach items="${petList }" var="p">
 								<option value="${p.petNo }">${p.petName }</option>
 								</c:forEach>
