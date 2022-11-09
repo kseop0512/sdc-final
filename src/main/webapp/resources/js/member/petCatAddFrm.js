@@ -126,40 +126,42 @@ $(".nextBtn").click(function(){
 			social += 2;
 		}else if($("#q1a2").is(":checked")){
 			sense += 1;
-		}else if($("#q1a3").is(":checked")){
-			sense += 1;
 			social -= 1;
+		}else if($("#q1a3").is(":checked")){
+			social += 1;
 		}else if($("#q1a4").is(":checked")){
 			sense += 1;
-			social -= 2;
+			social -= 1;
 		}else if($("#q1a5").is(":checked")){
 			sense += 1;
+			social += 2;
+		}else if($("#q1a6").is(":checked")){
+			inde += 1;
 			social += 1;
-		};
+		}
 		//q2
 		if($("#q2a1").is(":checked")){
 			social += 2;
 		}else if($("#q2a2").is(":checked")){
-			sense += 1;
-			social -= 1;
+			social += 1;
 		}else if($("#q2a3").is(":checked")){
-			sense += 1;
+			inde -= 1;
 			social -= 1;
 		}else if($("#q2a4").is(":checked")){
-			inde += 1;
-			social += 1;
+			social -= 1;
+		}else if($("#q2a5").is(":checked")){
+			social -= 1;
 		}
 		//q3
 		if($("#q3a1").is(":checked")){
 			sense -= 2;
 			social += 1;
 		}else if($("#q3a2").is(":checked")){
-			social += 1;
-		}else if($("#q3a3").is(":checked")){
 			inde += 1;
+		}else if($("#q3a3").is(":checked")){
+			sense += 1;
 		}else if($("#q3a4").is(":checked")){
 			sense += 2;
-			social -= 1;
 		}
 		//q4
 		if($("#q4a1").is(":checked")){
@@ -179,12 +181,8 @@ $(".nextBtn").click(function(){
 		}else if($("#q5a2").is(":checked")){
 			active += 2;
 		}else if($("#q5a3").is(":checked")){
-			active -= 1;
+			active -= 2;
 		}else if($("#q5a4").is(":checked")){
-			active += 1;
-		}else if($("#q5a5").is(":checked")){
-			active += 2;
-		}else if($("#q5a6").is(":checked")){
 			active -= 1;
 		}
 		//q6
@@ -355,10 +353,6 @@ $("#hq1a5").click(function(){
 	$("#hq1a1").removeClass("is-active");
 	$("#hq1a2").prop("checked", false);
 	$("#hq1a2").removeClass("is-active");
-	$("#hq1a3").prop("checked", false);
-	$("#hq1a3").removeClass("is-active");
-	$("#hq1a4").prop("checked", false);
-	$("#hq1a4").removeClass("is-active");
 });
 $("#hq2a3").click(function(){
 	$("#hq2a1").prop("checked", false);
@@ -371,14 +365,6 @@ $("#hq1a1").click(function(){
 	$("#hq1a5").removeClass("is-active");
 });
 $("#hq1a2").click(function(){
-	$("#hq1a5").prop("checked", false);
-	$("#hq1a5").removeClass("is-active");
-});
-$("#hq1a3").click(function(){
-	$("#hq1a5").prop("checked", false);
-	$("#hq1a5").removeClass("is-active");
-});
-$("#hq1a4").click(function(){
 	$("#hq1a5").prop("checked", false);
 	$("#hq1a5").removeClass("is-active");
 });

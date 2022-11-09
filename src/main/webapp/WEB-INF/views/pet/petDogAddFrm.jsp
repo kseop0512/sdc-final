@@ -30,11 +30,11 @@
 				<!-- 마이페이지 컨텐츠 -->
 				<div id="mypage-content">
 					<div id="title">
-						<h4>강아지 등록</h4><img class="dogLogo" src="/resources/img/dogBlack.png">
+						<h4>강아지 등록</h4><img class="petLogo" src="/resources/img/dogBlack.png">
 					</div>
 					<div id="content-wrap">
 						<div id="content">
-							<form action="/petDogAdd.do" method="post" enctype="multipart/form-data">
+							<form action="/petAdd.do" method="post" enctype="multipart/form-data">
 							<span class="profileSpan">프로필사진</span>
 							<input type="file" name="imageFile" accept=".jpg,.png,.jpeg" onchange="loadImg(this);">
 							<div class="fileZone">

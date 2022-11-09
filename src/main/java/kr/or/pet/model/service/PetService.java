@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.pet.model.dao.PetDao;
-import kr.or.pet.model.vo.DogCheckList;
+import kr.or.pet.model.vo.PetCheckList;
 import kr.or.pet.model.vo.Pet;
 
 @Service
@@ -14,11 +14,11 @@ public class PetService {
 	private PetDao dao;
 	
 	@Transactional
-	public int insertPetDog(Pet p, DogCheckList dogChk) {
-		int result = dao.insertPetDog(p);
+	public int insertPet(Pet p, PetCheckList petChk) {
+		int result = dao.insertPet(p);
 		if(result > 0) {
-			dogChk.setPetNo(p.getPetNo());
-			result = dao.insertDogChk(dogChk);			
+			petChk.setPetNo(p.getPetNo());
+			result = dao.insertPetChk(petChk);			
 			return result;
 		}else {
 			return result;
