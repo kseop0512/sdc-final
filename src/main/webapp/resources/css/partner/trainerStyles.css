@@ -35,6 +35,9 @@ a{
 	justify-content: center;
 	box-shadow: 0 4px 16px rgba(0 0 0 / 10%);
 }
+.trainerBox:hover{
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
 .trainerImg{
 	width: 433px;
 	height: 254px;
