@@ -19,9 +19,10 @@ public class Booking {
 	private String bookingTime;
 	private String specialRequest;
 	private String reviewState;
-	private String partnerAccept;
-	private String category;
-	private int price;
+	private String partnerAccept; // R Y C N D 
+	private String category; // V: 방문 / L: 위탁 / T: 훈련
+	private int price; // 서비스요금
+	private String cancleComment; // 취소 신청 시 취소 사유
 	
 	public String getSpecialRequestBr() {
 		return specialRequest.replaceAll("\r\n", "<br>");
