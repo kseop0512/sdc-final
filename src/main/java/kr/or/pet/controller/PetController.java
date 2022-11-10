@@ -90,6 +90,7 @@ public class PetController {
 		}
 	}
 	
+
 	//유저 마이페이지 - 이용내역 - 펫 이름 가져오기
 	@ResponseBody
 	@RequestMapping(value="/getPetName.do",produces="application/text;charset=utf-8")
@@ -97,5 +98,10 @@ public class PetController {
 		String petName = service.selectPetName(petNo);
 		return petName;
 	}
-	
+
+	@RequestMapping(value="/petDetail.do")
+	public String petDetail() {
+		return "pet/petDetail";
+	}
+
 }

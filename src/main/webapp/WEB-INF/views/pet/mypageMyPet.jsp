@@ -13,6 +13,7 @@
 <title>똑독캣 마이페이지</title>
 <jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <!-- 마이페이지 CSS -->
 <link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_mypet.css">
 </head>
@@ -42,7 +43,7 @@
 					</div>
 					<div id="content-wrap">
 						<c:forEach items="${petList}" var="pet">
-							<div class="pet-wrap">
+							<div class="pet-wrap" onclick="petDetail()";>
 								<img class="petProfile" src="/resources/upload/pet/petProfile/${pet.petFilename }">
 								<div class="info-wrap">
 									<p class="petName">${pet.petName }</p>
@@ -78,6 +79,38 @@
 								</div>
 							</div>
 							<hr class="hrCss">
+							<!-- 상세에서 사용할 데이터들 -->
+							<!-- pet_tbl -->
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							
+							<!-- pet_chklist꺼 -->
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
+							<input type="hidden" class="" value="">
 						</c:forEach>
 							<div class="pet-wrap addPetLink" onclick="petAddBtn();">
 								<div class="addPet">
@@ -102,9 +135,80 @@
 	</div>
 	
 	<!-- 펫 상세보기 -->	
-	<div></div>
-	<script>
-		
+	<div class="pdModal-wrap">
+		<div class="petDetail-wrap">
+			<div class="pdTopDiv">
+				<table class="pdTable">
+					<tr>
+						<td class="pdProfileTd" rowspan="4"  align="center"><img class="pdProfile" alt="펫 프사" src="/resources/img/dogBlack.png"></td>
+						<td colspan="1" align="center">이름</td>
+						<td colspan="2" align="center"><span class="answerSpan">철asdfa용</span></td>
+						<td colspan="1" align="center">나이</td>
+						<td colspan="2" align="center"><span class="answerSpan">1살</span></td>
+					</tr>
+					<tr> 
+						<td colspan="1" align="center">성별</td>
+						<td colspan="2" align="center"><span class="answerSpan">수컷</span></td>
+						<td colspan="1" align="center">중성화</td>
+						<td colspan="2" align="center"><span class="answerSpan">안했어요</span></td>
+					</tr>
+					<tr> 
+						<td colspan="1" align="center">생일</td>
+						<td colspan="2" align="center"><span class="answerSpan">20221110</span></td>
+						<td colspan="1" align="center">종</td>
+						<td colspan="2" align="center"><span class="answerSpan">말티푸</span></td>
+					</tr>
+					<tr> 
+						<td colspan="2" align="center" >자주가는병원<span style="color:green">✚</span></td>
+						<td colspan="3" align="center" style="padding-right: 40px"><span class="answerSpan" style="font-size: 17px">SDC동물병원asdfdfdf</span></td>
+					</tr>
+				</table>
+			</div>
+			<div class="pdMidDiv">
+				<textarea class="pdCharacter" readonly>
+ㅇㄴ리ㅏㄴㅁ아ㅓㄹㄴㅁ아ㅓㄹㅇㄴ머ㅏㄹㄴㅁ아ㅓ뤈아무럼ㄴ우런우런ㅇㅁ런ㅁㅇㄹ
+ㅓㄴㅇㅁㄻㄴ어ㅏ뤄ㅏㅇㄴ;ㅁ리ㅏㅓㅇ누라ㅓㄴㅇ;ㅁ루;ㅓㅏㄴ무라ㅓㄴ뭐ㅓㄴㅁ
+ㄴㅁㅇ러ㅏㅓㅜㄴㅇ밀ㄴㅇㅁㄹㄴㅁㅇ런ㅇㅁ
+ㄹㅇㄴ럼ㄴ울
+ㄴㅁㅇ뤙ㄴㄹ
+ㅇㅁ눙ㄹㄴㅇㄹㄴㅁ아ㅓㄹㅇ나ㅓㅗ로ㅓㄴㅇㅁㄹㅇㄴ
+ㅇㄴ리ㅏㄴㅁ아ㅓㄹㄴㅁ아ㅓㄹㅇㄴ머ㅏㄹㄴㅁ아ㅓ뤈아무럼ㄴ우런우런ㅇㅁ런ㅁㅇㄹ
+ㅓㄴㅇㅁㄻㄴ어ㅏ뤄ㅏㅇㄴ;ㅁ리ㅏㅓㅇ누라ㅓㄴㅇ;ㅁ루;ㅓㅏㄴ무라ㅓㄴ뭐ㅓㄴㅁ
+ㄴㅁㅇ러ㅏㅓㅜㄴㅇ밀ㄴㅇㅁㄹㄴㅁㅇ런ㅇㅁ
+ㄹㅇㄴ럼ㄴ울
+ㄴㅁㅇ뤙ㄴㄹ
+ㅇㅁ눙ㄹㄴㅇㄹㄴㅁ아ㅓㄹㅇ나ㅓㅗ로ㅓㄴㅇㅁㄹㅇㄴㅇㄴ리ㅏㄴㅁ아ㅓㄹㄴㅁ아ㅓㄹㅇㄴ머ㅏㄹㄴㅁ아ㅓ뤈아무럼ㄴ우런우런ㅇㅁ런ㅁㅇㄹ
+ㅓㄴㅇㅁㄻㄴ어ㅏ뤄ㅏㅇㄴ;ㅁ리ㅏㅓㅇ누라ㅓㄴㅇ;ㅁ루;ㅓㅏㄴ무라ㅓㄴ뭐ㅓㄴㅁ
+ㄴㅁㅇ러ㅏㅓㅜㄴㅇ밀ㄴㅇㅁㄹㄴㅁㅇ런ㅇㅁ
+ㄹㅇㄴ럼ㄴ울
+ㄴㅁㅇ뤙ㄴㄹ
+ㅇㅁ눙ㄹㄴㅇㄹㄴㅁ아ㅓㄹㅇ나ㅓㅗ로ㅓㄴㅇㅁㄹㅇㄴ</textarea>
+			</div>
+			<div class="pdBotDiv">
+				<div class="pdGraph" style="width:400px;height:400px;">
+					<canvas id="radar-chart"></canvas>
+				</div>
+				<div class="pdGraph-detail">
+				<textarea readonly>
+Independence: 체크리스트를 통해 대략적으로 측정한 값으로 얼마나 독립적인 지를 보여주는 독립성 지표입니다.
+
+Activity: 체크리스트를 통해 대략적으로 측정한 값으로 얼마나 활동적인 지를 보여주는 활동성 지표입니다.
+
+Sociality: 체크리스트를 통해 대략적으로 측정한 값으로 얼마나 사회적인 지를 보여주는 사회성 지표입니다.
+
+Sensitivity: 체크리스트를 통해 대략적으로 측정한 값으로 얼마나 예민한지를 보여주는 예민성 지표입니다.
+
+Min ~ Max: 최소값과 최대값을 나타내주기 위한 지표입니다.</textarea>
+				</div>
+				<div class="pdBtn-wrap">
+					<button class="pdPetEditBtn pdBtn" onclick="">펫정보수정</button>
+					<button class="pdClosebtn pdBtn" onclick="pdModalClose();">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	
 	</script>
 	<!-- 푸터 -->
 	<jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>

@@ -3,7 +3,6 @@ $(function(){
      var lastScroll = 0;
      $(window).scroll(function(event){
           var scroll = $(this).scrollTop();
-          console.log(scroll);
           if (scroll > 300){
           //이벤트를 적용시킬 스크롤 높이
                $("#mypage-nav").addClass("closeNav");
@@ -32,7 +31,7 @@ $(".pet-wrap").hover(function(){
 	$(this).find(".petProfile").css("border","2px solid #fff");
 });
 
-
+//펫 추가 모달
 $(".img_btn-wrap").hide();
 function petAddBtn(){
 	$("#main").hide();
@@ -61,3 +60,49 @@ $(".petBtn2").hover(function(){
 	$(".textSpan2").removeClass("text-active");
 	$(".textSpan2").addClass("petType");
 });
+
+
+//펫 상세 모달
+$(".pdModal-wrap").hide();
+	function petDetail(){
+		$("#main").hide();
+		$(".pdModal-wrap").show();
+
+	}
+	function pdModalClose(){
+		$("#main").show();
+		$(".pdModal-wrap").hide();
+	}
+	
+	new Chart(document.getElementById("radar-chart"), {
+	    type: 'radar',
+	    data: {
+	      labels: ["Independence", "Activity", "Min ~ Max", "Sociality","Sensitivity"],
+	      datasets: [
+	        {
+	          label: "평균",
+	          fill: true,
+	          backgroundColor: "rgba(179,181,198,0.2)",
+	          borderColor: "rgba(179,181,198,1)",
+	          pointBorderColor: "#fff",
+	          pointBackgroundColor: "rgba(179,181,198,1)",
+	          data: [5,5,0,5,5]
+	        }, {
+	          label: "철용",
+	          fill: true,
+	          backgroundColor: "rgba(255,99,132,0.2)",
+	          borderColor: "rgba(255,99,132,1)",
+	          pointBorderColor: "#fff",
+	          pointBackgroundColor: "rgba(255,99,132,1)",
+	          pointBorderColor: "#fff",
+	          data: [4,3,10,8,7]
+	        }
+	      ]
+	    },
+	    options: {
+		    title: {
+		      display: true,
+		      text: '철용이의 성향 그래프'
+		    }   
+	    }
+	});
