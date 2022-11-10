@@ -36,8 +36,8 @@
             PASSWORD <input type="password" class="form-control" name="pPw" id="pPw" placeholder="Your PASSWORD" style="background-color: #0c0b09;border-color: #625b4b;color:#aaaaaa;" autocomplete="off">
           </div>
           <div class="submit-btn">
-            <a href="/findIdPage.do" id="findIdBtn">아이디 찾기</a>
-            <a href="/findPwPage.do" id="findPwBtn">/비밀번호 찾기</a>
+            <a href="/findIdPartnerFrm.do" id="findIdBtn">아이디 찾기</a>
+            <a href="/findPwPartnerFrm.do" id="findPwBtn">/비밀번호 찾기</a>
           </div>
           <br>
           <br>

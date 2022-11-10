@@ -38,9 +38,26 @@ public class MemberDao {
 		return sqlSession.update("member.updateMember",m);
 	}
 
+
 	public ArrayList<Booking> selectBookingList(Member m) {
 		List list = sqlSession.selectList("booking.selectBookingList", m);
 		return (ArrayList<Booking>) list;
 	}
+
+
+	public Member searchId(String memberId) {
+		return sqlSession.selectOne("member.kakaoSearchId", memberId);
+	}
+
+	/* 아이디 찾기 */
+	public Member findIdUser(Member member) {
+		return sqlSession.selectOne("member.findIdUser",member);
+	}
+
+
+	public int updatePwMember(Member m) {
+		return sqlSession.update("member.updatePw", m);
+	}
+
 
 }
