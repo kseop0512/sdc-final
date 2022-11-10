@@ -13,9 +13,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
+import kr.or.mail.controller.MailSender;
 import kr.or.manager.model.service.ManagerService;
 import kr.or.manager.model.vo.Manager;
 import kr.or.member.model.vo.Member;
+import kr.or.partner.model.vo.Partner;
 
 @Controller
 public class ManagerController {
@@ -110,15 +114,54 @@ public class ManagerController {
 	public String adminIndex() {
 		return "manager/adminIndex";
 	}
-	//관리자 - 파트너 P로 이동 
+	//관리자 - 파트너 P로 이동  파트너승인
 	@RequestMapping(value="/partnerList.do")
-	public String partnerList() {
+	public String partnerList(String type, String keyword, Model model) {
+		ArrayList<Partner> list = service.partnerList(type,keyword);
+		model.addAttribute("list",list);
 		return "manager/partnerList";
 	}
 	
+	// 관리자 - 파트너 회원가입 중  순파트너인 사람 수
+//	@ResponseBody
+//	@RequestMapping(value="/partnerCount.do")
+//	public String partnerCount() {
+//		Partner p = service.nPartner();
+//		return "manger/partnerList";
+//	}
+	
+	//관리자 - 파트너 등급이동 -> 파트너 승인 된 사람들 등급변경 해주는 곳(C,B,A 등급) 
+	@RequestMapping(value="/getPartner.do")
+	public String getPartner() {
+		return "manager/partnerGrade";
+	}
+	//관리자 - 파트너 승인
+	@RequestMapping(value="/upgradeOk.do")
+	public String upgradeOk(String pNo, String gradeType,String email,Model model) {
+		int result = service.upgradeOk(pNo,gradeType,email);
+		if(result>0) {
+			model.addAttribute("title","파트너처리 완료");
+			model.addAttribute("msg","처리 되었습니다.");
+			model.addAttribute("icon","success");
+		}else {
+		     model.addAttribute("title","파트너 처리 실패");
+	         model.addAttribute("msg","정보수정 중 오류가 발생했습니다.");
+	         model.addAttribute("icon","error");
+	}
+		model.addAttribute("loc","/partnerList.do");
+		return "common/msg";	
+		
+ }
+	//파트너조회
+	@ResponseBody
+	@RequestMapping(value="/onePartner.do",produces="application/json;charset=utf-8")
+	public String onePartner(String pNo, Model model) {
+		Partner p = service.selectOnePartner(pNo);
+		return new Gson().toJson(p);
+//		return "redirect:/partnerList.do";
+	}
+	
 }
-
-
 
 
 

@@ -19,7 +19,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import kr.or.mail.controller.MailSender;
 import kr.or.manager.model.dao.ManagerDao;
 import kr.or.manager.model.vo.FileVOG;
 import kr.or.manager.model.vo.Manager;
@@ -246,6 +246,39 @@ public class ManagerService {
 	public void readGCountUpdate(int noticeGNo) {
 		dao.readGCountUpdate(noticeGNo);
 		
+	}
+// 관리자 - 승인해야할 partner 불러오기 
+	public ArrayList<Partner> partnerList(String type, String keyword) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		return dao.partnerList(map);
+	}
+//관리자 - 파트너 승인
+	public int upgradeOk(String pNo, String gradeType, String email) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("pNo", pNo);
+		map.put("gradeType", gradeType);
+		map.put("email", email);
+		
+		int result = 0;
+		if(gradeType.equals("C")) {
+		 result = dao.upgradeOk(map);			
+		 	//성공메일발송
+			 MailSender sender = new MailSender();
+			 sender.partnerEamil(email);
+		}else if(gradeType.equals("Z")) {
+		 result = dao.deletePartner(map);
+			//거절메일발송
+			 MailSender sender = new MailSender();
+			 sender.partnerCancel(email);
+		}
+		return result;
+	}
+//파트너 - 지원한 사람 상세보기
+	public Partner selectOnePartner(String pNo) {
+		// TODO Auto-generated method stub
+		return dao.selectOnePartner(pNo);
 	}
 	
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,7 +59,17 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="/adminMemberList.do">유저리스트</a>
-                                    <a class="nav-link" href="/partnerList.do">파트너관리</a>
+                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        	파트너관리
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="/partnerList.do">파트너승인</a>
+                                            <a class="nav-link" href="/getPartner.do">등급관리</a>
+                                        </nav>
+                                    </div>
+                                    
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -120,11 +131,11 @@
                                         </p>
                                         <div id="nameIdSerarch-Box" style="float: right;">
                                             <form action="#" post="post">
-                                                <select>
+                                                <select name="type">
                                                     <option>이름</option>
                                                     <option>아이디</option>
                                                 </select>
-                                                    <input class="input-form2" type="text" placeholder="입력하세요" style="width: 500px;">
+                                                    <input class="input-form2" type="text" placeholder="입력하세요" style="width: 500px;" name="keyword">
                                                     <button class="bc22">검색</button>
                                             </form>
                                         </div>
@@ -137,81 +148,149 @@
                                             <th>이름</th>
                                             <th>아이디</th>
                                             <th>전화번호</th>
-                                            <th>나이</th>
                                             <th>가입일</th>
                                             <th>테스트점수</th>
-                                            <th>승인현황</th>
+                                            <th>자격증</th>
+                                            <th>등급</th>
                                             <th>관리</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>파트너번호</th>
+                                            <th>No</th>
                                             <th>이름</th>
                                             <th>아이디</th>
                                             <th>전화번호</th>
-                                            <th>나이</th>
                                             <th>가입일</th>
                                             <th>테스트점수</th>
-                                            <th>승인현황</th>
-                                            <th>처리</th>
+                                            <th>자격증</th>
+                                            <th>등급</th>
+                                            <th>관리</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                    <c:forEach items="${list }" var="p">
                                         <tr>
-                                            <td>1</td>
-                                            <td>Tiger Nixon</td>
-                                            <td>Edinburgh</td>
-                                            <td>01011112323</td>
-                                            <td>34</td>
-                                            <td>2022/10/11</td>
-                                            <td>109점</td>
+                                            <td>${p.PNo }</td>
+                                            <td><div onclick="modal(this);">${p.PName }</div></td><!-- href="/onePartner.do?=${p.PNo }" target="_blank" -->
+                                            <td>${p.PId }</td>
+                                            <td>${p.PPhone }</td>
+                                            <td>${p.applyDate }</td>
+                                            <td>점수</td>
+                                            <td><div style="overflow: hidden; width: 400px; text-overflow: ellipsis; white-space: nowrap;">${p.license }</div></td>
                                             <td>
-                                                <select name="승인현황" required autofocus>
-                                                    <option value="대기">대기</option>
-                                                    <option value="보류">보류</option>
-                                                    <option value="승인완료">승인완료</option>
+										<c:choose>
+											<c:when test="${p.PGrade eq 'N'}">
+												준파트너
+											</c:when>
+										</c:choose>
+										</td>
+											<td>
+            									<select name="gradeType">
+                                                    <option value="C">승인</option>
+                                                    <option value="Z">거절</option>
                                                 </select>
                                             </td>
-                                            <td><button>처리하기</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Tiger Nixon</td>
-                                            <td>Edinburgh</td>
-                                            <td>01011112323</td>
-                                            <td>29</td>
-                                            <td>2022/10/11</td>
-                                            <td>125점</td>
                                             <td>
-                                                <select name="승인현황" required autofocus>
-                                                    <option value="대기">대기</option>
-                                                    <option value="보류">보류</option>
-                                                    <option value="승인완료">승인완료</option>
-                                                </select>
+                                            	<input type="hidden" name="pNo"><!-- '${pNo}','${gradeType}' -->
+                                            	<button type="submit" onclick="partnerGrade(this);">확인</button>
                                             </td>
-                                            <td><button type="button">처리하기</button></td>
                                         </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Tiger Nixon</td>
-                                            <td>Edinburgh</td>
-                                            <td>01011112323</td>
-                                            <td>31</td>
-                                            <td>2022/10/11</td>
-                                            <td>89점</td>
-                                            <td>
-                                                <select name="승인현황" required autofocus>
-                                                    <option value="대기">대기</option>
-                                                    <option value="보류">보류</option>
-                                                    <option value="승인완료">승인완료</option>
-                                                </select>
-                                            </td>
-                                            <td><button type="button">처리하기</button></td>
-                                        </tr>
+                                       </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
+                             <!-- 모달 -->
+                             <div class="modalmodel-wrap" id="modalmodal-wrap"> <!--뒤에 흐려지게 해주는거-->
+                            <div class="modal-modal"><!--흐려진 화면 위로 보여지게 해주는거 -->
+                                <div class="modal-top">
+                                    <p>상세정보</p>
+                                    <span style="font-size: 30px;" class="close-area" onclick="closeModal();">&times;</span>
+                                </div>
+                                <div class="modalmodal-content">
+                                    <div class="dmFrm">
+                                        <table class="table table-bordered" id="oneNotice">
+                                            <thead>
+                                                <tr>
+                                                    <td scope="col" rowspan="7" style="width: 230px; height: 200px;">
+                                                    	<span id="detailProfile"></span>
+                                                    </td>
+                                                    <th scope="col" style="text-align: center;">아이디</th>
+                                                    <td scope="col">
+                                                    	<span id="detailId"></span>
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                    <th scope="col" style="text-align: center;">이름</th>
+                                                    <td scope="col" style="text-align: center;">
+                                                    	<span id="detailName"></span>
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                    <th scope="col" style="text-align: center;">생년월일</th>
+                                                    <td scope="col"  style="text-align: center;">
+                                                    	<span id="detailHbd"></span>
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                    <th scope="col" style="text-align: center;">주소</th>
+                                                    <td scope="col" style="text-align: center;">
+                                                    	<span id="detailAddr"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="col" style="text-align: center;">전화번호</th>
+                                                    <td scope="col" colspan="6" style="text-align: center;">
+                                                    	<span id="detailPhone"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="col" style="text-align: center;">성별</th>
+                                                    <td scope="col" colspan="6" style="text-align: center;">
+                                                    	<span id="detailG"></span>
+                                                    </td>
+                                                
+                                                </tr>
+                                                <tr>
+                                                    <th scope="col" style="text-align: center;">가입일</th>
+                                                    <td scope="col" colspan="6">
+                                                    	<span id="detailApplydate"></span>
+                                                    </td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th style="line-height: 230px; text-align: center;">자격증</th>
+                                                    <td colspan="5">
+                                                    	<span id="detailLicence"></span>
+                                                    </td>
+                                                </tr>
+                                                  <tr>
+                                                    <th style="line-height: 230px; text-align: center;">근무경력</th>
+                                                    <td colspan="5">
+                                                    	<span id="detailWork"></span>
+                                                    </td>
+                                                </tr>
+                                                  <tr>
+                                                    <th style="line-height: 230px; text-align: center;">지원동기</th>
+                                                    <td colspan="5">
+                                                    	<span id="detailMotive"></span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div>
+                    
+   
+                                    <div id="modalmodal-Btn">
+                                        <button id="admin-noticeUpdate" class="btn bc11 bs4" onclick="closeModal();"><span>닫기</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 모달 -->
                         </div>
                     </div>
                 </main>
@@ -231,6 +310,7 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
        	<script src="/resources/js/scripts.js"></script>
+       	<script src="/resources/js/jquery-3.6.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="/resources/assets/demo/chart-area-demo.js"></script>
         <script src="/resources/assets/demo/chart-bar-demo.js"></script>

@@ -3,20 +3,22 @@
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
- <head>
+<head>
+  <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>똑독캣 마이페이지 - 관리자용</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link rel="stylesheet" href="/resources/css/admin/style-admin.css">
-        <link rel="stylesheet" href="/resources/css/admin/gdm_message.css">
-         <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+        <link rel="stylesheet" href="/resources/css/admin/partnerList.css">
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
-  <body class="sb-nav-fixed">
-	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+</head>
+<body class="sb-nav-fixed">
+       <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="/adminIndex.do">똑독캣 관리자페이지</a>
             <!-- Sidebar Toggle-->
@@ -57,16 +59,17 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="/adminMemberList.do">유저리스트</a>
-                                    	 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                         	파트너관리
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
                                      <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="/partnerList.do">파트너승인</a>
-                                            <a class="nav-link" href="/getPartner.do">파트너리스트</a>
+                                            <a class="nav-link" href="/getPartner.do">등급관리</a>
                                         </nav>
                                     </div>
+                                    
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -105,130 +108,120 @@
                     </div>
                 </nav>
             </div>
-            
+
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">1:1문의내역</h1>
+                        <h1 class="mt-4">파트너등급</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active" style="padding-left: 8px;">
-                                <span>1:1문의 총</span>
-                                <code>[<code id="dmMax_Count"></code>]</code>건
-                            </li>
+                            <li class="breadcrumb-item active">관리자용</li>
                         </ol>
+                        <hr>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                	관리자페이지 1:1  문의내역
+                               	 파트너 등급관리
                             </div>
                             <div class="card-body">
                                 <div class="card mb-4">
                                     <div class="card-body">
                                         <p class="mb-0">
-                                            <span>답변대기</span>
-                                            <code>[<code id="dm_check"></code>]</code> 
+                                           	<span>총 파트너</span>
+                                <code>[<code id="partnerCount"></code>]</code>명 /
+                                			       	 C등급
+                                            <code>[]</code>명 
                                             <span>/</span>
-                                           	<span>답변완료</span>
-                                            <code>[<code id="dm_checkRead"></code>]</code>건
+                                            	B등급
+                                            <code>[]</code>명
+                                            	A등급
+                                            <code>[]</code>명
                                         </p>
                                         <div id="nameIdSerarch-Box" style="float: right;">
-                                                <select name="dmType">
-                                                    <option disabled selected>문의유형</option><!-- 0: cancel, 1 : reserve, 2:etc -->
-                                                    <option value="0">취소/결제</option>
-                                                    <option value="1">예약</option>
-                                                    <option value="2">기타문의</option>
+                                            <form action="#" post="post">
+                                                <select name="type">
+                                                    <option>이름</option>
+                                                    <option>아이디</option>
                                                 </select>
-                                                    <input class="input-form2" type="text" name="keyword" placeholder="아이디를 입력하세요" style="width: 500px;">
-                                                    <button class="bc22" type="button" onclick="searchDm();" >검색</button>
+                                                    <input class="input-form2" type="text" placeholder="입력하세요" style="width: 500px;" name="keyword">
+                                                    <button class="bc22">검색</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>번호</th>
+                                            <th>No</th>
+                                            <th>이름</th>
                                             <th>아이디</th>
-                                            <th>문의유형</th>
-                                            <th>문의내용</th>
-                                            <th>날짜</th>
-                                            <th>답변여부</th>
+                                            <th>전화번호</th>
+                                            <th>가입일</th>
+                                            <th>테스트점수</th>
+                                            <th>자격증</th>
+                                            <th>포인트</th>
+                                            <th>등급</th>
+                                            <th>승인현황</th>
+                                            <th>관리</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>번호</th>
+                                            <th>No</th>
+                                            <th>이름</th>
                                             <th>아이디</th>
-                                            <th>문의유형</th>
-                                            <th>문의내용</th>
-                                            <th>날짜</th>
-                                            <th>답변여부</th>
+                                            <th>전화번호</th>
+                                            <th>가입일</th>
+                                            <th>테스트점수</th>
+                                            <th>자격증</th>
+                                            <th>포인트</th>
+                                            <th>등급</th>
+                                            <th>승인현황</th>
+                                            <th>관리</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                    <c:forEach items="${list }" var="p">
+<!--                                      <form action="/searcMember.do" post="post"> -->
+                                        <tr>
+                                            <td>${p.PNo }</td>
+                                            <td>${p.PName }</td>
+                                            <td>${p.PId }</td>
+                                            <td>${p.PPhone }</td>
+                                            <td>${p.applyDate }</td>
+                                            <td>점수</td>
+                                            <td><div style="overflow: hidden; width: 400px; text-overflow: ellipsis; white-space: nowrap;">${p.license }</div></td>
+                                            <td>${p.PPoint }</td>
+                                            <td>
+										<c:choose>
+											<c:when test="${p.PGrade eq 'N'}">
+												준파트너
+											</c:when>
+										</c:choose>
+										</td>
+                                            <td>
+                                                <select name="type" required autofocus>
+                                                    <option value="okay">승인</option>
+                                                    <option value="cancel">거절</option>
+                                                </select>
+                                            </td>
+                                            <td><button type="submit">처리하기</button></td>
+                                        </tr>
+<!--                                         </form> -->
+                                       </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        <!--모달-->
-                        <div class="modalmodel-wrap" id="modalmodal-wrap"> <%--뒤에 흐려지게 하는거 --%>
-                            <div class="modal-modal"><%--흐려진 화면 위로 보여지게 해주는거 --%>
-                                <div class="modal-top">
-                                    <h4>1:1 문의내용</h4>
-                                </div>
-                                <div class="modalmodal-content">
-                                    <div class="dmFrm">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                	<th scope="col" style="text-align: center;">No</th>
-                                                    <td scope="col" style="text-align: center;"><span id="detailNo"></span></td>
-                                                    <th scope="col" style="text-align: center;">문의유형</th>
-                                                    <td scope="col" style="text-align: center;"><span id="detailType"></span></td>
-                                                    <th scope="col" style="text-align: center;">날짜</th>
-                                                    <td scope="col" " style="text-align: center;"><span id="detailDate"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row" style="text-align: center;">아이디</th>
-                                                    <td style="text-align: center;"><span id="detailId"></span></td>
-                                                    <th style="text-align: center;">이름</th>
-                                                    <td style="text-align: center;"><span id="detailSender"></span></td>
-                                                    <th style="text-align: center;">연락처</th>
-                                                    <td style="text-align: center;"><span id="detailPhone"></span></td>
-                                                    <input type="hidden" id="sender" value="${sessionScope.g.adminId}">
-                                                    <input type="hidden" id="receiver">
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th style="line-height: 130px;">문의내용</th>
-                                                    <td colspan="5"><textarea id="detailContent" style="resize: none;" readonly></textarea></td>
-                                                </tr>
-                                                <tr>
-                                                    <th style="line-height: 130px;">답변하기</th>
-                                                    <td colspan="5"><textarea id="detailText" style="resize: none;"></textarea></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <div id="modalmodal-Btn">
-                                            <button class="btn bc11" onclick="dmSend();">답장</button>
-                                            <button class="btn bc11" onclick="closeModal();">닫기</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <%--모달 --%>
-                        <div style="height: 100vh"></div>
-                </div>
+                    </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2022</div>
+                            <div class="text-muted">Copyright &copy; 똑독캣 2022</div>
                             <div>
-                                <a href="#">Privacy Policy</a>
+                                <a href="index.html">메인으로 돌아가기</a>
                                 &middot;
-                                <a href="#">Terms &amp; Conditions</a>
+                                <a href="index.html#menu">산책 &amp; 돌봄 서비스</a>
                             </div>
                         </div>
                     </div>
@@ -236,10 +229,12 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+       	<script src="/resources/js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="/resources/assets/demo/chart-area-demo.js"></script>
+        <script src="/resources/assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="/resources/js/datatables-simple-demo.js"></script>
-        <script src="/resources/js/scripts.js"></script>
-    <!--<script src="/resources/js/admin/dm_message.js"></script> -->
-         <script src="/resources/js/admin/dm.js"></script>
+         <script src="/resources/js/datatables-simple-demo.js"></script>
+         <script src="/resources/js/admin/partnerList.js"></script>
     </body>
 </html>
