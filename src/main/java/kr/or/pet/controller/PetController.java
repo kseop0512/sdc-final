@@ -88,4 +88,9 @@ public class PetController {
 			return null;
 		}
 	}
+	
+	@RequestMapping(value="/petDetail.do")
+	public String petDetail() {
+		return "pet/petDetail";
+	}
 }
