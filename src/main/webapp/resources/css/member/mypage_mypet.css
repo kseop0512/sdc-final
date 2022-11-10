@@ -118,6 +118,7 @@
 	display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    margin-left: 35px;
 }
 .pet-wrap:hover{
 	cursor: pointer;
@@ -135,16 +136,14 @@
 	height: 130px;
     width: 360px;
 }
-.addPet{
-	margin-left: -150px;
-}
+
 .addPetSpan{
 	color: white;
 	font-size: 30px;
 	font-weight: bolder;
 	line-height: 130px;
 }
-.addPetSpan:hover{
+.addPetLink:hover .addPetSpan{
 	color: #ffb347;
 }
 .petName{

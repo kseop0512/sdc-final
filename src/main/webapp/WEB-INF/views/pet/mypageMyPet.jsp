@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,41 +46,63 @@
 								<img class="petProfile" src="/resources/upload/pet/petProfile/${pet.petFilename }">
 								<div class="info-wrap">
 									<p class="petName">${pet.petName }</p>
-									<p class="petInfo">${pet.petWeight } / 
-														<c:choose>
-														<c:when test="${pet.petGender eq 'M'}">
-															남자
-														</c:when>
-														<c:when test="${pet.petGender eq 'F'}">
-															여자
-														</c:when>
-														</c:choose>/
-														나이
+									<p class="petInfo">
+										<c:choose>
+											<c:when test="${pet.petType eq 1 && pet.petWeight lt 7}">
+													${pet.petWeight }kg(소형)
+											</c:when>
+											<c:when test="${pet.petType eq 1 && pet.petWeight lt 15} ">
+													${pet.petWeight }kg(중형)
+											</c:when>
+											<c:when test="${pet.petType eq 1 && pet.petWeight ge 15} ">
+													${pet.petWeight }kg(대형)
+											</c:when>
+											<c:when test="${pet.petType eq 2}">
+												${pet.petWeight }kg
+											</c:when>
+										</c:choose>
+										/ 
+										<c:choose>
+											<c:when test="${pet.petGender eq 'M'}">
+												남
+											</c:when>
+											<c:when test="${pet.petGender eq 'F'}">
+												여
+											</c:when>
+										</c:choose>/
+										<c:set var="nowYear" value="<%=new java.util.Date()%>" />
+										<c:set var="dd"><fmt:formatDate value="${nowYear}" pattern="yyyy" /></c:set>
+										<c:set var="petAge" value="${dd-pet.petBdate+1 }" />
+										${petAge }살
 									</p>
 								</div>
 							</div>
 							<hr class="hrCss">
 						</c:forEach>
-							<div class="pet-wrap">
+							<div class="pet-wrap addPetLink" onclick="petAddBtn();">
 								<div class="addPet">
-									<a class="addPetLink" onclick="petAddBtn();">
-										<span class="addPetSpan">+　반려동물추가</span>
-									</a>
+									<span class="addPetSpan">+　반려동물추가</span>
 								</div>
 							</div>
-							<div class="pet-wrap">
+							<hr class="hrCss">
+							<div class="pet-wrap" style="cursor: default;">
 							</div>
 					</div>
 				</div>
 			</div>
 		</section>
 	</main>
+	<!-- End #main -->
+	
+	<!-- 펫 추가하기 모달창 -->
 	<div class="img_btn-wrap">
 		<a class="backTag" onclick="back()">돌아가기</a>
 		<button type="button" class="btn-img petBtn1" onclick="location.href='/petDogAddFrm.do'"><span class="petType textSpan1">강아지</span></button>
 		<button type="button" class="btn-img petBtn2" onclick="location.href='/petCatAddFrm.do'"><span class="petType textSpan2">고양이</span></button>
 	</div>
-	<!-- End #main -->
+	
+	<!-- 펫 상세보기 -->	
+	<div></div>
 	<script>
 		
 	</script>
