@@ -61,29 +61,26 @@
 						</c:forEach>
 							<div class="pet-wrap">
 								<div class="addPet">
-									<a class="addPetLink" href="/petAddFrm.do">
+									<a class="addPetLink" onclick="petAddBtn();">
 										<span class="addPetSpan">+　반려동물추가</span>
 									</a>
 								</div>
 							</div>
 							<div class="pet-wrap">
-							
 							</div>
-						</div>
 					</div>
 				</div>
 			</div>
 		</section>
 	</main>
+	<div class="img_btn-wrap">
+		<a class="backTag" onclick="back()">돌아가기</a>
+		<button type="button" class="btn-img petBtn1" onclick="location.href='/petDogAddFrm.do'"><span class="petType textSpan1">강아지</span></button>
+		<button type="button" class="btn-img petBtn2" onclick="location.href='/petCatAddFrm.do'"><span class="petType textSpan2">고양이</span></button>
+	</div>
 	<!-- End #main -->
 	<script>
-		$(".pet-wrap").hover(function(){
-			$(this).find(".petName").css("border-color","#ffb347");
-			$(this).find(".petProfile").css("border","2px solid orange");
-		}, function(){
-			$(this).find(".petName").css("border-color","#fff");
-			$(this).find(".petProfile").css("border","2px solid #fff");
-		});
+		
 	</script>
 	<!-- 푸터 -->
 	<jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>

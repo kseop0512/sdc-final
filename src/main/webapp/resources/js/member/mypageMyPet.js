@@ -23,3 +23,41 @@ $(window).on("resize", function(){
 	      $("#mypage-nav").removeClass("closeNav");
 	  }
 });
+
+$(".pet-wrap").hover(function(){
+	$(this).find(".petName").css("border-color","#ffb347");
+	$(this).find(".petProfile").css("border","2px solid orange");
+}, function(){
+	$(this).find(".petName").css("border-color","#fff");
+	$(this).find(".petProfile").css("border","2px solid #fff");
+});
+
+
+$(".img_btn-wrap").hide();
+function petAddBtn(){
+	$("#main").hide();
+	$(".img_btn-wrap").show();
+}
+function back(){
+	$("#main").show();
+	$(".img_btn-wrap").hide();
+}
+$(".petBtn1").hover(function(){
+	$(this).addClass("active");
+	$(".textSpan1").addClass("text-active");
+	$(".textSpan1").removeClass("petType");
+}, function(){
+	$(this).removeClass("active")
+	$(".textSpan1").removeClass("text-active");
+	$(".textSpan1").addClass("petType");
+});
+
+$(".petBtn2").hover(function(){
+	$(this).addClass("active");
+	$(".textSpan2").addClass("text-active");
+	$(".textSpan2").removeClass("petType");
+}, function(){
+	$(this).removeClass("active");
+	$(".textSpan2").removeClass("text-active");
+	$(".textSpan2").addClass("petType");
+});
