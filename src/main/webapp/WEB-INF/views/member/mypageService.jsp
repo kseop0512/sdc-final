@@ -58,22 +58,48 @@
 		                  <c:forEach items="${list}" var="b">
 		                    <tr>
 		                    	<input type="hidden" value="${b.bookingNo}">
-		                    	<td><input type="text" class="td-start-date" value="${b.startDate} ${b.bookingTime}" readonly></td>
-		                    	<td><input type="text" class="td-end-date" value="${b.endDate}" readonly></td>
-		                    	<td><input type="text" class="td-pet" value="${b.petNo}" readonly></td>
-		                    	<td><input type="text" class="td-category" value="${b.category}" readonly></td>
-		                    	<td><input type="text" class="td-partner" value="${b.PNo}" readonly></td>
-		                    	<td><input type="text" class="td-price" value="${b.price}" readonly></td>
-		                    	<td><input type="text" class="td-state" value="${b.partnerAccept}" readonly></td>
-		                    	<td><input type="text" class="td-cancle-review" value="${b.reviewState}" readonly></td>
+		                    	<td class="td-start-date">
+		                    		<input type="hidden" class="input-start-date" value="${b.startDate}">		                    		
+		                    		<input type="hidden" class="input-start-time" value="${b.bookingTime}">
+		                    		<span class="span-start-date"></span>
+		                    		<!-- .td-start-date.text() -->
+		                    		<!-- .td-start-time.text() -->
+		                    	</td>
+		                    	<td class="td-end-date">
+		                    		<input type="hidden" class="input-end-date" value="${b.endDate}">
+		                    		<input type="hidden" class="input-end-time" value="${b.bookingTime}">
+		                    		<span class="span-end-date"></span>
+		                    		<!-- .td-end-date.text() -->
+		                    		<!-- .td-end-time.text() -->
+		                    	</td>
+		                    	<td class="td-pet">
+		                    		<input type="hidden" class="input-pet" value="${b.petNo}">
+		                    		<!-- .td-pet.text() -->
+		                    	</td>
+		                    	<td class="td-category">
+		                    		<input type="hidden" class="input-category" value="${b.category}">
+		                    		<!-- .td-category.text() -->
+		                    	</td>
+		                    	<td class="td-partner">
+		                    		<input type="hidden" class="input-partner" value="${b.PNo}">
+		                    		<!-- .td-partner.text() -->
+		                    	</td>
+		                    	<td class="td-price">
+		                    		<input type="hidden" class="input-price" value="${b.price}">
+		                    		<!-- .td-price.text() -->
+		                    	</td>
+		                    	<td class="td-state">
+		                    		<input type="hidden" class="input-state" value="${b.partnerAccept}">
+		                    		<!-- .td-state.text() -->
+		                    	</td>
+		                    	<td class="td-cancle-review">
+		                    		<input type="hidden" class="input-cancle-review" value="${b.reviewState}">
+		                    		<!-- .td-cancle-review.html() -->
+		                    		<!-- 취소신청/후기작성 링크 a태그로 -->
+		                    	</td>
 			                    	<!--
 			                    	<td>
-			                    	<c:choose>
-			                    		<c:when test="${rdm.dmType ==0}">결제/취소</c:when>
-			                    		<c:when test="${rdm.dmType ==1}">예약</c:when>
-			                    		<c:when test="${rdm.dmType ==2}">기타문의</c:when>
-			                    		<c:otherwise>오잉</c:otherwise>
-			                    	</c:choose>
+			                    	
 			                    	</td>
 				                    <td>
 				                    <c:choose>
