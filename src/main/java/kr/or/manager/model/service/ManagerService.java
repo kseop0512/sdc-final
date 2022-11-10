@@ -280,5 +280,9 @@ public class ManagerService {
 		// TODO Auto-generated method stub
 		return dao.selectOnePartner(pNo);
 	}
+//파트너 수 
+	public int nPartner() {
+		return dao.partnerC();
+	}
 	
 }

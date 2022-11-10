@@ -114,5 +114,10 @@ public class ManagerDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("partner.selectOne",pNo);
 	}
+//파트너 승인 숫자 
+	public int partnerC() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("manager.selectGetPartner");
+	}
 
 }
