@@ -130,7 +130,7 @@
                                 <code>[<code id="partnerCount"></code>]</code>건 
                                         </p>
                                         <div id="nameIdSerarch-Box" style="float: right;">
-                                            <form action="#" method="post">
+                                            <form action="/" method="post">
                                                 <select name="type">
                                                     <option value="id">이름</option>
                                                     <option value="name">아이디</option>

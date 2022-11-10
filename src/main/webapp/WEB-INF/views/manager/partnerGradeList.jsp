@@ -13,7 +13,7 @@
         <title>똑독캣 마이페이지 - 관리자용</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link rel="stylesheet" href="/resources/css/admin/style-admin.css">
-        <link rel="stylesheet" href="/resources/css/admin/partnerList.css">
+        <link rel="stylesheet" href="/resources/css/admin/partnerGradeList.css">
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
 </head>
@@ -112,7 +112,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">파트너등급</h1>
+                        <h1 class="mt-4">파트너관리</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">관리자용</li>
                         </ol>
@@ -120,27 +120,20 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                               	 파트너 등급관리
+                               	 파트너승인
                             </div>
                             <div class="card-body">
                                 <div class="card mb-4">
                                     <div class="card-body">
                                         <p class="mb-0">
-                                           	<span>총 파트너</span>
-                                <code>[<code id="partnerCount"></code>]</code>명 /
-                                			       	 C등급
-                                            <code>[]</code>명 
-                                            <span>/</span>
-                                            	B등급
-                                            <code>[]</code>명
-                                            	A등급
-                                            <code>[]</code>명
+                                           	<span>파트너 신청</span>
+                                <code>[<code id="partnerCount"></code>]</code>건 
                                         </p>
                                         <div id="nameIdSerarch-Box" style="float: right;">
-                                            <form action="#" post="post">
+                                            <form action="#" method="post">
                                                 <select name="type">
-                                                    <option>이름</option>
-                                                    <option>아이디</option>
+                                                    <option value="id">이름</option>
+                                                    <option value="name">아이디</option>
                                                 </select>
                                                     <input class="input-form2" type="text" placeholder="입력하세요" style="width: 500px;" name="keyword">
                                                     <button class="bc22">검색</button>
@@ -158,10 +151,8 @@
                                             <th>가입일</th>
                                             <th>테스트점수</th>
                                             <th>자격증</th>
-                                            <th>포인트</th>
                                             <th>등급</th>
-                                            <th>승인현황</th>
-                                            <th>관리</th>
+                                            <th>포인트</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -173,44 +164,133 @@
                                             <th>가입일</th>
                                             <th>테스트점수</th>
                                             <th>자격증</th>
-                                            <th>포인트</th>
                                             <th>등급</th>
-                                            <th>승인현황</th>
-                                            <th>관리</th>
+                                            <th>포인트</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     <c:forEach items="${list }" var="p">
-<!--                                      <form action="/searcMember.do" post="post"> -->
                                         <tr>
                                             <td>${p.PNo }</td>
-                                            <td>${p.PName }</td>
+                                            <td><div onclick="modal(this);">${p.PName }</div></td>
                                             <td>${p.PId }</td>
                                             <td>${p.PPhone }</td>
                                             <td>${p.applyDate }</td>
                                             <td>점수</td>
                                             <td><div style="overflow: hidden; width: 400px; text-overflow: ellipsis; white-space: nowrap;">${p.license }</div></td>
-                                            <td>${p.PPoint }</td>
                                             <td>
 										<c:choose>
-											<c:when test="${p.PGrade eq 'N'}">
+											<c:when test="${p.PGrade eq 'C'}">
 												준파트너
+											</c:when>
+											<c:when test="${p.PGrade eq 'B'}">
+												실버파트너
+											</c:when>
+											<c:when test="${p.PGrade eq 'A'}">
+												골드파트너
 											</c:when>
 										</c:choose>
 										</td>
-                                            <td>
-                                                <select name="type" required autofocus>
-                                                    <option value="okay">승인</option>
-                                                    <option value="cancel">거절</option>
-                                                </select>
+											<td>
+            									${p.PPoint }
                                             </td>
-                                            <td><button type="submit">처리하기</button></td>
+                                   
                                         </tr>
-<!--                                         </form> -->
                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
+                             <!-- 모달 -->
+                             <div class="modalmodel-wrap" id="modalmodal-wrap"> <!--뒤에 흐려지게 해주는거-->
+                            <div class="modal-modal"><!--흐려진 화면 위로 보여지게 해주는거 -->
+                                <div class="modal-top">
+                                    <p>상세정보</p>
+                                    <span style="font-size: 30px;" class="close-area" onclick="closeModal();">&times;</span>
+                                </div>
+                                <div class="modalmodal-content">
+                                    <div class="dmFrm">
+                                        <table class="table table-bordered" id="oneNotice">
+                                            <thead>
+                                                <tr>
+                                                    <td scope="col" rowspan="7" style="width: 230px; height: 200px;">
+                                                    	<span id="detailProfile"><img src="" style="width: 230px; height: 200px;"></span>
+                                                    </td>
+                                                    <th scope="col" style="text-align: center;">아이디</th>
+                                                    <td scope="col"  style="text-align: center;">
+                                                    	<span id="detailId"></span>
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                    <th scope="col" style="text-align: center;">이름</th>
+                                                    <td scope="col" style="text-align: center;">
+                                                    	<span id="detailName"></span>
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                    <th scope="col" style="text-align: center;">생년월일</th>
+                                                    <td scope="col"  style="text-align: center;">
+                                                    	<span id="detailHbd"></span>
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                    <th scope="col" style="text-align: center;">주소</th>
+                                                    <td scope="col" style="text-align: center;">
+                                                    	<span id="detailAddr"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="col" style="text-align: center;">전화번호</th>
+                                                    <td scope="col" colspan="6" style="text-align: center;">
+                                                    	<span id="detailPhone"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="col" style="text-align: center;">성별</th>
+                                                    <td scope="col" colspan="6" style="text-align: center;">
+                                                    	<span id="detailG"></span>
+                                                    </td>
+                                                
+                                                </tr>
+                                                <tr>
+                                                    <th scope="col" style="text-align: center;">가입일</th>
+                                                    <td scope="col" colspan="6" style="text-align: center;">
+                                                    	<span id="detailApplydate" ></span>
+                                                    </td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th style="line-height: 230px; text-align: center;">자격증</th>
+                                                    <td colspan="5">
+                                                    	<span id="detailLicence"></span>
+                                                    </td>
+                                                </tr>
+                                                  <tr>
+                                                    <th style="line-height: 230px; text-align: center;">근무경력</th>
+                                                    <td colspan="5">
+                                                    	<span id="detailWork"></span>
+                                                    </td>
+                                                </tr>
+                                                  <tr>
+                                                    <th style="line-height: 230px; text-align: center;">지원동기</th>
+                                                    <td colspan="5">
+                                                    	<span id="detailMotive"></span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div>
+                    
+   
+                                    <div id="modalmodal-Btn">
+                                        <button id="admin-noticeUpdate" class="btn bc11 bs4" onclick="closeModal();"><span>닫기</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 모달 -->
                         </div>
                     </div>
                 </main>
@@ -230,11 +310,12 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
        	<script src="/resources/js/scripts.js"></script>
+       	<script src="/resources/js/jquery-3.6.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="/resources/assets/demo/chart-area-demo.js"></script>
         <script src="/resources/assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
          <script src="/resources/js/datatables-simple-demo.js"></script>
-         <script src="/resources/js/admin/partnerList.js"></script>
+         <script src="/resources/js/admin/partnerGradeList.js"></script>
     </body>
 </html>

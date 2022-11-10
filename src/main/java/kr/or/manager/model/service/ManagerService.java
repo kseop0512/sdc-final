@@ -284,5 +284,17 @@ public class ManagerService {
 	public int nPartner() {
 		return dao.partnerC();
 	}
+//파트너 승인 후 -> 등급별로 들어오는 곳 
+	public ArrayList<Partner> partnerGradeList(String type, String keyword) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		return dao.partnerGradeList(map);
+	}
+	
+	public int gradePartner() {
+		// TODO Auto-generated method stub
+		return dao.gradePartner();
+	}
 	
 }

@@ -196,4 +196,21 @@
   <select id="selectGetPartner" resultType="int">
   	select count(*) from partner WHERE p_grade = 'N'
   </select>
+  <!-- 파트너 승인  후  -->
+  <select id="partnerGradeList" parameterType="map" resultType="p">
+  	select 
+		p_no as pNo,
+		p_name as pName,
+		p_id as pId,
+		p_phone as pPhone,    
+		p_addr as pAddr,
+		apply_date as applyDate,
+		license,
+		p_grade as pGrade,
+		p_point as pPoint
+	from partner where p_grade!='N' 
+  </select>
+  <select id="gradePartner" resultType="int">
+  	select count(*) from partner WHERE p_grade != 'N'
+  </select>
 </mapper>

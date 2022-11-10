@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -251,8 +252,10 @@ public class ManagerController {
 	
 	//관리자 - 파트너 등급이동 -> 파트너 승인 된 사람들 등급변경 해주는 곳(C,B,A 등급) 
 	@RequestMapping(value="/getPartner.do")
-	public String getPartner() {
-		return "manager/partnerGrade";
+	public String getPartner(String type, String keyword, Model model) {
+		ArrayList<Partner> list = service.partnerGradeList(type,keyword);
+		model.addAttribute("list",list);
+		return "manager/partnerGradeList";
 	}
 	//관리자 - 파트너 승인
 	@RequestMapping(value="/upgradeOk.do")
@@ -274,12 +277,17 @@ public class ManagerController {
 	//파트너조회
 	@ResponseBody
 	@RequestMapping(value="/onePartner.do",produces="application/json;charset=utf-8")
-	public String onePartner(String pNo, Model model) {
+	public String onePartner(String pNo) {
 		Partner p = service.selectOnePartner(pNo);
 		return new Gson().toJson(p);
-//		return "redirect:/partnerList.do";
 	}
 
+	@ResponseBody
+	@RequestMapping(value="/partnerGradeCount.do",produces="application/json;charset=utf-8")
+	public String partnerGradeCount(String pNo) {
+		int p = service.gradePartner();
+		return new Gson().toJson(p);
+	}
 	
 }
 

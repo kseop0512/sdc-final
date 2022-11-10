@@ -109,7 +109,7 @@ public class ManagerDao {
 	public int deletePartner(HashMap<String, Object> map) {
 		return sqlSession.delete("manager.deletePartner",map);
 	}
-
+//파트너 상세조회
 	public Partner selectOnePartner(String pNo) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("partner.selectOne",pNo);
@@ -118,6 +118,15 @@ public class ManagerDao {
 	public int partnerC() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("manager.selectGetPartner");
+	}
+//파트너 승인 후 -> 등급별로 나눠지는 곳 
+	public ArrayList<Partner> partnerGradeList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("manager.partnerGradeList",map);
+		return (ArrayList<Partner>)list;
+	}
+//파트너 수 
+	public int gradePartner() {
+		return sqlSession.selectOne("manager.gradePartner");
 	}
 
 }
