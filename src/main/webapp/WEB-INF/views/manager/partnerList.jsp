@@ -213,10 +213,10 @@
                                             <thead>
                                                 <tr>
                                                     <td scope="col" rowspan="7" style="width: 230px; height: 200px;">
-                                                    	<span id="detailProfile"></span>
+                                                    	<span id="detailProfile"><img src="" style="width: 230px; height: 200px;"></span>
                                                     </td>
                                                     <th scope="col" style="text-align: center;">아이디</th>
-                                                    <td scope="col">
+                                                    <td scope="col"  style="text-align: center;">
                                                     	<span id="detailId"></span>
                                                     </td>
                                                 </tr>
@@ -253,8 +253,8 @@
                                                 </tr>
                                                 <tr>
                                                     <th scope="col" style="text-align: center;">가입일</th>
-                                                    <td scope="col" colspan="6">
-                                                    	<span id="detailApplydate"></span>
+                                                    <td scope="col" colspan="6" style="text-align: center;">
+                                                    	<span id="detailApplydate" ></span>
                                                     </td>
                                                 </tr>
                                             </thead>
