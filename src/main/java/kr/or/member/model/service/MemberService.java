@@ -44,8 +44,24 @@ public class MemberService {
 		}
 	}
 
+
 	public ArrayList<Booking> selectBookingList(Member m) {
 		return dao.selectBookingList(m);
+	}
+
+
+	public Member findIdUser(Member member) {
+		return dao.findIdUser(member);
+	}
+
+
+	public Member selectOneMemberEnc(Member member) {
+		return dao.selectOneMember(member);
+	}
+
+
+	public int updatePwEncMember(Member m) {
+		return dao.updatePwMember(m);
 	}
 	
 }

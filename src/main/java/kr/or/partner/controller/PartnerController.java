@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,10 +17,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+
 import common.FileRename;
+
 import kr.or.member.model.vo.Member;
+
+import kr.or.member.model.service.MessageService;
+import kr.or.partner.model.service.MessagePService;
+
 import kr.or.partner.model.service.PartnerService;
 import kr.or.partner.model.vo.Partner;
 import kr.or.partner.model.vo.PartnerFileVO;
@@ -33,6 +41,8 @@ public class PartnerController {
 	private PartnerService service;
 	@Autowired
 	private FileRename fileRename;
+	@Autowired
+	private MessagePService msgPService;
 
 	public PartnerController() {
 		super();
@@ -264,7 +274,98 @@ public class PartnerController {
 		ArrayList<Pet> pets = service.selectAllPets(m);
 		model.addAttribute("trainer",trainer);
 		model.addAttribute("petList",pets);
+		System.out.println(trainer);
 		return "partner/trainerBookingPage";
 	}
-
+	
+	/* 아이디 비밀번호 찾기*/
+	@RequestMapping(value="/findIdPartnerFrm.do")
+	public String searchInfo() {
+		return "partner/findIdPartnerFrm";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/findIdPartner.do",produces="application/json;charset=utf-8")
+	public String findIdPartner(Partner partner) {
+		Partner p = service.findIdPartner(partner);
+		String text = "";
+		if(p != null) {
+			text = p.getPId() + "/" + p.getPGrade();
+		}else {
+			text = "아이디가 존재하지 않습니다";
+		}
+		return new Gson().toJson(text);
+	}
+	
+	@RequestMapping(value="/findPwPartnerFrm.do")
+	public String findPwPartnerFrm() {
+		return "partner/findPwPartnerFrm";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/findPwPartner.do", produces="application/json;charset=utf-8")
+	public String findPwPartner(Partner partner, HttpSession session) {
+		Partner p =service.selectOnePartnerEnc(partner);
+		String text = "";
+		if(p != null ) {
+			session.setAttribute("updatePwP", p);
+			text = "find";
+		}else {
+			text = "일치하는 회원정보가 없습니다.";
+		}
+		return new Gson().toJson(text);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/sendMsgP.do")
+	public String sendMsg(String pPhone) {
+		// 6자리 랜덤숫자 생성
+		Random r = new Random();
+		int rdNum = 0;
+		String rdCode = "";
+		String resultCode = "";
+				
+		for(int i=0; i<6; i++) {
+			rdNum = r.nextInt(9);
+			rdCode = Integer.toString(rdNum);
+			resultCode += rdCode;
+		}
+		
+		msgPService.sendMessage(pPhone, resultCode);
+		return resultCode;
+	}
+	
+	@RequestMapping(value="/updatePwPFrm.do")
+	public String updatePwPFrm() {
+		return "partner/updatePwPFrm";
+	}
+	
+	@RequestMapping(value="updatePwP.do")
+	public String updatePwP(String updatePwP, HttpSession session, Model model) {
+		Partner p = (Partner)session.getAttribute("p");
+		if(p == null) {
+			p = (Partner)session.getAttribute("updatePwP");
+			p.setPPw(updatePwP);
+			int result = service.updatePwEncPartNer(p);
+			if(result>0) {
+				return "partner/updatePwPSuccess";
+			}else {
+				return "redirect:/";
+			}
+		}else {
+			p.setPPw(updatePwP);
+			int result = service.updatePwEncPartNer(p);
+			if(result>0) {
+				model.addAttribute("title", "변경 완료");
+				model.addAttribute("msg", "비밀번호가 변경되었습니다.");
+				model.addAttribute("icon", "success");
+				model.addAttribute("loc", "/myPage.do");
+				return "common/msg";	
+			}else {
+				return "redirect:/updatePwPFrm.do";
+			}
+		}
+	}
+	
+	
 }
