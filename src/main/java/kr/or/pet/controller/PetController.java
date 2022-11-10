@@ -34,11 +34,6 @@ public class PetController {
 	@Autowired
 	private FileRename fileRename;
 	
-	@RequestMapping(value="/petAddFrm.do")
-	public String petAddFrm() {
-		return "pet/petAddFrm";
-	}
-	
 	@RequestMapping(value="/petDogAddFrm.do")
 	public String petDogAddFrm() {
 		return "pet/petDogAddFrm";
@@ -90,18 +85,12 @@ public class PetController {
 		}
 	}
 	
-
 	//유저 마이페이지 - 이용내역 - 펫 이름 가져오기
 	@ResponseBody
 	@RequestMapping(value="/getPetName.do",produces="application/text;charset=utf-8")
 	public String getPetName(int petNo) {
 		String petName = service.selectPetName(petNo);
 		return petName;
-	}
-
-	@RequestMapping(value="/petDetail.do")
-	public String petDetail() {
-		return "pet/petDetail";
 	}
 
 }
