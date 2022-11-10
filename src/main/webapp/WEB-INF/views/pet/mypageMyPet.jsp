@@ -5,53 +5,7 @@
 <html>
 <head>
 <style type="text/css">
-.pet-wrap{
-	width: 90%;
-	height:130px;
-	margin: 0 auto;
-	display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-.pet-wrap:hover{
-	cursor: pointer;
-	color: #ffb347;
-}
-.petProfile{
-	width: 130px;
-	height: 130px;
-	display: inline-block;
-	border: 2px solid #fff;
-	box-sizing: content-box;
-}
-.info-wrap{
-	display:inline-block;
-	height: 130px;
-    width: 360px;
-}
-.addPetSpan{
-	color: white;
-	font-size: 30px;
-	font-weight: bolder;
-	line-height: 130px;
-}
-.addPetSpan:hover{
-	color: #ffb347;
-}
-.petName{
-	border: 1px solid #fff;
-    width: 50%;
-    margin: 20px;
-    font-size: 20px;
-    font-weight: bolder;
-	margin-left: 50px;
-	text-align:center;
-}
-.petInfo{
-	margin-left: 50px;
-    font-size: 17px;
-    width: 70%;
-}
+
 </style>
 <meta charset="UTF-8">
 <title>똑독캣 마이페이지</title>
@@ -87,16 +41,16 @@
 					<div id="content-wrap">
 						<c:forEach items="${petList}" var="pet">
 							<div class="pet-wrap">
-								<img class="petProfile" src="/resources/img/pet/petProfile/${pet.petFilename }">
+								<img class="petProfile" src="/resources/upload/pet/petProfile/${pet.petFilename }">
 								<div class="info-wrap">
 									<p class="petName">${pet.petName }</p>
 									<p class="petInfo">${pet.petWeight } / 
 														<c:choose>
-														<c:when test="${petGender eq 'M'}">
-															
+														<c:when test="${pet.petGender eq 'M'}">
+															남자
 														</c:when>
-														<c:when test="${petGender eq 'F'}">
-															
+														<c:when test="${pet.petGender eq 'F'}">
+															여자
 														</c:when>
 														</c:choose>/
 														나이
@@ -106,19 +60,14 @@
 							<hr class="hrCss">
 						</c:forEach>
 							<div class="pet-wrap">
-								<img class="petProfile" src="">
-								<div class="info-wrap">
-									<p class="petName">댕댕asd이</p>
-									<p class="petInfo">3.5kg / 남 / 4살   >asdfasdfsd</p>
-								</div>
-							</div>
-							<hr class="hrCss">
-							<div class="pet-wrap">
 								<div class="addPet">
-									<a class="addPetLink" href="">
+									<a class="addPetLink" href="/petAddFrm.do">
 										<span class="addPetSpan">+　반려동물추가</span>
 									</a>
 								</div>
+							</div>
+							<div class="pet-wrap">
+							
 							</div>
 						</div>
 					</div>
