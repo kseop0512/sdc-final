@@ -101,7 +101,7 @@ $("#sendBtn").on("click", function() {
 	if ((phoneVal != "") && phoneRef.test(phoneVal)) {
 		const phVal = $("#pPhone").val().replace('-', '');
 		$.ajax({
-	        url  : '/sendMsg.do',
+	        url  : '/sendMsgP.do',
 	        type : 'post',
 	        data : {pPhone : phVal},
 	        success : function(data){

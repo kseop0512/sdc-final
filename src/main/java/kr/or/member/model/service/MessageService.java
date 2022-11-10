@@ -16,6 +16,7 @@ public class MessageService {
 		Message coolsms = new Message(api_key, api_secret);
 		 
 	    HashMap<String, String> params = new HashMap<String, String>();
+	    System.out.println("re : "+receiver);
 	    params.put("to", receiver);
 	    params.put("from", "01045679562");
 	    params.put("type", "SMS");
