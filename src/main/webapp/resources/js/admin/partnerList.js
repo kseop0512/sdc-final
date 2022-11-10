@@ -24,17 +24,35 @@ function modal(obj){
     $(".modal-modal").show();
     $(".modalmodel-wrap").show();
     
-    const pNo = $(obj).prev().text();
+    const pNo = $(obj).parent().prev().text();
     
     $.ajax({
     	url :"/onePartner.do",
     	data : {pNo:pNo},
     	success : function(data){
-    		console.log(data);
+    		
+    		$("#detailProfile").children().attr("src", "/resources/upload/partner/profileImg/" + data.profilePath); //프로필사진
+    		$("#detailId").text(data.pId); //아이디
+    		$("#detailName").text(data.pName); //이름
+    		$("#detailHbd").text(data.pDob); //생년월일
+    		$("#detailAddr").text(data.pAddr); //주소
+    		$("#detailPhone").text(data.pPhone); //전화번호
+    		$("#detailG").text(data.pGender); //성벌
+    			if(data.pGender == 'M'){
+    					$("#detailG").text("남"); 
+    			}else{
+    				$("#detailG").text("여");
+    			
+    			}
+    		$("#detailApplydate").text(data.applyDate); //가입일
+    		$("#detailLicence").text(data.license); //자격증
+    		$("#detailWork").text(data.workExp); //근무경력
+    		$("#detailMotive").text(data.applyMotiv); //지원동기
     	}
     
     });
 }
+
 
  /* 닫기 버튼 눌렀을때 */
 function closeModal(){
@@ -42,6 +60,7 @@ function closeModal(){
     $(".modalmodel-wrap").hide();
     $("#detailText").val(""); 
 }
+
 
 
 
@@ -59,10 +78,6 @@ function partnerGrade(obj){
 	location.href="/upgradeOk.do?pNo="+pNo+"&gradeType="+gradeType+"&email="+email;
 
 }
-
-
-//파트너 승인 상세보기 
-
 
 
 

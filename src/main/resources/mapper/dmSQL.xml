@@ -13,7 +13,7 @@
 			read_check as readCheck,
 			dm_type as dmType,
 			reply
-		from direct_msg
+		from direct_msg 
 		where receiver = #{adminId}
 	</select>
 	 <!-- 관리자 1:1 문의 총 카운트  -->

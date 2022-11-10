@@ -140,7 +140,7 @@ function getReceiveDm(){
 			data : {sender : sender},
 			success : function(data) {
 			
-			 $("#detailSender").text(data.memberName);//이름
+		//	 $("#detailSender").text(data.memberName);
 			 $("#detailId").text(sender);//아이디	
 			 $("#detailPhone").text(data.memberPhone);//핸드폰	
 			
