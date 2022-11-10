@@ -166,4 +166,31 @@
   		from notice_g
   	where notice_g_no = #{noticeGNo}
   </delete>
+  
+  <!-- 승인해야할 파트너 리스트 -->
+  <select id="adminPartnerList" parameterType="map" resultType="p">
+	 select 
+		p_no as pNo,
+		p_name as pName,
+		p_id as pId,
+		p_phone as pPhone,    
+		p_addr as pAddr,
+		apply_date as applyDate,
+		license,
+		p_grade as pGrade,
+		p_point as pPoint
+	from partner where p_grade='N' 
+		<choose>
+			<when test="type == 'null'">
+			and p_id like '%'||#{keyword}||'%'
+			</when>
+		</choose>
+  </select>
+  <!-- 파트너승인 -->
+  <update id="upgradeOk" parameterType="map">
+  	update partner set p_grade=#{gradeType} where p_no=#{pNo}
+  </update>
+  <delete id="deletePartner" parameterType="map">
+  	delete from partner where p_no=#{pNo}
+  </delete>
 </mapper>

@@ -96,4 +96,23 @@ public class ManagerDao {
 		return sqlSession.update("readGCountUpdate", noticeGNo);
 	}
 
+	//파트너 - 승인해야할 파트너 리스트
+	public ArrayList<Partner> partnerList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("manager.adminPartnerList",map);
+		return (ArrayList<Partner>)list;
+	}
+//파트너 - 파트너 승인
+	public int upgradeOk(HashMap<String, Object> map) {
+		return sqlSession.update("manager.upgradeOk",map);
+	}
+//파트너 거절 삭제 
+	public int deletePartner(HashMap<String, Object> map) {
+		return sqlSession.delete("manager.deletePartner",map);
+	}
+
+	public Partner selectOnePartner(String pNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("partner.selectOne",pNo);
+	}
+
 }
