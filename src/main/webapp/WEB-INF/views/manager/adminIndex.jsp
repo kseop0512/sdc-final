@@ -33,7 +33,7 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <!--<li><a class="dropdown-item" href="#!">Settings</a></li>
                         <li><hr class="dropdown-divider" /></li>-->
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                        <li><a class="dropdown-item" href="/logoutManager.do">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -84,7 +84,7 @@
                                 1:1문의내역
                             </a>
                             <div class="sb-sidenav-menu-heading">게시판</div>
-                            <a class="nav-link" href="/adminNotice.do">
+                            <a class="nav-link" href="/adminNotice.do?reqPage=1">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 	공지사항
                             </a>

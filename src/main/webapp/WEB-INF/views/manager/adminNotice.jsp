@@ -3,12 +3,16 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
+<c:choose>
+    <c:when test="${not empty sessionScope.g }">
 <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
+     
+    
         <title>똑독캣 마이페이지 - 관리자용</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -18,6 +22,9 @@
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     </head>
+    
+    
+    
 	<body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
@@ -149,6 +156,116 @@
                                 </table>
                             </div>
                             <div style="text-align: right;font-size: 20px;letter-spacing: 3px;margin-right: 25px;font-weight: bolder;">${pageNavi }</div>
+                            
+                            <div id="titleContentSerarch-Box">
+                                <select style="width: 100px; height: 40px; margin-right: -4px;" >
+                                    <option>제목</option>
+                                    <option>제목+내용</option>
+                                </select>
+                                <input type="text" placeholder="입력하세요" style="width: 400px; height: 40px;" name="keyword" id="keyword">
+                                <button class="searchbox-btn btn bc22 searchBtn" name="btnSearch" id="btnSearch">검색</button>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        
+                    </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; 똑독캣 2022</div>
+                            <div>
+                                <a href="/">메인으로 돌아가기</a>
+                                &middot;
+                                <a href="/#menu">산책 &amp; 돌봄 서비스</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+      	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="/resources/js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="/resources/assets/demo/chart-area-demo.js"></script>
+        <script src="/resources/assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="/resources/js/datatables-simple-demo.js"></script>
+        <script src="/resources/js/admin/notice.js"></script>
+    </body>
+    </c:when>
+    
+    <c:otherwise>
+    
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+    <title>똑독캣 공지사항</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+         <link rel="stylesheet" href="/resources/css/admin/style-admin.css">
+         <link rel="stylesheet" href="/resources/css/admin/notice.css">
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+        <jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
+    </head>
+    <body>
+	<jsp:include page="/WEB-INF/views/main/common/header.jsp"/>
+	
+	<main>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+				<div style="background-color: #1a1814;">
+					<div style="height: 60px;line-height: 60px;margin-left: 50px;font-size: 25px;">똑독캣 공지사항</div>
+                    <div class="container-fluid px-4">
+                        <div class="card mb-4">
+                            <div class="card-header" style="color:#ffc107;">
+                                <i class="fas fa-table me-1"></i>
+                                DDOK DOG&CAT NOTICE
+                            </div>
+                            <div class="card-body">
+                                <div style="font-size: 15px; padding-bottom: 10px;color: black;">게시글 총<code id="totalCount">[${totalNotice }]</code>건</div>
+                                <c:if test="${not empty sessionScope.g }">
+                                <div id="notice-write">
+                                    <!-- <input type="hidden" id="memberId" value="${sessionScope.m.memberId}"> -->
+                                            <a class="btn bc22 writeBtn" href="/adminNoticeWriteFrm.do">글쓰기</a> 
+                                </div>
+                               </c:if>
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">No.</th>
+                                        <th scope="col">제목</th>
+                                        <th scope="col">작성자</th>
+                                        <th scope="col">작성일</th>
+                                        <th scope="col">조회수</th>
+                                    </tr>
+                                    </thead>
+                                   
+                                    <tbody>
+                                    <c:forEach items="${list }" var="ng" varStatus="i">
+                                    <tr>
+                                        <th scope="row">${(reqPage-1)*numPerPage + i.count }</th>
+                                        <td><a href="/noticeGView.do?noticeGNo=${ng.noticeGNo }" style="text-decoration: none;color: #282f44;">${ng.noticeGTitle }</a></td>
+                                        <td>${ng.noticeGWriter }</td>
+                                        <td>${ng.noticeGDate }</td>
+                                        <td>${ng.readGCount }</td>
+                                    </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="text-align: right;font-size: 20px;letter-spacing: 3px;margin-right: 25px;font-weight: bolder;">${pageNavi }</div>
                             <!--  
                             <ul style="text-align: center;font-size: 20px;letter-spacing: 3px;" list-style-type: disc>${pageNavi }</ul>
                             -->
@@ -190,22 +307,12 @@
                         
                         
                     </div>
+                  </div>  
                 </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; 똑독캣 2022</div>
-                            <div>
-                                <a href="/">메인으로 돌아가기</a>
-                                &middot;
-                                <a href="/#menu">산책 &amp; 돌봄 서비스</a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-            </div>
-        </div>
-      	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	
+	
+	<jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="/resources/js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="/resources/assets/demo/chart-area-demo.js"></script>
@@ -213,5 +320,10 @@
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="/resources/js/datatables-simple-demo.js"></script>
         <script src="/resources/js/admin/notice.js"></script>
-    </body>
+</body>
+    
+    </c:otherwise>
+    
+    </c:choose>
+    
 </html>

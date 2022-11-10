@@ -100,6 +100,19 @@ public class ManagerController {
 		return "manager/adminNotice";
 	}
 	
+	//메인용 공지사항 이동
+	@RequestMapping(value="/homeNoticeList.do")
+	public String homeNoticeList(int reqPage, Model model) {
+		NoticeGPageData ngpd = service.selectAdminNotice(reqPage);
+		model.addAttribute("list",ngpd.getList());
+		model.addAttribute("pageNavi",ngpd.getPagenavi());
+		model.addAttribute("reqPage",ngpd.getReqPage());
+		model.addAttribute("numPerPage", ngpd.getNumPerPage());
+		model.addAttribute("totalNotice", ngpd.getTotalCount());
+		return "manager/adminNotice";
+	}
+	
+	
 	//관리자 공지사항 상세보기
 	@RequestMapping(value="/noticeGView.do")
 	public String noticeGView(int noticeGNo, Model model) {
