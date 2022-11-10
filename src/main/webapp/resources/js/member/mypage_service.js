@@ -1,26 +1,65 @@
-//보낸메시지 - 읽음여부 표시
-function unreadS(){
-    const sMsg = $(".send .td-content>a");
-    sMsg.each(function(index, item){
-        const readCheck = $(item).parent().siblings(".read-check").val();
-        if(readCheck == 0){
-            $(item).parent().siblings(".td-readcheck").text("읽지않음");
-        }else if(readCheck == 1){
-            $(item).parent().siblings(".td-readcheck").text("읽음");
-        }
-    });
-}
 $(function(){
+	//실제 DB 서비스 시작시간, 종료시간 값
 	const start = $(".input-start-time");
 	const end = $(".input-end-time");
+	
+	//실제DB 서비스 시작일, 종료일 값
+	const startDate = $(".input-start-date");
+	const endDate = $(".input-end-date");
+	
+	//화면에 표시할 서비스 시작일, 종료일 입력할 span태그
+	const sSpan = $(".span-start-date");
+	const eSpan = $(".span-end-date");	
+	
+	//span태그에 화면표시값 입력하기 'yy/mm/dd (hh:mi)'
 	for(let i=0;i<start.length;i++){
 		let time = start.eq(i).val().split(",");
 		start.eq(i).val(time[0]);
 		end.eq(i).val(time[1]);
-		$(".span-start-date").eq(i).text(time[0]);
-		$(".span-end-date").eq(i).text(time[1]);
+		let sDate = startDate.eq(i).val();
+		let eDate = endDate.eq(i).val();
+		//날짜 시간 합침 - 종료일 null인 경우 시작일+종료시간
+		sSpan.eq(i).html(sDate+"<br>"+" ("+time[0]+")");
+		if(eDate==""){
+			eSpan.eq(i).html(sDate+"<br>"+" ("+time[1]+")");
+		}else{
+			eSpan.eq(i).html(eDate+"<br>"+" ("+time[1]+")");
+		}
+	}
+	
+	//펫번호로 펫이름 조회해서 span태그에 입력하기
+	for(let i=0;i<$(".input-pet").length;i++){
+		const petNo = $(".input-pet").eq(i).val();
+		$.ajax({
+			url : "/getPetName.do",
+			data : {petNo : petNo},
+			success: function(petName){
+				$(".span-pet").eq(i).text(petName);
+			}
+		});
+	}
+	
+	//파트너번호로 파트너이름 조회해서 span태그에 입력하기
+	for(let i=0;i<$(".input-partner").length;i++){
+		const pNo = $(".input-partner").eq(i).val();
+		$.ajax({
+			url : "/getPartnerName.do",
+			data : {pNo : pNo},
+			success: function(pName){
+				$(".span-partner").eq(i).text(pName);
+			}
+		});
+	}
+	
+	//가격 세자리마다 콤마(,)표시
+	for(let i=0;i<$(".input-price").length;i++){
+		const price = $(".input-price").eq(i).val();
+		const commaPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");
+		$(".span-price").eq(i).text(commaPrice);
 	}
 });
+
+
 //이용내역 화면표시값 변경
 //startDate-startTime, endDate-endTime 'yy/mm/dd(hh:mi)'
 //petNo, category, PNo, price, partnerAccept, reviewState]
@@ -178,4 +217,4 @@ $("#close-btn").on("click",function(){
 });
 
 //초기화면
-getMemberRDm();
+//getMemberRDm();

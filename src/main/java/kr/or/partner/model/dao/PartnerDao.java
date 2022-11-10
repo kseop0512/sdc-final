@@ -99,4 +99,8 @@ public class PartnerDao {
 		return sqlSession.update("partner.updatePwP",p);
 	}
 
+	public String selectPartnerName(String pNo) {
+		return sqlSession.selectOne("partner.selectPartnerName",pNo);
+	}
+
 }
