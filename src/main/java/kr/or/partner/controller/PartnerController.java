@@ -367,5 +367,11 @@ public class PartnerController {
 		}
 	}
 	
-	
+	//유저 마이페이지 - 이용내역 - 파트너번호로 파트너이름 조회하기
+	@ResponseBody
+	@RequestMapping(value="/getPartnerName.do",produces="application/text;charset=utf-8")
+	public String getPetName(String pNo) {
+		String pName = service.selectPartnerName(pNo);
+		return pName;
+	}
 }

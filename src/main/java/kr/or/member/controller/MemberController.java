@@ -133,16 +133,11 @@ public class MemberController {
 	@RequestMapping(value="/mypageService.do")
 	public String mypageService(Member m, Model model) {
 		ArrayList<Booking> list = service.selectBookingList(m);
-		System.out.println("리스트 있다!");
-		System.out.println(list.get(0).getBookingNo());
-		System.out.println(list.get(0).getPetNo());
-		System.out.println(list.get(0).getMemberId());
 		model.addAttribute("list",list);
 		return "member/mypageService";
 	}
-
-	/* 아이디 비밀번호 찾기*/
 	
+	/* 아이디 비밀번호 찾기*/	
 	@RequestMapping(value="/findIdUserFrm.do")
 	public String searchInfo() {
 		return "member/findIdUserFrm";

@@ -168,5 +168,8 @@
 		where p_id = #{pId}
 	</update>
 	
-
+	<!-- 유저 마이페이지 - 이용내역 - 파트너이름 출력 -->
+	<select id="selectPartnerName" parameterType="string" resultType="string">
+		select p_name from partner where p_no=#{_parameter}
+	</select>
 </mapper>

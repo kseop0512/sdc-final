@@ -100,5 +100,10 @@ public class PartnerService {
 	public int updatePwEncPartNer(Partner p) {
 		return dao.updatePwPartNer(p);
 	}
+	
+	//유저 마이페이지 - 이용내역 - 파트너이름 출력
+	public String selectPartnerName(String pNo) {
+		return dao.selectPartnerName(pNo);
+	}
 
 }

@@ -100,4 +100,8 @@
 		from pet_chklist where pet_no in (select pet_no from pet_tbl where member_no =#{memberNo})
 		
 	</select>
+	
+	<select id="selectPetName" parameterType="_int" resultType="string">
+		select pet_name from pet_tbl where pet_no=#{_parameter}
+	</select>
 </mapper>

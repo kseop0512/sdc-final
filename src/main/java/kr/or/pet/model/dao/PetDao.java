@@ -32,4 +32,8 @@ public class PetDao {
 		List list = sqlSession.selectList("pet.selectMyPetChk", memberNo);
 		return (ArrayList<PetCheckList>)list;
 	}
+
+	public String selectPetName(int petNo) {
+		return sqlSession.selectOne("pet.selectPetName",petNo);
+	}
 }

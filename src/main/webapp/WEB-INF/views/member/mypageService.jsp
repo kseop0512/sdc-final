@@ -44,10 +44,10 @@
 		                <table>
 		                  <thead>
 		                    <tr>
+		                      <td class="th-category">종류</td>
 		                      <td class="th-start-date">서비스시작일</td>
-		                      <td class="th-end-date">서비스종료일</td>
+		                      <td class="th-end-date">서비스완료일</td>
 		                      <td class="th-pet">똑독캣</td>
-		                      <td class="th-category">서비스종류</td>
 		                      <td class="th-partner">담당파트너</td>
 		                      <td class="th-price">이용요금</td>
 		                      <td class="th-state">예약상태</td>
@@ -58,44 +58,75 @@
 		                  <c:forEach items="${list}" var="b">
 		                    <tr>
 		                    	<input type="hidden" value="${b.bookingNo}">
+		                    	<!-- 서비스종류 -->
+		                    	<td class="td-category">
+		                    		<input type="hidden" class="input-category" value="${b.category}">
+		                    		<span class="span-category">
+		                    		 <c:choose>
+			                    		<c:when test="${b.category eq 'V'}">방문돌봄</c:when>
+			                    		<c:when test="${b.category eq 'L'}">위탁돌봄</c:when>
+			                    		<c:when test="${b.category eq 'T'}">훈련</c:when>
+			                    	 </c:choose>
+			                    	</span>
+		                    	</td>
+		                    	<!-- 시작일 -->
 		                    	<td class="td-start-date">
 		                    		<input type="hidden" class="input-start-date" value="${b.startDate}">		                    		
 		                    		<input type="hidden" class="input-start-time" value="${b.bookingTime}">
 		                    		<span class="span-start-date"></span>
-		                    		<!-- .td-start-date.text() -->
-		                    		<!-- .td-start-time.text() -->
 		                    	</td>
+		                    	<!-- 종료일 -->
 		                    	<td class="td-end-date">
 		                    		<input type="hidden" class="input-end-date" value="${b.endDate}">
 		                    		<input type="hidden" class="input-end-time" value="${b.bookingTime}">
 		                    		<span class="span-end-date"></span>
-		                    		<!-- .td-end-date.text() -->
-		                    		<!-- .td-end-time.text() -->
 		                    	</td>
 		                    	<td class="td-pet">
 		                    		<input type="hidden" class="input-pet" value="${b.petNo}">
-		                    		<!-- .td-pet.text() -->
-		                    	</td>
-		                    	<td class="td-category">
-		                    		<input type="hidden" class="input-category" value="${b.category}">
-		                    		<!-- .td-category.text() -->
+		                    		<span class="span-pet"></span>
 		                    	</td>
 		                    	<td class="td-partner">
 		                    		<input type="hidden" class="input-partner" value="${b.PNo}">
-		                    		<!-- .td-partner.text() -->
+		                    		<span class="span-partner"></span>
 		                    	</td>
 		                    	<td class="td-price">
 		                    		<input type="hidden" class="input-price" value="${b.price}">
-		                    		<!-- .td-price.text() -->
+		                    		<span class="span-price"></span>
 		                    	</td>
 		                    	<td class="td-state">
 		                    		<input type="hidden" class="input-state" value="${b.partnerAccept}">
-		                    		<!-- .td-state.text() -->
+		                    		<span class="span-state">
+		                    		 <c:choose>
+			                    		<c:when test="${b.partnerAccept eq 'R'}">예약대기중</c:when>
+			                    		<c:when test="${b.partnerAccept eq 'Y'}">예약완료</c:when>
+			                    		<c:when test="${b.partnerAccept eq 'C'}">취소처리중</c:when>
+			                    		<c:when test="${b.partnerAccept eq 'N'}">취소완료</c:when>
+			                    		<c:when test="${b.partnerAccept eq 'D'}">이용완료</c:when>
+			                    	 </c:choose>
+		                    		</span>
 		                    	</td>
 		                    	<td class="td-cancle-review">
 		                    		<input type="hidden" class="input-cancle-review" value="${b.reviewState}">
-		                    		<!-- .td-cancle-review.html() -->
-		                    		<!-- 취소신청/후기작성 링크 a태그로 -->
+		                    		<c:choose>
+			                    		<c:when test="${b.partnerAccept eq 'D' && b.reviewState eq 1}">
+			                    			별!!!!!
+			                    		</c:when>
+			                    		<c:when test="${b.partnerAccept eq 'D' && b.reviewState eq 0}">
+			                    			<a href="#">후기작성</a>
+			                    		</c:when>
+			                    		<c:when test="${b.partnerAccept eq 'Y'}">
+			                    			<a href="#">취소신청</a>
+			                    		</c:when>
+			                    		<c:when test="${b.partnerAccept eq 'R'}">
+			                    			<a href="#">취소신청</a>
+			                    		</c:when>
+			                    		<c:when test="${b.partnerAccept eq 'C'}">
+			                    			취소처리중
+			                    		</c:when>
+			                    		<c:when test="${b.partnerAccept eq 'N'}">
+			                    			취소완료
+			                    		</c:when>
+			                    	 </c:choose>
 		                    	</td>
 			                    	<!--
 			                    	<td>
