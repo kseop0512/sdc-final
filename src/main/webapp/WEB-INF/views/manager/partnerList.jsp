@@ -130,10 +130,10 @@
                                 <code>[<code id="partnerCount"></code>]</code>건 
                                         </p>
                                         <div id="nameIdSerarch-Box" style="float: right;">
-                                            <form action="#" post="post">
+                                            <form action="#" method="post">
                                                 <select name="type">
-                                                    <option>이름</option>
-                                                    <option>아이디</option>
+                                                    <option value="id">이름</option>
+                                                    <option value="name">아이디</option>
                                                 </select>
                                                     <input class="input-form2" type="text" placeholder="입력하세요" style="width: 500px;" name="keyword">
                                                     <button class="bc22">검색</button>
@@ -172,7 +172,7 @@
                                     <c:forEach items="${list }" var="p">
                                         <tr>
                                             <td>${p.PNo }</td>
-                                            <td><div onclick="modal(this);">${p.PName }</div></td><!-- href="/onePartner.do?=${p.PNo }" target="_blank" -->
+                                            <td><div onclick="modal(this);">${p.PName }</div></td>
                                             <td>${p.PId }</td>
                                             <td>${p.PPhone }</td>
                                             <td>${p.applyDate }</td>

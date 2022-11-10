@@ -242,12 +242,12 @@ public class ManagerController {
 	
 
 	// 관리자 - 파트너 회원가입 중  순파트너인 사람 수
-//	@ResponseBody
-//	@RequestMapping(value="/partnerCount.do")
-//	public String partnerCount() {
-//		Partner p = service.nPartner();
-//		return "manger/partnerList";
-//	}
+	@ResponseBody
+	@RequestMapping(value="/partnerCount.do",produces="application/json;charset=utf-8")
+	public String partnerCount() {
+		int p = service.nPartner();
+		return new Gson().toJson(p);
+	}
 	
 	//관리자 - 파트너 등급이동 -> 파트너 승인 된 사람들 등급변경 해주는 곳(C,B,A 등급) 
 	@RequestMapping(value="/getPartner.do")

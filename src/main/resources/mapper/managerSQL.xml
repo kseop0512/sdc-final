@@ -193,4 +193,7 @@
   <delete id="deletePartner" parameterType="map">
   	delete from partner where p_no=#{pNo}
   </delete>
+  <select id="selectGetPartner" resultType="int">
+  	select count(*) from partner WHERE p_grade = 'N'
+  </select>
 </mapper>

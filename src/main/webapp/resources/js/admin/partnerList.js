@@ -1,4 +1,4 @@
-/*
+
 $(function(){
 	getPartnerCount();
 });
@@ -6,7 +6,7 @@ $(function(){
 
 function getPartnerCount(){
 
-$.ajax({
+	$.ajax({
 		url :"/partnerCount.do",
 		success: function(data){
 			$("#partnerCount").append(data);
@@ -17,7 +17,7 @@ $.ajax({
 	
 	});
 }
-*/
+
 
 /*문의제목 눌렀을때 모달 띄우기*/ 
 function modal(obj){
