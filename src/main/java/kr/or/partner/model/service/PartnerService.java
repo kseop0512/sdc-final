@@ -70,12 +70,16 @@ public class PartnerService {
 		return dao.selectOnePartner(pNo);
 	}
 
-
-	/*
-	public Partner selectOnepartner(Partner partner) {
-		Partner p = dao.selectOnepartner(partner);
-		return p;
+	public Partner findIdPartner(Partner partner) {
+		return dao.findIdPartner(partner);
 	}
-	*/
+
+	public Partner selectOnePartnerEnc(Partner partner) {
+		return dao.selectOnePartner(partner);
+	}
+
+	public int updatePwEncPartNer(Partner p) {
+		return dao.updatePwPartNer(p);
+	}
 
 }

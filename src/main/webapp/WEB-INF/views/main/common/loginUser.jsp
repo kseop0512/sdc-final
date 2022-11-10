@@ -37,15 +37,21 @@
           </div>
           <div class="submit-btn">
             <a href="/memberJoinFrm.do">회원가입</a>
-            <a href="/findIdPage.do" id="findIdBtn">| 아이디 찾기</a>
-            <a href="/findPwPage.do" id="findPwBtn">/비밀번호 찾기</a>
+            <a href="/findIdUserFrm.do" id="findIdBtn">| 아이디 찾기</a>
+            <a href="/findPwUserFrm.do" id="findPwBtn">/비밀번호 찾기</a>
           </div>
           <br>
           <br>
           <br>
           <br>
         <div class="text-center"><input type="submit" class="submitBtn loginBtn" value="LOGIN" style="background: #cda45e;border: 0;padding: 10px 35px;color: #fff;transition: 0.4s;border-radius: 50px;"></div>
+		
       </form>
+      <div>
+			<a href="/kakaoLogin.do">
+				<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/>
+			</a>
+		</div>
     </div>
   </section><!-- End Book A Table Section -->
 	

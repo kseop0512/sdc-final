@@ -36,5 +36,21 @@ public class MemberDao {
 	}
 
 
+	public Member searchId(String memberId) {
+		return sqlSession.selectOne("member.kakaoSearchId", memberId);
+	}
+
+	/* 아이디 찾기 */
+	public Member findIdUser(Member member) {
+		return sqlSession.selectOne("member.findIdUser",member);
+	}
+
+
+	public int updatePwMember(Member m) {
+		return sqlSession.update("member.updatePw", m);
+	}
+
+	
+
 
 }

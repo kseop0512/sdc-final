@@ -41,5 +41,43 @@ public class MemberService {
 		}
 	}
 
+
+	public Member findIdUser(Member member) {
+		return dao.findIdUser(member);
+	}
+
+
+	public Member selectOneMemberEnc(Member member) {
+		return dao.selectOneMember(member);
+	}
+
+
+	public int updatePwEncMember(Member m) {
+		return dao.updatePwMember(m);
+	}
+
+
+	
+
+	//카카오톡 존재하는 아이디 체크
+	/*
+	public Member searchId(String memberId) {
+		Member m = dao.searchId(memberId);
+	    return m;
+	}
+*/
+	/*
+	public int changePwMember(Member m) {
+		return dao.changePwMember(m);
+	}
+
+
+	public Member searchPwUser(Member m) {
+		return dao.searchPwUser(m);
+	}
+	*/
+	
+	
+	
 	
 }

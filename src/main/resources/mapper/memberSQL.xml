@@ -86,4 +86,52 @@
 		    apply_date as enrolldate
 		from partner
 	</select>
+	
+	<select id="findIdUser" parameterType="m" resultType="m">
+		select
+			member_id as memberId,
+			member_gender as memberGender
+		from member_tbl
+		where member_name= #{memberName} and member_phone = #{memberPhone}
+	</select>
+	
+	<update id="updatePw" parameterType="m">
+		update member_tbl
+		set member_pw = #{memberPw}
+		where member_id = #{memberId}
+	</update>
+	
+	
+	<!-- 카카오회원가입 
+    <insert id="addProfile" parameterType="m">
+    insert into member_tbl values (
+        member_seq.nextval,
+        #{memberName},
+		#{memberId},
+		#{memberPw},
+		#{memberBdate},
+		#{memberPhone},
+		#{memberAddr},
+		#{memberGender},
+		to_char(sysdate,'yyyymmdd')
+     )
+    </insert>
+	-->
+	
+	<!-- 카카오톡 로그인
+     <select id="kakaoSearchId" resultType="m" parameterType="string">
+        select
+           member_no as memberNo,
+			member_name as memberName,
+			member_id as memberId,
+	  		member_pw as memberPw,
+	  		member_bday as memberBdate,
+	  		member_phone as memberPhone,
+	  		member_addr as memberAddr,
+	  		member_gender as memberGender,
+	  		enroll_date as enrollDate
+        from member where member_id =#{memberId}
+   </select>
+	 -->
+	
 </mapper>
