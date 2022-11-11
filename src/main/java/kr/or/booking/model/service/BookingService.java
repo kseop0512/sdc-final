@@ -13,9 +13,9 @@ public class BookingService {
 	@Autowired
 	private BookingDao dao;
 
-	public int insertBooking(Booking b) {
+	public int insertTrainerBooking(Booking b) {
 		// TODO Auto-generated method stub
-		return dao.insertBooking(b);
+		return dao.insertTrainerBooking(b);
 	}
 
 	public ArrayList<String> selectBookingTime(Booking b) {

@@ -14,9 +14,9 @@ public class BookingDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public int insertBooking(Booking b) {
+	public int insertTrainerBooking(Booking b) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert("booking.insertBooking",b);
+		return sqlSession.insert("booking.insertTrainerBooking",b);
 	}
 
 	public ArrayList<String> selectBookingTime(Booking b) {

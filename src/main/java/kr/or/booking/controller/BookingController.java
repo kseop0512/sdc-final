@@ -23,7 +23,7 @@ public class BookingController {
 	
 	@RequestMapping(value="/bookingMemberInfo.do")
 	public String bookingMemberInfo(Booking b, Model model) {
-		int result = service.insertBooking(b);
+		int result = service.insertTrainerBooking(b);
 		if(result>0) {
 			model.addAttribute("title","예약 요청 성공");
 			model.addAttribute("msg","훈련사님께 예약 요청이 성공적으로 이루어졌습니다. 훈련사님으로부터 회신을 기다립니다");
@@ -41,6 +41,7 @@ public class BookingController {
 	@ResponseBody
 	@RequestMapping(value="/selectBookingTime.do", produces="application/json;charset=utf-8")
 	public String selectBookingTime(Booking b) {
+		System.out.println(b.getStartDate());
 		ArrayList<String> times = service.selectBookingTime(b);
 		// System.out.println(times);
 		if(times.isEmpty()) {
@@ -53,8 +54,6 @@ public class BookingController {
 					timeList.add(sT.nextToken());
 				}
 			}
-			
-			System.out.println(timeList);
 			return new Gson().toJson(timeList);
 		}
 	}
@@ -64,7 +63,7 @@ public class BookingController {
 	public String disabledDatesBookingTime() {
 		ArrayList<String> dates = new ArrayList<String>();
 		// ex) 11월 10일, 11월 20일 선택 못하게
-		dates.add("2022-11-10");
+		dates.add("2022-11-21");
 		dates.add("2022-11-20");
 		return new Gson().toJson(dates);
 	}

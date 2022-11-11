@@ -274,7 +274,6 @@ public class PartnerController {
 		ArrayList<Pet> pets = service.selectAllPets(m);
 		model.addAttribute("trainer",trainer);
 		model.addAttribute("petList",pets);
-		System.out.println(trainer);
 		return "partner/trainerBookingPage";
 	}
 	
