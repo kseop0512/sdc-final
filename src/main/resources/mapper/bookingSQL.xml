@@ -28,5 +28,6 @@
 			price
 		from booking_tbl
 		where member_id=#{memberId}
+		order by start_date desc
 	</select>
 </mapper>

@@ -90,4 +90,5 @@
 	<context:component-scan base-package="kr.or.dm"/>
 	<context:component-scan base-package="kr.or.booking"/>
 	<context:component-scan base-package="kr.or.pet"/>
+	<context:component-scan base-package="kr.or.review"/>
 </beans:beans>
