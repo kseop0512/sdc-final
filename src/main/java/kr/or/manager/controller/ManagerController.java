@@ -288,7 +288,7 @@ public class ManagerController {
 		int p = service.gradePartner();
 		return new Gson().toJson(p);
 	}
-	
+
 }
 
 

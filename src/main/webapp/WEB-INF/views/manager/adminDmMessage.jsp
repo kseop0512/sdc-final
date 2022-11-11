@@ -135,26 +135,30 @@
                                             <code>[<code id="dm_checkRead"></code>]</code>건
                                         </p>
                                         <div id="nameIdSerarch-Box" style="float: right;">
-                                            <form action="#" post="post">
-                                                <select>
+                                            <form action="/selectdmType.do" method="get">
+                                                <select name="dmType">
                                                     <option>문의유형</option>
-                                                    <option>취소/결제</option>
-                                                    <option>예약</option>
-                                                    <option>기타문의</option>
+                                                    <option value="0">취소/결제</option>
+                                                    <option value="1">예약</option>
+                                                    <option value="2">기타문의</option>
                                                 </select>
-                                                <select>
-                                                    <option>아이디</option>
-                                                </select>
-                                                    <input class="input-form2" type="text" placeholder="입력하세요" style="width: 500px;">
+                                                    <input class="input-form2" type="text" name="keyword" placeholder="아이디를 입력하세요" style="width: 500px;">
                                                     <button class="bc22">검색</button>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
+								 <!-- 탭 -->
+					              <div id="tab-wrap">
+					              	<div id="tab-allMember">전체</div>
+					                <div id="tab-member" class="active-tap">이용자</div>
+					                <div id="tab-partner">파트너</div>
+					              </div>
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
                                             <th>번호</th>
+                                            <th>구분(M/P)</th>
                                             <th>아이디</th>
                                             <th>문의유형</th>
                                             <th>문의내용</th>
@@ -165,6 +169,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>번호</th>
+                                            <th>구분(M/P)</th>
                                             <th>아이디</th>
                                             <th>문의유형</th>
                                             <th>문의내용</th>
@@ -185,7 +190,7 @@
                                 </div>
                                 <div class="modalmodal-content">
                                     <div class="dmFrm">
-                                        <table class="table table-bordered">
+                                        <table class="table table-bordered" style="min-width: 800px;">
                                             <thead>
                                                 <tr>
                                                 	<th scope="col" style="text-align: center;">No</th>
@@ -208,7 +213,7 @@
                                                     <input type="hidden" id="dm-type" value="">
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody style="min-width: 800px;">
                                                 <tr>
                                                     <th style="line-height: 130px;">문의내용</th>
                                                     <td colspan="5"><textarea id="detailContent" style="resize: none;" readonly></textarea></td>

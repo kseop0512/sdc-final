@@ -31,6 +31,12 @@ public class DirectMessageDao {
 		return m;
 	}
 	
+	public Partner selectOnepMember(String sender) {
+		Partner p = sqlSession.selectOne("manager.partnerOne",sender);
+		return p;
+	}
+	
+	
 	//dm 총 수 
 	public int dmCount(Manager g) {
 		int result = sqlSession.selectOne("dm.dmCount",g);
@@ -82,5 +88,25 @@ public class DirectMessageDao {
 		return sqlSession.delete("dm.deleteDm",dmNo);
 	}
 
+	//답변보여주기 
+	public DirectMessage selectReply(int dmNo) {
+		return sqlSession.selectOne("dm.showDmContent",dmNo);
+	}
+	//관리자P dm 결제/취소 검색
+	public ArrayList<DirectMessage> selectdmType(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("dm.selectdmType",map);
+		return (ArrayList<DirectMessage>)list;
+	}
+	//관리자 Member만 조회 
+	public ArrayList<DirectMessage> selectMemberDmList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("dm.selectMemberDmList",map);
+		return (ArrayList<DirectMessage>) list;
+	}
+	//관리자 partner만조회
+	public ArrayList<DirectMessage> selectpartnerDmList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("dm.selectPartnerDmList",map);
+		return (ArrayList<DirectMessage>) list;
+	}
+	
 
 }

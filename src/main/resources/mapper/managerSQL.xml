@@ -77,7 +77,12 @@
 		   member_phone as memberPhone
 		from member_tbl where member_id=#{_parameter}	 
 	</select>
-
+	<select id="partnerOne" parameterType="string" resultType="p">
+		select
+			p_name as pName,
+			p_phone as pPhone
+		from partner where p_id=#{_parameter}
+	</select>
 	
 	<select id="selectAdminNotice" parameterType="map" resultType="ng">
 		select * from
@@ -181,8 +186,14 @@
 		p_point as pPoint
 	from partner where p_grade='N' 
 		<choose>
-			<when test="type == 'null'">
-			and p_id like '%'||#{keyword}||'%'
+			<when test="type == null">
+				and p_id like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('id')">
+				and p_id like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('name')">
+				and p_name like '%'||#{keyword}||'%'
 			</when>
 		</choose>
   </select>
@@ -209,6 +220,17 @@
 		p_grade as pGrade,
 		p_point as pPoint
 	from partner where p_grade!='N' 
+	<choose>
+			<when test="type == null">
+				and p_id like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('id')">
+				and p_id like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('name')">
+				and p_name like '%'||#{keyword}||'%'
+			</when>
+		</choose>
   </select>
   <select id="gradePartner" resultType="int">
   	select count(*) from partner WHERE p_grade != 'N'
