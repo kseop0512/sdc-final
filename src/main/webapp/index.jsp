@@ -7,7 +7,112 @@
 <meta charset="UTF-8">
 <title>똑독캣 (SDC) | 펫시터, 훈련사, 그루머 예약서비스</title>
 <jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
+<style>
+	.contact .moonui {
+  width: 100%;
+}
 
+.contact .moonui .form-group {
+  padding-bottom: 8px;
+}
+
+.contact .moonui .validate {
+  display: none;
+  color: red;
+  margin: 0 0 15px 0;
+  font-weight: 400;
+  font-size: 13px;
+}
+
+.contact .moonui .error-message {
+  display: none;
+  color: #fff;
+  background: #ed3c0d;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+}
+
+.contact .moonui .sent-message {
+  display: none;
+  color: #fff;
+  background: #18d26e;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+}
+
+.contact .moonui .loading {
+  display: none;
+  text-align: center;
+  padding: 15px;
+}
+
+.contact .moonui .loading:before {
+  content: "";
+  display: inline-block;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin: 0 10px -6px 0;
+  border: 3px solid #ffb347;
+  border-top-color: #1a1814;
+  -webkit-animation: animate-loading 1s linear infinite;
+  animation: animate-loading 1s linear infinite;
+}
+
+.contact .moonui input,
+.contact .moonui textarea {
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 14px;
+  background: #0c0b09;
+  border-color: #625b4b;
+  color: white;
+}
+
+.contact .moonui input::-moz-placeholder,
+.contact .moonui textarea::-moz-placeholder {
+  color: #a49b89;
+}
+
+.contact .moonui input::placeholder,
+.contact .moonui textarea::placeholder {
+  color: #a49b89;
+}
+
+.contact .moonui input:focus,
+.contact .moonui textarea:focus {
+  border-color: #ffb347;
+}
+.contact .moonui input.is-invalid:focus,
+.contact .moonui textarea.is-invalid:focus {
+  border-color: #dc3545;
+}
+.contact .moonui input.is-invalid{
+  border-color: #dc3545;
+}
+.contact .moonui input {
+  height: 44px;
+}
+
+.contact .moonui textarea {
+  padding: 10px 12px;
+}
+
+.contact .moonui button[type=submit] {
+  background: #ffb347;
+  border: 0;
+  padding: 10px 35px;
+  color: #1a1814;
+  transition: 0.4s;
+  border-radius: 50px;
+}
+
+.contact .moonui button[type=submit]:hover {
+  background: #d3af71;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/main/common/header.jsp"/>
@@ -700,30 +805,53 @@
           </div>
 
           <div class="col-lg-8 mt-5 mt-lg-0">
-
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="이름" required>
-                </div>
-                <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="이메일" required>
-                </div>
+			
+			<c:choose>
+			<c:when test="${not empty sessionScope.m }">
+            <form action="/mainQnaWrite.do" method="post" role="form" class="moonui">
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="dmType" id="dmType" placeholder="문의유형 -> [0 : 결제/취소, 1: 예약/취소  , 2: 기타문의] 숫자로 적어주세요" required>
               </div>
               <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="문의제목" required>
+                <textarea class="form-control" name="dmContent" rows="8" placeholder="똑독캣에게  문의 할 내용을 적어주세요" required></textarea>
               </div>
               <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="8" placeholder="문의내용" required></textarea>
-              </div>
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
+              	<input type="hidden" name="sender" value="${sessionScope.m.memberId }">
+              	<input type="hidden" name="senderCategory" value="M">
               </div>
               <div class="text-center"><button type="submit">문의하기</button></div>
             </form>
-
+			</c:when>
+			<c:when test="${not empty sessionScope.p }">
+            <form action="/mainQnaWrite.do" method="post" role="form" class="moonui">
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="dmType" id="dmType" placeholder="문의유형 -> [0 : 결제/취소, 1: 예약/취소  , 2: 기타문의] 숫자로 적어주세요" required>
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="dmContent" rows="8" placeholder="똑독캣에게  문의 할 내용을 적어주세요" required></textarea>
+              </div>
+              <div class="form-group mt-3">
+              	<input type="hidden" name="sender" value="${sessionScope.p.PId }">
+              	<input type="hidden" name="senderCategory" value="P">
+              </div>
+              <div class="text-center"><button type="submit">문의하기</button></div>
+            </form>
+			</c:when>
+			<c:otherwise>
+			<form action="/mainQnaWrite.do" method="post" role="form" class="moonui">
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="dmType" id="dmType" placeholder="문의유형 -> [0 : 결제/취소, 1: 예약/취소  , 2: 기타문의] 숫자로 적어주세요" required>
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="dmContent" rows="8" placeholder="똑독캣에게  문의 할 내용을 적어주세요" required style="margin-bottom: 20px;"></textarea>
+              </div>
+              <div class="text-center">
+              	<!--  <button type="submit">문의하기</button> -->
+              	<a href="/beforeLogin.do" style="background: #cda45e;border: 0;padding: 10px 35px;color: #fff;transition:0.4s;border-radius: 50px;" type="submit">문의하기</a>
+              </div>
+			</c:otherwise>
+			</c:choose>
+			
           </div>
 
         </div>

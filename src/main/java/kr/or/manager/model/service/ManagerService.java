@@ -19,7 +19,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+<<<<<<< HEAD
 import kr.or.mail.controller.MailSender;
+=======
+import kr.or.dm.model.vo.DirectMessage;
+>>>>>>> refs/heads/hwan
 import kr.or.manager.model.dao.ManagerDao;
 import kr.or.manager.model.vo.FileVOG;
 import kr.or.manager.model.vo.Manager;
@@ -247,6 +251,7 @@ public class ManagerService {
 		dao.readGCountUpdate(noticeGNo);
 		
 	}
+<<<<<<< HEAD
 // 관리자 - 승인해야할 partner 불러오기 
 	public ArrayList<Partner> partnerList(String type, String keyword) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -296,5 +301,20 @@ public class ManagerService {
 		// TODO Auto-generated method stub
 		return dao.gradePartner();
 	}
+=======
+
+	public int mainQnaWrite(DirectMessage dm) {
+		System.out.println(dm);
+		int result = dao.mainQnaWrite(dm);
+		System.out.println(result);
+		return result;
+	}
+
+	public ArrayList<NoticeG> searchQnanotice(NoticeG ng) {
+		return dao.searchQnanotice(ng);
+	}
+	
+	
+>>>>>>> refs/heads/hwan
 	
 }

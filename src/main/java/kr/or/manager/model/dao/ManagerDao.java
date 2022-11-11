@@ -7,7 +7,9 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.dm.model.vo.DirectMessage;
 import kr.or.manager.model.vo.FileVOG;
 import kr.or.manager.model.vo.Manager;
 import kr.or.manager.model.vo.NoticeG;
@@ -94,6 +96,18 @@ public class ManagerDao {
 	
 	public Object readGCountUpdate(int noticeGNo) {
 		return sqlSession.update("readGCountUpdate", noticeGNo);
+	}
+	
+	@Transactional
+	public int mainQnaWrite(DirectMessage dm) {
+		System.out.println(dm);
+		int result = sqlSession.insert("manager.mainQnaWrite",dm);
+		return result;
+	}
+
+	public ArrayList<NoticeG> searchQnanotice(NoticeG ng) {
+		List list = sqlSession.selectList("manager.searchQnanotice",ng);
+		return (ArrayList<NoticeG>)list;
 	}
 
 	//파트너 - 승인해야할 파트너 리스트

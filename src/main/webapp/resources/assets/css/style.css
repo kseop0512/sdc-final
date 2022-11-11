@@ -1613,6 +1613,112 @@ section {
   background: #d3af71;
 }
 
+.contact .moonui {
+  width: 100%;
+}
+
+.contact .moonui .form-group {
+  padding-bottom: 8px;
+}
+
+.contact .moonui .validate {
+  display: none;
+  color: red;
+  margin: 0 0 15px 0;
+  font-weight: 400;
+  font-size: 13px;
+}
+
+.contact .moonui .error-message {
+  display: none;
+  color: #fff;
+  background: #ed3c0d;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+}
+
+.contact .moonui .sent-message {
+  display: none;
+  color: #fff;
+  background: #18d26e;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+}
+
+.contact .moonui .loading {
+  display: none;
+  text-align: center;
+  padding: 15px;
+}
+
+.contact .moonui .loading:before {
+  content: "";
+  display: inline-block;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin: 0 10px -6px 0;
+  border: 3px solid #ffb347;
+  border-top-color: #1a1814;
+  -webkit-animation: animate-loading 1s linear infinite;
+  animation: animate-loading 1s linear infinite;
+}
+
+.contact .moonui input,
+.contact .moonui textarea {
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 14px;
+  background: #0c0b09;
+  border-color: #625b4b;
+  color: white;
+}
+
+.contact .moonui input::-moz-placeholder,
+.contact .moonui textarea::-moz-placeholder {
+  color: #a49b89;
+}
+
+.contact .moonui input::placeholder,
+.contact .moonui textarea::placeholder {
+  color: #a49b89;
+}
+
+.contact .moonui input:focus,
+.contact .moonui textarea:focus {
+  border-color: #ffb347;
+}
+.contact .moonui input.is-invalid:focus,
+.contact .moonui textarea.is-invalid:focus {
+  border-color: #dc3545;
+}
+.contact .moonui input.is-invalid{
+  border-color: #dc3545;
+}
+.contact .moonui input {
+  height: 44px;
+}
+
+.contact .moonui textarea {
+  padding: 10px 12px;
+}
+
+.contact .moonui button[type=submit] {
+  background: #ffb347;
+  border: 0;
+  padding: 10px 35px;
+  color: #1a1814;
+  transition: 0.4s;
+  border-radius: 50px;
+}
+
+.contact .moonui button[type=submit]:hover {
+  background: #d3af71;
+}
+
+
 @-webkit-keyframes animate-loading {
   0% {
     transform: rotate(0deg);

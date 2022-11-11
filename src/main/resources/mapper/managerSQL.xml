@@ -167,6 +167,7 @@
   	where notice_g_no = #{noticeGNo}
   </delete>
   
+
   <!-- 승인해야할 파트너 리스트 -->
   <select id="adminPartnerList" parameterType="map" resultType="p">
 	 select 
@@ -213,4 +214,44 @@
   <select id="gradePartner" resultType="int">
   	select count(*) from partner WHERE p_grade != 'N'
   </select>
+
+  <!-- 메인 문의하기 -->
+  <insert id="mainQnaWrite" parameterType="dm">
+  	insert into direct_msg values
+  	(
+  		dm_seq.nextval,
+  		#{sender},
+  		#{senderCategory},
+  		'admin',
+  		#{dmContent},
+  		to_char(sysdate,'yy/mm/dd'),
+  		0,
+  		#{dmType},
+  		null
+  	)
+  </insert>
+  
+  <!-- 검색창 -->
+  <select id="searchQnanotice" parameterType="ng" resultType="ng">
+  	select
+  		notice_g_no as noticeGNo,
+		notice_g_title as noticeGTitle,
+		notice_g_content as noticeGContent,
+		notice_g_writer as noticeGWriter,
+		notice_g_date as noticeGDate,
+		read_g_count as readGCount,
+		search_type as searchType,
+		keyword as keyword
+	from qna_tbl
+	<choose>
+		<when test="searchType.equals('title')">
+			where notice_g_title like '%'||#{keyword}||'%'
+		</when>
+		<when test="searchType.equals('content')">
+		where notice_g_content like '%'||#{keyword}||'%'
+		</when>
+	</choose>
+  </select>
+  
+
 </mapper>

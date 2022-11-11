@@ -31,16 +31,9 @@
             <a class="navbar-brand ps-3" href="/adminIndex.do">똑독캣 관리자페이지</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-            <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
             <!-- Navbar-->
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                <li class="nav-item dropdown">
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4" style="margin-left: auto !important;">
+                <li class="nav-item dropdown" style="position: relative;display: flex;flex-wrap: wrap;align-items: stretch;width: 100%;">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <!--<li><a class="dropdown-item" href="#!">Settings</a></li>
@@ -174,6 +167,22 @@
                                 <input type="text" placeholder="입력하세요" style="width: 400px; height: 40px;" name="keyword" id="keyword">
                                 <button class="searchbox-btn btn bc22 searchBtn" name="btnSearch" id="btnSearch">검색</button>
                             </div>
+                            
+                            <div class="qna-board">
+								<div class="search-box">
+									<form action="#">
+										<select name="searchType" id="searchType" class="search-qna-form">
+											<option value="0" selected="selected">선택하세요 </option>
+											<option value="title">제목</option>
+											<option value="content">내용 </option>
+										</select> <input type="text" class="search-input"
+											 name="keyword" id="keyword">
+										<button type="button" class="search-btn" id="searchQnaAjax">검색</button>
+									</form>
+								</div>
+								<div id="qnaAjaxResult"></div>
+							</div>
+                            
                         </div>
                         
                         
@@ -195,6 +204,55 @@
                 </footer>
             </div>
         </div>
+        <script>
+        $("#searchQnaAjax").on("click",function(){
+
+        	const searchType = $("#searchType").val();
+        	const keyword = $("#keyword").val();
+        	
+        	if(searchType != 0 ){
+
+        	$.ajax({
+        		url : "/searchQnaAjax.do?searchType="+searchType+"&keyword="+keyword,
+                type : "post",
+                success : function(data){
+                	console.log(data);
+                //테이블 초기화 
+                $(".qna-table").empty();
+                if(data.length>=1){
+                
+                 const table = $("<table>");
+                    table.attr('class','qna-table');
+                    const titleTr = $("<tr>");
+                    titleTr.html("<th>글번호</th><th>제목</th><th>작성자</th><th>내용</th><th>문의날짜</th><th>조회수</th>");
+                    titleTr.attr('class','qna-tr');
+                    titleTr.attr("scope","col");
+                    table.append(titleTr);
+                    for(let i=0; i<data.length; i++){
+                        const tr = $("<tr>");
+                        tr.attr('class','qna-row');
+                        tr.append("<td>"+data[i].noticeGNo+"</td>");
+                      if(data[i].noticeGTitle == 1) {
+                      	tr.append("<td>"+"제목검색"+"</td>"); 
+                      } 
+                        tr.append("<td>"+data[i].noticeGContent+"</td>");
+                        tr.append("<td>"+data[i].noticeGWriter+"</td>");
+                        tr.append("<td>"+data[i].noticeGDate+"</td>");
+                        tr.append("<td>"+data[i].readGCount+"</td>");
+                        table.append(tr);
+                        
+                        
+                    }
+                    $("#qnaAjaxResult").html(table);
+                }
+                }
+        	});
+        	
+        	} else {
+        		alert(" 검색내용을 선택하고 검색어를 입력하세요  ");
+        	}
+        });
+        </script>
       	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="/resources/js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
