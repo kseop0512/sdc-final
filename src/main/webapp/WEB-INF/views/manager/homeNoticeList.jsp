@@ -89,8 +89,24 @@
                                     <option>제목+내용</option>
                                 </select>
                                 <input type="text" placeholder="입력하세요" style="width: 400px; height: 40px;" name="keyword" id="keyword">
-                                <button class="searchbox-btn btn bc22 searchBtn" name="btnSearch" id="btnSearch">검색</button>
+                                <button class="searchbox-btn btn bc22 searchBtn" name="btnSearch" id="btnSearch" style="background-color: #ffb347;">검색</button>
                             </div>
+                            
+                     <div class="qna-board">
+						<div class="search-box">
+							<form action="#">
+								<select name="searchType" id="searchType" class="search-qna-form">
+									<option value="0" selected="selected">선택하세요 </option>
+									<option value="title">제목</option>
+									<option value="content">내용 </option>
+								</select> <input type="text" class="search-input"
+									 name="keyword" id="keyword">
+								<button type="button" class="search-btn" id="searchQnaAjax">검색</button>
+							</form>
+						</div>
+						<div id="qnaAjaxResult"></div>
+					</div>
+                            
                         </div>
                         
                         

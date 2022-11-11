@@ -17,4 +17,6 @@ public class NoticeG {
 	private String noticeGDate;
 	private int readGCount;
 	private ArrayList<FileVOG> fileList;
+	private String searchType;
+	private String keyword;
 }

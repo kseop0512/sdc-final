@@ -19,7 +19,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import kr.or.dm.model.vo.DirectMessage;
 import kr.or.manager.model.dao.ManagerDao;
 import kr.or.manager.model.vo.FileVOG;
 import kr.or.manager.model.vo.Manager;
@@ -247,5 +247,18 @@ public class ManagerService {
 		dao.readGCountUpdate(noticeGNo);
 		
 	}
+
+	public int mainQnaWrite(DirectMessage dm) {
+		System.out.println(dm);
+		int result = dao.mainQnaWrite(dm);
+		System.out.println(result);
+		return result;
+	}
+
+	public ArrayList<NoticeG> searchQnanotice(NoticeG ng) {
+		return dao.searchQnanotice(ng);
+	}
+	
+	
 	
 }

@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,8 +27,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 
 import common.FileRename;
+import kr.or.dm.model.vo.DirectMessage;
 import kr.or.manager.model.service.ManagerService;
 import kr.or.manager.model.vo.FileVOG;
 import kr.or.manager.model.vo.Manager;
@@ -204,6 +207,17 @@ public class ManagerController {
 		return "redirect:/adminNotice.do?reqPage=1";
 	}
 	
+	//공지사항 검색
+	@ResponseBody
+	@RequestMapping(value="searchQnaAjax.do",produces = "application/json;charset=utf-8")
+	public String searchQnanotice(NoticeG ng) {
+		ArrayList<NoticeG> list = service.searchQnanotice(ng);
+		Gson gson = new Gson();
+		String result = gson.toJson(list);
+		System.out.println(result);
+		return result;
+	}
+	
 	@RequestMapping(value="/delete.do")
 	public String delete(NoticeG noticeGNo, Model model) { 
 		
@@ -218,6 +232,30 @@ public class ManagerController {
 			model.addAttribute("msg", "삭제 실패입니다");
 			model.addAttribute("icon", "error");
 			model.addAttribute("loc", "/adminNotice.do?reqPage=1");
+		}
+		return "common/msg";
+	}
+	
+	
+	//메인화면 문의하기
+	@RequestMapping(value="/mainQnaWrite.do")
+	public String mainQnaWrite(DirectMessage dm, Model model) {
+		System.out.println(dm);
+		int result = service.mainQnaWrite(dm);
+		System.out.println(result);
+		
+		if(result > 0) {
+			model.addAttribute("title", "문의 완료");
+			model.addAttribute("msg", "문의 성공입니다");
+			model.addAttribute("icon", "success");
+			model.addAttribute("loc", "/");
+			System.out.println("성공");
+		}else {
+			model.addAttribute("title", "문의 실패");
+			model.addAttribute("msg", "문의 실패입니다");
+			model.addAttribute("icon", "error");
+			model.addAttribute("loc", "/");
+			System.out.println("실패");
 		}
 		return "common/msg";
 	}
