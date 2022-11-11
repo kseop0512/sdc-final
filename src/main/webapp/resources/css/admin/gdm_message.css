@@ -139,3 +139,7 @@ tbody>tr>td:nth-child(7){
     cursor: pointer;
     color: #282F44;
 }
+
+#tab-partner{
+	float: left;
+}

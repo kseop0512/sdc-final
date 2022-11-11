@@ -24,6 +24,7 @@ public class DirectMessageController {
 	@Autowired
 	private DirectMessageService service;
 	
+	//관리자 - 1:1문의 리스트
 	@ResponseBody
 	@RequestMapping (value="/myDmList.do", produces="application/json;charset=utf-8")
 	public String myDmList(@SessionAttribute Manager g, DirectMessage dm) {
@@ -34,13 +35,14 @@ public class DirectMessageController {
 		return new Gson().toJson(list);
 	}
 	
-//dm.js에 모달 띄워줄때 아이디를 준 회원정보조회	
-@ResponseBody
-@RequestMapping(value="/detailMember.do", produces="application/json;charset=utf-8")
-public String detailMember(String sender) {
-	Member m  = service.selectOneMember(sender);
-	return new Gson().toJson(m);
-	}
+	//관리자 -  dm.js에 모달 띄워줄때 아이디를 준 회원정보조회, 내용조회
+	@ResponseBody
+	@RequestMapping(value="/detailMember.do", produces="application/json;charset=utf-8")
+	public String detailMember(String sender, int dmNo) {
+		HashMap<String, Object> m  = service.selectOneMember(sender, dmNo);
+		return new Gson().toJson(m);
+		}
+
 
  // 총 카운트 
 	@ResponseBody
@@ -140,5 +142,35 @@ public String detailMember(String sender) {
 			resultMsg = "fail";
 		}
 		return resultMsg;
+	}
+	//관리자 P 1;1 검색 
+	@ResponseBody
+	@RequestMapping(value="/selectdmType.do",produces="application/json;charset=utf-8")
+	public String selectdmType(int dmType, String keyword, Model model) {
+		System.out.println(dmType);
+		System.out.println(keyword);
+		ArrayList<DirectMessage> list = service.selectdmType(dmType,keyword);
+		model.addAttribute("list",list);
+		return new Gson().toJson(list);
+	}
+	//관리자 - member만 
+	@ResponseBody
+	@RequestMapping(value="/getMemberDmList.do",produces="application/json;charset=utf-8")
+	public String getMemberDmList(@SessionAttribute Manager g, DirectMessage dm) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("dm", dm);
+		map.put("adminId", g.getAdminId());
+		ArrayList<DirectMessage> list = service.getMemberDmList(map);
+		return new Gson().toJson(list);
+	}
+	//관리자 - partner만 
+	@ResponseBody
+	@RequestMapping(value="/getPartnerDmList.do",produces="application/json;charset=utf-8")
+	public String getPartnerDmList(@SessionAttribute Manager g, DirectMessage dm) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("dm", dm);
+		map.put("adminId", g.getAdminId());
+		ArrayList<DirectMessage> list = service.getPartnerDmList(map);
+		return new Gson().toJson(list);
 	}
 }
