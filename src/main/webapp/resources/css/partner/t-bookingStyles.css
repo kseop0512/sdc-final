@@ -87,6 +87,20 @@
 	font-size: 18px;
 	cursor: pointer;
 }
+.clicked_time{
+	float: left;
+	width: 20%;
+	height: 50px;
+	line-height: 50px;
+	background-color: #FF7F3F;
+	border: 1px solid #FF7F3F;
+	border-radius: 3px;
+	margin: 10px 10px;
+	text-align: center;
+	font-size: 18px;
+	cursor: pointer;
+	color: #fff;
+}
 
 .section-title{
 	padding: 26px 1px 10px 15px;
@@ -158,5 +172,3 @@
 	font-weight: bold;
 	background-color: #F0A500;
 }
-
-<!-- 시간선택비활성화 -->

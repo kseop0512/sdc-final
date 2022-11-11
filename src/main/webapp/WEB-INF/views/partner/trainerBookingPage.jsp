@@ -10,7 +10,11 @@
     <link href="/resources/css/partner/t-bookingStyles.css" rel="stylesheet" />
 	<link href='/resources/fullcalendar-5.11.3/lib/main.min.css' rel='stylesheet' />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-	
+	<style>
+		.fc-day-past, .fc-day-today{
+			opacity: .3;
+		}
+	</style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/main/common/header.jsp"/>
@@ -31,20 +35,20 @@
 				<div>
 					<span class="time_tit">AM</span>
 					<ul class="list_time">
-						<li class="available_time">10:00</li>
-						<li class="available_time">11:00</li>
+						<li class="available_time" value="10:00">10:00</li>
+						<li class="available_time" value="11:00">11:00</li>
 					</ul>
 				</div>
 				<div>
 					<span class="time_tit" style="margin-top: 10px;">PM</span>
 					<ul class="list_time">
-						<li class="available_time">12:00</li>
-						<li class="available_time">1:00</li>
-						<li class="available_time">2:00</li>
-						<li class="available_time">3:00</li>
-						<li class="available_time">4:00</li>
-						<li class="available_time">5:00</li>
-						<li class="available_time">6:00</li>
+						<li class="available_time" value="12:00">12:00</li>
+						<li class="available_time" value="13:00">1:00</li>
+						<li class="available_time" value="14:00">2:00</li>
+						<li class="available_time" value="15:00">3:00</li>
+						<li class="available_time" value="16:00">4:00</li>
+						<li class="available_time" value="17:00">5:00</li>
+						<li class="available_time" value="18:00">6:00</li>
 					</ul>
 				</div>
 			</div>
@@ -103,6 +107,7 @@
 							<input type="hidden" name="bookingTime">
 							<input type="hidden" name="pNo" value="${trainer.PNo }">
 							<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+							<input type="hidden" name="price">
 						</td>
 					</tr>
 				</table>
@@ -124,7 +129,7 @@
 		$("#totalFee").empty();
 		$("#totalFee").append(0);
 	})
-
+	
 </script>
 </body>
 </html>	
