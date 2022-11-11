@@ -71,6 +71,31 @@ $(function(){
 		const commaPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");
 		$(".span-price").eq(i).text(commaPrice);
 	}
+	
+	//후기작성한 서비스는 예약번호로 후기평점 가져오기
+	for(let i=0;i<$(".input-cancle-review").length;i++){
+		if($(".input-cancle-review").eq(i).val() == '1'){
+			const bookingNo = $(".input-booking-no").eq(i).val();
+			$.ajax({
+				url : "/getReviewRate.do",
+				data : {bookingNo : bookingNo},
+				success: function(reviewRate){
+					console.log(i+" 번째 "+bookingNo+" : "+reviewRate);
+					if(reviewRate == 1){
+						$(".a-review-rate").eq(i).text("★☆☆☆☆");
+					}else if(reviewRate == 2){
+						$(".a-review-rate").eq(i).text("★★☆☆☆");
+					}else if(reviewRate == 3){
+						$(".a-review-rate").eq(i).text("★★★☆☆");
+					}else if(reviewRate == 4){
+						$(".a-review-rate").eq(i).text("★★★★☆");
+					}else if(reviewRate == 5){
+						$(".a-review-rate").eq(i).text("★★★★★");
+					}
+				}
+			});
+		}
+	}
 });
 
 //모달창 우측상단 닫기 버튼

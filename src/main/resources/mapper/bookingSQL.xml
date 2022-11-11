@@ -30,4 +30,8 @@
 		where member_id=#{memberId}
 		order by start_date desc
 	</select>
+	
+	<update id="updateReviewState" parameterType="r">
+		update booking_tbl set review_state='1' where booking_no=#{bookingNo}
+	</update>
 </mapper>

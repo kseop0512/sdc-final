@@ -14,7 +14,7 @@ public class Review {
 	private String pNo;
 	private int petNo;
 	private int reviewRate;
-	private String reviewComment;
+	private String reviewContent;
 	private String reviewDate;
 	private String reviewFilename;
 	private String reviewFilepath;

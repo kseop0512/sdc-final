@@ -59,6 +59,7 @@
 		                    <tr>
 		                    	<!-- 서비스유형 -->
 		                    	<td class="td-category">
+		                    		<input type="hidden" class="input-booking-no" value="${b.bookingNo}">
 		                    		<input type="hidden" class="input-category" value="${b.category}">
 		                    		<a href="javascript:serviceDetail('${b.bookingNo}');" class="span-category">
 		                    		 <c:choose>
@@ -114,7 +115,7 @@
 		                    		<input type="hidden" class="input-cancle-review" value="${b.reviewState}">
 		                    		<c:choose>
 			                    		<c:when test="${b.partnerAccept eq 'D' && b.reviewState eq 1}">
-			                    			<a href="javascript:viewReview('${b.bookingNo}');" class="star">★★★★☆</a>
+			                    			<a href="javascript:viewReview('${b.bookingNo}');" class="a-review-rate">후기수정</a>
 			                    		</c:when>
 			                    		<c:when test="${b.partnerAccept eq 'D' && b.reviewState eq 0}">
 			                    			<a href="javascript:writeReview('${b.bookingNo}','${sessionScope.m.memberNo}','${b.PNo}','${b.petNo}');">후기작성</a>
@@ -157,6 +158,7 @@
 		<!-- 모달컨텐츠(폼) -->
 		<form action="/writeReview.do" method="post">
 			<div class="review-modal-content">
+				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 				<input type="hidden" name="bookingNo">
 				<input type="hidden" name="memberNo">
 				<input type="hidden" name="pNo">
@@ -167,7 +169,7 @@
 					<span class="star" style="padding: 0;">
 					★★★★★
 						<span>★★★★★</span>
-						<input type="range" id="star-range" oninput="drawStar(this)" value="0" step="0.5" min="0" max="5">
+						<input type="range" id="star-range" oninput="drawStar(this)" value="0" step="1" min="0" max="5">
 					</span>
 					<input type="text" name="reviewRate" id="rate" value="0" readonly>
 					<span class="rate-comment">*드래그해서 평점을 입력하세요</span>
