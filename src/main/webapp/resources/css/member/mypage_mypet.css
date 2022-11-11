@@ -296,6 +296,10 @@
 	border: 1px solid black;
 	width: 250px !important;
 }
+.pdProfile{
+	width: 250px;
+    height: 299px;
+}
 .pdMidDiv{
 	width: 740px;
 	margin: 0 auto;

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.pet.model.dao.PetDao;
 import kr.or.pet.model.vo.PetCheckList;
 import kr.or.pet.model.vo.Pet;
+import kr.or.pet.model.vo.PetAvgStat;
 
 @Service
 public class PetService {
@@ -41,4 +42,7 @@ public class PetService {
 		return dao.selectPetName(petNo);
 	}
 	
+	public ArrayList<PetAvgStat> getAvgStat() {
+		return dao.getAvgStat();
+	}
 }

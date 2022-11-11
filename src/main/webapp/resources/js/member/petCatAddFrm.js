@@ -21,10 +21,10 @@ var inde //독립성
 
 $(".socialBtn").click(function(){
 	$(".psnModal").fadeIn();
-	social = 0;
-	sense = 0;
-	active = 0;
-	inde = 0;
+	social = 5;
+	sense = 5;
+	active = 5;
+	inde = 5;
 	$("#socialInput").val(social);
 	$("#senseInput").val(sense);
 	$("#activeInput").val(active);

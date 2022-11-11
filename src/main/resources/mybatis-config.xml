@@ -9,6 +9,7 @@
 		<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
 		<typeAlias type="kr.or.pet.model.vo.Pet" alias="pet"/>
 		<typeAlias type="kr.or.pet.model.vo.PetCheckList" alias="petChk"/>
+		<typeAlias type="kr.or.pet.model.vo.PetAvgStat" alias="petAvgStat"/>
 		<typeAlias type="kr.or.partner.model.vo.Partner" alias="p"/>
 		<typeAlias type="kr.or.manager.model.vo.Manager" alias="g"/>
 		<typeAlias type="kr.or.partner.model.vo.TrainerBoard" alias="tb"/>

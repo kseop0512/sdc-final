@@ -21,11 +21,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+
 import common.FileRename;
 import kr.or.partner.model.vo.Partner;
 import kr.or.pet.model.service.PetService;
 import kr.or.pet.model.vo.PetCheckList;
 import kr.or.pet.model.vo.Pet;
+import kr.or.pet.model.vo.PetAvgStat;
 
 @Controller
 public class PetController {
@@ -48,8 +51,10 @@ public class PetController {
 	public String mypageMyPet(Model model, int memberNo) {
 		ArrayList<Pet> petList = service.selectMyPet(memberNo);
 		ArrayList<PetCheckList> chkList = service.selectMyPetChk(memberNo);
+		ArrayList<PetAvgStat> avgStat = service.getAvgStat();
 		model.addAttribute("petList", petList);
 		model.addAttribute("petChkList", chkList);
+		model.addAttribute("avgStat",avgStat);
 		return "pet/mypageMyPet";
 	}
 	
@@ -92,5 +97,6 @@ public class PetController {
 		String petName = service.selectPetName(petNo);
 		return petName;
 	}
-
+	
+	
 }
