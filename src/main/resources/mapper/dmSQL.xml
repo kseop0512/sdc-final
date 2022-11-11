@@ -14,7 +14,7 @@
 			dm_type as dmType,
 			reply
 		from direct_msg 
-		where receiver = #{adminId}
+		where receiver = #{adminId} order by 1
 	</select>
 	 <!-- 관리자 1:1 문의 총 카운트  -->
 	 <select id="dmCount" parameterType="g" resultType="int">
@@ -94,4 +94,64 @@
 	 <delete id="deleteDm" parameterType="_int">
 	 	delete from direct_msg where dm_no=#{_parameter}
 	 </delete>
+
+	 	 <!-- 관리자 답변보여주기 -->
+	 <select id="showDmContent" parameterType="int" resultType="dm">
+	 	select
+			dm_no as dmNo,
+			sender,
+			sender_category as senderCategory,
+			receiver,
+			dm_content as dmContent,
+			dm_date as dmDate,
+			read_check as readCheck,
+			dm_type as dmType,
+			reply
+		from direct_msg where reply= #{_parameter}
+	 </select>
+	 <!-- 관리자P 검색 (취소/결제)  -->
+	 <select id="selectdmType" parameterType="map" resultType="dm">
+	 	select
+			dm_no as dmNo,
+			sender,
+			sender_category as senderCategory,
+			receiver,
+			dm_content as dmContent,
+			dm_date as dmDate,
+			read_check as readCheck,
+			dm_type as dmType,
+            reply
+		from direct_msg 
+		where sender like '%'||#{keyword}||'%'
+		and dm_type = #{dmType} and sender != 'admin'
+	 </select>
+	 <!-- 관리자 p트너만 -->
+	 <select id="selectMemberDmList" parameterType="map" resultType="dm">
+	 	select
+			dm_no as dmNo,
+			sender,
+			sender_category as senderCategory,
+			receiver,
+			dm_content as dmContent,
+			dm_date as dmDate,
+			read_check as readCheck,
+			dm_type as dmType,
+			reply
+		from direct_msg 
+		where receiver = #{adminId} and sender_category = 'M' order by 1
+	 </select>
+	 <select id="selectPartnerDmList" parameterType="map" resultType="dm">
+	 	select
+			dm_no as dmNo,
+			sender,
+			sender_category as senderCategory,
+			receiver,
+			dm_content as dmContent,
+			dm_date as dmDate,
+			read_check as readCheck,
+			dm_type as dmType,
+			reply
+		from direct_msg 
+		where receiver = #{adminId} and sender_category = 'P' order by 1
+	 </select>
 </mapper>

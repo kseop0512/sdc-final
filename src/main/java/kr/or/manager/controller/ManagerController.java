@@ -306,6 +306,7 @@ public class ManagerController {
 		int p = service.gradePartner();
 		return new Gson().toJson(p);
 	}
+
 	
 	//메인화면 문의하기
 	@RequestMapping(value="/mainQnaWrite.do")
@@ -330,9 +331,7 @@ public class ManagerController {
 		return "common/msg";
 	}
 	
-	
 }
-
 
 
 
