@@ -168,6 +168,9 @@
                                 <button class="searchbox-btn btn bc22 searchBtn" name="btnSearch" id="btnSearch">검색</button>
                             </div>
                             
+                            
+                            
+                            <!--  
                             <div class="qna-board">
 								<div class="search-box">
 									<form action="#">
@@ -182,7 +185,7 @@
 								</div>
 								<div id="qnaAjaxResult"></div>
 							</div>
-                            
+                            -->
                         </div>
                         
                         
