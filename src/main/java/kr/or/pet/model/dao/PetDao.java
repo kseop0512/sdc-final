@@ -42,4 +42,14 @@ public class PetDao {
 		List list = sqlSession.selectList("pet.getAvgStat");
 		return (ArrayList<PetAvgStat>)list;
 	}
+
+	public int petEditDog(Pet pet) {
+		int result = sqlSession.update("pet.updateDog", pet);
+		return result;
+	}
+
+	public int petEditCat(Pet pet) {
+		int result = sqlSession.update("pet.updateCat", pet);
+		return result;
+	}
 }

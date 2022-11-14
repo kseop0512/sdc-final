@@ -99,7 +99,7 @@
 								</div>
 								<!-- pet_tbl -->
 								<div class="info-petInfo-wrap">
-									<input type="hidden" class="info-PetNo" value="${pet.petNo }">
+									<input type="hidden" class="info-petNo" value="${pet.petNo }">
 									<input type="hidden" class="info-memberNo" value="${pet.memberNo}">
 									<input type="hidden" class="info-petType" value="${pet.petType}">
 									<input type="hidden" class="info-petName" value="${pet.petName}">
@@ -172,6 +172,8 @@
 						<td colspan="3" align="center" style="padding-right: 40px"><span class="answerSpan pdPHospital" style="font-size: 17px"></span></td>
 					</tr>
 				</table>
+					<input type="hidden" class="detailPetNo" value="">
+					<input type="hidden" class="detailPetType" value="">
 			</div>
 			<div class="pdMidDiv">
 				<textarea class="pdCharacter" readonly></textarea>
@@ -193,13 +195,28 @@ Sensitivity: 체크리스트를 통해 대략적으로 측정한 값으로 얼�
 Min ~ Max: 최소값과 최대값을 나타내주기 위한 지표입니다.</textarea>
 				</div>
 				<div class="pdBtn-wrap">
-					<button class="pdPetEditBtn pdBtn" onclick="">펫정보수정</button>
+					<button class="pdPetEditBtn pdBtn" onclick="editPet();">펫정보수정</button>
 					<button class="pdClosebtn pdBtn" onclick="pdModalClose();">닫기</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
+	function editPet(){
+		var pNo = $(".detailPetNo").val();
+		var pType = $(".detailPetType").val();
+		console.log(pNo);
+		console.log(pType);
+		if(pType==1){
+			//강이지일때
+			window.location.href="/petEditDogFrm.do?petNo="+pNo;
+		}else if(pType==2){
+			//고양이일때
+			window.location.href="/petEditCatFrm.do?petNo="+pNo;
+		}
+		
+	};
+	
 	
 	$(".pdModal-wrap").hide();
 	function petDetail(e){
@@ -241,6 +258,9 @@ Min ~ Max: 최소값과 최대값을 나타내주기 위한 지표입니다.</te
 		var stat4;
 		
 		//상세창에 값 입력
+		//수정을 위한 펫 번호, 타입(개, 고양이)
+		$(".detailPetNo").val(pNo);
+		$(".detailPetType").val(pType);
 		//프로필사진부분
 		$(".pdProfile").attr("src", "/resources/upload/pet/petProfile/"+pFilename);
 		//이름

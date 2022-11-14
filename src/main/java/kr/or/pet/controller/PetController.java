@@ -98,5 +98,34 @@ public class PetController {
 		return petName;
 	}
 	
-	
+	//강아지 수정폼
+		@RequestMapping(value="/petEditDogFrm.do")
+		public String petEditDogFrm(int petNo) {
+			return "pet/petEditDogFrm?petNo="+petNo;
+		}
+	//강아지 수정
+	@RequestMapping(value="/petEditDog.do")
+	public String petEditDog(Pet pet) {
+		int result = service.petEditDog(pet);
+		if(result>0) {
+			return "redirect:/mypageMyPet.do";
+		}else {
+			return null;
+		}
+	}
+	//고양이 수정폼
+			@RequestMapping(value="/petEditCatFrm.do")
+			public String petEditCatFrm(int petNo) {
+				return "pet/petEditCatFrm?petNo="+petNo;
+			}
+	//고양이 수정
+		@RequestMapping(value="/petEditCat.do")
+		public String petEditCat(Pet pet) {
+			int result = service.petEditCat(pet);
+			if(result>0) {
+				return "redirect:/mypageMyPet.do";
+			}else {
+				return null;
+			}
+		}
 }

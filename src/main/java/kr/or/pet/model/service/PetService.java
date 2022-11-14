@@ -45,4 +45,13 @@ public class PetService {
 	public ArrayList<PetAvgStat> getAvgStat() {
 		return dao.getAvgStat();
 	}
+
+	public int petEditDog(Pet pet) {
+		return dao.petEditDog(pet);
+	}
+
+	public int petEditCat(Pet pet) {
+		// TODO Auto-generated method stub
+		return dao.petEditCat(pet);
+	}
 }
