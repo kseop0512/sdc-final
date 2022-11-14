@@ -71,8 +71,9 @@ public class BookingController {
 	// 혜규 on 11/13
 	// 파트너 예약 요청 리스트
 	@RequestMapping(value="/appliedList.do")
-	public String appliedList() {
+	public String appliedList(Partner p, Model model) {
 		ArrayList<Booking> lists = service.selectOngoingBooking(p);
+		model.addAttribute("lists",lists);
 		return "partner/appliedList";
 	}
 	@RequestMapping(value="/scheduleCalendar.do")
