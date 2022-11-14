@@ -113,4 +113,83 @@
 			round(avg(inde),0) as inde
 			from pet_chklist
 	</select>
+	
+	<select id="selectOnePet" parameterType="int" resultType="pet">
+		select
+			pet_no as petNo,
+			member_no as memberNo,
+			pet_type as petType,
+			pet_name as petName,
+			pet_gender as petGender,
+			pet_bdate as petBdate,
+			pet_kind as petKind,
+			pet_weight as petWeight,
+			pet_neut as petNeut,
+			pet_hospital as petHospital,
+			pet_note as petNote,
+			pet_filename as petFilename,
+			pet_filepath as petFilepath
+		from pet_tbl where pet_no=#{_parameter}
+	</select>
+	
+	<select id="selectOneChk" parameterType="int" resultType="petChk">
+		select
+			pet_no as petNo,
+			character1,
+			character2,
+			character3,
+			character4,
+			character5,
+			character6,
+			character7,
+			character8,
+			health1,
+			health2,
+			health3,
+			social,
+			sense,
+			active,
+			inde
+		from pet_chklist where pet_no in (select pet_no from pet_tbl where pet_no =#{petNo})
+	</select>
+	
+	<update id="updatePet" parameterType="pet">
+		update pet_tbl set 
+			pet_type = #{petType},
+			pet_name = #{petName},
+			pet_gender = #{petGender},
+			pet_bdate = #{petBdate},
+			pet_kind = #{petKind},
+			pet_weight = #{petWeight},
+			pet_neut = #{petNeut},
+			pet_Hospital = #{petHospital},
+			pet_note = #{petNote},
+			pet_filename = #{petFilename},
+			pet_filepath = #{petFilepath}
+		where pet_no = #{petNo}
+	</update>
+	
+	<update id="updatePetChk" parameterType="petChk">
+		update pet_chklist set
+			character1 = #{character1},
+			character2 = #{character2},
+			character3 = #{character3},
+			character4 = #{character4},
+			character5 = #{character5},
+			character6 = #{character6},
+			character7 = #{character7},
+			character8 = #{character8},
+			health1 = #{health1},
+			health2 = #{health2},
+			health3 = #{health3},
+			social = #{social},
+			sense = #{sense},
+			active = #{active},
+			inde = #{inde}
+		where pet_no = #{petNo}
+	</update>
+	
+	<delete id="deletePet" parameterType="int">
+		delete from pet_tbl where pet_no=#{_parameter}
+	</delete>
 </mapper>

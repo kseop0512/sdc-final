@@ -7,7 +7,19 @@
 <html>
 <head>
 <style type="text/css">
-
+.deleteA{
+	color: white;
+    position: relative;
+    float: right;
+    right: 150px;
+    bottom: 150px;
+    font-size: 17px;
+}
+.deleteA:hover{
+	color: red;
+    font-weight: bolder;
+    font-size: 1.1em;
+}
 </style>
 <meta charset="UTF-8">
 <title>똑독캣 마이페이지</title>
@@ -114,6 +126,7 @@
 									<input type="hidden" class="info-petFilepath" value="${pet.petFilepath}">
 								</div>
 							</div>
+							<a href="#" onclick="deletePet(${pet.petNo});" class="deleteA">삭제</a>
 							<hr class="hrCss">
 						</c:forEach>
 						<!-- 펫 성향 평균값 -->
@@ -202,18 +215,19 @@ Min ~ Max: 최소값과 최대값을 나타내주기 위한 지표입니다.</te
 		</div>
 	</div>
 	<script type="text/javascript">
+	function deletePet(petNo){
+		var deletePetNo = petNo;
+		if(confirm("정말 삭제하시겠습니까?\n삭제 후에는 복구할 수 없습니다")){
+			location.href="/petDelete.do?petNo="+deletePetNo;
+		}else{
+			preventEvent();
+		}
+	}
+	
 	function editPet(){
 		var pNo = $(".detailPetNo").val();
 		var pType = $(".detailPetType").val();
-		console.log(pNo);
-		console.log(pType);
-		if(pType==1){
-			//강이지일때
-			window.location.href="/petEditDogFrm.do?petNo="+pNo;
-		}else if(pType==2){
-			//고양이일때
-			window.location.href="/petEditCatFrm.do?petNo="+pNo;
-		}
+		window.location.href="/petEditPetFrm.do?petNo="+pNo;
 		
 	};
 	

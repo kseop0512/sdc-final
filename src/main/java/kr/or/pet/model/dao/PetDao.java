@@ -52,4 +52,26 @@ public class PetDao {
 		int result = sqlSession.update("pet.updateCat", pet);
 		return result;
 	}
+
+	public Pet selectOnePet(int petNo) {
+		return sqlSession.selectOne("pet.selectOnePet", petNo);
+	}
+
+	public PetCheckList selectOneChk(int petNo) {
+		return sqlSession.selectOne("pet.selectOneChk", petNo);
+	}
+
+	public int updatePet(Pet p) {
+		return sqlSession.update("pet.updatePet", p);
+	}
+
+	public int updatePetChk(PetCheckList petChk) {
+		return sqlSession.update("pet.updatePetChk", petChk);
+	}
+
+	public int petDelete(int petNo) {
+		return sqlSession.delete("pet.deletePet", petNo);
+	}
+	
+	
 }

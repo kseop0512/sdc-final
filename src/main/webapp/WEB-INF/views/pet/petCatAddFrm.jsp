@@ -165,9 +165,9 @@
 				<p class="chkQuestion"> 스킨십을 할 때 어떤가요?　　　　　　　　</p>
 				<input type="radio" id="q3a1" name="question3" value="거부감이 없어요">
 <!--예민성-2사회성+1--><label for="q3a1" class="modal-label">1) 거부감이 없어요</label>
-				<input type="radio" id="q3a2" name="question3" value="먼저 다가오면 만져줘도 괜찮아요 ">
+				<input type="radio" id="q3a2" name="question3" value="먼저 다가오면 만져줘도 괜찮아요">
 <!-- 독립성 +1 --><label for="q3a2" class="modal-label">2) 먼저 다가오면 만져줘도 괜찮아요 </label>
-				<input type="radio" id="q3a3" name="question3" value="먼저 다가오면 만져줘도 괜찮지만, 최대한 짧게 만져주세요 ">
+				<input type="radio" id="q3a3" name="question3" value="먼저 다가오면 만져줘도 괜찮지만, 최대한 짧게 만져주세요">
 <!-- 예민성 +1 --><label for="q3a3" class="modal-label">3) 먼저 다가오면 만져줘도 괜찮지만, 최대한 짧게 만져주세요 </label>
 				<input type="radio" id="q3a4" name="question3" value="겁이 많아 물 수도 있으니 만지지 말아주세요">
 <!-- 예민성+2 --><label for="q3a4" class="modal-label">4) 겁이 많아서 만지면 물 수도 있어요</label>
@@ -195,11 +195,11 @@
 			<div class="q5 qstn">
 				<h2 class="qNumber">Q5</h2><h4 class="qqNumber">5/8</h4>
 				<p class="chkQuestion">하루에 얼마나 놀아주고 있나요? 　　　　　　　</p>
-				<input type="radio" id="q5a1" name="question5" value="30분 이상 놀아주고 있고 고양이도 만족해요  ">
+				<input type="radio" id="q5a1" name="question5" value="30분 이상 놀아주고 있고 고양이도 만족해요">
 <!-- 활동성 +1 --><label for="q5a1" class="modal-label">1) 30분 이상 놀아주고 있고 고양이도 만족해요</label>
 				<input type="radio" id="q5a2" name="question5" value="30분 이상 놀아주고 있는데도 더 놀자고 보채거나 우다다를 해요">
 <!-- 활동성 +2 --><label for="q5a2" class="modal-label">2) 30분 이상 놀아주고 있는데도 더 놀자고 보채거나 우다다를 해요</label>
-				<input type="radio" id="q5a3" name="question5" value="30분 미만 놀아주는데도 고양이가 만족해요 ">
+				<input type="radio" id="q5a3" name="question5" value="30분 미만 놀아주는데도 고양이가 만족해요">
 <!-- 활동성 -2 --><label for="q5a3" class="modal-label">3) 30분 미만 놀아주는데도 고양이가 만족해요 </label>
 				<input type="radio" id="q5a4" name="question5" value="30분 미만 놀아주고 있고 고양이가 보채요">
 <!-- 활동성 -1 --><label for="q5a4" class="modal-label">4) 30분 미만 놀아주고 있고 고양이가 보채요</label>
@@ -239,11 +239,11 @@
 			<div class="q8 qstn">
 				<h2 class="qNumber">Q8</h2><h4 class="qqNumber">8/8</h4>
 				<p class="chkQuestion">주로 어떤 보호자를 따르는 편인가요?　　　　　　　　</p>
-				<input type="radio" id="q8a1" name="question8" value="보호자 한 명만 유독 잘 따르고 다른 가족에게는 관심이 덜 해요 ">
+				<input type="radio" id="q8a1" name="question8" value="보호자 한 명만 유독 잘 따르고 다른 가족에게는 관심이 덜 해요">
 <!-- 독립성+2 --><label for="q8a1" class="modal-label">1) 보호자 한 명만 유독 잘 따르고 다른 가족에게는 관심이 덜 해요 </label>
-				<input type="radio" id="q8a2" name="question8" value="두루두루 잘 따르는 편이에요 ">
+				<input type="radio" id="q8a2" name="question8" value="두루두루 잘 따르는 편이에요">
 <!-- 영향없음 --><label for="q8a2" class="modal-label">2) 두루두루 잘 따르는 편이에요 </label>
-				<input type="radio" id="q8a3" name="question8" value="반려동물을 혼자 키우고 있어요 ">
+				<input type="radio" id="q8a3" name="question8" value="반려동물을 혼자 키우고 있어요">
 <!-- 영향없음 --><label for="q8a3" class="modal-label">3) 반려동물을 혼자 키우고 있어요 </label>
 				<div class="modal-btn">
 					<button type="button" class="botBtn exitBtn">◀이전</button>
