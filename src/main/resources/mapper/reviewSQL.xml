@@ -29,4 +29,7 @@
 		)
 	</insert>
 	
+	<update id="updatePartnerPoint" parameterType="p">
+		update partner set p_point=p_point+#{pPoint} where p_no=#{pNo}
+	</update>
 </mapper>
