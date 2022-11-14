@@ -1,4 +1,6 @@
 $(function(){
+	console.log($("#listLength").val());
+
 	//실제 DB의 bookingTime, 예약일 값 담을 hidden input
 	const start = $(".input-start-time");
 	const end = $(".input-end-time");
@@ -42,7 +44,7 @@ $(function(){
 	}
 	
 	//펫번호로 펫이름 조회해서 span태그에 입력하기
-	for(let i=0;i<$(".input-pet").length;i++){
+	for(let i=0;i<$("#listLength").val();i++){
 		const petNo = $(".input-pet").eq(i).val();
 		$.ajax({
 			url : "/getPetName.do",
@@ -54,7 +56,7 @@ $(function(){
 	}
 	
 	//파트너번호로 파트너이름 조회해서 span태그에 입력하기
-	for(let i=0;i<$(".input-partner").length;i++){
+	for(let i=0;i<$("#listLength").val();i++){
 		const pNo = $(".input-partner").eq(i).val();
 		$.ajax({
 			url : "/getPartnerName.do",
@@ -66,31 +68,33 @@ $(function(){
 	}
 	
 	//가격 세자리마다 콤마(,)표시
-	for(let i=0;i<$(".input-price").length;i++){
+	for(let i=0;i<$("#listLength").val();i++){
 		const price = $(".input-price").eq(i).val();
 		const commaPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");
 		$(".span-price").eq(i).text(commaPrice);
 	}
 	
 	//후기작성한 서비스는 예약번호로 후기평점 가져오기
-	for(let i=0;i<$(".input-cancle-review").length;i++){
+	console.log($("#listLength").val());
+	console.log((".input-cancle-review").length);
+	console.log((".input-booking-no").length);
+	for(let i=0;i<$("#listLength").val();i++){
 		if($(".input-cancle-review").eq(i).val() == '1'){
 			const bookingNo = $(".input-booking-no").eq(i).val();
 			$.ajax({
 				url : "/getReviewRate.do",
 				data : {bookingNo : bookingNo},
 				success: function(reviewRate){
-					console.log(i+" 번째 "+bookingNo+" : "+reviewRate);
 					if(reviewRate == 1){
-						$(".a-review-rate").eq(i).text("★☆☆☆☆");
+						$(".td-cancle-review").eq(i).children("a").text("★☆☆☆☆");
 					}else if(reviewRate == 2){
-						$(".a-review-rate").eq(i).text("★★☆☆☆");
+						$(".td-cancle-review").eq(i).children("a").text("★★☆☆☆");
 					}else if(reviewRate == 3){
-						$(".a-review-rate").eq(i).text("★★★☆☆");
+						$(".td-cancle-review").eq(i).children("a").text("★★★☆☆");
 					}else if(reviewRate == 4){
-						$(".a-review-rate").eq(i).text("★★★★☆");
+						$(".td-cancle-review").eq(i).children("a").text("★★★★☆");
 					}else if(reviewRate == 5){
-						$(".a-review-rate").eq(i).text("★★★★★");
+						$(".td-cancle-review").eq(i).children("a").text("★★★★★");
 					}
 				}
 			});

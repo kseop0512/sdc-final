@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,6 +56,7 @@
 		                    </tr>
 		                  </thead>
 		                  <tbody>
+		                  <input type="hidden" value="${fn:length(list)}" id="listLength">
 		                  <c:forEach items="${list}" var="b">
 		                    <tr>
 		                    	<!-- 서비스유형 -->
