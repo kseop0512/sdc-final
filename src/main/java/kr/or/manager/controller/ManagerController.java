@@ -230,8 +230,7 @@ public class ManagerController {
 
 
 	/*
-=======
->>>>>>> refs/heads/sujin
+
 	//공지사항 검색
 	@RequestMapping(value="/searchNoticeG.do")
 	public String searchNoticeG(String type, String keyword, Model model, int reqPage) {

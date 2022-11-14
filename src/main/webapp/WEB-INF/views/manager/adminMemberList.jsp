@@ -13,6 +13,7 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link rel="stylesheet" href="/resources/css/admin/style-admin.css">
         <link rel="stylesheet" href="/resources/css/admin/memberList.css">
+        <script src="/resources/js/jquery-3.6.1.min.js"></script>
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
 <body class="sb-nav-fixed">
@@ -135,7 +136,7 @@
                                                     <option value="id">아이디</option>
                                                 </select>
                                                     <input class="input-form2" type="text" name="keyword" placeholder="입력하세요" style="width: 500px;">
-                                                    <button class="bc22" type="submit">검색</button>
+                                                    <button class="bc22" type="submit" id="sb">검색</button>
                                             </form>
                                         </div>
                                     </div>
@@ -153,7 +154,7 @@
                                             <th>전화번호</th>
                                             <th>주소</th>
                                             <th>가입일</th>
-                                            <th>관리</th>
+                                      
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -164,7 +165,7 @@
                                             <th>전화번호</th>
                                             <th>주소</th>
                                             <th>가입일</th>
-                                            <th>관리</th>
+                                        
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -176,7 +177,7 @@
                                             <td>${m.memberPhone}</td>
                                             <td>${m.memberAddr}</td>
                                             <td>${m.memberEnrollDate}</td>
-                                            <td><button class="bc77">관리</button></td>
+                                            
                                         </tr>
                                      </c:forEach>
                                     </tbody>
@@ -205,6 +206,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="/resources/assets/demo/chart-area-demo.js"></script>
         <script src="/resources/assets/demo/chart-bar-demo.js"></script>
+        <script src="/resources/js/admin/adminMemberList.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="/resources/js/datatables-simple-demo.js"></script>
 </body>

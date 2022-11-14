@@ -242,12 +242,16 @@ function dmSend(){
 function searchDm(){
 	const keyword = $("[name=keyword]").val();
 	const dmType = $("[name=dmType]").val(); //0,1,2,중에 선택한 값이 들어감
+	
+	console.log(keyword);
 	console.log(dmType);
+	
 		if(dmType == null){
 			alert("문의유형을 선택하세요");
 		} else if(keyword == ""){
 			alert("아이디를 입력하세요");
 		} else {
+		
 			$.ajax({
 				url:"/selectdmType.do",
 				data :{dmType : dmType, keyword : keyword},

@@ -127,8 +127,7 @@
                                            	<span>답변완료</span>
                                             <code>[<code id="dm_checkRead"></code>]</code>건
                                         </p>
-                                        <div id="nameIdSerarch-Box" style="float: right;">
-                                            <form action="/selectdmType.do" method="get">
+                                        <div id="nameIdSerarch-Box" style="float: right;">                                      
                                                 <select name="dmType">
                                                     <option>문의유형</option>
                                                     <option value="0">취소/결제</option>
@@ -136,8 +135,7 @@
                                                     <option value="2">기타문의</option>
                                                 </select>
                                                     <input class="input-form2" type="text" name="keyword" placeholder="아이디를 입력하세요" style="width: 500px;">
-                                                    <button class="bc22">검색</button>
-                                            </form>
+                                                    <button class="bc22" onclick="searchDm();">검색</button>  
                                         </div>
                                     </div>
                                 </div>

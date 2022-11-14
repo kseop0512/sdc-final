@@ -33,7 +33,7 @@
 	 </select>
 	 
 	 <!-- 관리자 메시지 읽음 처리 -->
-	 <update id="updateReadCheck" parameterType="int">
+	 <update id="updateReadCheck" parameterType="string">
 	 	update direct_msg set read_check=1 where dm_no=#{_parameter}
 	 </update>
 	 
