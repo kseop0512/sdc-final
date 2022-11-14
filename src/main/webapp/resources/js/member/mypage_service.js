@@ -103,13 +103,13 @@ $(function(){
 });
 
 //모달창 우측상단 닫기 버튼
-$("#close-btn").on("click",function(){
+$(".close-btn").on("click",function(){
     $(".review-modal").hide();
 });
 
 //후기작성submit 버튼
-$("#submit-btn").on("click",function(){
-	if($("[name=reviewRate]").val()==0){
+$("#insert-btn").on("click",function(){
+	if($(".insert-review [name=reviewRate]").val()==0){
 		alert("별을 드래그해서 평점을 입력해주세요.");
 	}else{
 		$(this).attr("type","submit");
@@ -118,21 +118,59 @@ $("#submit-btn").on("click",function(){
 
 //후기작성 모달창 띄우는 함수
 function writeReview(bookingNo, memberNo, pNo, petNo){
-	$("[name=bookingNo]").val(bookingNo);
-	$("[name=memberNo]").val(memberNo);
-	$("[name=pNo]").val(pNo);
-	$("[name=petNo]").val(petNo);
-	$(".review-modal").show();
+	$(".insert-review [name=bookingNo]").val(bookingNo);
+	$(".insert-review [name=memberNo]").val(memberNo);
+	$(".insert-review [name=pNo]").val(pNo);
+	$(".insert-review [name=petNo]").val(petNo);
+	$(".insert-review ").show();
 	$(this).keydown(function(event) {
         if ( event.keyCode == 27 || event.which == 27 ) {
-            $("#close-btn").click();
+            $(".close-btn").click();
         }
     });
 }
 
 //후기작성 평점 드래그 이벤트
-const drawStar = (target) => {
-  $(`.star span`).css({ width: `${target.value * 19}%` });
-  $("#rate").val(`${target.value}`);
+const drawStarI = (target) => {
+  $(`insert-review .star span`).css({ width: `${target.value * 19}%` });
+  $("#i-rate").val(`${target.value}`);
 }
 
+//후기수정 모달창 띄우는 함수
+function viewReview(bookingNo){
+	$(".update-review [name=bookingNo]").val(bookingNo);
+	$.ajax({
+		url : "/selectOneReview.do",
+		data : {bookingNo : bookingNo},
+		success: function(data){
+			$(".update-review [name=memberNo]").val(data.memberNo);
+			$(".update-review [name=pNo]").val(data.pNo);
+			$(".update-review [name=petNo]").val(data.petNo);
+			$(`.update-review .star span`).css({ width: `${data.reviewRate * 19}%` });
+			$("#u-rate").val(`${data.reviewRate}`)
+			$(".update-review [name=reviewRate]").val(data.reviewRate);
+			$(".update-review [name=reviewContent]").text(data.reviewContent);
+		}
+	});
+	$(".update-review ").show();
+	$(this).keydown(function(event) {
+        if ( event.keyCode == 27 || event.which == 27 ) {
+            $(".close-btn").click();
+        }
+    });
+}
+
+//후기수정 평점 드래그 이벤트
+const drawStarU = (target) => {
+  $(`.update-review .star span`).css({ width: `${target.value * 19}%` });
+  $("#u-rate").val(`${target.value}`);
+}
+
+//후기수정submit 버튼
+$("#update-btn").on("click",function(){
+	if($(".update-review [name=reviewRate]").val()==0){
+		alert("별을 드래그해서 평점을 입력해주세요.");
+	}else{
+		$(this).attr("type","submit");
+	}
+});

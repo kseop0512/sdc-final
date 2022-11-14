@@ -32,4 +32,29 @@
 	<update id="updatePartnerPoint" parameterType="p">
 		update partner set p_point=p_point+#{pPoint} where p_no=#{pNo}
 	</update>
+	
+	<select id="selectOneReview" parameterType="string" resultType="r">
+		select
+			review_no as reviewNo,
+			booking_no as bookingNo,
+			member_no as memberNo,
+			p_no as pNo,
+			pet_no as petNo,
+			review_rate as reviewRate,
+			review_content as reviewContent,
+			review_date as reviewDate,
+			review_filename as reviewFilename,
+			review_filepath as reviewFilepath
+		from review_tbl
+		where booking_no=#{_parameter}
+	</select>
+	
+	<update id="updateReview" parameterType="r">
+		update review_tbl set
+			review_rate = #{reviewRate},
+			review_content = #{reviewContent},
+			review_filename = #{reviewFilename},
+			review_filepath = #{reviewFilepath}
+		where booking_no=#{bookingNo}
+	</update>
 </mapper>

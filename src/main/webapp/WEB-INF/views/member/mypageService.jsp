@@ -151,11 +151,11 @@
 	<!-- End #main -->
 
 	<!-- 후기작성 모달 -->
-	<div class="review-modal" style="display:none;">
+	<div class="review-modal insert-review" style="display:none;">
 		<!-- 모달최상단 꾸밈 -->
 		<div class="review-modal-head">
 			<span id="review-modal-title">이용후기</span>
-			<span id="close-btn" class="material-symbols-outlined">close</span>
+			<span class="close-btn material-symbols-outlined">close</span>
 		</div>
 		<!-- 모달컨텐츠(폼) -->
 		<form action="/writeReview.do" method="post">
@@ -171,9 +171,9 @@
 					<span class="star" style="padding: 0;">
 					★★★★★
 						<span>★★★★★</span>
-						<input type="range" id="star-range" oninput="drawStar(this)" value="0" step="1" min="0" max="5">
+						<input type="range" id="star-range" oninput="drawStarI(this)" value="0" step="1" min="0" max="5">
 					</span>
-					<input type="text" name="reviewRate" id="rate" value="0" readonly>
+					<input type="text" name="reviewRate" id="i-rate" value="0" readonly>
 					<span class="rate-comment">*드래그해서 평점을 입력하세요</span>
 				</div>
 				<!-- 후기사진첨부 -->
@@ -199,7 +199,62 @@
 				</div>
 				<!-- 버튼 -->
 				<div class="review-btn-wrap">
-					<input type="button" id="submit-btn" value="작성">
+					<input type="button" id="insert-btn" value="작성">
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<!-- 후기수정 모달 -->
+	<div class="review-modal update-review" style="display:none;">
+		<!-- 모달최상단 꾸밈 -->
+		<div class="review-modal-head">
+			<span id="review-modal-title">이용후기</span>
+			<span class="close-btn material-symbols-outlined">close</span>
+		</div>
+		<!-- 모달컨텐츠(폼) -->
+		<form action="/updateReview.do" method="post">
+			<div class="review-modal-content">
+				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+				<input type="hidden" name="bookingNo">
+				<input type="hidden" name="memberNo">
+				<input type="hidden" name="pNo">
+				<input type="hidden" name="petNo">
+				<!-- 후기평점 -->
+				<div class="review-info review-rate">
+					<b class="rate-label">평점</b>
+					<span class="star" style="padding: 0;">
+					★★★★★
+						<span>★★★★★</span>
+						<input type="range" id="star-range" oninput="drawStarU(this)" value="0" step="1" min="0" max="5">
+					</span>
+					<input type="text" name="reviewRate" id="u-rate" value="0" readonly>
+					<span class="rate-comment">*드래그해서 평점을 입력하세요</span>
+				</div>
+				<!-- 후기사진첨부 -->
+				<div class="review-photo">
+					<b>사진첨부<b>
+					<div class="attach-wrap">
+						<div class="attach"><span class="material-symbols-outlined">add</span></div>
+						<div class="thumbnail thn1"></div>
+						<div class="thumbnail thn2"></div>
+						<div class="thumbnail thn3"></div>
+					</div>
+				</div>
+				<!-- 후기내용 -->
+				<div class="review-content">
+					<textarea id="reviewContent" name="reviewContent" placeholder="내용을 입력해주세요.
+
+서비스의 장점 및 단점 등 상세한 내용 작성은
+사이트 이용자와 파트너에게 큰 도움이 됩니다!
+
+※ 광고, 도배, 욕설, 비방 등
+서비스와 무관한 내용 작성시
+신고 및 무통보 삭제될 수 있습니다." required></textarea>
+				</div>
+				<!-- 버튼 -->
+				<div class="review-btn-wrap">
+					<input type="button" id="update-btn" value="수정">
 				</div>
 			</div>
 		</form>

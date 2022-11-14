@@ -40,4 +40,29 @@ public class ReviewController {
 		model.addAttribute("loc", "/mypageService.do?memberId="+m.getMemberId());
 		return "common/msg";
 	}
+	
+	//유저 마이페이지 - 이용내역 - 작성한 후기 상세보기
+	@ResponseBody
+	@RequestMapping(value="/selectOneReview.do")
+	public Review selectOneReview(String bookingNo) {
+		Review r = service.selectOneReview(bookingNo);
+		return r;
+	}
+	
+	//유저 마이페이지 - 이용내역 - 작성한 후기 수정
+	@RequestMapping(value = "/updateReview.do")
+	public String updateReview(Review r, Model model, Member m) {
+		int result = service.updateReview(r);
+		if (result>0) {
+			model.addAttribute("title", "후기수정 완료");
+			model.addAttribute("msg", "입력하신 내용으로 후기를 수정했습니다.");
+			model.addAttribute("icon", "success");
+		} else {
+			model.addAttribute("title", "후기수정 실패");
+			model.addAttribute("msg", "후기수정 중 오류가 발생했습니다.");
+			model.addAttribute("icon", "error");
+		}
+		model.addAttribute("loc", "/mypageService.do?memberId="+m.getMemberId());
+		return "common/msg";
+	}
 }

@@ -91,13 +91,12 @@
 .service-box>table .td-category>a, .service-box>table .td-state>a{
 	color: rgba(0,0,0,0.6);
 }
-.service-box>table .td-cancle-review>a{
+.service-box>table .td-cancle-review>a,
+.service-box>table .td-cancle-review>.a-review-rate:hover{
     color: #6497a2;
 }
-.service-box>table .td-cancle-review>.star{
-	color: #ffb347;
-}
-.service-box>table td>a:hover, .service-box>table .td-cancle-review>.star:hover{
+.service-box>table td>a:hover,
+.service-box>table .td-cancle-review>.a-review-rate{
     color: #cda45e;
 }
 .td-start-date, .td-state, .td-cancle-review{
@@ -106,7 +105,7 @@
 .service-box>table .td-state>a{
 	padding-left: 10px;
 }
-.material-symbols-outlined.detail-icon{
+.detail-icon.material-symbols-outlined{
 	font-size: 15px;
 	color: #cda45e;
 }
@@ -142,7 +141,7 @@ body{
     margin-left: 25px;
     font-size: 17px;
 }
-#close-btn{
+.close-btn.material-symbols-outlined{
     float: right;
     background-color: rgb(255, 50, 50);
     margin-top: 8px;
@@ -153,7 +152,7 @@ body{
     font-weight: bold;
     color: #fff;
 }
-#close-btn:hover{
+.close-btn:hover{
     cursor: pointer;
     background-color: rgb(255, 0, 0);
 }
