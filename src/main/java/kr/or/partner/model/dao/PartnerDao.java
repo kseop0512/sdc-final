@@ -65,6 +65,7 @@ public class PartnerDao {
 		return sqlSession.selectOne("partner.selectOne",pNo);
 	}
 
+
 	public ArrayList<Pet> selectAllPets(Member m) {
 		// TODO Auto-generated method stub
 		List list = sqlSession.selectList("pet.selectAllPets",m);
@@ -78,13 +79,28 @@ public class PartnerDao {
 
 
 
-	/*
+	
 	public Partner selectOnepartner(Partner partner) {
 		Partner p = sqlSession.selectOne("partner.selectOnepartner",partner);
 		System.out.println("파트너 로그인완료");
 		System.out.println(partner.getPEmail());
 		return p;
 	}
-	*/
+	public Partner findIdPartner(Partner partner) {
+		return sqlSession.selectOne("partner.findIdPartner",partner);
+
+	}
+
+	public Partner selectOnePartner(Partner partner) {
+		return sqlSession.selectOne("partner.selectOnePartner",partner);
+	}
+
+	public int updatePwPartNer(Partner p) {
+		return sqlSession.update("partner.updatePwP",p);
+	}
+
+	public String selectPartnerName(String pNo) {
+		return sqlSession.selectOne("partner.selectPartnerName",pNo);
+	}
 
 }

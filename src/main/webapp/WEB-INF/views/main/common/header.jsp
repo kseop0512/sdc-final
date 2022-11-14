@@ -68,7 +68,7 @@
                 </li>
                 <li class="dropdown"><a href="#"><span>게시판</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                        <li><a href="#">공지사항</a></li>
+                        <li><a href="/homeNoticeList.do?reqPage=1">공지사항</a></li>
                         <li class="dropdown"><a href="#"><span>똑독캣 게시판</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
                                 <li><a href="#">훈련사 QnA</a></li>

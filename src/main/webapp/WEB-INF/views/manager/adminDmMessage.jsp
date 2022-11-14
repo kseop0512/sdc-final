@@ -15,8 +15,8 @@
          <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
-  <body>
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+  <body class="sb-nav-fixed">
+	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="/adminIndex.do">똑독캣 관리자페이지</a>
             <!-- Sidebar Toggle-->
@@ -35,13 +35,13 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <!-- <li><a class="dropdown-item" href="#!">Settings</a></li>
                         <li><hr class="dropdown-divider" /></li> -->
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                        <li><a class="dropdown-item" href="/logoutManager.do">Logout</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
         <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
+			<div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
@@ -51,7 +51,7 @@
                                	 마이페이지
                             </a>
                             <div class="sb-sidenav-menu-heading">메뉴</div>
-                            <a class="nav-link collapsed" href="memberList.html" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <a class="nav-link collapsed" href="/adminMemberList.do" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                	 유저관리
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -59,7 +59,17 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="/adminMemberList.do">유저리스트</a>
-                                    <a class="nav-link" href="partnerList.html">파트너관리</a>
+                                    	 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        	파트너관리
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="/partnerList.do">파트너승인</a>
+                                            <a class="nav-link" href="/getPartner.do">파트너리스트</a>
+                                        </nav>
+                                    </div>
+
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -69,15 +79,15 @@
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="reportList.html" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                    <a class="nav-link collapsed" href="/reviewReportList.do" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                         	리뷰신고
                                     </a>
-                                    <a class="nav-link collapsed" href="reportList.html" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                    <a class="nav-link collapsed" href="/qnaReportList.do" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                         Q&A신고
                                     </a>
                                 </nav>
                             </div>
-                            <a class="nav-link" href="reservationList.html">
+                            <a class="nav-link" href="/reservationList.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 	예약내역
                             </a>
@@ -86,7 +96,7 @@
                                 1:1문의내역
                             </a>
                             <div class="sb-sidenav-menu-heading">게시판</div>
-                            <a class="nav-link" href="/adminNotice.do">
+                            <a class="nav-link" href="/adminNotice.do?reqPage=1">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 	공지사항
                             </a>
@@ -98,6 +108,7 @@
                     </div>
                 </nav>
             </div>
+            
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
@@ -124,26 +135,30 @@
                                             <code>[<code id="dm_checkRead"></code>]</code>건
                                         </p>
                                         <div id="nameIdSerarch-Box" style="float: right;">
-                                            <form action="#" post="post">
-                                                <select>
+                                            <form action="/selectdmType.do" method="get">
+                                                <select name="dmType">
                                                     <option>문의유형</option>
-                                                    <option>취소/결제</option>
-                                                    <option>예약</option>
-                                                    <option>기타문의</option>
+                                                    <option value="0">취소/결제</option>
+                                                    <option value="1">예약</option>
+                                                    <option value="2">기타문의</option>
                                                 </select>
-                                                <select>
-                                                    <option>아이디</option>
-                                                </select>
-                                                    <input class="input-form2" type="text" placeholder="입력하세요" style="width: 500px;">
+                                                    <input class="input-form2" type="text" name="keyword" placeholder="아이디를 입력하세요" style="width: 500px;">
                                                     <button class="bc22">검색</button>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
+								 <!-- 탭 -->
+					              <div id="tab-wrap">
+					              	<div id="tab-allMember">전체</div>
+					                <div id="tab-member" class="active-tap">이용자</div>
+					                <div id="tab-partner">파트너</div>
+					              </div>
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
                                             <th>번호</th>
+                                            <th>구분(M/P)</th>
                                             <th>아이디</th>
                                             <th>문의유형</th>
                                             <th>문의내용</th>
@@ -154,6 +169,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>번호</th>
+                                            <th>구분(M/P)</th>
                                             <th>아이디</th>
                                             <th>문의유형</th>
                                             <th>문의내용</th>
@@ -174,7 +190,7 @@
                                 </div>
                                 <div class="modalmodal-content">
                                     <div class="dmFrm">
-                                        <table class="table table-bordered">
+                                        <table class="table table-bordered" style="min-width: 800px;">
                                             <thead>
                                                 <tr>
                                                 	<th scope="col" style="text-align: center;">No</th>
@@ -197,7 +213,7 @@
                                                     <input type="hidden" id="dm-type" value="">
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody style="min-width: 800px;">
                                                 <tr>
                                                     <th style="line-height: 130px;">문의내용</th>
                                                     <td colspan="5"><textarea id="detailContent" style="resize: none;" readonly></textarea></td>

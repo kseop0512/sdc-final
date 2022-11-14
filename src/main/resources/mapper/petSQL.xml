@@ -68,7 +68,7 @@
 			pet_type as petType,
 			pet_name as petName,
 			pet_gender as petGender,
-			pet_bdate as petBdate,
+			substr(pet_bdate,1,4) as petBdate,
 			pet_kind as petKind,
 			pet_weight as petWeight,
 			pet_neut as petNeut,
@@ -99,5 +99,9 @@
 			inde
 		from pet_chklist where pet_no in (select pet_no from pet_tbl where member_no =#{memberNo})
 		
+	</select>
+	
+	<select id="selectPetName" parameterType="_int" resultType="string">
+		select pet_name from pet_tbl where pet_no=#{_parameter}
 	</select>
 </mapper>

@@ -36,5 +36,9 @@ public class PetService {
 		ArrayList<PetCheckList> list = dao.selectMyPetChk(memberNo);
 		return list;
 	}
+
+	public String selectPetName(int petNo) {
+		return dao.selectPetName(petNo);
+	}
 	
 }

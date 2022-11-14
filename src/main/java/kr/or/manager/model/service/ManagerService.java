@@ -20,6 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import kr.or.mail.controller.MailSender;
+
+import kr.or.dm.model.vo.DirectMessage;
 import kr.or.manager.model.dao.ManagerDao;
 import kr.or.manager.model.vo.FileVOG;
 import kr.or.manager.model.vo.Manager;
@@ -247,5 +250,68 @@ public class ManagerService {
 		dao.readGCountUpdate(noticeGNo);
 		
 	}
+
+// 관리자 - 승인해야할 partner 불러오기 
+	public ArrayList<Partner> partnerList(String type, String keyword) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		return dao.partnerList(map);
+	}
+//관리자 - 파트너 승인
+	public int upgradeOk(String pNo, String gradeType, String email) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("pNo", pNo);
+		map.put("gradeType", gradeType);
+		map.put("email", email);
+		
+		int result = 0;
+		if(gradeType.equals("C")) {
+		 result = dao.upgradeOk(map);			
+		 	//성공메일발송
+			 MailSender sender = new MailSender();
+			 sender.partnerEamil(email);
+		}else if(gradeType.equals("Z")) {
+		 result = dao.deletePartner(map);
+			//거절메일발송
+			 MailSender sender = new MailSender();
+			 sender.partnerCancel(email);
+		}
+		return result;
+	}
+//파트너 - 지원한 사람 상세보기
+	public Partner selectOnePartner(String pNo) {
+		// TODO Auto-generated method stub
+		return dao.selectOnePartner(pNo);
+	}
+//파트너 수 
+	public int nPartner() {
+		return dao.partnerC();
+	}
+//파트너 승인 후 -> 등급별로 들어오는 곳 
+	public ArrayList<Partner> partnerGradeList(String type, String keyword) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		return dao.partnerGradeList(map);
+	}
+	
+	public int gradePartner() {
+		// TODO Auto-generated method stub
+		return dao.gradePartner();
+	}
+
+
+	public int mainQnaWrite(DirectMessage dm) {
+		System.out.println(dm);
+		int result = dao.mainQnaWrite(dm);
+		System.out.println(result);
+		return result;
+	}
+
+	public ArrayList<NoticeG> searchQnanotice(NoticeG ng) {
+		return dao.searchQnanotice(ng);
+	}
+
 	
 }

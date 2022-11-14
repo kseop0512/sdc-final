@@ -77,7 +77,12 @@
 		   member_phone as memberPhone
 		from member_tbl where member_id=#{_parameter}	 
 	</select>
-
+	<select id="partnerOne" parameterType="string" resultType="p">
+		select
+			p_name as pName,
+			p_phone as pPhone
+		from partner where p_id=#{_parameter}
+	</select>
 	
 	<select id="selectAdminNotice" parameterType="map" resultType="ng">
 		select * from
@@ -166,4 +171,109 @@
   		from notice_g
   	where notice_g_no = #{noticeGNo}
   </delete>
+  
+
+  <!-- 승인해야할 파트너 리스트 -->
+  <select id="adminPartnerList" parameterType="map" resultType="p">
+	 select 
+		p_no as pNo,
+		p_name as pName,
+		p_id as pId,
+		p_phone as pPhone,    
+		p_addr as pAddr,
+		apply_date as applyDate,
+		license,
+		p_grade as pGrade,
+		p_point as pPoint
+	from partner where p_grade='N' 
+		<choose>
+			<when test="type == null">
+				and p_id like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('id')">
+				and p_id like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('name')">
+				and p_name like '%'||#{keyword}||'%'
+			</when>
+		</choose>
+  </select>
+  <!-- 파트너승인 -->
+  <update id="upgradeOk" parameterType="map">
+  	update partner set p_grade=#{gradeType} where p_no=#{pNo}
+  </update>
+  <delete id="deletePartner" parameterType="map">
+  	delete from partner where p_no=#{pNo}
+  </delete>
+  <select id="selectGetPartner" resultType="int">
+  	select count(*) from partner WHERE p_grade = 'N'
+  </select>
+  <!-- 파트너 승인  후  -->
+  <select id="partnerGradeList" parameterType="map" resultType="p">
+  	select 
+		p_no as pNo,
+		p_name as pName,
+		p_id as pId,
+		p_phone as pPhone,    
+		p_addr as pAddr,
+		apply_date as applyDate,
+		license,
+		p_grade as pGrade,
+		p_point as pPoint
+	from partner where p_grade!='N' 
+	<choose>
+			<when test="type == null">
+				and p_id like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('id')">
+				and p_id like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('name')">
+				and p_name like '%'||#{keyword}||'%'
+			</when>
+		</choose>
+  </select>
+  <select id="gradePartner" resultType="int">
+  	select count(*) from partner WHERE p_grade != 'N'
+  </select>
+
+  <!-- 메인 문의하기 -->
+  <insert id="mainQnaWrite" parameterType="dm">
+  	insert into direct_msg values
+  	(
+  		dm_seq.nextval,
+  		#{sender},
+  		#{senderCategory},
+  		'admin',
+  		#{dmContent},
+  		to_char(sysdate,'yy/mm/dd'),
+  		0,
+  		#{dmType},
+  		null
+  	)
+  </insert>
+  
+  <!-- 검색창 -->
+  <select id="searchQnanotice" parameterType="ng" resultType="ng">
+  	select
+  		notice_g_no as noticeGNo,
+		notice_g_title as noticeGTitle,
+		notice_g_content as noticeGContent,
+		notice_g_writer as noticeGWriter,
+		notice_g_date as noticeGDate,
+		read_g_count as readGCount,
+		search_type as searchType,
+		keyword as keyword
+	from qna_tbl
+	<choose>
+		<when test="searchType.equals('title')">
+			where notice_g_title like '%'||#{keyword}||'%'
+		</when>
+		<when test="searchType.equals('content')">
+		where notice_g_content like '%'||#{keyword}||'%'
+		</when>
+	</choose>
+  </select>
+  
+
 </mapper>

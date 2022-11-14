@@ -72,6 +72,7 @@ public class PartnerService {
 		return dao.selectOnePartner(pNo);
 	}
 
+
 	public ArrayList<Pet> selectAllPets(Member m) {
 		// TODO Auto-generated method stub
 		return dao.selectAllPets(m);
@@ -82,11 +83,27 @@ public class PartnerService {
 	}
 
 
-	/*
+	
 	public Partner selectOnepartner(Partner partner) {
 		Partner p = dao.selectOnepartner(partner);
 		return p;
 	}
-	*/
+	public Partner findIdPartner(Partner partner) {
+		return dao.findIdPartner(partner);
+
+	}
+
+	public Partner selectOnePartnerEnc(Partner partner) {
+		return dao.selectOnePartner(partner);
+	}
+
+	public int updatePwEncPartNer(Partner p) {
+		return dao.updatePwPartNer(p);
+	}
+	
+	//유저 마이페이지 - 이용내역 - 파트너이름 출력
+	public String selectPartnerName(String pNo) {
+		return dao.selectPartnerName(pNo);
+	}
 
 }

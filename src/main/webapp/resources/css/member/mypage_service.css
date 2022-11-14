@@ -44,9 +44,9 @@
     padding-top: 20px;
 }
 
-/* input[type=text] border, 배경색 없애기 */
+/* input[type=text] 너비 조정, border, 배경색 없애기 */
 #content input[type=text]{
-	width: 100px;
+	width: 100%;
     border: none;
     background-color: transparent;
 }
@@ -54,78 +54,7 @@
     outline: none;
 }
 
-/* 탭div[받은메시지/보낸메시지] */
-#tab-wrap{
-    display: flex;
-}
-#tab-wrap>div{
-    display: flex;
-    font-size: 17px;
-    font-weight: bold;
-    width: 110px;
-    justify-content: center;
-}
-#tab-wrap>div:first-child{
-    border-right: 2px solid rgba(255, 255, 255, 0.2);
-}
-#tab-wrap>div:hover{
-    color: #cda45e;
-    cursor: pointer;
-    transition-duration: 0.3s;
-}
-.active-tap{
-    color: #cda45e;
-}
-
-/* 버튼div */
-#btn-wrap{
-    margin: 15px 0;
-}
-#btn-wrap>button{
-    width: 80px;
-    margin-left: 10px;
-    border-radius: 15px;
-    color: #fff;
-    font-size: 15px;
-}
-#delete{
-    background-color: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-}
-#reading{
-    background-color: #cda45e;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-}
-#btn-wrap>button:hover{
-    background-color: #ffb347;
-    transition-duration: 0.3s;
-}
-
-/* 읽지않음 필터div */
-#msg-filter{
-    float: right;
-    margin-right: 10px;
-    padding: 0px 15px;
-    height: 30px;
-    line-height: 25px;
-    background-color: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    box-sizing: border-box;
-}
-#msg-filter>span{
-    font-size: 14px;
-}
-#filter-div{
-    color: rgba(255, 255, 255, 0.2);
-}
-#msg-filter>.filter:hover{
-    color: #cda45e;
-    transition-duration: 0.3s;
-    cursor: pointer;
-}
-
-/* 메시지함 */
+/* 이용내역 표 */
 .service-box{
     margin: 10px;
 }
@@ -142,64 +71,22 @@
     font-weight: bold;
 }
 .service-box>table td{
-    padding: 10px 10px 10px 15px;
+    padding: 10px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     font-size: 15px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-align: center;
 }
-.service-box>table td>a{
-    display: block;
-    width: 220px;
-    color: #000;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.service-box>table td>input{
+	text-align: center;
 }
 .service-box>table td>a:hover{
     color: #cda45e;
 }
-
-/* 컬럼이름 칸 너비 조정 */
-.th-checkbox{
-    width: 45px;
-}
-.th-category{
-    width: 95px;
-}
-.th-sender, .th-receiver{
-    width: 130px;
-}
-.th-date{
-    width: 130px;
-}
-.th-readcheck{
-    width: 90px;
-}
-
-/* 보낸사람 드롭박스 */
-.th-sender>button{
-    padding: 0;
-    border: none;
-    background-color: transparent;
-    font-weight: bold;
-}
-.th-sender>button:hover{
+.service-box>table td>a{
     color: #6f5ecd;
-    transition-duration: 0.3s;
-}
-.th-sender>button:focus{
-    outline: none;
-}
-.dropdown-menu{
-    --bs-dropdown-min-width: 0;
-}
-
-/* 체크박스 디자인 수정 */
-.form-check-input:checked {
-    background-color: #ffb347;
-    border-color: #fff;
 }
 
 /* 모달창 */

@@ -73,37 +73,7 @@
 			</when>
 		</choose>
 	</update>
-	<!--  
-	 파트너용 로그인 
-	<select id="selectOnepartner" parameterType="p" resultType="p">
-		select
-			p_no as pNo,
-			category,
-			p_id as pId,
-			p_pw as pPw,
-			p_name as pName,
-			p_dob as pDob,
-			p_phone as pPhone,
-			p_gender as pGender,
-			p_email as pEmail,
-			p_addr as pAddr,
-			p_grade as pGrade,
-			p_point as pPoint,
-			profile_name as profileName,
-			profile_path as profilePath,
-			apply_motiv as applyMotiv,
-			apply_date as applyDate,
-			approve_date as approveDate
-		from partner
-		where p_id=#{pId}
-		<if test="pPw != null">
-		and p_pw=#{pPw}
-		</if>
-		<if test="pAddr != null">
-		and p_addr=#{pAddr}
-		</if>
-	</select>
-	-->
+	
 	<!-- 관리자P 파트너 회원수 -->
 	<select id="selectPartner" resultType="int">
 		select count(*) as cnt from partner
@@ -178,7 +148,28 @@
 			work_exp as workExp
 		from partner where p_no = #{_parameter}
 	</select>
+
 	<update id="updateTrainerImg" parameterType="p">
 		UPDATE TRAINER_BOARD SET TRAINER_IMG=#{profilePath} WHERE P_NO=#{PNo}
 	</update>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findIdPartner" parameterType="p" resultType="p">
+		select
+			p_id as pId,
+			p_grade as pGrade
+		from partner
+		where p_name= #{pName} and p_phone = #{pPhone}
+	</select>
+	
+	<update id="updatePwP" parameterType="p">
+		update partner
+		set p_pw = #{pPw}
+		where p_id = #{pId}
+	</update>
+	
+	<!-- 유저 마이페이지 - 이용내역 - 파트너이름 출력 -->
+	<select id="selectPartnerName" parameterType="string" resultType="string">
+		select p_name from partner where p_no=#{_parameter}
+	</select>
 </mapper>
