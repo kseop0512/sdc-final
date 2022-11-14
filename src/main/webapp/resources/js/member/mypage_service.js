@@ -132,7 +132,7 @@ function writeReview(bookingNo, memberNo, pNo, petNo){
 
 //후기작성 평점 드래그 이벤트
 const drawStarI = (target) => {
-  $(`insert-review .star span`).css({ width: `${target.value * 19}%` });
+  $(`.insert-review .star span`).css({ width: `${target.value * 19}%` });
   $("#i-rate").val(`${target.value}`);
 }
 

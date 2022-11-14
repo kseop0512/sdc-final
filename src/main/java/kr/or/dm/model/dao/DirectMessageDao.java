@@ -57,7 +57,7 @@ public class DirectMessageDao {
 		return sqlSession.insert("dm.insertDm",dm);
 	}
 	//답장한 read_Check 변경하기 
-	public int updateReadCheck(int reply) {
+	public int updateReadCheck(String reply) {
 		 return sqlSession.update("dm.updateReadCheck", reply);
 	}
 	

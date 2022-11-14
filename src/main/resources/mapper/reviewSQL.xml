@@ -8,7 +8,7 @@
 	
 	<insert id="insertReview" parameterType="r">
 		insert into review_tbl values(
-			'REVIEW-' || p_seq.nextval,
+			'REVIEW-' || review_seq.nextval,
 			#{bookingNo},
 			#{memberNo},
 			#{pNo},
