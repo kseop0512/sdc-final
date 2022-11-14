@@ -38,7 +38,7 @@ public class DirectMessageController {
 	//관리자 -  dm.js에 모달 띄워줄때 아이디를 준 회원정보조회, 내용조회
 	@ResponseBody
 	@RequestMapping(value="/detailMember.do", produces="application/json;charset=utf-8")
-	public String detailMember(String sender, int dmNo) {
+	public String detailMember(String sender, String dmNo) {
 		HashMap<String, Object> m  = service.selectOneMember(sender, dmNo);
 		return new Gson().toJson(m);
 		}
@@ -108,7 +108,7 @@ public class DirectMessageController {
 	//유저 받은메시지 읽음처리
 	@ResponseBody
 	@RequestMapping(value = "/updateMemberReadCheck.do")
-	public int updateMemberReadCheck(int dmNo) {
+	public int updateMemberReadCheck(String dmNo) {
 		int result = service.updateMemberReadCheck(dmNo);
 		return result;
 	}
@@ -133,7 +133,7 @@ public class DirectMessageController {
 	//1:1문의 삭제
 	@ResponseBody
 	@RequestMapping(value="/deleteDm.do")
-	public String deleteDm(int dmNo) {
+	public String deleteDm(String dmNo) {
 		int result = service.deleteDm(dmNo);
 		String resultMsg;
 		if(result>0) {

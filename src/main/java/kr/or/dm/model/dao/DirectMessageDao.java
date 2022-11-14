@@ -74,7 +74,7 @@ public class DirectMessageDao {
 	}
 
 	//메시지 상세조회 시 읽음 상태로 변경
-	public int updateMemberReadCheck(int dmNo) {
+	public int updateMemberReadCheck(String dmNo) {
 		return sqlSession.update("dm.updateMemberReadCheck",dmNo);
 	}
 	
@@ -84,13 +84,13 @@ public class DirectMessageDao {
 	}
 	
 	//메시지 삭제
-	public int deleteDm(int dmNo) {
+	public int deleteDm(String dmNo) {
 		return sqlSession.delete("dm.deleteDm",dmNo);
 	}
 
 
 	//답변보여주기 
-	public DirectMessage selectReply(int dmNo) {
+	public DirectMessage selectReply(String dmNo) {
 		return sqlSession.selectOne("dm.showDmContent",dmNo);
 	}
 	//관리자P dm 결제/취소 검색
