@@ -180,47 +180,6 @@
 
       </div>
     </section><!-- End About Section -->
-
-    <!-- ======= Why Us Section ======= 
-    <section id="why-us" class="why-us">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Why Us</h2>
-          <p>우리 똑독캣을 선택하는 이유</p>
-        </div>
-
-        <div class="row">
-
-          <div class="col-lg-4">
-            <div class="box" data-aos="zoom-in" data-aos-delay="100">
-              <span>01</span>
-              <h4>Lorem Ipsum</h4>
-              <p>Ulamco laboris nisi ut aliquip ex ea commodo consequat. Et consectetur ducimus vero placeat</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mt-4 mt-lg-0">
-            <div class="box" data-aos="zoom-in" data-aos-delay="200">
-              <span>02</span>
-              <h4>Repellat Nihil</h4>
-              <p>Dolorem est fugiat occaecati voluptate velit esse. Dicta veritatis dolor quod et vel dire leno para dest</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mt-4 mt-lg-0">
-            <div class="box" data-aos="zoom-in" data-aos-delay="300">
-              <span>03</span>
-              <h4> Ad ad velit qui</h4>
-              <p>Molestiae officiis omnis illo asperiores. Aut doloribus vitae sunt debitis quo vel nam quis</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section> End Why Us Section -->
-
     <!-- ======= Menu Section ======= -->
     <section id="menu" class="menu section-bg">
       <div class="container" data-aos="fade-up">
@@ -276,10 +235,10 @@
           <div class="col-lg-6 menu-item filter-salads">
             <img src="resources/assets/img/menu/DC16.png" class="menu-img" alt="">
             <div class="menu-content">
-              <a href="#">영상 교육 (60분)</a><span>₩80,000</span>
+              <a href="/oneTrainer.do?tBoardNo=TBOARD-102">신조이 훈련사 - 방문 교육 (60분)</a><span>₩120,000</span>
             </div>
             <div class="menu-ingredients">
-              방문 교육 대비 부담없는 비용 / 거주지에 외부인 방문이 불편하신 분 / 자유롭게 원하는 스케줄에 교육 가능 / 짧은 시간(60분)내에 효율적인 교육
+               직접 현장에서 핸들링 및 코치 가능 / 산책 또는 야외 교육이 필요한 경우 / 공격성으로 직접 핸들링이 힘든 경우 / 오랜 시간(60분)집중적인 교육
 
             </div>
           </div>
@@ -307,20 +266,20 @@
           <div class="col-lg-6 menu-item filter-salads">
             <img src="resources/assets/img/menu/DC16.png" class="menu-img" alt="">
             <div class="menu-content">
-              <a href="#">방문 교육 (100분)</a><span>₩150,000</span>
+              <a href="/oneTrainer.do?tBoardNo=TBOARD-101">김광섭 훈련사 - 방문 교육 (60분)</a><span>₩120,000</span>
             </div>
             <div class="menu-ingredients">
-              직접 현장에서 핸들링 및 코치 가능 / 산책 또는 야외 교육이 필요한 경우 / 공격성으로 직접 핸들링이 힘든 경우 / 오랜 시간(100분)집중적인 교육
+              직접 현장에서 핸들링 및 코치 가능 / 산책 또는 야외 교육이 필요한 경우 / 공격성으로 직접 핸들링이 힘든 경우 / 오랜 시간(60분)집중적인 교육
             </div>
           </div>
 
           <div class="col-lg-6 menu-item filter-salads">
             <img src="resources/assets/img/menu/DC16.png" class="menu-img" alt="">
             <div class="menu-content">
-              <a href="#">종합 교육</a><span>₩210,000</span>
+              <a href="/oneTrainer.do?tBoardNo=TBOARD-100">신혜규 훈련사 - 방문 교육 (60분)</a><span>₩120,000</span>
             </div>
             <div class="menu-ingredients">
-              영상 교육 (60분) + 방문 교육 (100분)
+              직접 현장에서 핸들링 및 코치 가능 / 산책 또는 야외 교육이 필요한 경우 / 공격성으로 직접 핸들링이 힘든 경우 / 오랜 시간(60분)집중적인 교육
             </div>
           </div>
 
@@ -372,9 +331,9 @@
                   <div class="col-lg-8 details order-2 order-lg-1">
                     <h3>언제 어디서든 똑독캣을 부르세요</h3>
                     <p class="fst-italic">강아지의 삶에 가장 중요한 산책을 바쁜 일상으로 인해 자주 미루셨나요?
-                      이제는 와요 펫시터에게 강아지의 안전하고 즐거운 산책을 맡겨보세요</p>
+                      이제는 똑독캣 펫시터에게 강아지의 안전하고 즐거운 산책을 맡겨보세요</p>
                     <p>언제 어디서든 원하시는 방법으로 '똑독캣' 방문 펫시터 서비스를 예약할 수 있어요</p>
-                    <a href="#" id="jasehi" class="btn-book animated fadeInUp scrollto jasehi">
+                    <a href="/petSitterList.do" id="jasehi" class="btn-book animated fadeInUp scrollto jasehi">
                       <div style="width: 170px;height: 59px;border: 1px solid #333333;margin-top: 50px;display: flex;justify-content: center;align-items: center;">
                         <p style="font-size: 17px;color: #cda45e;font-weight: 600;letter-spacing: -0.2px;margin-bottom: 0;">자세히 보기</p>
                         <img src="resources//assets/img/arrow_right.png" style="width: 20px;height: 17px;margin-left: 15px;">
@@ -393,7 +352,7 @@
                     <p class="fst-italic">혼자 남겨진 반려동물을 생각하며, 외출을 망설인 적이 있으신가요?
                       이제는 똑독캣 펫시터에게 맡기고, 여러분의 소중한 일상을 마음 편히 보내세요</p>
                     <p>언제 어디서든 원하시는 방법으로 '똑독캣' 방문 펫시터 서비스를 예약할 수 있어요</p>
-                    <a href="#" id="jasehi" class="btn-book animated fadeInUp scrollto jasehi">
+                    <a href="/petSitterList.do" id="jasehi" class="btn-book animated fadeInUp scrollto jasehi">
                       <div style="width: 170px;height: 59px;border: 1px solid #333333;margin-top: 50px;display: flex;justify-content: center;align-items: center;">
                         <p style="font-size: 17px;color: #cda45e;font-weight: 600;letter-spacing: -0.2px;margin-bottom: 0;">자세히 보기</p>
                         <img src="resources//assets/img/arrow_right.png" style="width: 20px;height: 17px;margin-left: 15px;">
@@ -412,7 +371,7 @@
                     <p class="fst-italic">반려견과 보호자님 모두의 행복한 동행을 위해
                       똑독캣 든든한 교육 파트너가 되어드립니다.</p>
                     <p>KKF/KKC 3급 이상 경력 인증, 자격증 및 서류 사전 검증 등 믿을 수 있는 훈련사를 만나보세요</p>
-                    <a href="#" id="jasehi" class="btn-book animated fadeInUp scrollto jasehi">
+                    <a href="/trainerList.do" id="jasehi" class="btn-book animated fadeInUp scrollto jasehi">
                       <div style="width: 170px;height: 59px;border: 1px solid #333333;margin-top: 50px;display: flex;justify-content: center;align-items: center;">
                         <p style="font-size: 17px;color: #cda45e;font-weight: 600;letter-spacing: -0.2px;margin-bottom: 0;">자세히 보기</p>
                         <img src="resources//assets/img/arrow_right.png" style="width: 20px;height: 17px;margin-left: 15px;">
@@ -428,9 +387,9 @@
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
                     <h3>다른곳에 맡기고 싶다면 위탁 서비스를 이용해보세요</h3>
-                    <p class="fst-italic">Totam aperiam accusamus. Repellat consequuntur iure voluptas iure porro quis delectus</p>
-                    <p>Eaque consequuntur consequuntur libero expedita in voluptas. Nostrum ipsam necessitatibus aliquam fugiat debitis quis velit. Eum ex maxime error in consequatur corporis atque. Eligendi asperiores sed qui veritatis aperiam quia a laborum inventore</p>
-                    <a href="#" id="jasehi" class="btn-book animated fadeInUp scrollto jasehi">
+                    <p class="fst-italic">행복한 하루를 선물하세요</p>
+                    <p>여행, 출장, 늦은 퇴근에도 걱정마세요! 가족같은 펫시터가 내 아이와 함께합니다</p>
+                    <a href="/petSitterList.do" id="jasehi" class="btn-book animated fadeInUp scrollto jasehi">
                       <div style="width: 170px;height: 59px;border: 1px solid #333333;margin-top: 50px;display: flex;justify-content: center;align-items: center;">
                         <p style="font-size: 17px;color: #cda45e;font-weight: 600;letter-spacing: -0.2px;margin-bottom: 0;">자세히 보기</p>
                         <img src="resources//assets/img/arrow_right.png" style="width: 20px;height: 17px;margin-left: 15px;">

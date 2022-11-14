@@ -21,7 +21,6 @@ import org.springframework.stereotype.Service;
 
 
 import kr.or.mail.controller.MailSender;
-
 import kr.or.dm.model.vo.DirectMessage;
 import kr.or.manager.model.dao.ManagerDao;
 import kr.or.manager.model.vo.FileVOG;
@@ -309,9 +308,4 @@ public class ManagerService {
 		return result;
 	}
 
-	public ArrayList<NoticeG> searchQnanotice(NoticeG ng) {
-		return dao.searchQnanotice(ng);
-	}
-
-	
 }

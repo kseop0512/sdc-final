@@ -142,5 +142,11 @@ public class ManagerDao {
 	public int gradePartner() {
 		return sqlSession.selectOne("manager.gradePartner");
 	}
-
+	
+	/* 검색기능 보류
+	public ArrayList<NoticeG> searchNoticeG(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("manager.searchNoticeG",map);
+		return (ArrayList<NoticeG>)list;
+	}
+	*/
 }
