@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 
 import kr.or.booking.model.service.BookingService;
 import kr.or.booking.model.vo.Booking;
+import kr.or.partner.model.vo.Partner;
 
 
 
@@ -67,5 +68,29 @@ public class BookingController {
 		dates.add("2022-11-20");
 		return new Gson().toJson(dates);
 	}
-	
+	// 혜규 on 11/13
+	// 파트너 예약 요청 리스트
+	@RequestMapping(value="/appliedList.do")
+	public String appliedList() {
+		ArrayList<Booking> lists = service.selectOngoingBooking(p);
+		return "partner/appliedList";
+	}
+	@RequestMapping(value="/scheduleCalendar.do")
+	public String scheduleCalender() {
+		return "partner/scheduleCalendar";
+	}
+	// 훈련사 예약 리스트
+	@ResponseBody
+	@RequestMapping(value="/getScheduleList.do", produces="application/json;charset=utf-8")
+	public String getScheduleList(Partner p) {
+		ArrayList<Booking> lists = service.partnerCalendar(p);
+		return new Gson().toJson(lists);
+	}
+	// 위탁 펫시터 예약 리스트
+	@ResponseBody
+	@RequestMapping(value="/getSitterScheduleList.do", produces="application/json;charset=utf-8")
+	public String getSitterScheduleList(Partner p) {
+		ArrayList<Booking> lists = service.petSitterCalendar(p);
+		return new Gson().toJson(lists);
+	}
 }

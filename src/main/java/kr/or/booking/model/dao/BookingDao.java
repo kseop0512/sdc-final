@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.booking.model.vo.Booking;
+import kr.or.partner.model.vo.Partner;
 
 @Repository
 public class BookingDao {
@@ -23,5 +24,25 @@ public class BookingDao {
 		// TODO Auto-generated method stub
 		List list = sqlSession.selectList("booking.selectBookingTime",b);
 		return (ArrayList<String>)list;
+	}
+
+	// 혜규 on 11/13
+	public ArrayList<Booking> selectOngoingBooking(Partner p) {
+		// TODO Auto-generated method stub
+		List list = sqlSession.selectList("booking.selectOngoingBooking",p);
+		return (ArrayList<Booking>)list;
+	}
+
+	public ArrayList<Booking> partnerCalendar(Partner p) {
+		// TODO Auto-generated method stub
+		List list = sqlSession.selectList("booking.selectTrainerSchedule",p);
+		return (ArrayList<Booking>)list;
+	}
+	// END 혜규 on 11/13
+
+	public ArrayList<Booking> petSitterCalendar(Partner p) {
+		// TODO Auto-generated method stub
+		List list = sqlSession.selectList("booking.selectSitterSchedule",p);
+		return (ArrayList<Booking>)list;
 	}
 }

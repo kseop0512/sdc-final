@@ -76,7 +76,8 @@ $(".chkNewPw").on("click",function(){
 // 파트너 등급기준 표 보여주기
 
 $("#gradeTbl").on("click",function(){
-	$(".gradeTable").slideDown();
+	
+	$(".gradeTable").toggle();
  });
 // 프로필 변경사진 띄워주기
 function loadImg(f){
@@ -133,7 +134,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			let eventsArr = new Array();
 		    for(let i=0; i<disabledDates.length; i++){
 		      eventsArr.push ({
-		        
 		        start: disabledDates[i],
 		        display: 'background',
 		        color: '#041C32'
@@ -163,6 +163,7 @@ document.addEventListener('DOMContentLoaded', function () {
           return true
         },
         select: function (info) {
+        
           const selectedDate = info.startStr;
           const showDate = $(".showDate");
           showDate.empty();
@@ -188,13 +189,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
               }
             }
+            
           });
     
           //end 시간조회하기
+          
         },
       });
       calendar.render();
+      
 		}
+		
 	});
 
 

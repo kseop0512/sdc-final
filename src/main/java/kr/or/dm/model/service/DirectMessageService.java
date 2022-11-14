@@ -80,6 +80,4 @@ public class DirectMessageService {
 	public int deleteDm(int dmNo) {
 		return dao.deleteDm(dmNo);
 	}
-
-	
 }

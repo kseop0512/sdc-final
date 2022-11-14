@@ -144,8 +144,7 @@ public class PartnerController {
 			partner.setPEmail(p.getPEmail());
 			partner.setLicense(p.getLicense());
 			partner.setWorkExp(p.getWorkExpBr());
-			partner.setProfilePath(p.getProfilePath());
-			partner.setProfileName(p.getProfileName());
+		
 			session.setAttribute("p", partner);
 			model.addAttribute("title","프로필 변경 완료");
 			model.addAttribute("msg","프로필 내용이 업데이트 되었습니다.");

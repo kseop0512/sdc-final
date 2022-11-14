@@ -16,10 +16,12 @@
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <style>
+    	
     	.profileTable{
-    		width: 1000px;
+    		width: 900px;
     		margin: 0 auto;
     		margin-top: 20px;
+    		vertical-align: middle;
     	}
     	.profileTable th{
     		width: 20%;
@@ -33,6 +35,9 @@
     		display: none;
     		margin-top: 10px;
     		text-align: center;
+    	}
+    	#gradeTbl{
+    		cursor: pointer;
     	}
     </style>
     <body class="sb-nav-fixed">
@@ -81,7 +86,6 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="/showProfile.do">프로필 변경</a>
                                     <a class="nav-link" href="/chkPwFrm.do">비밀번호 변경</a>
-                                    <a class="nav-link" href="/unregisterFrm.do">파트너 탈퇴신청</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -97,7 +101,7 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">예약요청 리스트</a>
+                                            <a class="nav-link" href="/appliedList.do?pNo=${sessionScope.p.PNo }">예약요청 리스트</a>
                                             <a class="nav-link" href="#">뭐 넣지</a>
                                         </nav>
                                     </div>
@@ -138,7 +142,7 @@
                             <li class="breadcrumb-item active">${sessionScope.p.PName }님 환영합니다.</li>
                         </ol>
                   	<div>
-                      <table class="table table-bordered table-dark profileTable">
+                      <table class="table table-warning profileTable">
                           <tr>
                               <td rowspan="5" style="width: 20%; background-color: #fff"><img src="/resources/upload/partner/profileImg/${sessionScope.p.profilePath }" style="width: 100%; height: 100%;"></td>
                               <th>이름</th>
@@ -161,7 +165,7 @@
                           	<td>${sessionScope.p.PEmail }</td>
                           </tr>
                       </table>
-                      <table class="table table-bordered table-dark profileTable">
+                      <table class="table table-warning profileTable">
                       	<tr>
                       		<th>파트너 가입일</th>
                       		<td colspan="3">${sessionScope.p.approveDate }</td>
@@ -195,10 +199,14 @@
                       		<td style="border-left: 1px solid ;">파트너가 훈련일지/돌봄일지 <span><strong>30</strong></span> point!</td>
                       	</tr>
                       </table>
-                      <table class="table table-bordered table-dark profileTable">
+                      <table class="table table-warning profileTable">
                       	<tr>
                       		<th>자격증</th>
-                      		<td>${sessionScope.p.license }</td>
+                      		<td>
+                    			<c:forTokens items="${sessionScope.p.license }" var="l" delims=",">
+                    			${l }<br>
+                    			</c:forTokens>
+                      		</td>
                       	</tr>
                       	<tr>
                       		<th>경력 사항</th>

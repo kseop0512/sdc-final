@@ -1,0 +1,69 @@
+/* 마이페이지 왼쪽 메뉴 */
+/* 창 높이 770px이상일 때 fixed효과*/
+@media(min-height : 775px){
+	#mypage-nav {
+		width: 200px;
+		position: fixed;
+		bottom: 25vh;
+		transition-duration: 0.5s;
+	}
+	#mypage-nav.on {
+		position: absolute;
+		bottom: 20vh;
+		transition-duration: 0.5s;
+	}
+	#mypage-nav>ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		border-radius: 15px;
+		overflow: hidden;
+	}
+	#mypage-nav>ul>li>a {
+		display: block;
+		line-height: 60px;
+		text-align: center;
+		background-color: #26231d;
+		color: #fff;
+	}
+	#mypage-nav>ul>li>a:hover {
+		background-color: rgba(255, 255, 255, 0.2);
+		color: #cda45e;
+		transition-duration: 0.3s;
+	}
+	#mypage-nav>ul>li>.active {
+		background-color: rgba(255, 255, 255, 0.2);
+	}
+}
+
+/* 창 높이 770px미만일 때 fixed효과 없음*/
+@media(max-height : 774px){
+	#mypage-nav {
+		width: 200px;
+		position: absolute;
+		top: 100px;
+		transition-duration: 0.5s;
+	}
+	#mypage-nav>ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		border-radius: 15px;
+		overflow: hidden;
+	}
+	#mypage-nav>ul>li>a {
+		display: block;
+		line-height: 60px;
+		text-align: center;
+		background-color: #26231d;
+		color: #fff;
+	}
+	#mypage-nav>ul>li>a:hover {
+		background-color: rgba(255, 255, 255, 0.2);
+		color: #cda45e;
+		transition-duration: 0.3s;
+	}
+	#mypage-nav>ul>li>.active {
+		background-color: rgba(255, 255, 255, 0.2);
+	}
+}

@@ -7,9 +7,15 @@
     <meta charset="UTF-8">
     <title>똑독캣 (SDC) | 강아지 전문 훈련사 </title>
     <jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
+    <script src="http://code.jquery.com/jquery-3.6.1.js"></script>
     <link href="/resources/css/partner/trainerStyles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
+<style>
+	main{
+		position: relative;
+	}
+</style>
 <body>
 <jsp:include page="/WEB-INF/views/main/common/header.jsp"/>
 <main id="oneTrainer">
@@ -111,9 +117,46 @@
 			</div>
 		</div>
 	</div>
+	<!-- 메시지 보내기 모달 -->
+	<div class="msg-modal" style="display: none;" >
+	  <div class="msg-modal-head">
+	    <span id="msg-modal-title">문의하기</span>
+	    <span id="close-btn" class="material-symbols-outlined">close</span>
+	  </div>
+	  <form action="/insertTrainerDm.do" method="post">
+	    <div class="msg-modal-content">
+	        <div class="msg-info msg-sender">
+	          <span>From: ${sessionScope.m.memberId}</span>
+	          <input type="hidden" name="sender" value="${sessionScope.m.memberId}">
+	        </div>
+	        <div class="msg-info msg-date">
+	          <span>To: ${p.PName }</span>
+	          <input type="hidden" name="receiver" value="${p.PNo}">
+	        </div>
+	        <div class="msg-content">
+	          <textarea id="reply-msg" name="dmContent"placeholder="내용을 입력해주세요.
+	
+				※ 광고, 도배, 욕설, 비방 등
+				서비스와 무관한 내용 작성시
+				신고 및 무통보 삭제될 수 있습니다." required></textarea>
+	          
+	        </div>
+	        <div class="msg-btn-wrap">
+	          <input type="submit" id="submit-btn" value="문의하기">
+	        </div>
+	    </div>
+	  </form>
+	</div>
 </main>
 <jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
 <script src="/resources/js/partnerScripts.js"></script>
-
+<script>
+	$(".askBox-wrapper>div").on("click",function(){
+		$(".msg-modal").show();
+	});
+	$(document).on("click","#close-btn",function(){
+		$(".msg-modal").hide();
+	});
+</script>
 </body>
 </html>	

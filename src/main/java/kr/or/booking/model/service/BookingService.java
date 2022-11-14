@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.booking.model.dao.BookingDao;
 import kr.or.booking.model.vo.Booking;
+import kr.or.partner.model.vo.Partner;
 
 @Service
 public class BookingService {
@@ -23,5 +24,21 @@ public class BookingService {
 		return dao.selectBookingTime(b);
 	}
 
+	// 혜규 on 11/13
+	public ArrayList<Booking> selectOngoingBooking(Partner p) {
+		// TODO Auto-generated method stub
+		return dao.selectOngoingBooking(p);
+	}
+
+	public ArrayList<Booking> partnerCalendar(Partner p) {
+		// TODO Auto-generated method stub
+		return dao.partnerCalendar(p);
+	}
+
+	public ArrayList<Booking> petSitterCalendar(Partner p) {
+		// TODO Auto-generated method stub
+		return dao.petSitterCalendar(p);
+	}
 	
+	// END 혜규 on 11/13
 }

@@ -77,7 +77,7 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">예약요청 리스트</a>
+                                            <a class="nav-link"  href="/appliedList.do?pNo=${sessionScope.p.PNo }">예약요청 리스트</a>
                                             <a class="nav-link" href="#">뭐 넣지</a>
                                         </nav>
                                     </div>
@@ -152,10 +152,7 @@
             </div>
         </div>
         <script src="/resources/js/partnerScripts.js"></script>
-        <script src="/resources/js/partner-datatables-simple-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
     </body>
 </html>
 

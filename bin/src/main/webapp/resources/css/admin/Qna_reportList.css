@@ -1,0 +1,15 @@
+.bc22 {
+    color: #fff;
+    background-color: #282F44;
+    border: 2px solid#282F44;
+}
+.bc22:hover {
+    background-color:#fff;
+    cursor: pointer;
+    color: #282F44;
+}
+
+#report-btn{
+    position: absolute;
+    right: 240px;
+}

@@ -60,7 +60,6 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="/showProfile.do">파트너 프로필</a>
                                     <a class="nav-link" href="/chkPwFrm.do">비밀번호 변경</a>
-                                    <a class="nav-link" href="/uregisterFrm.do">파트너 탈퇴신청</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -76,20 +75,12 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">예약요청 리스트</a>
-                                            <a class="nav-link" href="#">뭐 넣지</a>
-                                        </nav>
-                                    </div>
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        스케줄
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">스케줄 달력</a>
+                                            <a class="nav-link" href="/appliedList.do?pNo=${sessionScope.p.PNo }">예약요청 리스트</a>
+                                            <a class="nav-link" href="/scheduleCalendar.do">스케줄 달력</a>
                                             <a class="nav-link" href="#">스케줄 등록</a>
                                         </nav>
                                     </div>
+                         
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">수입관리</div>

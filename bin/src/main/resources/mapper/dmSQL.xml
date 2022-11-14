@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dm">
+	<!-- 관리자 1:1 문의내역 조회 -->
+	<select id="selectMyDm" parameterType="map" resultType="dm">
+		select
+			dm_no as dmNo,
+			sender,
+			sender_category as senderCategory,
+			receiver,
+			dm_content as dmContent,
+			dm_date as dmDate,
+			read_check as readCheck,
+			dm_type as dmType,
+			reply
+		from direct_msg 
+		where receiver = #{adminId} order by 1
+	</select>
+	 <!-- 관리자 1:1 문의 총 카운트  -->
+	 <select id="dmCount" parameterType="g" resultType="int">
+	 	SELECT COUNT(*) FROM direct_msg where receiver =#{adminId}
+	 </select>
+	 
+	 <!-- 관리자 답변대기 카운트 -->
+	 <select id="dmReadCount" parameterType="g" resultType="int">
+	 	select count(*) from direct_msg where read_check=0 and receiver =#{adminId}
+	 </select>
+	 
+	 <!-- 관리자 답변완료 카운트 -->
+	 <select id="dmCheckRead" resultType="int">
+	 	select count(*) from direct_msg where read_check=1 and receiver =#{adminId}
+	 </select>
+	 
+	 <!-- 관리자 메시지 읽음 처리 -->
+	 <update id="updateReadCheck" parameterType="int">
+	 	update direct_msg set read_check=1 where dm_no=#{_parameter}
+	 </update>
+	 
+	 <!-- 공통 1:1 문의 답장하기 -->
+	 <insert id="insertDm" parameterType="dm">
+	 	insert into direct_msg values
+	 	(dm_seq.nextval,#{sender},#{senderCategory},#{receiver},#{dmContent},to_char(sysdate,'yy/mm/dd'),0,#{dmType},#{reply})
+	 </insert>
+	 
+	 <!-- 유저 받은메시지 조회 -->
+	 <select id="selectMemberReceiveDm" parameterType="string" resultType="dm">
+	 	select
+	 		dm_no as dmNo,
+			sender,
+			sender_category as senderCategory,
+			receiver,
+			dm_content as dmContent,
+			dm_date as dmDate,
+			read_check as readCheck,
+			dm_type as dmType
+	 	from direct_msg
+	 	where receiver = #{_parameter}
+	 	order by 1 desc
+	 </select>
+	 
+	 <!-- 유저 보낸메시지 조회 -->
+	 <select id="selectMemberSendDm" parameterType="string" resultType="dm">
+	 	select
+	 		dm_no as dmNo,
+			sender,
+			sender_category as senderCategory,
+			receiver,
+			dm_content as dmContent,
+			dm_date as dmDate,
+			read_check as readCheck,
+			dm_type as dmType
+	 	from direct_msg
+	 	where sender = #{_parameter}
+	 	order by 1 desc
+	 </select>
+	 
+	 <!-- 유저 받은메시지 읽음 체크 -->
+	 <update id="updateMemberReadCheck" parameterType="_int">
+	 	update direct_msg
+	 	set read_check = 1
+	 	where dm_no = #{_parameter}
+	 </update>
+	 
+	 <!-- 이름 표시를 위해 파트너 정보 불러오기 -->
+	 <select id="selectDmPartner" parameterType="string" resultType="p">
+	 	select
+			category,
+			p_name as pName
+		from partner
+		where p_id = #{_parameter}
+	 </select>
+	 
+	 <!-- 메시지 삭제 -->
+	 <delete id="deleteDm" parameterType="_int">
+	 	delete from direct_msg where dm_no=#{_parameter}
+	 </delete>
+
+	 	 <!-- 관리자 답변보여주기 -->
+	 <select id="showDmContent" parameterType="int" resultType="dm">
+	 	select
+			dm_no as dmNo,
+			sender,
+			sender_category as senderCategory,
+			receiver,
+			dm_content as dmContent,
+			dm_date as dmDate,
+			read_check as readCheck,
+			dm_type as dmType,
+			reply
+		from direct_msg where reply= #{_parameter}
+	 </select>
+	 <!-- 관리자P 검색 (취소/결제)  -->
+	 <select id="selectdmType" parameterType="map" resultType="dm">
+	 	select
+			dm_no as dmNo,
+			sender,
+			sender_category as senderCategory,
+			receiver,
+			dm_content as dmContent,
+			dm_date as dmDate,
+			read_check as readCheck,
+			dm_type as dmType,
+            reply
+		from direct_msg 
+		where sender like '%'||#{keyword}||'%'
+		and dm_type = #{dmType} and sender != 'admin'
+	 </select>
+	 <!-- 관리자 p트너만 -->
+	 <select id="selectMemberDmList" parameterType="map" resultType="dm">
+	 	select
+			dm_no as dmNo,
+			sender,
+			sender_category as senderCategory,
+			receiver,
+			dm_content as dmContent,
+			dm_date as dmDate,
+			read_check as readCheck,
+			dm_type as dmType,
+			reply
+		from direct_msg 
+		where receiver = #{adminId} and sender_category = 'M' order by 1
+	 </select>
+	 <select id="selectPartnerDmList" parameterType="map" resultType="dm">
+	 	select
+			dm_no as dmNo,
+			sender,
+			sender_category as senderCategory,
+			receiver,
+			dm_content as dmContent,
+			dm_date as dmDate,
+			read_check as readCheck,
+			dm_type as dmType,
+			reply
+		from direct_msg 
+		where receiver = #{adminId} and sender_category = 'P' order by 1
+	 </select>
+</mapper>

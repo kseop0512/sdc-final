@@ -1,0 +1,391 @@
+#main{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    margin-top: 160px;
+    justify-content: center;
+}
+
+/* 마이페이지 전체 틀 */
+.mypage{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-color: #1a1814;
+    padding: 0;
+    justify-content: center;
+    overflow: auto;
+}
+.mypage::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+.mypage-container{
+    width: 920px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+/* 마이페이지 왼쪽 메뉴 */
+.closeNav{
+	display: none !important;
+}
+#mypage-nav{
+    width: 200px;
+    position: fixed;
+    margin-top: 5vh;
+    transition-duration: 0.5s;
+    left: 5vw;
+}
+#mypage-nav.on{
+    position: fixed;
+    bottom: 10vh;
+    transition-duration: 0.5s;
+    left: 5vw;
+}
+#mypage-nav>ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+#mypage-nav>ul>li>a{
+    display: block;
+    line-height: 60px;
+    text-align: center;
+    background-color: #26231d;
+    color: #fff;
+}
+#mypage-nav>ul>li>a:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #cda45e;
+    transition-duration: 0.3s;
+}
+#mypage-nav>ul>li>.active{
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* 마이페이지 오른쪽 컨텐츠 */
+#mypage-content{
+    margin-left: 200px;
+}
+#title{
+    height: 80px;
+    padding-top: 35px;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+    width: 600px;
+}
+#title>h4{
+    font-family: "Open Sans", sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+#content-wrap{
+    margin-top: 20px;
+}
+#content{
+    padding-top: 20px;
+    padding-left: 5%;
+}
+#content>form>div{
+    height: 40px;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+#content>form>#gender-div{
+    height: 40px;
+}
+#content>form>div>label:first-child{
+    width: 120px;
+    font-weight: bold;
+    color: #cda45e;
+}
+
+/* input[text,submit]디자인 수정 */
+input[type=text], input[type=password]{
+    width: 400px;
+    line-height: 40px;
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    padding-left: 20px;
+    padding-right: 22px;
+    font-size: 16px;
+}
+input[type=text]:focus, input[type=password]:focus{
+    color: #cda45e;
+}
+input[type=submit]{
+    width: 525px;
+    height: 60px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border-radius: 30px;
+    margin-top: 20px;
+}
+input[type=submit]:hover{
+    background-color: #ffb347;
+    transition-duration: 0.3s;
+}
+
+
+/* input[radio]디자인 수정*/
+input[type=radio]{
+    display: none;
+}
+.radio-label{
+    width: 198px;
+    line-height: 40px;
+    text-align: center;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    font-weight: bold;
+}
+.radio-label:hover{
+    background-color: #ffb347;
+    transition-duration: 0.3s;
+}
+input[type=radio]:checked+.radio-label{
+    background-color: #ffb347;
+}
+
+/* span조절 */
+input+span{
+    display: block;
+    width: 400px;
+    font-size: 16px;
+}
+
+.hrCss{
+	border: 0;
+    height: 5px;
+    background: #ccc;
+    width: 530px;
+}
+.weightDiv{
+	position: relative;
+}
+.weightSpan{
+	position: absolute;
+	right: 180px;
+	top: 8px;
+}
+.noteSpan{
+	display:block;
+	margin-bottom: 10px;
+}
+#pNote{
+	width: 530px;
+	height: 150px;
+    line-height: 40px;
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    padding-left: 20px;
+    padding-right: 22px;
+    font-size: 16px;
+    resize: none;
+    overflow:auto;
+}
+#pNotes:focus{
+    color: #cda45e;
+}
+#pNotes::-webkit-scrollbar{
+	display:none;
+}
+
+.chk-wrap{
+	display: block;	
+}
+
+.chksBtn{
+	width: 530px;
+	height: 50px;
+	color: #fff;
+	font-weight: bolder;
+	background-color: transparent;
+	border: 2px solid rgba(255, 255, 255, 0.2);
+	border-radius: 10px;
+	margin-top: 5px;
+	margin-bottom: 3px;
+}
+.chksBtn:hover{
+	background-color: #ffb347;
+    transition-duration: 0.3s;
+}
+#title>h4{
+	display: inline-block;
+}
+.petLogo{
+	width: 28px;
+	height: 28px;
+	margin: 3px;
+	margin-bottom: 12px;
+}
+/*체크리스트 모달*/
+.chk-modal{
+	position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 125vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+  	display:none;
+    text-align: center;
+}
+.modal-body{
+	color: black;
+	width:520px; 
+	height:550px;
+  	background: #e8e7e3; 
+  	border-radius:10px;
+  	position:relative; 
+  	top:10%; 
+  	left:50%;
+  	margin-top: 4%; 
+  	margin-left:-220px;
+  	text-align:center;
+  	box-sizing:border-box; 
+  	padding:30px 0;
+  	line-height:23px; 
+  	overflow: auto;
+  	position: fixed;
+}
+.modal-label{
+    width: 400px;
+    line-height: 30px;
+    text-align: left;
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    border-radius: 7px;
+    font-weight: bold;
+    padding-left: 5px;
+	margin-top: 7px;
+}
+.modal-label:hover{
+    background-color: #ffb347;
+    transition-duration: 0.3s;
+}
+
+input[type=radio]:checked+.modal-label{
+    background-color: #ffb347;
+}
+.qNumber{
+	padding-left: 68px;
+	float: left;
+	padding-top: 18px;
+	padding-bottom: 15px;
+}
+.qqNumber{
+	padding-right: 45px;
+	float: right;
+	font-size: 15px;
+}
+.chkQuestion{
+	float: left;
+	padding-left: 65px;
+	font-weight: bolder;
+	font-size: 20px;
+}
+
+.modal-btn{
+	padding-top: 50px;
+}
+.botBtn{
+	border: none;
+	width: 190px;
+	height: 60px;
+	margin-right: 10px;
+	margin-left: 10px;
+	font-size: 25px;
+	background-color: #fff;
+	color: black;
+}
+.exitBtn:hover{
+	background-color: #ccc;
+	color: #fff;
+}
+.h-exitBtn:hover{
+	background-color: #ccc;
+	color: #fff;
+}
+.nextBtn:hover{
+	background-color: #ffb347;
+	color: #fff;
+}
+.h-nextBtn:hover{
+	background-color: #ffb347;
+	color: #fff;
+}
+
+.qstn{
+	display: none;
+}
+.chkQuestion+input+label{
+	margin-top: 20px;	
+}
+.hchkQuestion{
+	text-align: left;
+}
+.sub-texts{
+	color: #a4a1a1;
+	font-size: 15px;
+}
+.sub-texts1{
+	margin-left: -145px;
+}
+#hq3a1{
+	resize: none;
+    width: 400px;
+    height: 200px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+#hq3a1:focus{
+	outline:none;
+}
+
+/*프로필 사진부분 */
+.fileZone{
+	width:400px !important;
+	height : 300px !important;
+	box-sizing : border-box;
+	border : none;
+	/*align-content 위에서부터 하나씩 아래로 내리기 위한것*/
+	display: grid;
+    align-items: center;
+    justify-items: center;
+}
+#img-view{
+	width:400px !important;
+	height : 300px !important;
+	margin-left: 30%;
+	margin-top: 10px;
+	outline: auto;
+    outline-color: #cda45e;
+}
+.fileMsg{
+	font-size : 18px;
+	width: 100%;
+	text-align: center;
+	/*align-self 보조축 가운데정렬*/
+	align-self:center;
+	line-height: 300px;
+}
+.imageFile{
+	margin-bottom: 10px;
+}
+.profileSpan{
+	font-size: 20px;
+    font-weight: bold;
+    color: #cda45e;
+    margin-right: 115px;
+    margin-left: 57px;
+}
+.profileSpan+input{
+	width: 200px;
+}

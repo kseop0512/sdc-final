@@ -82,5 +82,4 @@ public class DirectMessageDao {
 		return sqlSession.delete("dm.deleteDm",dmNo);
 	}
 
-
 }
