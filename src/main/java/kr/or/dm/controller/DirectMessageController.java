@@ -146,11 +146,10 @@ public class DirectMessageController {
 	//관리자 P 1;1 검색 
 	@ResponseBody
 	@RequestMapping(value="/selectdmType.do",produces="application/json;charset=utf-8")
-	public String selectdmType(int dmType, String keyword, Model model) {
+	public String selectdmType(int dmType, String keyword) {
 		System.out.println(dmType);
 		System.out.println(keyword);
 		ArrayList<DirectMessage> list = service.selectdmType(dmType,keyword);
-		model.addAttribute("list",list);
 		return new Gson().toJson(list);
 	}
 	//관리자 - member만 

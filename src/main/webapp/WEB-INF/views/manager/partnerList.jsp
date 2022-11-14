@@ -125,7 +125,7 @@
                                                     <option value="name">이름</option>
                                                 </select>
                                                     <input class="input-form2" type="text" placeholder="입력하세요" style="width: 500px;" name="keyword">
-                                                    <button type="submit" class="bc22" >검색</button>
+                                                    <button type="submit" class="bc22" id="sb">검색</button>
                                             </form>
                                         </div>
                                     </div>

@@ -18,6 +18,18 @@ function getPartnerCount(){
 	});
 }
 
+//검색하기........
+$("#sb").on("click",function(){
+	if($("[name=keyword]").val() == ""){
+		alert("검색어를 입력해주세요");
+		$("#sb").attr("type","button");
+	}else{
+		$("#sb").attr("type","submit");
+	}
+
+});
+
+
 
 /*문의제목 눌렀을때 모달 띄우기*/ 
 function modal(obj){
