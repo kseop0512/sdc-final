@@ -4,6 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.partner.model.vo.Partner;
 import kr.or.review.model.vo.Review;
 
 @Repository
@@ -24,6 +25,11 @@ public class ReviewDao {
 	//후기작성 후 예약상태변경
 	public int updateReviewState(Review r) {
 		return sqlSession.update("booking.updateReviewState",r);
+	}
+	
+	//후기작성 후 파트너포인트 +30
+	public int updatePartnerPoint(Partner p) {
+		return sqlSession.update("review.updatePartnerPoint",p);
 	}
 	
 }
