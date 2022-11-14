@@ -37,13 +37,21 @@ public class MemberDao {
 	public int updateMember(Member m) {
 		return sqlSession.update("member.updateMember",m);
 	}
-
-
+	
+	//현재날짜보다 이전날짜인 예약목록 조회
+	public ArrayList<Booking> selectDoneBookingList(Member m) {
+		List dList = sqlSession.selectList("booking.selectDoneBookingList", m);
+		return (ArrayList<Booking>) dList;
+	}
+	//이용완료 반영
+	public int updateBookingState(String bookingNo) {
+		return sqlSession.update("booking.updateBookingState",bookingNo);
+	}
+	//이용완료 반영된 리스트 조회
 	public ArrayList<Booking> selectBookingList(Member m) {
 		List list = sqlSession.selectList("booking.selectBookingList", m);
 		return (ArrayList<Booking>) list;
 	}
-
 
 	public Member searchId(String memberId) {
 		return sqlSession.selectOne("member.kakaoSearchId", memberId);
@@ -58,6 +66,5 @@ public class MemberDao {
 	public int updatePwMember(Member m) {
 		return sqlSession.update("member.updatePw", m);
 	}
-
 
 }

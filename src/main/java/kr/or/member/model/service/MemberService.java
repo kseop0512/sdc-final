@@ -44,8 +44,17 @@ public class MemberService {
 		}
 	}
 
-
+	@Transactional
 	public ArrayList<Booking> selectBookingList(Member m) {
+		ArrayList<Booking> dList = dao.selectDoneBookingList(m);
+		int result = 0;
+		for(int i=0; i<dList.size(); i++) {
+			String bookingNo = dList.get(i).getBookingNo();
+			result = dao.updateBookingState(bookingNo);
+			if(result>0) {
+				System.out.println(bookingNo+" update완료");
+			}
+		}
 		return dao.selectBookingList(m);
 	}
 
