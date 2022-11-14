@@ -41,7 +41,7 @@
                     <ul>
                         <li><i class="bx bx-chevron-right"></i> <a href="#">안전보상제도</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="#">질문과 답변</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">이용 약관</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/serviceInfo.do">이용 약관</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="#">개인정보 취급</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="#">비즈니스 제휴</a></li>
                     </ul>

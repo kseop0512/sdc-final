@@ -63,7 +63,7 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="/selectUserList.do">유저리스트</a>
-                                    	 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                    	 <a class="nav-link collapsed" href="/partnerList.do" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                         	파트너관리
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
@@ -158,36 +158,6 @@
                                 </table>
                             </div>
                             <div style="text-align: right;font-size: 20px;letter-spacing: 3px;margin-right: 25px;font-weight: bolder;">${pageNavi }</div>
-                            
-                            <div id="titleContentSerarch-Box">
-                                <select style="width: 100px; height: 40px; margin-right: -4px;" >
-                                    <option>제목</option>
-                                    <option>제목+내용</option>
-                                </select>
-                                <input type="text" placeholder="입력하세요" style="width: 400px; height: 40px;" name="keyword" id="keyword">
-                                <button class="searchbox-btn btn bc22 searchBtn" name="btnSearch" id="btnSearch">검색</button>
-                            </div>
-                            
-                            <div class="qna-board">
-								<div class="search-box">
-									<form action="#">
-										<select name="searchType" id="searchType" class="search-qna-form">
-											<option value="0" selected="selected">선택하세요 </option>
-											<option value="title">제목</option>
-											<option value="content">내용 </option>
-										</select> <input type="text" class="search-input"
-											 name="keyword" id="keyword">
-										<button type="button" class="search-btn" id="searchQnaAjax">검색</button>
-									</form>
-								</div>
-								<div id="qnaAjaxResult"></div>
-							</div>
-                            
-                        </div>
-                        
-                        
-                        
-                        
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
@@ -332,7 +302,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div style="text-align: right;font-size: 20px;letter-spacing: 3px;margin-right: 25px;font-weight: bolder;">${pageNavi }</div>
+                            <div style="text-align: right;font-size: 20px;letter-spacing: 3px;margin-right: 25px;font-weight: bolder;color: black;">${pageNavi }</div>
                             <!--  
                             <ul style="text-align: center;font-size: 20px;letter-spacing: 3px;" list-style-type: disc>${pageNavi }</ul>
                             -->
@@ -360,19 +330,6 @@
                                 </ul>
                             </nav>
                             -->
-                            <div id="titleContentSerarch-Box">
-                                <select style="width: 100px; height: 40px; margin-right: -4px;" >
-                                    <option>제목</option>
-                                    <option>제목+내용</option>
-                                </select>
-                                <input type="text" placeholder="입력하세요" style="width: 400px; height: 40px;" name="keyword" id="keyword">
-                                <button class="searchbox-btn btn bc22 searchBtn" name="btnSearch" id="btnSearch">검색</button>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                        
                     </div>
                   </div>  
                 </main>
