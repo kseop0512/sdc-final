@@ -62,7 +62,7 @@ public class PetController {
 	}
 	
 	@RequestMapping(value="/petAdd.do")
-	public String petAdd(Pet p, PetCheckList petChk, MultipartFile[] imageFile, HttpServletRequest request, HttpSession session, @SessionAttribute Member m) {
+	public String petAdd(Pet p, PetCheckList petChk, MultipartFile[] imageFile, HttpServletRequest request, HttpSession session, @SessionAttribute Member m, Model model) {
 		if(!imageFile[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/pet/petProfile/");
 			for(MultipartFile file : imageFile) {
@@ -86,11 +86,17 @@ public class PetController {
 			}
 		}
 		int result = service.insertPet(p, petChk);
-		if(result>0) {
-			return "redirect:/mypageMyPet.do?memberNo="+m.getMemberNo();
+		if(result > 0) {
+			model.addAttribute("title","펫 추가 완료!");
+			model.addAttribute("msg","펫 추가가 완료됐습니다.");
+			model.addAttribute("icon","success");
 		}else {
-			return null;
+			model.addAttribute("title","펫 추가 실패");
+			model.addAttribute("msg","펫 추가 중 오류가 발생했습니다.");
+			model.addAttribute("icon","error");
 		}
+		model.addAttribute("loc","/mypageMyPet.do?memberNo="+m.getMemberNo());
+		return "common/msg";
 	}
 	
 	//유저 마이페이지 - 이용내역 - 펫 이름 가져오기
@@ -118,10 +124,7 @@ public class PetController {
 	}
 	
 	@RequestMapping(value="/petUpdate.do")
-	public String petUpdate(Pet p, PetCheckList petChk, MultipartFile[] imageFile, HttpServletRequest request, HttpSession session, @SessionAttribute Member m) {
-		System.out.println("업데이트 컨트롤 들어옴");
-		System.out.println(p);
-		System.out.println(petChk);
+	public String petUpdate(Pet p, PetCheckList petChk, MultipartFile[] imageFile, HttpServletRequest request, HttpSession session, @SessionAttribute Member m, Model model) {
 		if(!imageFile[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/pet/petProfile/");
 			for(MultipartFile file : imageFile) {
@@ -143,25 +146,34 @@ public class PetController {
 				p.setPetFilename(petFilename);
 				p.setPetFilepath(petFilepath);
 			}
-		}else {
-			
 		}
 		int result = service.updatePet(p, petChk);
-		System.out.println(result);
-		if(result>0) {
-			return "redirect:/mypageMyPet.do?memberNo="+m.getMemberNo();
+		if(result > 0) {
+			model.addAttribute("title","펫 정보수정 완료!");
+			model.addAttribute("msg","펫 정보수정이 완료됐습니다.");
+			model.addAttribute("icon","success");
 		}else {
-			return "redirect:/petEditPetFrm.do?petNo="+p.getPetNo();
+			model.addAttribute("title","펫 정보수정 실패");
+			model.addAttribute("msg","펫 정보수정 중 오류가 발생했습니다.");
+			model.addAttribute("icon","error");
 		}
+		model.addAttribute("loc","/mypageMyPet.do?memberNo="+m.getMemberNo());
+		return "common/msg";
 	}
 	
 	@RequestMapping(value="/petDelete.do")
-	public String petDelete(int petNo,@SessionAttribute Member m) {
+	public String petDelete(int petNo,@SessionAttribute Member m, Model model) {
 		int result = service.petDelete(petNo);
-		if(result>0) {
-			return "redirect:/mypageMyPet.do?memberNo="+m.getMemberNo();
+		if(result > 0) {
+			model.addAttribute("title","펫 삭제 완료!");
+			model.addAttribute("msg","펫이 삭제되었습니다.");
+			model.addAttribute("icon","success");
 		}else {
-			return null;
+			model.addAttribute("title","펫 삭제 실패");
+			model.addAttribute("msg","펫 삭제 중 오류가 발생했습니다.");
+			model.addAttribute("icon","error");
 		}
+		model.addAttribute("loc","/mypageMyPet.do?memberNo="+m.getMemberNo());
+		return "common/msg";
 	}
 }

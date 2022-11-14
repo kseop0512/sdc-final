@@ -18,7 +18,9 @@
 		#{memberPhone},
 		#{memberAddr},
 		#{memberGender},
-		to_char(sysdate,'yyyymmdd')
+		to_char(sysdate,'yyyymmdd'),
+		'nickname',
+		'email@mail.com'
 		)
 	</insert>
 
