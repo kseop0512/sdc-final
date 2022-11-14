@@ -209,7 +209,7 @@ body{
     position: fixed;
     width: 500px;
     height: 650px;
-    top: 170px;
+    top: 10%;
     left: 50%;
     transform: translateX(-50%);
     background-color: #fff;

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="review">
+	
+	<select id="selectReviewRate" parameterType="string" resultType="_int">
+		select review_rate from review_tbl where booking_no=#{_parameter}
+	</select>
+	
+	<insert id="insertReview" parameterType="r">
+		insert into review_tbl values(
+			'REVIEW-' || p_seq.nextval,
+			#{bookingNo},
+			#{memberNo},
+			#{pNo},
+			#{petNo},
+			#{reviewRate},
+			#{reviewContent},
+			to_char(sysdate,'yy/mm/dd'),
+			<choose>
+				<when test="reviewFilename != null and reviewFilepath != null">
+				#{reviewFilename},
+				#{reviewFilepath}
+				</when>
+				<otherwise>
+				null,
+				null
+				</otherwise>
+			</choose>
+		)
+	</insert>
+	
+</mapper>

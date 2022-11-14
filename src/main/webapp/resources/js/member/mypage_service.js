@@ -1,34 +1,50 @@
 $(function(){
-	//실제 DB 서비스 시작시간, 종료시간 값
+	console.log($("#listLength").val());
+
+	//실제 DB의 bookingTime, 예약일 값 담을 hidden input
 	const start = $(".input-start-time");
 	const end = $(".input-end-time");
-	
-	//실제DB 서비스 시작일, 종료일 값
 	const startDate = $(".input-start-date");
 	const endDate = $(".input-end-date");
 	
-	//화면에 표시할 서비스 시작일, 종료일 입력할 span태그
-	const sSpan = $(".span-start-date");
-	const eSpan = $(".span-end-date");	
+	//화면표시값 입력할 span태그
+	let sSpan = $(".span-start-date");
+	let eSpan = $(".span-end-date");	
 	
 	//span태그에 화면표시값 입력하기 'yy/mm/dd (hh:mi)'
 	for(let i=0;i<start.length;i++){
-		let time = start.eq(i).val().split(",");
-		start.eq(i).val(time[0]);
-		end.eq(i).val(time[1]);
+		//날짜 값 담는 변수
 		let sDate = startDate.eq(i).val();
 		let eDate = endDate.eq(i).val();
-		//날짜 시간 합침 - 종료일 null인 경우 시작일+종료시간
-		sSpan.eq(i).html(sDate+"<br>"+" ("+time[0]+")");
-		if(eDate==""){
-			eSpan.eq(i).html(sDate+"<br>"+" ("+time[1]+")");
+		//1. 위탁돌봄 (*bookingTime값X endDate값O)
+		if(start.eq(i).val()==""){
+			sSpan.eq(i).html(sDate+"&emsp;~&emsp;"+eDate);
+			sSpan.eq(i).parent().attr("colspan","2");
+			eSpan.eq(i).parent().remove();
+		//2. 방문돌봄/훈련 (*bookingTime값O endDate값X)
 		}else{
-			eSpan.eq(i).html(eDate+"<br>"+" ("+time[1]+")");
+			let time = start.eq(i).val().split(",");
+			if(time.length == 1){
+				//2-1. 예약시간 한 시간만 있는 경우
+				let timeCnt = 1;
+				start.eq(i).val(time[0]);
+				end.eq(i).val(time[0]);
+				sSpan.eq(i).html(sDate);
+				eSpan.eq(i).html("<b>"+time[0]+"</b><br>(총 "+time.length+"시간 이용)");
+			}else{
+				//2-2. 예약시간 여러 시간인 경우
+				let timeCnt = time.length;
+				//쉼표 기준으로 예약시간 잘라서 hidden input에 다시 반영
+				start.eq(i).val(time[0]);
+				end.eq(i).val(time[1]);
+				sSpan.eq(i).html(sDate);
+				eSpan.eq(i).html("<b>"+time[0]+"</b> , <b>"+time[time.length-1]+"</b><br>(총 "+time.length+"시간 이용)");
+			}
 		}
 	}
 	
 	//펫번호로 펫이름 조회해서 span태그에 입력하기
-	for(let i=0;i<$(".input-pet").length;i++){
+	for(let i=0;i<$("#listLength").val();i++){
 		const petNo = $(".input-pet").eq(i).val();
 		$.ajax({
 			url : "/getPetName.do",
@@ -40,7 +56,7 @@ $(function(){
 	}
 	
 	//파트너번호로 파트너이름 조회해서 span태그에 입력하기
-	for(let i=0;i<$(".input-partner").length;i++){
+	for(let i=0;i<$("#listLength").val();i++){
 		const pNo = $(".input-partner").eq(i).val();
 		$.ajax({
 			url : "/getPartnerName.do",
@@ -52,169 +68,71 @@ $(function(){
 	}
 	
 	//가격 세자리마다 콤마(,)표시
-	for(let i=0;i<$(".input-price").length;i++){
+	for(let i=0;i<$("#listLength").val();i++){
 		const price = $(".input-price").eq(i).val();
 		const commaPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");
 		$(".span-price").eq(i).text(commaPrice);
 	}
+	
+	//후기작성한 서비스는 예약번호로 후기평점 가져오기
+	console.log($("#listLength").val());
+	console.log((".input-cancle-review").length);
+	console.log((".input-booking-no").length);
+	for(let i=0;i<$("#listLength").val();i++){
+		if($(".input-cancle-review").eq(i).val() == '1'){
+			const bookingNo = $(".input-booking-no").eq(i).val();
+			$.ajax({
+				url : "/getReviewRate.do",
+				data : {bookingNo : bookingNo},
+				success: function(reviewRate){
+					if(reviewRate == 1){
+						$(".td-cancle-review").eq(i).children("a").text("★☆☆☆☆");
+					}else if(reviewRate == 2){
+						$(".td-cancle-review").eq(i).children("a").text("★★☆☆☆");
+					}else if(reviewRate == 3){
+						$(".td-cancle-review").eq(i).children("a").text("★★★☆☆");
+					}else if(reviewRate == 4){
+						$(".td-cancle-review").eq(i).children("a").text("★★★★☆");
+					}else if(reviewRate == 5){
+						$(".td-cancle-review").eq(i).children("a").text("★★★★★");
+					}
+				}
+			});
+		}
+	}
 });
 
+//모달창 우측상단 닫기 버튼
+$("#close-btn").on("click",function(){
+    $(".review-modal").hide();
+});
 
-//이용내역 화면표시값 변경
-//startDate-startTime, endDate-endTime 'yy/mm/dd(hh:mi)'
-//petNo, category, PNo, price, partnerAccept, reviewState]
-function replaceTd(){
-	const petNo = $("#memberId").val();
-	$.ajax({
-		url : "/getMemberRDm.do",
-		data : {memberId : memberId},
-		success: function(list){
-			const tbody = $(".receive tbody");
-			tbody.empty();
-			for(let i=0;i<list.length;i++){
-				const dm = list[i];
-				const tr = $("<tr>");
-				//체크박스
-				const checkboxTd = $("<td><input class='form-check-input check-r' type='checkbox'></td>");
-				const dmNoInput = $("<input type='hidden' value='"+dm.dmNo+"'>");
-				checkboxTd.append(dmNoInput);
-				
-				//문의유형
-				const typeTd = $("<td>");
-				if(dm.dmType == 0){
-					typeTd.text("결제/취소")
-				}else if(dm.dmType==1){
-					typeTd.text("예약")
-				}else{
-					typeTd.text("기타문의")
-				}
-				
-				//보낸사람
-				const senderTd = $("<td>");
-				if(dm.senderCategory == 'A'){
-		    		senderTd.text("관리자")
-		    	}else{
-		    		$.ajax({
-			    		url : "/selectDmPartner.do",
-			    		data : {pId:dm.sender},
-			    		success : function(p){
-			    			if(p.category == 'T'){
-					    		senderTd.text(p.pName+" 훈련사");
-					    	}else{
-					    		senderTd.text(p.pName+" 펫시터");
-					    	}
-			    		}
-		    		});
-		    	} 
-				
-				//문의내용
-				const contentTd = $("<td class='td-content'>");
-				const aTag = $("<a href='javascript:void(0);'>");
-				aTag.text(dm.dmContent);
-				contentTd.append(aTag);	
-				aTag.attr("onclick","receiveModal(this, '"+dm.dmNo+"', '"+dm.sender+"', '"+dm.dmDate+"', '"+dm.dmType+"')");
-				//날짜
-				const dmDateTd = $("<td>");
-				dmDateTd.text(dm.dmDate);
-				
-				//보낸사람구분
-				const senderCategory = $("<input type='hidden' class='sender-category'>");
-				senderCategory.val(dm.senderCategory);
-				
-				//읽음여부
-				const readCheckInput = $("<input type='hidden' class='read-check'>");
-				readCheckInput.val(dm.readCheck);
-				
-				//합치기
-				tr.append(checkboxTd).append(typeTd).append(senderTd).append(contentTd).append(dmDateTd).append(senderCategory).append(readCheckInput);
-				tbody.append(tr);
-			}
-		unreadR();
-		}
-	});
-}
+//후기작성submit 버튼
+$("#submit-btn").on("click",function(){
+	if($("[name=reviewRate]").val()==0){
+		alert("별을 드래그해서 평점을 입력해주세요.");
+	}else{
+		$(this).attr("type","submit");
+	}
+});
 
-//받은메시지 - 상세보기 모달창
-function receiveModal(obj,dmNo,dmSender,dmDate,dmType){
-	//읽음 반영
-	$.ajax({
-		url : "/updateMemberReadCheck.do",
-		data : {dmNo : dmNo},
-		success: function(data){
-			if(data>0){
-				console.log("읽음 업데이트");
-			}else{
-				console.log("(ㄱ-)");
-			}
-		}
-	});
-	//기본 세팅으로 복구
-	$("#submit-btn").hide();
-    $("#reply-btn").show();
-    $("#reply-msg").hide();
-    $("#receive-msg").show();
-    
-    //받은메시지 창 세팅
-    $("#msg-modal-title").text("받은메시지");
-    $(".msg-modal-content textarea").css("height","400px");
-    $(".msg-btn-wrap").show();
-    $(".msg-sender>span").text("보낸사람");
-    $(".msg-date>span").text("받은날짜");
-    
-    //보낸사람 표시값, receiver, dmType, reply값 세팅
-    $("[name=receiver]").val(dmSender);
-    $("[name=reply]").val(dmNo);
-    $("[name=dmType]").val(dmType);
-    if(dmSender=="admin"){
-    	$("#receiver-view").val("관리자");
-    }else{
-    	$.ajax({
-    		url : "/selectDmPartner.do",
-    		data : {pId:dmSender},
-    		success : function(p){
-    			if(p.category == 'A'){
-    				$("#receiver-view").val("관리자");
-    			}else if(p.category == 'T'){
-    				$("#receiver-view").val(p.pName+" 훈련사");
-    			}else{
-    				$("#receiver-view").val(p.pName+" 펫시터");
-    			}
-    		}
-    	});
-    }
-    //내용, 받은날짜 표시
-    const dmContent = $(obj).text();
-    $("#receive-msg").text(dmContent);
-    $(".msg-date>input").val(dmDate);
-    
-    //받은메시지 재출력
-	getMemberRDm();
-    
-    //이후 모달창 보여주기
-    $(".msg-modal").show();
-    //ESC키 누르면 닫기
-    $(this).keydown(function(event) {
+//후기작성 모달창 띄우는 함수
+function writeReview(bookingNo, memberNo, pNo, petNo){
+	$("[name=bookingNo]").val(bookingNo);
+	$("[name=memberNo]").val(memberNo);
+	$("[name=pNo]").val(pNo);
+	$("[name=petNo]").val(petNo);
+	$(".review-modal").show();
+	$(this).keydown(function(event) {
         if ( event.keyCode == 27 || event.which == 27 ) {
             $("#close-btn").click();
         }
     });
 }
 
-//받은메시지 - 답장
-$("#reply-btn").on("click",function(){
-	//답장(reply)버튼 숨기고 보내기(submit)버튼 표시
-    $("#receive-msg").hide();
-    $("#reply-msg").show();
-    $("#reply-msg").focus();
-    $(this).hide();
-    $("#submit-btn").show();
-});
+//후기작성 평점 드래그 이벤트
+const drawStar = (target) => {
+  $(`.star span`).css({ width: `${target.value * 19}%` });
+  $("#rate").val(`${target.value}`);
+}
 
-//모달창 우측상단 닫기 버튼
-$("#close-btn").on("click",function(){
-    $("#reply-msg").hide();
-    $(".msg-modal").hide();
-});
-
-//초기화면
-//getMemberRDm();

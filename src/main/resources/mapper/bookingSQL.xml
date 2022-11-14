@@ -28,6 +28,7 @@
 			price
 		from booking_tbl
 		where member_id=#{memberId}
+		order by start_date desc
 	</select>
 	
 	<!--  파트너 예약요청 리스트 조회 (혜규 on 11/13) -->
@@ -79,4 +80,9 @@
 		where partner_accept ='Y' order by start_date
 	</select>
 	<!-- END 혜규 -->
+	
+	<!-- 유저 이용내역 후기작성상태 업데이트 -->
+	<update id="updateReviewState" parameterType="r">
+		update booking_tbl set review_state='1' where booking_no=#{bookingNo}
+	</update>
 </mapper>
