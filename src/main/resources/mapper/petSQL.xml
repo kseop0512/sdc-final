@@ -68,7 +68,7 @@
 			pet_type as petType,
 			pet_name as petName,
 			pet_gender as petGender,
-			substr(pet_bdate,1,4) as petBdate,
+			pet_bdate as petBdate,
 			pet_kind as petKind,
 			pet_weight as petWeight,
 			pet_neut as petNeut,
@@ -103,5 +103,14 @@
 	
 	<select id="selectPetName" parameterType="_int" resultType="string">
 		select pet_name from pet_tbl where pet_no=#{_parameter}
+	</select>
+	
+	<select id="getAvgStat" resultType="petAvgStat">
+		SELECT 
+			round(avg(social),0) as social, 
+			round(avg(sense),0) as sense, 
+			round(avg(active),0) as active, 
+			round(avg(inde),0) as inde
+			from pet_chklist
 	</select>
 </mapper>

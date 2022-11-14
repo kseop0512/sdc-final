@@ -63,6 +63,7 @@ $(".petBtn2").hover(function(){
 
 
 //펫 상세 모달
+/*
 $(".pdModal-wrap").hide();
 	function petDetail(){
 		$("#main").hide();
@@ -106,3 +107,4 @@ $(".pdModal-wrap").hide();
 		    }   
 	    }
 	});
+*/

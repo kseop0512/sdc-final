@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.pet.model.vo.PetCheckList;
 import kr.or.pet.model.vo.Pet;
+import kr.or.pet.model.vo.PetAvgStat;
 
 @Repository
 public class PetDao {
@@ -35,5 +36,20 @@ public class PetDao {
 
 	public String selectPetName(int petNo) {
 		return sqlSession.selectOne("pet.selectPetName",petNo);
+	}
+	
+	public ArrayList<PetAvgStat> getAvgStat() {
+		List list = sqlSession.selectList("pet.getAvgStat");
+		return (ArrayList<PetAvgStat>)list;
+	}
+
+	public int petEditDog(Pet pet) {
+		int result = sqlSession.update("pet.updateDog", pet);
+		return result;
+	}
+
+	public int petEditCat(Pet pet) {
+		int result = sqlSession.update("pet.updateCat", pet);
+		return result;
 	}
 }
