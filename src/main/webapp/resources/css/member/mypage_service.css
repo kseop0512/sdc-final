@@ -218,7 +218,7 @@ body{
 	display: inline-block;
 	width: 40px;
 }
-.rate-comment{
+.rate-comment, .photo-comment{
 	margin-top: 3px;
 	font-size: 14px;
 	color: #989491;
@@ -226,26 +226,32 @@ body{
 }
 
 /* 사진첨부 */
-.attach-wrap{
+.review-photo{
+	overflow: hidden;
+}
+.photo-comment{
+	font-weight: normal;
+}
+.file-wrap{
 	margin-top: 10px;
 	display: flex;
 	justify-content: space-between;
 }
-.attach-wrap>div{
+.file-zone, .thumbnail{
 	width: 90px;
 	height: 90px;
 	background-color: rgba(0,0,0,0.1);
 }
-.attach{
+.file-zone{
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
-.attach:hover{
+.file-zone:hover{
 	cursor: pointer;
 	background-color: #FAEBCC;
 }
-.attach>span{
+.file-zone>span{
 	font-weight: bold;
 	color: rgba(0,0,0,0.6);
 }

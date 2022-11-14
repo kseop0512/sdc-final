@@ -10,7 +10,21 @@
 		WHERE P_NO=#{PNo} AND START_DATE=#{startDate}
 	</select>
 	
-	<!-- 유저 이용내역 조회 -->
+	<!-- 이용완료 반영이 필요한 유저 이용내역 조회 -->
+	<select id="selectDoneBookingList" parameterType="m" resultType="b">
+		select booking_no as bookingNo
+		from booking_tbl
+		where end_date<![CDATA[<]]>sysdate or start_date<![CDATA[<]]>sysdate
+	</select>
+	
+	<!-- 이용완료 반영 -->
+	<update id="updateBookingState" parameterType="string">
+		update booking_tbl
+		set partner_accept = 'D'
+		where booking_no = #{bookingNo}
+	</update>
+	
+	<!-- 이용완료 반영된 유저 이용내역 조회 -->
 	<select id="selectBookingList" parameterType="m" resultType="b">
 		select
 			booking_no as bookingNo,

@@ -149,7 +149,9 @@
 		</section>
 	</main>
 	<!-- End #main -->
-
+	
+	<!--  -->
+	
 	<!-- 후기작성 모달 -->
 	<div class="review-modal insert-review" style="display:none;">
 		<!-- 모달최상단 꾸밈 -->
@@ -158,7 +160,7 @@
 			<span class="close-btn material-symbols-outlined">close</span>
 		</div>
 		<!-- 모달컨텐츠(폼) -->
-		<form action="/writeReview.do" method="post">
+		<form action="/writeReview.do" method="post" enctype="multipart/form-data">
 			<div class="review-modal-content">
 				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 				<input type="hidden" name="bookingNo">
@@ -179,8 +181,10 @@
 				<!-- 후기사진첨부 -->
 				<div class="review-photo">
 					<b>사진첨부<b>
-					<div class="attach-wrap">
-						<div class="attach"><span class="material-symbols-outlined">add</span></div>
+					<span class="photo-comment">*최대 3개까지 첨부가능</span>
+					<div class="file-wrap">
+						<label class="file-zone" for="file-insert"><span class="material-symbols-outlined">add</span></label>
+						<input type="file" class="add-file" id="file-insert" style="display: none;" name="reviewFilename" accept=".jpg, .jpeg, .png, .gif" multiple>
 						<div class="thumbnail thn1"></div>
 						<div class="thumbnail thn2"></div>
 						<div class="thumbnail thn3"></div>
@@ -213,7 +217,7 @@
 			<span class="close-btn material-symbols-outlined">close</span>
 		</div>
 		<!-- 모달컨텐츠(폼) -->
-		<form action="/updateReview.do" method="post">
+		<form action="/updateReview.do" method="post" enctype="multipart/form-data">
 			<div class="review-modal-content">
 				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 				<input type="hidden" name="bookingNo">
@@ -234,8 +238,10 @@
 				<!-- 후기사진첨부 -->
 				<div class="review-photo">
 					<b>사진첨부<b>
-					<div class="attach-wrap">
-						<div class="attach"><span class="material-symbols-outlined">add</span></div>
+					<span class="photo-comment">*최대 3개까지 첨부가능</span>
+					<div class="file-wrap">
+						<label class="file-zone" for="file-update"><span class="material-symbols-outlined">add</span></label>
+						<input type="file" class="add-file" id="file-update" style="display: none;" name="reviewFilename" accept=".jpg, .jpeg, .png, .gif" multiple>
 						<div class="thumbnail thn1"></div>
 						<div class="thumbnail thn2"></div>
 						<div class="thumbnail thn3"></div>
@@ -265,5 +271,8 @@
 	<!-- 마이페이지 JS -->
 	<script type="text/javascript" src="/resources/js/member/mypage_nav.js"></script>
 	<script type="text/javascript" src="/resources/js/member/mypage_service.js"></script>
+	
+	
+	
 </body>
 </html>
