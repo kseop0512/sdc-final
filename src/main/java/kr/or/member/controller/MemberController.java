@@ -34,10 +34,6 @@ public class MemberController {
 	@Autowired
 	private MessageService msgService;
 	
-	@RequestMapping(value="/memberJoinSuccess.do")
-	public String memberJoinSuccess() {
-		return "member/memberJoinSuccess";
-	}
 	
 	@RequestMapping(value="/memberJoinChkFrm.do")
 	public String memberJoinChkFrm() {
@@ -50,14 +46,20 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/memberJoin.do")
-	public String memberJoin(Member m) {
-		System.out.println(m);
+	public String memberJoin(Member m, Model model) {
 		int result = service.insertMember(m);
-		if (result > 0) {
-			return "member/memberJoinSuccess";
-		} else {
-			return "redirect:/";
+		if(result > 0) {
+			model.addAttribute("title","회원가입 완료");
+			model.addAttribute("msg","회원가입을 완료했습니다.");
+			model.addAttribute("icon","success");
+			model.addAttribute("loc","/loginUserFrm.do");
+		}else {
+			model.addAttribute("title","회원가입 실패");
+			model.addAttribute("msg","회원가입 중 오류가 발생했습니다.");
+			model.addAttribute("icon","error");
+			model.addAttribute("loc","redirect:/");
 		}
+		return "common/msg";
 	}
 	
 	@ResponseBody

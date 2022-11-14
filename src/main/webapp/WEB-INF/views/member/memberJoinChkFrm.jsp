@@ -8,14 +8,63 @@
 <jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 </head>
+<style>
+#joinChk-wrap{
+	width: 100%;
+    display: flex;
+    margin-top: 15%;
+    margin-bottom: 50px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+h4{
+	float: left;
+}
+textarea{
+	resize: none;
+	width: 850px;
+	background: rgb(255 191 74);
+}
+.joinBtn-wrap{
+	display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+#backBtn{
+	background-color: lightgray; 
+	font-weight:bolder; 
+	border:2px solid white;
+	border-right: 2px;
+	width: 150px;
+	height: 50px;
+}
+#backBtn:hover{
+	color:white;
+	background-color: darkgray;
+}
+#joinBtn{
+	background-color: transparent;
+    color: white;
+    font-weight: bolder;
+    border: 2px solid white;
+    width: 150px;
+    height: 50px;
+}
+#joinBtn:hover{
+	background-color:#ffb347;
+	color: white;
+}
+</style>
 <body>
 	<jsp:include page="/WEB-INF/views/main/common/header.jsp"/>
+	<div id="joinChk-wrap">
 	<h1>이용자 회원가입</h1>
 	<hr>
-	<div id="joinAllCheck" >전체동의<span>이용약관(필수), 개인정보 수집 및 이용 안내(필수), 개인정보 수집 및 이용 안내(선택)에 모두 동의합니다.</span><input type="checkbox" id="allChk"></div>
+	<div id="joinAllCheck" style="font-size:18px;font-weight:bolder">전체동의 <span style="font-size:18px;font-weight:normal">이용약관(필수), 개인정보 수집 및 이용 안내(필수), 개인정보 수집 및 이용 안내(선택)에 모두 동의합니다.</span><input type="checkbox" id="allChk"></div>
 	<hr>
-	<h4>이용약관동의<span class="mandChk" style="color: red">(필수)</span><input type="checkbox" class="chk"></h4>
-	<textarea style="border: 1px solid black" readonly>
+	<h4 style="position: relative;left: -320px">이용약관동의<span class="mandChk" style="color: red">(필수)</span><input type="checkbox" class="chk"></h4>
+	<textarea style="border: 1px solid black;height:250px;"readonly>
 	
   ③ “똑독캣”의 승낙의 의사표시에는 이용자의 구매 신청에 대한 확인 및 판매가능 여부, 구매신청의 정정 취소 등에 관한 정보 등을 포함하여야 합니다.
  
@@ -147,8 +196,8 @@
  
 	</textarea>
 	<hr>
-	<h4>개인정보 수집 및 이용 안내 동의<span class="mandChk" style="color: red">(필수)</span><input type="button" value="개인정보 처리방침 전문"><input type="checkbox" class="chk"></h4>
-	<textarea style="border: 1px solid black" readonly>
+	<h4 style="position: relative;left: -230px">개인정보 수집 및 이용 안내 동의<span class="mandChk" style="color: red">(필수)</span><input type="checkbox" class="chk"></h4>
+	<textarea style="border: 1px solid black;height:300px;" readonly>
 	개인정보처리방침
 
 [차례]
@@ -287,8 +336,8 @@
 2) 시행일자 : 2022년 10월 26일 
 	</textarea>
 	<hr>
-	<h4>개인정보 수집 및 이용 안내 동의<span>(선택)</span><input type="checkbox" class="chk"></h4>
-	<textarea style="border: 1px solid black" readonly>
+	<h4 style="position: relative;left: -230px">개인정보 수집 및 이용 안내 동의<span>(선택)</span><input type="checkbox" class="chk"></h4>
+	<textarea style="border: 1px solid black;height:240px" readonly>
 1. 수집, 이용 항목
 성명, 생년월일, 이메일주소, 휴대전화번호, 주소, 구매 및 예약 내역, 아이디
 
@@ -297,9 +346,12 @@
 - 경품 발송 및 DM 발송 등의 배송에 대한 정확한 배송지의 확보
 
 3. 수집하는 개인정보의 보유 및 이용기간
-수집·이용 동의일로부터 회원 탈퇴 또는 동의 철회 시 까지
-	</textarea><br>
-	<input type="button" id="backBtn" value="취소" style="background-color: lightgrey; font-weight:bolder; border:none"><input type="button" id="joinBtn" value="가입하기" style="background-color: skyblue; color:white; font-weight:bolder; border:none">
+수집·이용 동의일로부터 회원 탈퇴 또는 동의 철회 시 까지</textarea><br>
+	</div>
+	<div class="joinBtn-wrap">
+		<input type="button" id="backBtn" value="취소" style="">
+		<input type="button" id="joinBtn" value="가입하기" style="">
+	</div>
 	<script>
 		//모두 동의
 		$("#allChk").click(function(){

@@ -66,11 +66,9 @@ public class PetService {
 	@Transactional
 	public int updatePet(Pet p, PetCheckList petChk) {
 		int result = dao.updatePet(p);
-		System.out.println("서비스 펫 리저트" + result);
 		if(result > 0) {
 			petChk.setPetNo(p.getPetNo());
 			result = dao.updatePetChk(petChk);	
-			System.out.println("서비스 체크리스트 리저트" + result);
 			return result;
 		}else {
 			return result;
