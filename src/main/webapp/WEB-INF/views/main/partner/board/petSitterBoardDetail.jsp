@@ -103,7 +103,6 @@
 
                 <div class="col-lg-4">
                     <div id="sidebar" class="" >
-
                         <div class="sidebar sidebar__inner js-search-option">
                             <h3 class="sidebar-title">맡기시는 날짜</h3>
                             <div class="sidebar-item calendar">
@@ -124,16 +123,16 @@
                             <h3 class="sidebar-title">체크인/체크아웃</h3>
                             <div class="sidebar-item d-flex">
                                 <div class="col-5">
-                                    <select class="form-select select-checkin" aria-label=".select-checkin">
-                                        <option selected>체크인</option>
+                                    <select class="form-select select-checkin" name="selectCheckIn" aria-label=".select-checkin">
+                                        <option value="" selected>체크인</option>
                                         <c:forEach var="i"  begin="9" end="18">
                                             <option value="${i>9?i:'0'}${i>9?'':i}:00">${i>9?i:'0'}${i>9?'':i}:00</option>
                                         </c:forEach>
                                     </select>
                                 </div>
                                 <div class="col-5 ms-2">
-                                    <select class="form-select select-checkout" aria-label=".select-checkout">
-                                        <option selected>체크아웃</option>
+                                    <select class="form-select select-checkout" name="selectCheckOut" aria-label=".select-checkout">
+                                        <option value="" selected>체크아웃</option>
                                         <c:forEach var="i"  begin="9" end="18">
                                             <option value="${i>9?i:'0'}${i>9?'':i}:00">${i>9?i:'0'}${i>9?'':i}:00</option>
                                         </c:forEach>
@@ -145,13 +144,56 @@
                                 <div id="map" style="width:100%;height:350px;"></div>
                                 <p class="text-muted text-end mt-1 mb-0">${detail.petsitterAddr}</p>
                             </div><!-- End sidebar categories-->
+                            <c:if test="${not empty pList}">
+                                <h3 class="sidebar-title">나의 반려동물</h3>
+                                <div class="sidebar-item">
+                                    <c:choose>
+                                        <c:when test="${fn:length(pList) == 0}">
+                                        <select class="form-select select-pet" name="selectPet" aria-label=".select-pet">
+                                            <option value="" selected>등록된 반려동물이 없습니다</option>
+                                        </select>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <select class="form-select select-pet" name="selectPet" aria-label=".select-pet">
+                                            <c:forEach items="${pList}" var="pi" varStatus="i">
+                                                <option value="${pi.petName}">${pi.petName}</option>
+                                            </c:forEach>
+                                            </select>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                            </c:if>
+                            
                             <h3 class="sidebar-title">이용요금</h3>
                             <div class="sidebar-item ">
                                 <i class="bi bi-house-heart me-2"></i>1박 35,000
                             </div><!-- End sidebar categories-->
-                            <div class="d-grid gap-2">
-                                <button type="button" class="btn btn-warning btn-lg">예약 요청</button>
+                            <div class="sidebar-item d-none">
+                                <dl class="d-flex justify-content-between border-bottom border-secondary">
+                                    <dt>합계 금액</dt>
+                                    <dd class="total-amount">0</dd>
+                                </dl>
+                                <dl class="d-flex justify-content-between">
+                                    <dt class="total-days text-muted"></dt>
+                                    <dd class="this-amount text-muted"></dd>
+                                </dl>
                             </div>
+                            <c:choose>
+                                <c:when test="${empty sessionScope.p and not empty sessionScope.m}">
+                                    <div class="d-grid gap-2">
+                                        <button type="button" class="btn btn-warning btn-lg" onclick="requestReservation()">예약 요청</button>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <%--<div class="d-grid gap-2">
+                                        <button type="button" class="btn btn-warning btn-lg" onclick="requestReservation()">예약 요청</button>
+                                    </div>--%>
+                                    <div class="d-grid gap-2">
+                                        <button type="button" class="btn btn-warning btn-lg" disabled>이용자 로그인이 필요합니다</button>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
+
                         </div><!-- End sidebar -->
                     </div>
                 </div><!-- End blog sidebar -->
@@ -160,14 +202,122 @@
     </section><!-- End Blog Section -->
 
 </main>
+<!-- payment Modal -->
+<div class="modal fade" id="paymentModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="bi bi-journal-check fs-3"></i>
+                <h4 class="modal-title text-center w-100" id="paymentModalLabel">예약 요청</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <article class="row g-2 pt-3 pb-4 border-bottom">
+                    <h5 class="text-dark">이용자 정보</h5>
+
+                    <div class="col-md-6">
+                        <label for="memberName" class="form-label">이름</label>
+                        <input type="text" class="form-control member-name" id="memberName" value="">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="memberPhone" class="form-label">전화번호</label>
+                        <input type="text" class="form-control member-phone" id="memberPhone" value="">
+                    </div>
+                    <div class="col-12">
+                        <label for="specialRequest" class="form-label">요청사항 <small class="text-muted">(간단한 요청사항)</small></label>
+                        <textarea class="form-control" id="specialRequest" rows="3"></textarea>
+                    </div>
+                </article>
+                <article class="row g-2 pt-3 pb-3 border-bottom">
+                    <h5 class="mt-3 mb-3 text-dark">파트너 정보</h5>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4">이름</dt>
+                        <dd class="col-sm-8 partner-name"></dd>
+
+                        <dt class="col-sm-4">주소</dt>
+                        <dd class="col-sm-8 partner-addr"></dd>
+
+                        <dt class="col-sm-4 text-nowrap">자격증/수료 교육</dt>
+                        <dd class="col-sm-8 partner-license"></dd>
+
+                        <dt class="col-sm-4 text-nowrap"><span class="text-primary">SDC</span> 파트너 인증일</dt>
+                        <dd class="col-sm-8 partner-approve-date"></dd>
+                    </dl>
+                </article>
+                <article class="row g-2 pt-3 pb-3">
+                    <h5 class="d-flex align-items-center mt-3 mb-3 text-dark">결제정보 / 수단 <i class="bi bi-credit-card fs-4 ms-2"></i></h5>
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+                            <tr>
+                                <th>예약일</th>
+                                <td colspan="2" class="check-in-out"></td>
+                            </tr>
+                        </table>
+                        <table class="table align-middle">
+                            <thead>
+                            <tr>
+                                <th scope="col">상품정보</th>
+                                <th scope="col">예약일 수</th>
+                                <th scope="col">금액</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>위탁돌봄<br>(산책, 실내놀이 포함)</td>
+                                <td class="total-days"></td>
+                                <td class="total-amount"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <input type="radio" class="btn-check" name="paymentMethod" id="paymentMethod1" value="가상계좌" >
+                        <label class="btn payment-toss" for="paymentMethod1">가상계좌</label>
+                        <input type="radio" class="btn-check" name="paymentMethod" id="paymentMethod2" value="카드"  checked>
+                        <label class="btn payment-toss" for="paymentMethod2">간편결제</label>
+                    </div>
+                </article>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-warning" id="payment-button">결제/예약요청</button>
+            </div>
+        </div>
+    </div>
+</div>
 <jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fe0ca6d48cf3c72c89b2f627b0eb544a&libraries=drawing"></script>
 <script src="/resources/js/plugin.js"></script>
 <script src="/resources/js/common-partner.js"></script>
 <script src="/resources/js/sticky-sidebar.js"></script>
-
+<script src="https://js.tosspayments.com/v1"></script>
 <script>
+
+    var tossPayments = TossPayments("test_ck_5mBZ1gQ4YVX72jPObvZ3l2KPoqNb");
+    var button = document.getElementById("payment-button");
+
+    var orderId = new Date().getTime();
+    let total;
+    button.addEventListener("click", function () {
+        var method = document.querySelector('input[name=paymentMethod]:checked').value; // "카드" 혹은 "가상계좌"
+
+        var paymentData = {
+            amount: 1000,
+            orderId: orderId,
+            orderName: "SDC 서비스",
+            customerName: "SDC",
+            successUrl: window.location.origin + "/paymentSuccess.do",
+            failUrl: window.location.origin + "/paymentFail.do",
+        };
+
+        if (method === '가상계좌') {
+            paymentData.virtualAccountCallbackUrl = window.location.origin + '/virtual-account/callback'
+        }
+
+        tossPayments.requestPayment(method, paymentData);
+    });
+
     <c:set var="mLng" value="${detail.lng == null ? '126.8969784' : detail.lng}" />
     <c:set var="mLat" value="${detail.lat == null ? '37.5338151' : detail.lat}" />
     <c:set var="sDate" value="${detail.startDate == null ? '' : detail.startDate}" />
@@ -178,6 +328,76 @@
     mxDate = "${eDate}";
     sDate = "${param.startDate}";
     eDate = "${param.endDate}";
+
+    $("#startDate").on("change", function() {
+        setTotalAmount();
+    })
+
+    function setTotalAmount() {
+        const amount = 35000;
+        const selDateDiff = dUtils.dateDiff($("#startDate").val(), $("#endDate").val());
+        total = amount * selDateDiff;
+        const wonTotal = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        const totalAmount = $(".total-amount"),
+            totalDays = $(".total-days"),
+            thisAmount = $(".this-amount");
+        if(total > 0) {
+            totalAmount.closest(".sidebar-item").removeClass("d-none");
+            totalAmount.text(wonTotal);
+            totalDays.text(selDateDiff + "박 비용");
+            thisAmount.text(wonTotal);
+        } else {
+            totalAmount.closest(".sidebar-item").addClass("d-none");
+        }
+    }
+    setTotalAmount();
+
+    function requestReservation() {
+        const getObj = function(name) {
+            return $("[name=" + name + "]");
+        }
+
+        if(getObj("startDate").val() == "" || getObj("endDate").val() == "") {
+            alert("날짜를 선택하세요.");
+            return;
+        }
+        if(getObj("selectCheckIn").val() == "" || getObj("selectCheckOut").val() == "") {
+            alert("체크인 / 체크아웃 시간을 선택하세요.");
+            return;
+        }
+
+        var paymentEl = document.getElementById('paymentModal');
+        var paymentModal = new bootstrap.Modal(paymentEl, {
+            keyboard: false
+        });
+        paymentEl.addEventListener('show.bs.modal', function (event) {
+            console.log(event)
+            const modal = $(event.target);
+            modal.find(".partner-name").text("${detail.pName}");
+            modal.find(".partner-addr").text("${detail.petsitterAddr}");
+            modal.find(".partner-license").text("${detail.license}");
+            modal.find(".partner-approve-date").text("${detail.approveDate}");
+            modal.find(".partner-approve-date").text("${detail.approveDate}");
+
+            const checkIn = $("#startDate").val(),
+                checkOut = $("#endDate").val();
+            const checkInTime = $(".select-checkin").val(),
+                checkOutTime = $(".select-checkout").val();
+            const amount = 35000;
+            const selDateDiff = dUtils.dateDiff(checkIn, checkOut);
+            const total = amount * selDateDiff;
+            const wonTotal = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            const checkInOut = checkIn + " (" + dUtils.getDateToDay(checkIn) + ") " + checkInTime + " ~ " + checkOut + " (" + dUtils.getDateToDay(checkOut) + ") " + checkOutTime;
+
+            modal.find(".check-in-out").text(checkInOut);
+            modal.find(".total-days").text(selDateDiff + "박");
+            modal.find(".total-amount").text(wonTotal);
+
+        })
+        paymentModal.show();
+    }
+
+
 
     var sidebar = new StickySidebar('#sidebar', {
         containerSelector: '#main-content',
