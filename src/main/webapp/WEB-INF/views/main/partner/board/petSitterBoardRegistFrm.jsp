@@ -85,7 +85,7 @@
                             <label for="" class="form-label col-form-label-lg">위탁 장소 사진 첨부 <span class="text-warning">*</span> <small class="text-muted">(사진 1개이상 첨부)</small></label>
                             <input type="file" name="partnerFile" id="partnerFile" class="file-multiple d-none" multiple>
 
-<%--                        <input class="form-control form-control-lg add-file" id="" name="" type="file" >--%>
+                            <%--                        <input class="form-control form-control-lg add-file" id="" name="" type="file" >--%>
                             <div class="input-group">
                                 <input type="file" class="form-control add-file" aria-label="Upload">
                                 <button class="btn btn-outline-danger" type="button" onclick="deleteFile(this)">삭제</button>
@@ -265,7 +265,7 @@
         const inputFile = delBtn.prev();
 
         if(inputFile.val() == "") {
-           return;
+            return;
         } else {
             inputFile.val("");
             const fileLength = $(".add-file.has-file").length;
@@ -345,7 +345,7 @@
                 if(res > 2) {
                     successModal.show();
                     successModalEl.addEventListener('hidden.bs.modal', function (event) {
-                        window.location = "/petSitterList.do";
+                        window.location = "/petSitterBoardList.do";
                     });
                 } else {
                     submitModal.hide();

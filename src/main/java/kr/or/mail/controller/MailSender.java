@@ -40,9 +40,11 @@ public class MailSender {
         //Properties prop = System.getProperties();
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
-        prop.put("mail.smtp.port", 465);
+        prop.put("mail.smtp.port", 587);
         prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.ssl.enable", "true");
+        prop.put("mail.smtp.starttls.enable", true); //추가
+        prop.put("mail.smtp.ssl.protocols", "TLSv1.2"); //추가
+//        prop.put("mail.smtp.ssl.enable", "true");
         prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 
         //prop.put("mail.smtp.user", "sdcmaster1");
@@ -59,7 +61,7 @@ public class MailSender {
         );*/
         Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("sdcmaster1", "zgzocugfmymqzofs");
+                return new PasswordAuthentication("sdcmaster1", "epxgwfsfezzvgzcp");
             }
         });
         //이메일을 작성해서 전송하는 객체
