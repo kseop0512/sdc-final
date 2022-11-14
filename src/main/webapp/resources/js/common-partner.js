@@ -42,7 +42,7 @@ $(document).ready(function() {
                     data : {pId : pId},
                     async : false,
                     success: function(result) {
-                        console.log(result);
+                        // console.log(result);
                         if(result>0) {
                             input.removeClass(INVALID_CLASS);
                             msg.text("");
@@ -322,6 +322,10 @@ sdcJs.calendarMgr = {
  *
  * @param initResvCalendar (Element)
  */
+let mnDate;
+let mxDate;
+let sDate;
+let eDate;
 sdcJs.initResvCalendar = function (calendarEl) {
     if (!calendarEl.length) {
         return;
@@ -364,7 +368,7 @@ sdcJs.initResvCalendar = function (calendarEl) {
             ],
             // minDate: 0,
             minDate: new Date(2020, 7, 25),
-            dateFormat: 'yy.mm.dd',
+            dateFormat: 'yy-mm-dd',
             onChangeMonthYear: function (year, month, inst) {
                 setPromotionDate(year, month);
             },
@@ -421,9 +425,22 @@ sdcJs.initResvCalendar = function (calendarEl) {
         const isOneday = calendarEl.hasClass('oneDay');
         let unSelectableDate = [];
 
-        const startDate = new Date();
+        let startDate = new Date();
+        //const endDate = new Date(startDate.getFullYear(), startDate.getMonth() + 3, 0);
+        let endDate = "+2M";
 
-        const endDate = new Date(startDate.getFullYear(), startDate.getMonth() + 2, 0);
+        if(mnDate != undefined && mxDate != undefined && mnDate != "" && mxDate != "") {
+            startDate = new Date(mnDate);
+            endDate = new Date(mxDate);
+        }
+        if(sDate != undefined && eDate != undefined && sDate != "" && eDate != "") {
+            sdcJs
+                .calendarMgr
+                ._setChkInDate(sDate);
+            sdcJs
+                .calendarMgr
+                ._setChkOutDate(eDate);
+        }
 
         calendarEl.on('refresh', function () {
             clickCnt = 0;
@@ -433,8 +450,8 @@ sdcJs.initResvCalendar = function (calendarEl) {
         option = {
             defaultDate: startDate,
             tDay: startDate, // .ui-datepicker-today 적용 날짜
-            //startTitle: 'start',
-            //endTitle: 'end',
+            startTitle: 'start',
+            endTitle: 'end',
             numberOfMonths: 2,
             showMonthAfterYear: true,
 
@@ -457,11 +474,11 @@ sdcJs.initResvCalendar = function (calendarEl) {
                 : [ "SUN", "MON", "TUE", "WED", "THU", "FRI","SAT"],*/
             dayNamesMin: [ "일", "월", "화", "수", "목", "금", "토" ] ,
             // minDate: 0, maxDate : '+11m',
-            //minDate: startDate,
-            minDate:new Date(2022, 11 - 1, 11),
-            //maxDate: endDate,
-            maxDate: "+2M",
-            dateFormat: 'yy.mm.dd',
+            minDate: startDate,
+            //minDate:new Date(2022, 11 - 1, 11),
+            maxDate: endDate,
+            //maxDate: "+2M",
+            dateFormat: 'yy-mm-dd',
             yearSuffix: '년',
             onChangeMonthYear: function (year, month, inst) {
                 //날짜선택 및 달력 월 이동시 호출 setUnselectableDate(year, month);
@@ -469,12 +486,14 @@ sdcJs.initResvCalendar = function (calendarEl) {
             beforeShowDay: function (date) {
 
                 const calDate = dUtils.getToDate(date);
+
                 chkInDate = sdcJs
                     .calendarMgr
                     ._getChkInDate();
                 chkOutDate = sdcJs
                     .calendarMgr
                     ._getChkOutDate();
+
                 // 체크인
                 if (chkInDate == calDate) {
                     return [true, 'sel is-start ui-datepicker-unselectable ui-state-disabled'];
@@ -495,6 +514,7 @@ sdcJs.initResvCalendar = function (calendarEl) {
                     }
                 }
 
+
                 // 중간 날짜 선택
                 return [
                     true,
@@ -510,7 +530,7 @@ sdcJs.initResvCalendar = function (calendarEl) {
                     drawMonth = inst.drawMonth;
 
                 let selectPrevChkIn = false;
-                const dateSplit = date.split('.');
+                const dateSplit = date.split('-');
                 if (chkInDate != '' && date < chkInDate) {
                     selectPrevChkIn = true;
                 }
@@ -544,12 +564,18 @@ sdcJs.initResvCalendar = function (calendarEl) {
                         chkOutDate + "<em>(" + ckoutDay.substring(0, 1) + ")</em>"
                     );
 
-                    calendarEl.datepicker('option', 'maxDate', "+2M");// maxDate 초기화
+                    //calendarEl.datepicker('option', 'maxDate', "+2M");// maxDate 초기화
 
                     const daysDiff = dUtils.dateDiff(chkInDate, chkOutDate);
                     // var startDate = new Date(); var endDate = new Date(startDate.getFullYear(),
                     // startDate.getMonth() + 12, 0);
                     if (daysDiff > 0) {
+                        let setMaxDate;
+                        if(sDate != undefined && eDate != undefined && sDate != "" && eDate != "") {
+                            setMaxDate = new Date(calendarEl.datepicker('option', 'maxDate'));
+                        } else {
+                            setMaxDate = "+2M";
+                        }
                         calendarEl.datepicker('setDate', chkOutDate);
 
                         calendarEl.datepicker(
@@ -560,13 +586,13 @@ sdcJs.initResvCalendar = function (calendarEl) {
                         calendarEl.datepicker(
                             'option',
                             'maxDate',
-                            //new Date(calendarEl.datepicker('option', 'maxDate'))
-                            "+2M"
+                            setMaxDate
                         );
-
                     }
+
                 } else {
                     chkInDate = date;
+
                     sdcJs
                         .calendarMgr
                         ._setChkInDate(date);
@@ -584,20 +610,22 @@ sdcJs.initResvCalendar = function (calendarEl) {
                         'minDate',
                         calendarEl.datepicker('option', 'minDate')
                     );
-                    if (_cid > endDate) {
+                    //if (_cid > endDate) {
                         calendarEl.datepicker(
                             'option',
                             'maxDate',
-                            //calendarEl.datepicker('option', 'maxDate')
-                            _cid
+                            calendarEl.datepicker('option', 'maxDate')
+                            //_cid
                         );
-                    } else {
+                    /*} else {
                         calendarEl.datepicker('option', 'maxDate', _cid);
-                    }
+                    }*/
                 }
-                if (drawMonth == new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]).getMonth()) {
+                if (drawMonth == new Date(dateSplit[0], dateSplit[1]-1, dateSplit[2]).getMonth()) {
+
                     sdcJs.gotoDate(calendarEl, mon, year);
                 } else {
+
                     sdcJs.gotoDate(calendarEl, mon - 1, year);
                 }
                 if (chkInDate != '' && chkOutDate != '') {
@@ -633,6 +661,7 @@ sdcJs.initResvCalendar = function (calendarEl) {
             function (e) {
 
                 if (chkInDate != '') {
+
                     var chkInCalendarIdx = $('.is-start')
                         .closest('.cal-inner')
                         .index();
@@ -668,7 +697,7 @@ sdcJs.initResvCalendar = function (calendarEl) {
                     chkInRightCalendar = true;
                 } else if (currentTr.closest('.calRight').length && chkInCalendarIdx == 0) {
                     calendarEl
-                    .find('.calLeft tbody tr')
+                    .find('.cal-left tbody tr')
                     .each(function (idx, itm) {
                         if (idx == startTr.index()) {
                             setTdState(startTr, startTd.index(), 6);
@@ -683,7 +712,7 @@ sdcJs.initResvCalendar = function (calendarEl) {
                         .find('td[data-handler="selectDay"]')
                         .eq(0);
 
-                } else if (currentTr.closest('.calLeft').length && chkInCalendarIdx == 0) {
+                } else if (currentTr.closest('.cal-left').length && chkInCalendarIdx == 0) {
                     calendarEl
                         .find('.calRight tbody tr td')
                         .removeClass('is-ing is-ing-eng sel');
@@ -741,7 +770,7 @@ sdcJs.initResvCalendar = function (calendarEl) {
                     })
                 } else {
                     calendarEl
-                    .find('.calLeft .calendar tbody tr')
+                    .find('.cal-left .calendar tbody tr')
                     .each(function () {
                         const _this = $(this);
 
@@ -871,8 +900,8 @@ function lpad(str, padLen, padStr) {
     return str;
 }
 const dUtils = {
-    sep: '.', //구분자
-    format: 'yy.mm.dd', //포맷
+    sep: '-', //구분자
+    format: 'yy-mm-dd', //포맷
 
     /**
      * 현재 조회년월 가져오기 (YYYYMM)
@@ -911,7 +940,6 @@ const dUtils = {
             ? '0' + varDate.getDate()
             : varDate.getDate();
         const varFullDate = varYear + this.sep + varMonth + this.sep + varDay;
-
         return varFullDate;
     },
 

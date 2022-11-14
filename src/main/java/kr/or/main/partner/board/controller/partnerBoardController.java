@@ -1,5 +1,6 @@
 package kr.or.main.partner.board.controller;
 
+import com.google.gson.Gson;
 import common.FileRename;
 import kr.or.main.partner.board.model.service.PartnerBoardService;
 import kr.or.main.partner.board.model.vo.PartnerBoard;
@@ -7,8 +8,9 @@ import kr.or.main.partner.board.model.vo.PartnerBoardFileVO;
 import kr.or.main.partner.board.model.vo.PartnerBoardOption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -33,8 +35,6 @@ public class partnerBoardController {
         
         ArrayList<PartnerBoardFileVO> list = new ArrayList<PartnerBoardFileVO>();
         List<MultipartFile> partnerFile = multipartReq.getFiles("partnerFile");
-        System.out.println(partnerFile.get(0));
-        System.out.println(partnerFile.get(0).getOriginalFilename());
         if(!partnerFile.get(0).isEmpty()) {
             String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/partner/petsitterFiles/");
             for(MultipartFile file : partnerFile) {
@@ -65,4 +65,31 @@ public class partnerBoardController {
 
     }
 
+
+    @RequestMapping(value = "/petSitterBoardList.do")
+    public String selectPetSitterBoardList(@RequestParam HashMap<String, Object> param, Model model) {
+        //String pageNavi = service.getPageNavi(param);
+
+        List<Map<String, Object>> list = service.selectPetSitterBoardList(param);
+
+        model.addAttribute("param", param);
+        model.addAttribute("list", list);
+//        model.addAttribute("pageNavi", pageNavi);
+
+        return "main/partner/board/petSitterBoardList";
+    }
+    @ResponseBody
+    @RequestMapping(value = "/getSitterBoardList.do", produces="application/json;charset=utf-8")
+    public String getSitterBoardList(@RequestParam HashMap<String, Object> param) {
+
+        List<Map<String, Object>> list = service.selectPetSitterBoardList(param);
+        return new Gson().toJson(list);
+    }
+    @RequestMapping(value = "petSitterBoardDetail.do")
+    public String viewBoardDetail(@RequestParam HashMap<String, Object> param, Model model) {
+        Map<String, Object> detailContent = service.selectPetSitterBoard(param);
+        model.addAttribute("detail", detailContent);
+        model.addAttribute("param", param);
+        return "main/partner/board/petSitterBoardDetail";
+    }
 }

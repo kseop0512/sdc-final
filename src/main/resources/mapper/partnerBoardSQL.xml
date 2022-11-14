@@ -42,4 +42,108 @@
 		        #{filepath}
 			   )
 	</insert>
+	<select id="selectPetSitterBoardCount" parameterType="hashmap" resultType="_int">
+		SELECT count(*) AS cnt FROM PARTNER_PETSITTER_BOARD
+	</select>
+	<select id="selectPetSitterBoardList" parameterType="hashmap" resultMap="getBoardList">
+		SELECT * FROM (
+		SELECT ROWNUM as rnum, b.* FROM (
+		SELECT ppb.petsitter_board_no,
+			   ppb.petsitter_board_title,
+			   ppb.p_no,
+			   ppb.petsitter_addr,
+			   p.P_NAME,
+			   p.P_GRADE,
+			   (SELECT LISTAGG(FILEPATH, ',') WITHIN GROUP (ORDER BY FILEPATH) AS FILEPATH
+				FROM PETSITTER_FILES
+				WHERE PETSITTER_BOARD_NO = ppb.PETSITTER_BOARD_NO) AS filelist,
+			   (6371 *
+				acos(cos(CAST(lat AS FLOAT) * 3.141592653589793 / 180.0) * cos(
+				    <choose><when test="lat != null and !lat.equals('')">#{lat}</when><otherwise>37.5338151</otherwise></choose> * 3.141592653589793 / 180.0)
+						 *
+					 cos((<choose><when test="lng != null and !lng.equals('')">#{lng}</when><otherwise>126.8969784</otherwise></choose> * 3.141592653589793 / 180.0) - (CAST(lng AS FLOAT) * 3.141592653589793 / 180.0)) +
+					 sin(CAST(lat AS FLOAT) * 3.141592653589793 / 180.0)
+						 * sin(<choose><when test="lat != null and !lat.equals('')">#{lat}</when><otherwise>37.5338151</otherwise></choose> * 3.141592653589793 / 180.0))) as distance,
+			   pol.petsitter_option
+		FROM PARTNER_PETSITTER_BOARD ppb,
+			 PARTNER p,
+			 (SELECT PETSITTER_BOARD_NO,
+					 no_pet_str || ',' || pickup_str || ',' || large_pet_str || ',' || yard_str || ',' || old_pet_str AS petsitter_option
+			  FROM (SELECT petsitter_board_no, no_pet, pickup, large_pet, yard, old_pet,
+						   DECODE(no_pet, 'Y', '반려동물없음', 'N', '반려동물있음', 'N') AS no_pet_str,
+						   DECODE(pickup, 'Y', '픽업가능', 'N')                  AS pickup_str,
+						   DECODE(large_pet, 'Y', '대형견가능', 'N')              AS large_pet_str,
+						   DECODE(yard, 'Y', '마당있음', 'N')                    AS yard_str,
+						   DECODE(old_pet, 'Y', '노견케어', 'N')                 AS old_pet_str
+					FROM PETSITTER_OPTION_TBL
+					<where>
+					<if test="noPet != null and !noPet.equals('')">AND NO_PET='Y' </if>
+					<if test="pickup != null and !pickup.equals('')">AND PICKUP='Y' </if>
+					<if test="largePet != null and !largePet.equals('')">AND LARGE_PET='Y' </if>
+					<if test="yard != null and !yard.equals('')">AND YARD='Y' </if>
+					<if test="oldPet != null and !oldPet.equals('')">AND OLD_PET='Y' </if>
+					</where>)) pol
+		WHERE ppb.P_NO = p.P_NO AND pol.PETSITTER_BOARD_NO = ppb.PETSITTER_BOARD_NO
+		<if test="startDate != null and !startDate.equals('')">
+		AND (START_DATE <![CDATA[<=]]> #{startDate} AND END_DATE <![CDATA[>=]]> #{endDate})
+		</if>
+		ORDER BY distance) b) WHERE rnum BETWEEN #{start} AND #{end}
+	</select>
+	<select id="selectPetSitterBoard" parameterType="hashmap" resultMap="getBoard">
+		SELECT
+				SUBSTR(p.p_name,1,1) || LPAD('*', LENGTH(p.p_name)-2, '*') || SUBSTR(p_name, LENGTH(p.p_name), 1) AS p_name,
+				p.P_GENDER,
+				p.PROFILE_PATH,
+				p.LICENSE,
+				ppb.PETSITTER_BOARD_TITLE,
+				ppb.PETSITTER_ABOUT_ME,
+				ppb.LAT,
+				ppb.LNG,
+				TO_CHAR(ppb.START_DATE, 'yyyy-mm-dd') as start_date,
+				TO_CHAR(ppb.END_DATE, 'yyyy-mm-dd') as end_date,
+				ppb.PETSITTER_ADDR,
+				(SELECT
+					 LISTAGG(FILEPATH , ',') WITHIN GROUP (ORDER BY FILEPATH) AS FILEPATH
+				 FROM PETSITTER_FILES
+				 WHERE PETSITTER_BOARD_NO = #{petsitterBoardNo}) AS filelist,
+				pol.petsitter_option,
+				(SELECT count(*) review_cnt FROM REVIEW_TBL rt WHERE p_no = p.p_no) AS review_cnt
+		FROM PARTNER p , PARTNER_PETSITTER_BOARD ppb,
+			 (SELECT PETSITTER_BOARD_NO, no_pet_str || ',' || pickup_str || ',' || large_pet_str || ',' || yard_str || ',' || old_pet_str AS petsitter_option
+			  FROM (SELECT petsitter_board_no, no_pet, pickup, large_pet, yard, old_pet,
+						   DECODE(no_pet, 'Y', '반려동물없음', 'N', '반려동물있음', 'N') AS no_pet_str,
+						   DECODE(pickup, 'Y', '픽업가능', 'N')                  AS pickup_str,
+						   DECODE(large_pet, 'Y', '대형견가능', 'N')              AS large_pet_str,
+						   DECODE(yard, 'Y', '마당있음', 'N')                    AS yard_str,
+						   DECODE(old_pet, 'Y', '노견케어', 'N')                 AS old_pet_str
+					FROM PETSITTER_OPTION_TBL) WHERE PETSITTER_BOARD_NO = #{petsitterBoardNo}) pol
+		WHERE p.P_NO = ppb.P_NO AND ppb.PETSITTER_BOARD_NO = #{petsitterBoardNo}
+	</select>
+	<resultMap type="Map" id="getBoard">
+		<result column="p_name" property="pName"/>
+		<result column="p_gender" property="pGender"/>
+		<result column="profile_path" property="profilePath"/>
+		<result column="license" property="license"/>
+		<result column="petsitter_board_title" property="petsitterBoardTitle"/>
+		<result column="petsitter_about_me" property="petsitterAboutMe"/>
+		<result column="lat" property="lat"/>
+		<result column="lng" property="lng"/>
+		<result column="start_date" property="startDate"/>
+		<result column="end_date" property="endDate"/>
+		<result column="petsitter_addr" property="petsitterAddr"/>
+		<result column="filelist" property="fileList"/>
+		<result column="petsitter_option" property="petsitterOption"/>
+		<result column="review_cnt" property="reviewCnt"/>
+	</resultMap>
+	<resultMap type="Map" id="getBoardList">
+		<result column="petsitter_board_no" property="petsitterBoardNo"/>
+		<result column="petsitter_board_title" property="petsitterBoardTitle"/>
+		<result column="p_no" property="pNo"/>
+		<result column="petsitter_addr" property="petsitterAddr"/>
+		<result column="p_name" property="pName"/>
+		<result column="p_grade" property="pGrade"/>
+		<result column="filelist" property="fileList"/>
+		<result column="distance" property="distance"/>
+		<result column="petsitter_option" property="petsitterOption"/>
+	</resultMap>
 </mapper>
