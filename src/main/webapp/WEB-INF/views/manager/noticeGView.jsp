@@ -31,16 +31,9 @@
             <a class="navbar-brand ps-3" href="/adminIndex.do">똑독캣 관리자페이지</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-            <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
             <!-- Navbar-->
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                <li class="nav-item dropdown">
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4" style="margin-left: auto !important;">
+                <li class="nav-item dropdown" style="position: relative;display: flex;flex-wrap: wrap;align-items: stretch;width: 100%;">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <!--<li><a class="dropdown-item" href="#!">Settings</a></li>
@@ -143,7 +136,7 @@
 							</tr>
 							<tr style="background-image: url(/resources/assets/img/logo-15수정본.png);background-repeat: no-repeat;background-position: center center;background-size: contain;">
 								<th style="border-right: black solid 1px;text-align: center;">내용</th>
-								<td colspan="4" style="height: 100px;padding-left: 5px;white-space: pre-wrap;">
+								<td colspan="4" style="height: 100px;padding-left: 5px;white-space: pre-line;">
 									${ng.noticeGContent }
 								</td>
 							</tr>
@@ -165,7 +158,7 @@
             </div>
         </div>
       	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
+        <script src="/resources/js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="/resources/assets/demo/chart-area-demo.js"></script>
         <script src="/resources/assets/demo/chart-bar-demo.js"></script>
@@ -205,13 +198,14 @@
 				<br>
 				<br>
 				<div style="height: 60px;line-height: 60px;font-size: 25px;background-color: #1d1b16;display: flex;justify-content: left;width: 100%;margin-top: 10px;padding-left: 35px;">똑독캣 공지사항</div>
-                <div style="background-color: #fff;display: flex;justify-content: center;width: 100%;padding-left: 145px;">
+                <div style="background-color: #fff;display: flex;justify-content: center;width: 100%;padding-left: 275px;">
                 <br>
+                    <div style="width: 100%;background-color: #fff;">
                     <div class="container-fluid px-4" style="background-color: #fff;padding-bottom: 30px;">
-                        <hr style="color: #cda45e;width: 70%;">
-                        <h1 style="text-align: center;border: #cda45e solid 3px;background-color: #282f44;color: #fff;width: 70%;">게시글 상세보기</h1>
-						<hr style="color: #cda45e;width: 70%;">
-						<table border="1" style="width: 70%;background-color: #f8f9fa;font-size: 20px;border-color: #282f44;color: black;box-shadow: 0 4px 16px rgb(0 0 0 / 50%);">
+                        <hr style="color: #cda45e;width: 60%;">
+                        <h1 style="text-align: center;border: #cda45e solid 3px;background-color: #282f44;color: #fff;width: 60%;">게시글 상세보기</h1>
+						<hr style="color: #cda45e;width: 60%;">
+						<table border="1" style="width: 60%;background-color: #f8f9fa;font-size: 20px;border-color: #282f44;color: black;box-shadow: 0 4px 16px rgb(0 0 0 / 50%);">
 							<tr style="border-bottom: black solid 1px;">
 								<th style="border-right: black solid 1px;width: 90px;text-align: center;">글번호</th>
 								<td style="border-right: black solid 1px;padding-left: 5px;">${ng.noticeGNo }</td>
@@ -236,13 +230,13 @@
 							</tr>
 							<tr style="background-image: url(/resources/assets/img/logo-15수정본.png);background-repeat: no-repeat;background-position: center center;background-size: contain;">
 								<th style="border-right: black solid 1px;text-align: center;">내용</th>
-								<td colspan="4" style="height: 100px;padding-left: 5px;white-space: pre-wrap;">
+								<td colspan="4" style="height: 100px;padding-left: 5px;white-space: pre-line;">
 									${ng.noticeGContent }
 								</td>
 							</tr>
 						</table>
                     </div>
-                    
+                    </div>
                     </div>
                 </main>
             </div>

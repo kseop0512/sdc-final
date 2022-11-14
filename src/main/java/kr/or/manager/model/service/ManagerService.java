@@ -308,9 +308,13 @@ public class ManagerService {
 		return result;
 	}
 
-	public ArrayList<NoticeG> searchQnanotice(NoticeG ng) {
-		return dao.searchQnanotice(ng);
+	/*
+	public ArrayList<NoticeG> searchNoticeG(String type, String keyword, int reqPage) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		return dao.searchNoticeG(map);
 	}
-	
+	*/
 	
 }

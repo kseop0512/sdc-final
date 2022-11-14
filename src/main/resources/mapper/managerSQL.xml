@@ -253,27 +253,24 @@
   	)
   </insert>
   
-  <!-- 검색창 -->
-  <select id="searchQnanotice" parameterType="ng" resultType="ng">
+  <!-- 검색창 보류
+  <select id="searchNoticeG" parameterType="map" resultType="ng">
   	select
   		notice_g_no as noticeGNo,
 		notice_g_title as noticeGTitle,
 		notice_g_content as noticeGContent,
 		notice_g_writer as noticeGWriter,
 		notice_g_date as noticeGDate,
-		read_g_count as readGCount,
-		search_type as searchType,
-		keyword as keyword
-	from qna_tbl
+		read_g_count as readGCount
+	from notice_g
 	<choose>
-		<when test="searchType.equals('title')">
-			where notice_g_title like '%'||#{keyword}||'%'
-		</when>
-		<when test="searchType.equals('content')">
-		where notice_g_content like '%'||#{keyword}||'%'
-		</when>
+			<when test="type.equals('title')">
+				where notice_g_title like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('content')">
+				where notice_g_content like '%'||#{keyword}||'%'
+			</when>
 	</choose>
   </select>
-  
-
+	-->
 </mapper>

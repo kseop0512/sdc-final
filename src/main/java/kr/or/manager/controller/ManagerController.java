@@ -229,18 +229,20 @@ public class ManagerController {
 	
 
 
-
+	/*
 	//공지사항 검색
-	@ResponseBody
-	@RequestMapping(value="searchQnaAjax.do",produces = "application/json;charset=utf-8")
-	public String searchQnanotice(NoticeG ng) {
-		ArrayList<NoticeG> list = service.searchQnanotice(ng);
-		Gson gson = new Gson();
-		String result = gson.toJson(list);
-		System.out.println(result);
-		return result;
-	}
+	@RequestMapping(value="/searchNoticeG.do")
+	public String searchNoticeG(String type, String keyword, Model model, int reqPage) {
+		
+		ArrayList<NoticeG> list = service.searchNoticeG(type,keyword,reqPage);
+		model.addAttribute("list",list);
+		
+		return "redirect:/adminNotice.do?reqPage=1";
 
+	}
+	*/
+	
+	
 	@RequestMapping(value="/delete.do")
 	public String delete(NoticeG noticeGNo, Model model) { 
 		
@@ -331,6 +333,10 @@ public class ManagerController {
 		return "common/msg";
 	}
 	
+	@RequestMapping(value="/serviceInfo.do")
+	public String serviceInfo() {
+		return "main/common/serviceInfo";
+	}
 }
 
 
