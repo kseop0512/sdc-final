@@ -93,9 +93,18 @@
 		<div class="main-right">
 			<div class="askBox-wrapper">
 				<p>궁금한 내용이 있다면, <strong>${tb.trainerName }</strong> 훈련사님께 교육 문의를 보내보세요!</p>
-				<div>
+				<c:choose>
+				<c:when test="${not empty sessionScope.m }">
+				<div class="askBtn">
 					<span>문의하기</span>
 				</div>
+				</c:when>
+				<c:when test="${empty sessionScope.m }">
+				<div class="alertBtn">
+					<span>문의하기(회원전용)</span>
+				</div>
+				</c:when>
+				</c:choose>
 			</div>
 			<div class="fee-wrapper">
 				<div><p>이용요금</p></div>
@@ -123,7 +132,7 @@
 	    <span id="msg-modal-title">문의하기</span>
 	    <span id="close-btn" class="material-symbols-outlined">close</span>
 	  </div>
-	  <form action="/insertTrainerDm.do" method="post">
+	  <form action="/insertPartnerDm.do" method="post">
 	    <div class="msg-modal-content">
 	        <div class="msg-info msg-sender">
 	          <span>From: ${sessionScope.m.memberId}</span>
@@ -142,6 +151,7 @@
 	          
 	        </div>
 	        <div class="msg-btn-wrap">
+	        	<input type="hidden" name="tBoardNo" value="${tb.TBoardNo }">
 	          <input type="submit" id="submit-btn" value="문의하기">
 	        </div>
 	    </div>
@@ -151,12 +161,16 @@
 <jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
 <script src="/resources/js/partnerScripts.js"></script>
 <script>
-	$(".askBox-wrapper>div").on("click",function(){
+	$(".askBtn").on("click",function(){
 		$(".msg-modal").show();
 	});
 	$(document).on("click","#close-btn",function(){
 		$(".msg-modal").hide();
 	});
+	$(document).on("click",".alertBtn",function(){
+		alert("로그인 후 이용해주세요");
+	});
+
 </script>
 </body>
 </html>	

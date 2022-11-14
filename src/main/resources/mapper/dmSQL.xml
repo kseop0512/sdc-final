@@ -154,4 +154,11 @@
 		from direct_msg 
 		where receiver = #{adminId} and sender_category = 'P' order by 1
 	 </select>
+	 <!--  혜규 on 11/14 msg from Member to Partner -->
+	 <insert id="insertPartnerDm" parameterType="dm">
+	 	insert into direct_msg values(
+	 		'DM.NO-'||DM_SEQ.NEXTVAL, #{sender},'M',#{receiver},#{dmContent},to_char(sysdate,'yy/mm/dd'),
+	 		0, 1, null
+	 	)
+	 </insert>
 </mapper>

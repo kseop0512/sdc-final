@@ -173,4 +173,22 @@ public class DirectMessageController {
 		ArrayList<DirectMessage> list = service.getPartnerDmList(map);
 		return new Gson().toJson(list);
 	}
+	
+	// 혜규 on 11/14
+	@RequestMapping(value="/insertPartnerDm.do")
+	public String insertPartnerDm(DirectMessage dm, String tBoardNo, Model model) {
+		int result = service.insertPartnerDm(dm);
+		if(result>0) {
+			model.addAttribute("title","문의하기 완료");
+			model.addAttribute("msg","문의하기 메시지가 전달되었습니다.");
+			model.addAttribute("icon","success");
+		}else {
+			model.addAttribute("title","문의하기 실패 ㅠㅠ");
+			model.addAttribute("msg","다시 시도해보세요!");
+			model.addAttribute("icon","error");
+		}
+		model.addAttribute("redirect:/oneTrainer.do?tBoardNo="+tBoardNo);
+		return "common/msg";
+	}
+	// end 혜규 on 11/14
 }

@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	// 오늘 yyyy-MM-dd
 	const todayYmd = new Date().toISOString().substring(0, 10)
 	let disabledDates = []
-
+	
 	// 비활성화할 날짜 목록 로드
 	$.ajax({
 		url: "/disabled-dates.do",
@@ -188,21 +188,21 @@ document.addEventListener('DOMContentLoaded', function () {
                   }
                 }
               }
+              $(".showTime").empty();
+              $(".available_time").removeClass("clicked_time");
+              $(".unAvailable_time").removeClass("clicked_time");
+              timeArr.length=0;
+			  jspArr.length=0;
+			  $("#totalFee").text(0);
             }
-            
           });
     
           //end 시간조회하기
-          
         },
       });
       calendar.render();
-      
 		}
-		
 	});
-
-
 });
 
 // 시간 출력

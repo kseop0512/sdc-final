@@ -108,6 +108,10 @@ public class DirectMessageDao {
 		List list = sqlSession.selectList("dm.selectPartnerDmList",map);
 		return (ArrayList<DirectMessage>) list;
 	}
+	public int insertPartnerDm(DirectMessage dm) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("dm.insertPartnerDm",dm);
+	}
 	
 
 
