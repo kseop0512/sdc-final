@@ -12,7 +12,7 @@ public class ReviewDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	//후기평점 조회
+	//예약목록의 후기평점 조회
 	public int selectReviewRate(String bookingNo) {
 		return sqlSession.selectOne("review.selectReviewRate",bookingNo);
 	}
@@ -21,15 +21,22 @@ public class ReviewDao {
 	public int insertReview(Review r) {
 		return sqlSession.insert("review.insertReview",r);
 	}
-	
 	//후기작성 후 예약상태변경
 	public int updateReviewState(Review r) {
 		return sqlSession.update("booking.updateReviewState",r);
 	}
-	
 	//후기작성 후 파트너포인트 +30
 	public int updatePartnerPoint(Partner p) {
 		return sqlSession.update("review.updatePartnerPoint",p);
+	}
+	
+	//작성한 후기 상세조회
+	public Review selectOneReview(String bookingNo) {
+		return sqlSession.selectOne("review.selectOneReview",bookingNo);
+	}
+	//작성한 후기 수정
+	public int updateReview(Review r) {
+		return sqlSession.update("review.updateReview",r);
 	}
 	
 }

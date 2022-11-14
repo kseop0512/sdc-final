@@ -21,12 +21,11 @@ public class ReviewService {
 	@Transactional
 	public int writeReview(Review r) {
 		int result = 0;
-		int updateResult = 0;
-		//입력정보로 이용후기 생성
+		//입력정보 r로 이용후기 생성
 		int insertResult = dao.insertReview(r);
 		if(insertResult>0) {
-			//후기 작성여부 1로 수정
-			updateResult = dao.updateReviewState(r);
+			//예약목록 후기 작성상태 1로 수정
+			int updateResult = dao.updateReviewState(r);
 			if(updateResult>0) {
 				//후기 작성 후 파트너포인트 +30
 				Partner p = new Partner();
@@ -36,6 +35,15 @@ public class ReviewService {
 			}
 		}
 		return result;
+	}
+
+	public Review selectOneReview(String bookingNo) {
+		return dao.selectOneReview(bookingNo);
+	}
+	
+	@Transactional
+	public int updateReview(Review r) {
+		return dao.updateReview(r);
 	}
 
 }
