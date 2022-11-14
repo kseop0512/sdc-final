@@ -13,7 +13,7 @@
         <title>똑독캣 마이페이지 - 관리자용</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link rel="stylesheet" href="/resources/css/admin/style-admin.css">
-        <link rel="stylesheet" href="/resources/css/admin/partnerGradeList.css">
+        <link rel="stylesheet" href="/resources/css/admin/partnerList.css">
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
 </head>
@@ -72,25 +72,21 @@
                                     
                                 </nav>
                             </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+      						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                	신고내역
+                                	예약관리
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="/reviewReportList.do" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        	리뷰신고
+                                    <a class="nav-link collapsed" href="/reservationList.do" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        	방문예약
                                     </a>
-                                    <a class="nav-link collapsed" href="/qnaReportList.do" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Q&A신고
+                                    <a class="nav-link collapsed" href="/trainerBooking.do" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        	위탁/훈련
                                     </a>
                                 </nav>
                             </div>
-                            <a class="nav-link" href="/reservationList.do">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                	예약내역
-                            </a>
                             <a class="nav-link" href="/adminDmMessage.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 1:1문의내역
@@ -112,7 +108,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">파트너관리</h1>
+                        <h1 class="mt-4">예약관리</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">관리자용</li>
                         </ol>
@@ -120,23 +116,23 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                               	 파트너등급
+                               	 방문예약
                             </div>
                             <div class="card-body">
                                 <div class="card mb-4">
                                     <div class="card-body">
                                         <p class="mb-0">
-                                           	<span>파트너</span>
-                                <code>[<code id="partnerCount"></code>]</code>명 
+                                           	<span>방문 예약</span>
+                                <code>[<code id="partnerCount"></code>]</code>건 
                                         </p>
                                         <div id="nameIdSerarch-Box" style="float: right;">
-                                            <form action="/getPartner.do" method="get">
+                                            <form action="/bangMoon.do" method="get">
                                                 <select name="type">
-                                                    <option value="name">이름</option>
                                                     <option value="id">아이디</option>
+                                                    <option value="BOOKEDDATE">예약일</option>
                                                 </select>
                                                     <input class="input-form2" type="text" placeholder="입력하세요" style="width: 500px;" name="keyword">
-                                                    <button class="bc22" type="submit">검색</button>
+                                                    <button type="submit" class="bc22" >검색</button>
                                             </form>
                                         </div>
                                     </div>
@@ -145,14 +141,14 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>이름</th>
                                             <th>아이디</th>
-                                            <th>전화번호</th>
-                                            <th>가입일</th>
-                                            <th>테스트점수</th>
+                                            <th>예약일</th>
+                                            <th>시작일</th>
+                                            <th>예약상태</th>
+                                            <th></th>
                                             <th>자격증</th>
                                             <th>등급</th>
-                                            <th>포인트</th>
+                                            <th>관리</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -165,7 +161,7 @@
                                             <th>테스트점수</th>
                                             <th>자격증</th>
                                             <th>등급</th>
-                                            <th>포인트</th>
+                                            <th>관리</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -180,21 +176,21 @@
                                             <td><div style="overflow: hidden; width: 400px; text-overflow: ellipsis; white-space: nowrap;">${p.license }</div></td>
                                             <td>
 										<c:choose>
-											<c:when test="${p.PGrade eq 'C'}">
-												정파트너
-											</c:when>
-											<c:when test="${p.PGrade eq 'B'}">
-												실버파트너
-											</c:when>
-											<c:when test="${p.PGrade eq 'A'}">
-												골드파트너
+											<c:when test="${p.PGrade eq 'N'}">
+												준파트너
 											</c:when>
 										</c:choose>
 										</td>
 											<td>
-            									${p.PPoint }
+            									<select name="gradeType">
+                                                    <option value="C">승인</option>
+                                                    <option value="Z">거절</option>
+                                                </select>
                                             </td>
-                                   
+                                            <td>
+                                            	<input type="hidden" name="pNo"><!-- '${pNo}','${gradeType}' -->
+                                            	<button type="submit" onclick="partnerGrade(this);">확인</button>
+                                            </td>
                                         </tr>
                                        </c:forEach>
                                     </tbody>
@@ -316,6 +312,6 @@
         <script src="/resources/assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
          <script src="/resources/js/datatables-simple-demo.js"></script>
-         <script src="/resources/js/admin/partnerGradeList.js"></script>
+         <script src="/resources/js/admin/partnerList.js"></script>
     </body>
 </html>

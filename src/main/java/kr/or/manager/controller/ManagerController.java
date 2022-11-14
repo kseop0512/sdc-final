@@ -37,8 +37,7 @@ import common.FileRename;
 import com.google.gson.Gson;
 
 import kr.or.mail.controller.MailSender;
-
-
+import kr.or.booking.model.vo.Booking;
 import kr.or.dm.model.vo.DirectMessage;
 import kr.or.manager.model.service.ManagerService;
 import kr.or.manager.model.vo.FileVOG;
@@ -227,9 +226,6 @@ public class ManagerController {
 
 	}
 	
-
-
-
 	//공지사항 검색
 	@ResponseBody
 	@RequestMapping(value="searchQnaAjax.do",produces = "application/json;charset=utf-8")
@@ -329,6 +325,47 @@ public class ManagerController {
 			System.out.println("실패");
 		}
 		return "common/msg";
+	}
+	
+	//관리자 - 예약관리(방문)
+//		@RequestMapping(value="/bangMoon.do")
+//		public String bangMoon(String type, String keyword, Model model) {
+//			ArrayList<Booking> list = service.bangMoonList(type,keyword);
+//			model.addAttribute("list",list);
+//			return "manager/bangMoonList";
+//
+//		}
+//	관리자 - 위탁/훈련예약페이지
+	@RequestMapping(value="/trainerBooking.do")
+	public String trainerBooking(Model model) {
+		ArrayList<Booking> list = service.trainerBooking();
+		model.addAttribute("list",list);
+		return "manager/trainerBooking";
+	}
+	
+	//관리자 - 위탁/훈련 예약 취소
+	@RequestMapping(value="/bookingFail.do")
+	public String bookingFail(String bookingNo,Model model) {
+		int result = service.bookingFail(bookingNo);
+		if(result>0) {
+			model.addAttribute("title","파트너처리 완료");
+			model.addAttribute("msg","처리 되었습니다.");
+			model.addAttribute("icon","success");
+		}else {
+		     model.addAttribute("title","파트너 처리 실패");
+	         model.addAttribute("msg","정보수정 중 오류가 발생했습니다.");
+	         model.addAttribute("icon","error");
+	}
+		model.addAttribute("loc","/trainerBooking.do");
+		return "common/msg";		
+ }
+	
+	// 예약 상세
+	@ResponseBody
+	@RequestMapping(value="/bookingDetail.do",produces="application/json;charset=utf-8")
+	public String bookingDetail(String bookingNo) {
+		Booking b = service.bookingDetail(bookingNo);
+		return new Gson().toJson(b);
 	}
 	
 }

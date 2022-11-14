@@ -5,6 +5,11 @@ $(function(){
 	getdmMaxCount();
 	getdmRead();
 	getcheckRead();
+	
+		$("#tabAllMember").css("font-weight","900");
+		$("#tabMember").css("font-weight","normal");
+		$("#tabPartner").css("font-weight", "normal");
+
 });
 
 
@@ -20,6 +25,7 @@ $(function(){
 		}
 	});
 }
+
 
 //답변대기 총 카운트
 function getdmRead(){
@@ -146,7 +152,7 @@ function getReceiveDm(){
 		$.ajax({
 			url:"/detailMember.do",
 			data : {sender : sender, dmNo:dmNo},
-			dataType: 'json',
+		
 			success : function(data) {
 			console.log("정보"+data);
 			
@@ -232,6 +238,7 @@ function dmSend(){
 	});
 }
 
+//검색
 function searchDm(){
 	const keyword = $("[name=keyword]").val();
 	const dmType = $("[name=dmType]").val(); //0,1,2,중에 선택한 값이 들어감
@@ -323,19 +330,27 @@ function searchDm(){
 	}
 
 //탭 클릭에 따라 받은메시지, 보낸메시지 표시
-$("#tab-member").on("click",function(){
+$("#tabMember").on("click",function(){
 	//이용자 리스트 출력
 	getMemberDm();
+	$(this).css("font-weight","900");
+	$("#tabAllMember").css("font-weight", "normal");
+	$("#tabPartner").css("font-weight", "normal");
 });
-$("#tab-partner").on("click",function(){
+$("#tabPartner").on("click",function(){
 	//파트너 리스트 출력 
 	getPartnerDm();
-	
+	$(this).css("font-weight","900");
+	$("#tabAllMember").css("font-weight", "normal");
+	$("#tabMember").css("font-weight","normal");
 });
-$("#tab-allMember").on("click",function(){
+
+$("#tabAllMember").on("click",function(){
 	//파트너 리스트 출력 
 	getReceiveDm();
-	
+	$(this).css("font-weight","900");
+	$("#tabMember").css("font-weight","normal");
+	$("#tabPartner").css("font-weight", "normal");
 });
 
 //이용자만 

@@ -24,7 +24,7 @@ public class DirectMessageService {
 	}
 	
 	//회원 한명 조회, 답변조회
-	public HashMap<String, Object> selectOneMember(String sender,int dmNo) {
+	public HashMap<String, Object> selectOneMember(String sender,String dmNo) {
 		Member m = dao.selectOneMember(sender);
 		Partner p = dao.selectOnepMember(sender);
 		DirectMessage dm = dao.selectReply(dmNo);
@@ -73,7 +73,7 @@ public class DirectMessageService {
 
 	//메시지 상세조회 시 읽음 상태로 변경
 	@Transactional
-	public int updateMemberReadCheck(int dmNo) {
+	public int updateMemberReadCheck(String dmNo) {
 		return dao.updateMemberReadCheck(dmNo);
 	}
 	
@@ -84,7 +84,7 @@ public class DirectMessageService {
 	
 	//선택 메시지 삭제
 	@Transactional
-	public int deleteDm(int dmNo) {
+	public int deleteDm(String dmNo) {
 		return dao.deleteDm(dmNo);
 	}
 
@@ -105,6 +105,7 @@ public class DirectMessageService {
 		// TODO Auto-generated method stub
 		return dao.selectpartnerDmList(map);
 	}
-	
+
+
 	
 }
