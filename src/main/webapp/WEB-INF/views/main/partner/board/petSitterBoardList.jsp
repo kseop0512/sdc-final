@@ -162,9 +162,12 @@
                             <div class="col-auto d-grid mt-5">
                                 <button type="button" class="btn btn-lg btn-basic" onclick="searchBoardList()">펫시터 찾기</button>
                             </div>
-                            <div class="side-btn-group">
-                                <a href="/petSitterFrm.do" class="btn btn-dark">펫시터 등록</a>
-                            </div>
+                            <c:if test="${not empty sessionScope.p and sessionScope.p.PGrade ne 'N' }">
+                                <div class="side-btn-group">
+                                    <a href="/petSitterFrm.do" class="btn btn-dark">펫시터 등록</a>
+                                </div>
+                            </c:if>
+
                         </div><!-- End sidebar -->
 
                     </div>
@@ -307,16 +310,9 @@
                 }
 
                 sidebar.updateSticky();
-
-
             }
-
-
         })
-
-
     }
-
 
     $(window).scroll(function() {
         const position = $(window).scrollTop();
@@ -372,8 +368,8 @@
 
     function viewDetailPage(boardNo) {
 
-        const startDate = $("#startDate").val() != "" ? "&startDate=" + $("#startDate").val() : "";
-        const endDate = $("#endDate").val() != "" ? "&endDate=" + $("#endDate").val() : "";
+        const startDate = $("#paramForm [name=startDate]").val() != "" ? "&startDate=" + $("#paramForm [name=startDate]").val() : "";
+        const endDate = $("#paramForm [name=endDate]").val() != "" ? "&endDate=" + $("#paramForm [name=endDate]").val() : "";
 
         window.open("/petSitterBoardDetail.do?petsitterBoardNo=" + boardNo + startDate + endDate);
     }

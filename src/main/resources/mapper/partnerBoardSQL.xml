@@ -95,6 +95,7 @@
 				p.P_GENDER,
 				p.PROFILE_PATH,
 				p.LICENSE,
+				p.APPROVE_DATE,
 				ppb.PETSITTER_BOARD_TITLE,
 				ppb.PETSITTER_ABOUT_ME,
 				ppb.LAT,
@@ -124,6 +125,7 @@
 		<result column="p_gender" property="pGender"/>
 		<result column="profile_path" property="profilePath"/>
 		<result column="license" property="license"/>
+		<result column="approve_date" property="approveDate"/>
 		<result column="petsitter_board_title" property="petsitterBoardTitle"/>
 		<result column="petsitter_about_me" property="petsitterAboutMe"/>
 		<result column="lat" property="lat"/>

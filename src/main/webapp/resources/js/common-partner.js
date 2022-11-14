@@ -525,6 +525,7 @@ sdcJs.initResvCalendar = function (calendarEl) {
 
             },
             onSelect: function (date, inst) {
+
                 const mon = inst.selectedMonth,
                     year = inst.selectedYear,
                     drawMonth = inst.drawMonth;
@@ -548,6 +549,14 @@ sdcJs.initResvCalendar = function (calendarEl) {
                 }
 
                 clickCnt++;
+
+                let setMaxDate;
+                if(mnDate != undefined && mnDate != undefined && mxDate != "" && mxDate != "") {
+                    setMaxDate = new Date(calendarEl.datepicker('option', 'maxDate'));
+                } else {
+                    setMaxDate = "+2M";
+                }
+
                 if (clickCnt > 1) {
 
                     chkOutDate = date;
@@ -570,12 +579,7 @@ sdcJs.initResvCalendar = function (calendarEl) {
                     // var startDate = new Date(); var endDate = new Date(startDate.getFullYear(),
                     // startDate.getMonth() + 12, 0);
                     if (daysDiff > 0) {
-                        let setMaxDate;
-                        if(sDate != undefined && eDate != undefined && sDate != "" && eDate != "") {
-                            setMaxDate = new Date(calendarEl.datepicker('option', 'maxDate'));
-                        } else {
-                            setMaxDate = "+2M";
-                        }
+
                         calendarEl.datepicker('setDate', chkOutDate);
 
                         calendarEl.datepicker(
@@ -589,7 +593,7 @@ sdcJs.initResvCalendar = function (calendarEl) {
                             setMaxDate
                         );
                     }
-
+                    $("#startDate").change();
                 } else {
                     chkInDate = date;
 
@@ -604,33 +608,35 @@ sdcJs.initResvCalendar = function (calendarEl) {
                         _cid.setDate(_cid.getDate() + 30);
                     }
                     calendarEl.datepicker('setDate', chkInDate);
-                    // calendarEl.datepicker('option' , 'minDate', 0);
                     calendarEl.datepicker(
                         'option',
                         'minDate',
                         calendarEl.datepicker('option', 'minDate')
                     );
-                    //if (_cid > endDate) {
+                    // if (_cid > endDate) {
+                        //체크아웃초기화
+                        sdcJs
+                            .calendarMgr
+                            ._setChkOutDate('');
                         calendarEl.datepicker(
                             'option',
                             'maxDate',
-                            calendarEl.datepicker('option', 'maxDate')
-                            //_cid
+                            setMaxDate
                         );
                     /*} else {
-                        calendarEl.datepicker('option', 'maxDate', _cid);
+                        //calendarEl.datepicker('option', 'maxDate', _cid);
+                        calendarEl.datepicker('option', 'maxDate', setMaxDate);
                     }*/
                 }
                 if (drawMonth == new Date(dateSplit[0], dateSplit[1]-1, dateSplit[2]).getMonth()) {
-
                     sdcJs.gotoDate(calendarEl, mon, year);
                 } else {
-
                     sdcJs.gotoDate(calendarEl, mon - 1, year);
                 }
                 if (chkInDate != '' && chkOutDate != '') {
                     resved = true;
                 }
+
             }
         };
 
@@ -991,7 +997,7 @@ const dUtils = {
      */
     getDateToDay: function (dateStr) {
         const date = new Date(dateStr.replace(/\./gi, "-"));
-        const week = [ 'S', 'M', 'T', 'W', 'T', 'F', 'T']
+        const week = [ '일', '월', '화', '수', '목', '금', '토']
 
         const dayOfWeek = week[date.getDay()];
         return dayOfWeek;

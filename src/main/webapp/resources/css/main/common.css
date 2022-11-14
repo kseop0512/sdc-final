@@ -81,3 +81,12 @@
     border-color:var(--sdc-main-color);
     color:#fff;
 }
+.btn-check + .btn.payment-toss{
+    border:1px solid #3182f6;
+    color:#3182f6;
+}
+.btn-check:checked + .btn.payment-toss {
+    background-color:#3182f6;
+    border: 1px solid #3182f6;
+    color: #fff;
+}

@@ -49,7 +49,7 @@ public class PartnerBoardService {
             param.put("end", String.valueOf(end));
             param.put("start", String.valueOf(start));
         }
-        System.out.println(param);
+
         List<Map<String, Object>> list = dao.selectPetSitterBoardList(param);
 
         return list;
