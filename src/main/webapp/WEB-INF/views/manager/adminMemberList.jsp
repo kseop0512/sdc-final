@@ -62,25 +62,24 @@
                                     </div>
                                 </nav>
                             </div>
+
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                	신고내역
+                                	예약관리
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="/reviewReportList.do" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        	리뷰신고
+                                    <a class="nav-link " href="/bangMoon.do" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        	방문예약
                                     </a>
-                                    <a class="nav-link collapsed" href="/qnaReportList.do" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Q&A신고
+                                    <a class="nav-link collapsed " href="/trainerBooking.do" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        	위탁/훈련
                                     </a>
                                 </nav>
                             </div>
-                            <a class="nav-link" href="/reservationList.do">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                	예약내역
-                            </a>
+                            
+                            
                             <a class="nav-link" href="/adminDmMessage.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 1:1문의내역

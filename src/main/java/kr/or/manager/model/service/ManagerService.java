@@ -21,6 +21,9 @@ import org.springframework.stereotype.Service;
 
 
 import kr.or.mail.controller.MailSender;
+
+import kr.or.booking.model.vo.Booking;
+
 import kr.or.dm.model.vo.DirectMessage;
 import kr.or.manager.model.dao.ManagerDao;
 import kr.or.manager.model.vo.FileVOG;
@@ -307,5 +310,33 @@ public class ManagerService {
 		System.out.println(result);
 		return result;
 	}
+
+
+	public ArrayList<NoticeG> searchQnanotice(NoticeG ng) {
+		return dao.searchQnanotice(ng);
+	}
+// 방문 예약 
+//	public ArrayList<Booking> bangMoonList(String type, String keyword) {
+//		HashMap<String, Object> map = new HashMap<String, Object>();
+//		map.put("type", type);
+//		map.put("keyword", keyword);
+//		return dao.bangMoonList(map);
+//	}
+//	
+//관리자 - 위탁/훈련 예약페이지 
+	public ArrayList<Booking> trainerBooking() {
+		return dao.trainerBooking();
+	}
+//관리자 - 위탁/훈련 예약취소
+	public int bookingFail(String bookingNo) {
+		int result = dao.bookingFail(bookingNo);
+		return result;
+	}
+//예약상세
+	public Booking bookingDetail(String bookingNo) {
+		return dao.bookingDetail(bookingNo);
+	}
+
+
 
 }

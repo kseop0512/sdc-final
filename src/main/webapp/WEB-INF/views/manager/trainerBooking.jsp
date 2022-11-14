@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,7 @@
         <title>똑독캣 마이페이지 - 관리자용</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link rel="stylesheet" href="/resources/css/admin/style-admin.css">
-        <link rel="stylesheet" href="/resources/css/admin/partnerGradeList.css">
+        <link rel="stylesheet" href="/resources/css/admin/trainerBooking.css">
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
 </head>
@@ -23,9 +24,16 @@
             <a class="navbar-brand ps-3" href="/adminIndex.do">똑독캣 관리자페이지</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
             <!-- Navbar-->
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4" style="margin-left: auto !important;">
-                <li class="nav-item dropdown" style="position: relative;display: flex;flex-wrap: wrap;align-items: stretch;width: 100%;">
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#!">Logout</a></li>
@@ -65,31 +73,27 @@
                                     
                                 </nav>
                             </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                 			<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                	신고내역
+                                	예약관리
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="/reviewReportList.do" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        	리뷰신고
+                                    <a class="nav-link collapsed" href="/bangMoon.do" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        	방문예약
                                     </a>
-                                    <a class="nav-link collapsed" href="/qnaReportList.do" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Q&A신고
+                                    <a class="nav-link collapsed" href="/trainerBooking.do" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        	위탁/훈련
                                     </a>
                                 </nav>
                             </div>
-                            <a class="nav-link" href="/reservationList.do">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                	예약내역
-                            </a>
                             <a class="nav-link" href="/adminDmMessage.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 1:1문의내역
                             </a>
                             <div class="sb-sidenav-menu-heading">게시판</div>
-                            <a class="nav-link" href="/adminNotice.do?reqPage=1">
+                            <a class="nav-link" href="/adminNotice.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 	공지사항
                             </a>
@@ -105,7 +109,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">파트너관리</h1>
+                        <h1 class="mt-4">예약관리</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">관리자용</li>
                         </ol>
@@ -113,23 +117,23 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                               	 파트너등급
+                               	 방문예약
                             </div>
                             <div class="card-body">
                                 <div class="card mb-4">
                                     <div class="card-body">
                                         <p class="mb-0">
-                                           	<span>파트너</span>
-                                <code>[<code id="partnerCount"></code>]</code>명 
+                                           	<span>방문 예약</span>
+                                <code>[<code id="partnerCount"></code>]</code>건 
                                         </p>
                                         <div id="nameIdSerarch-Box" style="float: right;">
-                                            <form action="/getPartner.do" method="get">
+                                            <form action="/" method="get">
                                                 <select name="type">
-                                                    <option value="name">이름</option>
+                                                    <option value="bookingDate">예약일</option>
                                                     <option value="id">아이디</option>
                                                 </select>
                                                     <input class="input-form2" type="text" placeholder="입력하세요" style="width: 500px;" name="keyword">
-                                                    <button class="bc22" type="submit">검색</button>
+                                                    <button type="submit" class="bc22" >검색</button>
                                             </form>
                                         </div>
                                     </div>
@@ -138,56 +142,61 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>이름</th>
                                             <th>아이디</th>
                                             <th>전화번호</th>
-                                            <th>가입일</th>
-                                            <th>테스트점수</th>
-                                            <th>자격증</th>
-                                            <th>등급</th>
-                                            <th>포인트</th>
+                                            <th>예약일</th>
+                                            <th>훈련신청일</th>
+                                            <th>요금</th>
+                                            <th>예약상태</th>
+                                            <th>관리</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>이름</th>
                                             <th>아이디</th>
                                             <th>전화번호</th>
-                                            <th>가입일</th>
-                                            <th>테스트점수</th>
-                                            <th>자격증</th>
-                                            <th>등급</th>
-                                            <th>포인트</th>
+                                            <th>예약일</th>
+                                            <th>훈련신청일</th>
+                                            <th>요금</th>                                            
+                                            <th>예약상태</th>
+                                            <th>관리</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                    <c:forEach items="${list }" var="p">
+                                    <c:forEach items="${list }" var="b">
                                         <tr>
-                                            <td>${p.PNo }</td>
-                                            <td style="font-weight: 900; cursor: pointer;"><div onclick="modal(this);">${p.PName }</div></td>
-                                            <td>${p.PId }</td>
-                                            <td>${p.PPhone }</td>
-                                            <td>${p.applyDate }</td>
-                                            <td>점수</td>
-                                            <td><div style="overflow: hidden; width: 400px; text-overflow: ellipsis; white-space: nowrap;">${p.license }</div></td>
+                                            <td>${b.bookingNo }</td>
+                                            <td style="font-weight: 900; cursor: pointer;">
+                                            	<div onclick="modal(this);">${b.memberId }</div>
+                                            </td>
+                                            <td>${b.bookingPhone }</td>
+                                            <td>${b.bookingDate }</td>
+                                            <td>${b.startDate }</td>
+                                            <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${b.price }"/></td>
+<%--                                             <td><div style="overflow: hidden; width: 400px; text-overflow: ellipsis; white-space: nowrap;">${b.cancleComment }</div></td> --%>
                                             <td>
 										<c:choose>
-											<c:when test="${p.PGrade eq 'C'}">
-												정파트너
+											<c:when test="${b.partnerAccept eq 'C'}">
+												취소신청
 											</c:when>
-											<c:when test="${p.PGrade eq 'B'}">
-												실버파트너
-											</c:when>
-											<c:when test="${p.PGrade eq 'A'}">
-												골드파트너
+											<c:when test="${b.partnerAccept eq 'N'}">
+												취소완료
 											</c:when>
 										</c:choose>
 										</td>
-											<td>
-            									${p.PPoint }
+<!-- 											<td> -->
+<!--             									<select name="acceptType"> -->
+<!--                                                     <option value="N">승인</option> -->
+<!--                                                 </select> -->
+<!--                                             </td> -->
+													<td>
+											<c:choose>
+												<c:when test="${b.partnerAccept eq 'C'}">
+                                            		<button><a href="/bookingFail.do?bookingNo=${b.bookingNo }">확인</a></button>												
+												</c:when>
+											</c:choose>
                                             </td>
-                                   
                                         </tr>
                                        </c:forEach>
                                     </tbody>
@@ -205,69 +214,61 @@
                                         <table class="table table-bordered" id="oneNotice">
                                             <thead>
                                                 <tr>
-                                                    <td scope="col" rowspan="7" style="width: 230px; height: 200px;">
-                                                    	<span id="detailProfile"><img src="" style="width: 230px; height: 200px;"></span>
+                                                    <th scope="col" style="text-align: center;">예약번호</th>
+                                                    <td scope="col"  colspan="3" style="text-align: center;">
+                                                    	<span id="detailNo"></span>
                                                     </td>
+                                                </tr>
+                                                 <tr>
                                                     <th scope="col" style="text-align: center;">아이디</th>
-                                                    <td scope="col"  style="text-align: center;">
+                                                    <td scope="col" colspan="3" style="text-align: center;">
                                                     	<span id="detailId"></span>
                                                     </td>
                                                 </tr>
                                                  <tr>
-                                                    <th scope="col" style="text-align: center;">이름</th>
-                                                    <td scope="col" style="text-align: center;">
-                                                    	<span id="detailName"></span>
+                                                    <th scope="col" style="text-align: center;">파트너번호</th>
+                                                    <td scope="col"  colspan="3" style="text-align: center;">
+                                                    	<span id="detailPartnerNo"></span>
                                                     </td>
                                                 </tr>
                                                  <tr>
-                                                    <th scope="col" style="text-align: center;">생년월일</th>
+                                                    <th scope="col" style="text-align: center;">펫번호</th>
+                                                    <td scope="col"  colspan="3" style="text-align: center;">
+                                                    	<span id="detailPetNo"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="col" style="text-align: center;">예약일</th>
+                                                    <td scope="col"   colspan="3" style="text-align: center;">
+                                                    	<span id="detailBookingDate"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="col" style="text-align: center;">시작일</th>
                                                     <td scope="col"  style="text-align: center;">
-                                                    	<span id="detailHbd"></span>
+                                                    	<span id="detailStart"></span>
                                                     </td>
-                                                </tr>
-                                                 <tr>
-                                                    <th scope="col" style="text-align: center;">주소</th>
-                                                    <td scope="col" style="text-align: center;">
-                                                    	<span id="detailAddr"></span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="col" style="text-align: center;">전화번호</th>
-                                                    <td scope="col" colspan="6" style="text-align: center;">
-                                                    	<span id="detailPhone"></span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="col" style="text-align: center;">성별</th>
-                                                    <td scope="col" colspan="6" style="text-align: center;">
-                                                    	<span id="detailG"></span>
-                                                    </td>
-                                                
-                                                </tr>
-                                                <tr>
-                                                    <th scope="col" style="text-align: center;">가입일</th>
-                                                    <td scope="col" colspan="6" style="text-align: center;">
-                                                    	<span id="detailApplydate" ></span>
+                                                    <th scope="col" style="text-align: center;">종료일</th>
+                                                    <td scope="col"  style="text-align: center;">
+                                                    	<span id="detailEnd"></span>
                                                     </td>
                                                 </tr>
                                             </thead>
                                             <tbody>
+            									<tr>
+            									 <th scope="col" style="text-align: center;">예약현황</th>
+                                                    <td scope="col"  style="text-align: center;">
+                                                    	<span id="detailPartnerAccpet" ></span>
+                                                    </td>
+                                                    <th scope="col" style="text-align: center;">금액</th>
+                                                    <td scope="col"  style="text-align: center;">
+                                                    	<span id="detailPrice" ></span>
+                                                    </td>
+                                                </tr>
                                                 <tr>
-                                                    <th style="line-height: 230px; text-align: center;">자격증</th>
-                                                    <td colspan="5">
-                                                    	<span id="detailLicence"></span>
-                                                    </td>
-                                                </tr>
-                                                  <tr>
-                                                    <th style="line-height: 230px; text-align: center;">근무경력</th>
-                                                    <td colspan="5">
-                                                    	<span id="detailWork"></span>
-                                                    </td>
-                                                </tr>
-                                                  <tr>
-                                                    <th style="line-height: 230px; text-align: center;">지원동기</th>
-                                                    <td colspan="5">
-                                                    	<span id="detailMotive"></span>
+                                                    <th scope="col" style="text-align: center; line-height: 200px;">취소신청사유</th>
+                                                    <td scope="col"  colspan="3"  style="height: 200px;">
+                                                    	<span id="detailCancelComment" ></span>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -309,6 +310,6 @@
         <script src="/resources/assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
          <script src="/resources/js/datatables-simple-demo.js"></script>
-         <script src="/resources/js/admin/partnerGradeList.js"></script>
+         <script src="/resources/js/admin/trainerBooking.js"></script>
     </body>
 </html>

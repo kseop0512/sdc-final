@@ -106,6 +106,7 @@ public class DirectMessageService {
 		return dao.selectpartnerDmList(map);
 	}
 
+
 	public int insertPartnerDm(DirectMessage dm) {
 		// TODO Auto-generated method stub
 		return dao.insertPartnerDm(dm);

@@ -143,3 +143,19 @@ tbody>tr>td:nth-child(7){
 #tab-partner{
 	float: left;
 }
+
+/* 전체/ 이용자 / 파트너  */
+#membertab{
+    width: 190px;
+    position: absolute;
+    right: 200px;
+    margin-top: 7px;
+    cursor: pointer;
+}
+
+#tabAllMember{
+    float: left;
+}
+#tabMember{
+    float: left;
+}

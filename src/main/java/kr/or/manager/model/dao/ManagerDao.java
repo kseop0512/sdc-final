@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.booking.model.vo.Booking;
 import kr.or.dm.model.vo.DirectMessage;
 import kr.or.manager.model.vo.FileVOG;
 import kr.or.manager.model.vo.Manager;
@@ -116,10 +117,12 @@ public class ManagerDao {
 		return (ArrayList<Partner>)list;
 	}
 //파트너 - 파트너 승인
+	@Transactional
 	public int upgradeOk(HashMap<String, Object> map) {
 		return sqlSession.update("manager.upgradeOk",map);
 	}
 //파트너 거절 삭제 
+	@Transactional
 	public int deletePartner(HashMap<String, Object> map) {
 		return sqlSession.delete("manager.deletePartner",map);
 	}
@@ -142,6 +145,7 @@ public class ManagerDao {
 	public int gradePartner() {
 		return sqlSession.selectOne("manager.gradePartner");
 	}
+
 	
 	/* 검색기능 보류
 	public ArrayList<NoticeG> searchNoticeG(HashMap<String, Object> map) {
@@ -149,4 +153,27 @@ public class ManagerDao {
 		return (ArrayList<NoticeG>)list;
 	}
 	*/
+
+//방문예약
+//	public ArrayList<Booking> bangMoonList(HashMap<String, Object> map) {
+//		List list = sqlSession.selectList("manager.bangMoon",map);
+//		return (ArrayList<Booking>)list;
+//	}
+// 위탁/훈련 예약페이지 
+	public ArrayList<Booking> trainerBooking() {
+		List list = sqlSession.selectList("manager.trainerBooking");
+		return (ArrayList<Booking>)list;
+	}
+// 관리자 - 위탁/훈련 예약
+	@Transactional
+	public int bookingFail(String bookingNo) {
+		return sqlSession.update("manager.bookingFail",bookingNo);
+	}
+// 예약 상세
+	public Booking bookingDetail(String bookingNo) {
+		return  sqlSession.selectOne("manager.bookingDetail",bookingNo);
+	}
+
+
+
 }

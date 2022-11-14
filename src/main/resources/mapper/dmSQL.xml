@@ -23,12 +23,13 @@
 	 
 	 <!-- 관리자 답변대기 카운트 -->
 	 <select id="dmReadCount" parameterType="g" resultType="int">
-	 	select count(*) from direct_msg where read_check=0 and receiver =#{adminId}
+	 	select count(*) from direct_msg where receiver =#{adminId} and read_check=0
 	 </select>
 	 
 	 <!-- 관리자 답변완료 카운트 -->
+<!-- 	 	select count(*) from direct_msg where read_check=1 and receiver =#{adminId} -->
 	 <select id="dmCheckRead" resultType="int">
-	 	select count(*) from direct_msg where read_check=1 and receiver =#{adminId}
+		SELECT COUNT(reply) as cnt FROM direct_msg
 	 </select>
 	 
 	 <!-- 관리자 메시지 읽음 처리 -->
@@ -75,7 +76,7 @@
 	 </select>
 	 
 	 <!-- 유저 받은메시지 읽음 체크 -->
-	 <update id="updateMemberReadCheck" parameterType="_int">
+	 <update id="updateMemberReadCheck" parameterType="string">
 	 	update direct_msg
 	 	set read_check = 1
 	 	where dm_no = #{_parameter}
@@ -91,12 +92,12 @@
 	 </select>
 	 
 	 <!-- 메시지 삭제 -->
-	 <delete id="deleteDm" parameterType="_int">
+	 <delete id="deleteDm" parameterType="string">
 	 	delete from direct_msg where dm_no=#{_parameter}
 	 </delete>
 
 	 	 <!-- 관리자 답변보여주기 -->
-	 <select id="showDmContent" parameterType="int" resultType="dm">
+	 <select id="showDmContent" parameterType="string" resultType="dm">
 	 	select
 			dm_no as dmNo,
 			sender,

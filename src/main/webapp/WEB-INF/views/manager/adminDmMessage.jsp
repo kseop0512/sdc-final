@@ -141,13 +141,12 @@
                                         </div>
                                     </div>
                                 </div>
-								 <!-- 탭 -->
-					              <div id="tab-wrap">
-					              	<div id="tab-allMember">전체</div>
-					                <div id="tab-member" class="active-tap">이용자</div>
-					                <div id="tab-partner">파트너</div>
-					              </div>
                                 <table id="datatablesSimple">
+								 <!-- 탭 -->
+                      			<div id="membertab">
+                                    <div id="tabAllMember" >전체<span>/</span></div>
+                                    <div id="tabMember" class="active-tap">이용자<span>/</span></div>
+                                <div id="tabPartner">파트너</div>
                                     <thead>
                                         <tr>
                                             <th>번호</th>
@@ -247,6 +246,7 @@
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="/resources/js/datatables-simple-demo.js"></script>
         <script src="/resources/js/scripts.js"></script>
+        <script src="/resources/js/jquery-3.6.1.min.js"></script>
     <!--<script src="/resources/js/admin/dm_message.js"></script> -->
          <script src="/resources/js/admin/dm.js"></script>
     </body>

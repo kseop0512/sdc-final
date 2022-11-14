@@ -220,16 +220,16 @@
 		license,
 		p_grade as pGrade,
 		p_point as pPoint
-	from partner where p_grade!='N' 
+	from partner where p_grade!='N'
 	<choose>
 			<when test="type == null">
-				and p_id like '%'||#{keyword}||'%'
+				and p_id like '%'||#{keyword}||'%' ORDER by 1
 			</when>
 			<when test="type.equals('id')">
-				and p_id like '%'||#{keyword}||'%'
+				and p_id like '%'||#{keyword}||'%' ORDER by 1
 			</when>
 			<when test="type.equals('name')">
-				and p_name like '%'||#{keyword}||'%'
+				and p_name like '%'||#{keyword}||'%' ORDER by 1
 			</when>
 		</choose>
   </select>
@@ -271,6 +271,81 @@
 				where notice_g_content like '%'||#{keyword}||'%'
 			</when>
 	</choose>
-  </select>
+	</select>
 	-->
+
+  <!-- 
+  <select id="bangMoon" parameterType="map" resultType="b">
+  	 select
+			booking_no as bookingNo,
+			member_id as memberId,
+			p_no as pNo,
+			pet_no as petNo,
+			booked_date as bookingDate,
+			to_char(start_date,'yy/mm/dd') as startDate,
+			to_char(end_date,'yy/mm/dd') as endDate,
+			booking_time as bookingTime,
+			special_request as specialRequest,
+			review_state as reviewState,
+			partner_accept as partnerAccept,
+			category,
+			price
+		from booking_tbl where category='V' 
+  	<choose>
+			<when test="type == null">
+				and member_id like '%'||#{keyword}||'%'
+			</when>
+		</choose>
+
+  </select>
+
+	-->
+
+   <!-- 위탁/훈련 예약 -->
+	<select id="trainerBooking" resultType="b">
+  	 select
+			booking_no as bookingNo,
+			member_id as memberId,
+			p_no as pNo,
+			pet_no as petNo,
+			BOOKING_PHONE as bookingPhone,
+			booked_date as bookingDate,
+			to_char(start_date,'yy/mm/dd') as startDate,
+			to_char(end_date,'yy/mm/dd') as endDate,
+			booking_time as bookingTime,
+			special_request as specialRequest,
+			review_state as reviewState,
+			partner_accept as partnerAccept,
+			category,
+			cancle_comment as cancleComment,
+			price
+		from booking_tbl where category!='V' order by 1
+  </select>
+  <!-- 위탁/훈련 C-> N으로 업데이트 모에모에뀽 -->
+ 	<update id="bookingFail" parameterType="string">
+		update 
+			booking_tbl set  partner_accept='N' 
+		where booking_no=#{_parameter}
+	</update>
+	<select id="bookingDetail" parameterType="string" resultType="b">
+		select
+			booking_no as bookingNo,
+			member_id as memberId,
+			p_no as pNo,
+			pet_no as petNo,
+			BOOKING_PHONE as bookingPhone,
+			booked_date as bookingDate,
+			to_char(start_date,'yy/mm/dd') as startDate,
+			to_char(end_date,'yy/mm/dd') as endDate,
+			booking_time as bookingTime,
+			special_request as specialRequest,
+			review_state as reviewState,
+			partner_accept as partnerAccept,
+			category,
+			cancle_comment as cancleComment,
+			 price
+		from booking_tbl where booking_no=#{_parameter}
+	
+	</select>
+
 </mapper>
