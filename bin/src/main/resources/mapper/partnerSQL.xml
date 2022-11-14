@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="partner">
+	<select id="selectOnePartner" parameterType="p" resultType="p">
+		select
+			p_no as pNo,
+			category,
+			p_id as pId,
+			p_pw as pPw,
+			p_name as pName,
+			p_dob as pDob,
+			p_phone as pPhone,
+			p_gender as pGender,
+			p_email as pEmail,
+			p_addr as pAddr,
+			p_grade as pGrade,
+			p_point as pPoint,
+			profile_name as profileName,
+			profile_path as profilePath,
+			apply_motiv as applyMotiv,
+			apply_date as applyDate,
+			approve_date as approveDate,
+			license,
+			work_exp as workExp
+		from partner
+		where p_id = #{pId}
+		<if test="pPw != null">
+		and p_pw = #{pPw}
+		</if>
+		<if test="pAddr != null">
+		and p_addr=#{pAddr}
+		</if>
+	</select>
+	<update id="changePw" parameterType="p">
+		update partner set p_pw = #{pPw} where p_id = #{pId}
+	</update>
+	<insert id="insertPartner" parameterType="p">
+		insert into partner values(
+			'P-' || p_seq.nextval,
+			#{category},
+		    #{pId},
+			#{pPw},
+			#{pName},
+		    #{pDob},
+		    #{pPhone},
+		    #{pGender},
+		    #{pId},
+		    #{pAddr},
+		    'N',
+		    0,
+		    #{profileName},
+		    #{profilePath},
+			#{applyMotiv},
+		    sysdate,
+		    null,
+		    #{license},
+		    #{workExp}
+		)
+	</insert>
+
+	<update id="updateProfile" parameterType="p">
+		<choose>
+			<when test="profileName!=null">
+				update partner
+					set p_addr = #{pAddr}, p_phone = #{pPhone}, p_email = #{pEmail}, license = #{license}, work_exp = #{workExp},
+						profile_name = #{profileName}, profile_path = #{profilePath}
+				where p_no = #{pNo}
+			</when>
+			<when test="profileName == null">
+				update partner
+					set p_addr = #{pAddr}, p_phone = #{pPhone}, p_email = #{pEmail}, license = #{license}, work_exp = #{workExp}
+				where p_no = #{pNo}
+			</when>
+		</choose>
+	</update>
+	
+	<!-- 관리자P 파트너 회원수 -->
+	<select id="selectPartner" resultType="int">
+		select count(*) as cnt from partner
+	</select>
+	
+	<insert id="uploadTrainerBoard" parameterType="tb">
+		insert into trainer_board values 
+		('TBOARD-'||T_BOARD_SEQ.NEXTVAL,#{pNo},#{boardTitle},#{topExp},#{profField},#{visitArea},#{aboutMe},#{hashTag},#{trainerName},#{trainerImg} )
+		<selectKey resultType="string" order="AFTER" keyProperty = "tBoardNo">
+			select max(t_board_no) from trainer_board
+		</selectKey>
+	</insert>
+	<insert id="insertPartnerFiles" parameterType="pfv">
+		insert into partner_files values ('FileNo-'||p_files_seq.nextval, #{tBoardNo},#{imgName},#{imgPath})
+	</insert>
+	<select id="selectAllBoard" resultType="tb">
+		select
+			t_board_no as tBoardNo,
+			p_no as pNo,
+			board_title as boardTitle,
+			top_exp as topExp,
+			prof_field as profField,
+			visit_area as visitArea,
+			about_me as aboutMe,
+			hashtag as hashTag,
+			trainer_name as trainerName,
+			trainer_img as trainerImg
+		from trainer_board order by t_board_no desc
+	</select>
+	<select id="selectOneTrainerBoard" parameterType="string" resultType="tb">
+		select
+			t_board_no as tBoardNo,
+			p_no as pNo,
+			board_title as boardTitle,
+			top_exp as topExp,
+			prof_field as profField,
+			visit_area as visitArea,
+			about_me as aboutMe,
+			hashtag as hashTag,
+			trainer_name as trainerName,
+			trainer_img as trainerImg
+		from trainer_board where t_board_no=#{_parameter}
+	</select>
+	<select id="selectFileList" parameterType="string" resultType='pfv'>
+		select
+			file_no as fileNo,
+			t_board_no as tBoardNo,
+			img_name as imgName,
+			img_path as imgPath
+		from partner_files where t_board_no=#{_parameter}
+	</select>
+	<select id="selectOne" parameterType="string" resultType="p">
+		select
+			p_no as pNo,
+			category,
+			p_id as pId,
+			p_pw as pPw,
+			p_name as pName,
+			p_dob as pDob,
+			p_phone as pPhone,
+			p_gender as pGender,
+			p_email as pEmail,
+			p_addr as pAddr,
+			p_grade as pGrade,
+			p_point as pPoint,
+			profile_name as profileName,
+			profile_path as profilePath,
+			apply_motiv as applyMotiv,
+			apply_date as applyDate,
+			approve_date as approveDate,
+			license,
+			work_exp as workExp
+		from partner where p_no = #{_parameter}
+	</select>
+
+	<update id="updateTrainerImg" parameterType="p">
+		UPDATE TRAINER_BOARD SET TRAINER_IMG=#{profilePath} WHERE P_NO=#{PNo}
+	</update>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findIdPartner" parameterType="p" resultType="p">
+		select
+			p_id as pId,
+			p_grade as pGrade
+		from partner
+		where p_name= #{pName} and p_phone = #{pPhone}
+	</select>
+	
+	<update id="updatePwP" parameterType="p">
+		update partner
+		set p_pw = #{pPw}
+		where p_id = #{pId}
+	</update>
+	
+	<!-- 유저 마이페이지 - 이용내역 - 파트너이름 출력 -->
+	<select id="selectPartnerName" parameterType="string" resultType="string">
+		select p_name from partner where p_no=#{_parameter}
+	</select>
+</mapper>

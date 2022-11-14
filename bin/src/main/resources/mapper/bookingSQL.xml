@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="booking">
+	<insert id="insertTrainerBooking" parameterType="b">
+		insert into booking_tbl values ('BOOKING-'||BOOKING_NO_SEQ.NEXTVAL, #{memberId}, #{pNo}, #{petNo}, sysdate, #{bookingPhone},
+		#{startDate},null,#{bookingTime},#{specialRequest},0,'R','T',#{price},null)
+	</insert>
+	<select id="selectBookingTime" parameterType="b" resultType="string">
+		SELECT BOOKING_TIME FROM BOOKING_TBL 
+		WHERE P_NO=#{PNo} AND START_DATE=#{startDate}
+	</select>
+	
+	<!-- 유저 이용내역 조회 -->
+	<select id="selectBookingList" parameterType="m" resultType="b">
+		select
+			booking_no as bookingNo,
+			member_id as memberId,
+			p_no as pNo,
+			pet_no as petNo,
+			booked_date as bookedDate,
+			to_char(start_date,'yy/mm/dd') as startDate,
+			to_char(end_date,'yy/mm/dd') as endDate,
+			booking_time as bookingTime,
+			special_request as specialRequest,
+			review_state as reviewState,
+			partner_accept as partnerAccept,
+			category,
+			price
+		from booking_tbl
+		where member_id=#{memberId}
+	</select>
+</mapper>

@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="manager">
+
+	<!-- 관리자용 로그인 -->
+	<select id="selectOneManager" parameterType="g" resultType="g">
+		select
+			admin_no as adminNo,
+			admin_id as adminId,
+	  		admin_pw as adminPw
+		from admin_tbl
+		where admin_id=#{adminId}
+		<if test="adminPw != null">
+		and admin_pw=#{adminPw}
+		</if>
+	</select>      
+
+	<!-- 회원관리 회원리스트  검색-->
+	<select id="searchMember" parameterType="map" resultType="m">
+		select 
+		    member_name as memberName,
+		    member_id as memberId,
+		    member_bday as memberBday,
+		    member_phone as memberPhone,
+		    member_addr as memberAddr,
+		    enroll_date as memberEnrollDate
+		from member_tbl
+		<choose>
+			<when test="type.equals('id')">
+				where member_id '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('name')">
+				where member_name like '%'||#{keyword}||'%'
+			</when>
+		</choose>
+	</select>
+	<select id="searchPartner" parameterType="map" resultType="m">
+		select 
+			p_name as memberName,
+			p_id as memberId,
+			p_dob as memberBday,
+			p_phone as memberPhone,
+			p_addr as memberAddr,
+			apply_date as memberEnrollDate
+		from partner
+			<choose>
+			<when test="type.equals('id')">
+				where p_id like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('name')">
+				 where p_name like '%'||#{keyword}||'%'
+			</when>
+		</choose>
+	</select>
+	<select id="memberPartnerList" resultType="m">
+				select 
+		    member_name as memberName,
+		    member_id as memberId,
+		    member_bday as memberBdate,
+		    member_phone as memberPhone,
+		    member_addr as memberAddr,
+		    enroll_date as memberEnrollDate
+		from member_tbl
+		union all
+		select 
+		    p_name as mname,
+		    p_id as mid,
+		    p_dob as mdob,
+		    p_phone as mphone,
+		    p_addr as maddr,
+		    apply_date as enrolldate
+		from partner
+	</select>
+	<select id="memberOne" parameterType="string" resultType="m">
+		select 
+		   member_name as memberName,
+		   member_phone as memberPhone
+		from member_tbl where member_id=#{_parameter}	 
+	</select>
+	<select id="partnerOne" parameterType="string" resultType="p">
+		select
+			p_name as pName,
+			p_phone as pPhone
+		from partner where p_id=#{_parameter}
+	</select>
+	
+	<select id="selectAdminNotice" parameterType="map" resultType="ng">
+		select * from
+		(select rownum as rnum, ng.* from
+		(select
+			notice_g_no as noticeGNo,
+			notice_g_title as noticeGTitle,
+			notice_g_writer as noticeGWriter,
+			notice_g_date as noticeGDate,
+			read_g_count as readGCount
+		from notice_g order by 1 desc)ng)
+		where rnum between #{start} and #{end}
+	</select>
+	 
+	<select id="totalCount" resultType="int">
+  	select count(*) from notice_g
+  	</select>
+  	
+  	
+  	<update id="readGCountUpdate" parameterType="int">
+  		update notice_g set read_g_count=read_g_count+1 where notice_g_no=#{notice_g_no}
+  	</update>
+  	
+  	
+  	<select id="selectOneNoticeG" parameterType="_int" resultMap="getNoticeG">
+  	select
+  		*
+    from notice_g where notice_g_no = #{_parameter}	
+  </select>
+  
+  <select id="selectFileList" parameterType="_int" resultType="fvg">
+  	select
+  		file_g_no as fileGNo,
+    	notice_g_no as noticeGNo,
+    	filename_g as filenameG,
+    	filepath_g as filepathG
+    from file_g_tbl where notice_g_no = #{_parameter}	
+  </select>
+  
+  
+  <resultMap type="ng" id="getNoticeG">
+  	<result column="notice_g_no" property="noticeGNo"/>
+  	<result column="notice_g_title" property="noticeGTitle"/>
+  	<result column="notice_g_writer" property="noticeGWriter"/>
+  	<result column="notice_g_content" property="noticeGContent"/>
+  	<result column="notice_g_date" property="noticeGDate"/>
+  	<result column="read_g_count" property="readGCount"/>
+  	<collection property="fileList"
+  			select="selectFileList"
+  			column="notice_g_no"
+  			ofType="fvg"
+  			javaType="java.util.ArrayList"
+  	/>
+  </resultMap>
+  
+  
+  <insert id="insertNoticeG" parameterType="ng">
+  	insert into notice_g values
+  	(
+  		notice_g_seq.nextval, 
+  		#{noticeGTitle}, 
+  		#{noticeGContent},
+  		#{noticeGWriter},
+  		to_char(sysdate,'yyyy-mm-dd'),
+  		0
+  	)
+  	<selectKey resultType="_int" order="AFTER" keyProperty="noticeGNo">
+  		select max(notice_g_no) from notice_g
+  	</selectKey>
+  </insert>
+  <select id="selectNoticeGNo" resultType="_int">
+  	select max(notice_g_no) from notice_g
+  </select>
+  <insert id="insertFile" parameterType="fvg">
+  	insert into file_g_tbl values
+  	(
+  		file_g_seq.nextval, 
+  		#{noticeGNo}, 
+  		#{filenameG}, 
+  		#{filepathG}
+  	)
+  </insert>
+  
+  <delete id="deleteNotice" parameterType="ng">
+  	delete
+  		from notice_g
+  	where notice_g_no = #{noticeGNo}
+  </delete>
+  
+
+  <!-- 승인해야할 파트너 리스트 -->
+  <select id="adminPartnerList" parameterType="map" resultType="p">
+	 select 
+		p_no as pNo,
+		p_name as pName,
+		p_id as pId,
+		p_phone as pPhone,    
+		p_addr as pAddr,
+		apply_date as applyDate,
+		license,
+		p_grade as pGrade,
+		p_point as pPoint
+	from partner where p_grade='N' 
+		<choose>
+			<when test="type == null">
+				and p_id like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('id')">
+				and p_id like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('name')">
+				and p_name like '%'||#{keyword}||'%'
+			</when>
+		</choose>
+  </select>
+  <!-- 파트너승인 -->
+  <update id="upgradeOk" parameterType="map">
+  	update partner set p_grade=#{gradeType} where p_no=#{pNo}
+  </update>
+  <delete id="deletePartner" parameterType="map">
+  	delete from partner where p_no=#{pNo}
+  </delete>
+  <select id="selectGetPartner" resultType="int">
+  	select count(*) from partner WHERE p_grade = 'N'
+  </select>
+  <!-- 파트너 승인  후  -->
+  <select id="partnerGradeList" parameterType="map" resultType="p">
+  	select 
+		p_no as pNo,
+		p_name as pName,
+		p_id as pId,
+		p_phone as pPhone,    
+		p_addr as pAddr,
+		apply_date as applyDate,
+		license,
+		p_grade as pGrade,
+		p_point as pPoint
+	from partner where p_grade!='N' 
+	<choose>
+			<when test="type == null">
+				and p_id like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('id')">
+				and p_id like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('name')">
+				and p_name like '%'||#{keyword}||'%'
+			</when>
+		</choose>
+  </select>
+  <select id="gradePartner" resultType="int">
+  	select count(*) from partner WHERE p_grade != 'N'
+  </select>
+
+  <!-- 메인 문의하기 -->
+  <insert id="mainQnaWrite" parameterType="dm">
+  	insert into direct_msg values
+  	(
+  		dm_seq.nextval,
+  		#{sender},
+  		#{senderCategory},
+  		'admin',
+  		#{dmContent},
+  		to_char(sysdate,'yy/mm/dd'),
+  		0,
+  		#{dmType},
+  		null
+  	)
+  </insert>
+  
+  <!-- 검색창 -->
+  <select id="searchQnanotice" parameterType="ng" resultType="ng">
+  	select
+  		notice_g_no as noticeGNo,
+		notice_g_title as noticeGTitle,
+		notice_g_content as noticeGContent,
+		notice_g_writer as noticeGWriter,
+		notice_g_date as noticeGDate,
+		read_g_count as readGCount,
+		search_type as searchType,
+		keyword as keyword
+	from qna_tbl
+	<choose>
+		<when test="searchType.equals('title')">
+			where notice_g_title like '%'||#{keyword}||'%'
+		</when>
+		<when test="searchType.equals('content')">
+		where notice_g_content like '%'||#{keyword}||'%'
+		</when>
+	</choose>
+  </select>
+  
+
+</mapper>

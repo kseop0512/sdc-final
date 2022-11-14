@@ -1,0 +1,45 @@
+.bc22 {
+    color: #fff;
+    background-color: #282F44;
+    border: 2px solid#282F44;
+}
+.bc22:hover {
+    background-color:#fff;
+    cursor: pointer;
+    color: #282F44;
+}
+
+/* -----------------input 디자인-------------- */
+.input-form { /* 두껍고 각진 input */
+    width: 100%;
+    padding: 12px 20px;
+    display: block;
+    background-color: #fff;
+    outline: none;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+.input-form:focus {
+    box-shadow: 0 0 0 0.1rem #eee;
+}
+
+textarea.input-form {
+    resize: none;
+    min-height: 400px;
+}
+.input-form:read-only:not(select),
+.input-form:disabled {
+    background-color: #f7f7f9;
+}
+
+
+.table-bordered{
+    text-align: center;
+}
+
+#writeBtn{
+    width: 10%;
+}
+#writeBtn+button{
+    width: 10%;
+}

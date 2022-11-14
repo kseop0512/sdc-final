@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pet">
+	<select id="selectAllPets" parameterType="pet" resultType="pet">
+		select
+			pet_no as petNo,
+			member_no as memberNo,
+			pet_type as petType,
+			pet_name as petName,
+			pet_gender as petGender,
+			pet_bdate as petBdate,
+			pet_kind as petKind,
+			pet_weight as petWeight,
+			pet_neut as petNeut,
+			pet_hospital as petHospital,
+			pet_note as petNote,
+			pet_filename as petFilename,
+			pet_filepath as petFilepath
+		from pet_tbl where member_no=#{memberNo}
+	</select>
+	
+	<insert id="insertPet" parameterType="pet">
+		insert into pet_tbl values(
+			pet_seq.nextval,
+			#{memberNo},
+			#{petType},
+			#{petName},
+			#{petGender},
+			#{petBdate},
+			#{petKind},
+			#{petWeight},
+			#{petNeut},
+			#{petHospital},
+			#{petNote},
+			#{petFilename},
+			#{petFilepath}
+		)
+		<selectKey resultType="_int" order="AFTER" keyProperty="petNo">
+			select MAX(pet_no) from pet_tbl
+		</selectKey>
+	</insert>
+	
+	<insert id="insertPetChk" parameterType="petChk">
+		insert into pet_chklist values(
+			#{petNo},
+			#{character1},
+			#{character2},
+			#{character3},
+			#{character4},
+			#{character5},
+			#{character6},
+			#{character7},
+			#{character8},
+			#{health1},
+			#{health2},
+			#{health3},
+			#{social},
+			#{sense},
+			#{active},
+			#{inde}
+		)
+	</insert>
+	
+	<select id="selectMyPet" parameterType="int" resultType="pet">
+		select
+			pet_no as petNo,
+			member_no as memberNo,
+			pet_type as petType,
+			pet_name as petName,
+			pet_gender as petGender,
+			substr(pet_bdate,1,4) as petBdate,
+			pet_kind as petKind,
+			pet_weight as petWeight,
+			pet_neut as petNeut,
+			pet_hospital as petHospital,
+			pet_note as petNote,
+			pet_filename as petFilename,
+			pet_filepath as petFilepath
+		from pet_tbl where member_no=#{memberNo}
+	</select>
+	
+	<select id="selectMyPetChk" parameterType="int" resultType="petChk">
+		select
+			pet_no as petNo,
+			character1,
+			character2,
+			character3,
+			character4,
+			character5,
+			character6,
+			character7,
+			character8,
+			health1,
+			health2,
+			health3,
+			social,
+			sense,
+			active,
+			inde
+		from pet_chklist where pet_no in (select pet_no from pet_tbl where member_no =#{memberNo})
+		
+	</select>
+	
+	<select id="selectPetName" parameterType="_int" resultType="string">
+		select pet_name from pet_tbl where pet_no=#{_parameter}
+	</select>
+</mapper>
