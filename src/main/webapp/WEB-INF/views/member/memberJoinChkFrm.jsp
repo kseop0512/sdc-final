@@ -352,6 +352,7 @@ textarea::-webkit-scrollbar{
 
 3. 수집하는 개인정보의 보유 및 이용기간
 수집·이용 동의일로부터 회원 탈퇴 또는 동의 철회 시 까지</textarea><br>
+	<div id="joinAllCheck" style="font-size:18px;font-weight:bolder">전체동의 <span style="font-size:18px;font-weight:normal">이용약관(필수), 개인정보 수집 및 이용 안내(필수), 개인정보 수집 및 이용 안내(선택)에 모두 동의합니다.</span><input type="checkbox" id="allChk-bot"></div>
 	</div>
 	<div class="joinBtn-wrap">
 		<input type="button" id="backBtn" value="취소" style="">
@@ -368,6 +369,15 @@ textarea::-webkit-scrollbar{
 			}
 		});
 		
+		//모두 동의 아래
+		$("#allChk-bot").click(function(){
+			var checked = $("#allChk-bot").is(":checked");
+			if(checked){
+				$("input:checkbox").prop("checked", true);
+			}else{
+				$("input:checkbox").prop("checked", false);
+			}
+		});
 		//모두 체크 됐을 때 모두 동의 까지 체크
 		$(".chk").click(function(){
 			var checked = $("this").is(":checked");
@@ -378,6 +388,19 @@ textarea::-webkit-scrollbar{
 				$("#allChk").prop("checked", true);
 			}else if(!checked){
 				$("#allChk").prop("checked", false);
+			}
+		});
+		
+		//모두 체크 됐을 때 모두 동의bot 까지 체크
+		$(".chk").click(function(){
+			var checked = $("this").is(":checked");
+			var chk1 = $(".chk").eq(0).is(":checked");
+			var chk2 = $(".chk").eq(1).is(":checked");
+			var chk3 = $(".chk").eq(2).is(":checked");
+			if((chk1) && (chk2) && (chk3)){
+				$("#allChk-bot").prop("checked", true);
+			}else if(!checked){
+				$("#allChk-bot").prop("checked", false);
 			}
 		});
 		

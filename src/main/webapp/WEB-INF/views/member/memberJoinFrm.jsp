@@ -13,6 +13,21 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/member/memberJoin.css">
 </head>
 <body>
+<style>
+.smsBtn{
+	background: #fff;
+	margin-bottom: 15px;
+
+}
+.smsBtn:hover{
+	background: #cda45e;
+	color: #fff;
+}
+.smsChkBtn:hover{
+	background: #cda45e;
+	color: #fff;
+}
+</style>
 <jsp:include page="/WEB-INF/views/main/common/header.jsp"/>
 <main id="main">
 	<div class="content-wrap">
@@ -46,13 +61,42 @@
 				<label for="mAddr">주소</label><br>
 				<input type="text" name="memberAddr" id="mAddr" placeholder=""><br>
 				<label for="mPhone">전화번호</label><span id="phoneSpan"></span><br>
-				<input type="text" name="memberPhone" id="mPhone" placeholder="ex)01012340000 숫자만"><br>
+				<input type="text" style="width:300px;" name="memberPhone" id="mPhone" placeholder="ex)01012340000 숫자만">
+				<button type="button" class="smsBtn" onclick="sendSMS();" style="width:170px;height:50px;">인증번호발송</button><br>
+				<div class="sms-wrap" style="display:inline-block;">
+					<input type="text" style="width:200px;min-width:200px;" class="smsVal" placeholder="인증번호입력">
+					<div class="timeZone" style="display: inline-block;width: 197px; height: 50px;color: #fff;background: transparent;text-align: center;">
+						<span class="timeRSpan"><span id="min">3</span><span class="timeSpan">분 </span><span id="sec">00</span>초</span>
+					</div>
+					<input type="hidden" id="smsChk" value="0">
+					<button type="button" class="smsChkBtn" style="width:170px;height:50px;">인증번호확인</button><br>
+				</div>
 				<input type="hidden" name="memberGender" id="mGender">
 				<input type="submit" id="joinBtn" value="회원가입">
 			</fieldset>
 		</form>
 	</div>
 </main>
+<script>
+
+/*휴대폰 인증번호 발송*/
+$(".phoneChkSendBtn").click(function(){
+   
+   alert("인증번호가 발송되었습니다.");
+   var phone1 = $("[name=frontNum]").val();
+   var phone2 = $("[name=memberPhone1]").val();
+   var phone = phone1+phone2;
+   $.ajax({
+      type : "POST",
+      url : "/memberPhoneCheck.do",
+      data : {phone : phone},
+      success : function(numStr) {
+              $(".certifyNum2").val(numStr);
+                             
+      }
+   });
+});
+</script>
 	<script type="text/javascript" src="/resources/js/member/memberJoinFrm.js">
 	</script>
 	<jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>

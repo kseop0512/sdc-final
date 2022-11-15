@@ -24,6 +24,7 @@ import kr.or.mail.controller.MailSender;
 
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.service.MessageService;
+import kr.or.member.model.service.MessageService2;
 import kr.or.member.model.vo.Member;
 
 @Controller
@@ -31,8 +32,11 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	
-	@Autowired
+	@Autowired//정환번호
 	private MessageService msgService;
+	
+	@Autowired//구원번호
+	private MessageService2 msgService2;
 	
 	
 	@RequestMapping(value="/memberJoinChkFrm.do")
@@ -197,6 +201,23 @@ public class MemberController {
 		}
 		
 		msgService.sendMessage(memberPhone, resultCode);
+		return resultCode;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/sendSMS.do")
+	public String sendSMS(String pNum) {
+		Random r = new Random();
+		int rNum = 0;
+		String ranCode = "";
+		String resultCode = "";
+		
+		for(int i=0; i<6; i++) {
+			rNum = r.nextInt(9);
+			ranCode = Integer.toString(rNum);
+			resultCode += ranCode;
+		}
+		msgService2.sendMessage(pNum, resultCode);
 		return resultCode;
 	}
 	
