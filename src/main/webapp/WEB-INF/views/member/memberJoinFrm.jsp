@@ -8,6 +8,9 @@
 <title>똑독캣</title>
 <jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://demo.plantpot.works/assets/css/normalize.css">
 <link rel="stylesheet" href="https://use.typekit.net/opg3wle.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/member/memberJoin.css">
@@ -78,6 +81,33 @@
 	</div>
 </main>
 <script>
+//우편번호 주소 검색 api
+$("#mAddr").on("click", function() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+        	(async () => {
+        	    const { value: getAddr } = await Swal.fire({
+        	        title: '상세주소',
+        	        text: '나머지 주소를 입력해주세요',
+        	        input: 'text'
+        	    });
+        	    if(getAddr){
+    				const detailAddr = data.address+", "+getAddr;
+                	$("#mAddr").val(detailAddr);
+    			}
+        	})()
+
+			
+        }
+    }).open();
+})
+
+//상세주소 입력창
+function getDetailAddr(){
+	const getAddr = prompt("상세주소를 입력하세요");
+	return getAddr;
+}
+
 
 /*휴대폰 인증번호 발송*/
 $(".phoneChkSendBtn").click(function(){
