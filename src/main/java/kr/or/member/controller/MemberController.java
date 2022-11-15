@@ -94,7 +94,7 @@ public class MemberController {
 	}
 	
 	//유저 로그아웃
-	@RequestMapping(value="logoutUser.do")
+	@RequestMapping(value="/logoutUser.do")
 	public String logoutUser(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
@@ -231,6 +231,27 @@ public class MemberController {
 			}
 		}
 	}
-
 	
+	@RequestMapping(value="/mypageDeleteFrm.do")
+	public String mypageDeleteFrm(int memberNo) {
+		return "member/mypageDeleteFrm";
+	}
+	
+	@RequestMapping(value="/deleteMember.do")
+	public String deleteMember(int memberNo, Model model) {
+		int result = service.deleteMember(memberNo);
+		if(result > 0) {
+			model.addAttribute("title", "탈퇴 완료");
+			model.addAttribute("msg", "똑독캣을 이용해주셔서 감사합니다.");
+			model.addAttribute("icon", "success");
+			model.addAttribute("loc", "/logoutUser.do");
+			return "common/msg";		
+		}else {
+			model.addAttribute("title", "탈퇴 실패");
+			model.addAttribute("msg", "관리자에게 문의해주세요.");
+			model.addAttribute("icon", "Fail");
+			model.addAttribute("loc", "/memberMypage.do");
+			return "common/msg";
+		}
+	}
 }
