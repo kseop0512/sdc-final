@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -153,33 +154,85 @@
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
+                                            <th>No</th>
+                                            <th>Rank</th>
                                             <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>Category</th>
+                                            <th>Id</th>
+                                            <th>Gender</th>
+                                            <th>Phone</th>
+                                            <th>Grade</th>
+                                            <th>Point</th>
+                                            <th>ApplyDate</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
+                                            <th>No</th>
+                                            <th>Rank</th>
                                             <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>Category</th>
+                                            <th>Id</th>
+                                            <th>Gender</th>
+                                            <th>Phone</th>
+                                            <th>Grade</th>
+                                            <th>Point</th>
+                                            <th>ApplyDate</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+										<c:forEach items="${list }" var="p">
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
+                                            <td>${p.PNo }</td>
+                                          <td>${p.rank }</td>
+                                            <td>${p.PName }</td>
+                                            <td>
+                                          <c:choose>
+                                            <c:when test="${p.category eq 'T'}">
+                                            	훈련
+                                            </c:when>
+                                            <c:when test="${p.category eq 'L'}">
+                      						 	위탁                     
+                                            </c:when>
+                                            <c:when test="${p.category eq 'V'}">
+             									방문                               
+                                            </c:when>
+                                            <c:when test="${p.category  eq 'VL'}">
+             									방문/위탁
+                                            </c:when>
+                                           </c:choose>
+ 											</td>		
+                                            <td>${p.PId }</td>
+                                            <td>
+                                            <c:choose>
+											<c:when test="${p.PGender eq 'M'}">
+													남
+											</c:when>  
+											<c:when test="${p.PGender eq 'F'}">
+													여
+											</c:when>                                            
+                                            </c:choose>
+                                            </td>
+                                            <td>${p.PPhone }</td>
+                                            <td>
+                                            <c:choose>
+                                            	<c:when test="${p.PGrade eq 'C'}">
+                                            		정파트너
+                                            	</c:when>
+                                            	<c:when test="${p.PGrade eq 'B'}">
+                                            		실버파트너
+                                            	</c:when>
+                                            	<c:when test="${p.PGrade eq 'A'}">
+                                            		골드파트너
+                                            	</c:when>
+                                          	</c:choose>
+                                          	</td>
+                                            <td>${p.PPoint }</td>
+                                          
+                                            <td>${p.applyDate }</td>
+                                        </tr>										
+										</c:forEach>                                    
+
                                     </tbody>
                                 </table>
                             </div>

@@ -124,7 +124,7 @@
                                 </div>
                                  
                                   <select name="membertab" onchange="selectAll(this)">
-                                  <option value="tabAll" id="all">선택</div>
+                                  	<option>보기선택</div>
                                     <option value="tabAllMember" id="all">전체</div>
                                     <option value="tabMember" id="member" class="active-tap">이용자</div>
                                 	<option value="tabPartner" id="partner">파트너</div>

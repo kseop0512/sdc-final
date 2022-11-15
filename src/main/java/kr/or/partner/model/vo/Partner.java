@@ -30,6 +30,7 @@ public class Partner {
 	private String license;
 	private String workExp;
 	private ArrayList<String> licenceArr;
+	private int rank;
 	
 	public String getApplyMotivBr() {
 		return applyMotiv.replaceAll("\r\n", "<br>");

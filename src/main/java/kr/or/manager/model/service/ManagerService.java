@@ -383,6 +383,17 @@ public class ManagerService {
 		return dao.bookingDetail(bookingNo);
 	}
 
+	public ArrayList<Partner> pointPartner() {
+		return dao.pointPartner();
+	}
+//예약 검색
+	public ArrayList<Booking> searchBooking(String type, String keyword) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		return dao.searchBooking(map);
+	}
+
 
 
 

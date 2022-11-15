@@ -385,4 +385,56 @@
 		    apply_date as memberEnrollDate
 		from partner
 	</select>
+	<select id="pointPartner" resultType="p">
+	     SELECT  
+             p_no as pNo,
+			p_name as pName,
+			p_id as pId,
+			p_dob as pDob,
+			p_gender as pGender,
+			p_phone as pPhone,
+			p_addr as pAddr,
+			apply_date as applyDate,
+			p_point as pPoint,
+			p_grade as pGrade,
+			category,
+		RANK() OVER (ORDER BY p_point desc) as Rank 
+		FROM partner
+<!-- 		<![CDATA[ -->
+		
+<!-- 		SELECT p_NO,p_name,p_id, p_point,category,p_grade,p_phone,apply_Date,p_gender -->
+<!-- 		FROM (　　　　 -->
+<!-- 		        SELECT p_no, p_name,p_id, p_point,category,p_grade,p_phone,apply_Date ,p_gender, -->
+<!-- 		              row_number () over (ORDER BY p_point DESC) rn -->
+<!-- 		        FROM partner ) -->
+<!-- 		WHERE rn <= 5 -->
+		
+<!-- 		]]> -->
+	</select>
+	<select id="searchBooking" parameterType="map" resultType="b">
+		 select
+			booking_no as bookingNo,
+			member_id as memberId,
+			p_no as pNo,
+			pet_no as petNo,
+			BOOKING_PHONE as bookingPhone,
+			booked_date as bookedDate,
+			to_char(start_date,'yy/mm/dd') as startDate,
+			booking_time as bookingTime,
+			special_request as specialRequest,
+			review_state as reviewState,
+			partner_accept as partnerAccept,
+			category,
+			cancle_comment as cancleComment,
+			price
+		from booking_tbl where category!='V' 
+		<choose>
+			<when test="type.equals('bookingNo')">
+				and booking_no like '%'||#{keyword}||'%' order by 1
+			</when>
+			<when test="type.equals('id')">
+				and member_id like '%'||#{keyword}||'%' order by 1
+			</when>
+		</choose>
+	</select>
 </mapper>

@@ -106,13 +106,13 @@
                                 <div class="card mb-4">
                                     <div class="card-body">
                                         <p class="mb-0">
-                                           	<span>방문 예약</span>
-                                <code>[<code id="partnerCount"></code>]</code>건 
+                                           	<span>예약신청</span>
+                                <code>[<code id="bookingCount"></code>]</code>건 
                                         </p>
                                         <div id="nameIdSerarch-Box" style="float: right;">
-                                            <form action="/" method="get">
-                                                <select name="type">
-                                                    <option value="bookingDate">예약일</option>
+                                            <form action="/searchBooking.do" method="get">
+                                                <select name="type" style="width: 150px">
+                                                    <option value="bookingNo">예약번호</option>
                                                     <option value="id">아이디</option>
                                                 </select>
                                                     <input class="input-form2" type="text" placeholder="입력하세요" style="width: 500px;" name="keyword">
