@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>똑독캣 이용내역</title>
+<title>똑독캣 이용후기</title>
 <jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
 <!-- 마이페이지 CSS -->
 	<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_nav.css">
@@ -29,15 +29,15 @@
 						<li><a href="/memberMypage.do">나의 정보</a></li>
 						<li><a href="/mypagePet.do">나의 똑독캣</a></li>
 						<li><a href="/mypageMessage.do">1:1 문의내역</a></li>
-						<li><a href="/mypageService.do" class="active">서비스 이용내역</a></li>
-						<li><a href="/mypageReview.do">나의 이용후기</a></li>
+						<li><a href="/mypageService.do">서비스 이용내역</a></li>
+						<li><a href="/mypageReview.do" class="active">나의 이용후기</a></li>
 						<li><a href="/withdraw.do">회원탈퇴</a></li>
 					</ul>
 				</div>
 				<!-- 마이페이지 컨텐츠 -->
 		        <div id="mypage-content">
 		          <div id="title">
-		            <h4>서비스 이용내역</h4>
+		            <h4>나의 이용후기</h4>
 		          </div>
 		          <div id="content-wrap">
 		            <div id="content">
