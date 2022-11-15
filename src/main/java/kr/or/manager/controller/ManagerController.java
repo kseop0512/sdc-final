@@ -81,12 +81,7 @@ public class ManagerController {
 		return "redirect:/";
 	}
 	
-	//관리자 페이지 확인용
-	@RequestMapping(value="/adminMemberList.do")
-	public String adminMemberList() {
-		return "manager/adminMemberList";
-	}
-		
+	
 	//유저리스트 회원 수 
 	@RequestMapping(value="/selectUserList.do")
 	public String selectUserList(Model model,Member m) {
