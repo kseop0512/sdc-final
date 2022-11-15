@@ -165,8 +165,11 @@
 				<input type="hidden" name="memberNo">
 				<input type="hidden" name="pNo">
 				<input type="hidden" name="petNo">
+				<div class="review-info">
+					<span class="d-p-name"></span>
+				</div>
 				<!-- 후기평점 -->
-				<div class="review-info review-rate">
+				<div class="review-rate">
 					<b class="rate-label">평점</b>
 					<span class="star" style="padding: 0;">
 					★★★★★
@@ -227,8 +230,12 @@
 				<input type="hidden" name="memberNo">
 				<input type="hidden" name="pNo">
 				<input type="hidden" name="petNo">
+				<div class="review-info">
+					<span class="d-p-name"></span>
+					<span class="span-review-date"></span>
+				</div>
 				<!-- 후기평점 -->
-				<div class="review-info review-rate">
+				<div class="review-rate">
 					<b class="rate-label">평점</b>
 					<span class="star" style="padding: 0;">
 					★★★★★

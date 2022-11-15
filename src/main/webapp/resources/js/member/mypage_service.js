@@ -117,6 +117,14 @@ function writeReview(bookingNo, memberNo, pNo, petNo){
 	$(".insert-review [name=bookingNo]").val(bookingNo);
 	$(".insert-review [name=memberNo]").val(memberNo);
 	$(".insert-review [name=pNo]").val(pNo);
+	//파트너번호로 파트너이름 조회해서 입력하기
+	$.ajax({
+		url : "/getPartnerName.do",
+		data : {pNo : pNo},
+		success: function(pName){
+			$(".insert-review .d-p-name").text("["+pName+"] 님의 서비스는 어떠셨나요?");
+		}
+	});
 	$(".insert-review [name=petNo]").val(petNo);
 	$(".insert-review ").show();
 	$(this).keydown(function(event) {
@@ -139,23 +147,40 @@ function viewReview(bookingNo){
 		url : "/selectOneReview.do",
 		data : {bookingNo : bookingNo},
 		success: function(data){
+			$(".update-review [name=reviewNo]").val(data.reviewNo);
+			
+			//파트너번호로 파트너이름 조회해서 입력하기
+			$.ajax({
+				url : "/getPartnerName.do",
+				data : {pNo : data.pno},
+				success: function(pName){
+					console.log(pName);
+					$(".update-review .d-p-name").text("["+pName+"] 님의 서비스");
+				}
+			});
+			
+			$(".span-review-date").text("후기작성일 : "+data.reviewDate);
+			
+			//등록한 사진 썸네일 표시
 			$('#Preview-u').empty();
-			console.log("dd: "+data.fileList.length);
 			if(data.fileList.length>0){
+				$('.review-photo').show();
+				$(".review-modal").removeClass("file-empty");
 				for(let i=0;i<data.fileList.length;i++){
-					//div에 이미지 추가
 	                var str = '<li class="ui-state-default">';
 	                str += '<img src="/resources/upload/review/'+ data.fileList[i].imgPath + '" title="' + data.fileList[i].imgName + '" width=90 height=90>';
 	                $(str).appendTo('#Preview-u');
 				}
+			}else{
+				$('.review-photo').hide();
+				$(".review-modal").addClass("file-empty");
 			}
-			$(".update-review [name=reviewNo]").val(data.reviewNo);
-			$(".update-review [name=memberNo]").val(data.memberNo);
-			$(".update-review [name=pNo]").val(data.pNo);
-			$(".update-review [name=petNo]").val(data.petNo);
+			
+			//평점 표시
 			$(`.update-review .star span`).css({ width: `${data.reviewRate * 19}%` });
-			$("#u-rate").val(`${data.reviewRate}`)
+			$("#u-rate").val(`${data.reviewRate}`);
 			$(".update-review [name=reviewRate]").val(data.reviewRate);
+			
 			$(".update-review [name=reviewContent]").text(data.reviewContent);
 		}
 	});
@@ -182,7 +207,7 @@ $("#update-btn").on("click",function(){
 	}
 });
 
-//사진첨부
+//후기작성 시 사진첨부
 $(function () {
     //드래그 앤 드롭
     $(".sortable").sortable();
