@@ -16,18 +16,19 @@ $(function(){
 		let eDate = endDate.eq(i).val();
 		//1. 위탁돌봄 (*bookingTime값X endDate값O)
 		if(start.eq(i).val()==""){
-			sSpan.eq(i).html(sDate+"&emsp;~&emsp;"+eDate);
+			sSpan.eq(i).html(sDate+"&ensp;~&ensp;"+eDate);
 			sSpan.eq(i).parent().attr("colspan","2");
 			eSpan.eq(i).parent().remove();
 		//2. 방문돌봄/훈련 (*bookingTime값O endDate값X)
 		}else{
+			let sDate2 = startDate.eq(i).val().split(" (");
 			let time = start.eq(i).val().split(",");
 			if(time.length == 1){
 				//2-1. 예약시간 한 시간만 있는 경우
 				let timeCnt = 1;
 				start.eq(i).val(time[0]);
 				end.eq(i).val(time[0]);
-				sSpan.eq(i).html(sDate);
+				sSpan.eq(i).html(sDate2[0]);
 				eSpan.eq(i).html("<b>"+time[0]+"</b><br>(총 "+time.length+"시간 이용)");
 			}else{
 				//2-2. 예약시간 여러 시간인 경우
@@ -35,7 +36,7 @@ $(function(){
 				//쉼표 기준으로 예약시간 잘라서 hidden input에 다시 반영
 				start.eq(i).val(time[0]);
 				end.eq(i).val(time[1]);
-				sSpan.eq(i).html(sDate);
+				sSpan.eq(i).html(sDate2[0]);
 				eSpan.eq(i).html("<b>"+time[0]+"</b> , <b>"+time[time.length-1]+"</b><br>(총 "+time.length+"시간 이용)");
 			}
 		}
@@ -145,7 +146,6 @@ function viewReview(bookingNo){
 					//div에 이미지 추가
 	                var str = '<li class="ui-state-default">';
 	                str += '<img src="/resources/upload/review/'+ data.fileList[i].imgPath + '" title="' + data.fileList[i].imgName + '" width=90 height=90>';
-	                str += '<span class="delBtn">x</span>';
 	                $(str).appendTo('#Preview-u');
 				}
 			}

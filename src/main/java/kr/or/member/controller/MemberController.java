@@ -26,6 +26,7 @@ import kr.or.member.model.service.MemberService;
 import kr.or.member.model.service.MessageService;
 import kr.or.member.model.service.MessageService2;
 import kr.or.member.model.vo.Member;
+import kr.or.review.model.vo.Review;
 
 @Controller
 public class MemberController {
@@ -133,15 +134,31 @@ public class MemberController {
 	public String mypageMessage() {
 		return "member/mypageMessage";
 	}
-	
 
-	//유저 마이페이지 - 이용내역 이동
+	//유저 마이페이지 - 서비스 이용내역 이동
 	@RequestMapping(value="/mypageService.do")
 	public String mypageService(HttpSession session, Model model) {
 		Member m = (Member) session.getAttribute("m");
 		ArrayList<Booking> list = service.selectBookingList(m);
 		model.addAttribute("list",list);
 		return "member/mypageService";
+	}
+	
+	//유저 마이페이지 - 서비스 이용내역 상세조회
+	@RequestMapping(value="/mypageServiceDetail.do")
+	public String mypageService(String bookingNo, Model model) {
+		Booking b = service.selectOneBooking(bookingNo);
+		model.addAttribute("b",b);
+		return "member/mypageServiceDetail";
+	}
+	
+	//유저 마이페이지 - 나의 이용후기 이동
+	@RequestMapping(value="/mypageReview.do")
+	public String mypageReview(HttpSession session, Model model) {
+		Member m = (Member) session.getAttribute("m");
+		ArrayList<Review> list = service.selectReviewList(m);
+		model.addAttribute("list",list);
+		return "member/mypageReview";
 	}
 	
 	/* 아이디 비밀번호 찾기*/	

@@ -10,7 +10,7 @@
 <jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
 <!-- 마이페이지 CSS -->
 	<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_nav.css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_service.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_review.css">
 <!-- 아이콘-->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <!-- 사진첨부 li -->
@@ -27,11 +27,11 @@
 				<div id="mypage-nav">
 					<ul>
 						<li><a href="/memberMypage.do">나의 정보</a></li>
-						<li><a href="/mypagePet.do">나의 똑독캣</a></li>
+						<li><a href="/mypageMyPet.do?memberNo=${sessionScope.m.memberNo }">나의 똑독캣</a></li>
 						<li><a href="/mypageMessage.do">1:1 문의내역</a></li>
 						<li><a href="/mypageService.do">서비스 이용내역</a></li>
 						<li><a href="/mypageReview.do" class="active">나의 이용후기</a></li>
-						<li><a href="/withdraw.do">회원탈퇴</a></li>
+						<li><a href="/mypageDeleteFrm.do?memberNo=${sessionScope.m.memberNo }">회원탈퇴</a></li>
 					</ul>
 				</div>
 				<!-- 마이페이지 컨텐츠 -->
@@ -41,107 +41,19 @@
 		          </div>
 		          <div id="content-wrap">
 		            <div id="content">
-		              <!-- 이용내역 -->
-		              <div class="service-box">
-		                <table>
-		                  <thead>
-		                    <tr>
-		                      <td class="th-category">서비스</td>
-		                      <td class="th-start-date">이용날짜</td>
-		                      <td class="th-end-date">이용시간대</td>
-		                      <td class="th-pet">똑독캣</td>
-		                      <td class="th-partner">담당파트너</td>
-		                      <td class="th-price">이용요금</td>
-		                      <td class="th-state">예약상태</td>
-		                      <td class="th-cancle-review">취소/후기</td>
-		                    </tr>
-		                  </thead>
-		                  <tbody>
-		                  <input type="hidden" value="${fn:length(list)}" id="listLength">
-		                  <c:forEach items="${list}" var="b">
-		                    <tr>
-		                    	<!-- 서비스유형 -->
-		                    	<td class="td-category">
-		                    		<input type="hidden" class="input-booking-no" value="${b.bookingNo}">
-		                    		<input type="hidden" class="input-category" value="${b.category}">
-		                    		<a href="javascript:serviceDetail('${b.bookingNo}');" class="span-category">
-		                    		 <c:choose>
-			                    		<c:when test="${b.category eq 'V'}"><b>방문돌봄</b></c:when>
-			                    		<c:when test="${b.category eq 'L'}"><b>위탁돌봄</b></c:when>
-			                    		<c:when test="${b.category eq 'T'}"><b>훈련</b></c:when>
-			                    	 </c:choose>
-			                    	</a>
-		                    	</td>
-		                    	<!-- 시작일 -->
-		                    	<td class="td-start-date">
-		                    		<input type="hidden" class="input-start-date" value="${b.startDate}">		                    		
-		                    		<input type="hidden" class="input-start-time" value="${b.bookingTime}">
-		                    		<span class="span-start-date"></span>
-		                    	</td>
-		                    	<!-- 종료일 -->
-		                    	<td class="td-end-date">
-		                    		<input type="hidden" class="input-end-date" value="${b.endDate}">
-		                    		<input type="hidden" class="input-end-time" value="${b.bookingTime}">
-		                    		<span class="span-end-date"></span>
-		                    	</td>
-		                    	<!-- 반려동물 이름 -->
-		                    	<td class="td-pet">
-		                    		<input type="hidden" class="input-pet" value="${b.petNo}">
-		                    		<span class="span-pet"></span>
-		                    	</td>
-		                    	<!-- 파트너 이름 -->
-		                    	<td class="td-partner">
-		                    		<input type="hidden" class="input-partner" value="${b.PNo}">
-		                    		<span class="span-partner"></span>
-		                    	</td>
-		                    	<!-- 이용요금 -->
-		                    	<td class="td-price">
-		                    		<input type="hidden" class="input-price" value="${b.price}">
-		                    		<span class="span-price"></span>
-		                    	</td>
-		                    	<!-- 예약상태 -->
-		                    	<td class="td-state">
-		                    		<input type="hidden" class="input-state" value="${b.partnerAccept}">
-		                    		<a href="javascript:serviceDetail('${b.bookingNo}');">
-		                    		 <c:choose>
-			                    		<c:when test="${b.partnerAccept eq 'R'}">예약대기중</c:when>
-			                    		<c:when test="${b.partnerAccept eq 'Y'}">예약완료</c:when>
-			                    		<c:when test="${b.partnerAccept eq 'C'}">취소처리중</c:when>
-			                    		<c:when test="${b.partnerAccept eq 'N'}">취소완료</c:when>
-			                    		<c:when test="${b.partnerAccept eq 'D'}">이용완료</c:when>
-			                    	 </c:choose>
-			                    	 <span class="detail-icon material-symbols-outlined">add_circle</span>
-		                    		</a>
-		                    	</td>
-		                    	<!-- 취소신청 및 취소상태 표시/후기작성 및 평점 표시하는 란 -->
-		                    	<td class="td-cancle-review">
-		                    		<input type="hidden" class="input-cancle-review" value="${b.reviewState}">
-		                    		<c:choose>
-			                    		<c:when test="${b.partnerAccept eq 'D' && b.reviewState eq 1}">
-			                    			<a href="javascript:viewReview('${b.bookingNo}');" class="a-review-rate">후기수정</a>
-			                    		</c:when>
-			                    		<c:when test="${b.partnerAccept eq 'D' && b.reviewState eq 0}">
-			                    			<a href="javascript:writeReview('${b.bookingNo}','${sessionScope.m.memberNo}','${b.PNo}','${b.petNo}');">후기작성</a>
-			                    		</c:when>
-			                    		<c:when test="${b.partnerAccept eq 'Y'}">
-			                    			<a href="javascript:cancleComment('${b.bookingNo}');">예약취소</a>
-			                    		</c:when>
-			                    		<c:when test="${b.partnerAccept eq 'R'}">
-			                    			<a href="/serviceCancle.do">신청취소</a>
-			                    		</c:when>
-			                    		<c:when test="${b.partnerAccept eq 'C'}">
-			                    			취소처리중
-			                    		</c:when>
-			                    		<c:when test="${b.partnerAccept eq 'N'}">
-			                    			취소완료
-			                    		</c:when>
-			                    	 </c:choose>
-		                    	</td>
-		                    </tr>
-		                   </c:forEach>
-		                    
-		                  </tbody>
-		                </table>
+		              <!-- 이용후기 -->
+		              <div class="review-box">
+		              	<input type="hidden" value="${fn:length(list)}" id="listLength">
+		                <c:forEach items="${list}" var="r">
+		                  <div class="review-item">
+		                  	<input type="hidden" class="input-review-no" value="${r.reviewNo}">
+		                  	<input type="hidden" class="input-booking-no" value="${r.bookingNo}">
+		                  	<input type="hidden" class="input-review-rate" value="${r.reviewRate}">
+		                  	<input type="text" class="input-star" value="" readonly>
+		                  	<input type="text" class="input-review-content" value="${r.reviewContent}" readonly>
+		                  	<input type="text" class="input-review-date" value="${r.reviewDate} 작성" readonly>
+		                  </div>
+		                </c:forEach>
 		              </div><!-- .msg-box receive종료 -->
 		            </div><!-- End #content -->
 		          </div><!-- End #content-wrap -->
@@ -238,7 +150,7 @@
 					<input type="text" name="reviewRate" id="u-rate" value="0" readonly>
 					<span class="rate-comment">*드래그해서 평점을 입력하세요</span>
 				</div>
-				<!-- 후기사진첨부 -->
+				<!-- 후기사진 -->
 				<div class="review-photo">
 					<div class="filebox clearfix">
 						<ul id="Preview-u" class="sortable"></ul>
@@ -264,7 +176,7 @@
 	</div>
 	<!-- 마이페이지 JS -->
 	<script type="text/javascript" src="/resources/js/member/mypage_nav.js"></script>
-	<script type="text/javascript" src="/resources/js/member/mypage_service.js"></script>
+	<script type="text/javascript" src="/resources/js/member/mypage_review.js"></script>
 	<!-- 푸터 -->
 	<jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
 </body>

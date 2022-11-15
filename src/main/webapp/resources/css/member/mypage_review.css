@@ -54,9 +54,23 @@
     outline: none;
 }
 
-/* 이용내역 표 */
-.service-box{
-    margin: 10px;
+/* 이용내역*/
+.review-box{
+	width: 100%;
+	overflow: hidden;
+}
+.review-item{
+    width: 40%;
+    height: 200px;
+    float: left;
+    background-color: #fff;
+    margin: 30px;
+    padding: 30px;
+    border-radius: 30px;
+}
+.review-item>input{
+	text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .service-box>table{
     width: 100%;
