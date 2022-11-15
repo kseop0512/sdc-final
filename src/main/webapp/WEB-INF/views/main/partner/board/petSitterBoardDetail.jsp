@@ -144,25 +144,25 @@
                                 <div id="map" style="width:100%;height:350px;"></div>
                                 <p class="text-muted text-end mt-1 mb-0">${detail.petsitterAddr}</p>
                             </div><!-- End sidebar categories-->
-                            <c:if test="${not empty pList}">
-                                <h3 class="sidebar-title">나의 반려동물</h3>
-                                <div class="sidebar-item">
-                                    <c:choose>
-                                        <c:when test="${fn:length(pList) == 0}">
+                            <c:choose>
+                                <c:when test="${not empty pList}">
+                                    <h3 class="sidebar-title">나의 반려동물</h3>
+                                    <div class="sidebar-item">
                                         <select class="form-select select-pet" name="selectPet" aria-label=".select-pet">
-                                            <option value="" selected>등록된 반려동물이 없습니다</option>
-                                        </select>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <select class="form-select select-pet" name="selectPet" aria-label=".select-pet">
                                             <c:forEach items="${pList}" var="pi" varStatus="i">
-                                                <option value="${pi.petName}">${pi.petName}</option>
+                                                <option value="${pi.petNo}">${pi.petName}</option>
                                             </c:forEach>
-                                            </select>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </div>
-                            </c:if>
+                                        </select>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <h3 class="sidebar-title">나의 반려동물</h3>
+                                    <div class="sidebar-item">
+                                        <p class="m-0 p-2 d-flex align-items-center justify-content-center bg-light"><small>등록된 반려동물이 없습니다.</small></p>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
+
                             
                             <h3 class="sidebar-title">이용요금</h3>
                             <div class="sidebar-item ">
@@ -181,8 +181,14 @@
                             <c:choose>
                                 <c:when test="${empty sessionScope.p and not empty sessionScope.m}">
                                     <div class="d-grid gap-2">
-                                        <button type="button" class="btn btn-warning btn-lg" onclick="requestReservation()">예약 요청</button>
+                                        <c:if test="${fn:length(pList) gt 0}">
+                                            <button type="button" class="btn btn-warning btn-lg" onclick="requestReservation()">예약 요청</button>
+                                        </c:if>
+                                        <c:if test="${fn:length(pList) lt 1}">
+                                            <button type="button" class="btn btn-warning btn-lg" disabled>반려동물을 등록하세요</button>
+                                        </c:if>
                                     </div>
+
                                 </c:when>
                                 <c:otherwise>
                                     <%--<div class="d-grid gap-2">
@@ -193,7 +199,9 @@
                                     </div>
                                 </c:otherwise>
                             </c:choose>
-
+                            <div class="side-btn-group">
+                                <button type="button" class="btn btn-dark ">문의하기</button>
+                            </div>
                         </div><!-- End sidebar -->
                     </div>
                 </div><!-- End blog sidebar -->
@@ -217,19 +225,20 @@
 
                     <div class="col-md-6">
                         <label for="memberName" class="form-label">이름</label>
-                        <input type="text" class="form-control member-name" id="memberName" value="">
+                        <input type="text" class="form-control member-name" id="memberName" name="memberName" value="">
+                        <input type="hidden" id="memberId" name="memberId"/>
                     </div>
                     <div class="col-md-6">
                         <label for="memberPhone" class="form-label">전화번호</label>
-                        <input type="text" class="form-control member-phone" id="memberPhone" value="">
+                        <input type="text" class="form-control member-phone" id="memberPhone" name="memberPhone" value="">
                     </div>
                     <div class="col-12">
                         <label for="specialRequest" class="form-label">요청사항 <small class="text-muted">(간단한 요청사항)</small></label>
-                        <textarea class="form-control" id="specialRequest" rows="3"></textarea>
+                        <textarea class="form-control" id="specialRequest" rows="3" name="specialRequest"></textarea>
                     </div>
                 </article>
                 <article class="row g-2 pt-3 pb-3 border-bottom">
-                    <h5 class="mt-3 mb-3 text-dark">파트너 정보</h5>
+                    <h5 class="mt-3 mb-3 text-dark">파트너 정보<input type="hidden" class="p-no" name="pNo"/></h5>
                     <dl class="row mb-0">
                         <dt class="col-sm-4">이름</dt>
                         <dd class="col-sm-8 partner-name"></dd>
@@ -300,22 +309,56 @@
     var orderId = new Date().getTime();
     let total;
     button.addEventListener("click", function () {
-        var method = document.querySelector('input[name=paymentMethod]:checked').value; // "카드" 혹은 "가상계좌"
 
-        var paymentData = {
-            amount: 1000,
-            orderId: orderId,
-            orderName: "SDC 서비스",
-            customerName: "SDC",
-            successUrl: window.location.origin + "/paymentSuccess.do",
-            failUrl: window.location.origin + "/paymentFail.do",
-        };
+        $("body").append("<div id='preloader'></div>");
 
-        if (method === '가상계좌') {
-            paymentData.virtualAccountCallbackUrl = window.location.origin + '/virtual-account/callback'
+        const getValue = function(name) {
+            return $("[name=" + name + "]").val();
         }
 
-        tossPayments.requestPayment(method, paymentData);
+        $.ajax({
+            type: "POST",
+            url: "/reservePetSitter.do",
+            data: {
+                memberId : getValue("memberId"),
+                pNo : getValue("pNo"),
+                petNo : getValue("selectPet"),
+                bookingPhone : getValue("memberPhone"),
+                startDate : getValue("startDate") + " " + getValue("selectCheckIn"),
+                endDate : getValue("endDate") + " " + getValue("selectCheckOut"),
+                specialRequest : getValue("specialRequest"),
+                price : total
+            },
+            success: function(result){
+                $("#preloader").remove();
+                if(result > 0) {
+                    var method = document.querySelector('input[name=paymentMethod]:checked').value; // "카드" 혹은 "가상계좌"
+
+                    var paymentData = {
+                        amount: 1000,
+                        orderId: orderId,
+                        orderName: "SDC 서비스",
+                        customerName: "SDC",
+                        successUrl: window.location.origin + "/paymentSuccess.do",
+                        failUrl: window.location.origin + "/paymentFail.do",
+                    };
+
+                    if (method === '가상계좌') {
+                        paymentData.virtualAccountCallbackUrl = window.location.origin + '/virtual-account/callback'
+                    }
+
+                    tossPayments.requestPayment(method, paymentData);
+
+                } else {
+                    alert("예약실패\n 관리자에게 문의하세요.");
+                }
+            },
+            error : function(request, status, error) {
+                $("#preloader").remove();
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
+        })
+
     });
 
     <c:set var="mLng" value="${detail.lng == null ? '126.8969784' : detail.lng}" />
@@ -371,8 +414,11 @@
             keyboard: false
         });
         paymentEl.addEventListener('show.bs.modal', function (event) {
-            console.log(event)
             const modal = $(event.target);
+            modal.find(".member-name").val("${sessionScope.m.memberName}");
+            modal.find("#memberId").val("${sessionScope.m.memberId}");
+            modal.find(".member-phone").val("${sessionScope.m.memberPhone}");
+            modal.find(".p-no").val("${detail.pNo}");
             modal.find(".partner-name").text("${detail.pName}");
             modal.find(".partner-addr").text("${detail.petsitterAddr}");
             modal.find(".partner-license").text("${detail.license}");
@@ -402,7 +448,7 @@
     var sidebar = new StickySidebar('#sidebar', {
         containerSelector: '#main-content',
         innerWrapperSelector: '.sidebar__inner',
-        topSpacing: 150,
+        topSpacing: 110,
         bottomSpacing: 20,
         resizeSensor: true
     });

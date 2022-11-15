@@ -99,4 +99,30 @@
 	<update id="updateReviewState" parameterType="r">
 		update booking_tbl set review_state='1' where booking_no=#{bookingNo}
 	</update>
+
+	<!-- 위탁 펫시터 예약 인서트 -->
+	<insert id="insertPetSitterBooking" parameterType="b">
+		insert into booking_tbl values (
+										   'BOOKING-'||BOOKING_NO_SEQ.NEXTVAL,
+										   #{memberId},
+										   #{pNo},
+										   #{petNo},
+										   sysdate,
+										   #{bookingPhone},
+										   to_date(#{startDate}, 'YYYY-MM-DD HH24:MI:SS'),
+										   to_date(#{endDate}, 'YYYY-MM-DD HH24:MI:SS'),
+										   null,
+										   #{specialRequest},
+										   0,'R','L',
+										   #{price},
+										   null
+									   )
+		<selectKey resultType="String" keyProperty="bookingNo" order="AFTER">
+			SELECT 'BOOKING-'||BOOKING_NO_SEQ.CURRVAL FROM DUAL
+		</selectKey>
+	</insert>
+	
+	<delete id="deleteBooking" parameterType="string">
+		DELETE FROM BOOKING_TBL WHERE BOOKING_NO = #{_parameter}
+	</delete>
 </mapper>

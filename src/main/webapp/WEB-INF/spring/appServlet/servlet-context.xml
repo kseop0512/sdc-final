@@ -91,5 +91,5 @@
 	<context:component-scan base-package="kr.or.booking"/>
 	<context:component-scan base-package="kr.or.pet"/>
 	<context:component-scan base-package="kr.or.review"/>
-	<context:component-scan base-package="kr.or.payment" />
+	<context:component-scan base-package="kr.or.payment.toss" />
 </beans:beans>

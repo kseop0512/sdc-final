@@ -27,7 +27,7 @@ public class PartnerBoardDao {
         return sqlSession.insert("partnerBoard.insertPartnerBoardOption", map);
     }
 
-    public int inesrtPartnerBoardFile(PartnerBoardFileVO pbf) {
+    public int insertPartnerBoardFile(PartnerBoardFileVO pbf) {
         return sqlSession.insert("partnerBoard.insertPartnerBoardFile", pbf);
     }
 

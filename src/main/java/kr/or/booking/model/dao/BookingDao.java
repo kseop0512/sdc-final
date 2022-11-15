@@ -45,4 +45,16 @@ public class BookingDao {
 		List list = sqlSession.selectList("booking.selectSitterSchedule",p);
 		return (ArrayList<Booking>)list;
 	}
+
+	public String[] insertPetSitterBooking(Booking b) {
+		int result =  sqlSession.insert("booking.insertPetSitterBooking", b);
+		String[] resultArr = new String[2];
+		resultArr[0] = String.valueOf(result);
+		resultArr[1] = b.getBookingNo();
+		return resultArr;
+	}
+
+	public int deleteFailPaymentBooking(String bookingNo) {
+		return sqlSession.delete("booking.deleteBooking", bookingNo);
+	}
 }

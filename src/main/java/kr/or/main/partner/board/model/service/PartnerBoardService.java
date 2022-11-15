@@ -29,7 +29,7 @@ public class PartnerBoardService {
             if(result[0] > 1 && !list.isEmpty()) {
                 for(PartnerBoardFileVO partnerBoardFileVo : list) {
                     partnerBoardFileVo.setPetsitterBoardNo(result[1]);
-                    result[0] += dao.inesrtPartnerBoardFile(partnerBoardFileVo);
+                    result[0] += dao.insertPartnerBoardFile(partnerBoardFileVo);
                 }
             }
         }

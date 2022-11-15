@@ -39,6 +39,14 @@ public class BookingService {
 		// TODO Auto-generated method stub
 		return dao.petSitterCalendar(p);
 	}
-	
+
 	// END 혜규 on 11/13
+
+	public String[] insertPetSitterBooking(Booking b) {
+		return dao.insertPetSitterBooking(b);
+	}
+
+	public int deleteFailedPaymentBooking(String bookingNo) {
+		return dao.deleteFailPaymentBooking(bookingNo);
+	}
 }

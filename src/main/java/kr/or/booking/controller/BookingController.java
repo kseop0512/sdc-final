@@ -15,6 +15,7 @@ import kr.or.booking.model.service.BookingService;
 import kr.or.booking.model.vo.Booking;
 import kr.or.partner.model.vo.Partner;
 
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -93,5 +94,22 @@ public class BookingController {
 	public String getSitterScheduleList(Partner p) {
 		ArrayList<Booking> lists = service.petSitterCalendar(p);
 		return new Gson().toJson(lists);
+	}
+
+	/**
+	 * 위탁 펫시터 예약
+	 * @param b
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/reservePetSitter.do")
+	public String reservePetSitter(Booking b, HttpSession session) {
+
+		String[] resultArr = service.insertPetSitterBooking(b);
+		if(resultArr[1] != null) {
+			session.setAttribute("bookingNo", resultArr[1]);
+		}
+		return resultArr[0];
 	}
 }

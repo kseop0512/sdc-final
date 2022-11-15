@@ -327,7 +327,7 @@
     var sidebar = new StickySidebar('#sidebar', {
         containerSelector: '#main-content',
         innerWrapperSelector: '.sidebar__inner',
-        topSpacing: 150,
+        topSpacing: 110,
         bottomSpacing: 20,
         resizeSensor: true
     });

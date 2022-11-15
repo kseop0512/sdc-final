@@ -91,6 +91,7 @@
 	</select>
 	<select id="selectPetSitterBoard" parameterType="hashmap" resultMap="getBoard">
 		SELECT
+		    	p.P_NO,
 				SUBSTR(p.p_name,1,1) || LPAD('*', LENGTH(p.p_name)-2, '*') || SUBSTR(p_name, LENGTH(p.p_name), 1) AS p_name,
 				p.P_GENDER,
 				p.PROFILE_PATH,
@@ -121,6 +122,7 @@
 		WHERE p.P_NO = ppb.P_NO AND ppb.PETSITTER_BOARD_NO = #{petsitterBoardNo}
 	</select>
 	<resultMap type="Map" id="getBoard">
+		<result column="p_no" property="pNo"/>
 		<result column="p_name" property="pName"/>
 		<result column="p_gender" property="pGender"/>
 		<result column="profile_path" property="profilePath"/>
