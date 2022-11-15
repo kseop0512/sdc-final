@@ -43,7 +43,49 @@
 		            <div id="content">
 		              <!-- 상세보기 -->
 		              <div class="service-box">
-		                
+		              	<div id="service-category">
+		              		<input type="hidden" value="${b.category }">
+		              		<div id="leave">위탁돌봄</div>
+		              		<div id="teach">훈련</div>
+		              	</div>
+		              	<div class="pet">
+		                	서비스받는 똑독캣 : ${b.petNo }
+		                </div>
+		              	<div id="booking-info">
+		              		<div class="special-request">
+		              			요청사항 :
+		              			<c:choose>
+		              				<c:when test="${b.specialRequest eq null}">
+		              					<textarea readonly>없음</textarea>
+		              				</c:when>
+		              				<c:otherwise>
+		              					<textarea readonly>${b.specialRequest }</textarea>
+		              				</c:otherwise>
+		              			</c:choose>
+		              			
+		              		</div>
+		              		<div class="price">
+			                	서비스요금 : ${b.price }
+			                </div>
+		              		<div class="booked-date">
+			                	예약일 : ${b.bookedDate }
+			                </div>
+			                <div class="booking-phone">
+			                	안내받을 연락처 : ${b.bookingPhone }
+			                </div>
+		              	</div>
+		                <div id="service-info">
+				            <div class="service-date">
+		                		<c:choose>
+				                	<c:when test="${b.endDate eq null}">
+					                	서비스이용일 : ${b.startDate } (${b.bookingTime })
+				                	</c:when>
+				                	<c:otherwise>
+				                		서비스이용일 : ${b.startDate } ~ ${b.endDate }
+				                	</c:otherwise>
+		                		</c:choose>
+		                	</div>
+		                </div>
 		              </div>
 		            </div><!-- End #content -->
 		          </div><!-- End #content-wrap -->
