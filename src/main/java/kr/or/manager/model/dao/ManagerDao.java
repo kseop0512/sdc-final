@@ -202,6 +202,11 @@ public class ManagerDao {
 		return (ArrayList<Booking>)list;
 	}
 
+	public int bookingCount() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("manager.bookingCount");
+	}
+
 	
 
 

@@ -437,4 +437,7 @@
 			</when>
 		</choose>
 	</select>
+	<select id="bookingCount" resultType="int">
+		select count(*) from booking_tbl WHERE category != 'V'
+	</select>
 </mapper>
