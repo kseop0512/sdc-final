@@ -67,4 +67,8 @@ public class MemberDao {
 		return sqlSession.update("member.updatePw", m);
 	}
 
+	public int deleteMember(int memberNo) {
+		return sqlSession.delete("member.deleteMember", memberNo);
+	}
+
 }
