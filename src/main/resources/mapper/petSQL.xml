@@ -113,8 +113,6 @@
 			round(avg(inde),0) as inde
 			from pet_chklist
 	</select>
-
-	
 	<select id="selectOnePet" parameterType="int" resultType="pet">
 		select
 			pet_no as petNo,
@@ -194,7 +192,7 @@
 		delete from pet_tbl where pet_no=#{_parameter}
 	</delete>
 
-	<select id="selectOnePet" parameterType="p" resultType="pp">
+	<select id="selectOnePetforPartner" parameterType="p" resultType="pp">
 		select
 			pet_name as petName,
 			pet_gender as petGender,
