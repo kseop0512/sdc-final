@@ -75,9 +75,6 @@ $(function(){
 	}
 	
 	//후기작성한 서비스는 예약번호로 후기평점 가져오기
-	console.log($("#listLength").val());
-	console.log((".input-cancle-review").length);
-	console.log((".input-booking-no").length);
 	for(let i=0;i<$("#listLength").val();i++){
 		if($(".input-cancle-review").eq(i).val() == '1'){
 			const bookingNo = $(".input-booking-no").eq(i).val();
