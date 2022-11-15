@@ -61,6 +61,24 @@ public class ManagerDao {
 		List list = sqlSession.selectList("manager.searchPartner",map);
 		return (ArrayList<Member>)list;
 	}
+	///////////////////////////////
+	public ArrayList<Member> selectmember(String membertab) {
+		List list = sqlSession.selectList("manager.selectmember",membertab);
+		return (ArrayList<Member>)list;
+	}
+	
+	public ArrayList<Member> selectpartner(String membertab) {
+		List list = sqlSession.selectList("manager.selectpartner", membertab);
+		return (ArrayList<Member>)list;
+	}
+
+	
+	public ArrayList<Member> allUser(String membertab) {
+		List list = sqlSession.selectList("manager.alluser",membertab);
+		return (ArrayList<Member>)list;
+	}
+	
+//////////////////////////////////////////////////////
 	//엑셀 다운 회원전체 조회
 	public ArrayList<Member> selectMemberPartnerList() {
 		List list = sqlSession.selectList("manager.memberPartnerList");
@@ -174,6 +192,7 @@ public class ManagerDao {
 		return  sqlSession.selectOne("manager.bookingDetail",bookingNo);
 	}
 
+	
 
 
 }

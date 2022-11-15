@@ -72,5 +72,10 @@ public class MemberService {
 	public int updatePwEncMember(Member m) {
 		return dao.updatePwMember(m);
 	}
+
+	@Transactional
+	public int deleteMember(int memberNo) {
+		return dao.deleteMember(memberNo);
+	}
 	
 }

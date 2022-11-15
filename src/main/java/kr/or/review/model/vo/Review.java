@@ -1,5 +1,8 @@
 package kr.or.review.model.vo;
 
+import java.util.ArrayList;
+
+import kr.or.partner.model.vo.PartnerFileVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +19,5 @@ public class Review {
 	private int reviewRate;
 	private String reviewContent;
 	private String reviewDate;
-	private String reviewFilename;
-	private String reviewFilepath;
+	private ArrayList<ReviewFileVO> fileList;
 }

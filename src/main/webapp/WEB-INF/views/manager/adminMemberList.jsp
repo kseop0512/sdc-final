@@ -33,54 +33,35 @@
             </ul>
         </nav>
         <div id="layoutSidenav">
-			<div id="layoutSidenav_nav">
+					<div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">홈</div>
                             <a class="nav-link" href="/adminIndex.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                               	 마이페이지
+                              	  마이페이지
                             </a>
                             <div class="sb-sidenav-menu-heading">메뉴</div>
+                              <a class="nav-link" href="/selectUserList.do">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                	회원리스트
+                            </a>
                             <a class="nav-link collapsed" href="/adminMemberList.do" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                               	 유저관리
+                               	 파트너관리
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/adminMemberList.do">유저리스트</a>
-									 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        	파트너관리
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="/partnerList.do">파트너승인</a>
+                                    <a class="nav-link" href="/partnerList.do">파트너승인</a>
                                             <a class="nav-link" href="/getPartner.do">파트너리스트</a>
-                                        </nav>
-                                    </div>
                                 </nav>
                             </div>
-
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                	예약관리
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            <a class="nav-link" href="/trainerBooking.do">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                	예약내역
                             </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link " href="/bangMoon.do" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        	방문예약
-                                    </a>
-                                    <a class="nav-link collapsed " href="/trainerBooking.do" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        	위탁/훈련
-                                    </a>
-                                </nav>
-                            </div>
-                            
-                            
                             <a class="nav-link" href="/adminDmMessage.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 1:1문의내역
@@ -135,17 +116,25 @@
                                                     <option value="name">이름</option>
                                                     <option value="id">아이디</option>
                                                 </select>
-                                                    <input class="input-form2" type="text" name="keyword" placeholder="입력하세요" style="width: 500px;">
+                                                    <input class="input-form2" type="text" name="keyword" placeholder="입력하세요" style="width: 500px;" value="${keyword }">
                                                     <button class="bc22" type="submit" id="sb">검색</button>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
+                                 
+                                  <select name="membertab" onchange="selectAll(this)">
+                                  <option value="tabAll" id="all">선택</div>
+                                    <option value="tabAllMember" id="all">전체</div>
+                                    <option value="tabMember" id="member" class="active-tap">이용자</div>
+                                	<option value="tabPartner" id="partner">파트너</div>
+                               	 </select>
+                               	    	                           
+                                <table id="datatablesSimple">
                                 <form action="/excelDown.do" method="get">
 	                                <div id="memberlist-btn">
 	                                    <button type="submit" class="btn bc22 bs4">다운로드</button>
 	                                </div>
-                                <table id="datatablesSimple">
                                     <thead>
                                         <tr>
                                             <th>아이디</th>
@@ -169,6 +158,7 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                
                                     <c:forEach items="${list }" var="m">
                                         <tr>
                                             <td>${m.memberId }</td>
@@ -177,9 +167,9 @@
                                             <td>${m.memberPhone}</td>
                                             <td>${m.memberAddr}</td>
                                             <td>${m.memberEnrollDate}</td>
-                                            
                                         </tr>
                                      </c:forEach>
+                           
                                     </tbody>
                                 </table>
                                 </form>

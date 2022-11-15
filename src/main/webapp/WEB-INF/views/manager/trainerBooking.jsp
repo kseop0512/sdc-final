@@ -42,58 +42,41 @@
             </ul>
         </nav>
         <div id="layoutSidenav">
-			<div id="layoutSidenav_nav">
+					<div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">홈</div>
                             <a class="nav-link" href="/adminIndex.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                               	 마이페이지
+                              	  마이페이지
                             </a>
                             <div class="sb-sidenav-menu-heading">메뉴</div>
+                              <a class="nav-link" href="/selectUserList.do">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                	회원리스트
+                            </a>
                             <a class="nav-link collapsed" href="/adminMemberList.do" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                               	 유저관리
+                               	 파트너관리
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/adminMemberList.do">유저리스트</a>
-                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        	파트너관리
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="/partnerList.do">파트너승인</a>
-                                            <a class="nav-link" href="/getPartner.do">등급관리</a>
-                                        </nav>
-                                    </div>
-                                    
+                                    <a class="nav-link" href="/partnerList.do">파트너승인</a>
+                                            <a class="nav-link" href="/getPartner.do">파트너리스트</a>
                                 </nav>
                             </div>
-                 			<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                	예약관리
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            <a class="nav-link" href="/trainerBooking.do">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                	예약내역
                             </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="/bangMoon.do" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        	방문예약
-                                    </a>
-                                    <a class="nav-link collapsed" href="/trainerBooking.do" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        	위탁/훈련
-                                    </a>
-                                </nav>
-                            </div>
                             <a class="nav-link" href="/adminDmMessage.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 1:1문의내역
                             </a>
                             <div class="sb-sidenav-menu-heading">게시판</div>
-                            <a class="nav-link" href="/adminNotice.do">
+                            <a class="nav-link" href="/adminNotice.do?reqPage=1">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 	공지사항
                             </a>
@@ -142,6 +125,7 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
+                                            <th>카테고리</th>
                                             <th>아이디</th>
                                             <th>전화번호</th>
                                             <th>예약일</th>
@@ -154,6 +138,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
+                                            <th>카테고리</th>
                                             <th>아이디</th>
                                             <th>전화번호</th>
                                             <th>예약일</th>
@@ -167,11 +152,19 @@
                                     <c:forEach items="${list }" var="b">
                                         <tr>
                                             <td>${b.bookingNo }</td>
+                                            <td> <c:choose>
+                                            	<c:when test="${b.category eq 'T'}">
+                                            		훈련
+                                            	</c:when>
+                                            	<c:when test="${b.category eq 'L'}">
+                                            		위탁
+                                            	</c:when>
+                                            </c:choose></td>
                                             <td style="font-weight: 900; cursor: pointer;">
                                             	<div onclick="modal(this);">${b.memberId }</div>
                                             </td>
                                             <td>${b.bookingPhone }</td>
-                                            <td>${b.bookingDate }</td>
+                                            <td>${b.bookedDate }</td>
                                             <td>${b.startDate }</td>
                                             <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${b.price }"/></td>
 <%--                                             <td><div style="overflow: hidden; width: 400px; text-overflow: ellipsis; white-space: nowrap;">${b.cancleComment }</div></td> --%>

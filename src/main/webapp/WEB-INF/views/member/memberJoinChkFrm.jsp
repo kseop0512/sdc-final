@@ -24,20 +24,25 @@ h4{
 textarea{
 	resize: none;
 	width: 850px;
-	background: rgb(255 191 74);
+	background: rgb(255 210 129);
+}
+textarea::-webkit-scrollbar{
+	display:none;
 }
 .joinBtn-wrap{
 	display: flex;
     justify-content: center;
-    margin-bottom: 50px;
+    margin-bottom: 80px;
+    margin-top: -20px;
+    font-size: 20px;
 }
 #backBtn{
-	background-color: lightgray; 
-	font-weight:bolder; 
-	border:2px solid white;
-	border-right: 2px;
-	width: 150px;
-	height: 50px;
+	background-color: lightgray;
+    font-weight: bolder;
+    border: 2px solid white;
+    border-right: 2px;
+    width: 425px;
+    height: 70px;
 }
 #backBtn:hover{
 	color:white;
@@ -48,8 +53,8 @@ textarea{
     color: white;
     font-weight: bolder;
     border: 2px solid white;
-    width: 150px;
-    height: 50px;
+    width: 425px;
+    height: 70px;
 }
 #joinBtn:hover{
 	background-color:#ffb347;
@@ -64,7 +69,7 @@ textarea{
 	<div id="joinAllCheck" style="font-size:18px;font-weight:bolder">전체동의 <span style="font-size:18px;font-weight:normal">이용약관(필수), 개인정보 수집 및 이용 안내(필수), 개인정보 수집 및 이용 안내(선택)에 모두 동의합니다.</span><input type="checkbox" id="allChk"></div>
 	<hr>
 	<h4 style="position: relative;left: -320px">이용약관동의<span class="mandChk" style="color: red">(필수)</span><input type="checkbox" class="chk"></h4>
-	<textarea style="border: 1px solid black;height:250px;"readonly>
+	<textarea style="border: 1px solid black;height:300px;"readonly>
 	
   ③ “똑독캣”의 승낙의 의사표시에는 이용자의 구매 신청에 대한 확인 및 판매가능 여부, 구매신청의 정정 취소 등에 관한 정보 등을 포함하여야 합니다.
  

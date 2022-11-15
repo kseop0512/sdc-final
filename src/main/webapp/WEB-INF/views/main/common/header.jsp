@@ -20,7 +20,7 @@
                     <li><a href="/partnerMain.do">마이페이지</a></li>
                 </c:when>
                 <c:when test="${not empty sessionScope.g }">
-                    <li><a href="/selectUserList.do">마이페이지</a></li>
+                    <li><a href="/adminIndex.do">마이페이지</a></li>
                 </c:when>
                 <c:otherwise>
                     <li><a href="/memberJoinChkFrm.do">회원가입</a></li>
@@ -28,7 +28,7 @@
                 </c:choose>
                 <c:choose>
                 <c:when test="${not empty sessionScope.g }">
-					<li><a href="/selectUserList.do">Manager</a></li>
+					<li><a href="/adminIndex.do">Manager</a></li>
 				</c:when>
 				<c:otherwise>
 					<li><a href="/loginManagerFrm.do">Manager</a></li>
