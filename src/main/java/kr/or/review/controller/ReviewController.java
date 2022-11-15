@@ -62,10 +62,10 @@ public class ReviewController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				ReviewFileVO fv = new ReviewFileVO();
-				fv.setImgName(filename);
-				fv.setImgPath(filepath);
-				fileList.add(fv);
+				ReviewFileVO rv = new ReviewFileVO();
+				rv.setImgName(filename);
+				rv.setImgPath(filepath);
+				fileList.add(rv);
 			}
 		}
 		r.setFileList(fileList);
