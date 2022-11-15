@@ -232,7 +232,7 @@
                                     <label class="form-check-label" for="license4">반려동물관리사/행동교정사</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox"  id="license5" value="KPA 수료증 (CTP, Foundation 등)">
+                                    <input class="form-check-input" type="checkbox"  id="license5" value="KPA 수료증 (CTP / Foundation 등)">
                                     <label class="form-check-label" for="license5">KPA 수료증 (CTP, Foundation 등)</label>
                                 </div>
                             </div>
