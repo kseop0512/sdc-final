@@ -182,7 +182,9 @@ public class ManagerController {
 	}
 	//관리자 index P이동
 	@RequestMapping(value="/adminIndex.do")
-	public String adminIndex() {
+	public String adminIndex(Model model) {
+		ArrayList<Partner> list = service.pointPartner();
+		model.addAttribute("list",list);
 		return "manager/adminIndex";
 	}
 
@@ -385,7 +387,13 @@ public class ManagerController {
 		Booking b = service.bookingDetail(bookingNo);
 		return new Gson().toJson(b);
 	}
-	
+	//예약 검색
+	@RequestMapping(value="/searchBooking.do")
+	public String searchBooking(String type, String keyword,Model model) {
+		ArrayList<Booking> list = service.searchBooking(type,keyword);
+		model.addAttribute("list",list);
+		return "manager/trainerBooking";
+	}
 
 
 }

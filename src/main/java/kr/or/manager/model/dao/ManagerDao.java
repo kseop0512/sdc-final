@@ -192,6 +192,16 @@ public class ManagerDao {
 		return  sqlSession.selectOne("manager.bookingDetail",bookingNo);
 	}
 
+	public ArrayList<Partner> pointPartner() {
+		List list = sqlSession.selectList("manager.pointPartner"); 
+		return (ArrayList<Partner>)list;
+	}
+//예약검색
+	public ArrayList<Booking> searchBooking(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("manager.searchBooking",map);
+		return (ArrayList<Booking>)list;
+	}
+
 	
 
 
