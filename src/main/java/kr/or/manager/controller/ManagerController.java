@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -89,17 +90,27 @@ public class ManagerController {
 	//유저리스트 회원 수 
 	@RequestMapping(value="/selectUserList.do")
 	public String selectUserList(Model model,Member m) {
-		int result = service.selectMemberList();
-		int result2 = service.selectPartnerList();
-		int result3 = service.selectTotalMember();
-		model.addAttribute("memberCount", result);
-		model.addAttribute("partnerCount", result2);
-		model.addAttribute("totalCount",result3);
-			
-		ArrayList<Member> list = service.selectMemberPartnerList(m);
-		model.addAttribute("list",list);
+		HashMap<String,Object> map = service.selectMemberPartnerList(m);
+		model.addAttribute("list",map.get("list"));
+		model.addAttribute("memberCount",map.get("memberCount"));
+		model.addAttribute("partnerCount",map.get("partnerCount"));
+		model.addAttribute("totalCount",map.get("totalCount"));
+		
 		return "manager/adminMemberList";
 	}
+	
+	@RequestMapping(value="/selectmember.do")
+	public String selectmember(String membertab, Model model) {
+		
+		HashMap<String,Object> map  = service.selectmember(membertab);
+		model.addAttribute("list",map.get("list"));
+		model.addAttribute("memberCount",map.get("memberCount"));
+		model.addAttribute("partnerCount",map.get("partnerCount"));
+		model.addAttribute("totalCount",map.get("totalCount"));
+		
+		return "manager/adminMemberList";
+	}
+	
 	//관리자P 공지사항 이동
 	@RequestMapping(value="/adminNotice.do")
 	public String adminNotice(int reqPage, Model model) {
@@ -150,18 +161,24 @@ public class ManagerController {
 	//관리자p 회원관리 검색
 	@RequestMapping(value="/searcMember.do")
 	public String searchMember(String memberType,String type, String keyword, Model model) {
-		int result = service.selectMemberList();
-		int result2 = service.selectPartnerList();
-		int result3 = service.selectTotalMember();
-		model.addAttribute("memberCount", result);
-		model.addAttribute("partnerCount", result2);
-		model.addAttribute("totalCount",result3);
-		
-		ArrayList<Member> list = service.searchMember(memberType,type,keyword);
-		model.addAttribute("list",list);
+//		int result = service.selectMemberList();
+//		int result2 = service.selectPartnerList();
+//		int result3 = service.selectTotalMember();
+//		model.addAttribute("memberCount", result);
+//		model.addAttribute("partnerCount", result2);
+//		model.addAttribute("totalCount",result3);
+//		model.addAttribute("keyword",keyword);
+//		
+		HashMap<String,Object> map = service.searchMember(memberType,type,keyword);
+		model.addAttribute("list",map.get("list"));
+		model.addAttribute("memberCount",map.get("memberCount"));
+		model.addAttribute("partnerCount",map.get("partnerCount"));
+		model.addAttribute("totalCount",map.get("totalCount"));
+		model.addAttribute("keyword",map.get("keyword"));
 		return "manager/adminMemberList";
 			
 	}
+	
 	
 	//유저리스트 회원 엑셀다운로드
 	@RequestMapping(value="/excelDown.do")
@@ -380,6 +397,8 @@ public class ManagerController {
 		Booking b = service.bookingDetail(bookingNo);
 		return new Gson().toJson(b);
 	}
+	
+
 
 }
 

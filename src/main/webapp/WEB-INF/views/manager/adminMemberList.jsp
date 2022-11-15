@@ -135,17 +135,25 @@
                                                     <option value="name">이름</option>
                                                     <option value="id">아이디</option>
                                                 </select>
-                                                    <input class="input-form2" type="text" name="keyword" placeholder="입력하세요" style="width: 500px;">
+                                                    <input class="input-form2" type="text" name="keyword" placeholder="입력하세요" style="width: 500px;" value="${keyword }">
                                                     <button class="bc22" type="submit" id="sb">검색</button>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
+                                 
+                                  <select name="membertab" onchange="selectAll(this)">
+                                  <option value="tabAll" id="all">선택</div>
+                                    <option value="tabAllMember" id="all">전체</div>
+                                    <option value="tabMember" id="member" class="active-tap">이용자</div>
+                                	<option value="tabPartner" id="partner">파트너</div>
+                               	 </select>
+                               	    	                           
+                                <table id="datatablesSimple">
                                 <form action="/excelDown.do" method="get">
 	                                <div id="memberlist-btn">
 	                                    <button type="submit" class="btn bc22 bs4">다운로드</button>
 	                                </div>
-                                <table id="datatablesSimple">
                                     <thead>
                                         <tr>
                                             <th>아이디</th>
@@ -169,6 +177,7 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                
                                     <c:forEach items="${list }" var="m">
                                         <tr>
                                             <td>${m.memberId }</td>
@@ -177,9 +186,9 @@
                                             <td>${m.memberPhone}</td>
                                             <td>${m.memberAddr}</td>
                                             <td>${m.memberEnrollDate}</td>
-                                            
                                         </tr>
                                      </c:forEach>
+                           
                                     </tbody>
                                 </table>
                                 </form>

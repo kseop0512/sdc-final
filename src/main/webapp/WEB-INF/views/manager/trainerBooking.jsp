@@ -142,6 +142,7 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
+                                            <th>카테고리</th>
                                             <th>아이디</th>
                                             <th>전화번호</th>
                                             <th>예약일</th>
@@ -154,6 +155,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
+                                            <th>카테고리</th>
                                             <th>아이디</th>
                                             <th>전화번호</th>
                                             <th>예약일</th>
@@ -167,11 +169,19 @@
                                     <c:forEach items="${list }" var="b">
                                         <tr>
                                             <td>${b.bookingNo }</td>
+                                            <td> <c:choose>
+                                            	<c:when test="${b.category eq 'T'}">
+                                            		훈련
+                                            	</c:when>
+                                            	<c:when test="${b.category eq 'L'}">
+                                            		위탁
+                                            	</c:when>
+                                            </c:choose></td>
                                             <td style="font-weight: 900; cursor: pointer;">
                                             	<div onclick="modal(this);">${b.memberId }</div>
                                             </td>
                                             <td>${b.bookingPhone }</td>
-                                            <td>${b.bookingDate }</td>
+                                            <td>${b.bookedDate }</td>
                                             <td>${b.startDate }</td>
                                             <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${b.price }"/></td>
 <%--                                             <td><div style="overflow: hidden; width: 400px; text-overflow: ellipsis; white-space: nowrap;">${b.cancleComment }</div></td> --%>

@@ -9,3 +9,14 @@ $("#sb").on("click",function(){
 
 });
 
+
+function selectAll(obj){
+
+	const membertab = $("[name=membertab]").val();	
+	console.log(membertab);
+	
+	location.href="/selectmember.do?membertab="+membertab;
+
+	
+
+}
