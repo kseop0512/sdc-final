@@ -9,7 +9,93 @@
     <title>똑독캣 (SDC) | 펫시터, 훈련사, 그루머 예약서비스</title>
     <jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
     <link rel="stylesheet" href="/resources/css/main/style-partner.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <style>
+        .msg-modal{
+            position: fixed;
+            width: 500px;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #fff;
+            color: #000;
+            border-radius: 20px;
+            box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+        /* 모달창 헤드 */
+        .msg-modal-head{
+            /*height: 40px;*/
+            padding:13px 15px 10px 20px;
+            background-color: #ffb347;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            overflow: hidden;
+        }
+        #msg-modal-title{
+            float: left;
+            color: #fff;
+            font-size: 20px;
+        }
+        .modal-close{
+            cursor:pointer;
+        }
+        /* 모달창 컨텐츠 */
+        .msg-modal-content{
+            padding: 20px 30px;
+        }
+        .msg-modal-content input[type=text]{
+            border: 0;
+            background-color: transparent;
+            color: #000;
+        }
+        .msg-modal-content textarea{
+            width: 100%;
+            height: 400px;
+            resize: none;
+            padding: 15px;
+            border-radius: 15px;
+            font-size: 15px;
+        }
+        .msg-modal-content input:focus, .msg-modal-content textarea:focus{
+            outline: none;
+        }
+        .msg-info>span{
+            font-weight: bold;
+            padding-right: 10px;
+        }
+        .msg-info>input{
+            margin-left: 5px;
+        }
+        .msg-modal-content>.msg-sender{
+            margin-bottom: 10px;
+        }
+        /* 모달창 답장버튼 */
+        .msg-modal-content>.msg-btn-wrap{
+            display: flex;
+            justify-content: center;
+            margin: 0;
+        }
+        .msg-btn-wrap>input{
+            width: 130px;
+            height: 55px;
+            border: 0;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #ffb347;
+            text-align: center;
+        }
+        .msg-btn-wrap>input:hover{
+            cursor: pointer;
+            background-color: #ffcc33;
+            color: #000;
+            transition-duration: 0.8s;
+        }
+    </style>
 </head>
+
 <body>
 <jsp:include page="/WEB-INF/views/main/common/header.jsp"/>
 <div id="preloader"></div>
@@ -155,12 +241,12 @@
                                         </select>
                                     </div>
                                 </c:when>
-                                <c:otherwise>
+                                <c:when test="${not empty sessionScope.m}">
                                     <h3 class="sidebar-title">나의 반려동물</h3>
                                     <div class="sidebar-item">
                                         <p class="m-0 p-2 d-flex align-items-center justify-content-center bg-light"><small>등록된 반려동물이 없습니다.</small></p>
                                     </div>
-                                </c:otherwise>
+                                </c:when>
                             </c:choose>
 
                             
@@ -191,24 +277,51 @@
 
                                 </c:when>
                                 <c:otherwise>
-                                    <%--<div class="d-grid gap-2">
-                                        <button type="button" class="btn btn-warning btn-lg" onclick="requestReservation()">예약 요청</button>
-                                    </div>--%>
                                     <div class="d-grid gap-2">
                                         <button type="button" class="btn btn-warning btn-lg" disabled>이용자 로그인이 필요합니다</button>
                                     </div>
                                 </c:otherwise>
                             </c:choose>
-                            <div class="side-btn-group">
-                                <button type="button" class="btn btn-dark ">문의하기</button>
-                            </div>
+                            <c:if test="${not empty sessionScope.m}">
+                                <div class="side-btn-group">
+                                    <button type="button" class="btn btn-dark " onclick="showContactUs()">문의하기</button>
+                                </div>
+                            </c:if>
+
                         </div><!-- End sidebar -->
                     </div>
                 </div><!-- End blog sidebar -->
             </div>
         </div>
     </section><!-- End Blog Section -->
-
+    <!-- 문의하기 modal -->
+    <div class="msg-modal d-none">
+        <div class="msg-modal-head d-flex justify-content-between align-items-center">
+            <span id="msg-modal-title">문의하기</span>
+            <span class="modal-close fs-3"><i class="bi bi-x-circle"></i></span>
+        </div>
+        <form action="/insertPartnerDm.do" method="post" id="dmForm">
+            <div class="msg-modal-content">
+                <div class="msg-info msg-sender">
+                    <span><span class="text-muted me-1">From:</span> ${sessionScope.m.memberId}</span>
+                    <input type="hidden" name="sender" value="${sessionScope.m.memberId}">
+                </div>
+                <div class="msg-info msg-date mb-3">
+                    <span><span class="text-muted me-1">To:</span> ${detail.pName} 펫시터 님</span>
+                    <input type="hidden" name="receiver" value="${detail.pNo}">
+                </div>
+                <div class="msg-content position-relative">
+                    <textarea id="reply-msg" name="dmContent" placeholder="" required></textarea>
+                    <small class="text-muted note-placeholder" style="position:absolute;top:20px;left:20px;"> 내용을 입력해주세요.<br>※ 광고, 도배, 욕설, 비방 등<br>서비스와 무관한 내용 작성시<br>신고 및 무통보 삭제될 수 있습니다.</small>
+                </div>
+                <div class="msg-btn-wrap mt-4">
+                    <input type="hidden" name="pBoardNo" value="<c:out value="${param.petsitterBoardNo}"/>">
+                    <input type="submit" id="submit-btn" value="문의하기">
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- // 문의하기 modal -->
 </main>
 <!-- payment Modal -->
 <div class="modal fade" id="paymentModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="paymentModalLabel" aria-hidden="true">
@@ -302,7 +415,30 @@
 <script src="/resources/js/sticky-sidebar.js"></script>
 <script src="https://js.tosspayments.com/v1"></script>
 <script>
-
+    function showContactUs() {
+        const msgModal = $(".msg-modal");
+        const closeBtn = msgModal.find(".modal-close");
+        const msgContent = msgModal.find(".msg-content");
+        const msgArea = msgModal.find("textarea");
+        msgModal.removeClass("d-none");
+        msgContent.on("click", function() {
+            $(this).find("textarea").focus();
+        });
+        msgArea.on({
+            "focus" : function() {
+                $(".note-placeholder").addClass("d-none");
+            },
+            "focusout" : function (){
+                if($(this).val() == "") {
+                    $(".note-placeholder").removeClass("d-none");
+                }
+            }
+        })
+        closeBtn.on("click", function() {
+            msgArea.val("").focusout();
+            msgModal.addClass("d-none");
+        })
+    }
     var tossPayments = TossPayments("test_ck_5mBZ1gQ4YVX72jPObvZ3l2KPoqNb");
     var button = document.getElementById("payment-button");
 
@@ -335,7 +471,7 @@
                     var method = document.querySelector('input[name=paymentMethod]:checked').value; // "카드" 혹은 "가상계좌"
 
                     var paymentData = {
-                        amount: 1000,
+                        amount: total,
                         orderId: orderId,
                         orderName: "SDC 서비스",
                         customerName: "SDC",

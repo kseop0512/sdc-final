@@ -175,7 +175,7 @@ public class DirectMessageController {
 	
 	// 혜규 on 11/14
 	@RequestMapping(value="/insertPartnerDm.do")
-	public String insertPartnerDm(DirectMessage dm, String tBoardNo, Model model) {
+	public String insertPartnerDm(DirectMessage dm, String tBoardNo, String pBoardNo, Model model) {
 		int result = service.insertPartnerDm(dm);
 		if(result>0) {
 			model.addAttribute("title","문의하기 완료");
@@ -186,7 +186,11 @@ public class DirectMessageController {
 			model.addAttribute("msg","다시 시도해보세요!");
 			model.addAttribute("icon","error");
 		}
-		model.addAttribute("redirect:/oneTrainer.do?tBoardNo="+tBoardNo);
+		if(tBoardNo != null) {
+			model.addAttribute("loc","/oneTrainer.do?tBoardNo="+tBoardNo);
+		} else if ( pBoardNo != null ){
+			model.addAttribute("loc","/petSitterBoardDetail.do?petsitterBoardNo=" + pBoardNo);
+		}
 		return "common/msg";
 	}
 	// end 혜규 on 11/14
