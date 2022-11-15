@@ -62,9 +62,21 @@
 	<update id="updateReview" parameterType="r">
 		update review_tbl set
 			review_rate = #{reviewRate},
-			review_content = #{reviewContent},
-			review_filename = #{reviewFilename},
-			review_filepath = #{reviewFilepath}
+			review_content = #{reviewContent}
 		where booking_no=#{bookingNo}
 	</update>
+	
+	<select id="selectReviewList" parameterType="m" resultType="r">
+		select
+			review_no as reviewNo,
+			booking_no as bookingNo,
+			member_no as memberNo,
+			p_no as pNo,
+			pet_no as petNo,
+			review_rate as reviewRate,
+			review_content as reviewContent,
+			review_date as reviewDate
+		from review_tbl
+		where member_no=#{memberNo}
+	</select>
 </mapper>

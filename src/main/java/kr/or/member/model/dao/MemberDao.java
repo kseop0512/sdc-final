@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.booking.model.vo.Booking;
 import kr.or.dm.model.vo.DirectMessage;
 import kr.or.member.model.vo.Member;
+import kr.or.review.model.vo.Review;
 
 @Repository
 public class MemberDao {
@@ -69,6 +70,15 @@ public class MemberDao {
 
 	public int deleteMember(int memberNo) {
 		return sqlSession.delete("member.deleteMember", memberNo);
+	}
+
+	public Booking selectOneBooking(String bookingNo) {
+		return sqlSession.selectOne("booking.selectOneBooking",bookingNo);
+	}
+
+	public ArrayList<Review> selectReviewList(Member m) {
+		List list = sqlSession.selectList("review.selectReviewList", m);
+		return (ArrayList<Review>) list;
 	}
 
 }

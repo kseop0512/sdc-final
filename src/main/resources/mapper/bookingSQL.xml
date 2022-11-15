@@ -10,7 +10,7 @@
 		WHERE P_NO=#{PNo} AND START_DATE=#{startDate}
 	</select>
 	
-	<!-- '이용완료' 반영이 필요한 예약목록 조회(서비스이용일이 현재날짜보다 이전이면 갖고오기) -->
+	<!-- '이용완료' 반영이 필요한 예약목록의 booking_no 조회(서비스이용일이 현재날짜보다 이전이면 갖고오기) -->
 	<select id="selectDoneBookingList" parameterType="m" resultType="b">
 		select booking_no as bookingNo
 		from booking_tbl
@@ -37,8 +37,8 @@
 			p_no as pNo,
 			pet_no as petNo,
 			booked_date as bookedDate,
-			to_char(start_date,'yy/mm/dd') as startDate,
-			to_char(end_date,'yy/mm/dd') as endDate,
+			to_char(start_date,'yy/mm/dd (hh:mi)') as startDate,
+			to_char(end_date,'yy/mm/dd (hh:mi)') as endDate,
 			booking_time as bookingTime,
 			special_request as specialRequest,
 			review_state as reviewState,
@@ -48,6 +48,26 @@
 		from booking_tbl
 		where member_id=#{memberId}
 		order by booked_date desc
+	</select>
+	
+	<!-- 선택한 이용내역 상세조회 -->
+	<select id="selectOneBooking" parameterType="string" resultType="b">
+		select
+			booking_no as bookingNo,
+			member_id as memberId,
+			p_no as pNo,
+			pet_no as petNo,
+			booked_date as bookedDate,
+			to_char(start_date,'yy/mm/dd (hh:mi)') as startDate,
+			to_char(end_date,'yy/mm/dd (hh:mi)') as endDate,
+			booking_time as bookingTime,
+			special_request as specialRequest,
+			review_state as reviewState,
+			partner_accept as partnerAccept,
+			category,
+			price
+		from booking_tbl
+		where booking_no=#{_parameter}
 	</select>
 	
 	<!--  파트너 예약요청 리스트 조회 (혜규 on 11/13) -->

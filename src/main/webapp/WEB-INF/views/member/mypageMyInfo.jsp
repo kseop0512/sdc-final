@@ -22,12 +22,11 @@
 				<div id="mypage-nav">
 					<ul>
 						<li><a href="/memberMypage.do" class="active">나의 정보</a></li>
-						<li><a href="/mypageMyPet.do">나의 똑독캣</a></li>
+						<li><a href="/mypageMyPet.do?memberNo=${sessionScope.m.memberNo }">나의 똑독캣</a></li>
 						<li><a href="/mypageMessage.do">1:1 문의내역</a></li>
 						<li><a href="/mypageService.do">서비스 이용내역</a></li>
-						<li><a href="/mypagePetDiary.do">돌봄·훈련일지</a></li>
-						<li><a href="/mypageQnA.do">훈련사Q&A</a></li>
-						<li><a href="/withdraw.do">회원탈퇴</a></li>
+						<li><a href="/mypageReview.do">나의 이용후기</a></li>
+						<li><a href="/mypageDeleteFrm.do?memberNo=${sessionScope.m.memberNo }">회원탈퇴</a></li>
 					</ul>
 				</div>
 				<!-- 마이페이지 컨텐츠 -->
