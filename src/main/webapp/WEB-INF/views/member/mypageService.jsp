@@ -13,6 +13,8 @@
 	<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_service.css">
 <!-- 아이콘-->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<!-- 사진첨부 li -->
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" ></script>
 </head>
 <body>
 	<!-- 헤더 -->
@@ -149,9 +151,6 @@
 		</section>
 	</main>
 	<!-- End #main -->
-	
-	<!--  -->
-	
 	<!-- 후기작성 모달 -->
 	<div class="review-modal insert-review" style="display:none;">
 		<!-- 모달최상단 꾸밈 -->
@@ -182,14 +181,17 @@
 				<div class="review-photo">
 					<b>사진첨부<b>
 					<span class="photo-comment">*최대 3개까지 첨부가능</span>
-					<div class="file-wrap">
-						<label class="file-zone" for="file-insert"><span class="material-symbols-outlined">add</span></label>
-						<input type="file" class="add-file" id="file-insert" style="display: none;" name="reviewFilename" accept=".jpg, .jpeg, .png, .gif" multiple>
-						<div class="thumbnail thn1"></div>
-						<div class="thumbnail thn2"></div>
-						<div class="thumbnail thn3"></div>
+					<div class="filebox clearfix">
+						<div class="inputFile">
+							<label for="AddImgs" class="addImgBtn"><span class="material-symbols-outlined">add</span></label>
+							<input type="file" id="AddImgs" class="upload-hidden" name="reviewFile" accept=".jpg, .jpeg, .png, .gif" multiple>
+						</div>
+						<ul id="Preview-i" class="sortable">
+							<li><label for="AddImgs" class="addImgBtn"></label></li>
+							<li><label for="AddImgs" class="addImgBtn"></label></li>
+							<li><label for="AddImgs" class="addImgBtn"></label></li>
+						</ul>
 					</div>
-				</div>
 				<!-- 후기내용 -->
 				<div class="review-content">
 					<textarea id="reviewContent" name="reviewContent" placeholder="내용을 입력해주세요.
@@ -205,6 +207,7 @@
 				<div class="review-btn-wrap">
 					<input type="button" id="insert-btn" value="작성">
 				</div>
+			</div>
 			</div>
 		</form>
 	</div>
@@ -241,7 +244,7 @@
 					<span class="photo-comment">*최대 3개까지 첨부가능</span>
 					<div class="file-wrap">
 						<label class="file-zone" for="file-update"><span class="material-symbols-outlined">add</span></label>
-						<input type="file" class="add-file" id="file-update" style="display: none;" name="reviewFilename" accept=".jpg, .jpeg, .png, .gif" multiple>
+						<input type="file" class="add-file" id="file-update" name="reviewFile" style="display: none;" accept=".jpg, .jpeg, .png, .gif" multiple>
 						<div class="thumbnail thn1"></div>
 						<div class="thumbnail thn2"></div>
 						<div class="thumbnail thn3"></div>
@@ -265,14 +268,10 @@
 			</div>
 		</form>
 	</div>
-
-	<!-- 푸터 -->
-	<jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
 	<!-- 마이페이지 JS -->
 	<script type="text/javascript" src="/resources/js/member/mypage_nav.js"></script>
 	<script type="text/javascript" src="/resources/js/member/mypage_service.js"></script>
-	
-	
-	
+	<!-- 푸터 -->
+	<jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
 </body>
 </html>

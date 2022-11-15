@@ -15,17 +15,22 @@
 			#{petNo},
 			#{reviewRate},
 			#{reviewContent},
-			to_char(sysdate,'yy/mm/dd'),
-			<choose>
-				<when test="reviewFilename != null and reviewFilepath != null">
-				#{reviewFilename},
-				#{reviewFilepath}
-				</when>
-				<otherwise>
-				null,
-				null
-				</otherwise>
-			</choose>
+			to_char(sysdate,'yy/mm/dd')
+		)
+	</insert>
+	
+	<select id="selectReviewNo" parameterType="string" resultType="string">
+		select review_no
+		from review_tbl
+		where booking_no=#{bookingNo}
+	</select>
+	
+	<insert id="insertReviewFiles" parameterType="rv">
+		insert into review_files values(
+			'R_FILES-' || r_files_seq.nextval,
+			#{reviewNo},
+			#{imgName},
+			#{imgPath}
 		)
 	</insert>
 	
@@ -42,9 +47,7 @@
 			pet_no as petNo,
 			review_rate as reviewRate,
 			review_content as reviewContent,
-			review_date as reviewDate,
-			review_filename as reviewFilename,
-			review_filepath as reviewFilepath
+			review_date as reviewDate
 		from review_tbl
 		where booking_no=#{_parameter}
 	</select>
