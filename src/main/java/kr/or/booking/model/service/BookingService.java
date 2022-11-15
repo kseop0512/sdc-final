@@ -40,6 +40,18 @@ public class BookingService {
 		return dao.petSitterCalendar(p);
 	}
 
+
+	public int updatePartnerStatus(String bookingNo) {
+		// TODO Auto-generated method stub
+		return dao.updatePartnerStatus(bookingNo);
+	}
+
+	public int updatePartnerPoint(String pNo) {
+		// TODO Auto-generated method stub
+		return dao.updatePartnerPoint(pNo);
+	}
+	
+
 	// END 혜규 on 11/13
 
 	public String[] insertPetSitterBooking(Booking b) {

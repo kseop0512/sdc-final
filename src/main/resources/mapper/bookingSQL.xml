@@ -66,7 +66,7 @@
 			partner_accept as partnerAccept,
 			category
 		from booking_tbl
-		where p_no=#{pNo} and partner_accept='R' order by start_date
+		where p_no=#{pNo} and partner_accept='R' AND MEMBER_ID IS NOT NULL order by start_date
 	</select>
 	<select id="selectTrainerSchedule" parameterType="p" resultType="b">
 		select
@@ -105,6 +105,7 @@
 		update booking_tbl set review_state='1' where booking_no=#{bookingNo}
 	</update>
 
+
 	<!-- 위탁 펫시터 예약 인서트 -->
 	<insert id="insertPetSitterBooking" parameterType="b">
 		insert into booking_tbl values (
@@ -130,4 +131,12 @@
 	<delete id="deleteBooking" parameterType="string">
 		DELETE FROM BOOKING_TBL WHERE BOOKING_NO = #{_parameter}
 	</delete>
+
+	<select id="selectSpecialRequest" parameterType="string" resultType="string">
+		select special_request from booking_tbl where booking_no=#{bookingNo}
+	</select>
+	<update id="updatePartnerStatus" parameterType="string">
+		update booking_tbl set partner_accept='Y'where booking_no=#{_parameter}
+	</update>
+
 </mapper>

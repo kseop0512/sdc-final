@@ -113,6 +113,7 @@
 			round(avg(inde),0) as inde
 			from pet_chklist
 	</select>
+
 	
 	<select id="selectOnePet" parameterType="int" resultType="pet">
 		select
@@ -192,4 +193,21 @@
 	<delete id="deletePet" parameterType="int">
 		delete from pet_tbl where pet_no=#{_parameter}
 	</delete>
+
+	<select id="selectOnePet" parameterType="p" resultType="pp">
+		select
+			pet_name as petName,
+			pet_gender as petGender,
+			pet_neut as petNeut,
+			pet_bdate as petBdate,
+			pet_kind as petKind,
+			pet_hospital as petHospital,
+			pet_note as petNote,
+			pet_filepath as petFilepath,
+			character2,
+			character6,
+			character8
+		from pet_tbl join pet_chklist using(pet_no) where pet_no=#{petNo}
+	</select>
+
 </mapper>

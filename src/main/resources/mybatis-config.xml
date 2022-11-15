@@ -24,5 +24,7 @@
 		<typeAlias type="kr.or.main.partner.board.model.vo.PartnerBoardFileVO" alias="pbf"/>
 		<typeAlias type="kr.or.review.model.vo.Review" alias="r"/>
 		<typeAlias type="kr.or.review.model.vo.ReviewFileVO" alias="rv"/>
+		<typeAlias type="kr.or.pet.model.vo.PetForPartner" alias="pp" />
+
 	</typeAliases>
 </configuration>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.pet.model.vo.PetCheckList;
+import kr.or.pet.model.vo.PetForPartner;
 import kr.or.pet.model.vo.Pet;
 import kr.or.pet.model.vo.PetAvgStat;
 
@@ -53,6 +54,7 @@ public class PetDao {
 		return result;
 	}
 
+
 	public Pet selectOnePet(int petNo) {
 		return sqlSession.selectOne("pet.selectOnePet", petNo);
 	}
@@ -74,4 +76,16 @@ public class PetDao {
 	}
 	
 	
+
+	public PetForPartner selectOnePet(Pet p) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("pet.selectOnePet",p);
+	}
+
+	public String selectSpecialRequest(String bookingNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("booking.selectSpecialRequest",bookingNo);
+	}
+
+
 }

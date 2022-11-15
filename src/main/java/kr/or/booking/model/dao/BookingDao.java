@@ -46,6 +46,7 @@ public class BookingDao {
 		return (ArrayList<Booking>)list;
 	}
 
+
 	public String[] insertPetSitterBooking(Booking b) {
 		int result =  sqlSession.insert("booking.insertPetSitterBooking", b);
 		String[] resultArr = new String[2];
@@ -56,5 +57,16 @@ public class BookingDao {
 
 	public int deleteFailPaymentBooking(String bookingNo) {
 		return sqlSession.delete("booking.deleteBooking", bookingNo);
+	}
+
+	public int updatePartnerStatus(String bookingNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("booking.updatePartnerStatus",bookingNo);
+	}
+
+	public int updatePartnerPoint(String pNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("partner.updatePartnerPoint",pNo);
+
 	}
 }

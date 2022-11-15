@@ -26,10 +26,13 @@ import com.google.gson.Gson;
 import com.graphbuilder.math.func.AvgFunction;
 
 import common.FileRename;
+
 import kr.or.member.model.vo.Member;
+import kr.or.booking.model.vo.Booking;
 import kr.or.partner.model.vo.Partner;
 import kr.or.pet.model.service.PetService;
 import kr.or.pet.model.vo.PetCheckList;
+import kr.or.pet.model.vo.PetForPartner;
 import kr.or.pet.model.vo.Pet;
 import kr.or.pet.model.vo.PetAvgStat;
 
@@ -142,6 +145,7 @@ public class PetController {
 	}
 
 
+
 	@RequestMapping(value="/petUpdate.do")
 	public String petUpdate(Pet p, PetCheckList petChk, MultipartFile[] imageFile, HttpServletRequest request, HttpSession session, @SessionAttribute Member m, Model model) {
 		if(!imageFile[0].isEmpty()) {
@@ -195,5 +199,23 @@ public class PetController {
 		model.addAttribute("loc","/mypageMyPet.do?memberNo="+m.getMemberNo());
 		return "common/msg";
 	}
+
+
+
+	
+	// 혜규 on 11/15 - 펫 정보 불러오기
+	@ResponseBody
+	@RequestMapping(value="/getPetInfo.do", produces="application/text;charset=utf-8")
+	public String getPetInfo(Pet p, String bookingNo) {
+		PetForPartner pet = service.selectOnePet(p);
+		String request = service.selectSpecialRequest(bookingNo);
+		if(request == null) {
+			pet.setSpecialRequest("");
+		}else {
+			pet.setSpecialRequest(request);
+		}
+		return new Gson().toJson(pet);
+	}
+
 }
 
