@@ -32,3 +32,20 @@
     position: absolute;
     right: 240px;
 }
+
+
+/* 전체/ 이용자 / 파트너  */
+[name=membertab]{
+    width: 100px;
+    position: absolute;
+    left: 230px;
+    margin-top: 7px;
+    cursor: pointer;
+}
+
+[name=tabAllMember]{
+    float: left;
+}
+[name=tabMember]{
+    float: left;
+}

@@ -45,35 +45,92 @@ public class ManagerService {
 	}
 	
 	//관리자 P 회원 수
-	public int selectMemberList() {
-			return dao.selectUserList();
-	}
+//	public int selectMemberList() {
+//			return dao.selectUserList();
+//	}
 	//관리자 P 파트너 수 
-	public int selectPartnerList() {
-		return dao.selectPartnerCount() ;
-	}
+//	public int selectPartnerList() {
+//		return dao.selectPartnerCount() ;
+//	}
 	// 관리자 P 총 인원
-	public int selectTotalMember() {
-		return dao.selectTotalMember();
-	}
+//	public int selectTotalMember() {
+	//	return dao.selectTotalMember();
+	//}
+	
 	//관리자p 회원리스트
-	public ArrayList<Member> selectMemberPartnerList(Member m) {
+	public HashMap<String,Object> selectMemberPartnerList(Member m) {
+		//이용자수
+		int memberCount = dao.selectUserList(); 
+		//파트너수
+		int partnerCount = dao.selectPartnerCount();
+		//총 회원
+		int totalCount = dao.selectTotalMember();
+		
 		ArrayList<Member> list = dao.selectMemberPartnerList(m);
-		return list;
+
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberCount", memberCount);
+		map.put("partnerCount", partnerCount);
+		map.put("totalCount", totalCount);
+		map.put("list", list);
+
+		
+		return map;
 	}
 //유저리스트 검색
-	public ArrayList<Member> searchMember(String memberType, String type, String keyword) {
+	public HashMap<String, Object> searchMember(String memberType, String type, String keyword) {
+		//이용자수
+		int memberCount = dao.selectUserList(); 
+		//파트너수
+		int partnerCount = dao.selectPartnerCount();
+		//총 회원
+		int totalCount = dao.selectTotalMember();
+		
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("type", type);
 		map.put("keyword", keyword);
 		map.put("memberType",memberType);
+		map.put("memberCount", memberCount);
+		map.put("partnerCount", partnerCount);
+		map.put("totalCount", totalCount);
+
 		ArrayList<Member> list = null;
 		if(memberType.equals("partner")) {
 			list = dao.serchPartner(map);			
 		}else {
 			list = dao.searchMember(map);			
 		}
-		return list;
+		
+		map.put("list",list);
+		return map;
+	}
+	
+	
+	public HashMap<String, Object> selectmember(String membertab) {
+		//이용자수
+		int memberCount = dao.selectUserList(); 
+		//파트너수
+		int partnerCount = dao.selectPartnerCount();
+		//총 회원
+		int totalCount = dao.selectTotalMember();
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberCount", memberCount);
+		map.put("partnerCount", partnerCount);
+		map.put("totalCount", totalCount);
+		
+		ArrayList<Member> list = null;
+		if(membertab.equals("tabMember")) {
+			list = 	dao.selectmember(membertab);
+		}else if(membertab.equals("tabPartner")){
+			list = 	dao.selectpartner(membertab);
+		}else if(membertab.equals("tabAllMember")) {
+			list = dao.allUser(membertab);
+		}
+		map.put("list", list);
+		return map;
 	}
 
 	//유저 리스트 엑셀다운
@@ -336,6 +393,8 @@ public class ManagerService {
 	public Booking bookingDetail(String bookingNo) {
 		return dao.bookingDetail(bookingNo);
 	}
+
+
 
 
 

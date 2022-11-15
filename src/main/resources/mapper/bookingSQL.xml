@@ -36,7 +36,7 @@
 			member_id as memberId,
 			p_no as pNo,
 			pet_no as petNo,
-			booked_date as bookingDate,
+			booked_date as bookedDate,
 			to_char(start_date,'yy/mm/dd') as startDate,
 			to_char(end_date,'yy/mm/dd') as endDate,
 			booking_time as bookingTime,

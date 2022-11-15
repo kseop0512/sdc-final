@@ -145,6 +145,7 @@
                                     <div id="tabAllMember" >전체<span>/</span></div>
                                     <div id="tabMember" class="active-tap">이용자<span>/</span></div>
                                 <div id="tabPartner">파트너</div>
+                                </div>
                                     <thead>
                                         <tr>
                                             <th>번호</th>

@@ -52,8 +52,8 @@
 			</when>
 		</choose>
 	</select>
-	<select id="memberPartnerList" resultType="m">
-				select 
+	<select id="selectMemberPartnerList"  resultType="m">
+		select 
 		    member_name as memberName,
 		    member_id as memberId,
 		    member_bday as memberBdate,
@@ -309,9 +309,8 @@
 			p_no as pNo,
 			pet_no as petNo,
 			BOOKING_PHONE as bookingPhone,
-			booked_date as bookingDate,
+			booked_date as bookedDate,
 			to_char(start_date,'yy/mm/dd') as startDate,
-			to_char(end_date,'yy/mm/dd') as endDate,
 			booking_time as bookingTime,
 			special_request as specialRequest,
 			review_state as reviewState,
@@ -334,7 +333,7 @@
 			p_no as pNo,
 			pet_no as petNo,
 			BOOKING_PHONE as bookingPhone,
-			booked_date as bookingDate,
+			booked_date as bookedDate,
 			to_char(start_date,'yy/mm/dd') as startDate,
 			to_char(end_date,'yy/mm/dd') as endDate,
 			booking_time as bookingTime,
@@ -347,5 +346,43 @@
 		from booking_tbl where booking_no=#{_parameter}
 	
 	</select>
-
+	<select id="selectmember" parameterType="string" resultType="m">
+		select 
+		    member_name as memberName,
+		    member_id as memberId,
+		    member_bday as memberBdate,
+		    member_phone as memberPhone,
+		    member_addr as memberAddr,
+		    enroll_date as memberEnrollDate
+		from member_tbl
+	</select>
+	<select id="selectpartner" parameterType="string" resultType="m">
+		select 
+		    p_name as memberName,
+		    p_id as memberId,
+		    p_dob as memberBdate,
+		    p_phone as memberPhone,
+		    p_addr as memberAddr,
+		    apply_date as memberEnrollDate
+		from partner
+	</select>
+	<select id="alluser" parameterType="string" resultType="m">
+		select 
+		    member_name as memberName,
+		    member_id as memberId,
+		    member_bday as memberBdate,
+		    member_phone as memberPhone,
+		    member_addr as memberAddr,
+		    enroll_date as memberEnrollDate
+		from member_tbl
+		union all
+		select 
+		    p_name as memberName,
+		    p_id as memberId,
+		    p_dob as memberBdate,
+		    p_phone as memberPhone,
+		    p_addr as memberAddr,
+		    apply_date as memberEnrollDate
+		from partner
+	</select>
 </mapper>
