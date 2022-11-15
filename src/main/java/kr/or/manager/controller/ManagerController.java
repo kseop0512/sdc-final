@@ -395,6 +395,12 @@ public class ManagerController {
 		return "manager/trainerBooking";
 	}
 
+	@ResponseBody
+	@RequestMapping(value="/bookingCount.do",produces="application/json;charset=utf-8")
+	public String bookingCount() {
+		int b = service.bookingCount();
+		return new Gson().toJson(b);
+	}
 
 }
 

@@ -40,6 +40,7 @@ public class DirectMessageDao {
 	//dm 총 수 
 	public int dmCount(Manager g) {
 		int result = sqlSession.selectOne("dm.dmCount",g);
+
 		return result;
 	}
 	//dm 답변대기 수

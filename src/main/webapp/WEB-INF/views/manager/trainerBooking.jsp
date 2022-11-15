@@ -100,13 +100,13 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                               	 방문예약
+                               	 위탁/훈련 예약취소
                             </div>
                             <div class="card-body">
                                 <div class="card mb-4">
                                     <div class="card-body">
                                         <p class="mb-0">
-                                           	<span>예약신청</span>
+                                           	<span>예약취소 총</span>
                                 <code>[<code id="bookingCount"></code>]</code>건 
                                         </p>
                                         <div id="nameIdSerarch-Box" style="float: right;">

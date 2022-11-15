@@ -393,6 +393,11 @@ public class ManagerService {
 		map.put("keyword", keyword);
 		return dao.searchBooking(map);
 	}
+//예약취소신청
+	public int bookingCount() {
+		int result = dao.bookingCount();
+		return result;
+	}
 
 
 

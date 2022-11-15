@@ -7,9 +7,9 @@ $(function(){
 function getPartnerCount(){
 
 	$.ajax({
-		url :"/partnerCount.do",
+		url :"/bookingCount.do",
 		success: function(data){
-			$("#partnerCount").append(data);
+			$("#bookingCount").append(data);
 		},
 		error : function(){
 			console.log("err");
@@ -24,7 +24,7 @@ function modal(obj){
     $(".modal-modal").show();
     $(".modalmodel-wrap").show();
     
-   const bookingNo = $(obj).parent().prev().text();
+   const bookingNo = $(obj).parent().prev().prev().text();
 
     $.ajax({
     	url :"/bookingDetail.do",
@@ -36,7 +36,7 @@ function modal(obj){
     		$("#detailId").text(data.memberId); //아이디
     		$("#detailPartnerNo").text(data.pNo); //파트너번호
     		$("#detailPetNo").text(data.petNo); //펫번호
-    		$("#detailBookingDate").text(data.bookingDate); //예약일
+    		$("#detailBookingDate").text(data.bookedDate); //예약일
     		$("#detailPartnerAccpet").text(data.partnerAccept); //예약현황
     			if(data.partnerAccept == 'C'){
     					$("#detailPartnerAccpet").text("취소처리중"); 
