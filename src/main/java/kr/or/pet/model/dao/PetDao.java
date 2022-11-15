@@ -79,7 +79,7 @@ public class PetDao {
 
 	public PetForPartner selectOnePet(Pet p) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("pet.selectOnePet",p);
+		return sqlSession.selectOne("pet.selectOnePetforPartner",p);
 	}
 
 	public String selectSpecialRequest(String bookingNo) {
