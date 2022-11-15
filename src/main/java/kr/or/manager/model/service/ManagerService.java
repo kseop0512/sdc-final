@@ -44,18 +44,7 @@ public class ManagerService {
 		return g;
 	}
 	
-	//관리자 P 회원 수
-//	public int selectMemberList() {
-//			return dao.selectUserList();
-//	}
-	//관리자 P 파트너 수 
-//	public int selectPartnerList() {
-//		return dao.selectPartnerCount() ;
-//	}
-	// 관리자 P 총 인원
-//	public int selectTotalMember() {
-	//	return dao.selectTotalMember();
-	//}
+
 	
 	//관리자p 회원리스트
 	public HashMap<String,Object> selectMemberPartnerList(Member m) {

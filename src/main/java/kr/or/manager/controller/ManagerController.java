@@ -161,14 +161,7 @@ public class ManagerController {
 	//관리자p 회원관리 검색
 	@RequestMapping(value="/searcMember.do")
 	public String searchMember(String memberType,String type, String keyword, Model model) {
-//		int result = service.selectMemberList();
-//		int result2 = service.selectPartnerList();
-//		int result3 = service.selectTotalMember();
-//		model.addAttribute("memberCount", result);
-//		model.addAttribute("partnerCount", result2);
-//		model.addAttribute("totalCount",result3);
-//		model.addAttribute("keyword",keyword);
-//		
+
 		HashMap<String,Object> map = service.searchMember(memberType,type,keyword);
 		model.addAttribute("list",map.get("list"));
 		model.addAttribute("memberCount",map.get("memberCount"));
