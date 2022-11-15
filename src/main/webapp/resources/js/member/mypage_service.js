@@ -138,6 +138,18 @@ function viewReview(bookingNo){
 		url : "/selectOneReview.do",
 		data : {bookingNo : bookingNo},
 		success: function(data){
+			$('#Preview-u').empty();
+			console.log("dd: "+data.fileList.length);
+			if(data.fileList.length>0){
+				for(let i=0;i<data.fileList.length;i++){
+					//div에 이미지 추가
+	                var str = '<li class="ui-state-default">';
+	                str += '<img src="/resources/upload/review/'+ data.fileList[i].imgPath + '" title="' + data.fileList[i].imgName + '" width=90 height=90>';
+	                str += '<span class="delBtn">x</span>';
+	                $(str).appendTo('#Preview-u');
+				}
+			}
+			$(".update-review [name=reviewNo]").val(data.reviewNo);
 			$(".update-review [name=memberNo]").val(data.memberNo);
 			$(".update-review [name=pNo]").val(data.pNo);
 			$(".update-review [name=petNo]").val(data.petNo);

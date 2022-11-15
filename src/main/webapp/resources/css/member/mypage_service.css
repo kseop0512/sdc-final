@@ -256,32 +256,12 @@ body{
 .photo-comment{
 	font-weight: normal;
 }
-.file-wrap{
-	margin-top: 10px;
-	display: flex;
-	justify-content: space-between;
+.filebox{
+	overflow: hidden;
 }
-.file-zone, .thumbnail{
-	width: 90px;
-	height: 90px;
-	background-color: rgba(0,0,0,0.1);
-}
-.file-zone{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-.file-zone:hover{
-	cursor: pointer;
-	background-color: #FAEBCC;
-}
-.file-zone>span{
-	font-weight: bold;
-	color: rgba(0,0,0,0.6);
-}
-
-/*사진첨부*/
-.inputFile, #Preview-i, #Preview-i li{
+.inputFile,
+#Preview-i, #Preview-i li
+#Preview-u, #Preview-u li{
     float:left;
 }
 .filebox{
@@ -292,10 +272,6 @@ body{
     display: flex;
 	justify-content: center;
 	align-items: center;
-}
-.file-zone>span{
-	font-weight: bold;
-	color: rgba(0,0,0,0.6);
 }
 .upload-hidden{
 	display: none;
@@ -316,7 +292,13 @@ body{
     margin: 0;
     list-style-type: none;
 }
-#Preview-i li{
+#Preview-u{
+	width: 350px;
+	padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+#Preview-i li, #Preview-u li{
     margin-left: 24px;
     position: relative;
     border: 1px solid #ececec;

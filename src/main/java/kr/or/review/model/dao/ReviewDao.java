@@ -1,5 +1,8 @@
 package kr.or.review.model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -39,11 +42,16 @@ public class ReviewDao {
 	public Review selectOneReview(String bookingNo) {
 		return sqlSession.selectOne("review.selectOneReview",bookingNo);
 	}
+	//작성한 후기 사진 불러오기
+	public ArrayList<ReviewFileVO> selectOneReviewFiles(Review r) {
+		List fileList = sqlSession.selectList("review.selectOneReviewFiles",r);
+		return (ArrayList<ReviewFileVO>) fileList;
+	}
 	//작성한 후기 수정
 	public int updateReview(Review r) {
 		return sqlSession.update("review.updateReview",r);
 	}
-	//후기작성한 예약목록 번호
+	//후기작성한 예약목록 번호 불러오기
 	public String selectReviewNo(String bookingNo) {
 		return sqlSession.selectOne("review.selectReviewNo", bookingNo);
 	}

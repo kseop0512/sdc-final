@@ -29,7 +29,7 @@
 						<li><a href="/memberMypage.do">나의 정보</a></li>
 						<li><a href="/mypagePet.do">나의 똑독캣</a></li>
 						<li><a href="/mypageMessage.do">1:1 문의내역</a></li>
-						<li><a href="/mypageService.do?memberId=${sessionScope.m.memberId }" class="active">서비스 이용내역</a></li>
+						<li><a href="/mypageService.do" class="active">서비스 이용내역</a></li>
 						<li><a href="/mypagePetDiary.do">돌봄·훈련일지</a></li>
 						<li><a href="/mypageQnA.do">훈련사Q&A</a></li>
 						<li><a href="/withdraw.do">회원탈퇴</a></li>
@@ -125,10 +125,10 @@
 			                    			<a href="javascript:writeReview('${b.bookingNo}','${sessionScope.m.memberNo}','${b.PNo}','${b.petNo}');">후기작성</a>
 			                    		</c:when>
 			                    		<c:when test="${b.partnerAccept eq 'Y'}">
-			                    			<a href="javascript:cancleComment('${b.bookingNo}');">취소신청</a>
+			                    			<a href="javascript:cancleComment('${b.bookingNo}');">예약취소</a>
 			                    		</c:when>
 			                    		<c:when test="${b.partnerAccept eq 'R'}">
-			                    			<a href="/serviceCancle.do">취소신청</a>
+			                    			<a href="/serviceCancle.do">신청취소</a>
 			                    		</c:when>
 			                    		<c:when test="${b.partnerAccept eq 'C'}">
 			                    			취소처리중
@@ -222,6 +222,7 @@
 		<!-- 모달컨텐츠(폼) -->
 		<form action="/updateReview.do" method="post" enctype="multipart/form-data">
 			<div class="review-modal-content">
+				<input type="hidden" name="reviewNo">
 				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 				<input type="hidden" name="bookingNo">
 				<input type="hidden" name="memberNo">
@@ -240,14 +241,8 @@
 				</div>
 				<!-- 후기사진첨부 -->
 				<div class="review-photo">
-					<b>사진첨부<b>
-					<span class="photo-comment">*최대 3개까지 첨부가능</span>
-					<div class="file-wrap">
-						<label class="file-zone" for="file-update"><span class="material-symbols-outlined">add</span></label>
-						<input type="file" class="add-file" id="file-update" name="reviewFile" style="display: none;" accept=".jpg, .jpeg, .png, .gif" multiple>
-						<div class="thumbnail thn1"></div>
-						<div class="thumbnail thn2"></div>
-						<div class="thumbnail thn3"></div>
+					<div class="filebox clearfix">
+						<ul id="Preview-u" class="sortable"></ul>
 					</div>
 				</div>
 				<!-- 후기내용 -->

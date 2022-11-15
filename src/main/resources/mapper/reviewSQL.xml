@@ -52,6 +52,13 @@
 		where booking_no=#{_parameter}
 	</select>
 	
+	<select id="selectOneReviewFiles" parameterType="r" resultType="rv">
+		select
+			img_name as imgName, img_path as imgPath
+		from review_files
+		where review_no=#{reviewNo}
+	</select>
+	
 	<update id="updateReview" parameterType="r">
 		update review_tbl set
 			review_rate = #{reviewRate},

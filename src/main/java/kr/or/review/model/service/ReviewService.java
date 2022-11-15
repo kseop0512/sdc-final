@@ -1,5 +1,7 @@
 package kr.or.review.model.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,14 +28,13 @@ public class ReviewService {
 		int insertFileResult = 0;
 		//입력정보 r로 이용후기 생성
 		int insertResult = dao.insertReview(r);
-		System.out.println(r.getBookingNo());
 		String reviewNo = dao.selectReviewNo(r.getBookingNo());
 		if(insertResult>0) {
 			//후기사진 인서트
 			if(!r.getFileList().isEmpty()) {
-				for(ReviewFileVO fv : r.getFileList()) {
-					fv.setReviewNo(reviewNo);
-					insertFileResult += dao.insertReviewFiles(fv);
+				for(ReviewFileVO rv : r.getFileList()) {
+					rv.setReviewNo(reviewNo);
+					insertFileResult += dao.insertReviewFiles(rv);
 				}
 				if(insertFileResult == 0) {
 					return 0;
@@ -53,7 +54,10 @@ public class ReviewService {
 	}
 
 	public Review selectOneReview(String bookingNo) {
-		return dao.selectOneReview(bookingNo);
+		Review r = dao.selectOneReview(bookingNo);
+		ArrayList<ReviewFileVO> fileList = dao.selectOneReviewFiles(r);
+		r.setFileList(fileList);
+		return r;
 	}
 	
 	@Transactional

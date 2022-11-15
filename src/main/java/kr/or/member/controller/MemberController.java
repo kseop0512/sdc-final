@@ -133,7 +133,8 @@ public class MemberController {
 
 	//유저 마이페이지 - 이용내역 이동
 	@RequestMapping(value="/mypageService.do")
-	public String mypageService(Member m, Model model) {
+	public String mypageService(HttpSession session, Model model) {
+		Member m = (Member) session.getAttribute("m");
 		ArrayList<Booking> list = service.selectBookingList(m);
 		model.addAttribute("list",list);
 		return "member/mypageService";
