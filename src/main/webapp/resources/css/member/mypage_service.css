@@ -82,7 +82,7 @@
 }
 .service-box>table .td-start-date{
 	text-align: left;
-	padding-left: 25px;
+	padding: 0px 25px;
 	width: 115px;
 }
 .service-box>table td>a{
@@ -225,6 +225,30 @@ body{
 	float: right;
 }
 
+/* 모달창 답장버튼 */
+.review-btn-wrap{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+.review-btn-wrap>input{
+    width: 130px;
+    height: 55px;
+    border: 0;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #ffb347;
+    text-align: center;
+}
+.review-btn-wrap>input:hover{
+	cursor: pointer;
+    background-color: #ffcc33;
+    color: #000;
+    transition-duration: 0.8s;
+}
+
 /* 사진첨부 */
 .review-photo{
 	overflow: hidden;
@@ -256,26 +280,58 @@ body{
 	color: rgba(0,0,0,0.6);
 }
 
-/* 모달창 답장버튼 */
-.review-btn-wrap{
+/*사진첨부*/
+.inputFile, #Preview-i, #Preview-i li{
+    float:left;
+}
+.filebox{
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+.addImgBtn{
     display: flex;
-    justify-content: center;
-    margin-top: 10px;
+	justify-content: center;
+	align-items: center;
 }
-.review-btn-wrap>input{
-    width: 130px;
-    height: 55px;
-    border: 0;
-    border-radius: 15px;
-    font-size: 18px;
-    font-weight: bold;
+.file-zone>span{
+	font-weight: bold;
+	color: rgba(0,0,0,0.6);
+}
+.upload-hidden{
+	display: none;
+}
+.AddImgs{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.addImgBtn{
+    width: 90px;
+	height: 90px;
+	background-color: rgba(0,0,0,0.1);
+}
+#Preview-i{
+    width: 350px;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+#Preview-i li{
+    margin-left: 24px;
+    position: relative;
+    border: 1px solid #ececec;
+}
+.delBtn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 13px;
+    background-color: #000;
     color: #fff;
-    background-color: #ffb347;
+    width: 18px;
+    height: 18px;
+    line-height: 16px;
+    display: inline-block;
     text-align: center;
-}
-.review-btn-wrap>input:hover{
-	cursor: pointer;
-    background-color: #ffcc33;
-    color: #000;
-    transition-duration: 0.8s;
+    cursor: pointer;
 }

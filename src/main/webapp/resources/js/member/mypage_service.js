@@ -1,6 +1,4 @@
 $(function(){
-	console.log($("#listLength").val());
-
 	//실제 DB의 bookingTime, 예약일 값 담을 hidden input
 	const start = $(".input-start-time");
 	const end = $(".input-end-time");
@@ -149,7 +147,7 @@ function viewReview(bookingNo){
 			$(".update-review [name=reviewContent]").text(data.reviewContent);
 		}
 	});
-	$(".update-review ").show();
+	$(".update-review").show();
 	$(this).keydown(function(event) {
         if ( event.keyCode == 27 || event.which == 27 ) {
             $(".close-btn").click();
@@ -170,4 +168,78 @@ $("#update-btn").on("click",function(){
 	}else{
 		$(this).attr("type","submit");
 	}
+});
+
+//사진첨부
+$(function () {
+    //드래그 앤 드롭
+    $(".sortable").sortable();
+
+    //이미지 등록
+    $("#AddImgs").change(function (e) {
+        //div 내용 비워주기
+        $('#Preview-i').empty();
+        var files = e.target.files;
+        var arr = Array.prototype.slice.call(files);
+        
+        if(files.length>3){
+        	alert('사진은 최대 3개까지 첨부가능합니다.');
+        	$("#AddImgs").val("");  //파일 초기화
+        	return false;
+        }
+        
+        //업로드 가능 파일인지 체크
+        for (var i = 0; i < files.length; i++) {
+            if (!checkExtension(files[i].name, files[i].size)) {
+                return false;
+            }
+        }
+        preview(arr);
+        
+        console.log(files);
+        console.log(files.length);
+        
+        function checkExtension(fileName, fileSize) {
+            var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+            var maxSize = 20971520;  //20MB
+            if (fileSize >= maxSize) {
+                alert('이미지 크기가 초과되었습니다.');
+                $("#AddImgs").val("");  //파일 초기화
+                return false;
+            }
+            if (regex.test(fileName)) {
+                alert('확장자명을 확인해주세요.');
+                $("#AddImgs").val("");  //파일 초기화
+                return false;
+            }
+            return true;
+        }
+
+        function preview(arr) {
+            arr.forEach(function (f) {
+                //div에 이미지 추가
+                var str = '<li class="ui-state-default">';
+                //str += '<span>'+fileName+'</span><br>';
+
+                //이미지 파일 미리보기
+                if (f.type.match('image.*')) {
+                    //파일을 읽기 위한 FileReader객체 생성
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+                        str += '<img src="' + e.target.result + '" title="' + f.name + '" width=90 height=90>';
+                        str += '<span class="delBtn">x</span>';
+                        str += '</li>';
+                        $(str).appendTo('#Preview-i');
+                    }
+                    reader.readAsDataURL(f);
+                }
+            });
+        }
+    });
+	
+    //이미지 삭제
+    $("#Preview-i").on("click",".delBtn",function(){
+        $(this).parent("li").remove();
+    });
 });

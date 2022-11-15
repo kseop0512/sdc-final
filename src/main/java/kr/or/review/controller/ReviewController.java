@@ -1,20 +1,34 @@
 package kr.or.review.controller;
 
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import common.FileRename;
 import kr.or.member.model.vo.Member;
 import kr.or.review.model.service.ReviewService;
 import kr.or.review.model.vo.Review;
+import kr.or.review.model.vo.ReviewFileVO;
 
 @Controller
 public class ReviewController {
 	@Autowired
 	private ReviewService service;
+	@Autowired
+	private FileRename fileRename;
 	
 	// 유저 마이페이지 - 이용내역 - 후기 평점 출력
 	@ResponseBody
@@ -25,8 +39,36 @@ public class ReviewController {
 	}
 	
 	// 유저 마이페이지 - 이용내역 - 후기작성
-	@RequestMapping(value = "/writeReview.do")
-	public String writeReview(Review r, Model model, Member m) {
+	@RequestMapping(value="/writeReview.do")
+	public String writeReview(Review r, MultipartFile[] reviewFile, HttpServletRequest request, Model model, Member m) {
+		System.out.println(reviewFile);
+		System.out.println(reviewFile.length);
+		ArrayList<ReviewFileVO> fileList = new ArrayList<ReviewFileVO>();
+		if(!reviewFile[0].isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/review/");
+			for(MultipartFile file:reviewFile) {
+				String filename = file.getOriginalFilename();
+				String filepath = fileRename.fileRename(savePath, filename);
+				try {
+					FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[]bytes = file.getBytes();
+					bos.write(bytes);
+					bos.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				ReviewFileVO fv = new ReviewFileVO();
+				fv.setImgName(filename);
+				fv.setImgPath(filepath);
+				fileList.add(fv);
+			}
+		}
+		r.setFileList(fileList);
 		int result = service.writeReview(r);
 		if (result>0) {
 			model.addAttribute("title", "후기작성 완료");

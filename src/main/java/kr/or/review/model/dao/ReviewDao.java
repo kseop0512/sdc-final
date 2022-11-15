@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.partner.model.vo.Partner;
 import kr.or.review.model.vo.Review;
+import kr.or.review.model.vo.ReviewFileVO;
 
 @Repository
 public class ReviewDao {
@@ -20,6 +21,10 @@ public class ReviewDao {
 	//후기작성
 	public int insertReview(Review r) {
 		return sqlSession.insert("review.insertReview",r);
+	}
+	//사진첨부
+	public int insertReviewFiles(ReviewFileVO rv) {
+		return sqlSession.insert("review.insertReviewFiles",rv);
 	}
 	//후기작성 후 예약상태변경
 	public int updateReviewState(Review r) {
@@ -37,6 +42,10 @@ public class ReviewDao {
 	//작성한 후기 수정
 	public int updateReview(Review r) {
 		return sqlSession.update("review.updateReview",r);
+	}
+	//후기작성한 예약목록 번호
+	public String selectReviewNo(String bookingNo) {
+		return sqlSession.selectOne("review.selectReviewNo", bookingNo);
 	}
 	
 }
