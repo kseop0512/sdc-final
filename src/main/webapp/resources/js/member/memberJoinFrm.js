@@ -2,7 +2,7 @@ var joinFrmChks = 0; //모든 조건 만족 확인을 위한 변수
 var joinFinalChk = 0;
 $("#mGender").attr("value","M");
 //아이디 부분체크
-$("[name=memberId]").on("keyup",function(){
+$("[name=memberId]").on("keyup change paste",function(){
 	var joinFrmChksId = 0;
 	$("#idSpan").text("");
 	const memberId=$(this).val();
@@ -40,7 +40,7 @@ $("[name=memberId]").on("keyup",function(){
 
 
 //비밀번호 유효성 조건 소문자/대문자/숫자로 8~12글자
-$("[name=memberPw]").on("keyup",function(){
+$("[name=memberPw]").on("keyup change paste",function(){
 	var joinFrmChksPw = 0;
 	var joinFrmChksPwRe = 0;
 	$("#pwSpan").text("");
@@ -69,7 +69,7 @@ $("[name=memberPw]").on("keyup",function(){
 		joinFrmChks = 1;
 		
 		//비밀번호확인 일치검사
-		$("[name=memberPwRe]").on("keyup",function(){
+		$("[name=memberPwRe]").on("keyup change paste",function(){
 			$("#pwReSpan").text("");
 			
 			if(pwReValue.length > 7){
@@ -89,7 +89,7 @@ $("[name=memberPw]").on("keyup",function(){
 		$("#pwSpan").css("color","red");
 		joinFrmChks = 0;
 	}
-	$("[name=memberPwRe]").on("keyup",function(){
+	$("[name=memberPwRe]").on("keyup change paste",function(){
 			$("#pwReSpan").text("");
 			var pwRe = $("#mPwRe");
 			var pwReValue = pwRe.val();
@@ -109,7 +109,7 @@ $("[name=memberPw]").on("keyup",function(){
 	console.log(joinFinalChk);
 });
 
-$("[name=memberBdate]").on("keyup",function(){
+$("[name=memberBdate]").on("keyup change paste",function(){
 	var joinFrmChksBdate = 0;
 	const dateReg=/^[0-9]{8}$/;
 	$("#bdateSpan").text("");
@@ -125,7 +125,7 @@ $("[name=memberBdate]").on("keyup",function(){
 	console.log(joinFinalChk);
 });
 
-$("[name=memberPhone]").on("keyup",function(){
+$("[name=memberPhone]").on("keyup change paste",function(){
 	var joinFrmChksPhone = 0;
 	const phoneReg=/^[0-9]{10,11}$/;
 	$("#phoneSpan").text("");
@@ -138,8 +138,100 @@ $("[name=memberPhone]").on("keyup",function(){
 		joinFrmChks = 1;
 	}
 	joinFinalChk += joinFrmChks;
-	console.log(joinFinalChk);
 });
+
+//휴대폰 인증부분
+var smsNum;
+var intervalId;
+$(".sms-wrap").hide();
+function sendSMS(){
+const phoneReg=/^[0-9]{10,11}$/;
+	$("#phoneSpan").text("");
+	var pNum = $("#mPhone").val();
+	if(!phoneReg.test(pNum)){
+		$("#phoneSpan").text("입력형식이 맞지 않습니다. -를 제외한 숫자만");
+		$("#phoneSpan").css("color","red");
+	}else{
+		$.ajax({
+	      	type : "POST",
+	      	url : "/sendSMS.do",
+	     	data : {pNum : pNum},
+	     	success : function(data) {
+				$(".sms-wrap").show();
+				$("#phoneSpan").text("인증번호가 발송되었습니다.");
+				$("#phoneSpan").css("color","blue");
+				$("#mPhone").attr("readonly",true);
+				$(".smsBtn").hide();
+	        	smsNum = data;
+	            verifyCount();   
+	      	}
+	   	});
+		
+	}
+};
+
+
+function verifyCount() {
+	intervalId = window.setInterval(function(){
+		timeCount();
+	}, 1000);
+}
+
+function timeCount() {
+	const min = Number($("#min").text());
+	const sec = $("#sec").text();
+	if(sec == "00") {
+		if(min == 0) {
+			resultCode = null;
+			clearInterval(intervalId);
+			$("#min").text("");
+			$("#sec").text("");
+			$(".timeRSpan").text("인증시간만료");
+			$(".timeRSpan").css("color", "red");
+			$(".smsChkBtn").hide();
+			joinFrmChks = 0;
+		} else {
+			$("#min").text(min-1);
+			$("#sec").text(59);
+		}
+	} else {
+		const newSec = Number(sec) - 1;
+		if(newSec < 10) {
+			$("#sec").text("0"+newSec);
+		} else {
+			$("#sec").text(newSec);
+		}
+	}
+};
+
+$(".smsChkBtn").on("click", function(){
+	const smsVal = $(".smsVal").val();
+	$(".timeRSpan").text("");
+	if(smsNum != null){
+		if(smsVal == smsNum) {
+			$("#min").text("");
+			$("#sec").text("");
+			$(".timeRSpan").append("인증 성공");
+			$(".timeRSpan").css("color", "#ffc107");
+			clearInterval(intervalId); // 시간 카운트 함수 멈춤
+			$("#smsChk").val("1");
+			$("#mPhone").attr("readonly", true);
+			$(".smsChkBtn").hide();
+			$(".smsBtn").hide();
+			joinFrmChks = 1;
+			
+		} else {
+			$(".timeRSpan").append("인증 실패! 올바르게 입력 후 다시 확인버튼을 눌러주세요.");
+			$(".timeRSpan").css("color", "red");
+			$(".timeRSpan").css("font-size","15px");
+			joinFrmChks = 0;
+		}
+	}
+	joinFinalChk += joinFrmChks;
+})
+
+
+
 
 $("#RadioF").click(function(){
 	$("#mGender").attr("value","F");
@@ -151,7 +243,7 @@ $("#RadioM").click(function(){
 });
 
 $("#joinBtn").click(function(e){
-	if((joinFinalChk >= 4) && (joinFrmChks == 1) && (!$("#mAddr").val()=="") && (!$("#mName").val()=="") && (!$("#mPwRe").val()=="") && (!$("#mPw").val()=="")){
+	if((joinFinalChk >= 5) && (joinFrmChks == 1) && (!$("#mAddr").val()=="") && (!$("#mName").val()=="") && (!$("#mPwRe").val()=="") && (!$("#mPw").val()=="")){
 
 	}else{
 		e.preventDefault();
