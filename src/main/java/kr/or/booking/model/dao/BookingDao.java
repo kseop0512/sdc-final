@@ -45,4 +45,14 @@ public class BookingDao {
 		List list = sqlSession.selectList("booking.selectSitterSchedule",p);
 		return (ArrayList<Booking>)list;
 	}
+
+	public int updatePartnerStatus(String bookingNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("booking.updatePartnerStatus",bookingNo);
+	}
+
+	public int updatePartnerPoint(String pNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("partner.updatePartnerPoint",pNo);
+	}
 }

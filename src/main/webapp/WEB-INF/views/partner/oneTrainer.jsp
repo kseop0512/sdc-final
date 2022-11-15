@@ -143,11 +143,12 @@
 	          <input type="hidden" name="receiver" value="${p.PNo}">
 	        </div>
 	        <div class="msg-content">
-	          <textarea id="reply-msg" name="dmContent"placeholder="내용을 입력해주세요.
-	
+	          <textarea id="reply-msg" name="dmContent"placeholder="
+	          	내용을 입력해주세요.
 				※ 광고, 도배, 욕설, 비방 등
 				서비스와 무관한 내용 작성시
-				신고 및 무통보 삭제될 수 있습니다." required></textarea>
+				신고 및 무통보 삭제될 수 있습니다." required>
+			</textarea>
 	          
 	        </div>
 	        <div class="msg-btn-wrap">

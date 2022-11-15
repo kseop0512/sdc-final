@@ -47,7 +47,7 @@
 			partner_accept as partnerAccept,
 			category
 		from booking_tbl
-		where p_no=#{pNo} and partner_accept='R' order by start_date
+		where p_no=#{pNo} and partner_accept='R' AND MEMBER_ID IS NOT NULL order by start_date
 	</select>
 	<select id="selectTrainerSchedule" parameterType="p" resultType="b">
 		select
@@ -84,5 +84,11 @@
 	<!-- 유저 이용내역 후기작성상태 업데이트 -->
 	<update id="updateReviewState" parameterType="r">
 		update booking_tbl set review_state='1' where booking_no=#{bookingNo}
+	</update>
+	<select id="selectSpecialRequest" parameterType="string" resultType="string">
+		select special_request from booking_tbl where booking_no=#{bookingNo}
+	</select>
+	<update id="updatePartnerStatus" parameterType="string">
+		update booking_tbl set partner_accept='Y'where booking_no=#{_parameter}
 	</update>
 </mapper>

@@ -16,8 +16,39 @@
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <style>
-    	.list-table th:last-child, .list-table td:last-child{
+    	.list-table th, .list-table td{
     		text-align: center;
+    	}
+    	table img{
+    		width: 100%;
+    		height: 100%;
+    	}
+    	.petInfo{
+    		min-height: 80px; 
+    		border:1px solid #ebebeb;
+    		border-radius: 5px;
+    		margin-top: 10px;
+    		margin-bottom: 10px;
+    	}
+    	.petInfo-wrapper table{
+    		vertical-align: middle;
+    		text-align: center;
+    	}
+    	.petInfo-wrapper table>tbody>tr td{
+    		color: #04293A;
+    		font-weight: 1000;
+    	}
+    	.petInfo{
+    		padding: 10px 10px;
+    	}
+    	#question{
+    		color: #EA5C2B;
+    		font-size: 14px;
+    		font-weight: 900;
+    	}
+    	#answer1, #answer2, #answer3{
+    		font-size: 14px;
+    		padding-left: 20px;
     	}
     </style>
     <body class="sb-nav-fixed">
@@ -144,6 +175,7 @@
                 						</thead>
                 						<tbody>
                 							<c:forEach items="${lists }" var="li">
+                							<input type="hidden" name="petNo" value="${li.petNo }">
 											<tr>
 												<td>${li.bookingNo }</td>
 												<td>${li.memberId }</td>
@@ -152,9 +184,12 @@
 												<td>${li.bookingPhone }</td>
 												<td>${li.bookedDate }</td>
 												<td>
-													<button type="button" class="btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">반려견 보기</button>
+													<input type="hidden" id="pNo" value="${sessionScope.p.PNo }">
+													<input type="hidden" name="petNo" value="${li.petNo }">
+													<button type="button" class="btn-warning petDetailBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">반려견 보기</button>
 												</td>
 											</tr>
+												
 											</c:forEach>
                 						</tbody>
                 					</table>
@@ -173,15 +208,53 @@
 				  <div class="modal-dialog">
 				    <div class="modal-content">
 				      <div class="modal-header">
-				        <h1 class="modal-title fs-5" id="exampleModalLabel">반려견 정보</h1>
+				        <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-weight: 900;">반려견 정보</h1>
 				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				      </div>
 				      <div class="modal-body">
-				        --------------------------------------------------------------------------------------------------------------
+				      	<div class="petInfo-wrapper">
+					      	<table class="table">
+					      		<tr>
+					      			<td rowspan="4" style="width: 30%;"><img id="petImg"></td>
+					      			<th>이름</th>
+					      			<td id="name"></td>
+					      			<th>나이</th>
+					      			<td id="age"></td>
+					      		</tr>
+					      		<tr>
+					      			<th>성별</th>
+					      			<td id="gender"></td>
+					      			<th>중성화</th>
+					      			<td id="neut"></td>
+					      		</tr>
+					      		<tr>
+					      			<th>생일</th>
+					      			<td id="dob"></td>
+					      			<th style="width: 20%">종</th>
+					      			<td style="width: 15%;" id="kind"></td>
+					      		</tr>
+					      		<tr>
+					      			<th colspan="2">자주 가는 병원</th>
+					      			<td colspan="2" id="hospital"></td>
+					      		</tr>
+					      	</table>
+					      	<div class="petInfo">
+					      		<p id="question">산책할 때 다른 강아지를 보면 어떻게 행동하나요?</p>
+					      		<p id="answer1"></p>
+					      		<p id="question">집에서 평상시 행동은 어떤가요?</p>
+					      		<p id="answer2"></p>
+					      		<p id="question">주로 어떤 보호자를 따르는 편인가요?</p>
+					      		<p id="answer3"></p>
+					      	</div> <!-- petInfo -->
+					      	<span style="font-weight: 900;">똑독캣 님의 반려견 소개</span>
+					      	<div class="petInfo about-pet"></div>
+					      	<span style="font-weight: 900;">파트너님께 남긴 메시지</span>
+					      	<div class="petInfo leftMsg"></div>
+				      	</div> <!-- petInfo-wrapper -->
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-warning"data-bs-dismiss="modal">수락</button>
 				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">거절</button>
+				        <button type="button" class="btn btn-warning acceptBtn">수락</button>
 				      </div>
 				    </div>
 				  </div>
@@ -189,7 +262,52 @@
 				<!--  end Modal -->
             </div>
         </div>
-        <script src="/resources/js/partnerScripts.js"></script>
+        <script>
+        $(document).on("click",".petDetailBtn",function(){
+        	const petNo = $(this).prev().val();
+        	let bookingNo = $(this).parent().parent().children().eq(0).text();
+        	console.log(bookingNo);
+         	$.ajax({
+        		url: "/getPetInfo.do",
+        		data: {petNo:petNo, bookingNo:bookingNo},
+        		dataType: 'json',
+        		success: function(data){
+        			
+        			$("#petImg").empty(); $(".about-pet").empty(); $("#answer2").empty();
+        			$("#name").empty(); $("#hospital").empty();	$("#answer3").empty();
+        			$("#age").empty(); $("#kind").empty();	 $(".leftMsg").empty();
+        			$("#dob").empty(); $("#neut").empty();
+        			$("#gender").empty();	$("#answer1").empty();
+        			
+        			const petImg = $("#petImg");
+        		    petImg.attr("src","/resources/upload/pet/petProfile/"+data.petFilepath);
+        		    $("#name").append(data.petName);
+        		    const currentYear = new Date().getFullYear();
+          			const dob = data.petBdate.substring(0,4);
+          			const age = (currentYear - dob) + 1;
+        		    $("#age").append(age+"살");
+        		    const month = data.petBdate.substring(4,6);
+        		    const date = data.petBdate.substring(6,8);
+        		    $("#dob").append(month+"월"+date+"일");
+        		    $("#gender").append(data.petGender);
+        		    $("#neut").append(data.petNeut);
+        		    $("#kind").append(data.petKind);
+        		    $("#hospital").append(data.petHospital);
+        		    $(".about-pet").append(data.petNote);
+        		    $("#answer1").append(data.character2);
+        		    $("#answer2").append(data.health1);
+        		    $("#answer3").append(data.health2);
+        		    $(".leftMsg").append(data.specialRequest);
+        		}
+         	}) // ajax끝
+         	$(".acceptBtn").on("click",function(){
+         		if(window.confirm("예약 요청을 수락하시겠습니까?")){
+         			const pNo = $("#pNo").val();
+         			location.href="/acceptBooking.do?bookingNo="+bookingNo+"&&pNo="+pNo;
+         		}
+         	})
+         });
+        </script>
         <script src="/resources/js/partner-datatables-simple-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>

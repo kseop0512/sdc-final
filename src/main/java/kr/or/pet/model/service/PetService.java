@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.pet.model.dao.PetDao;
 import kr.or.pet.model.vo.PetCheckList;
+import kr.or.pet.model.vo.PetForPartner;
 import kr.or.pet.model.vo.Pet;
 import kr.or.pet.model.vo.PetAvgStat;
 
@@ -54,4 +55,15 @@ public class PetService {
 		// TODO Auto-generated method stub
 		return dao.petEditCat(pet);
 	}
+
+	public PetForPartner selectOnePet(Pet p) {
+		// TODO Auto-generated method stub
+		return dao.selectOnePet(p);
+	}
+
+	public String selectSpecialRequest(String bookingNo) {
+		// TODO Auto-generated method stub
+		return dao.selectSpecialRequest(bookingNo);
+	}
+
 }

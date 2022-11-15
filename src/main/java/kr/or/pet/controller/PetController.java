@@ -24,9 +24,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 
 import common.FileRename;
+import kr.or.booking.model.vo.Booking;
 import kr.or.partner.model.vo.Partner;
 import kr.or.pet.model.service.PetService;
 import kr.or.pet.model.vo.PetCheckList;
+import kr.or.pet.model.vo.PetForPartner;
+import kr.or.pet.model.vo.SendPetToPartner;
 import kr.or.pet.model.vo.Pet;
 import kr.or.pet.model.vo.PetAvgStat;
 
@@ -130,4 +133,19 @@ public class PetController {
 			return null;
 		}
 	}
+	
+	// 혜규 on 11/15 - 펫 정보 불러오기
+	@ResponseBody
+	@RequestMapping(value="/getPetInfo.do", produces="application/text;charset=utf-8")
+	public String getPetInfo(Pet p, String bookingNo) {
+		PetForPartner pet = service.selectOnePet(p);
+		String request = service.selectSpecialRequest(bookingNo);
+		if(request == null) {
+			pet.setSpecialRequest("");
+		}else {
+			pet.setSpecialRequest(request);
+		}
+		return new Gson().toJson(pet);
+	}
+
 }
