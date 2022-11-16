@@ -1,6 +1,8 @@
 
 $(function(){
 	getPartnerCount();
+	cancelCnt();
+	CancelOkay();
 });
 
 
@@ -18,6 +20,24 @@ function getPartnerCount(){
 	});
 }
 
+function CancelOkay(){
+	$.ajax({
+		url : "/cancelOkay.do",
+		success : function(data){
+			$("#CancelOkay").append(data);
+		}	
+	});
+}
+
+function cancelCnt(){
+	$.ajax({
+		url : "/cancelCnt.do",
+		success: function(data){
+			$("#CancelCnt").append(data);
+		}
+	});
+}
+
 
 /*문의제목 눌렀을때 모달 띄우기*/ 
 function modal(obj){
@@ -25,7 +45,7 @@ function modal(obj){
     $(".modalmodel-wrap").show();
     
    const bookingNo = $(obj).parent().prev().prev().text();
-
+	
     $.ajax({
     	url :"/bookingDetail.do",
     	data : {bookingNo : bookingNo},
@@ -39,12 +59,15 @@ function modal(obj){
     		$("#detailBookingDate").text(data.bookedDate); //예약일
     		$("#detailPartnerAccpet").text(data.partnerAccept); //예약현황
     			if(data.partnerAccept == 'C'){
-    					$("#detailPartnerAccpet").text("취소처리중"); 
+    					$("#detailPartnerAccpet").text("취소처리중");
+    					$("#detailPartnerAccpet").css("color",'red');
     			}else if(data.partnerAccept == 'N'){
     				$("#detailPartnerAccpet").text("취소완료");
+    				$("#detailPartnerAccpet").css("color",'black');
     			}
     		$("#detailStart").text(data.startDate); //시작일
-    		//$("#detailEnd").text(data.applyDate); //종료일
+    		$("#detailEnd").text(data.endDate); //종료일
+    		$("#detailTime").text(data.bookingTime);//훈련시작일
     		
     		const price = $(obj).parent().next().next().next().next().text();
     		$("#detailPrice").text(price+"원"); //가격

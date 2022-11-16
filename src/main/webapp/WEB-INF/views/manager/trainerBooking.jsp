@@ -109,6 +109,12 @@
                                            	<span>예약취소 총</span>
                                 <code>[<code id="bookingCount"></code>]</code>건 
                                         </p>
+                                        <p class="mb-0">
+                                       	<span>취소신청중</span>
+                                       	<code>[<code id="CancelCnt"></code>]</code>
+                                            	 <span>/ 취소완료</span>
+                                            <code>[<code id="CancelOkay"></code>]</code>건
+                                        </p>
                                         <div id="nameIdSerarch-Box" style="float: right;">
                                             <form action="/searchBooking.do" method="get">
                                                 <select name="type" style="width: 150px">
@@ -186,7 +192,9 @@
 													<td>
 											<c:choose>
 												<c:when test="${b.partnerAccept eq 'C'}">
-                                            		<button><a href="/bookingFail.do?bookingNo=${b.bookingNo }">확인</a></button>												
+                                            		<button class="bc66">확인
+                                            			<a  href="/bookingFail.do?bookingNo=${b.bookingNo }"></a>
+                                            		</button>												
 												</c:when>
 											</c:choose>
                                             </td>
@@ -208,59 +216,64 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col" style="text-align: center;">예약번호</th>
-                                                    <td scope="col"  colspan="3" style="text-align: center;">
+                                                    <td scope="col"  colspan="5" style="text-align: center;">
                                                     	<span id="detailNo"></span>
                                                     </td>
                                                 </tr>
                                                  <tr>
                                                     <th scope="col" style="text-align: center;">아이디</th>
-                                                    <td scope="col" colspan="3" style="text-align: center;">
+                                                    <td scope="col" colspan="5" style="text-align: center;">
                                                     	<span id="detailId"></span>
                                                     </td>
                                                 </tr>
                                                  <tr>
                                                     <th scope="col" style="text-align: center;">파트너번호</th>
-                                                    <td scope="col"  colspan="3" style="text-align: center;">
+                                                    <td scope="col"  colspan="5" style="text-align: center;">
                                                     	<span id="detailPartnerNo"></span>
                                                     </td>
                                                 </tr>
                                                  <tr>
                                                     <th scope="col" style="text-align: center;">펫번호</th>
-                                                    <td scope="col"  colspan="3" style="text-align: center;">
+                                                    <td scope="col"  colspan="5" style="text-align: center;">
                                                     	<span id="detailPetNo"></span>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="col" style="text-align: center;">예약일</th>
-                                                    <td scope="col"   colspan="3" style="text-align: center;">
+                                                    <td scope="col"  colspan="5" style="text-align: center;">
                                                     	<span id="detailBookingDate"></span>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="col" style="text-align: center;">시작일</th>
-                                                    <td scope="col"  style="text-align: center;">
+                                                    <td scope="col" colspan="1" style="text-align: center;">
                                                     	<span id="detailStart"></span>
                                                     </td>
                                                     <th scope="col" style="text-align: center;">종료일</th>
-                                                    <td scope="col"  style="text-align: center;">
+                                                    <td scope="col" colspan="1" style="text-align: center;">
                                                     	<span id="detailEnd"></span>
+                                                    </td>
+                                                       <th scope="col" style="text-align: center;">훈련시간</th>
+                                                    <td scope="col" colspan="1" style="text-align: center;">
+                                                    	<span id="detailTime"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+            									 <th scope="col" style="text-align: center;">예약현황</th>
+                                                    <td scope="col" colspan="2"  style="text-align: center;">
+                                                    	<span id="detailPartnerAccpet" ></span>
+                                                    </td>
+                                                    <th scope="col" style="text-align: center;">금액</th>
+                                                    <td scope="col" colspan="2" style="text-align: center;">
+                                                    	<span id="detailPrice" ></span>
                                                     </td>
                                                 </tr>
                                             </thead>
                                             <tbody>
-            									<tr>
-            									 <th scope="col" style="text-align: center;">예약현황</th>
-                                                    <td scope="col"  style="text-align: center;">
-                                                    	<span id="detailPartnerAccpet" ></span>
-                                                    </td>
-                                                    <th scope="col" style="text-align: center;">금액</th>
-                                                    <td scope="col"  style="text-align: center;">
-                                                    	<span id="detailPrice" ></span>
-                                                    </td>
-                                                </tr>
+            									
                                                 <tr>
                                                     <th scope="col" style="text-align: center; line-height: 200px;">취소신청사유</th>
-                                                    <td scope="col"  colspan="3"  style="height: 200px;">
+                                                    <td scope="col"  colspan="5"  style="height: 200px;">
                                                     	<span id="detailCancelComment" ></span>
                                                     </td>
                                                 </tr>
