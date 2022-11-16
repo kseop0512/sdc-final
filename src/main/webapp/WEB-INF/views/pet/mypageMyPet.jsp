@@ -28,6 +28,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <!-- 마이페이지 CSS -->
 <link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_mypet.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_nav.css">
 </head>
 <body>
 	<!-- 헤더 -->
