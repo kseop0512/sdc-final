@@ -127,7 +127,7 @@
 			                    			<a href="javascript:cancleComment('${b.bookingNo}');">예약취소</a>
 			                    		</c:when>
 			                    		<c:when test="${b.partnerAccept eq 'R'}">
-			                    			<a href="/serviceCancle.do">신청취소</a>
+			                    			<a href="/serviceCancel.do">신청취소</a>
 			                    		</c:when>
 			                    		<c:when test="${b.partnerAccept eq 'C'}">
 			                    			취소처리중
