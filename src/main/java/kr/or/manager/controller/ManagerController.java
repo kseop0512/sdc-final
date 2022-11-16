@@ -401,7 +401,22 @@ public class ManagerController {
 		int b = service.bookingCount();
 		return new Gson().toJson(b);
 	}
-
+	@ResponseBody
+	@RequestMapping(value="/cancelCnt.do",produces="application/json;charset=utf-8")
+	public String cancelCnt() {
+		int b = service.cancelCnt();
+		return new Gson().toJson(b);
+		
+	}
+	@ResponseBody
+	@RequestMapping(value="/cancelOkay.do",produces="application/json;charset=utf-8")
+	public String cancelOkay() {
+		int b = service.cancelOkay();
+		return new Gson().toJson(b);
+		
+	}
+	
+	
 }
 
 

@@ -318,7 +318,7 @@
 			category,
 			cancle_comment as cancleComment,
 			price
-		from booking_tbl where category!='V' order by 1
+		from booking_tbl where category!='V' and partner_accept='C' or partner_accept='N' order by 1
   </select>
   <!-- 위탁/훈련 C-> N으로 업데이트 모에모에뀽 -->
  	<update id="bookingFail" parameterType="string">
@@ -438,6 +438,12 @@
 		</choose>
 	</select>
 	<select id="bookingCount" resultType="int">
-		select count(*) from booking_tbl WHERE category != 'V'
+		select count(*) from booking_tbl WHERE category != 'V' and partner_accept='C' or  partner_accept='N'
+	</select>
+	<select id="cancelCnt" resultType="int">
+	select count(*) from booking_tbl WHERE category != 'V' and partner_accept='C'
+	</select>
+	<select id="cancelOkay" resultType="int">
+	select count(*) from booking_tbl WHERE category != 'V' and partner_accept='N'
 	</select>
 </mapper>

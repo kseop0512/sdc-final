@@ -9,6 +9,19 @@
     color: #282F44;
 }
 
+.bc66 {
+  color: #fff;
+  background-color: rgba(255, 46, 99, 1);
+  border: 2px solid rgba(255, 46, 99, 1);
+}
+
+.bc66:hover {
+  background-color: #fff;
+  color: rgba(255, 46, 99, 1);
+  cursor: pointer;
+}
+
+
 .input-form2 { /* 얇고 각진 input */
     padding: 2px 10px;
     display: inline;
