@@ -192,7 +192,7 @@
 													<td>
 											<c:choose>
 												<c:when test="${b.partnerAccept eq 'C'}">
-                                            		<button class="bc22">확인
+                                            		<button class="bc6">확인
                                             			<a  href="/bookingFail.do?bookingNo=${b.bookingNo }"></a>
                                             		</button>												
 												</c:when>
