@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.StringTokenizer;
 
 import kr.or.payment.toss.PaymentController;
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
+
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -76,7 +80,9 @@ public class BookingController {
 	@RequestMapping(value="/appliedList.do")
 	public String appliedList(Partner p, Model model) {
 		ArrayList<Booking> lists = service.selectOngoingBooking(p);
+		ArrayList<Booking> sitters = service.selectOngoingBookingPetSitter(p);
 		model.addAttribute("lists",lists);
+		model.addAttribute("sitter",sitters);
 		return "partner/appliedList";
 	}
 	@RequestMapping(value="/scheduleCalendar.do")
@@ -121,15 +127,37 @@ public class BookingController {
 	}
 
 	// 예약 상태 업데이트 with 파트너 포인트 up
-	@RequestMapping(value="/acceptBooking.do")
-	public String acceptBooking(String bookingNo, String pNo, Model model) {
-		int result = service.updatePartnerStatus(bookingNo);
-		if(result>0) {
-			// 파트너 포인트 올리기
-			result += service.updatePartnerPoint(pNo);
-		}
-		return "redirect:/appliedList.do?pNo="+pNo;
-	}
+	   @RequestMapping(value="/acceptBooking.do")
+	   public String acceptBooking(String bookingNo, String pNo, String bookingPhone) {
+	      int result = service.updatePartnerStatus(bookingNo);
+	      if(result>0) {
+	         // 파트너 포인트 올리기
+	         result += service.updatePartnerPoint(pNo);
+	           String api_key = "NCSMTTQ4FCRBKKN9";
+	           String api_secret = "ICW2VA8P8JJLZDBWMSASXMRWEDIEJ0JH";
+	           Message coolsms = new Message(api_key, api_secret);
+	           
+	           String BookingMsg = "파트너님이 예약 요청을 수락 하셨습니다. 똑독캣 마이페이지에서 확인해주세요!.";
+	           
+	           HashMap<String, String> set = new HashMap<String, String>();
+	           set.put("to", bookingPhone); // 수신번호
+
+	           set.put("from", "01027850281"); // 발신번호
+	           set.put("text", BookingMsg); // 문자내용
+	           set.put("type", "sms"); // 문자 타입
+	           set.put("app_version", "test app 1.2"); 
+
+	           try {
+	           JSONObject result2 = coolsms.send(set); // 보내기&전송결과받기
+
+	           System.out.println(result2.toString());
+	          } catch (CoolsmsException e) {
+	            System.out.println(e.getMessage());
+	            System.out.println(e.getCode());
+	          }
+	      }
+	      return "redirect:/appliedList.do?pNo="+pNo;
+	   }
 	
 	//회원탈퇴 전 예약내역 조회
 	@ResponseBody
@@ -158,4 +186,35 @@ public class BookingController {
 		System.out.println(map);
 		return service.cancelReserve(map);
 	}
+	
+	// 파트너의 예약 신청 거부 (혜규)
+	   @RequestMapping(value="/denyBooking.do")
+	   public String denyBooking(String pNo, String bookingNo, String bookingPhone) {
+	      service.denyBooking(bookingNo);
+	      String api_key = "NCSMTTQ4FCRBKKN9";
+	        String api_secret = "ICW2VA8P8JJLZDBWMSASXMRWEDIEJ0JH";
+	        Message coolsms = new Message(api_key, api_secret);
+	        
+	        String BookingMsg = "파트너님이 예약 요청을 거절하셨습니다. 똑독캣 마이페이지에서 확인해주세요.";
+	        
+	        HashMap<String, String> set = new HashMap<String, String>();
+	        set.put("to", bookingPhone); // 수신번호
+
+	        set.put("from", "01027850281"); // 발신번호
+	        set.put("text", BookingMsg); // 문자내용
+	        set.put("type", "sms"); // 문자 타입
+	        set.put("app_version", "test app 1.2"); 
+
+	        try {
+	        JSONObject result2 = coolsms.send(set); // 보내기&전송결과받기
+	        System.out.println(result2.toString());
+	        
+	        } catch (CoolsmsException e) {
+	         System.out.println(e.getMessage());
+	         System.out.println(e.getCode());
+	        }
+	      
+	      return "redirect:/appliedList.do?pNo="+pNo; 
+	   }
+	
 }

@@ -159,7 +159,7 @@
                 					${sessionScope.p.PName }님의 예약요청 리스트
                 				</div>
                 				<c:choose>
-                				<c:when test="${sessionCope.p.category == T  }">
+                				<c:when test="${sessionScope.p.category == 'T' }">
                 				<div class="card-body">
                 					<table class="list-table"id="datatablesSimple">
                 						<thead>
@@ -184,10 +184,11 @@
 												<td>${li.bookingPhone }</td>
 												<td>${li.bookedDate }</td>
 												<td>
-													<input type="hidden" id="pNo" value="${sessionScope.p.PNo }">
-													<input type="hidden" name="petNo" value="${li.petNo }">
-													<button type="button" class="btn-warning petDetailBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">반려견 보기</button>
-												</td>
+			                                       <input type="hidden" id="pNo" value="${sessionScope.p.PNo }">
+			                                       <input type="hidden" name="petNo" value="${li.petNo }">
+			                                       <input type="hidden" id="bookingPhone" value="${li.bookingPhone }">
+			                                       <button type="button" class="btn-warning petDetailBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">반려견 보기</button>
+                                    			</td>
 											</tr>
 												
 											</c:forEach>
@@ -195,8 +196,42 @@
                 					</table>
                 				</div>
                 				</c:when>
-                				<c:when test="${sessionScope.p.category == L }">
-                				
+                				<c:when test="${sessionScope.p.category == 'L'  }"> <!-- 위탁펫시터 화면 -->
+                				<div class="card-body">
+                					<table class="list-table"id="datatablesSimple">
+                						<thead>
+                							<tr>
+                								<th>예약번호</th>
+                								<th>신청자 아이디</th>
+                								<th>맡기는 날짜/시간</th>
+                								<th>찾는 날짜/시간</th>
+                								<th>연락처</th>
+                								<th>결제 날짜</th>
+                								<th>반려견 정보</th>
+                							</tr>
+                						</thead>
+                						<tbody>
+                							<c:forEach items="${sitter }" var="s">
+                							<input type="hidden" name="petNo" value="${s.petNo }">
+											<tr>
+												<td>${s.bookingNo }</td>
+												<td>${s.memberId }</td>
+												<td>${s.startDate }</td>
+												<td>${s.endDate }</td>
+												<td>${s.bookingPhone }</td>
+												<td>${s.bookedDate }</td>
+												<td>
+			                                       <input type="hidden" id="pNo" value="${sessionScope.p.PNo }">
+			                                       <input type="hidden" name="petNo" value="${s.petNo }">
+			                                       <input type="hidden" id="bookingPhone" value="${s.bookingPhone }">
+			                                       <button type="button" class="btn-warning petDetailBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">반려견 보기</button>
+                                    			</td>
+											</tr>
+												
+											</c:forEach>
+                						</tbody>
+                					</table>
+                				</div>
                 				</c:when>
                 				</c:choose>
                 			</div>
@@ -253,7 +288,7 @@
 				      	</div> <!-- petInfo-wrapper -->
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">거절</button>
+				        <button type="button" class="btn btn-secondary denyBtn" data-bs-dismiss="modal">거절</button>
 				        <button type="button" class="btn btn-warning acceptBtn">수락</button>
 				      </div>
 				    </div>
@@ -301,11 +336,20 @@
         		}
          	}) // ajax끝
          	$(".acceptBtn").on("click",function(){
-         		if(window.confirm("예약 요청을 수락하시겠습니까?")){
-         			const pNo = $("#pNo").val();
-         			location.href="/acceptBooking.do?bookingNo="+bookingNo+"&&pNo="+pNo;
-         		}
-         	})
+                if(window.confirm("예약 요청을 수락하시겠습니까?")){
+                   const pNo = $("#pNo").val();
+                   const bookingPhone = $("#bookingPhone").val();
+                   location.href="/acceptBooking.do?bookingNo="+bookingNo+"&&pNo="+pNo+"&&bookingPhone="+bookingPhone;
+                }
+             })
+             $(".denyBtn").on("click",function(){
+                if(window.confirm("예약 요청을 정말 '거절'하시겠습니까?^^")){
+                   const pNo = $("#pNo").val();
+                   console.log(pNo);
+                   const bookingPhone = $("#bookingPhone").val();
+                   location.href="/denyBooking.do?bookingNo="+bookingNo+"&&pNo="+pNo+"&&bookingPhone="+bookingPhone;
+                }
+             })
          });
         </script>
         <script src="/resources/js/partner-datatables-simple-demo.js"></script>

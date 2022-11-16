@@ -83,4 +83,15 @@ public class BookingDao {
 	public int cancelReserve(HashMap<String, String> map) {
 		return sqlSession.update("booking.cancelReserve", map);
 	}
+
+	public void denyBooking(String bookingNo) {
+		// TODO Auto-generated method stub
+		sqlSession.update("booking.denyBookingRequest",bookingNo);
+	}
+
+	public ArrayList<Booking> selectOngoingBookingPetSitter(Partner p) {
+		// TODO Auto-generated method stub
+		List list = sqlSession.selectList("booking.selectOngoingBookingPetSitter",p);
+		return (ArrayList<Booking>)list;
+	}
 }
