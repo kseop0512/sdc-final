@@ -98,7 +98,9 @@
                             <li class="breadcrumb-item active">관리자용</li>
                         </ol>
                         <hr style="color: #cda45e;">
-                        <h1 style="text-align: center;border: #cda45e solid 3px;background-color: #282f44;color: #fff">게시글 상세보기</h1>
+                        <div id="notice-title">
+                        	<h1>게시글 상세보기</h1>
+						</div>
 						<hr style="color: #cda45e;">
 						<table border="1" style="width: 100%;background-color: #f8f9fa;font-size: 20px;border-color: #282f44;">
 							<tr style="border-bottom: black solid 1px;">
@@ -125,13 +127,14 @@
 							</tr>
 							<tr style="background-image: url(/resources/assets/img/logo-15수정본.png);background-repeat: no-repeat;background-position: center center;background-size: contain;">
 								<th style="border-right: black solid 1px;text-align: center;">내용</th>
-								<td colspan="4" style="height: 100px;padding-left: 5px;white-space: pre-line;">
+								<td colspan="4" style="height: 500px; padding-left: 5px;  white-space: pre-line;">
 									${ng.noticeGContent }
 								</td>
 							</tr>
 						</table>
                     </div>
                 </main>
+                <div style="height: 20vh;"></div>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
