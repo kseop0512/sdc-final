@@ -123,8 +123,6 @@ public class BookingController {
 	// 예약 상태 업데이트 with 파트너 포인트 up
 	@RequestMapping(value="/acceptBooking.do")
 	public String acceptBooking(String bookingNo, String pNo, Model model) {
-		System.out.println(bookingNo);
-		System.out.println(pNo);
 		int result = service.updatePartnerStatus(bookingNo);
 		if(result>0) {
 			// 파트너 포인트 올리기

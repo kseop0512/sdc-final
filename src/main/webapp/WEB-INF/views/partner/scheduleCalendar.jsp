@@ -142,8 +142,11 @@
             // 파트너 예약 리스트 가져오기
             const pNo = $("input[name=pNo]").val();
             const partnerType = $("input[name=category]").val();
+            console.log(pNo);
             console.log(partnerType);
+            
             if(partnerType==='T'){
+            	console.log("이게 떠?");
             let eventArr = []
             $.ajax({
             	url: "/getScheduleList.do",
@@ -153,7 +156,7 @@
             			console.log(data[i].memberId);
             			eventArr.push(
             				{
-            					title: data[i].memberId+'/time:'+data[i].bookingTime,
+            					title: data[i].bookingTime+" "+data[i].memberId,
             					start: data[i].startDate
             				},
             			)
@@ -172,7 +175,7 @@
             calendar.render();
             	} //end success
             });
-           } // if partnerType=T
+           } // if partnerType=L
             if(partnerType==='L'){
             let eventArr = []
             $.ajax({
@@ -180,11 +183,13 @@
             	data: {pNo:pNo},
             	success: function(data){
             		for(let i=0; i<data.length; i++){
-            			console.log(data[i].memberId);
+            			console.log(data[i].startDate);
+            			console.log(data[i].endDate);
             			eventArr.push(
             				{
-            					title: data[i].memberId+'/예약시간: '+data[i].bookingTime,
-            					start: data[i].startDate
+            					title: data[i].memberId,
+            					start: data[i].startDate,
+            					end: data[i].endDate
             				},
             			)
             		}
