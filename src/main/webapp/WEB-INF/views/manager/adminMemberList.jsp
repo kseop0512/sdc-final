@@ -122,14 +122,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                 
                                   <select name="membertab" onchange="selectAll(this)">
-                                  	<option>보기선택</div>
+                                  	<option>보기</div>
                                     <option value="tabAllMember" id="all">전체</div>
                                     <option value="tabMember" id="member" class="active-tap">이용자</div>
                                 	<option value="tabPartner" id="partner">파트너</div>
                                	 </select>
-                               	    	                           
+                               	 <p style="color: #ccc; position: absolute; left: 320px; margin-top: 12px; font-size: 14px;">※ 이용자 유형을 선택하세요</p>                 
                                 <table id="datatablesSimple">
                                 <form action="/excelDown.do" method="get">
 	                                <div id="memberlist-btn">

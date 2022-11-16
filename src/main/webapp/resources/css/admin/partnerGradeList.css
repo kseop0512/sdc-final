@@ -202,6 +202,13 @@ tbody>tr>td:nth-child(2):hover{
     float: left;
 }
 
+#span2da{
+	position: absolute;
+	font: 14px;
+	color: #ccc;
+	left: 230px;
+	margin-top: 8px;
+}
 
 
 

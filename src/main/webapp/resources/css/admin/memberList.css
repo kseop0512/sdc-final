@@ -36,11 +36,14 @@
 
 /* 전체/ 이용자 / 파트너  */
 [name=membertab]{
-    width: 100px;
+    width: 80px;
+    height: 30px;
     position: absolute;
     left: 230px;
     margin-top: 7px;
     cursor: pointer;
+    border-radius: 10px;
+    border-color: #ccc;
 }
 
 [name=tabAllMember]{

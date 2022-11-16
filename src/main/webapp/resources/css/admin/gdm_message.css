@@ -159,3 +159,10 @@ tbody>tr>td:nth-child(7){
 #tabMember{
     float: left;
 }
+
+
+[name=dmType]{
+	width: 	120px;
+	height: 30px;
+	border-color: #ccc; 
+}

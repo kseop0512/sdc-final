@@ -110,7 +110,7 @@
                                 <code>[<code id="bookingCount"></code>]</code>건 
                                         </p>
                                         <p class="mb-0">
-                                       	<span>취소신청중</span>
+                                       	<span>취소신청 중</span>
                                        	<code>[<code id="CancelCnt"></code>]</code>
                                             	 <span>/ 취소완료</span>
                                             <code>[<code id="CancelOkay"></code>]</code>건
@@ -122,7 +122,7 @@
                                                     <option value="id">아이디</option>
                                                 </select>
                                                     <input class="input-form2" type="text" placeholder="입력하세요" style="width: 500px;" name="keyword">
-                                                    <button type="submit" class="bc22" >검색</button>
+                                                    <button type="submit" class="bc22" id="sb">검색</button>
                                             </form>
                                         </div>
                                     </div>
@@ -192,7 +192,7 @@
 													<td>
 											<c:choose>
 												<c:when test="${b.partnerAccept eq 'C'}">
-                                            		<button class="bc66">확인
+                                            		<button class="bc22">확인
                                             			<a  href="/bookingFail.do?bookingNo=${b.bookingNo }"></a>
                                             		</button>												
 												</c:when>
