@@ -62,7 +62,7 @@ public class BookingService {
 		return dao.deleteFailPaymentBooking(bookingNo);
 	}
 
-	public ArrayList<String> getBookingCategory(String memberId) {
-		return dao.getBookingCategory(memberId);
+	public ArrayList<String> getBookingAccept(String memberId) {
+		return dao.getBookingAccept(memberId);
 	}
 }

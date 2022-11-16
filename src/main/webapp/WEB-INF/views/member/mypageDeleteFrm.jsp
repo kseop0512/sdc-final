@@ -125,13 +125,28 @@
 				if (!isConfirm) return;
 				jQuery.ajax({
 					type : "POST",
-					url : "/getBookingCategory.do",
+					url : "/getBookingAccept.do",
 					data : { memberId : memberId},
 					cache: false,
 					dataType : "json",
 					success : function(data) {
 						if(data.includes("R" || "Y" || "C")){
-							swal("실패", "예약내역을 확인해주세요.", "error");
+							swal({
+								title: "처리가 완료되지 않은 예약내역이 있습니다.\n이용내역으로 가시겠습니까?",
+								type: "error",
+								showCancelButton: true,
+								confirmButtonColor: "#DD6B55",
+								confirmButtonText: "예",
+								cancelButtonText: "아니요",
+								closeOnConfirm: false,
+								closeOnCancel : true
+							}, function (isConfirm) {
+								if(isConfirm){								
+									location.href="/mypageService.do";
+								}else{									
+									location.href="/memberMypage.do";
+								}
+							});
 						}else{
 							location.href="/deleteMember.do?memberId="+memberId;
 						}

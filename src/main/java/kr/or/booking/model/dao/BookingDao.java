@@ -70,8 +70,8 @@ public class BookingDao {
 
 	}
 
-	public ArrayList<String> getBookingCategory(String memberId) {
-		List list = sqlSession.selectList("booking.getBookCategory",memberId);
+	public ArrayList<String> getBookingAccept(String memberId) {
+		List list = sqlSession.selectList("booking.getBookAccept",memberId);
 		return (ArrayList<String>)list;
 	}
 }

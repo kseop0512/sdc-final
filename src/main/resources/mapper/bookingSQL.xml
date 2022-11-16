@@ -159,8 +159,8 @@
 		update booking_tbl set partner_accept='Y'where booking_no=#{_parameter}
 	</update>
 	
-	<select id="getBookCategory" parameterType="String" resultType="string">
-		select category from booking_tbl where member_id = #{_parameter}
+	<select id="getBookAccept" parameterType="String" resultType="string">
+		select partner_accept from booking_tbl where member_id = #{_parameter}
 	</select>
 	
 </mapper>
