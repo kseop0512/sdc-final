@@ -109,6 +109,14 @@
     color: #000;
     transition-duration: 0.8s;
 }
+.none-dm{
+	position: absolute;
+    top: 300px;
+    color: #fff;
+	font-weight: bolder;
+    font-size: 40px;
+    right: 140px;
+}
 </style>
 <body>
 	<!-- 헤더 -->
@@ -151,6 +159,7 @@
 		                  </thead>
 		                  <tbody>
 		                  <input type="hidden" value="${fn:length(list)}" id="listLength">
+		                  
 		                  <c:forEach items="${list}" var="b">
 		                    <tr>
 		                    	<!-- 서비스유형 -->

@@ -305,3 +305,12 @@ body{
     color: #000;
     transition-duration: 0.8s;
 }
+
+.none-dm{
+	position: absolute;
+    top: 230px;
+    color: #fff;
+	font-weight: bolder;
+    font-size: 40px;
+    right: 140px;
+}
