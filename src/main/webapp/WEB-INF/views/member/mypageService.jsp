@@ -76,6 +76,7 @@
     outline-color: #ffb347;
     padding: 20px;
     padding-top: 15px;
+    border-radius: 15px;
 }
 .cancel-btn-wrap{
 	display: flex;
@@ -374,11 +375,10 @@
 				<h4>취소 사유를 입력해주세요</h4>			
 			</div>
 			<div class="cancel-contentDiv">
-<textarea class="cancel-content" placeholder="  
-   내용을 입력해주세요.
+<textarea class="cancel-content" placeholder="내용을 입력해주세요.
 	
-   ※ 공백, 욕설 등 부적합한 사유 입력 시 환불처리가 
-   불가합니다." required></textarea>
+ ※ 공백, 욕설 등 부적합한 사유 입력 시 
+      환불처리가 불가합니다." required></textarea>
 			</div>
 			<div class="cancel-btn-wrap">
 				<button type="button" class="cancel-cancelBtn" onclick="closeCancelModal()">닫기</button>
