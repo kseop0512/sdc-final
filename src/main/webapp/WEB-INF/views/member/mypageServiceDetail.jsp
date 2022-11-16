@@ -103,14 +103,24 @@
 									</h5>
 									<table id="info-booking">
 										<tr>
-											<th id="border-top-left">예약한 똑똑캣</th>
-											<td>${petName }</td>
+											<th id="border-top-left">예약상태</th>
+											<td>
+											<c:choose>
+					                    		<c:when test="${b.partnerAccept eq 'R'}">예약대기중</c:when>
+					                    		<c:when test="${b.partnerAccept eq 'Y'}">예약완료</c:when>
+					                    		<c:when test="${b.partnerAccept eq 'C'}">취소처리중</c:when>
+					                    		<c:when test="${b.partnerAccept eq 'N'}">취소완료</c:when>
+					                    		<c:when test="${b.partnerAccept eq 'D'}">이용완료</c:when>
+					                    	 </c:choose>
+											</td>
 											<th>예약일</th>
 											<td>${b.bookedDate }</td>
 										</tr>
 										<tr>
+											<th>예약한 똑똑캣</th>
+											<td>${petName }</td>
 											<th>안내받을 연락처</th>
-											<td colspan="3" class="phone2">${b.bookingPhone }</td>
+											<td class="phone2">${b.bookingPhone }</td>
 										</tr>
 										<tr>
 											<th>서비스이용일</th>

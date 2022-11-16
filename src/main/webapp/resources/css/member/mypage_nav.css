@@ -4,12 +4,12 @@
 	#mypage-nav {
 		width: 200px;
 		position: fixed;
-		bottom: 15vh;
+		bottom: 22vh;
 		transition-duration: 0.5s;
 	}
 	#mypage-nav.on {
 		position: absolute;
-		bottom: 10vh;
+		bottom: 5vh;
 		transition-duration: 0.5s;
 	}
 	#mypage-nav>ul {
@@ -40,8 +40,13 @@
 @media(max-height : 774px){
 	#mypage-nav {
 		width: 200px;
+		position: fixed;
+		bottom: 22vh;
+		transition-duration: 0.5s;
+	}
+	#mypage-nav.on {
 		position: absolute;
-		top: 100px;
+		bottom: 5vh;
 		transition-duration: 0.5s;
 	}
 	#mypage-nav>ul {

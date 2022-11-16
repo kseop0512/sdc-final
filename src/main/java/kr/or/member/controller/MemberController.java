@@ -155,13 +155,10 @@ public class MemberController {
 	public String mypageService(String bookingNo, Model model) {
 		Booking b = service.selectOneBooking(bookingNo); //예약정보 전체 조회
 		String petName = petService.selectPetName(b.getPetNo()); //반려동물 이름 조회
-		Partner p = service.selectOnePartnerInfo(b.getPNo()); //파트너 이름,연락처,사진 조회
+		Partner p = service.selectOnePartnerInfo(b.getPNo()); //파트너 이름,연락처,사진,등급 조회
 		model.addAttribute("b",b);
 		model.addAttribute("petName",petName);
 		model.addAttribute("p",p);
-		System.out.println("b : "+b);
-		System.out.println("petName : "+petName);
-		System.out.println("p : "+p);
 		/*
 		if(b.getCategory().equals("L")) {
 			//1. 위탁돌봄일 때

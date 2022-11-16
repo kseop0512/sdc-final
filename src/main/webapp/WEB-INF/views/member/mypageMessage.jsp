@@ -27,7 +27,6 @@
 						<li><a href="/mypageMyPet.do?memberNo=${sessionScope.m.memberNo }">나의 똑독캣</a></li>
 						<li><a href="/mypageMessage.do" class="active">1:1 문의내역</a></li>
 						<li><a href="/mypageService.do">서비스 이용내역</a></li>
-						<li><a href="/mypageReview.do">나의 이용후기</a></li>
 						<li><a href="/mypageDeleteFrm.do?memberNo=${sessionScope.m.memberNo }">회원탈퇴</a></li>
 					</ul>
 				</div>
