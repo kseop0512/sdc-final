@@ -107,12 +107,13 @@
                                                     <option value="name">이름</option>
                                                     <option value="id">아이디</option>
                                                 </select>
-                                                    <input class="input-form2" type="text" placeholder="입력하세요" style="width: 500px;" name="keyword">
-                                                    <button class="bc22" type="submit">검색</button>
+                                                    <input class="input-form2" type="text" placeholder="검색어를 입력하세요^_ㅠ" style="width: 500px;" name="keyword">
+                                                    <button class="bc22" type="submit" id="sb">검색</button>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
+                                <span id="span2da">※상세보기는 이름을 클릭하세요.</span>
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>

@@ -319,6 +319,7 @@ public class ManagerService {
 		 	//성공메일발송
 			 MailSender sender = new MailSender();
 			 sender.partnerEamil(email);
+			 
 		}else if(gradeType.equals("Z")) {
 		 result = dao.deletePartner(map);
 			//거절메일발송
@@ -397,6 +398,14 @@ public class ManagerService {
 	public int bookingCount() {
 		int result = dao.bookingCount();
 		return result;
+	}
+// 취소 몇건
+	public int cancelCnt() {
+		return dao.cancelCnt();
+	}
+//취소 완료 몇건 
+	public int cancelOkay() {
+		return dao.cancelOkay();
 	}
 
 

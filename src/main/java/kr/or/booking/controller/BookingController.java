@@ -1,8 +1,10 @@
 package kr.or.booking.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.StringTokenizer;
 
+import kr.or.payment.toss.PaymentController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -107,11 +109,15 @@ public class BookingController {
 	@RequestMapping(value="/reservePetSitter.do")
 	public String reservePetSitter(Booking b, HttpSession session) {
 
-		String[] resultArr = service.insertPetSitterBooking(b);
-		if(resultArr[1] != null) {
-			session.setAttribute("bookingNo", resultArr[1]);
+		//String[] resultArr = service.insertPetSitterBooking(b);
+		if(b != null) {
+			session.setAttribute("booking", b);
+			return "1";
 		}
-		return resultArr[0];
+		/*if(resultArr[1] != null) {
+			session.setAttribute("bookingNo", resultArr[1]);
+		}*/
+		return "0";
 	}
 
 	// 예약 상태 업데이트 with 파트너 포인트 up
@@ -123,6 +129,33 @@ public class BookingController {
 			result += service.updatePartnerPoint(pNo);
 		}
 		return "redirect:/appliedList.do?pNo="+pNo;
-
+	}
+	
+	//회원탈퇴 전 예약내역 조회
+	@ResponseBody
+	@RequestMapping(value="/getBookingAccept.do", produces="application/json;charset=utf-8")
+	public String getBookingAccept(String memberId) {
+		ArrayList<String> bCatList = service.getBookingAccept(memberId);
+		return new Gson().toJson(bCatList);
+	}
+	
+	//예약대기 취소
+	@ResponseBody
+	@RequestMapping(value="/cancelService.do")
+	public int cancelService(String bookingNo) {
+		return service.cancelService(bookingNo);
+	}
+	
+	//예약완료 취소
+	@ResponseBody
+	@RequestMapping(value="/cancelReserve.do")
+	public int cancelService(String bookingNo, String comment) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("bookingNo", bookingNo);
+		map.put("comment", comment);
+		System.out.println(bookingNo);
+		System.out.println(comment);
+		System.out.println(map);
+		return service.cancelReserve(map);
 	}
 }

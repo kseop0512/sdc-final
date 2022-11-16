@@ -1,13 +1,16 @@
 package kr.or.booking.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.booking.model.dao.BookingDao;
 import kr.or.booking.model.vo.Booking;
 import kr.or.partner.model.vo.Partner;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookingService {
@@ -53,12 +56,26 @@ public class BookingService {
 	
 
 	// END 혜규 on 11/13
-
-	public String[] insertPetSitterBooking(Booking b) {
+	@Transactional
+	public int insertPetSitterBooking(Booking b) {
 		return dao.insertPetSitterBooking(b);
 	}
 
 	public int deleteFailedPaymentBooking(String bookingNo) {
 		return dao.deleteFailPaymentBooking(bookingNo);
+	}
+
+	public ArrayList<String> getBookingAccept(String memberId) {
+		return dao.getBookingAccept(memberId);
+	}
+	
+	@Transactional
+	public int cancelService(String bookingNo) {
+		return dao.cancelService(bookingNo);
+	}
+
+	@Transactional
+	public int cancelReserve(HashMap<String, String> map) {
+		return dao.cancelReserve(map);
 	}
 }

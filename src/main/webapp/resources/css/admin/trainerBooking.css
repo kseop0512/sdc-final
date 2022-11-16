@@ -8,6 +8,17 @@
     cursor: pointer;
     color: #282F44;
 }
+.bc6 {
+  background-color: rgba(255, 46, 99, 0.9);
+  color: #fff;
+  border: 2px solid rgba(255, 46, 99, 0.9);
+}
+.bc6:hover {
+  background-color: rgba(255, 46, 99, 1);
+  cursor: pointer;
+}
+
+
 
 .input-form2 { /* 얇고 각진 input */
     padding: 2px 10px;

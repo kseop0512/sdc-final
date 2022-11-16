@@ -113,6 +113,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <span id="span2da">※상세보기는 이름을 클릭하세요.</span>
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
@@ -124,7 +125,7 @@
                                             <th>테스트점수</th>
                                             <th>자격증</th>
                                             <th>등급</th>
-                                            <th>관리</th>
+                                            <th colspan="2" style="text-align: center;">관리</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -159,7 +160,7 @@
 											</c:when>
 										</c:choose>
 										</td>
-											<td>
+											<td style="width: 70px;">
             									<select name="gradeType">
                                                     <option value="C">승인</option>
                                                     <option value="Z">거절</option>
@@ -167,7 +168,7 @@
                                             </td>
                                             <td>
                                             	<input type="hidden" name="pNo"><!-- '${pNo}','${gradeType}' -->
-                                            	<button type="submit" onclick="partnerGrade(this);">확인</button>
+                                            	<button type="submit" class="bc6" onclick="partnerGrade(this);">확인</button>
                                             </td>
                                         </tr>
                                        </c:forEach>

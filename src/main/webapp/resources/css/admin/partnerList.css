@@ -8,6 +8,15 @@
     cursor: pointer;
     color: #282F44;
 }
+.bc6 {
+  background-color: rgba(255, 46, 99, 0.9);
+  color: #fff;
+  border: 2px solid rgba(255, 46, 99, 0.9);
+}
+.bc6:hover {
+  background-color: rgba(255, 46, 99, 1);
+  cursor: pointer;
+}
 
 .input-form2 { /* 얇고 각진 input */
     padding: 2px 10px;
@@ -202,7 +211,18 @@ tbody>tr>td:nth-child(2):hover{
     float: left;
 }
 
-
+[name=gradeType]{
+	width:60px;
+	border-color: #ccc;
+	border: none;
+}
+#span2da{
+	position: absolute;
+	font: 14px;
+	color: #ccc;
+	left: 230px;
+	margin-top: 8px;
+}
 
 
 

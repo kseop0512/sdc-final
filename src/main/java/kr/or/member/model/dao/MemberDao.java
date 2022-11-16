@@ -68,8 +68,8 @@ public class MemberDao {
 		return sqlSession.update("member.updatePw", m);
 	}
 
-	public int deleteMember(int memberNo) {
-		return sqlSession.delete("member.deleteMember", memberNo);
+	public int deleteMember(String memberId) {
+		return sqlSession.delete("member.deleteMember", memberId);
 	}
 
 	public Booking selectOneBooking(String bookingNo) {

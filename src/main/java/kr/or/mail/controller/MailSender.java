@@ -156,8 +156,8 @@ public class MailSender {
 	            msg.setSubject("SDC 파트너 승인 결과메일입니다.","UTF-8");
 	            //이메일 본문설정
 	            msg.setContent("<h1>안녕하세요. SDC 관리자 입니다.</h1>"
-	                            + "<h3>파트너 [<span style='color:red'>"
-	                            + sb.toString() + "</span>] 되었습니다.</h3>"
+	                            + "<h3>파트너 신청이 [<span style='color:red'>"
+	                            + sb.toString() + "</span>] 되었습니다. 활동을 시작해주세요들레히요</h3>"
 	                    ,"text/html;charset=utf-8");
 	            //이메일 전송
 	            Transport.send(msg);
@@ -230,8 +230,8 @@ public class MailSender {
 	            msg.setSubject("SDC 파트너 승인 결과메일입니다.","UTF-8");
 	            //이메일 본문설정
 	            msg.setContent("<h1>안녕하세요. SDC 관리자 입니다.</h1>"
-	                            + "<h3>파트너 [<span style='color:red'>"
-	                            + sb.toString() + "</span>] 되었습니다. 다시 지원해주세요.</h3>"
+	                            + "<h3>파트너 신청이 [<span style='color:red'>"
+	                            + sb.toString() + "</span>] 되었습니다. 다시 지원해주세요^.^</h3>"
 	                    ,"text/html;charset=utf-8");
 	            //이메일 전송
 	            Transport.send(msg);

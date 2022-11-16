@@ -206,6 +206,14 @@ public class ManagerDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("manager.bookingCount");
 	}
+//취소 몇건
+	public int cancelCnt() {
+		return sqlSession.selectOne("manager.cancelCnt");
+	}
+//취소완료몇건
+	public int cancelOkay() {
+		return sqlSession.selectOne("manager.cancelOkay");
+	}
 
 	
 
