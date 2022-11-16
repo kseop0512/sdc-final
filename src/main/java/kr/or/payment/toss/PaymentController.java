@@ -3,6 +3,7 @@ package kr.or.payment.toss;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.or.booking.model.service.BookingService;
+import kr.or.booking.model.vo.Booking;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.http.client.ClientHttpResponse;
@@ -50,9 +51,14 @@ public class PaymentController {
             Model model, HttpServletRequest req) throws Exception {
 
         HttpSession session = req.getSession();
-        String bookingNo = (String)session.getAttribute("bookingNo");
-        if(bookingNo != null) {
-            session.removeAttribute("bookingNo");
+        Booking booking = (Booking) session.getAttribute("booking");
+        if(booking != null) {
+            int result = bookingService.insertPetSitterBooking(booking);
+            if(result < 1) {
+                return "main/partner/payment/paymentFail";
+            } else {
+                session.removeAttribute("booking");
+            }
         }
         HttpHeaders headers = new HttpHeaders();
         // headers.setBasicAuth(SECRET_KEY, ""); // spring framework 5.2 이상 버전에서 지원
@@ -67,7 +73,7 @@ public class PaymentController {
 
         ResponseEntity<JsonNode> responseEntity = restTemplate.postForEntity(
                 "https://api.tosspayments.com/v1/payments/" + paymentKey, request, JsonNode.class);
-
+        System.out.println(responseEntity.getStatusCode());
         if (responseEntity.getStatusCode() == HttpStatus.OK) {
             JsonNode successNode = responseEntity.getBody();
             model.addAttribute("orderId", successNode.get("orderId").asText());
@@ -82,18 +88,8 @@ public class PaymentController {
     }
 
     @RequestMapping("/paymentFail.do")
-    public String failPayment(@RequestParam String message, @RequestParam String code, Model model, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        String bookingNo = (String)session.getAttribute("bookingNo");
-        int result = 0;
-        if(bookingNo != null) {
-            result = bookingService.deleteFailedPaymentBooking(bookingNo);
-            if(result > 0) {
-                System.out.println("SUCCESS DELETE BOOKING TABLE");
-            } else {
-                System.out.println("FAIL DELETE BOOKING TABLE");
-            }
-        }
+    public String failPayment(@RequestParam String message, @RequestParam String code, Model model) {
+
         model.addAttribute("message", message);
         model.addAttribute("code", code);
         return "main/partner/payment/paymentFail";

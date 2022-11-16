@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,5 +43,10 @@ public class PartnerBoardDao {
 
     public Map<String, Object> selectPetSitterBoard(HashMap<String, Object> param) {
         return sqlSession.selectOne("partnerBoard.selectPetSitterBoard", param);
+    }
+
+    public ArrayList<Map<String, Object>> selectBoardReplyList(Object pNo) {
+        List list = sqlSession.selectList("partnerBoard.selectBoardReplyList", pNo);
+        return (ArrayList<Map<String, Object>>) list;
     }
 }

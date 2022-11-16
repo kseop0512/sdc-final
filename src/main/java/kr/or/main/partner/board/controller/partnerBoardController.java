@@ -97,7 +97,10 @@ public class partnerBoardController {
         HttpSession session = request.getSession();
         Member member = (Member) session.getAttribute("m");
         Map<String, Object> detailContent = service.selectPetSitterBoard(param);
-
+        if(Integer.parseInt(String.valueOf(detailContent.get("reviewCnt"))) > 0) {
+            ArrayList<Map<String, Object>> replyList = service.selectBoardReplyList(detailContent.get("pNo"));
+            model.addAttribute("replyList", replyList);
+        }
         if(member != null) {
             ArrayList<Pet> petList = pService.selectMyPet(member.getMemberNo());
             model.addAttribute("pList", petList);

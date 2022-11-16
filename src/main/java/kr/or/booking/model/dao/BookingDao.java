@@ -47,12 +47,12 @@ public class BookingDao {
 	}
 
 
-	public String[] insertPetSitterBooking(Booking b) {
+	public int insertPetSitterBooking(Booking b) {
 		int result =  sqlSession.insert("booking.insertPetSitterBooking", b);
-		String[] resultArr = new String[2];
+		/*String[] resultArr = new String[2];
 		resultArr[0] = String.valueOf(result);
-		resultArr[1] = b.getBookingNo();
-		return resultArr;
+		resultArr[1] = b.getBookingNo();*/
+		return result;
 	}
 
 	public int deleteFailPaymentBooking(String bookingNo) {

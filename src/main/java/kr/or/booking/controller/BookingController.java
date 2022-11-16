@@ -3,6 +3,7 @@ package kr.or.booking.controller;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import kr.or.payment.toss.PaymentController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -107,11 +108,15 @@ public class BookingController {
 	@RequestMapping(value="/reservePetSitter.do")
 	public String reservePetSitter(Booking b, HttpSession session) {
 
-		String[] resultArr = service.insertPetSitterBooking(b);
-		if(resultArr[1] != null) {
-			session.setAttribute("bookingNo", resultArr[1]);
+		//String[] resultArr = service.insertPetSitterBooking(b);
+		if(b != null) {
+			session.setAttribute("booking", b);
+			return "1";
 		}
-		return resultArr[0];
+		/*if(resultArr[1] != null) {
+			session.setAttribute("bookingNo", resultArr[1]);
+		}*/
+		return "0";
 	}
 
 	// 예약 상태 업데이트 with 파트너 포인트 up
