@@ -48,6 +48,14 @@ public class ReviewService {
 				p.setPNo(r.getPNo());
 				p.setPPoint(30);
 				result = dao.updatePartnerPoint(p);
+				int pPoint = dao.selectPartnerPoint(r.getPNo());
+				if(pPoint>300 && pPoint<=700) {
+					p.setPGrade("B");
+					result = dao.updatePartnerGrade(p);
+				}else if(pPoint>700) {
+					p.setPGrade("A");
+					result = dao.updatePartnerGrade(p);
+				}
 			}
 		}
 		return result;

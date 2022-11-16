@@ -28,6 +28,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <!-- 마이페이지 CSS -->
 <link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_mypet.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_nav.css">
 </head>
 <body>
 	<!-- 헤더 -->
@@ -43,7 +44,6 @@
 						<li><a href="/mypageMyPet.do?memberNo=${sessionScope.m.memberNo }" class="active">나의 똑독캣</a></li>
 						<li><a href="/mypageMessage.do">1:1 문의내역</a></li>
 						<li><a href="/mypageService.do">서비스 이용내역</a></li>
-						<li><a href="/mypageReview.do">나의 이용후기</a></li>
 						<li><a href="/mypageDeleteFrm.do?memberNo=${sessionScope.m.memberNo }">회원탈퇴</a></li>
 					</ul>
 				</div>

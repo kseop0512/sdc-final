@@ -25,14 +25,17 @@ public class ReviewDao {
 	public int insertReview(Review r) {
 		return sqlSession.insert("review.insertReview",r);
 	}
+	
 	//사진첨부
 	public int insertReviewFiles(ReviewFileVO rv) {
 		return sqlSession.insert("review.insertReviewFiles",rv);
 	}
+	
 	//후기작성 후 예약상태변경
 	public int updateReviewState(Review r) {
 		return sqlSession.update("booking.updateReviewState",r);
 	}
+	
 	//후기작성 후 파트너포인트 +30
 	public int updatePartnerPoint(Partner p) {
 		return sqlSession.update("review.updatePartnerPoint",p);
@@ -42,18 +45,31 @@ public class ReviewDao {
 	public Review selectOneReview(String bookingNo) {
 		return sqlSession.selectOne("review.selectOneReview",bookingNo);
 	}
+	
 	//작성한 후기 사진 불러오기
 	public ArrayList<ReviewFileVO> selectOneReviewFiles(Review r) {
 		List fileList = sqlSession.selectList("review.selectOneReviewFiles",r);
 		return (ArrayList<ReviewFileVO>) fileList;
 	}
+	
 	//작성한 후기 수정
 	public int updateReview(Review r) {
 		return sqlSession.update("review.updateReview",r);
 	}
+	
 	//후기작성한 예약목록 번호 불러오기
 	public String selectReviewNo(String bookingNo) {
 		return sqlSession.selectOne("review.selectReviewNo", bookingNo);
+	}
+	
+	//파트너 포인트 조회
+	public int selectPartnerPoint(String pNo) {
+		return sqlSession.selectOne("partner.selectPartnerPoint", pNo);
+	}
+	
+	//파트너 등급업
+	public int updatePartnerGrade(Partner p) {
+		return sqlSession.update("partner.updatePartnerGrade", p);
 	}
 	
 }

@@ -172,8 +172,19 @@
 	<select id="selectPartnerName" parameterType="string" resultType="string">
 		select p_name from partner where p_no=#{_parameter}
 	</select>
+	
 	<!--  유저의 이용 신청에 따른 파트너 포인트 50점 추가 -->
 	<update id="updatePartnerPoint" parameterType="string">
 		UPDATE PARTNER SET P_POINT = P_POINT+50 WHERE P_NO=#{_parameter}
+	</update>
+	
+	<!-- 업데이트된 파트너 포인트 조회 -->
+	<select id="selectPartnerPoint" parameterType="string" resultType="_int">
+		select p_point from partner where p_no=#{_parameter}
+	</select>
+	
+	<!-- 파트너 등급업 -->
+	<update id="updatePartnerGrade" parameterType="p">
+		update partner set p_grade=#{pGrade} where p_no=#{pNo}
 	</update>
 </mapper>
