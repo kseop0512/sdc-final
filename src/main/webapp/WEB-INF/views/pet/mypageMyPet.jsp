@@ -50,7 +50,7 @@
 				<!-- 마이페이지 컨텐츠 -->
 				<div id="mypage-content">
 					<div id="title">
-						<img class="petLogo" style="max-width: 100%; height: auto;" src="/resources/img/dogBlack.png"><h4>나의 똑독캣</h4><img class="petLogo" src="/resources/img/catBlack.png">
+						<img class="petLogo" style="max-width:100%; height: auto;" src="/resources/img/dogBlack.png" alt="등록된 프로필사진이 없습니다." ><h4>나의 똑독캣</h4><img class="petLogo" src="/resources/img/catBlack.png">
 					</div>
 					<div id="content-wrap">
 						<c:forEach var="pet" items="${petList}" varStatus="statNum">

@@ -20,6 +20,90 @@
 <!-- 사진첨부 li -->
 	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" ></script>
 </head>
+<style>
+.cancel-modal-wrap{
+	border-radius: 20px;
+    position: fixed;
+    left: 40%;
+    top: 22%;
+    background-color: #ebe8e8;
+    width: 400px;
+    height: 470px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cancel-modal-wrap div{
+	width: 400px;
+}
+.cancel-title{
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	background: #ffb347;
+    position: absolute;
+    top: 0px;
+}
+.cancel-title h4{
+	font-size: 18px;
+    color: #fff;
+    margin-bottom: 15px;
+    position: relative;
+    top: 7px;
+    padding-left: 25px;
+    font-weight: bolder;
+}
+.cancel-mid h4{
+	font-size: 20px;
+    color: #000;
+    position: relative;
+    text-align: center;
+    top: 20px;
+}
+.cancel-contentDiv{
+	display:flex;
+	justify-content: center;
+	margin-top: 35px;
+}
+.cancel-content{
+	resize: none;
+    width: 350px;
+    height: 250px;
+    color: black;
+    border: none;
+    outline-color: #ffb347;
+}
+.cancel-btn-wrap{
+	display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+.cancel-btn-wrap>button{
+	border-radius: 10px;
+    width: 120px;
+    height: 50px;
+    margin: 5px;
+    border: none;
+    font-weight: bolder;
+}
+.cancel-cancelBtn{
+	background: #ccc;
+	color: #fff;
+}
+.cancel-cancelBtn:hover{
+	color: #000;
+	background-color: lightgray;
+	transition-duration: 0.8s;
+}
+.cancel-submitBtn{
+	background: #ffb347;
+	color: #fff;
+}
+.cancel-submitBtn:hover{
+	background-color: #ffcc33;
+    color: #000;
+    transition-duration: 0.8s;
+}
+</style>
 <body>
 	<!-- 헤더 -->
 	<jsp:include page="/WEB-INF/views/main/common/header.jsp"/>
@@ -211,6 +295,7 @@
 				</div>
 				<!-- 버튼 -->
 				<div class="review-btn-wrap">
+				
 					<input type="button" id="insert-btn" value="작성">
 				</div>
 			</div>
@@ -273,51 +358,131 @@
 			</div>
 		</form>
 	</div>
+	
+	<!-- 취소사유 모달 -->
+	<div class="cancel-modal-wrap" style="display:none;">
+		<div class="cancel-modal">
+			<div class="cancel-title">
+				<h4>취소 사유</h4>			
+			</div>
+			<div class="cancel-mid">
+				<h4>취소 사유를 입력해주세요</h4>			
+			</div>
+			<div class="cancel-contentDiv">
+<textarea class="cancel-content" placeholder="  
+   내용을 입력해주세요.
+	
+   ※ 공백, 욕설 등 부적합한 사유 입력 시 환불처리가 
+   불가합니다." required></textarea>
+			</div>
+			<div class="cancel-btn-wrap">
+				<button type="button" class="cancel-cancelBtn" onclick="closeCancelModal()">닫기</button>
+				<button type="button" class="cancel-submitBtn" onclick="submitCancelModal()">제출</button>
+			</div>
+		</div>
+	</div>
 	<script>
-		function cancelService(bookingNo, category){
-			if(category == "V"){
-				category = "펫시터(방문)";
-			}else if(category == "L"){
-				category = "펫시터(위탁)";
-			}else if(category == "T"){
-				category = "훈련";
-			}else{
-				alert("이상있다");
+	//예약완료일 때 
+	function cancelReserve(bookingNo, category){
+		if(category == "V"){
+			category = "펫시터(방문)";
+		}else if(category == "L"){
+			category = "펫시터(위탁)";
+		}else if(category == "T"){
+			category = "훈련";
+		}else{
+			alert("이상있다");
+		}
+		Swal.fire({
+			title: category+" 서비스\n신청을 취소하시겠습니까?",
+			text: "매칭이 완료된 서비스는 검토 후 취소처리됩니다.",	
+			icon: "warning",
+			   
+			showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+			confirmButtonColor: "#FFB347", // confrim 버튼 색깔 지정
+			confirmButtonText: "예", // confirm 버튼 텍스트 지정
+			cancelButtonText: "아니오", // cancel 버튼 텍스트 지정
+			reverseButtons: true, // 버튼 순서 거꾸로
+			   
+		}).then(result => {
+			if (result.isConfirmed) {
+			$(".cancel-modal-wrap").show();
+				
+			};
+		});
+	};
+	
+	//취소모달에서 닫기 클릭시
+	function closeCancelModal(){
+		$(".cancel-modal-wrap").hide();
+		$(".cancel-content").val("");
+	}
+	//취소모달에서 제출 클릭시
+	function submitCancelModal(){
+		var bookingNo = $(".input-booking-no").val();
+		var comment = $(".cancel-content").val();
+		jQuery.ajax({
+			type : "POST",
+			url : "/cancelReserve.do",
+			data : {
+				bookingNo : bookingNo,
+				comment : comment	
+			},
+			cache: false,
+			success : function(data) {
+				if(data == 1){
+				    Swal.fire("취소신청 완료되었습니다.", "", "success").then(function(){
+						location.href = "/mypageService.do";
+				    });
+				}else{
+					Swal.fire("취소에 실패해습니다.", "관리자에게 문의하세요", "error").then(function(){
+						location.href = "/mypageService.do";
+					});
+				}
 			}
-			Swal.fire({
-				   title: category+" 서비스\n신청을 취소하시겠습니까?",
-				   icon: "warning",
-				   
-				   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
-				   confirmButtonColor: "#FFB347", // confrim 버튼 색깔 지정
-				   confirmButtonText: "예", // confirm 버튼 텍스트 지정
-				   cancelButtonText: "아니오", // cancel 버튼 텍스트 지정
-				   reverseButtons: true, // 버튼 순서 거꾸로
-				   
-				}).then(result => {
-					if (result.isConfirmed) {
-						jQuery.ajax({
-							type : "POST",
-							url : "/cancelService.do",
-							data : {bookingNo : bookingNo},
-							cache: false,
-							success : function(data) {
-								if(data == 1){
-								    Swal.fire("취소가 완료되었습니다.", "", "success").then(function(){
-										location.href = "/mypageService.do";
-								    });
-								}else{
-									Swal.fire("취소에 실패해습니다.", "관리자에게 문의하세요", "error");
-								}
-							}
-						});
-				   	}
+		});
+	}
+	//예약대기일때
+	function cancelService(bookingNo, category){
+		if(category == "V"){
+			category = "펫시터(방문)";
+		}else if(category == "L"){
+			category = "펫시터(위탁)";
+		}else if(category == "T"){
+			category = "훈련";
+		}else{
+			alert("이상있다");
+		}
+		Swal.fire({
+			   title: category+" 서비스\n신청을 취소하시겠습니까?",
+			   icon: "warning",
+			   
+			   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+			   confirmButtonColor: "#FFB347", // confrim 버튼 색깔 지정
+			   confirmButtonText: "예", // confirm 버튼 텍스트 지정
+			   cancelButtonText: "아니오", // cancel 버튼 텍스트 지정
+			   reverseButtons: true, // 버튼 순서 거꾸로
+			   
+		}).then(result => {
+			if (result.isConfirmed) {
+				jQuery.ajax({
+					type : "POST",
+					url : "/cancelService.do",
+					data : {bookingNo : bookingNo},
+					cache: false,
+					success : function(data) {
+						if(data == 1){
+						    Swal.fire("취소가 완료되었습니다.", "", "success").then(function(){
+								location.href = "/mypageService.do";
+						    });
+						}else{
+							Swal.fire("취소에 실패해습니다.", "관리자에게 문의하세요", "error");
+						}
+					}
 				});
-		};
-		
-		function cancelReserve(){
-			
-		};
+		   	}
+		});
+	};
 	</script>
 	<!-- 마이페이지 JS -->
 	<script type="text/javascript" src="/resources/js/member/mypage_nav.js"></script>

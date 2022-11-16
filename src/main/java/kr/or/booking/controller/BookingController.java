@@ -150,6 +150,9 @@ public class BookingController {
 		HashMap<String, String> map = new HashMap<>();
 		map.put("bookingNo", bookingNo);
 		map.put("comment", comment);
+		System.out.println(bookingNo);
+		System.out.println(comment);
+		System.out.println(map);
 		return service.cancelReserve(map);
 	}
 }

@@ -168,7 +168,7 @@
 	</update>
 	
 	<update id="cancelReserve" parameterType="hashmap">
-		update booking_tbl set partner_accept = 'C', cancel_comment=#{comment} where booking_no = #{bookingNo}
+		update booking_tbl set partner_accept = 'C', cancle_comment=#{comment} where booking_no = #{bookingNo}
 	</update>
 	
 </mapper>
