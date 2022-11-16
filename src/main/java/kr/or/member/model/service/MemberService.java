@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.booking.model.vo.Booking;
 import kr.or.dm.model.vo.DirectMessage;
+import kr.or.main.partner.board.model.vo.PartnerBoardOption;
 import kr.or.member.model.dao.MemberDao;
 import kr.or.member.model.vo.Member;
+import kr.or.partner.model.vo.Partner;
 import kr.or.review.model.vo.Review;
 
 @Service
@@ -85,6 +87,18 @@ public class MemberService {
 
 	public ArrayList<Review> selectReviewList(Member m) {
 		return dao.selectReviewList(m);
+	}
+
+	public Partner selectOnePartnerInfo(String pNo) {
+		return dao.selectOnePartnerInfo(pNo);
+	}
+
+	public int selectOnePartnerBoardNo(String pNo) {
+		return dao.selectOnePartnerBoardNo(pNo);
+	}
+
+	public PartnerBoardOption selectPetsitterOption(int petsitterBoardNo) {
+		return dao.selectPetsitterOption(petsitterBoardNo);
 	}
 	
 }

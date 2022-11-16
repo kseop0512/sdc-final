@@ -21,17 +21,23 @@ import kr.or.booking.model.vo.Booking;
 import kr.or.dm.model.vo.DirectMessage;
 
 import kr.or.mail.controller.MailSender;
-
+import kr.or.main.partner.board.model.vo.PartnerBoard;
+import kr.or.main.partner.board.model.vo.PartnerBoardOption;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.service.MessageService;
 import kr.or.member.model.service.MessageService2;
 import kr.or.member.model.vo.Member;
+import kr.or.partner.model.vo.Partner;
+import kr.or.pet.model.service.PetService;
+import kr.or.pet.model.vo.Pet;
 import kr.or.review.model.vo.Review;
 
 @Controller
 public class MemberController {
 	@Autowired
 	private MemberService service;
+	@Autowired
+	private PetService petService;
 	
 	@Autowired//정환번호
 	private MessageService msgService;
@@ -147,8 +153,31 @@ public class MemberController {
 	//유저 마이페이지 - 서비스 이용내역 상세조회
 	@RequestMapping(value="/mypageServiceDetail.do")
 	public String mypageService(String bookingNo, Model model) {
-		Booking b = service.selectOneBooking(bookingNo);
+		Booking b = service.selectOneBooking(bookingNo); //예약정보 전체 조회
+		String petName = petService.selectPetName(b.getPetNo()); //반려동물 이름 조회
+		Partner p = service.selectOnePartnerInfo(b.getPNo()); //파트너 이름,연락처,사진 조회
 		model.addAttribute("b",b);
+		model.addAttribute("petName",petName);
+		model.addAttribute("p",p);
+		System.out.println("b : "+b);
+		System.out.println("petName : "+petName);
+		System.out.println("p : "+p);
+		/*
+		if(b.getCategory().equals("L")) {
+			//1. 위탁돌봄일 때
+			//1-1. 펫시터보드넘버 조회
+			int petsitterBoardNo = service.selectOnePartnerBoardNo(b.getPNo());
+			System.out.println("petsitterBoardNo : "+petsitterBoardNo);
+			//1-2. 펫시터보드넘버를 통해 돌봄옵션 조회
+			PartnerBoardOption pbo = service.selectPetsitterOption(petsitterBoardNo);
+			model.addAttribute("pbo",pbo);
+			System.out.println("pbo : "+pbo);
+			return "member/mypageServiceL";
+		}else {
+			//2. 훈련일 때
+			return "member/mypageServiceT";
+		}
+		 */
 		return "member/mypageServiceDetail";
 	}
 	

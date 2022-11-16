@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
@@ -7,18 +7,16 @@
 <head>
 <meta charset="UTF-8">
 <title>똑독캣 이용내역</title>
-<jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
+<jsp:include page="/WEB-INF/views/main/common/headContent.jsp" />
 <!-- 마이페이지 CSS -->
-	<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_nav.css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_service.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_nav.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_service_detail.css">
 <!-- 아이콘-->
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-<!-- 사진첨부 li -->
-	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" ></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <body>
 	<!-- 헤더 -->
-	<jsp:include page="/WEB-INF/views/main/common/header.jsp"/>
+	<jsp:include page="/WEB-INF/views/main/common/header.jsp" />
 	<!-- main -->
 	<main id="main">
 		<section class="mypage">
@@ -30,186 +28,125 @@
 						<li><a href="/mypageMyPet.do?memberNo=${sessionScope.m.memberNo }">나의 똑독캣</a></li>
 						<li><a href="/mypageMessage.do">1:1 문의내역</a></li>
 						<li><a href="/mypageService.do" class="active">서비스 이용내역</a></li>
-						<li><a href="/mypageReview.do">나의 이용후기</a></li>
 						<li><a href="/mypageDeleteFrm.do?memberNo=${sessionScope.m.memberNo }">회원탈퇴</a></li>
 					</ul>
 				</div>
 				<!-- 마이페이지 컨텐츠 -->
-		        <div id="mypage-content">
-		          <div id="title">
-		            <h4>서비스 이용내역</h4>
-		          </div>
-		          <div id="content-wrap">
-		            <div id="content">
-		              <!-- 상세보기 -->
-		              <div class="service-box">
-		              	<div id="service-category">
-		              		<input type="hidden" value="${b.category }">
-		              		<div id="leave">위탁돌봄</div>
-		              		<div id="teach">훈련</div>
-		              	</div>
-		              	<div class="pet">
-		                	서비스받는 똑독캣 : ${b.petNo }
-		                </div>
-		              	<div id="booking-info">
-		              		<div class="special-request">
-		              			요청사항 :
-		              			<c:choose>
-		              				<c:when test="${b.specialRequest eq null}">
-		              					<textarea readonly>없음</textarea>
-		              				</c:when>
-		              				<c:otherwise>
-		              					<textarea readonly>${b.specialRequest }</textarea>
-		              				</c:otherwise>
-		              			</c:choose>
-		              			
-		              		</div>
-		              		<div class="price">
-			                	서비스요금 : ${b.price }
-			                </div>
-		              		<div class="booked-date">
-			                	예약일 : ${b.bookedDate }
-			                </div>
-			                <div class="booking-phone">
-			                	안내받을 연락처 : ${b.bookingPhone }
-			                </div>
-		              	</div>
-		                <div id="service-info">
-				            <div class="service-date">
-		                		<c:choose>
-				                	<c:when test="${b.endDate eq null}">
-					                	서비스이용일 : ${b.startDate } (${b.bookingTime })
-				                	</c:when>
-				                	<c:otherwise>
-				                		서비스이용일 : ${b.startDate } ~ ${b.endDate }
-				                	</c:otherwise>
-		                		</c:choose>
-		                	</div>
-		                </div>
-		              </div>
-		            </div><!-- End #content -->
-		          </div><!-- End #content-wrap -->
-		        </div><!-- End #mypage-content -->
+				<div id="mypage-content">
+					<div id="title">
+						<h4>서비스 이용내역</h4>
+					</div>
+					<div id="content-wrap">
+						<div id="content">
+							<!-- 상세보기 -->
+							<div class="service-box">
+								<!-- 서비스 구분 -->
+								<div id="service-category">
+									<input type="hidden" class="" value="${b.category }">
+									<c:choose>
+										<c:when test="${b.category eq 'L'}">
+											<div class="active">돌봄</div>
+											<div>훈련</div>
+										</c:when>
+										<c:otherwise>
+											<div>돌봄</div>
+											<div class="active">훈련</div>
+										</c:otherwise>
+									</c:choose>
+									
+								</div>
+								<!-- 서비스 상세정보 -->
+								<div id="service-content">
+									<h5>
+										<span class="material-symbols-outlined">pets</span> ${p.PName}
+										<c:choose>
+											<c:when test="${b.category eq 'L'}">
+											펫시터 님의 돌봄 서비스
+											</c:when>
+											<c:otherwise>
+											훈련사 님의 훈련 서비스
+											</c:otherwise>
+										</c:choose>
+									</h5>
+									
+									<div id="info-partner">
+										<img src="/resources/upload/partner/profileImg/${p.profilePath}">
+										<div>
+											<p class="grade">
+											<c:choose>
+												<c:when test="${p.PGrade eq 'C'}">
+												<span class="face-icon material-symbols-outlined">sentiment_satisfied</span> 똑독캣에서 인증받은 정파트너
+												</c:when>
+												<c:when test="${p.PGrade eq 'B'}">
+												<span class="face-icon material-symbols-outlined">mood</span> 똑독캣에서 인증받은 실버파트너
+												</c:when>
+												<c:when test="${p.PGrade eq 'A'}">
+												<span class="face-icon material-symbols-outlined">sentiment_very_satisfied</span> 똑독캣에서 인증받은 골드파트너
+												</c:when>
+											</c:choose>
+											 입니다.
+											</p>
+											<p>전화번호 : <span class="phone1">${p.PPhone }</span></p>
+											<p>이메일 : ${p.PEmail }</p>
+										</div>
+									</div>
+									
+									<h5>
+										<span class="material-symbols-outlined">pets</span> 예약 상세정보
+									</h5>
+									<table id="info-booking">
+										<tr>
+											<th id="border-top-left">예약한 똑똑캣</th>
+											<td>${petName }</td>
+											<th>예약일</th>
+											<td>${b.bookedDate }</td>
+										</tr>
+										<tr>
+											<th>안내받을 연락처</th>
+											<td colspan="3" class="phone2">${b.bookingPhone }</td>
+										</tr>
+										<tr>
+											<th>서비스이용일</th>
+											<td colspan="3" class="td-service-date">
+												<input type="hidden" class="hidden-startdate" value="${b.startDate }">
+												<input type="hidden" class="hidden-enddate" value="${b.endDate }">
+												<input type="hidden" class="hidden-bookingtime" value="${b.bookingTime }">
+												<span class="service-date"></span>
+											</td>
+										</tr>
+										<tr>
+											<th id="border-bottom-left">서비스요금</th>
+											<td colspan="3" class="price">${b.price }</td>
+										</tr>
+									</table>
+									
+									<h5>
+										<span class="material-symbols-outlined">pets</span> 요청사항
+									</h5>
+									<c:choose>
+										<c:when test="${b.specialRequest eq null}">
+											<textarea class="special-request" readonly>없음</textarea>
+										</c:when>
+										<c:otherwise>
+											<textarea class="special-request" readonly>${b.specialRequest }</textarea>
+										</c:otherwise>
+									</c:choose>
+
+								</div><!-- End #service-content -->
+							</div><!-- End .service-box -->
+						</div><!-- End #content -->
+					</div><!-- End #content-wrap -->
+				</div><!-- End #mypage-content -->
 			</div>
 		</section>
 	</main>
 	<!-- End #main -->
-	<!-- 후기작성 모달 -->
-	<div class="review-modal insert-review" style="display:none;">
-		<!-- 모달최상단 꾸밈 -->
-		<div class="review-modal-head">
-			<span id="review-modal-title">이용후기</span>
-			<span class="close-btn material-symbols-outlined">close</span>
-		</div>
-		<!-- 모달컨텐츠(폼) -->
-		<form action="/writeReview.do" method="post" enctype="multipart/form-data">
-			<div class="review-modal-content">
-				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-				<input type="hidden" name="bookingNo">
-				<input type="hidden" name="memberNo">
-				<input type="hidden" name="pNo">
-				<input type="hidden" name="petNo">
-				<!-- 후기평점 -->
-				<div class="review-info review-rate">
-					<b class="rate-label">평점</b>
-					<span class="star" style="padding: 0;">
-					★★★★★
-						<span>★★★★★</span>
-						<input type="range" id="star-range" oninput="drawStarI(this)" value="0" step="1" min="0" max="5">
-					</span>
-					<input type="text" name="reviewRate" id="i-rate" value="0" readonly>
-					<span class="rate-comment">*드래그해서 평점을 입력하세요</span>
-				</div>
-				<!-- 후기사진첨부 -->
-				<div class="review-photo">
-					<b>사진첨부<b>
-					<span class="photo-comment">*최대 3개까지 첨부가능</span>
-					<div class="filebox clearfix">
-						<div class="inputFile">
-							<label for="AddImgs" class="addImgBtn"><span class="material-symbols-outlined">add</span></label>
-							<input type="file" id="AddImgs" class="upload-hidden" name="reviewFile" accept=".jpg, .jpeg, .png, .gif" multiple>
-						</div>
-						<ul id="Preview-i" class="sortable">
-							<li><label for="AddImgs" class="addImgBtn"></label></li>
-							<li><label for="AddImgs" class="addImgBtn"></label></li>
-							<li><label for="AddImgs" class="addImgBtn"></label></li>
-						</ul>
-					</div>
-				<!-- 후기내용 -->
-				<div class="review-content">
-					<textarea id="reviewContent" name="reviewContent" placeholder="내용을 입력해주세요.
 
-서비스의 장점 및 단점 등 상세한 내용 작성은
-사이트 이용자와 파트너에게 큰 도움이 됩니다!
-
-※ 광고, 도배, 욕설, 비방 등
-서비스와 무관한 내용 작성시
-신고 및 무통보 삭제될 수 있습니다." required></textarea>
-				</div>
-				<!-- 버튼 -->
-				<div class="review-btn-wrap">
-					<input type="button" id="insert-btn" value="작성">
-				</div>
-			</div>
-			</div>
-		</form>
-	</div>
-	
-	<!-- 후기수정 모달 -->
-	<div class="review-modal update-review" style="display:none;">
-		<!-- 모달최상단 꾸밈 -->
-		<div class="review-modal-head">
-			<span id="review-modal-title">이용후기</span>
-			<span class="close-btn material-symbols-outlined">close</span>
-		</div>
-		<!-- 모달컨텐츠(폼) -->
-		<form action="/updateReview.do" method="post" enctype="multipart/form-data">
-			<div class="review-modal-content">
-				<input type="hidden" name="reviewNo">
-				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-				<input type="hidden" name="bookingNo">
-				<input type="hidden" name="memberNo">
-				<input type="hidden" name="pNo">
-				<input type="hidden" name="petNo">
-				<!-- 후기평점 -->
-				<div class="review-info review-rate">
-					<b class="rate-label">평점</b>
-					<span class="star" style="padding: 0;">
-					★★★★★
-						<span>★★★★★</span>
-						<input type="range" id="star-range" oninput="drawStarU(this)" value="0" step="1" min="0" max="5">
-					</span>
-					<input type="text" name="reviewRate" id="u-rate" value="0" readonly>
-					<span class="rate-comment">*드래그해서 평점을 입력하세요</span>
-				</div>
-				<!-- 후기사진첨부 -->
-				<div class="review-photo">
-					<div class="filebox clearfix">
-						<ul id="Preview-u" class="sortable"></ul>
-					</div>
-				</div>
-				<!-- 후기내용 -->
-				<div class="review-content">
-					<textarea id="reviewContent" name="reviewContent" placeholder="내용을 입력해주세요.
-
-서비스의 장점 및 단점 등 상세한 내용 작성은
-사이트 이용자와 파트너에게 큰 도움이 됩니다!
-
-※ 광고, 도배, 욕설, 비방 등
-서비스와 무관한 내용 작성시
-신고 및 무통보 삭제될 수 있습니다." required></textarea>
-				</div>
-				<!-- 버튼 -->
-				<div class="review-btn-wrap">
-					<input type="button" id="update-btn" value="수정">
-				</div>
-			</div>
-		</form>
-	</div>
 	<!-- 마이페이지 JS -->
 	<script type="text/javascript" src="/resources/js/member/mypage_nav.js"></script>
-	<script type="text/javascript" src="/resources/js/member/mypage_service.js"></script>
+	<script type="text/javascript"
+		src="/resources/js/member/mypage_service_detail.js"></script>
 	<!-- 푸터 -->
-	<jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
+	<jsp:include page="/WEB-INF/views/main/common/footer.jsp" />
 </body>
 </html>

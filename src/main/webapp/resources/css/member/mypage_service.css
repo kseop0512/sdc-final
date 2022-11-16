@@ -1,7 +1,6 @@
 #main{
     display: flex;
     width: 100%;
-    height: 100vh;
     margin-top: 160px;
     justify-content: center;
 }
@@ -10,10 +9,10 @@
 .mypage{
     display: flex;
     width: 100%;
-    height: 100vh;
     background-color: #1a1814;
     padding: 0;
     justify-content: center;
+    padding-bottom: 80px;
 }
 .mypage-container{
     width: 70%;
@@ -72,6 +71,7 @@
     font-size: 15px;
 }
 .service-box>table td{
+	height: 59px;
     padding: 8px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     font-size: 14px;
@@ -124,7 +124,7 @@ body{
     box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.2);
     z-index: 999;
 }
-.review-modal.file-empty{
+.update-review.file-empty{
 	height: 520px;
 }
 /* 모달창 헤드 */
@@ -243,7 +243,7 @@ body{
 .review-btn-wrap{
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 .review-btn-wrap>input{
     width: 130px;
@@ -280,7 +280,7 @@ body{
 }
 .filebox{
 	margin-top: 5px;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
 .addImgBtn{
     display: flex;
@@ -300,8 +300,11 @@ body{
 	height: 90px;
 	background-color: rgba(0,0,0,0.1);
 }
+#Preview-i{
+	display: flex;
+	justify-content: space-between;
+}
 #Preview-i,#Preview-u{
-    width: 350px;
     padding: 0;
     margin: 0;
     list-style-type: none;

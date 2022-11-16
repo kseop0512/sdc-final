@@ -139,4 +139,30 @@
    </select>
 	 -->
 	
+	<select id="selectOnePartnerInfo" parameterType="string" resultType="p">
+		select
+			p_name as pName,
+			p_phone as pPhone,
+			p_email as pEmail,
+			p_grade as pGrade,
+			profile_path as profilePath
+		from partner
+		where p_no=#{_parameter}
+	</select>
+	
+	<select id="selectOnePartnerBoardNo" parameterType="string" resultType="_int">
+		select petsitter_board_no as petsitterBoardNo
+		from partner_petsitter_board
+		where p_no=#{_parameter}
+	</select>
+	
+	<select id="selectPetsitterOption" parameterType="_int" resultType="pbo">
+		select
+			no_pet as noPet
+			pickup
+			large_pet as largePet
+			yard
+		from petsitter_option_tbl
+		where petsitter_board_no=#{_parameter}
+	</select>
 </mapper>
