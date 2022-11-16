@@ -108,24 +108,6 @@ function getDetailAddr(){
 	return getAddr;
 }
 
-
-/*휴대폰 인증번호 발송*/
-$(".phoneChkSendBtn").click(function(){
-   
-   alert("인증번호가 발송되었습니다.");
-   var phone1 = $("[name=frontNum]").val();
-   var phone2 = $("[name=memberPhone1]").val();
-   var phone = phone1+phone2;
-   $.ajax({
-      type : "POST",
-      url : "/memberPhoneCheck.do",
-      data : {phone : phone},
-      success : function(numStr) {
-              $(".certifyNum2").val(numStr);
-                             
-      }
-   });
-});
 </script>
 	<script type="text/javascript" src="/resources/js/member/memberJoinFrm.js">
 	</script>

@@ -194,64 +194,69 @@ function getMemberRDm(){
 		success: function(list){
 			const tbody = $(".receive tbody");
 			tbody.empty();
-			for(let i=0;i<list.length;i++){
-				const dm = list[i];
-				const tr = $("<tr>");
-				//체크박스
-				const checkboxTd = $("<td><input class='form-check-input check-r' type='checkbox'></td>");
-				const dmNoInput = $("<input type='hidden' value='"+dm.dmNo+"'>");
-				checkboxTd.append(dmNoInput);
-				
-				//문의유형
-				const typeTd = $("<td>");
-				if(dm.dmType == 0){
-					typeTd.text("결제/취소")
-				}else if(dm.dmType==1){
-					typeTd.text("예약")
-				}else{
-					typeTd.text("기타문의")
+			if(list.length == 0){
+				const h3 = $("<h3 class='none-dm'>받은 메세지가 없습니다..😹</h3>");
+				tbody.append(h3);
+			}else{
+				for(let i=0;i<list.length;i++){
+					const dm = list[i];
+					const tr = $("<tr>");
+					//체크박스
+					const checkboxTd = $("<td><input class='form-check-input check-r' type='checkbox'></td>");
+					const dmNoInput = $("<input type='hidden' value='"+dm.dmNo+"'>");
+					checkboxTd.append(dmNoInput);
+					
+					//문의유형
+					const typeTd = $("<td>");
+					if(dm.dmType == 0){
+						typeTd.text("결제/취소")
+					}else if(dm.dmType==1){
+						typeTd.text("예약")
+					}else{
+						typeTd.text("기타문의")
+					}
+					
+					//보낸사람
+					const senderTd = $("<td>");
+					if(dm.senderCategory == 'A'){
+			    		senderTd.text("관리자")
+			    	}else{
+			    		$.ajax({
+				    		url : "/selectDmPartner.do",
+				    		data : {pId:dm.sender},
+				    		success : function(p){
+				    			if(p.category == 'T'){
+						    		senderTd.text(p.pName+" 훈련사");
+						    	}else{
+						    		senderTd.text(p.pName+" 펫시터");
+						    	}
+				    		}
+			    		});
+			    	} 
+					
+					//문의내용
+					const contentTd = $("<td class='td-content'>");
+					const aTag = $("<a href='javascript:void(0);'>");
+					aTag.text(dm.dmContent);
+					contentTd.append(aTag);	
+					aTag.attr("onclick","receiveModal(this, '"+dm.dmNo+"', '"+dm.sender+"', '"+dm.dmDate+"', '"+dm.dmType+"')");
+					//날짜
+					const dmDateTd = $("<td>");
+					dmDateTd.text(dm.dmDate);
+					
+					//보낸사람구분
+					const senderCategory = $("<input type='hidden' class='sender-category'>");
+					senderCategory.val(dm.senderCategory);
+					
+					//읽음여부
+					const readCheckInput = $("<input type='hidden' class='read-check'>");
+					readCheckInput.val(dm.readCheck);
+					
+					//합치기
+					tr.append(checkboxTd).append(typeTd).append(senderTd).append(contentTd).append(dmDateTd).append(senderCategory).append(readCheckInput);
+					tbody.append(tr);
 				}
-				
-				//보낸사람
-				const senderTd = $("<td>");
-				if(dm.senderCategory == 'A'){
-		    		senderTd.text("관리자")
-		    	}else{
-		    		$.ajax({
-			    		url : "/selectDmPartner.do",
-			    		data : {pId:dm.sender},
-			    		success : function(p){
-			    			if(p.category == 'T'){
-					    		senderTd.text(p.pName+" 훈련사");
-					    	}else{
-					    		senderTd.text(p.pName+" 펫시터");
-					    	}
-			    		}
-		    		});
-		    	} 
-				
-				//문의내용
-				const contentTd = $("<td class='td-content'>");
-				const aTag = $("<a href='javascript:void(0);'>");
-				aTag.text(dm.dmContent);
-				contentTd.append(aTag);	
-				aTag.attr("onclick","receiveModal(this, '"+dm.dmNo+"', '"+dm.sender+"', '"+dm.dmDate+"', '"+dm.dmType+"')");
-				//날짜
-				const dmDateTd = $("<td>");
-				dmDateTd.text(dm.dmDate);
-				
-				//보낸사람구분
-				const senderCategory = $("<input type='hidden' class='sender-category'>");
-				senderCategory.val(dm.senderCategory);
-				
-				//읽음여부
-				const readCheckInput = $("<input type='hidden' class='read-check'>");
-				readCheckInput.val(dm.readCheck);
-				
-				//합치기
-				tr.append(checkboxTd).append(typeTd).append(senderTd).append(contentTd).append(dmDateTd).append(senderCategory).append(readCheckInput);
-				tbody.append(tr);
-			}
+			};
 		unreadR();
 		}
 	});
@@ -266,63 +271,68 @@ function getMemberSDm(){
 		success: function(list){
 			const tbody = $(".send tbody");
 			tbody.empty();
-			for(let i=0;i<list.length;i++){
-				const dm = list[i];
-				const tr = $("<tr>");
-				
-				//체크박스
-				const checkboxTd = $("<td><input class='form-check-input check-s' type='checkbox'></td>");
-				const dmNoInput = $("<input type='hidden' value='"+dm.dmNo+"'>");
-				checkboxTd.append(dmNoInput);
-				
-				//문의유형
-				const typeTd = $("<td>");
-				if(dm.dmType == 0){
-					typeTd.text("결제/취소")
-				}else if(dm.dmType==1){
-					typeTd.text("예약")
-				}else{
-					typeTd.text("기타문의")
+			if(list.length == 0){
+				const h3 = $("<h3 class='none-dm'>보낸 메세지가 없습니다..😿</h3>");
+				tbody.append(h3);
+			}else{
+				for(let i=0;i<list.length;i++){
+					const dm = list[i];
+					const tr = $("<tr>");
+					
+					//체크박스
+					const checkboxTd = $("<td><input class='form-check-input check-s' type='checkbox'></td>");
+					const dmNoInput = $("<input type='hidden' value='"+dm.dmNo+"'>");
+					checkboxTd.append(dmNoInput);
+					
+					//문의유형
+					const typeTd = $("<td>");
+					if(dm.dmType == 0){
+						typeTd.text("결제/취소")
+					}else if(dm.dmType==1){
+						typeTd.text("예약")
+					}else{
+						typeTd.text("기타문의")
+					}
+					
+					//받는사람
+					const receiverTd = $("<td>");
+					if(dm.receiver == 'admin'){
+			    		receiverTd.text("관리자")
+			    	}else{
+			    		$.ajax({
+				    		url : "/selectDmPartner.do",
+				    		data : {pId:dm.receiver},
+				    		success : function(p){
+				    			if(p.category == 'T'){
+						    		receiverTd.text(p.pName+" 훈련사");
+						    	}else{
+						    		receiverTd.text(p.pName+" 펫시터");
+						    	}
+				    		}
+			    		});
+			    	} 
+					
+					//문의내용
+					const contentTd = $("<td class='td-content'>");
+					const aTag = $("<a href='javascript:void(0);'>");
+					aTag.text(dm.dmContent);
+					contentTd.append(aTag);	
+					aTag.attr("onclick","sendModal(this, '"+dm.receiver+"', '"+dm.dmDate+"')");
+					
+					//날짜
+					const dmDateTd = $("<td>");
+					dmDateTd.text(dm.dmDate);
+					
+					//읽음여부
+					const readCheckTd = $("<td class='td-readcheck'>");
+					const readCheckInput = $("<input type='hidden' class='read-check'>");
+					readCheckInput.val(dm.readCheck);
+					
+					//합치기
+					tr.append(checkboxTd).append(typeTd).append(receiverTd).append(contentTd).append(dmDateTd).append(readCheckTd).append(readCheckInput);
+					tbody.append(tr);
 				}
-				
-				//받는사람
-				const receiverTd = $("<td>");
-				if(dm.receiver == 'admin'){
-		    		receiverTd.text("관리자")
-		    	}else{
-		    		$.ajax({
-			    		url : "/selectDmPartner.do",
-			    		data : {pId:dm.receiver},
-			    		success : function(p){
-			    			if(p.category == 'T'){
-					    		receiverTd.text(p.pName+" 훈련사");
-					    	}else{
-					    		receiverTd.text(p.pName+" 펫시터");
-					    	}
-			    		}
-		    		});
-		    	} 
-				
-				//문의내용
-				const contentTd = $("<td class='td-content'>");
-				const aTag = $("<a href='javascript:void(0);'>");
-				aTag.text(dm.dmContent);
-				contentTd.append(aTag);	
-				aTag.attr("onclick","sendModal(this, '"+dm.receiver+"', '"+dm.dmDate+"')");
-				
-				//날짜
-				const dmDateTd = $("<td>");
-				dmDateTd.text(dm.dmDate);
-				
-				//읽음여부
-				const readCheckTd = $("<td class='td-readcheck'>");
-				const readCheckInput = $("<input type='hidden' class='read-check'>");
-				readCheckInput.val(dm.readCheck);
-				
-				//합치기
-				tr.append(checkboxTd).append(typeTd).append(receiverTd).append(contentTd).append(dmDateTd).append(readCheckTd).append(readCheckInput);
-				tbody.append(tr);
-			}
+			};
 		unreadS();
 		}
 	});

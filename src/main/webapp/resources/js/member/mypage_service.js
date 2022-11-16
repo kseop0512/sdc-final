@@ -5,6 +5,8 @@ $(function(){
 	const startDate = $(".input-start-date");
 	const endDate = $(".input-end-date");
 	
+	
+	
 	//화면표시값 입력할 span태그
 	let sSpan = $(".span-start-date");
 	let eSpan = $(".span-end-date");	
@@ -97,6 +99,8 @@ $(function(){
 		}
 	}
 });
+
+
 
 //모달창 우측상단 닫기 버튼
 $(".close-btn").on("click",function(){
@@ -281,4 +285,17 @@ $(function () {
     $("#Preview-i").on("click",".delBtn",function(){
         $(this).parent("li").remove();
     });
+});
+
+
+//조회된 내역 없을 때 출력할 텍스트
+$(function(){
+	const tbody = $(".service-box tbody");
+	if($("#listLength").val() == 0){
+		console.log($("#listLength").val());
+		const h3 = $("<h3 class='none-dm'>보낸 메세지가 없습니다..🙀</h3>");
+		tbody.append(h3);
+	}
+	console.log(tbody);
+	console.log($("#listLength").val());
 });
