@@ -44,13 +44,13 @@
 
 /* 삭제버튼 */
 .bc77 {
-    color: rgba(248, 95, 115, 1);
-    background-color: #fff;
+    color: #fff;
+    background-color: rgba(248, 95, 115, 1);
     border: 2px solid rgba(248, 95, 115, 1);
 }
 .bc77:hover {
-    background-color: rgba(248, 95, 115, 1);
-    color: #fff;
+    background-color: #fff;
+    color: rgba(248, 95, 115, 1);
     cursor: pointer;
 }
 
@@ -225,112 +225,18 @@ tbody>tr>td:nth-child(2):hover{
     float: left;
 }
 
-/* 댓글 */
-/*댓글*/
-.inputCommentBox{
-    margin-bottom:50px;
+#notice-title{
+	border-radius:5px;
+	height:70px;
+	text-align: center; 
+	border: #cda45e solid 3px; 
+	background-color: #282f44; 
+	
 }
-.inputCommentBox>form>ul{ /*아이콘, 댓글창, 댓글버튼 list style없애주고 옆으로 붙이려고 flex*/
-    list-style-type:none;
-    display:flex;
-}
-.inputCommentBox>form>ul>li:first-child{ /*아이콘*/
-    width:15%;
-    display:flex;
-    margin-left: 100px;
-}
-/* 댓글 사진 */
-.inputCommentBox>form>ul>li:first-child>span>img{
-    width: 100px;
-    height: 100px;
+#notice-title>h1{
+	color:#fff;
+	font-size: 18px;
+	line-height: 60px;
 }
 
 
-/*댓글 input 창*/
-.inputCommentBox>form>ul>li:nth-child(2){
-    width: 90%;
-    display: flex;
-    justify-content: center;
-}
-.inputCommentBox>form>ul>li:nth-child(2)>textarea.input-form{
-    width: 90%;
-    height:96px;
-    min-height:96px;
-    resize: none;
-}
-/*댓글 등록버튼*/
-.inputCommentBox>form>ul>li:last-child{
-    width: 30%;
-}
-
-/*댓글 아이콘 색상*/
-.posting-comment>li>span{
-    color: #101010;
-    font-size: 50px;
-}
-
-
-#comment-button {
-    padding: 2rem;
-    font-size: 1.1em;
-    
-}
-
-/* 댓글 */
-/*댓글 아이콘 색상*/
-/* .posting-comment>li>span{
-    color: #101010;
-    font-size: 50px;
-} */
-
-.posting-comment>li>img{
-    width: 100px;
-    height: 100px;
-}
-
-
-/*첫번째 코멘트*/
-.posting-comment{
-    list-style-type: none;
-    display: flex;
-    border-top: 2px solid #ccc;
-}
-.posting-comment>li:first-child{
-    width: 15%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100px;
-    /* border-right: 1px solid #ccc; */
-}
-.posting-comment>li{
-    box-sizing: border-box;
-}
-
-.posting-comment>li:last-child{
-    display: flex;
-    flex-direction: column;
-    width: 85%;
-}
-.posting-comment>li:last-child>p{
-    width: 100%;
-    padding: 5px;
-    box-sizing: border-box;
-}
-
-.posting-comment>li:last-child> .comment-link{
-    text-align: right;
-}
-
-.posting-comment > li:last-child > .comment-info>span:not(:last-child){
-    border-right: 2px solid #ccc;
-}
-
-.posting-comment>li:last-child>.comment-info>span{
-    padding: 0px 20px;
-}
-
-/*대댓글 !*/
-.posting-comment.reply>li:first-child{
-    width: 20%;
-}
