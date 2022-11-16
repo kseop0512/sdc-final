@@ -97,6 +97,26 @@ function closeModal(){
     $("#detailText").val(""); 
 }
 
+function bookingSms(obj){
+	const bookingNo =$(obj).parent().prev().prev().prev().prev().prev().prev().prev().prev().text();
+	const bookingPhone =$(obj).parent().prev().prev().prev().prev().prev().text();
+	const accept = $(obj).parent().prev();
+	console.log(accept);
+	
+	$.ajax({
+		url :"/bookingFail.do",
+		data : {bookingNo : bookingNo, bookingPhone:bookingPhone},
+		success : function(data){	
+		console.log(data);
+			if(data > 0){
+				if($.trim(accept.text()) == "취소신청"){
+					accept.text("취소완료");
+					$(obj).hide();				
+				}
+			}
+		}
+	});
+}
 
 
 

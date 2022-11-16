@@ -25,6 +25,7 @@ import kr.or.mail.controller.MailSender;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.service.MessageService;
 import kr.or.member.model.service.MessageService2;
+import kr.or.member.model.service.MessageService3;
 import kr.or.member.model.vo.Member;
 import kr.or.review.model.vo.Review;
 
@@ -38,6 +39,8 @@ public class MemberController {
 	
 	@Autowired//구원번호
 	private MessageService2 msgService2;
+	
+
 	
 	
 	@RequestMapping(value="/memberJoinChkFrm.do")

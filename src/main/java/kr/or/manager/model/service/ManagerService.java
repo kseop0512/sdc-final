@@ -375,8 +375,13 @@ public class ManagerService {
 		return dao.trainerBooking();
 	}
 //관리자 - 위탁/훈련 예약취소
-	public int bookingFail(String bookingNo) {
-		int result = dao.bookingFail(bookingNo);
+	public int bookingFail(String bookingNo, String bookingPhone) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("bookingNo", bookingNo);
+		map.put("bookingPhone", bookingPhone);
+		
+		int result = dao.bookingFail(map);
+		
 		return result;
 	}
 //예약상세

@@ -184,9 +184,10 @@ public class ManagerDao {
 	}
 // 관리자 - 위탁/훈련 예약
 	@Transactional
-	public int bookingFail(String bookingNo) {
-		return sqlSession.update("manager.bookingFail",bookingNo);
+	public int bookingFail(HashMap<String,Object> map) {
+		return sqlSession.update("manager.bookingFail",map);
 	}
+	
 // 예약 상세
 	public Booking bookingDetail(String bookingNo) {
 		return  sqlSession.selectOne("manager.bookingDetail",bookingNo);
