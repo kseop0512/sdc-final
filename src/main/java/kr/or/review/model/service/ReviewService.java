@@ -48,13 +48,20 @@ public class ReviewService {
 				p.setPNo(r.getPNo());
 				p.setPPoint(30);
 				result = dao.updatePartnerPoint(p);
+				//파트너의 현재 포인트 조회하기
 				int pPoint = dao.selectPartnerPoint(r.getPNo());
 				if(pPoint>300 && pPoint<=700) {
+					//301~700포인트: B등급
 					p.setPGrade("B");
 					result = dao.updatePartnerGrade(p);
+					System.out.println("현재point : "+pPoint);
+					System.out.println(p.getPGrade());
 				}else if(pPoint>700) {
+					//701~포인트: A등급
 					p.setPGrade("A");
 					result = dao.updatePartnerGrade(p);
+					System.out.println("현재point : "+pPoint);
+					System.out.println(p.getPGrade());
 				}
 			}
 		}
