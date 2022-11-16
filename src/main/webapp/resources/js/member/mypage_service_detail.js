@@ -18,10 +18,7 @@ $(function(){
 	const splitTime = bookingTime.split(",");
 	
 	if(endDate==""){
-		$(".service-date").text(startDateL+" 이용시간대("+bookingTime+") 총 "+splitTime.length+"시간 이용");
-		const td = "<td></td>";
-		td.text(bookingTime+" 총 "++);
-		$(".td-service-date").append().html("<th>이용시간대</th>");
+		$(".service-date").text(startDateL+" [ 이용시간대 - "+bookingTime+" ] 총 "+splitTime.length+"시간 이용");
 	}else{
 		$(".service-date").text(startDate+" ~ "+endDate);
 	}

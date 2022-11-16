@@ -71,6 +71,7 @@
     font-size: 15px;
 }
 .service-box>table td{
+	height: 59px;
     padding: 8px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     font-size: 14px;
