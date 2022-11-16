@@ -45,15 +45,15 @@
                         <div class="col col-md-8 mb-5">
                             <label for="">지원 유형 <span class="text-warning">*</span></label>
                             <div class="row mt-3">
-                                <div class="col">
-                                    <input type="checkbox" class="btn-check" name="partnerType" id="partnerType1" value="L">
+                                <div class="col-4">
+                                    <input type="checkbox" class="btn-check" name="partnerType" id="partnerType1" value="L" checked>
                                     <label class="btn col-md-12 btn-outline-secondary" for="partnerType1">위탁돌봄</label>
                                 </div>
-                                <div class="col">
+                                <%--<div class="col">
                                     <input type="checkbox" class="btn-check" name="partnerType" id="partnerType2" value="V">
                                     <label class="btn col-md-12 btn-outline-secondary" for="partnerType2">방문돌봄</label>
-                                </div>
-                                <input type="hidden" name="category" value="">
+                                </div>--%>
+                                <input type="hidden" name="category" value="L">
                             </div>
                         </div>
                         <div class="section-title">
