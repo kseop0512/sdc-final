@@ -13,37 +13,16 @@ $(function(){
 	const endDate = $(".hidden-enddate").val();
 	const bookingTime = $(".hidden-bookingtime").val();
 	
-	let sDate2 = startDate.eq(i).val().split(" (");
+	const splitDate = startDate.split(" (");
+	const startDateL = splitDate[0];
+	const splitTime = bookingTime.split(",");
 	
-	if($(".hidden-category").val()=="L"){
-		$(".service-date").text();
+	if(endDate==""){
+		$(".service-date").text(startDateL+" 이용시간대("+bookingTime+") 총 "+splitTime.length+"시간 이용");
+		const td = "<td></td>";
+		td.text(bookingTime+" 총 "++);
+		$(".td-service-date").append().html("<th>이용시간대</th>");
 	}else{
-		$(".service-date").text();
+		$(".service-date").text(startDate+" ~ "+endDate);
 	}
-	
-	
-			sSpan.eq(i).html(sDate+"&ensp;~&ensp;"+eDate);
-			sSpan.eq(i).parent().attr("colspan","2");
-			eSpan.eq(i).parent().remove();
-		//2. 방문돌봄/훈련 (*bookingTime값O endDate값X)
-		}else{
-			let sDate2 = startDate.eq(i).val().split(" (");
-			let time = start.eq(i).val().split(",");
-			if(time.length == 1){
-				//2-1. 예약시간 한 시간만 있는 경우
-				let timeCnt = 1;
-				start.eq(i).val(time[0]);
-				end.eq(i).val(time[0]);
-				sSpan.eq(i).html(sDate2[0]);
-				eSpan.eq(i).html("<b>"+time[0]+"</b><br>(총 "+time.length+"시간 이용)");
-			}else{
-				//2-2. 예약시간 여러 시간인 경우
-				let timeCnt = time.length;
-				//쉼표 기준으로 예약시간 잘라서 hidden input에 다시 반영
-				start.eq(i).val(time[0]);
-				end.eq(i).val(time[1]);
-				sSpan.eq(i).html(sDate2[0]);
-				eSpan.eq(i).html("<b>"+time[0]+"</b> , <b>"+time[time.length-1]+"</b><br>(총 "+time.length+"시간 이용)");
-			}
-		}
 });

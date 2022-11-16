@@ -25,14 +25,10 @@
 				<div id="mypage-nav">
 					<ul>
 						<li><a href="/memberMypage.do">나의 정보</a></li>
-						<li><a
-							href="/mypageMyPet.do?memberNo=${sessionScope.m.memberNo }">나의
-								똑독캣</a></li>
+						<li><a href="/mypageMyPet.do?memberNo=${sessionScope.m.memberNo }">나의 똑독캣</a></li>
 						<li><a href="/mypageMessage.do">1:1 문의내역</a></li>
 						<li><a href="/mypageService.do" class="active">서비스 이용내역</a></li>
-						<li><a href="/mypageReview.do">나의 이용후기</a></li>
-						<li><a
-							href="/mypageDeleteFrm.do?memberNo=${sessionScope.m.memberNo }">회원탈퇴</a></li>
+						<li><a href="/mypageDeleteFrm.do?memberNo=${sessionScope.m.memberNo }">회원탈퇴</a></li>
 					</ul>
 				</div>
 				<!-- 마이페이지 컨텐츠 -->
@@ -111,7 +107,7 @@
 										</tr>
 										<tr>
 											<th>서비스이용일</th>
-											<td colspan="3">
+											<td colspan="3" class="td-service-date">
 												<input type="hidden" class="hidden-startdate" value="${b.startDate }">
 												<input type="hidden" class="hidden-enddate" value="${b.endDate }">
 												<input type="hidden" class="hidden-bookingtime" value="${b.bookingTime }">
