@@ -293,8 +293,9 @@ $(function(){
 	const tbody = $(".service-box tbody");
 	if($("#listLength").val() == 0){
 		console.log($("#listLength").val());
-		const h3 = $("<h3 class='none-dm'>보낸 메세지가 없습니다..🙀</h3>");
+		const h3 = $("<h3 class='none-dm'>예약내역이 없습니다..🙀</h3>");
 		tbody.append(h3);
+		$(".service-box").css("height","600px");
 	}
 	console.log(tbody);
 	console.log($("#listLength").val());

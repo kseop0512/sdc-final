@@ -197,6 +197,7 @@ function getMemberRDm(){
 			if(list.length == 0){
 				const h3 = $("<h3 class='none-dm'>받은 메세지가 없습니다..😹</h3>");
 				tbody.append(h3);
+				$(".receive").css("height","600px");
 			}else{
 				for(let i=0;i<list.length;i++){
 					const dm = list[i];
@@ -274,6 +275,7 @@ function getMemberSDm(){
 			if(list.length == 0){
 				const h3 = $("<h3 class='none-dm'>보낸 메세지가 없습니다..😿</h3>");
 				tbody.append(h3);
+				$(".send").css("height","600px");
 			}else{
 				for(let i=0;i<list.length;i++){
 					const dm = list[i];

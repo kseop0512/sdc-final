@@ -111,11 +111,12 @@
 }
 .none-dm{
 	position: absolute;
-    top: 300px;
+    top: 50%;
     color: #fff;
 	font-weight: bolder;
     font-size: 40px;
-    right: 140px;
+    left: 62%;
+    transform: translate(-50%, 0%);
 }
 </style>
 <body>
