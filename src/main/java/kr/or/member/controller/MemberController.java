@@ -26,6 +26,7 @@ import kr.or.main.partner.board.model.vo.PartnerBoardOption;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.service.MessageService;
 import kr.or.member.model.service.MessageService2;
+import kr.or.member.model.service.MessageService3;
 import kr.or.member.model.vo.Member;
 import kr.or.partner.model.vo.Partner;
 import kr.or.pet.model.service.PetService;
@@ -44,6 +45,8 @@ public class MemberController {
 	
 	@Autowired//구원번호
 	private MessageService2 msgService2;
+	
+
 	
 	
 	@RequestMapping(value="/memberJoinChkFrm.do")

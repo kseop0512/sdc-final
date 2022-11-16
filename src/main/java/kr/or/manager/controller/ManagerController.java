@@ -45,6 +45,7 @@ import kr.or.manager.model.vo.FileVOG;
 import kr.or.manager.model.vo.Manager;
 import kr.or.manager.model.vo.NoticeG;
 import kr.or.manager.model.vo.NoticeGPageData;
+import kr.or.member.model.service.MessageService3;
 import kr.or.member.model.vo.Member;
 import kr.or.partner.model.vo.Partner;
 
@@ -54,6 +55,9 @@ public class ManagerController {
 	private ManagerService service;
 	@Autowired
 	private FileRename fileRename;
+	
+	@Autowired//수진번호
+	private MessageService3 msgService3;
 	
 	//관리자 로그인 폼 이동
 	@RequestMapping(value="/loginManagerFrm.do")
@@ -364,20 +368,17 @@ public class ManagerController {
 	}
 	
 	//관리자 - 위탁/훈련 예약 취소
-	@RequestMapping(value="/bookingFail.do")
-	public String bookingFail(String bookingNo,Model model) {
-		int result = service.bookingFail(bookingNo);
+	@ResponseBody
+	@RequestMapping(value="/bookingFail.do",produces="application/json;charset=utf-8")
+	public String bookingFail(String bookingNo,String bookingPhone, Model model) {
+		int result = service.bookingFail(bookingNo,bookingPhone);
 		if(result>0) {
-			model.addAttribute("title","파트너처리 완료");
-			model.addAttribute("msg","처리 되었습니다.");
-			model.addAttribute("icon","success");
+			msgService3.sendMessage(bookingPhone);
+			return "1";
 		}else {
-		     model.addAttribute("title","파트너 처리 실패");
-	         model.addAttribute("msg","정보수정 중 오류가 발생했습니다.");
-	         model.addAttribute("icon","error");
-	}
-		model.addAttribute("loc","/trainerBooking.do");
-		return "common/msg";		
+			return "0";
+		}
+				
  }
 	
 	// 예약 상세

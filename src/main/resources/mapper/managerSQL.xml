@@ -321,10 +321,10 @@
 		from booking_tbl where category!='V' and partner_accept='C' or partner_accept='N' order by 1
   </select>
   <!-- 위탁/훈련 C-> N으로 업데이트 모에모에뀽 -->
- 	<update id="bookingFail" parameterType="string">
+ 	<update id="bookingFail" parameterType="map">
 		update 
 			booking_tbl set  partner_accept='N' 
-		where booking_no=#{_parameter}
+		where booking_no=#{bookingNo} and booking_phone=#{bookingPhone}
 	</update>
 	<select id="bookingDetail" parameterType="string" resultType="b">
 		select
