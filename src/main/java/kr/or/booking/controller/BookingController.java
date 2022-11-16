@@ -1,6 +1,7 @@
 package kr.or.booking.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,5 +134,22 @@ public class BookingController {
 	public String getBookingAccept(String memberId) {
 		ArrayList<String> bCatList = service.getBookingAccept(memberId);
 		return new Gson().toJson(bCatList);
+	}
+	
+	//예약대기 취소
+	@ResponseBody
+	@RequestMapping(value="/cancelService.do")
+	public int cancelService(String bookingNo) {
+		return service.cancelService(bookingNo);
+	}
+	
+	//예약완료 취소
+	@ResponseBody
+	@RequestMapping(value="/cancelReserve.do")
+	public int cancelService(String bookingNo, String comment) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("bookingNo", bookingNo);
+		map.put("comment", comment);
+		return service.cancelReserve(map);
 	}
 }

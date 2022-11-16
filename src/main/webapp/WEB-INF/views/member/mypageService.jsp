@@ -8,6 +8,10 @@
 <meta charset="UTF-8">
 <title>똑독캣 이용내역</title>
 <jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<!-- 스윗앨럿 -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 <!-- 마이페이지 CSS -->
 	<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_nav.css">
 	<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_service.css">
@@ -124,10 +128,10 @@
 			                    			<a href="javascript:writeReview('${b.bookingNo}','${sessionScope.m.memberNo}','${b.PNo}','${b.petNo}');">후기작성</a>
 			                    		</c:when>
 			                    		<c:when test="${b.partnerAccept eq 'Y'}">
-			                    			<a href="javascript:cancleComment('${b.bookingNo}');">예약취소</a>
+			                    			<a href="javascript:cancelReserve('${b.bookingNo}','${b.category }');">예약취소</a>
 			                    		</c:when>
 			                    		<c:when test="${b.partnerAccept eq 'R'}">
-			                    			<a href="/serviceCancel.do">신청취소</a>
+			                    			<a href="javascript:cancelService('${b.bookingNo }','${b.category }')">신청취소</a>
 			                    		</c:when>
 			                    		<c:when test="${b.partnerAccept eq 'C'}">
 			                    			취소처리중
@@ -269,6 +273,52 @@
 			</div>
 		</form>
 	</div>
+	<script>
+		function cancelService(bookingNo, category){
+			if(category == "V"){
+				category = "펫시터(방문)";
+			}else if(category == "L"){
+				category = "펫시터(위탁)";
+			}else if(category == "T"){
+				category = "훈련";
+			}else{
+				alert("이상있다");
+			}
+			Swal.fire({
+				   title: category+" 서비스\n신청을 취소하시겠습니까?",
+				   icon: "warning",
+				   
+				   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+				   confirmButtonColor: "#FFB347", // confrim 버튼 색깔 지정
+				   confirmButtonText: "예", // confirm 버튼 텍스트 지정
+				   cancelButtonText: "아니오", // cancel 버튼 텍스트 지정
+				   reverseButtons: true, // 버튼 순서 거꾸로
+				   
+				}).then(result => {
+					if (result.isConfirmed) {
+						jQuery.ajax({
+							type : "POST",
+							url : "/cancelService.do",
+							data : {bookingNo : bookingNo},
+							cache: false,
+							success : function(data) {
+								if(data == 1){
+								    Swal.fire("취소가 완료되었습니다.", "", "success").then(function(){
+										location.href = "/mypageService.do";
+								    });
+								}else{
+									Swal.fire("취소에 실패해습니다.", "관리자에게 문의하세요", "error");
+								}
+							}
+						});
+				   	}
+				});
+		};
+		
+		function cancelReserve(){
+			
+		};
+	</script>
 	<!-- 마이페이지 JS -->
 	<script type="text/javascript" src="/resources/js/member/mypage_nav.js"></script>
 	<script type="text/javascript" src="/resources/js/member/mypage_service.js"></script>
