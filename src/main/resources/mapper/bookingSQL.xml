@@ -159,8 +159,16 @@
 		update booking_tbl set partner_accept='Y'where booking_no=#{_parameter}
 	</update>
 	
-	<select id="getBookAccept" parameterType="String" resultType="string">
+	<select id="getBookAccept" parameterType="string" resultType="string">
 		select partner_accept from booking_tbl where member_id = #{_parameter}
 	</select>
+	
+	<update id="cancelService" parameterType="string">
+		update booking_tbl set partner_accept = 'N' where booking_no = #{_parameter}
+	</update>
+	
+	<update id="cancelReserve" parameterType="hashmap">
+		update booking_tbl set partner_accept = 'C', cancle_comment=#{comment} where booking_no = #{bookingNo}
+	</update>
 	
 </mapper>

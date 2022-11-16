@@ -1,6 +1,7 @@
 package kr.or.booking.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -73,5 +74,13 @@ public class BookingDao {
 	public ArrayList<String> getBookingAccept(String memberId) {
 		List list = sqlSession.selectList("booking.getBookAccept",memberId);
 		return (ArrayList<String>)list;
+	}
+
+	public int cancelService(String bookingNo) {
+		return sqlSession.update("booking.cancelService", bookingNo);
+	}
+
+	public int cancelReserve(HashMap<String, String> map) {
+		return sqlSession.update("booking.cancelReserve", map);
 	}
 }
