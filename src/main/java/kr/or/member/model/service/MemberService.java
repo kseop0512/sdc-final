@@ -75,8 +75,8 @@ public class MemberService {
 	}
 
 	@Transactional
-	public int deleteMember(int memberNo) {
-		return dao.deleteMember(memberNo);
+	public int deleteMember(String memberId) {
+		return dao.deleteMember(memberId);
 	}
 
 	public Booking selectOneBooking(String bookingNo) {

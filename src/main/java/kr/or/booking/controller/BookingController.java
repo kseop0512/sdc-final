@@ -125,6 +125,13 @@ public class BookingController {
 			result += service.updatePartnerPoint(pNo);
 		}
 		return "redirect:/appliedList.do?pNo="+pNo;
-
+	}
+	
+	//회원탈퇴 전 예약내역 조회
+	@ResponseBody
+	@RequestMapping(value="/getBookingCategory.do", produces="application/json;charset=utf-8")
+	public String getBookingCategory(String memberId) {
+		ArrayList<String> bCatList = service.getBookingCategory(memberId);
+		return new Gson().toJson(bCatList);
 	}
 }

@@ -20,7 +20,8 @@
 		#{memberGender},
 		to_char(sysdate,'yyyymmdd'),
 		'nickname',
-		'email@mail.com'
+		'email@mail.com',
+		0
 		)
 	</insert>
 
@@ -37,7 +38,7 @@
 	  		member_gender as memberGender,
 	  		enroll_date as enrollDate
 		from member_tbl
-		where member_id=#{memberId}
+		where member_id=#{memberId} and del_member=0
 		<if test="memberPw != null">
 		and member_pw=#{memberPw}
 		</if>
@@ -102,8 +103,8 @@
 		where member_id = #{memberId}
 	</update>
 	
-	<delete id="deleteMember" parameterType="_int">
-		delete from member_tbl where member_no=#{_parameter}
+	<delete id="deleteMember" parameterType="String">
+		update member_tbl set del_member = 1 where member_id=#{_parameter}
 	</delete>
 	
 	<!-- 카카오회원가입 

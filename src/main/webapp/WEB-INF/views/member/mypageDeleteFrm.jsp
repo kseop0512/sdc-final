@@ -11,8 +11,13 @@
 <!-- 마이페이지 CSS -->
 <link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_nav.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_myinfo.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"/>
 </head>
 <style>
+.sweet-alert h2{
+	font-size: 21px;
+}
 .deleteSpan{
 	color: white;
 }
@@ -45,9 +50,9 @@
 	<!-- main -->
 	<main id="main">
 		<section class="mypage">
-			<div class="mypage-container">
+			<div class="mypage-container" style="left:-100px;">
 				<!-- 마이페이지 메뉴 리모컨 -->
-				<div id="mypage-nav">
+				<div id="mypage-nav" style="left:100px;">
 					<ul>
 						<li><a href="/memberMypage.do">나의 정보</a></li>
 						<li><a href="/mypageMyPet.do?memberNo=${sessionScope.m.memberNo }">나의 똑독캣</a></li>
@@ -82,7 +87,7 @@
 회원탈퇴 처리 후에는 회원님의 개인정보를 복원할 수 없으며,해당 아이디는 영구적으로 삭제되어 재가입이 불가합니다.</textarea>
 						</div>
 						<span class="deleteSpan" style="position: relative;top: 110px;left: 12vw;font-size: 18px;">해당 내용을 모두 확인했으며, 회원탈퇴에 동의합니다<input type="checkbox" class="deleteChk"></span>
-						<button type="button" class="deleteMBtn" onclick="deleteMember(${sessionScope.m.memberNo});">탈퇴하기</button>
+						<button type="button" class="deleteMBtn" onclick="deleteMember('${sessionScope.m.memberId}');">탈퇴하기</button>
 					</div>
 				</div>
 			</div>
@@ -104,14 +109,38 @@
 	          lastScroll = scroll;
 	     });
 	});
-	function deleteMember(memberNo){
-		console.log(memberNo);
-	
+	function deleteMember(memberId){
 		var delChk = $(".deleteChk").is(":checked");
 		if(delChk){
-			location.href="/deleteMember.do?memberNo="+memberNo;
+			swal({
+				title: "완료되지 않은 예약이 있을경우 탈퇴되지 않습니다. 정말 탈퇴하시겠습니까?",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "예",
+				cancelButtonText: "아니요",
+				closeOnConfirm: false,
+				closeOnCancel : true
+			}, function (isConfirm) {
+				if (!isConfirm) return;
+				jQuery.ajax({
+					type : "POST",
+					url : "/getBookingCategory.do",
+					data : { memberId : memberId},
+					cache: false,
+					dataType : "json",
+					success : function(data) {
+						if(data.includes("R" || "Y" || "C")){
+							swal("실패", "예약내역을 확인해주세요.", "error");
+						}else{
+							location.href="/deleteMember.do?memberId="+memberId;
+						}
+						
+					}
+				});
+			});
 		}else{
-			alert("탈퇴 약관에 동의해주세요");
+			swal("실패", "탈퇴 약관에 동의해주세요.", "error");
 		}
 	}
 	</script>

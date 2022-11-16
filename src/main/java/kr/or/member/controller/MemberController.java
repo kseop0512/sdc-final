@@ -277,8 +277,8 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/deleteMember.do")
-	public String deleteMember(int memberNo, Model model) {
-		int result = service.deleteMember(memberNo);
+	public String deleteMember(String memberId, Model model) {
+		int result = service.deleteMember(memberId);
 		if(result > 0) {
 			model.addAttribute("title", "탈퇴 완료");
 			model.addAttribute("msg", "똑독캣을 이용해주셔서 감사합니다.");

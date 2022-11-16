@@ -61,4 +61,8 @@ public class BookingService {
 	public int deleteFailedPaymentBooking(String bookingNo) {
 		return dao.deleteFailPaymentBooking(bookingNo);
 	}
+
+	public ArrayList<String> getBookingCategory(String memberId) {
+		return dao.getBookingCategory(memberId);
+	}
 }

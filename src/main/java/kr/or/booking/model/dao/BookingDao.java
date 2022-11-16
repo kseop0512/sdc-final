@@ -69,4 +69,9 @@ public class BookingDao {
 		return sqlSession.update("partner.updatePartnerPoint",pNo);
 
 	}
+
+	public ArrayList<String> getBookingCategory(String memberId) {
+		List list = sqlSession.selectList("booking.getBookCategory",memberId);
+		return (ArrayList<String>)list;
+	}
 }
