@@ -78,4 +78,14 @@ public class BookingService {
 	public int cancelReserve(HashMap<String, String> map) {
 		return dao.cancelReserve(map);
 	}
+
+	public void denyBooking(String bookingNo) {
+		// TODO Auto-generated method stub
+		dao.denyBooking(bookingNo);
+	}
+
+	public ArrayList<Booking> selectOngoingBookingPetSitter(Partner p) {
+		// TODO Auto-generated method stub
+		return dao.selectOngoingBookingPetSitter(p);
+	}
 }

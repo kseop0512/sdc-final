@@ -7,7 +7,7 @@
 	</insert>
 	<select id="selectBookingTime" parameterType="b" resultType="string">
 		SELECT BOOKING_TIME FROM BOOKING_TBL 
-		WHERE P_NO=#{PNo} AND START_DATE=#{startDate}
+		WHERE P_NO=#{PNo} AND START_DATE=#{startDate} AND PARTNER_ACCEPT IN ('R','Y')
 	</select>
 	
 	<!-- '이용완료' 반영이 필요한 예약목록의 booking_no 조회(서비스이용일이 현재날짜보다 이전이면 갖고오기) -->
@@ -170,5 +170,26 @@
 	<update id="cancelReserve" parameterType="hashmap">
 		update booking_tbl set partner_accept = 'C', cancle_comment=#{comment} where booking_no = #{bookingNo}
 	</update>
+	
+	<update id="denyBookingRequest" parameterType="string">
+		update booking_tbl set partner_accept='Z' where booking_no=#{_parameter}
+	</update>
+	<select id="selectOngoingBookingPetSitter" parameterType="p" resultType="b">
+		select
+			booking_no as bookingNo,
+			member_id as memberId,
+			p_no as pNo,
+			pet_no as petNo,
+			to_char(booked_date,'yyyy-mm-dd') as bookedDate,
+			booking_phone as bookingPhone,
+			to_char(start_date,'yyyy-mm-dd HH24:MI') as startDate,
+			to_char(end_date,'yyyy-mm-dd HH24:MI') as endDate,
+			booking_time as bookingTime,
+			special_request as specialRequest,
+			partner_accept as partnerAccept,
+			category
+		from booking_tbl
+		where p_no=#{pNo} and partner_accept='R' order by start_date	
+	</select>
 	
 </mapper>

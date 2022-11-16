@@ -209,8 +209,8 @@ public class PetController {
 	public String getPetInfo(Pet p, String bookingNo) {
 		PetForPartner pet = service.selectOnePet(p);
 		String request = service.selectSpecialRequest(bookingNo);
-		if(request == null) {
-			pet.setSpecialRequest("");
+		if(request.isEmpty()) {
+			pet.setSpecialRequest("빈칸");
 		}else {
 			pet.setSpecialRequest(request);
 		}
