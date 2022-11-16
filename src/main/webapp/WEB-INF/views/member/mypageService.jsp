@@ -21,8 +21,11 @@
 	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" ></script>
 </head>
 <style>
+.swal2-popup{
+	border-radius: 15px;
+}
 .cancel-modal-wrap{
-	border-radius: 20px;
+	border-radius: 15px;
     position: fixed;
     left: 40%;
     top: 22%;
@@ -37,8 +40,8 @@
 	width: 400px;
 }
 .cancel-title{
-	border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
 	background: #ffb347;
     position: absolute;
     top: 0px;
@@ -48,7 +51,7 @@
     color: #fff;
     margin-bottom: 15px;
     position: relative;
-    top: 7px;
+    top: 8px;
     padding-left: 25px;
     font-weight: bolder;
 }
@@ -71,6 +74,8 @@
     color: black;
     border: none;
     outline-color: #ffb347;
+    padding: 20px;
+    padding-top: 15px;
 }
 .cancel-btn-wrap{
 	display: flex;
@@ -382,6 +387,8 @@
 		</div>
 	</div>
 	<script>
+	//예약취소할 bookingNo 담는값
+	var cancelBookingNo = "";
 	//예약완료일 때 
 	function cancelReserve(bookingNo, category){
 		if(category == "V"){
@@ -406,8 +413,9 @@
 			   
 		}).then(result => {
 			if (result.isConfirmed) {
-			$(".cancel-modal-wrap").show();
-				
+				cancelBookingNo=bookingNo;
+				console.log(cancelBookingNo);
+				$(".cancel-modal-wrap").show();
 			};
 		});
 	};
@@ -419,7 +427,7 @@
 	}
 	//취소모달에서 제출 클릭시
 	function submitCancelModal(){
-		var bookingNo = $(".input-booking-no").val();
+		var bookingNo = cancelBookingNo;
 		var comment = $(".cancel-content").val();
 		jQuery.ajax({
 			type : "POST",
