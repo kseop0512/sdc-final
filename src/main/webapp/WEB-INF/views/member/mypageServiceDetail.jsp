@@ -70,7 +70,14 @@
 									</h5>
 									
 									<div id="info-partner">
-										<img src="/resources/upload/partner/profileImg/${p.profilePath}">
+										<c:choose>
+											<c:when test="${not empty p.profilePath}">
+												<img src="/resources/upload/partner/profileImg/${p.profilePath}" onerror="this.src='/resources/upload/partner/profileImg/bam.jpg'">
+											</c:when>
+											<c:otherwise>
+												<img src="/resources/upload/partner/profileImg/bam.jpg">
+											</c:otherwise>
+										</c:choose>
 										<div>
 											<p class="grade">
 											<c:choose>
