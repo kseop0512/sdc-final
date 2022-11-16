@@ -64,7 +64,9 @@
 					 cos((<choose><when test="lng != null and !lng.equals('')">#{lng}</when><otherwise>126.8969784</otherwise></choose> * 3.141592653589793 / 180.0) - (CAST(lng AS FLOAT) * 3.141592653589793 / 180.0)) +
 					 sin(CAST(lat AS FLOAT) * 3.141592653589793 / 180.0)
 						 * sin(<choose><when test="lat != null and !lat.equals('')">#{lat}</when><otherwise>37.5338151</otherwise></choose> * 3.141592653589793 / 180.0))) as distance,
-			   pol.petsitter_option
+			   pol.petsitter_option,
+				(SELECT COUNT(*) FROM REVIEW_TBL rt WHERE rt.P_NO = ppb.P_NO) AS review_cnt,
+				to_char((SELECT AVG(review_rate) FROM REVIEW_TBL rt2 WHERE rt2.P_NO = ppb.P_NO), '9.99') AS review_avg
 		FROM PARTNER_PETSITTER_BOARD ppb,
 			 PARTNER p,
 			 (SELECT PETSITTER_BOARD_NO,
@@ -109,7 +111,8 @@
 				 FROM PETSITTER_FILES
 				 WHERE PETSITTER_BOARD_NO = #{petsitterBoardNo}) AS filelist,
 				pol.petsitter_option,
-				(SELECT count(*) review_cnt FROM REVIEW_TBL rt WHERE p_no = p.p_no) AS review_cnt
+				(SELECT count(*) FROM REVIEW_TBL rt WHERE p_no = p.p_no) AS review_cnt,
+				to_char((SELECT AVG(review_rate) FROM REVIEW_TBL rt2 WHERE rt2.P_NO = p.P_NO), '9.99')AS review_avg
 		FROM PARTNER p , PARTNER_PETSITTER_BOARD ppb,
 			 (SELECT PETSITTER_BOARD_NO, no_pet_str || ',' || pickup_str || ',' || large_pet_str || ',' || yard_str || ',' || old_pet_str AS petsitter_option
 			  FROM (SELECT petsitter_board_no, no_pet, pickup, large_pet, yard, old_pet,
@@ -121,6 +124,25 @@
 					FROM PETSITTER_OPTION_TBL) WHERE PETSITTER_BOARD_NO = #{petsitterBoardNo}) pol
 		WHERE p.P_NO = ppb.P_NO AND ppb.PETSITTER_BOARD_NO = #{petsitterBoardNo}
 	</select>
+	<select id="selectBoardReplyList" resultType="map" resultMap="getReplyList" parameterType="string">
+		SELECT
+			SUBSTR(mt.MEMBER_NAME,1,1) || LPAD('*', LENGTH(mt.MEMBER_NAME)-2, '*') || SUBSTR(mt.member_name, LENGTH(mt.MEMBER_NAME), 1) AS member_name,
+			rt.REVIEW_CONTENT,
+			rt.REVIEW_DATE,
+			(SELECT
+				 LISTAGG(IMG_PATH , ',') WITHIN GROUP (ORDER BY IMG_PATH) AS FILEPATH
+			 FROM REVIEW_FILES rf
+			 WHERE rf.REVIEW_NO = rt.REVIEW_NO) AS filelist,
+			(SELECT pt.PET_FILEPATH  FROM PET_TBL pt WHERE pt.PET_NO = rt.PET_NO) AS pet_filepath
+		FROM REVIEW_TBL rt, MEMBER_TBL mt WHERE rt.MEMBER_NO = mt.MEMBER_NO AND rt.P_NO = #{_parameter}
+	</select>
+	<resultMap id="getReplyList" type="Map">
+		<result column="member_name" property="memberName"/>
+		<result column="review_content" property="reviewContent"/>
+		<result column="review_date" property="reviewDate"/>
+		<result column="filelist" property="fileList"/>
+		<result column="pet_filepath" property="petFilepath"/>
+	</resultMap>
 	<resultMap type="Map" id="getBoard">
 		<result column="p_no" property="pNo"/>
 		<result column="p_name" property="pName"/>
@@ -138,6 +160,7 @@
 		<result column="filelist" property="fileList"/>
 		<result column="petsitter_option" property="petsitterOption"/>
 		<result column="review_cnt" property="reviewCnt"/>
+		<result column="review_avg" property="reviewAvg"/>
 	</resultMap>
 	<resultMap type="Map" id="getBoardList">
 		<result column="petsitter_board_no" property="petsitterBoardNo"/>
@@ -149,5 +172,8 @@
 		<result column="filelist" property="fileList"/>
 		<result column="distance" property="distance"/>
 		<result column="petsitter_option" property="petsitterOption"/>
+		<result column="review_cnt" property="reviewCnt"/>
+		<result column="review_avg" property="reviewAvg"/>
+
 	</resultMap>
 </mapper>

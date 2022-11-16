@@ -107,9 +107,11 @@ public class PartnerBoardService {
     public Map<String, Object> selectPetSitterBoard(HashMap<String, Object> param) {
 
         Map<String, Object> detailContent = dao.selectPetSitterBoard(param);
-        if(Integer.parseInt(String.valueOf(detailContent.get("reviewCnt"))) > 0) {
 
-        }
         return detailContent;
+    }
+
+    public ArrayList<Map<String, Object>> selectBoardReplyList(Object pNo) {
+        return dao.selectBoardReplyList(pNo);
     }
 }

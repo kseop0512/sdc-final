@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.or.booking.model.dao.BookingDao;
 import kr.or.booking.model.vo.Booking;
 import kr.or.partner.model.vo.Partner;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookingService {
@@ -53,8 +54,8 @@ public class BookingService {
 	
 
 	// END 혜규 on 11/13
-
-	public String[] insertPetSitterBooking(Booking b) {
+	@Transactional
+	public int insertPetSitterBooking(Booking b) {
 		return dao.insertPetSitterBooking(b);
 	}
 

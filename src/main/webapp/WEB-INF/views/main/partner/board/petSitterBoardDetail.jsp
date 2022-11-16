@@ -10,6 +10,7 @@
     <jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
     <link rel="stylesheet" href="/resources/css/main/style-partner.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
         .msg-modal{
             position: fixed;
@@ -93,6 +94,120 @@
             color: #000;
             transition-duration: 0.8s;
         }
+        .be-comment-block {
+            border: 1px solid #edeff2;
+            border-radius: 2px;
+            border:1px solid #ffffff;
+        }
+        .be-comment-block + .be-comment-block{
+            padding-top:15px;
+            margin-top:20px;
+            border-top:1px solid rgb(235, 235, 235);
+
+        }
+        .comments-title {
+            font-size: 16px;
+            color: #262626;
+            margin-bottom: 15px;
+            font-family: 'Conv_helveticaneuecyr-bold';
+        }
+
+        .be-img-comment {
+            width: 60px;
+            height: 60px;
+            float: left;
+            margin-bottom: 15px;
+        }
+
+        .be-ava-comment {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .be-comment-content {
+            margin-left: 80px;
+        }
+
+        .be-comment-content span {
+            display: inline-block;
+            width: 49%;
+            margin-bottom: 15px;
+        }
+
+        .be-comment-name {
+            font-size: 13px;
+            font-family: 'Conv_helveticaneuecyr-bold';
+        }
+
+        .be-comment-content a {
+            color: #383b43;
+        }
+
+        .be-comment-content span {
+            display: inline-block;
+            width: 49%;
+            margin-bottom: 15px;
+        }
+
+        .be-comment-time {
+            text-align: right;
+        }
+
+        .be-comment-time {
+            font-size: 11px;
+            color: #b4b7c1;
+        }
+
+        .be-comment-text {
+            font-size: 13px;
+            line-height: 18px;
+            color: #7a8192;
+            display: block;
+            background: #f6f6f7;
+            border: 1px solid #edeff2;
+            padding: 15px 20px 20px 20px;
+        }
+
+        .form-group.fl_icon .icon {
+            position: absolute;
+            top: 1px;
+            left: 16px;
+            width: 48px;
+            height: 48px;
+            background: #f6f6f7;
+            color: #b5b8c2;
+            text-align: center;
+            line-height: 50px;
+            -webkit-border-top-left-radius: 2px;
+            -webkit-border-bottom-left-radius: 2px;
+            -moz-border-radius-topleft: 2px;
+            -moz-border-radius-bottomleft: 2px;
+            border-top-left-radius: 2px;
+            border-bottom-left-radius: 2px;
+        }
+
+        .form-group .form-input {
+            font-size: 13px;
+            line-height: 50px;
+            font-weight: 400;
+            color: #b4b7c1;
+            width: 100%;
+            height: 50px;
+            padding-left: 20px;
+            padding-right: 20px;
+            border: 1px solid #edeff2;
+            border-radius: 3px;
+        }
+
+        .form-group.fl_icon .form-input {
+            padding-left: 70px;
+        }
+
+        .form-group textarea.form-input {
+            height: 150px;
+        }
     </style>
 </head>
 
@@ -173,10 +288,59 @@
                             <p class="me-4"><i class="bi bi-filter-square me-2"></i>${license}</p>
                             </c:forEach>
                         </div>
-                        <h5 class="mt-5 mb-4">후기 <small class="text-muted">${detail.reviewCnt}개</small></h5>
+                        <h5 class="d-flex mt-5 mb-4">후기 <small class="text-muted ">${detail.reviewCnt}개</small>
+                            <div class="stars ms-3 position-relative">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <div class="cover" style="width:${100.0-((detail.reviewAvg/5.0)*100.0)}%"></div>
+                            </div>
+                        </h5>
                         <c:choose>
                             <c:when test="${detail.reviewCnt gt 0}">
-
+                            <div class="container">
+                                <c:forEach items="${replyList}" var="reply" varStatus="i">
+                                <div class="be-comment-block">
+                                   <%-- <h1 class="comments-title">Comments (3)</h1>--%>
+                                    <div class="be-comment">
+                                        <div class="be-img-comment">
+                                            <a href="javascript:void(0)">
+                                                <c:choose>
+                                                    <c:when test="${not empty reply.petFilepath}">
+                                                        <img src="/resources/upload/pet/petProfile/${reply.petFilepath}" alt="" class="be-ava-comment">
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <img src="/resources/upload/pet/petProfile/img-nopet-profile.png" alt="" class="be-ava-comment" style="border: 1px solid #bebebe">
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </a>
+                                        </div>
+                                        <div class="be-comment-content">
+                                            <span class="be-comment-name">
+                                                <a href="javascript:void(0)">${reply.memberName}</a>
+                                            </span>
+                                            <span class="be-comment-time">
+                                                <i class="fa fa-clock-o"></i>
+                                                ${reply.reviewDate}
+                                            </span>
+                                            <p class="be-comment-text">${reply.reviewContent}</p>
+                                        </div>
+                                    </div>
+                                    <c:if test="${not empty reply.fileList}">
+                                    <div class="reply-images">
+                                        <c:set var="images" value="${fn:split(reply.fileList, ',')}" />
+                                        <c:forEach items="${images}" var="file">
+                                        <div class="reply-image">
+                                            <img src="/resources/upload/review/${file}" alt="">
+                                        </div>
+                                        </c:forEach>
+                                    </div>
+                                    </c:if>
+                                </div>
+                                </c:forEach>
+                            </div>
                             </c:when>
                             <c:otherwise>
                                 <div class="bg-light p-5 d-flex align-items-center justify-content-center">
@@ -196,10 +360,10 @@
                                     <%--                                    <button type="button" class="">달력열기</button>--%>
                                     <div class="input-group mb-2">
                                         <span class="input-group-text" id="basic-addon1"><i class="bi bi-calendar text-muted"></i></span>
-                                        <input type="text" id="startDate" name="startDate" class="form-control" placeholder="시작일" value="${param.startDate}">
+                                        <input type="text" id="startDate" name="startDate" class="form-control" placeholder="시작일" value="${param.startDate}" autocomplete="false">
                                     </div>
                                     <div class="input-group">
-                                        <input type="text" id="endDate" name="endDate" class="form-control" placeholder="종료일" value="${param.endDate}">
+                                        <input type="text" id="endDate" name="endDate" class="form-control" placeholder="종료일" value="${param.endDate}" autocomplete="false">
                                     </div>
                                 </div>
                                 <div class="reservation-calendar clear-cont">
@@ -225,11 +389,6 @@
                                     </select>
                                 </div>
                             </div>
-                            <h3 class="sidebar-title">위탁장소</h3>
-                            <div class="sidebar-item mb-2">
-                                <div id="map" style="width:100%;height:350px;"></div>
-                                <p class="text-muted text-end mt-1 mb-0">${detail.petsitterAddr}</p>
-                            </div><!-- End sidebar categories-->
                             <c:choose>
                                 <c:when test="${not empty pList}">
                                     <h3 class="sidebar-title">나의 반려동물</h3>
@@ -248,8 +407,6 @@
                                     </div>
                                 </c:when>
                             </c:choose>
-
-                            
                             <h3 class="sidebar-title">이용요금</h3>
                             <div class="sidebar-item ">
                                 <i class="bi bi-house-heart me-2"></i>1박 35,000
@@ -266,7 +423,7 @@
                             </div>
                             <c:choose>
                                 <c:when test="${empty sessionScope.p and not empty sessionScope.m}">
-                                    <div class="d-grid gap-2">
+                                    <div class="sidebar-item d-grid gap-2">
                                         <c:if test="${fn:length(pList) gt 0}">
                                             <button type="button" class="btn btn-warning btn-lg" onclick="requestReservation()">예약 요청</button>
                                         </c:if>
@@ -277,7 +434,7 @@
 
                                 </c:when>
                                 <c:otherwise>
-                                    <div class="d-grid gap-2">
+                                    <div class="sidebar-item d-grid gap-2">
                                         <button type="button" class="btn btn-warning btn-lg" disabled>이용자 로그인이 필요합니다</button>
                                     </div>
                                 </c:otherwise>
@@ -287,7 +444,11 @@
                                     <button type="button" class="btn btn-dark " onclick="showContactUs()">문의하기</button>
                                 </div>
                             </c:if>
-
+                            <h3 class="sidebar-title">위탁장소</h3>
+                            <div class="sidebar-item mb-2">
+                                <div id="map" style="width:100%;height:350px;"></div>
+                                <p class="text-muted text-end mt-1 mb-0">${detail.petsitterAddr}</p>
+                            </div><!-- End sidebar categories-->
                         </div><!-- End sidebar -->
                     </div>
                 </div><!-- End blog sidebar -->
@@ -415,6 +576,22 @@
 <script src="/resources/js/sticky-sidebar.js"></script>
 <script src="https://js.tosspayments.com/v1"></script>
 <script>
+
+    var sidebar = new StickySidebar('#sidebar', {
+        containerSelector: '#main-content',
+        innerWrapperSelector: '.sidebar__inner',
+        topSpacing: 110,
+        bottomSpacing: 20,
+        resizeSensor: true
+    });
+
+    var boardCarousel = document.querySelectorAll('.board-detail-carousel');
+    boardCarousel.forEach(function(item,index){
+        var newCarousel = new bootstrap.Carousel(item, {
+            interval: false
+        });
+    })
+
     function showContactUs() {
         const msgModal = $(".msg-modal");
         const closeBtn = msgModal.find(".modal-close");
@@ -439,9 +616,10 @@
             msgModal.addClass("d-none");
         })
     }
+
+
     var tossPayments = TossPayments("test_ck_5mBZ1gQ4YVX72jPObvZ3l2KPoqNb");
     var button = document.getElementById("payment-button");
-
     var orderId = new Date().getTime();
     let total;
     button.addEventListener("click", function () {
@@ -528,6 +706,7 @@
         } else {
             totalAmount.closest(".sidebar-item").addClass("d-none");
         }
+        sidebar.updateSticky();
     }
     setTotalAmount();
 
@@ -578,23 +757,6 @@
         })
         paymentModal.show();
     }
-
-
-
-    var sidebar = new StickySidebar('#sidebar', {
-        containerSelector: '#main-content',
-        innerWrapperSelector: '.sidebar__inner',
-        topSpacing: 110,
-        bottomSpacing: 20,
-        resizeSensor: true
-    });
-
-    var boardCarousel = document.querySelectorAll('.board-detail-carousel');
-    boardCarousel.forEach(function(item,index){
-        var newCarousel = new bootstrap.Carousel(item, {
-            interval: false
-        });
-    })
 
 
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div

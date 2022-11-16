@@ -75,14 +75,14 @@
                                         </c:forEach>
                                     </div>
                                     <div class="reviews">
-                                        <span class="review-count">후기 28</span>
+                                        <span class="review-count">후기 ${pb.reviewCnt}</span>
                                         <div class="stars">
                                             <i class="bi bi-star-fill"></i>
                                             <i class="bi bi-star-fill"></i>
                                             <i class="bi bi-star-fill"></i>
                                             <i class="bi bi-star-fill"></i>
                                             <i class="bi bi-star-fill"></i>
-                                            <div class="cover"></div>
+                                            <div class="cover" style="width:${100.0-((pb.reviewAvg/5.0)*100.0)}%"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -230,14 +230,15 @@
                     } else {
                         fileArr = "";
                     }
-
+                    const boardNo = list[i].petsitterBoardNo;
                     const addr = list[i].petsitterAddr;
                     const title = list[i].petsitterBoardTitle;
                     const optionArr = list[i].petsitterOption.split(",");
-
+                    const reviewCnt = list[i].reviewCnt;
+                    const reviewAvg = (100.0-((list[i].reviewAvg/5.0)*100.0));
                     let itemHtml = "";
 
-                    itemHtml += '<article class="entry d-flex" onclick="">';
+                    itemHtml += '<article class="entry d-flex" onclick="viewDetailPage(' + boardNo + ')">';
                     itemHtml += '    <section class="entry-img p-0">';
                     itemHtml += '        <div id="boardCarousel' + (numPerPage+i+1) + '" class="carousel slide board-carousel add" data-bs-interval="false">';
                     itemHtml += '            <div class="carousel-inner">';
@@ -281,14 +282,14 @@
                     }
                     itemHtml += '                </div>';
                     itemHtml += '                <div class="reviews">';
-                    itemHtml += '                    <span class="review-count">후기 28</span>';
+                    itemHtml += '                    <span class="review-count">후기 ' + reviewCnt +  '</span>';
                     itemHtml += '                    <div class="stars">';
                     itemHtml += '                        <i class="bi bi-star-fill"></i>';
                     itemHtml += '                        <i class="bi bi-star-fill"></i>';
                     itemHtml += '                        <i class="bi bi-star-fill"></i>';
                     itemHtml += '                        <i class="bi bi-star-fill"></i>';
                     itemHtml += '                        <i class="bi bi-star-fill"></i>';
-                    itemHtml += '                        <div class="cover"></div>';
+                    itemHtml += '                        <div class="cover" style="width:' + reviewAvg + '%"></div>';
                     itemHtml += '                    </div>';
                     itemHtml += '                </div>';
                     itemHtml += '            </div>';
@@ -367,7 +368,9 @@
     }
 
     function viewDetailPage(boardNo) {
-
+        if(event.target.classList.contains("carousel-control-next-icon") || event.target.classList.contains("carousel-control-prev-icon") ){
+            return;
+        }
         const startDate = $("#paramForm [name=startDate]").val() != "" ? "&startDate=" + $("#paramForm [name=startDate]").val() : "";
         const endDate = $("#paramForm [name=endDate]").val() != "" ? "&endDate=" + $("#paramForm [name=endDate]").val() : "";
 
