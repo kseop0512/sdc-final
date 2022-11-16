@@ -4,12 +4,12 @@
 	#mypage-nav {
 		width: 200px;
 		position: fixed;
-		bottom: 25vh;
+		bottom: 15vh;
 		transition-duration: 0.5s;
 	}
 	#mypage-nav.on {
 		position: absolute;
-		bottom: 20vh;
+		bottom: 10vh;
 		transition-duration: 0.5s;
 	}
 	#mypage-nav>ul {
@@ -21,7 +21,7 @@
 	}
 	#mypage-nav>ul>li>a {
 		display: block;
-		line-height: 60px;
+		line-height: 80px;
 		text-align: center;
 		background-color: #26231d;
 		color: #fff;

@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.booking.model.vo.Booking;
 import kr.or.dm.model.vo.DirectMessage;
+import kr.or.main.partner.board.model.vo.PartnerBoardOption;
 import kr.or.member.model.vo.Member;
+import kr.or.partner.model.vo.Partner;
 import kr.or.review.model.vo.Review;
 
 @Repository
@@ -79,6 +81,18 @@ public class MemberDao {
 	public ArrayList<Review> selectReviewList(Member m) {
 		List list = sqlSession.selectList("review.selectReviewList", m);
 		return (ArrayList<Review>) list;
+	}
+
+	public Partner selectOnePartnerInfo(String pNo) {
+		return sqlSession.selectOne("member.selectOnePartnerInfo", pNo);
+	}
+
+	public int selectOnePartnerBoardNo(String pNo) {
+		return sqlSession.selectOne("member.selectOnePartnerBoardNo", pNo);
+	}
+
+	public PartnerBoardOption selectPetsitterOption(int petsitterBoardNo) {
+		return sqlSession.selectOne("member.selectPetsitterOption", petsitterBoardNo);
 	}
 
 }

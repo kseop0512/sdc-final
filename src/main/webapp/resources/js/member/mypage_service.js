@@ -114,6 +114,7 @@ $("#insert-btn").on("click",function(){
 
 //후기작성 모달창 띄우는 함수
 function writeReview(bookingNo, memberNo, pNo, petNo){
+	$(".close-btn").click();
 	$(".insert-review [name=bookingNo]").val(bookingNo);
 	$(".insert-review [name=memberNo]").val(memberNo);
 	$(".insert-review [name=pNo]").val(pNo);
@@ -142,6 +143,7 @@ const drawStarI = (target) => {
 
 //후기수정 모달창 띄우는 함수
 function viewReview(bookingNo){
+	$(".close-btn").click();
 	$(".update-review [name=bookingNo]").val(bookingNo);
 	$.ajax({
 		url : "/selectOneReview.do",
@@ -164,16 +166,16 @@ function viewReview(bookingNo){
 			//등록한 사진 썸네일 표시
 			$('#Preview-u').empty();
 			if(data.fileList.length>0){
-				$('.review-photo').show();
-				$(".review-modal").removeClass("file-empty");
+				$('.update-review .review-photo').show();
+				$(".update-review").removeClass("file-empty");
 				for(let i=0;i<data.fileList.length;i++){
 	                var str = '<li class="ui-state-default">';
 	                str += '<img src="/resources/upload/review/'+ data.fileList[i].imgPath + '" title="' + data.fileList[i].imgName + '" width=90 height=90>';
 	                $(str).appendTo('#Preview-u');
 				}
 			}else{
-				$('.review-photo').hide();
-				$(".review-modal").addClass("file-empty");
+				$('.update-review .review-photo').hide();
+				$(".update-review").addClass("file-empty");
 			}
 			
 			//평점 표시
