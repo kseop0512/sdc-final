@@ -33,7 +33,6 @@ import kr.or.partner.model.vo.Partner;
 import kr.or.pet.model.service.PetService;
 import kr.or.pet.model.vo.PetCheckList;
 import kr.or.pet.model.vo.PetForPartner;
-import kr.or.pet.model.vo.SendPetToPartner;
 import kr.or.pet.model.vo.Pet;
 import kr.or.pet.model.vo.PetAvgStat;
 

@@ -23,6 +23,7 @@
 <title>똑독캣 마이페이지</title>
 <jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 <!-- 마이페이지 CSS -->
 <link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_mypet.css">
