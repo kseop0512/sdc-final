@@ -299,15 +299,16 @@
         </div>
         <script>
         $(document).on("click",".petDetailBtn",function(){
-        	const petNo = $(this).prev().val();
+        	const petNo = $("input[name=petNo]").val();
         	let bookingNo = $(this).parent().parent().children().eq(0).text();
         	console.log(bookingNo);
+        	console.log(petNo);
          	$.ajax({
         		url: "/getPetInfo.do",
         		data: {petNo:petNo, bookingNo:bookingNo},
         		dataType: 'json',
         		success: function(data){
-        			
+        			if(data!=0){
         			$("#petImg").empty(); $(".about-pet").empty(); $("#answer2").empty();
         			$("#name").empty(); $("#hospital").empty();	$("#answer3").empty();
         			$("#age").empty(); $("#kind").empty();	 $(".leftMsg").empty();
@@ -334,6 +335,7 @@
         		    $("#answer3").append(data.health2);
         		    $(".leftMsg").append(data.specialRequest);
         		}
+        		}
          	}) // ajax끝
          	$(".acceptBtn").on("click",function(){
                 if(window.confirm("예약 요청을 수락하시겠습니까?")){
@@ -345,8 +347,9 @@
              $(".denyBtn").on("click",function(){
                 if(window.confirm("예약 요청을 정말 '거절'하시겠습니까?^^")){
                    const pNo = $("#pNo").val();
-                   console.log(pNo);
+                   console.log("위탁"+pNo);
                    const bookingPhone = $("#bookingPhone").val();
+                  	console.log("위탁"+bookingPhone);
                    location.href="/denyBooking.do?bookingNo="+bookingNo+"&&pNo="+pNo+"&&bookingPhone="+bookingPhone;
                 }
              })

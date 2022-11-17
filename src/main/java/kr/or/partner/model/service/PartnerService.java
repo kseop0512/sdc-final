@@ -12,6 +12,8 @@ import kr.or.partner.model.vo.Partner;
 import kr.or.partner.model.vo.PartnerFileVO;
 import kr.or.partner.model.vo.TrainerBoard;
 import kr.or.pet.model.vo.Pet;
+import kr.or.review.model.vo.Review;
+import kr.or.review.model.vo.ReviewFileVO;
 
 @Service
 public class PartnerService {
@@ -105,5 +107,20 @@ public class PartnerService {
 	public String selectPartnerName(String pNo) {
 		return dao.selectPartnerName(pNo);
 	}
+	public ArrayList<Review> selectAllReview(String pNo) {
+		// TODO Auto-generated method stub
+		return dao.selectAllReview(pNo);
+	}
+	public ArrayList<ReviewFileVO> selectReviewFiles(String reviewNo) {
+		// TODO Auto-generated method stub
+		return dao.selectReviewFiles(reviewNo);
+	}
+
+	
+//  혜규 is working on...
+//	public int getAvgRate(String tNo) {
+//		// TODO Auto-generated method stub
+//		return dao.getAvgRate(tNo);
+//	}
 
 }

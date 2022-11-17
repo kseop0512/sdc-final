@@ -79,4 +79,23 @@
 		from review_tbl
 		where member_no=#{memberNo}
 	</select>
+	<select id="selectTrainerReview" parameterType="string" resultType="r">
+		select
+			review_no as reviewNo,
+			booking_no as bookingNo,
+			member_no as memberNo,
+			pet_no as petNo,
+			review_rate as reviewRate,
+			review_content as reviewContent,
+			review_date as reviewDate
+		from review_tbl where p_no=#{_parameter}
+	</select>
+	<select id="selectTrainerReviewFiles" parameterType="string" resultType="rv">
+		select
+			file_no as fileNo,
+			review_no as reviewNo,
+			img_name as imgName,
+			img_path as imgPath
+		from review_files where review_no = #{_parameter}
+	</select>
 </mapper>
