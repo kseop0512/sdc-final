@@ -146,68 +146,67 @@
             console.log(partnerType);
             
             if(partnerType==='T'){
-            	console.log("이게 떠?");
+                console.log("이게 떠?");
             let eventArr = []
             $.ajax({
-            	url: "/getScheduleList.do",
-            	data: {pNo:pNo},
-            	success: function(data){
-            		for(let i=0; i<data.length; i++){
-            			console.log(data[i].memberId);
-            			eventArr.push(
-            				{
-            					title: data[i].bookingTime+" "+data[i].memberId,
-            					start: data[i].startDate
-            				},
-            			)
-            		}
+                url: "/getScheduleList.do",
+                data: {pNo:pNo},
+                success: function(data){
+                    for(let i=0; i<data.length; i++){
+                        console.log(data[i].memberId);
+                        eventArr.push(
+                            {
+                                title: data[i].bookingTime+" "+data[i].memberId,
+                                start: data[i].startDate
+                            },
+                        )
+                    }
             var calendar = new FullCalendar.Calendar(calendarEl, {
               headerToolbar: {
-            	  left: 'prev,next',
-            	  center: 'title',
-            	  right: 'today'
+                  left: 'prev,next',
+                  center: 'title',
+                  right: 'today'
               },
               businessHours: true,
               events:
                   eventArr
-            	
             });
             calendar.render();
-            	} //end success
+                } //end success
             });
-           } // if partnerType=L
+            }
+            // if partnerType=L
             if(partnerType==='L'){
             let eventArr = []
             $.ajax({
-            	url: "/getSitterScheduleList.do",
-            	data: {pNo:pNo},
-            	success: function(data){
-            		for(let i=0; i<data.length; i++){
-            			console.log(data[i].startDate);
-            			console.log(data[i].endDate);
-            			eventArr.push(
-            				{
-            					title: data[i].memberId,
-            					start: data[i].startDate,
-            					end: data[i].endDate
-            				},
-            			)
-            		}
+                url: "/getSitterScheduleList.do",
+                data: {pNo:pNo},
+                success: function(data){
+                    for(let i=0; i<data.length; i++){
+                        console.log(data[i].startDate);
+                        console.log(data[i].endDate);
+                        eventArr.push(
+                            {
+                                title: data[i].memberId,
+                                start: data[i].startDate,
+                                end: data[i].endDate
+                            },
+                        )
+                    }
             var calendar = new FullCalendar.Calendar(calendarEl, {
               headerToolbar: {
-            	  left: 'prev,next',
-            	  center: 'title',
-            	  right: 'today'
+                  left: 'prev,next',
+                  center: 'title',
+                  right: 'today'
               },
               events:
                   eventArr
-            	
             });
             calendar.render();
-            	} //end success
+                } //end success
             });
-           } // if partnerType=L
-          });
+            }
+        });
         </script>
         <script src='/resources/fullcalendar-5.11.3/lib/main.min.js'></script>
         <script src="/resources/js/partner-datatables-simple-demo.js"></script>
