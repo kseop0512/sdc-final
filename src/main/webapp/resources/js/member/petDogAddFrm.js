@@ -416,6 +416,10 @@ $("#f").click(function(){
 	$("#pGender").attr("value","F");
 	console.log($("#pGender").val());
 });
+$("#m").click(function(){
+	$("#pGender").attr("value","M");
+	console.log($("#pGender").val());
+});
 $("#y").click(function(){
 	$("#pNeut").attr("value","Y");
 	console.log($("#pNeut").val());

@@ -10,7 +10,7 @@
 .deleteA{
 	color: white;
     position: absolute;
-    right: -60px;
+    right: 110px;
     font-size: 17px;
     top: 0px;
 }
@@ -53,9 +53,10 @@
 					</div>
 					<div id="content-wrap">
 						<c:forEach var="pet" items="${petList}" varStatus="statNum">
+								<div class="info-wrap2" style="position:relative;">
 							<div class="pet-wrap" onclick="petDetail(this);">
 								<img class="petProfile" src="/resources/upload/pet/petProfile/${pet.petFilename }">
-								<div class="info-wrap" style="position:relative;">
+								<div class="info-wrap">
 									<p class="petName">${pet.petName }</p>
 									<p class="petInfo">
 										<c:choose>
@@ -87,8 +88,9 @@
 										<c:set var="petAge" value="${dd-pet.petBdate.substring(0,4)+1 }" />
 										${petAge }살
 									</p>
-									<a href="#" onclick="deletePet(${pet.petNo});" class="deleteA">삭제</a>
 								</div>
+								</div>
+									<a href="#" onclick="deletePet(${pet.petNo});" class="deleteA">삭제</a>
 								<!-- 상세에서 사용할 데이터들 -->
 								<!-- pet_chklist꺼 -->
 								<div class="info-petChk-wrap">
