@@ -7,7 +7,10 @@
 <title>Insert title here</title>
 <jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_pet.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_nav.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/main/common/header.jsp"/>
@@ -46,10 +49,11 @@
 								</div>
 								<div id="gender-div">
 									<label>성별</label>
-									<input type="radio" id="m" name="petGender" value="M">
+									<input type="radio" id="m" name="petGenderFrm" value="M">
 									<label for="m" class="radio-label">남자아이</label>
-									<input type="radio" id="f" name="petGender" value="F"> 
+									<input type="radio" id="f" name="petGenderFrm" value="F"> 
 									<label for="f" class="radio-label">여자아이</label>
+									<input type="hidden" id="pGender" name="petGender">
 								</div>
 								<div>
 									<label for="pKind">품종</label>
@@ -66,10 +70,11 @@
 								</div>
 								<div id="gender-div">
 									<label>중성화</label>
-									<input type="radio" id="y" name="petNeut" value="Y">
+									<input type="radio" id="y" name="petNeutFrm" value="Y">
 									<label for="y" class="radio-label">했어요</label>
-									<input type="radio" id="n" name="petNeut" value="N"> 
+									<input type="radio" id="n" name="petNeutFrm" value="N"> 
 									<label for="n" class="radio-label">안했어요</label>
+									<input type="hidden" id="pNeut" name="petNeut">
 								</div>
 								<div>
 									<label for="pHospital">동물병원</label>
@@ -106,7 +111,7 @@
 								<label class="noteSpan" for="pNote">기타 참고사항</label>
 								<textarea id="pNote" name="petNote" placeholder="300자 이내로 추가사항들을 적어주세요"></textarea>
 								<div>
-									<input type="submit" value="강아지등록!">
+									<input type="submit" id="dogAdd" value="강아지등록!">
 								</div>
 								<br><br><br><br>
 							</form>

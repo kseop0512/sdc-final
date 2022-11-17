@@ -16,7 +16,8 @@ var social //사회성 점수
 var sense //예민성
 var active //활동성
 var inde //독립성
-
+var petChk = 0;
+var healthChk = 0;
 
 
 $(".socialBtn").click(function(){
@@ -49,7 +50,7 @@ $(".nextBtn").click(function(){
 			qNo = 2;
 			
 		}else{
-			alert("답변을 선택해주세요");
+			new swal("답변을 선택해주세요!", "", "info");
 		}
 		break;
 	
@@ -59,7 +60,7 @@ $(".nextBtn").click(function(){
 			q3.show();
 			qNo = 3;					
 		}else{
-			alert("답변을 선택해주세요");
+			new swal("답변을 선택해주세요!", "", "info");
 		}
 		break;
 	
@@ -69,7 +70,7 @@ $(".nextBtn").click(function(){
 			q4.show();
 			qNo = 4;					
 		}else{
-			alert("답변을 선택해주세요");
+			new swal("답변을 선택해주세요!", "", "info");
 		}
 		break;
 	
@@ -79,7 +80,7 @@ $(".nextBtn").click(function(){
 			q5.show();
 			qNo = 5;					
 		}else{
-			alert("답변을 선택해주세요");
+			new swal("답변을 선택해주세요!", "", "info");
 		}
 		break;
 	
@@ -89,7 +90,7 @@ $(".nextBtn").click(function(){
 			q6.show();
 			qNo = 6;					
 		}else{
-			alert("답변을 선택해주세요");
+			new swal("답변을 선택해주세요!", "", "info");
 		}
 		break;
 	
@@ -99,7 +100,7 @@ $(".nextBtn").click(function(){
 			q7.show();
 			qNo = 7;					
 		}else{
-			alert("답변을 선택해주세요");
+			new swal("답변을 선택해주세요!", "", "info");
 		}
 		break;
 	
@@ -109,7 +110,7 @@ $(".nextBtn").click(function(){
 			q8.show();
 			qNo = 8;					
 		}else{
-			alert("답변을 선택해주세요");
+			new swal("답변을 선택해주세요!", "", "info");
 		}
 		break;
 	
@@ -119,7 +120,7 @@ $(".nextBtn").click(function(){
 			$(".psnModal").fadeOut();
 			$(".socialBtn").css("background-color","#ffb347");					
 		}else{
-			alert("답변을 선택해주세요");
+			new swal("답변을 선택해주세요!", "", "info");
 		}
 		//q1
 		if($("#q1a1").is(":checked")){
@@ -224,6 +225,7 @@ $(".nextBtn").click(function(){
 		$("#character6").val($("input[name=question6]:checked").val());
 		$("#character7").val($("input[name=question7]:checked").val());
 		$("#character8").val($("input[name=question8]:checked").val());
+		petChk = 1;
 		break;
 	}
 });
@@ -288,7 +290,7 @@ $(".h-nextBtn").click(function(){
 			hqNo = 2;
 			
 		}else{
-			alert("답변을 선택해주세요");
+			new swal("답변을 선택해주세요!", "", "info");
 		}
 		break;
 	
@@ -299,12 +301,13 @@ $(".h-nextBtn").click(function(){
 			hqNo = 3;
 			
 		}else{
-			alert("답변을 선택해주세요");
+			new swal("답변을 선택해주세요!", "", "info");
 		}
 		break;
 	case 3:
 		$(".hltModal").fadeOut();
 		$(".healthBtn").css("background-color","#ffb347");
+		healthChk = 1;
 		hq3.hide();
 		var h1Answer = $("input[name=hquestion1-1]:checked").val() + $("input[name=hquestion1-2]:checked").val() + $("input[name=hquestion1-3]:checked").val() + $("input[name=hquestion1-4]:checked").val() + $("input[name=hquestion1-5]:checked").val();
 		h1Answer = h1Answer.replace(/undefined/gi, "");
@@ -409,29 +412,23 @@ function loadImg(f){
 	}
 }
 
-//nav 스크롤 220이하일때 사라지는 js
-$(function(){
-	     var lastScroll = 0;
-	     $(window).scroll(function(event){
-	          var scroll = $(this).scrollTop();
-	          console.log(scroll);
-	          if (scroll > 220){
-	          //이벤트를 적용시킬 스크롤 높이
-	               $("#mypage-nav").addClass("closeNav");
-	          }
-	          else {
-	               $("#mypage-nav").removeClass("closeNav");
-	          }
-	          lastScroll = scroll;
-	     });
-	});
-	
-//width 900이하면 nav 사라짐
-$(window).on("resize", function(){
-      if (window.innerWidth <= 900) {
-      	  $("#mypage-nav").addClass("closeNav");
-	  }
-	  else {
-	      $("#mypage-nav").removeClass("closeNav");
-	  }
-});	
+$("#f").click(function(){
+	$("#pGender").attr("value","F");
+	console.log($("#pGender").val());
+});
+$("#y").click(function(){
+	$("#pNeut").attr("value","Y");
+	console.log($("#pNeut").val());
+});
+$("#n").click(function(){
+	$("#pNeut").attr("value","N");
+	console.log($("#pNeut").val());
+});
+$("#dogAdd").click(function(e){
+	if((!$("#pName").val()=="") && (!$("#pName").val()=="") && (!$("#pGender").val()=="") && (!$("#pKind").val()=="")  && (!$("#pBdate").val()=="") && (!$("#pWeight").val()=="") && (!$("#pNeut").val()=="") && (!$("#pHospital").val()=="") && petChk == 1 && healthChk == 1){
+
+	}else{
+		e.preventDefault();
+		new swal("입력값을 확인해주세요!", "", "info");
+	}
+});
