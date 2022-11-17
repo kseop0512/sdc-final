@@ -46,9 +46,6 @@ public class MemberController {
 	@Autowired//구원번호
 	private MessageService2 msgService2;
 	
-
-	
-	
 	@RequestMapping(value="/memberJoinChkFrm.do")
 	public String memberJoinChkFrm() {
 		return "member/memberJoinChkFrm";
