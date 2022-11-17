@@ -81,7 +81,7 @@ public class ManagerDao {
 //////////////////////////////////////////////////////
 	//엑셀 다운 회원전체 조회
 	public ArrayList<Member> selectMemberPartnerList() {
-		List list = sqlSession.selectList("manager.memberPartnerList");
+		List list = sqlSession.selectList("manager.selectMemberPartnerList");
 		return (ArrayList<Member>) list;
 	}
 

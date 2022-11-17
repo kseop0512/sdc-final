@@ -29,7 +29,7 @@
 	 <!-- 관리자 답변완료 카운트 -->
 <!-- 	 	select count(*) from direct_msg where read_check=1 and receiver =#{adminId} -->
 	 <select id="dmCheckRead" resultType="int">
-		SELECT COUNT(reply) as cnt FROM direct_msg
+		SELECT COUNT(*) FROM direct_msg where sender ='admin'
 	 </select>
 	 
 	 <!-- 관리자 메시지 읽음 처리 -->

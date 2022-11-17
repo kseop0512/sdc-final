@@ -177,6 +177,7 @@ public class ManagerController {
 	@ResponseBody
 	public void excelDown(HttpServletResponse response, HttpServletRequest request) throws IOException{
 		service.excelDown(response);
+		
 	}
 	
 	//1:1문의내역 P 이동

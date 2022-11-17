@@ -129,11 +129,12 @@
                                 	<option value="tabPartner" id="partner">파트너</div>
                                	 </select>
                                	 <p style="color: #ccc; position: absolute; left: 320px; margin-top: 12px; font-size: 14px;">※ 이용자 유형을 선택하세요</p>                 
-                                <table id="datatablesSimple">
                                 <form action="/excelDown.do" method="get">
 	                                <div id="memberlist-btn">
-	                                    <button type="submit" class="btn bc22 bs4">다운로드</button>
+	                                    <button type="submit" class="btn bc22 bs4">회원 엑셀 다운로드</button>
 	                                </div>
+	                            </form>
+                                <table id="datatablesSimple">
                                     <thead>
                                         <tr>
                                             <th>아이디</th>

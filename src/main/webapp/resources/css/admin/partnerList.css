@@ -196,12 +196,11 @@ tbody>tr>td:nth-child(2):hover{
 .modal-top{
     display: block;
 }
-
 .modal-top .close-area{
-    position: absolute;
+    position: relative;
     color: #fff;
-    top: 20px;
-    left: 1447px;
+    top: -100px;
+    left: 1130px;
     cursor: pointer;
 }
 #modalmodal-Btn{

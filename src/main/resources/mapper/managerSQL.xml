@@ -52,6 +52,7 @@
 			</when>
 		</choose>
 	</select>
+	<!-- 회원리스트 &엑셀 -->
 	<select id="selectMemberPartnerList"  resultType="m">
 		select 
 		    member_name as memberName,

@@ -83,7 +83,7 @@ function modal(obj){
     		$("#detailPrice").text(price+"원"); //가격
     		
     		
-    		//$("#detailCancelComment").text(data.comment); //예약취소사유
+    		$("#detailCancelComment").text(data.cancleComment); //예약취소사유
     	}
     
     });
