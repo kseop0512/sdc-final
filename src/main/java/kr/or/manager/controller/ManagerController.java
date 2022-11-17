@@ -235,8 +235,6 @@ public class ManagerController {
 		model.addAttribute("list",list);
 		return "manager/adminIndex";
 	}
-
-
 	//관리자 공지사항 글쓰기
 	@RequestMapping(value="adminNoticeWrite.do")
 	public String adminNoticeWrite(NoticeG ng, MultipartFile[] boardFileG, HttpServletRequest request) {
