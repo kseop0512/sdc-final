@@ -154,11 +154,11 @@
                                                     <textarea id="admin-noticeContent" name="noticeGContent" class="input-form"  placeholder=" 내용을 입력하세요"></textarea>
                                                 </td>
                                             </tr>
-                                                <td colspan="4">
+                                                <td colspan="4" style="padding-left: 35px;">
                                                 	<input type="file" name="boardFileG" multiple style="display:none;">
 													<input type="hidden" name="noticeGWriter" value="${sessionScope.g.adminId }">
-													<input type="submit" value="게시글작성" class="btn bc22 bs4" id="writeBtn">
-                                                    <button class="btn bc22 bs4"><a href="/adminNotice.do?reqPage=1" class="bc99" style="color: #fff;text-decoration: none;">취소</a></button><!--공지사항 리스트로이동-->
+													<input type="submit" value="게시글작성" class="btn bc22 bs4" id="writeBtn" style="width: 115px;">
+                                                    <a href="/adminNotice.do?reqPage=1" class="btn bc22 bs4" style="width: 115px;">취소</a><!--공지사항 리스트로이동-->
                                                 </td>
                                             </tr>
                                             </tbody>

@@ -308,4 +308,9 @@ public class ManagerService {
 		return result;
 	}
 
+	public FileVOG fileDown(int fileGNo) {
+		FileVOG f = dao.fileDown(fileGNo);
+		return f;
+	}
+
 }

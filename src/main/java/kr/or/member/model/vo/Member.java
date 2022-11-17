@@ -17,4 +17,6 @@ public class Member {
 	private String memberAddr;
 	private String memberGender;
 	private String memberEnrollDate;
+	private String email;
+	private String nickname;
 }

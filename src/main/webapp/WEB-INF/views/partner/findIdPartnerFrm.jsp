@@ -35,14 +35,14 @@
                 <form action="/findIdPartner.do" method="post" autocomplete="off">
                     <div class="box" style="margin-bottom: 5px;">
                         <label for="pName">이름<span class="comment"></span></label>
-                        <input type="text" name="pName" id="pName" class="input" style="border-color: #ffc107;background-color:#1A1814;border-radius: 10px;margin-left: 27px;color: #fff;">
+                        <input type="text" name="pName" id="pName" class="input" style="border-color: #ffc107;background-color:#1A1814;border-radius: 10px;margin-left: 39px;color: #fff;">
                     </div>
                     <div class="box" style="margin-bottom: 15px;">
                         <label for="pPhone">전화번호<span class="comment"></span></label>
-                        <input type="text" name="pPhone" id="pPhone" class="input" style="border-color: #ffc107;background-color:#1A1814;border-radius: 10px;color: #fff;" placeholder=" - 없이 적어주세요">
+                        <input type="text" name="pPhone" id="pPhone" class="input" style="border-color: #ffc107;background-color:#1A1814;border-radius: 10px;color: #fff;margin-left: 10px;" placeholder=" - 없이 적어주세요">
                     </div>
                     <div class="btn-box submit-btn">
-                        <button type="button" class="btn" style="background-color: #ffb347;width: 150px;margin-left: 35px;">아이디 찾기</button>
+                        <button type="button" class="btn" style="background-color: #ffb347;width: 150px;margin-left: 35px;margin-bottom: 5px;">아이디 찾기</button>
                     </div>
                 </form>
                 <div class="submit-btn" style="margin-left: 38px;">

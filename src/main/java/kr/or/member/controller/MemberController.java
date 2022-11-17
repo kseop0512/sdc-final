@@ -1,11 +1,21 @@
 package kr.or.member.controller;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.util.SessionConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,24 +25,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import kr.or.booking.model.vo.Booking;
 import kr.or.dm.model.vo.DirectMessage;
 
 import kr.or.mail.controller.MailSender;
-
+import kr.or.member.model.service.KakaoService;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.service.MessageService;
+import kr.or.member.model.vo.Kakao;
+import kr.or.member.model.vo.KakaoResult;
+import kr.or.member.model.vo.KakaoToken;
 import kr.or.member.model.vo.Member;
 
 @Controller
 public class MemberController {
+	
 	@Autowired
 	private MemberService service;
 	
 	@Autowired
 	private MessageService msgService;
+	
+	@Autowired
+	private KakaoService kakaoService;
 	
 	@RequestMapping(value="/memberJoinSuccess.do")
 	public String memberJoinSuccess() {
@@ -229,6 +248,34 @@ public class MemberController {
 			}
 		}
 	}
-
 	
+	
+	
+	/*
+	 //login 페이지 mapping
+    @RequestMapping("value=/kakaoLogin.do")
+    public String kakaoLogin(){
+        return "main/common/loginUser";
+    }
+
+
+    //redirect 경로 mapping
+    @RequestMapping(value="/kakaoLogin1.do", method = RequestMethod.GET)
+    public String kakaoLogin1(@RequestParam(value = "code",required = false) String code){
+        if(code!=null){//카카오측에서 보내준 code가 있다면 출력합니다
+            System.out.println("code = " + code);
+            
+          //추가됨: 카카오 토큰 요청
+            KakaoToken kakaoToken = kakaoService.requestToken(code);
+            System.out.println("kakoToken = " + kakaoToken);
+            
+          //추가됨: 유저정보 요청
+            Kakao user = kakaoService.getuserinfo(kakaoToken.getAccess_token());
+            System.out.println("user = " + user);
+
+        }
+        return "redirect:/"; //만들어둔 응답받을 View 페이지 redirect 리턴
+    }
+	*/
+    
 }

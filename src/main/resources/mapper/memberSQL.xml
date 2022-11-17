@@ -18,7 +18,9 @@
 		#{memberPhone},
 		#{memberAddr},
 		#{memberGender},
-		to_char(sysdate,'yyyymmdd')
+		to_char(sysdate,'yyyymmdd'),
+		#{email},
+		#{nickname}
 		)
 	</insert>
 
@@ -33,7 +35,9 @@
 	  		member_phone as memberPhone,
 	  		member_addr as memberAddr,
 	  		member_gender as memberGender,
-	  		enroll_date as enrollDate
+	  		enroll_date as enrollDate,
+	  		email,
+	  		nickname
 		from member_tbl
 		where member_id=#{memberId}
 		<if test="memberPw != null">
@@ -100,37 +104,15 @@
 		where member_id = #{memberId}
 	</update>
 	
-	
-	<!-- 카카오회원가입 
-    <insert id="addProfile" parameterType="m">
-    insert into member_tbl values (
-        member_seq.nextval,
-        #{memberName},
-		#{memberId},
-		#{memberPw},
-		#{memberBdate},
-		#{memberPhone},
-		#{memberAddr},
-		#{memberGender},
-		to_char(sysdate,'yyyymmdd')
-     )
-    </insert>
-	-->
-	
-	<!-- 카카오톡 로그인
-     <select id="kakaoSearchId" resultType="m" parameterType="string">
-        select
-           member_no as memberNo,
-			member_name as memberName,
-			member_id as memberId,
-	  		member_pw as memberPw,
-	  		member_bday as memberBdate,
-	  		member_phone as memberPhone,
-	  		member_addr as memberAddr,
-	  		member_gender as memberGender,
-	  		enroll_date as enrollDate
-        from member where member_id =#{memberId}
-   </select>
+	 <!--  
+	 <select id="kakao" parameterType="java.util.HashMap" resultType="koko">
+	select * from kakao_tbl where k_nickname=#{nickname} and k_email=#{email}
+	</select>
+ 
+	<insert id="insert" parameterType="java.util.HashMap">
+	insert into kakao_tbl(k_nickname,k_email)
+	   values(#{nickname},#{email})
+	</insert>
 	 -->
-	
+	 
 </mapper>

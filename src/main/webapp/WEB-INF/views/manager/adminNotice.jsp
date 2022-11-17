@@ -151,7 +151,7 @@
                                         <td>${ng.noticeGWriter }</td>
                                         <td>${ng.noticeGDate }</td>
                                         <td>${ng.readGCount }</td>
-                                        <td><button class="bc77"><a href="/delete.do?noticeGNo=${ng.noticeGNo }" class="bc77" style="text-decoration: none;border: none;">삭제</a></button></td>
+                                        <td><a href="/delete.do?noticeGNo=${ng.noticeGNo }" class="bc77" style="text-decoration: none;padding: 3px;">삭제</a></td>
                                     </tr>
                                     </c:forEach>
                                     </tbody>

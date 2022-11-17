@@ -58,6 +58,12 @@ public class MemberDao {
 	public int updatePwMember(Member m) {
 		return sqlSession.update("member.updatePw", m);
 	}
-
+	
+	/*
+	public int insertKakao(Member m) {
+		System.out.println(m);
+		return sqlSession.insert("member.insertKakao", m);
+	}
+*/
 
 }

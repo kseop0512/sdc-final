@@ -1,5 +1,10 @@
 package kr.or.member.model.service;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,5 +68,6 @@ public class MemberService {
 	public int updatePwEncMember(Member m) {
 		return dao.updatePwMember(m);
 	}
+	
 	
 }
