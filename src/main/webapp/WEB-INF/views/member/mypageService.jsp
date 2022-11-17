@@ -326,14 +326,11 @@
 			<span class="close-btn material-symbols-outlined">close</span>
 		</div>
 		<!-- 모달컨텐츠(폼) -->
-		<form action="/updateReview.do" method="post" enctype="multipart/form-data">
+		<form action="/updateReview.do" method="post">
 			<div class="review-modal-content">
 				<input type="hidden" name="reviewNo">
 				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 				<input type="hidden" name="bookingNo">
-				<input type="hidden" name="memberNo">
-				<input type="hidden" name="pNo">
-				<input type="hidden" name="petNo">
 				<div class="review-info">
 					<span class="d-p-name"></span>
 					<span class="span-review-date"></span>

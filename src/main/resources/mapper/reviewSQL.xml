@@ -63,7 +63,7 @@
 		update review_tbl set
 			review_rate = #{reviewRate},
 			review_content = #{reviewContent}
-		where booking_no=#{bookingNo}
+		where review_no=#{reviewNo}
 	</update>
 	
 	<select id="selectReviewList" parameterType="m" resultType="r">

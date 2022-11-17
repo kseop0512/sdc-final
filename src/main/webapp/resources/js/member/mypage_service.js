@@ -5,8 +5,6 @@ $(function(){
 	const startDate = $(".input-start-date");
 	const endDate = $(".input-end-date");
 	
-	
-	
 	//화면표시값 입력할 span태그
 	let sSpan = $(".span-start-date");
 	let eSpan = $(".span-end-date");	
@@ -100,8 +98,6 @@ $(function(){
 	}
 });
 
-
-
 //모달창 우측상단 닫기 버튼
 $(".close-btn").on("click",function(){
     $(".review-modal").hide();
@@ -122,6 +118,7 @@ function writeReview(bookingNo, memberNo, pNo, petNo){
 	$(".insert-review [name=bookingNo]").val(bookingNo);
 	$(".insert-review [name=memberNo]").val(memberNo);
 	$(".insert-review [name=pNo]").val(pNo);
+	$(".insert-review [name=reviewContent]").text("");
 	//파트너번호로 파트너이름 조회해서 입력하기
 	$.ajax({
 		url : "/getPartnerName.do",
@@ -149,10 +146,12 @@ const drawStarI = (target) => {
 function viewReview(bookingNo){
 	$(".close-btn").click();
 	$(".update-review [name=bookingNo]").val(bookingNo);
+	$(".update-review [name=reviewContent]").text("");
 	$.ajax({
 		url : "/selectOneReview.do",
 		data : {bookingNo : bookingNo},
 		success: function(data){
+			//후기번호 입력
 			$(".update-review [name=reviewNo]").val(data.reviewNo);
 			
 			//파트너번호로 파트너이름 조회해서 입력하기
@@ -187,7 +186,8 @@ function viewReview(bookingNo){
 			$("#u-rate").val(`${data.reviewRate}`);
 			$(".update-review [name=reviewRate]").val(data.reviewRate);
 			
-			$(".update-review [name=reviewContent]").text(data.reviewContent);
+			//후기 내용 표시
+			$(".update-review [name=reviewContent]").val(data.reviewContent);
 		}
 	});
 	$(".update-review").show();
@@ -295,7 +295,6 @@ $(function(){
 		console.log($("#listLength").val());
 		const h3 = $("<h3 class='none-dm'>예약내역이 없습니다..🙀</h3>");
 		tbody.append(h3);
-		$(".service-box").css("height","600px");
 	}
 	console.log(tbody);
 	console.log($("#listLength").val());
