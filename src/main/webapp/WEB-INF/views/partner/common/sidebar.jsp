@@ -7,7 +7,7 @@
                 <div class="sb-sidenav-menu-heading">Core</div>
                 <a class="nav-link" href="/partnerMain.do">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    Dashboard
+                    My Page
                 </a>
                 <div class="sb-sidenav-menu-heading">Interface</div>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -36,7 +36,7 @@
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="/appliedList.do?pNo=${sessionScope.p.PNo }">예약요청 리스트</a>
                                 <a class="nav-link" href="/scheduleCalendar.do">스케줄 달력</a>
-                                <a class="nav-link" href="#">스케줄 등록</a>
+<%--                                <a class="nav-link" href="#">스케줄 등록</a>--%>
                             </nav>
                         </div>
 
@@ -47,7 +47,7 @@
                     문의 관리
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
-                <div class="sb-sidenav-menu-heading">수입관리</div>
+                <%--<div class="sb-sidenav-menu-heading">수입관리</div>
                 <a class="nav-link" href="charts.html">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                     수입 내역 확인하기
@@ -55,7 +55,7 @@
                 <a class="nav-link" href="tables.html">
                     <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                     수입 내역
-                </a>
+                </a>--%>
             </div>
         </div>
         <div class="sb-sidenav-footer">
