@@ -9,11 +9,10 @@
 <style type="text/css">
 .deleteA{
 	color: white;
-    position: relative;
-    float: right;
-    right: 150px;
-    bottom: 150px;
+    position: absolute;
+    right: -60px;
     font-size: 17px;
+    top: 0px;
 }
 .deleteA:hover{
 	color: red;
@@ -56,14 +55,14 @@
 						<c:forEach var="pet" items="${petList}" varStatus="statNum">
 							<div class="pet-wrap" onclick="petDetail(this);">
 								<img class="petProfile" src="/resources/upload/pet/petProfile/${pet.petFilename }">
-								<div class="info-wrap">
+								<div class="info-wrap" style="position:relative;">
 									<p class="petName">${pet.petName }</p>
 									<p class="petInfo">
 										<c:choose>
-											<c:when test="${pet.petType eq 1 && pet.petWeight lt 7}">
+											<c:when test="${pet.petType eq 1 && pet.petWeight le 7}">
 													${pet.petWeight }kg(소형)
 											</c:when>
-											<c:when test="${pet.petType eq 1 && pet.petWeight lt 15} ">
+											<c:when test="${pet.petType eq 1 && pet.petWeight gt 7 && pet.petWeight lt 15} ">
 													${pet.petWeight }kg(중형)
 											</c:when>
 											<c:when test="${pet.petType eq 1 && pet.petWeight ge 15} ">
@@ -88,6 +87,7 @@
 										<c:set var="petAge" value="${dd-pet.petBdate.substring(0,4)+1 }" />
 										${petAge }살
 									</p>
+									<a href="#" onclick="deletePet(${pet.petNo});" class="deleteA">삭제</a>
 								</div>
 								<!-- 상세에서 사용할 데이터들 -->
 								<!-- pet_chklist꺼 -->
@@ -125,7 +125,6 @@
 									<input type="hidden" class="info-petFilepath" value="${pet.petFilepath}">
 								</div>
 							</div>
-							<a href="#" onclick="deletePet(${pet.petNo});" class="deleteA">삭제</a>
 							<hr class="hrCss">
 						</c:forEach>
 						<!-- 펫 성향 평균값 -->
@@ -133,7 +132,7 @@
 						<input type="hidden" class="avg-social" value="${avgStat[0].social}">
 						<input type="hidden" class="avg-active" value="${avgStat[0].active}">
 						<input type="hidden" class="avg-inde" value="${avgStat[0].inde}">
-						<div class="pet-wrap addPetLink" onclick="petAddBtn();">
+						<div class="pet-wrap addPetLink" onclick="petAddBtn();" style="margin-bottom:0px;">
 							<div class="addPet">
 								<span class="addPetSpan">+　반려동물추가</span>
 							</div>

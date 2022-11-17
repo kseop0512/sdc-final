@@ -43,9 +43,9 @@
 	<!-- main -->
 	<main id="main">
 		<section class="mypage">
-			<div class="mypage-container" style="left:-100px;">
+			<div class="mypage-container">
 				<!-- 마이페이지 메뉴 리모컨 -->
-				<div id="mypage-nav" style="left:100px;">
+				<div id="mypage-nav">
 					<ul>
 						<li><a href="/memberMypage.do">나의 정보</a></li>
 						<li><a href="/mypageMyPet.do?memberNo=${sessionScope.m.memberNo }">나의 똑독캣</a></li>
@@ -87,20 +87,7 @@
 	</main>
 	<!-- End #main -->
 	<script>
-	$(function(){
-	     var lastScroll = 0;
-	     $(window).scroll(function(event){
-	          var scroll = $(this).scrollTop();
-	          if (scroll > 300){
-	          //이벤트를 적용시킬 스크롤 높이
-	               $("#mypage-nav").addClass("closeNav");
-	          }
-	          else {
-	               $("#mypage-nav").removeClass("closeNav");
-	          }
-	          lastScroll = scroll;
-	     });
-	});
+	
 	function deleteMember(memberId){
 		var delChk = $(".deleteChk").is(":checked");
 		if(delChk){
