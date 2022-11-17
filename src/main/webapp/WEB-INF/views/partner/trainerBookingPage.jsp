@@ -101,8 +101,8 @@
 					</tr>
 					<tr>
 						<td colspan="2" style="border: none; text-align: center">
-						   <!--<button type="button" onclick="requestPay()" class="payBtn">결제하기</button>-->
-							  <input type="submit" class="payBtn" value="결제하기">
+						   <!--  <button type="button" onclick="requestPay()" class="payBtn">결제하기</button>-->
+						  <input type="submit" class="payBtn" value="결제하기">
 							<input type="hidden" name="startDate">
 							<input type="hidden" name="bookingTime">
 							<input type="hidden" name="pNo" value="${trainer.PNo }">
@@ -114,9 +114,11 @@
 			</form>
 			</div>
 		</div>
-		
 	</div>
 </main>
+<script>
+
+</script>
 <jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
 <script src="/resources/js/partnerScripts.js"></script>
 <script src='/resources/fullcalendar-5.11.3/lib/main.min.js'></script>

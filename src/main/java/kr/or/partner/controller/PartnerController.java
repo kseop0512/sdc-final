@@ -8,6 +8,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,23 +22,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
 import common.FileRename;
-
 import kr.or.member.model.vo.Member;
-
-import kr.or.member.model.service.MessageService;
 import kr.or.partner.model.service.MessagePService;
-
 import kr.or.partner.model.service.PartnerService;
 import kr.or.partner.model.vo.Partner;
 import kr.or.partner.model.vo.PartnerFileVO;
 import kr.or.partner.model.vo.TrainerBoard;
 import kr.or.pet.model.vo.Pet;
+import kr.or.review.model.vo.Review;
+import kr.or.review.model.vo.ReviewFileVO;
 
 @Controller
 public class PartnerController {
@@ -177,8 +179,16 @@ public class PartnerController {
 	@RequestMapping(value="/trainerList.do")
 	public String trainerList(Model model) {
 		ArrayList<TrainerBoard> boardList = service.selectAllBoard();
+//		ArrayList<Integer> rates = new ArrayList<Integer>();
+//		for(int i=0; i<boardList.size();i++) {
+//			String tNo = boardList.get(i).getPNo();
+//			int avgRate = service.getAvgRate(tNo);
+//			rates.add(avgRate);
+//		}
+//		model.addAttribute("rate",rates);
 		model.addAttribute("boardList",boardList);
 		return "main/partner/trainerList";
+
 	}
 	
 	// 훈련사 게시글 작성 페이지 이동
@@ -217,6 +227,7 @@ public class PartnerController {
 	// 훈련사 게시글 upload
 	@RequestMapping(value="/uploadTrainerBoard.do")
 	public String uploadTrainerBoard(TrainerBoard tb, MultipartFile[] boardFile, HttpServletRequest request, Model model) {
+		System.out.println(tb.getTrainerImg());
 		ArrayList<PartnerFileVO> list = new ArrayList<PartnerFileVO>();
 		if(!boardFile[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/partner/trainerFiles/");
@@ -265,8 +276,15 @@ public class PartnerController {
 		TrainerBoard tb = service.selectOneTrainerBoard(tBoardNo);
 		String pNo = tb.getPNo();
 		Partner p = service.selectOnePartner(pNo);
+		ArrayList<Review> review = service.selectAllReview(pNo);
+		for(int i=0; i<review.size();i++) {
+			String reviewNo = review.get(i).getReviewNo();
+			ArrayList<ReviewFileVO> files = service.selectReviewFiles(reviewNo);
+			review.get(i).setFileList(files);
+		}
 		model.addAttribute("tb",tb);
 		model.addAttribute("p",p);
+		model.addAttribute("review",review);
 		return "partner/oneTrainer";
 	}
 	// 훈련사 예약페이지 이동

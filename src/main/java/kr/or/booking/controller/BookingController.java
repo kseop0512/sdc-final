@@ -194,9 +194,7 @@ public class BookingController {
 	      String api_key = "NCSMTTQ4FCRBKKN9";
 	        String api_secret = "ICW2VA8P8JJLZDBWMSASXMRWEDIEJ0JH";
 	        Message coolsms = new Message(api_key, api_secret);
-	        
 	        String BookingMsg = "파트너님이 예약 요청을 거절하셨습니다. 똑독캣 마이페이지에서 확인해주세요.";
-	        
 	        HashMap<String, String> set = new HashMap<String, String>();
 	        set.put("to", bookingPhone); // 수신번호
 

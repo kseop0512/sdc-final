@@ -102,7 +102,7 @@
 			category,
 			price
 		from booking_tbl
-		where partner_accept ='Y' order by start_date
+		where partner_accept ='Y'and p_no=#{pNo} order by start_date
 	</select>
 	<select id="selectSitterSchedule" parameterType="p" resultType="b">
 		select
@@ -117,7 +117,7 @@
 			category,
 			price
 		from booking_tbl
-		where partner_accept ='Y' order by start_date
+		where partner_accept ='Y'and p_no=#{pNo} order by start_date
 	</select>
 	<!-- END 혜규 -->
 	
@@ -173,7 +173,7 @@
 	</update>
 	
 	<update id="denyBookingRequest" parameterType="string">
-		update booking_tbl set partner_accept='Z' where booking_no=#{_parameter}
+		update booking_tbl set partner_accept='N' where booking_no=#{_parameter}
 	</update>
 	<select id="selectOngoingBookingPetSitter" parameterType="p" resultType="b">
 		select

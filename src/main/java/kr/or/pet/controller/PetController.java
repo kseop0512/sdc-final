@@ -33,6 +33,7 @@ import kr.or.partner.model.vo.Partner;
 import kr.or.pet.model.service.PetService;
 import kr.or.pet.model.vo.PetCheckList;
 import kr.or.pet.model.vo.PetForPartner;
+import kr.or.pet.model.vo.SendPetToPartner;
 import kr.or.pet.model.vo.Pet;
 import kr.or.pet.model.vo.PetAvgStat;
 
@@ -207,13 +208,11 @@ public class PetController {
 	@ResponseBody
 	@RequestMapping(value="/getPetInfo.do", produces="application/text;charset=utf-8")
 	public String getPetInfo(Pet p, String bookingNo) {
+		System.out.println("petNo:"+p.getPetNo());
+		System.out.println("bookingNo:"+bookingNo);
 		PetForPartner pet = service.selectOnePet(p);
 		String request = service.selectSpecialRequest(bookingNo);
-		if(request.isEmpty()) {
-			pet.setSpecialRequest("빈칸");
-		}else {
-			pet.setSpecialRequest(request);
-		}
+		pet.setSpecialRequest(request);
 		return new Gson().toJson(pet);
 	}
 
