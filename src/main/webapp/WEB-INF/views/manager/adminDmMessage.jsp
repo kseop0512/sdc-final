@@ -209,11 +209,11 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2022</div>
+                            <div class="text-muted">Copyright &copy; 똑독캣 2022</div>
                             <div>
-                                <a href="#">Privacy Policy</a>
+                                <a href="/">메인으로 돌아가기</a>
                                 &middot;
-                                <a href="#">Terms &amp; Conditions</a>
+                                <a href="/#menu">산책 &amp; 돌봄 서비스</a>
                             </div>
                         </div>
                     </div>
