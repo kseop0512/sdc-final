@@ -55,7 +55,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div style="text-align: right;font-size: 20px;letter-spacing: 3px;margin-right: 25px;font-weight: bolder;">${pageNavi }</div>
+                            <div style="text-align: right;font-size: 20px;letter-spacing: 3px;margin-right: 25px;font-weight: bolder;margin-bottom: 7px;">${pageNavi }</div>
                             <!--  
                             <ul style="text-align: center;font-size: 20px;letter-spacing: 3px;" list-style-type: disc>${pageNavi }</ul>
                             -->

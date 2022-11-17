@@ -1,11 +1,21 @@
 package kr.or.member.controller;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.util.SessionConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,18 +25,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import kr.or.booking.model.vo.Booking;
 import kr.or.dm.model.vo.DirectMessage;
 
 import kr.or.mail.controller.MailSender;
+
 import kr.or.main.partner.board.model.vo.PartnerBoard;
 import kr.or.main.partner.board.model.vo.PartnerBoardOption;
+
+import kr.or.member.model.service.KakaoService;
+
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.service.MessageService;
+
 import kr.or.member.model.service.MessageService2;
 import kr.or.member.model.service.MessageService3;
+
+import kr.or.member.model.vo.Kakao;
+import kr.or.member.model.vo.KakaoResult;
+import kr.or.member.model.vo.KakaoToken;
+
 import kr.or.member.model.vo.Member;
 import kr.or.partner.model.vo.Partner;
 import kr.or.pet.model.service.PetService;
@@ -35,6 +57,7 @@ import kr.or.review.model.vo.Review;
 
 @Controller
 public class MemberController {
+	
 	@Autowired
 	private MemberService service;
 	@Autowired
@@ -43,8 +66,18 @@ public class MemberController {
 	@Autowired//정환번호
 	private MessageService msgService;
 	
+
 	@Autowired//구원번호
 	private MessageService2 msgService2;
+
+	@Autowired
+	private KakaoService kakaoService;
+	
+	@RequestMapping(value="/memberJoinSuccess.do")
+	public String memberJoinSuccess() {
+		return "member/memberJoinSuccess";
+	}
+
 	
 	@RequestMapping(value="/memberJoinChkFrm.do")
 	public String memberJoinChkFrm() {
@@ -288,6 +321,7 @@ public class MemberController {
 		}
 	}
 	
+
 	@RequestMapping(value="/mypageDeleteFrm.do")
 	public String mypageDeleteFrm(int memberNo) {
 		return "member/mypageDeleteFrm";
@@ -310,4 +344,5 @@ public class MemberController {
 			return "common/msg";
 		}
 	}
+
 }

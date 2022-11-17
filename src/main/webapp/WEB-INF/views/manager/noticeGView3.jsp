@@ -44,43 +44,54 @@
             </ul>
         </nav>
         <div id="layoutSidenav">
-            		<div id="layoutSidenav_nav">
+            <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">홈</div>
-                            <a class="nav-link" href="/adminIndex.do">
+                            <a class="nav-link" href="/selectUserList.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                              	  마이페이지
+                                마이페이지
                             </a>
                             <div class="sb-sidenav-menu-heading">메뉴</div>
-                              <a class="nav-link" href="/selectUserList.do">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                	회원리스트
-                            </a>
-                            <a class="nav-link collapsed" href="/adminMemberList.do" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <a class="nav-link collapsed" href="memberList.html" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                               	 파트너관리
+                                유저관리
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/partnerList.do">파트너승인</a>
-                                            <a class="nav-link" href="/getPartner.do">파트너리스트</a>
+                                    <a class="nav-link" href="/selectUserList.do">유저리스트</a>
+                                    <a class="nav-link" href="partnerList.html">파트너관리</a>
                                 </nav>
                             </div>
-                            <a class="nav-link" href="/trainerBooking.do">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                	예약내역
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                신고내역
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <a class="nav-link" href="/adminDmMessage.do">
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed" href="reportList.html" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        리뷰신고
+                                    </a>
+                                    <a class="nav-link collapsed" href="reportList.html" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        Q&A신고
+                                    </a>
+                                </nav>
+                            </div>
+                            <a class="nav-link" href="reservationList.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                예약내역
+                            </a>
+                            <a class="nav-link" href="dm_message.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 1:1문의내역
                             </a>
                             <div class="sb-sidenav-menu-heading">게시판</div>
                             <a class="nav-link" href="/adminNotice.do?reqPage=1">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                	공지사항
+                                공지사항
                             </a>
                         </div>
                     </div>
@@ -98,9 +109,7 @@
                             <li class="breadcrumb-item active">관리자용</li>
                         </ol>
                         <hr style="color: #cda45e;">
-                        <div id="notice-title">
-                        	<h1>게시글 상세보기</h1>
-						</div>
+                        <h1 style="text-align: center;border: #cda45e solid 3px;background-color: #282f44;color: #fff">게시글 상세보기</h1>
 						<hr style="color: #cda45e;">
 						<table border="1" style="width: 100%;background-color: #f8f9fa;font-size: 20px;border-color: #282f44;">
 							<tr style="border-bottom: black solid 1px;">
@@ -127,14 +136,13 @@
 							</tr>
 							<tr style="background-image: url(/resources/assets/img/logo-15수정본.png);background-repeat: no-repeat;background-position: center center;background-size: contain;">
 								<th style="border-right: black solid 1px;text-align: center;">내용</th>
-								<td colspan="4" style="height: 500px; padding-left: 5px;  white-space: pre-line;">
+								<td colspan="4" style="height: 100px;padding-left: 5px;white-space: pre-line;">
 									${ng.noticeGContent }
 								</td>
 							</tr>
 						</table>
                     </div>
                 </main>
-                <div style="height: 20vh;"></div>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
@@ -181,51 +189,58 @@
     <body>
 	<jsp:include page="/WEB-INF/views/main/common/header.jsp"/>
 	
-	<main style="margin-top: 150px;">
-	<div id="wrapper" style="position: relative;min-height: calc(100vh - 63px);padding-bottom: 80px;background-color: #fff;">
-         <div id="contents" class="notice" style="max-width: 1170px;margin: 0 auto;">
-         	<h1 style="height: 145px;padding-top: 82px;color: #17191d;">공지사항</h1>
-         	<h2 style="position: absolute;top: 86px;right: 35px;padding-top: 5px;font-size: 14px;font-weight: 400;">똑독캣 공지</h2>
-         	<div class="noticeView" style="border-top: 2px solid #17191d;">
-         		<h3 style="height: 58px;padding: 24px 0 11px 20px;color: #17191d;">${ng.noticeGTitle }</h3>
-         		<div class="noticeInfo" style="position: relative;height: 40px;padding-right: 6px;border-bottom: 1px solid #dde1e5;text-align: right;color: black;">
-         			<div class="cate" style="position: absolute;top: 0;left: 20px;">
-         				<th class="acchidden" style="position: absolute;overflow: hidden;clip: rect(0 0 0 0);height: 1px;width: 1px; margin: -1px;"></th>
-         				<th>[공지]</th>
-         			</div>
-         			<div class="date" style="display: inline-block;padding-right: 21px;">
-         				<th class="acchidden" style="position: absolute;overflow: hidden;clip: rect(0 0 0 0);height: 1px;width: 1px; margin: -1px;">등록일</th>
-         				<td>${ng.noticeGDate }</td>
-         			</div>
-         			<div class="count" style="display: inline-block;padding-right: 21px;">
-         				<th class="acchidden" style="position: absolute;overflow: hidden;clip: rect(0 0 0 0);height: 1px; width: 1px;margin: -1px;">조회수</th>
-         				<td>${ng.readGCount }</td>
-         			</div>
-         		</div>
-         		<div class="noticeInfo" style="position: relative;padding-right: 6px;border-bottom: 1px solid #dde1e5;text-align: right;">
-         			<tr style="border-bottom: black solid 1px;">
-						<th style="border-right: black solid 1px;text-align: center;">첨부파일</th>
-						<td colspan="3">
-						<c:forEach items="${ng.fileList }" var="fvg">
-							<p style="color: black;">
-								<a href="/boardFileDown.do?fileGNo=${fvg.fileGNo }">${fvg.filenameG }</a>
-							</p>
-						</c:forEach>
-						</td>
-					</tr>
-         		</div>
-         		<div class="noticeCnts" style="padding: 36px 20px;color: #363940;">
-         			<p class="MsoNoSpacing" style="margin: 0cm;">
-         				<span style="font-size: 20.5px;letter-spacing: -0.4px;color: #000000;white-space: pre-line;">${ng.noticeGContent }</span>
-         			</p>
-         		</div>
-         		<div class="noticeBt" style="padding-top: 60px;text-align: center;border-top: 1px solid #dde1e5;">
-         			<a href="/homeNoticeList.do?reqPage=1" style="display: inline-block;width: 146px;height: 52px;padding-top: 12px;font-weight: 700;border: 2px solid #ffb347;background-color: #ffb347;color: #fff;">목록</a>
-         		</div>
-         	</div>
-         </div>
-    </div>
-	</main>
+	
+	<div>
+                <main>
+                <br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<div style="height: 60px;line-height: 60px;font-size: 25px;background-color: #1d1b16;display: flex;justify-content: left;width: 100%;margin-top: 10px;padding-left: 35px;">똑독캣 공지사항</div>
+                <div style="background-color: #fff;display: flex;justify-content: center;width: 100%;padding-left: 275px;">
+                <br>
+                    <div style="width: 100%;background-color: #fff;">
+                    <div class="container-fluid px-4" style="background-color: #fff;padding-bottom: 30px;">
+                        <hr style="color: #cda45e;width: 60%;">
+                        <h1 style="text-align: center;border: #cda45e solid 3px;background-color: #282f44;color: #fff;width: 60%;">게시글 상세보기</h1>
+						<hr style="color: #cda45e;width: 60%;">
+						<table border="1" style="width: 60%;background-color: #f8f9fa;font-size: 20px;border-color: #282f44;color: black;box-shadow: 0 4px 16px rgb(0 0 0 / 50%);">
+							<tr style="border-bottom: black solid 1px;">
+								<th style="border-right: black solid 1px;width: 90px;text-align: center;">글번호</th>
+								<td style="border-right: black solid 1px;padding-left: 5px;">${ng.noticeGNo }</td>
+								<th style="border-right: black solid 1px;width: 90px;text-align: center;">제목</th>
+								<td style="padding-left: 5px;">${ng.noticeGTitle }</td>
+							</tr>
+							<tr style="border-bottom: black solid 1px;">
+								<th style="border-right: black solid 1px;text-align: center;">작성자</th>
+								<td style="border-right: black solid 1px;padding-left: 5px;">${ng.noticeGWriter }</td>
+								<th style="border-right: black solid 1px;text-align: center;">작성일</th>
+								<td style="padding-left: 5px;">${ng.noticeGDate }</td>
+							</tr>
+							<tr style="border-bottom: black solid 1px;">
+								<th style="border-right: black solid 1px;text-align: center;">첨부파일</th>
+								<td colspan="3">
+								<c:forEach items="${ng.fileList }" var="fvg">
+									<p>
+										<a href="#">${fvg.filenameG }</a>
+									</p>
+								</c:forEach>
+								</td>
+							</tr>
+							<tr style="background-image: url(/resources/assets/img/logo-15수정본.png);background-repeat: no-repeat;background-position: center center;background-size: contain;">
+								<th style="border-right: black solid 1px;text-align: center;">내용</th>
+								<td colspan="4" style="height: 100px;padding-left: 5px;white-space: pre-line;">
+									${ng.noticeGContent }
+								</td>
+							</tr>
+						</table>
+                    </div>
+                    </div>
+                    </div>
+                </main>
+            </div>
+	
 	
 	<jsp:include page="/WEB-INF/views/main/common/footer.jsp"/>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

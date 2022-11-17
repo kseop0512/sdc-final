@@ -131,6 +131,9 @@
 					<c:when test="${not empty sessionScope.g }">
 						<h1>안녕하세요  ${sessionScope.g.adminId }님 <span>똑독캣에 오신걸 환영합니다</span></h1>
 					</c:when>
+					<c:when test="${not empty sessionScope.koko }">
+						<h1>안녕하세요  ${sessionScope.ko.nickname }님 <span>똑독캣에 오신걸 환영합니다</span></h1>
+					</c:when>
 					<c:otherwise>
 						<h1>안녕하세요  <span>똑독캣에 오신걸 환영합니다</span></h1>
 					</c:otherwise>
@@ -193,7 +196,7 @@
           <div class="col-lg-12 d-flex justify-content-center">
             <ul id="menu-flters">
               <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-starters">산책&돌봄</li>
+              <li data-filter=".filter-starters">위탁</li>
               <li data-filter=".filter-salads">훈련</li>
               <li data-filter=".filter-specialty">패키지</li>
             </ul>
@@ -205,30 +208,30 @@
           <div class="col-lg-6 menu-item filter-starters">
             <img src="resources/assets/img/menu/WELC.png" class="menu-img" alt="">
             <div class="menu-content">
-              <a href="#">산책/돌봄 30분</a><span>₩38,000</span>
+              <a href="/petSitterBoardList.do">위탁 1Day</a><span>₩35,000</span>
             </div>
             <div class="menu-ingredients">
-              30분 (방문 산책 + 방문 돌봄)
+              1박(산책 + 돌봄)기준
             </div>
           </div>
 
           <div class="col-lg-6 menu-item filter-specialty">
             <img src="resources/assets/img/menu/logo-15수정본.jpg" class="menu-img" alt="">
             <div class="menu-content">
-              <a href="#">똑독캣 패키지 1</a><span>₩109,000</span>
+              <a href="#">똑독캣 패키지 1</a><span>₩가격 상담</span>
             </div>
             <div class="menu-ingredients">
-              산책/돌봄 30분 + 영상 교육(60분)으로 이뤄진 패키지
+              위탁 + 훈련 교육(60분)으로 이뤄진 패키지
             </div>
           </div>
 
           <div class="col-lg-6 menu-item filter-starters">
             <img src="resources/assets/img/menu/WELC.png" class="menu-img" alt="">
             <div class="menu-content">
-              <a href="#">산책/돌봄 60분</a><span>₩54,000</span>
+              <a href="/petSitterBoardList.do">위탁 2Day</a><span>₩69,000</span>
             </div>
             <div class="menu-ingredients">
-              60분 (방문 산책 + 방문 돌봄)
+              2박(산책 + 돌봄)기준
             </div>
           </div>
 
@@ -246,20 +249,20 @@
           <div class="col-lg-6 menu-item filter-specialty">
             <img src="resources/assets/img/menu/logo-15수정본.jpg" class="menu-img" alt="">
             <div class="menu-content">
-              <a href="#">똑독캣 패키지 2</a><span>₩200,000</span>
+              <a href="#">똑독캣 패키지 2</a><span>₩가격 상담</span>
             </div>
             <div class="menu-ingredients">
-              산책/돌봄 60분 + 방문 교육(100분)으로 이뤄진 패키지
+              위탁 + 훈련 교육(60분)으로 이뤄진 패키지
             </div>
           </div>
 
           <div class="col-lg-6 menu-item filter-starters">
             <img src="resources/assets/img/menu/WELC.png" class="menu-img" alt="">
             <div class="menu-content">
-              <a href="#">산책/돌봄 120분</a><span>₩100,000</span>
+              <a href="/petSitterBoardList.do">위탁 3Day</a><span>₩100,000</span>
             </div>
             <div class="menu-ingredients">
-              120분 (방문 산책 + 방문 돌봄)
+              3박(산책 + 돌봄)기준
             </div>
           </div>
 
@@ -282,14 +285,24 @@
               직접 현장에서 핸들링 및 코치 가능 / 산책 또는 야외 교육이 필요한 경우 / 공격성으로 직접 핸들링이 힘든 경우 / 오랜 시간(60분)집중적인 교육
             </div>
           </div>
+          
+          <div class="col-lg-6 menu-item filter-salads">
+            <img src="resources/assets/img/menu/DC16.png" class="menu-img" alt="">
+            <div class="menu-content">
+              <a href="/oneTrainer.do?tBoardNo=TBOARD-141">김사딕 훈련사 - 방문 교육 (60분)</a><span>₩120,000</span>
+            </div>
+            <div class="menu-ingredients">
+              직접 현장에서 핸들링 및 코치 가능 / 산책 또는 야외 교육이 필요한 경우 / 공격성으로 직접 핸들링이 힘든 경우 / 오랜 시간(60분)집중적인 교육
+            </div>
+          </div>
 
           <div class="col-lg-6 menu-item filter-specialty">
             <img src="resources/assets/img/menu/logo-15수정본.jpg" class="menu-img" alt="">
             <div class="menu-content">
-              <a href="#">똑독캣 패키지 3</a><span>₩300,000</span>
+              <a href="#">똑독캣 패키지 3</a><span>₩가격 상담</span>
             </div>
             <div class="menu-ingredients">
-              2회에 나눠 진행되는 산책/돌봄 120분 + 영상 교육 (60분) + 방문 교육 (100분)
+             위탁 + 훈련 교육(60분)으로 이뤄진 패키지
             </div>
           </div>
 
@@ -434,10 +447,10 @@
                   <span>핸들러 2급</span>
                 </div>
                 <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+                  <a href="/oneTrainer.do?tBoardNo=TBOARD-141"><i class="bi bi-twitter"></i></a>
+                  <a href="/oneTrainer.do?tBoardNo=TBOARD-141"><i class="bi bi-facebook"></i></a>
+                  <a href="/oneTrainer.do?tBoardNo=TBOARD-141"><i class="bi bi-instagram"></i></a>
+                  <a href="/oneTrainer.do?tBoardNo=TBOARD-141"><i class="bi bi-linkedin"></i></a>
                 </div>
               </div>
             </div>
@@ -448,19 +461,19 @@
               <img src="resources/assets/img/chefs/trainer-2-2.jpg" class="img-fluid" alt="">
               <div class="member-info">
                 <div class="member-info-content">
-                  <h4>박춘자 펫시터</h4>
-                  <span>Petsitter</span>
-                  <span>펫시터 전문가 교육 수료</span>
+                  <h4>신조이 훈련사</h4>
+                  <span>Master Trainer</span>
+                  <span>KKF 인증 1등 훈련사</span>
                   <span>반려동물행동상담사 2급 자격증 보유</span>
-                  <span>전문 펫시터 자격증 보유</span>
+                  <span>전문 훈련사 자격증 보유</span>
                   <span>강아지 반려 경험(12년) 인증 완료</span>
                   <span>고양이 반려 경험(7년) 인증 완료</span>
                 </div>
                 <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+                  <a href="/oneTrainer.do?tBoardNo=TBOARD-102"><i class="bi bi-twitter"></i></a>
+                  <a href="/oneTrainer.do?tBoardNo=TBOARD-102"><i class="bi bi-facebook"></i></a>
+                  <a href="/oneTrainer.do?tBoardNo=TBOARD-102"><i class="bi bi-instagram"></i></a>
+                  <a href="/oneTrainer.do?tBoardNo=TBOARD-102"><i class="bi bi-linkedin"></i></a>
                 </div>
               </div>
             </div>
@@ -471,7 +484,7 @@
               <img src="resources/assets/img/chefs/trainer-3-3.jpg" class="img-fluid" alt="">
               <div class="member-info">
                 <div class="member-info-content">
-                  <h4>안드레유</h4>
+                  <h4>섭섭 펫시터</h4>
                   <span>Petsitter</span>
                   <span>펫시터 전문가 교육 수료</span>
                   <span>반려동물행동교정사 2급 자격증 보유</span>
@@ -480,10 +493,10 @@
                   <span>고양이 반려 경험(11년) 인증 완료</span>
                 </div>
                 <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+                  <a href="/petSitterBoardDetail.do?petsitterBoardNo=43"><i class="bi bi-twitter"></i></a>
+                  <a href="/petSitterBoardDetail.do?petsitterBoardNo=43"><i class="bi bi-facebook"></i></a>
+                  <a href="/petSitterBoardDetail.do?petsitterBoardNo=43"><i class="bi bi-instagram"></i></a>
+                  <a href="/petSitterBoardDetail.do?petsitterBoardNo=43"><i class="bi bi-linkedin"></i></a>
                 </div>
               </div>
             </div>
@@ -494,64 +507,13 @@
       </div>
     </section><!-- End Chefs Section -->
 
-    <!-- ======= Book A Table Section ======= 
-    <section id="book-a-table" class="book-a-table">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Reservation</h2>
-          <p>Book a Table</p>
-        </div>
-
-        <form action="forms/book-a-table.php" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
-          <div class="row">
-            <div class="col-lg-4 col-md-6 form-group">
-              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-              <div class="validate"></div>
-            </div>
-            <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
-              <div class="validate"></div>
-            </div>
-            <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-              <input type="text" class="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-              <div class="validate"></div>
-            </div>
-            <div class="col-lg-4 col-md-6 form-group mt-3">
-              <input type="text" name="date" class="form-control" id="date" placeholder="Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-              <div class="validate"></div>
-            </div>
-            <div class="col-lg-4 col-md-6 form-group mt-3">
-              <input type="text" class="form-control" name="time" id="time" placeholder="Time" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-              <div class="validate"></div>
-            </div>
-            <div class="col-lg-4 col-md-6 form-group mt-3">
-              <input type="number" class="form-control" name="people" id="people" placeholder="# of people" data-rule="minlen:1" data-msg="Please enter at least 1 chars">
-              <div class="validate"></div>
-            </div>
-          </div>
-          <div class="form-group mt-3">
-            <textarea class="form-control" name="message" rows="5" placeholder="Message"></textarea>
-            <div class="validate"></div>
-          </div>
-          <div class="mb-3">
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Your booking request was sent. We will call back or send an Email to confirm your reservation. Thank you!</div>
-          </div>
-          <div class="text-center"><button type="submit">Book a Table</button></div>
-        </form>
-
-      </div>
-    </section> End Book A Table Section -->
-
     <!-- ======= Testimonials Section ======= -->
     <section id="testimonials" class="testimonials section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
           <h2>이용후기</h2>
-          <p>실시간 똑독캣 후기</p>
+          <p>핫한 똑독캣 후기</p>
         </div>
 
         <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
@@ -566,7 +528,7 @@
                 </p>
                 <img src="resources/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
                 <h3>Saul Goodman</h3>
-                <h4>Ceo &amp; Founder</h4>
+                <h4>User</h4>
               </div>
             </div><!-- End testimonial item -->
 
@@ -574,12 +536,12 @@
               <div class="testimonial-item">
                 <p>
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+                  훈련사님이 다녀가신 후로 배운대로 교육을 꾸준하게하다보니 분리불안이 많이 없어졌어요!!평상시에는 제가 집에서 어딜가든 따라다니고 뒤에있었는데 이제는 제가 밥을먹던 설거지를하던 저렇게 자기집에서 쳐다보기만해욬ㅋㅋㅋㅋㅋㅋㅋ너무감사합니다ㅜㅜ정말 많은 도움이 되었어요:)!!!
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
                 <img src="resources/assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                <h3>Sara Wilsson</h3>
-                <h4>Designer</h4>
+                <h3>이*진</h3>
+                <h4>User</h4>
               </div>
             </div><!-- End testimonial item -->
 
@@ -587,12 +549,15 @@
               <div class="testimonial-item">
                 <p>
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
+			                  쌤은 친절하게 자세하게. 잊지않게 잘 설명해주시고.
+					아이와 맞춰서 진행해주시니 시간이 가는줄도 모르고 교육을 받았어요
+					짧은 시간에 아이가 좋아진 모습이 보이고 행복해하는 모습에서 쌤이 아이에게 맞는 교육을 해주시는구나 느낄수있었습니다
+					진심으로 감사드립니다
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
                 <img src="resources/assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                <h3>Jena Karlis</h3>
-                <h4>Store Owner</h4>
+                <h3>김*라</h3>
+                <h4>User</h4>
               </div>
             </div><!-- End testimonial item -->
 
@@ -600,12 +565,12 @@
               <div class="testimonial-item">
                 <p>
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
+                  별별 방법을 다 써도 사료를 안먹거나 바닥에 뿌려놓고 먹는둥 마는둥 했었는데 선생님께서 단 1분만에 매직을 보여주셨어요..! 진짜 그동안 뭘한건가 싶더라고여ㅎㅎ 뿐만아니라 짖음 행동도 그동안 몰랐던 저희 강아지의 성향 파악과 동시에 문제해결까지 바로 할 수 있도록 알려주셔서 너무 감사했습니다 ㅠㅠ 이사오면서 분리불안이 걱정되어 신청한거였는데 그 이상으로 도움이 많이 되었어요! 분리불안은 앞으로 알려주신 방법으로 일관되고 침착하게 잘 해보도록 할게요 :) 정말정말 돈이 아깝지 않은 시간이었어요! 너무너무감사함니다 ^^
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
                 <img src="resources/assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                <h3>Matt Brandon</h3>
-                <h4>Freelancer</h4>
+                <h3>김*환</h3>
+                <h4>User</h4>
               </div>
             </div><!-- End testimonial item -->
 
@@ -613,12 +578,13 @@
               <div class="testimonial-item">
                 <p>
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
+                  사실 유튜브나 방송등 강아지 훈련 관련에 대해 많이 알아봤었고, 공부도 많이했다고 생각했어요. 하지만 강아지마다 성향과 성격이 모두 다르기에 전문가 선생님의 솔루션을 들어보고자 신청을 하게 되었습니다!
+성급하지 않게 하나하나 초코의 문제점과 성향을 파악해주시고, 거기에 대한 솔루션을 제시해주셨는데 제가 완전히 잘못알고있던 부분이 많더라구요! 선생님께서 시간도 일찍 와주셔서 감사했습니다.. (때문에 커피사러갈 시간도없어서 빈손으로 가신게 맘에 걸리지만요..ㅎ) 솔루션 카드도 꼼꼼히 작성해주시고, 앞으로의 방향성까지 알려주셔서 너무 좋은 시간이였습니다. 훈련사님께서 말씀이 조심스럽지만 재밌게 해주셔서 즐거운 시간이였고, 무엇보다 감사한 시간이였습니다! 또 수업으로 만나뵙고싶네요!
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
                 <img src="resources/assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                <h3>John Larson</h3>
-                <h4>Entrepreneur</h4>
+                <h3>안*영</h3>
+                <h4>User</h4>
               </div>
             </div><!-- End testimonial item -->
 

@@ -359,6 +359,7 @@ public class ManagerService {
 	}
 
 
+
 	public ArrayList<NoticeG> searchQnanotice(NoticeG ng) {
 		return dao.searchQnanotice(ng);
 	}
@@ -413,8 +414,9 @@ public class ManagerService {
 		return dao.cancelOkay();
 	}
 
-
-
-
+	public FileVOG fileDown(int fileGNo) {
+		FileVOG f = dao.fileDown(fileGNo);
+		return f;
+	}
 
 }

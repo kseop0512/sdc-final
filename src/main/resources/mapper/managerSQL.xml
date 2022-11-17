@@ -167,6 +167,15 @@
   	)
   </insert>
   
+  <!-- 첨부파일 다운 -->
+  <select id="fileDown" parameterType="int" resultType="fvg">
+  	select
+  		filename_g as filenameG,
+    	filepath_g as filepathG
+    from file_g_tbl
+    where file_g_no =#{fileGNo}
+  </select>
+  
   <delete id="deleteNotice" parameterType="ng">
   	delete
   		from notice_g

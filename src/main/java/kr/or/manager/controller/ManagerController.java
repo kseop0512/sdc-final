@@ -1,8 +1,10 @@
 package kr.or.manager.controller;
 
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
@@ -10,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +27,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -137,7 +140,7 @@ public class ManagerController {
 	
 	//관리자 공지사항 상세보기
 	@RequestMapping(value="/noticeGView.do")
-	public String noticeGView(int noticeGNo, Model model) {
+	public String noticeGView2(int noticeGNo, Model model) {
 		NoticeG ng = service.selectOneNoticeG(noticeGNo);
 		System.out.println(ng);
 		model.addAttribute("ng", ng);
@@ -156,7 +159,47 @@ public class ManagerController {
 		return "manager/adminNoticeWrite";
 	}
 	
-
+	//공지사항 파일 다운로드
+	@RequestMapping(value="boardFileDown.do")
+	public void boardFileDown(int fileGNo, HttpServletRequest request, HttpServletResponse response) {
+		//fileNo : DB에서 filename, filepath를 조회하기위한 값
+		FileVOG f = service.fileDown(fileGNo);
+		String path = request.getSession().getServletContext().getRealPath("/resources/upload/manager/notice/")+f.getFilepathG();
+		//request : 파일이 위치하는 경로를 찾기위해서 필요
+		FileInputStream fis;
+		try {
+			fis = new FileInputStream(path);
+			BufferedInputStream bis = new BufferedInputStream(fis);
+			//읽어온 파일을 사용자에게 내보내기위한 스트림생생성
+			ServletOutputStream sos = response.getOutputStream();
+			BufferedOutputStream bos = new BufferedOutputStream(sos);
+			//파일명처리
+			String resFilename = new String(f.getFilenameG().getBytes("UTF-8"),"ISO-8859-1");
+			response.setContentType("application/octet-stream");
+			response.setHeader("Content-Disposition", "attachment;filename="+resFilename);
+			//퍼일전송
+			while(true) {
+				int read = bis.read();
+				if(read != -1) {
+					bos.write(read);
+				}else {
+					break;
+				}
+			}
+			bos.close();
+			bis.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//response : 사용자에게 파일을 보내주기위해 필요
+	}
+	
+	
 	//관리자p 회원관리 검색
 	@RequestMapping(value="/searcMember.do")
 	public String searchMember(String memberType,String type, String keyword, Model model) {
@@ -237,24 +280,6 @@ public class ManagerController {
 		return "manager/partnerList";
 
 	}
-	
-
-
-
-	/*
-
-	//공지사항 검색
-	@RequestMapping(value="/searchNoticeG.do")
-	public String searchNoticeG(String type, String keyword, Model model, int reqPage) {
-		
-		ArrayList<NoticeG> list = service.searchNoticeG(type,keyword,reqPage);
-		model.addAttribute("list",list);
-		
-		return "redirect:/adminNotice.do?reqPage=1";
-
-	}
-	*/
-	
 	
 	@RequestMapping(value="/delete.do")
 	public String delete(NoticeG noticeGNo, Model model) { 
@@ -420,13 +445,4 @@ public class ManagerController {
 	
 	
 }
-
-
-
-
-
-
-
-
-
 

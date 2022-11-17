@@ -117,7 +117,7 @@ $("#sendBtn").on("click", function() {
 	        }
 	    });
 	} else if (phoneVal == "") {
-		phoneComment.text("전화번호를 입력해주세요.");
+		phoneComment.text("를 입력해주세요.");
 	} else if (!phoneReg.test(phoneVal)) { // 정규표현식을 만족하지 않는다면
         phoneComment.text("전화번호 형식으로 입력해주세요.");
     }
@@ -164,15 +164,15 @@ $(".btn").on("click", function(){
 	phoneComment.text("");
 	
 	if(idVal == "") {
-		idComment.text("아이디를 입력해주세요.");
+		idComment.text("를 입력해주세요.");
 	} else if (!idReg.test(idVal)) { // 정규표현식을 만족하지 않는다면
-        idComment.text("다시 입력해주세요");
+        idComment.text("를 다시 입력해주세요");
     }
     
 	if (phoneVal == "") {
-		phoneComment.text("전화번호를 입력해주세요.");
+		phoneComment.text("를 입력해주세요.");
 	} else if (!phoneReg.test(phoneVal)) { // 정규표현식을 만족하지 않는다면
-        phoneComment.text(" - 형식으로 입력해주세요.");
+        phoneComment.text("를 올바른 형식으로 입력해주세요.");
     }
 	
 	if(phoneReg.test(phoneVal) && (idVal != "")) {

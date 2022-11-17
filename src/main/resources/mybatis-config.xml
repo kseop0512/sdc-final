@@ -26,6 +26,7 @@
 		<typeAlias type="kr.or.review.model.vo.Review" alias="r"/>
 		<typeAlias type="kr.or.review.model.vo.ReviewFileVO" alias="rv"/>
 		<typeAlias type="kr.or.pet.model.vo.PetForPartner" alias="pp" />
-
+		<typeAlias type="kr.or.member.model.vo.KakaoResult" alias="ko"/>
+		<typeAlias type="kr.or.member.model.vo.Kakao" alias="koko"/>
 	</typeAliases>
 </configuration>

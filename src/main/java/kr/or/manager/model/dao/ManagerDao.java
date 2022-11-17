@@ -165,6 +165,15 @@ public class ManagerDao {
 	}
 
 	
+	//첨부파일 다운로드
+	public FileVOG fileDown(int fileGNo) {
+		//List list = sqlSession.selectList("manager.fileDown", fileGNo);
+		//return (ArrayList<FileVOG>)list;
+		return sqlSession.selectOne("manager.fileDown", fileGNo);
+	}
+	
+	
+	
 	/* 검색기능 보류
 	public ArrayList<NoticeG> searchNoticeG(HashMap<String, Object> map) {
 		List list = sqlSession.selectList("manager.searchNoticeG",map);

@@ -35,7 +35,7 @@
           <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
             PASSWORD <input type="password" class="form-control" name="pPw" id="pPw" placeholder="Your PASSWORD" style="background-color: #0c0b09;border-color: #625b4b;color:#aaaaaa;" autocomplete="off">
           </div>
-          <div class="submit-btn">
+          <div class="submit-btn" style="margin-top: 9px;">
             <a href="/findIdPartnerFrm.do" id="findIdBtn">아이디 찾기</a>
             <a href="/findPwPartnerFrm.do" id="findPwBtn">/비밀번호 찾기</a>
           </div>

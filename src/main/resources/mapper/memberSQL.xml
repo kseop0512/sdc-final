@@ -36,7 +36,9 @@
 	  		member_phone as memberPhone,
 	  		member_addr as memberAddr,
 	  		member_gender as memberGender,
-	  		enroll_date as enrollDate
+	  		enroll_date as enrollDate,
+	  		email,
+	  		nickname
 		from member_tbl
 		where member_id=#{memberId} and del_member=0
 		<if test="memberPw != null">
@@ -103,6 +105,7 @@
 		where member_id = #{memberId}
 	</update>
 	
+<<<<<<< HEAD
 	<delete id="deleteMember" parameterType="String">
 		update member_tbl set del_member = 1 where member_id=#{_parameter}
 	</delete>
@@ -137,7 +140,19 @@
 	  		enroll_date as enrollDate
         from member where member_id =#{memberId}
    </select>
+=======
+	 <!--  
+	 <select id="kakao" parameterType="java.util.HashMap" resultType="koko">
+	select * from kakao_tbl where k_nickname=#{nickname} and k_email=#{email}
+	</select>
+ 
+	<insert id="insert" parameterType="java.util.HashMap">
+	insert into kakao_tbl(k_nickname,k_email)
+	   values(#{nickname},#{email})
+	</insert>
+>>>>>>> refs/heads/hwan
 	 -->
+<<<<<<< HEAD
 	
 	<select id="selectOnePartnerInfo" parameterType="string" resultType="p">
 		select
@@ -165,4 +180,7 @@
 		from petsitter_option_tbl
 		where petsitter_board_no=#{_parameter}
 	</select>
+=======
+	 
+>>>>>>> refs/heads/hwan
 </mapper>
