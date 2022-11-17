@@ -13,6 +13,8 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import kr.or.dm.model.service.DirectMessageService;
+import kr.or.dm.model.vo.DirectMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,7 +45,8 @@ public class PartnerController {
 	private FileRename fileRename;
 	@Autowired
 	private MessagePService msgPService;
-
+	@Autowired
+	private DirectMessageService dmService;
 	public PartnerController() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -371,5 +374,18 @@ public class PartnerController {
 	public String getPetName(String pNo) {
 		String pName = service.selectPartnerName(pNo);
 		return pName;
+	}
+
+	@RequestMapping(value = "/managementInquiry.do")
+	public String managementInquiry(){
+
+		return "partner/managementInquiry";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/getPartnerReceivedDmList.do", produces="application/text;charset=utf-8")
+	public String getPartnerReceivedDmList(String partnerNo){
+		ArrayList<DirectMessage> dmList = dmService.selectPartnerReceivedDmList(partnerNo);
+		return new Gson().toJson(dmList);
 	}
 }

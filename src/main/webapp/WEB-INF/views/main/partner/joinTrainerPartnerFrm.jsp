@@ -38,7 +38,7 @@
     <section id="contact" class="contact" style="">
         <div class="container" data-aos="">
             <div class="row justify-content-center">
-                <form action="/joinPartner.do" id="" name="" method="post" enctype="multipart/form-data">
+                <form action="/joinPartner.do" id="joinFrm" name="" method="post" enctype="multipart/form-data">
                 <div class="col-lg-10 mt-lg-0">
                     <!-- <form action="forms/contact.php" method="post" role="form" class="php-email-form"> -->
                     <div class="row php-email-form">
@@ -228,7 +228,7 @@
                     </div>
                 </div>
                 <div class="text-center php-email-form border-top pt-5 mt-5">
-                    <button type="submit" class="btn-complete">지원서 보내기</button>
+                    <button type="button" class="btn-complete btn btn-warning btn-lg">지원서 보내기</button>
                 </div>
                 </form>
             </div>

@@ -111,6 +111,9 @@ public class DirectMessageService {
 		// TODO Auto-generated method stub
 		return dao.insertPartnerDm(dm);
 	}
-	
 
+
+	public ArrayList<DirectMessage> selectPartnerReceivedDmList(String partnerNo) {
+		return dao.selectPartnerReceivedDmList(partnerNo);
+	}
 }

@@ -90,17 +90,23 @@ $(document).ready(function() {
 
         if(isValid === false) {return};
         if(mailAuth == false) {
-            alert("메일 인증은 필수입니다.")
+            alert("메일 인증은 필수입니다.");
+            return;
         }else if($("[name=pGender]:checked").length < 1) {
             $("[name=pGender]").focus();
             return;
         } else if ($("[name=license]:checked").length < 1) {
             $("[name=license]").eq(0).focus();
             return;
+        } else if ($("[name=profile]").val() == "") {
+            alert("프로필 사진은 필수 항목입니다.")
+            return;
         } else if($("[name=agreement]:checked").length < 2) {
             alert("동의 사항은 모두 필수 체크 항목입니다.");
             return;
         }
+
+        $("#joinFrm").submit();
 
     })
 

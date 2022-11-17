@@ -162,4 +162,18 @@
 	 		0, 1, null
 	 	)
 	 </insert>
+
+	<select id="selectPartnerReceivedDmList" parameterType="string" resultType="dm">
+		select
+			dm_no as dmNo,
+			sender,
+			sender_category as senderCategory,
+			receiver,
+			dm_content as dmContent,
+			dm_date as dmDate,
+			read_check as readCheck,
+			dm_type as dmType,
+			reply
+		from DIRECT_MSG where RECEIVER = #{_parameter}
+	</select>
 </mapper>
