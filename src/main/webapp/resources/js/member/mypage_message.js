@@ -108,7 +108,7 @@ function msgFilter(){
 
 //읽지않음,전체 필터 클릭에 따라 표시
 $(".unread").on("click",function(){
-	if($(this).children().val() == 0){
+	if($(this).children().text() == 0){
 		$(".all").click();
 		return;
 	}
