@@ -178,15 +178,6 @@ public class MemberController {
 		return "member/mypageServiceDetail";
 	}
 	
-	//유저 마이페이지 - 나의 이용후기 이동
-	@RequestMapping(value="/mypageReview.do")
-	public String mypageReview(HttpSession session, Model model) {
-		Member m = (Member) session.getAttribute("m");
-		ArrayList<Review> list = service.selectReviewList(m);
-		model.addAttribute("list",list);
-		return "member/mypageReview";
-	}
-	
 	/* 아이디 비밀번호 찾기*/	
 	@RequestMapping(value="/findIdUserFrm.do")
 	public String searchInfo() {

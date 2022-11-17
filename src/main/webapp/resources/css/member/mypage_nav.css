@@ -4,12 +4,12 @@
 	#mypage-nav {
 		width: 200px;
 		position: fixed;
-		bottom: 22vh;
+		bottom: 28vh;
 		transition-duration: 0.5s;
 	}
 	#mypage-nav.on {
 		position: absolute;
-		bottom: 5vh;
+		bottom: 10vh;
 		transition-duration: 0.5s;
 	}
 	#mypage-nav>ul {
@@ -41,12 +41,12 @@
 	#mypage-nav {
 		width: 200px;
 		position: fixed;
-		bottom: 22vh;
+		bottom: 28vh;
 		transition-duration: 0.5s;
 	}
 	#mypage-nav.on {
 		position: absolute;
-		bottom: 5vh;
+		bottom: 10vh;
 		transition-duration: 0.5s;
 	}
 	#mypage-nav>ul {
