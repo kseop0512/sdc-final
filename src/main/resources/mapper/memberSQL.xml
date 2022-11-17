@@ -108,7 +108,7 @@
 	<delete id="deleteMember" parameterType="String">
 		update member_tbl set del_member = 1 where member_id=#{_parameter}
 	</delete>
-
+	
 	<select id="selectOnePartnerInfo" parameterType="string" resultType="p">
 		select
 			p_name as pName,
