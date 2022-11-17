@@ -241,7 +241,7 @@
   <insert id="mainQnaWrite" parameterType="dm">
   	insert into direct_msg values
   	(
-  		dm_seq.nextval,
+  		'DM.NO-'||dm_seq.nextval,
   		#{sender},
   		#{senderCategory},
   		'admin',
