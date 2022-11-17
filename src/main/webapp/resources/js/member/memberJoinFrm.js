@@ -20,11 +20,13 @@ $("[name=memberId]").on("keyup change paste",function(){
 				if(data=="1"){
 					$("#idSpan").text("이미 사용중인 아이디입니다.");
 					$("#idSpan").css("color","red");
+					$("#idSpan").css("margin-left", "10px");
 					joinFrmChks = 0;
 					
 				}else if(data=="0"){
 					$("#idSpan").text("사용가능한 아이디입니다.");
-					$("#idSpan").css("color","blue");
+					$("#idSpan").css("color","#ffb347");
+					$("#idSpan").css("margin-left", "10px");
 					joinFrmChks = 1;
 					
 				}
@@ -55,17 +57,20 @@ $("[name=memberPw]").on("keyup change paste",function(){
     if(pwReValue.length > 7){
 	    if(pwValue == pwReValue){
 			$("#pwReSpan").text("비밀번호가 일치합니다.");
-			$("#pwReSpan").css("color","blue");
+			$("#pwReSpan").css("color","#ffb347");
+			$("#pwReSpan").css("margin-left", "10px");
 			joinFrmChks = 1;	
 		}else{
 			$("#pwReSpan").text("비밀번호가 일치하지 않습니다.");
 			$("#pwReSpan").css("color","red");
+			$("#pwRespan").css("margin-left", "10px");
 			joinFrmChks = 0;
 		}
 	}
 	if(pwReg.test(pwValue) && pwReg1.test(pwValue) && pwReg2.test(pwValue) && pwReg3.test(pwValue)){
 		$("#pwSpan").text("사용 가능한 비밀번호입니다.");
-		$("#pwSpan").css("color","blue");
+		$("#pwSpan").css("color","#ffb347");
+		$("#pwSpan").css("margin-left", "10px");
 		joinFrmChks = 1;
 		
 		//비밀번호확인 일치검사
@@ -75,11 +80,13 @@ $("[name=memberPw]").on("keyup change paste",function(){
 			if(pwReValue.length > 7){
 				if(pwValue == pwReValue){
 					$("#pwReSpan").text("비밀번호가 일치합니다.");
-					$("#pwReSpan").css("color","blue");
+					$("#pwReSpan").css("color","#ffb347");
+					$("#pwReSpan").css("margin-left", "10px");
 					joinFrmChks = 1;	
 				}else{
 					$("#pwReSpan").text("비밀번호가 일치하지 않습니다.");
 					$("#pwReSpan").css("color","red");
+					$("#pwReSpan").css("margin-left", "10px");
 					joinFrmChks = 0;
 				}
 			}	
@@ -96,11 +103,13 @@ $("[name=memberPw]").on("keyup change paste",function(){
 			if(pwReValue.length > 7){
 				if(pwValue == pwReValue){
 					$("#pwReSpan").text("비밀번호가 일치합니다.");
-					$("#pwReSpan").css("color","blue");
+					$("#pwReSpan").css("color","#ffb347");
+					$("#pwReSpan").css("margin-left", "10px");
 					joinFrmChks = 1;	
 				}else{
 					$("#pwReSpan").text("비밀번호가 일치하지 않습니다.");
 					$("#pwReSpan").css("color","red");
+					$("#pwReSpan").css("margin-left", "10px");
 					joinFrmChks = 0;
 				}
 			}	
@@ -117,6 +126,7 @@ $("[name=memberBdate]").on("keyup change paste",function(){
 	if(!dateReg.test(mBdate)){
 		$("#bdateSpan").text("입력형식이 맞지 않습니다.(YYYYMMDD)");
 		$("#bdateSpan").css("color","red");
+		$("#bdateSpan").css("margin-left", "10px");
 		joinFrmChks = 0;
 	}else{
 		joinFrmChks = 1;
@@ -133,6 +143,7 @@ $("[name=memberPhone]").on("keyup change paste",function(){
 	if(!phoneReg.test(mPhone)){
 		$("#phoneSpan").text("입력형식이 맞지 않습니다. -를 제외한 숫자만");
 		$("#phoneSpan").css("color","red");
+		$("#phoneSpan").css("margin-left", "10px");
 		joinFrmChks = 0;
 	}else{
 		joinFrmChks = 1;
@@ -159,7 +170,7 @@ const phoneReg=/^[0-9]{10,11}$/;
 	     	success : function(data) {
 				$(".sms-wrap").show();
 				$("#phoneSpan").text("인증번호가 발송되었습니다.");
-				$("#phoneSpan").css("color","blue");
+				$("#phoneSpan").css("color","#ffb347");
 				$("#mPhone").attr("readonly",true);
 				$(".smsBtn").hide();
 	        	smsNum = data;
@@ -247,6 +258,6 @@ $("#joinBtn").click(function(e){
 
 	}else{
 		e.preventDefault();
-		alert("입력값을 확인해주세요");
+		new swal("입력값을 확인해주세요!", "", "info");
 	}
 });

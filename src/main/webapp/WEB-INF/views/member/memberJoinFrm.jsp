@@ -64,15 +64,17 @@
 				<label for="mAddr">주소</label><br>
 				<input type="text" name="memberAddr" id="mAddr" placeholder=""><br>
 				<label for="mPhone">전화번호</label><span id="phoneSpan"></span><br>
-				<input type="text" style="width:300px;" name="memberPhone" id="mPhone" placeholder="ex)01012340000 숫자만">
-				<button type="button" class="smsBtn" onclick="sendSMS();" style="width:170px;height:50px;">인증번호발송</button><br>
-				<div class="sms-wrap" style="display:inline-block;">
-					<input type="text" style="width:200px;min-width:200px;" class="smsVal" placeholder="인증번호입력">
-					<div class="timeZone" style="display: inline-block;width: 197px; height: 50px;color: #fff;background: transparent;text-align: center;">
+				<div class="phone-wrap">
+				<input type="text" style="width:40%;min-width: 40%;" name="memberPhone" id="mPhone" placeholder="ex)01012340000 숫자만">
+				<button type="button" class="smsBtn" onclick="sendSMS();" style="width:19%;height:50px;min-width: 19%;">인증번호발송</button><br>
+				</div>
+				<div class="sms-wrap" style="display:block;width:60%">
+					<input type="text" style="width:27%;min-width: 32%;" class="smsVal" placeholder="인증번호입력">
+					<div class="timeZone" style="display: inline-block;width: 32%; height: 50px;color: #fff;background: transparent;text-align: center;">
 						<span class="timeRSpan"><span id="min">3</span><span class="timeSpan">분 </span><span id="sec">00</span>초</span>
 					</div>
 					<input type="hidden" id="smsChk" value="0">
-					<button type="button" class="smsChkBtn" style="width:170px;height:50px;">인증번호확인</button><br>
+					<button type="button" class="smsChkBtn" style="width:33%;height:50px;margin-left: 1%;">인증번호확인</button><br>
 				</div>
 				<input type="hidden" name="memberGender" id="mGender">
 				<input type="submit" id="joinBtn" value="회원가입">
@@ -84,7 +86,7 @@
 //우편번호 주소 검색 api
 $("#mAddr").on("click", function() {
     new daum.Postcode({
-        oncomplete: function(data) {
+	     oncomplete: function(data) {
         	(async () => {
         	    const { value: getAddr } = await Swal.fire({
         	        title: '상세주소',

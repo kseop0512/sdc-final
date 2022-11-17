@@ -15,29 +15,22 @@
 <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"/>
 </head>
 <style>
+.mypage{
+	height: 760px;
+}
 .sweet-alert h2{
 	font-size: 21px;
 }
 .deleteSpan{
 	color: white;
 }
-.closeNav{
-	display: none !important;
-}
-#mypage-nav{
-    width: 200px;
-    position: fixed;
-    top: 200px;
-    transition-duration: 0.5s;
-}
 .deleteMBtn{
 	background: lightgray;
-	position: absolute;
-    bottom: 50px;
+    position: relative;
     width: 300px;
     height: 70px;
-    left: 530px;
-	
+    right: 20%;
+    top: 180px;
 }
 .deleteMBtn:hover{
 	background: #ffa526;
@@ -62,7 +55,7 @@
 					</ul>
 				</div>
 				<!-- 마이페이지 컨텐츠 -->
-				<div id="mypage-content">
+				<div id="mypage-content" >
 					<div id="title" style="height: 80px;padding-top: 35px;width:800px;border-bottom: 3px solid rgba(255, 255, 255, 0.2);position: absolute;">
 						<h4>회원탈퇴</h4>
 					</div>
@@ -85,7 +78,7 @@
 유의사항
 회원탈퇴 처리 후에는 회원님의 개인정보를 복원할 수 없으며,해당 아이디는 영구적으로 삭제되어 재가입이 불가합니다.</textarea>
 						</div>
-						<span class="deleteSpan" style="position: relative;top: 110px;left: 12vw;font-size: 18px;">해당 내용을 모두 확인했으며, 회원탈퇴에 동의합니다<input type="checkbox" class="deleteChk"></span>
+						<span class="deleteSpan" style="position: relative;top: 110px;left: 1vw;font-size: 18px;">해당 내용을 모두 확인했으며, 회원탈퇴에 동의합니다<input type="checkbox" class="deleteChk"></span>
 						<button type="button" class="deleteMBtn" onclick="deleteMember('${sessionScope.m.memberId}');">탈퇴하기</button>
 					</div>
 				</div>
