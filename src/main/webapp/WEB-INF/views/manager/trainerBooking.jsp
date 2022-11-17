@@ -299,9 +299,9 @@
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted">Copyright &copy; 똑독캣 2022</div>
                             <div>
-                                <a href="index.html">메인으로 돌아가기</a>
+                                <a href="/">메인으로 돌아가기</a>
                                 &middot;
-                                <a href="index.html#menu">산책 &amp; 돌봄 서비스</a>
+                                <a href="/#menu">산책 &amp; 돌봄 서비스</a>
                             </div>
                         </div>
                     </div>

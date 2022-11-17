@@ -178,7 +178,7 @@ public class BookingController {
 	@ResponseBody
 	@RequestMapping(value="/cancelReserve.do")
 	public int cancelService(String bookingNo, String comment) {
-		HashMap<String, String> map = new HashMap<>();
+		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("bookingNo", bookingNo);
 		map.put("comment", comment);
 		System.out.println(bookingNo);
