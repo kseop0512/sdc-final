@@ -34,6 +34,7 @@ function getdmRead(){
 		success: function(data){
 			console.log(data);
 			$("#dm_check").append(data);
+		
 		},
 		error : function(){
 			console.log("답변대기err");
@@ -47,6 +48,7 @@ function getcheckRead(){
 		success: function(data){
 			console.log(data);
 		 $("#dm_checkRead").append(data);
+		
 		}
 	});
 }
@@ -197,6 +199,7 @@ function getReceiveDm(){
 			if(reply == "답변완료"){
 				$("#detailText").val(data.dm.dmContent);
 				$("#detailText").attr("disabled",true); //답변완료인것은 disabled 처리
+				$("#send-btn").hide(); // 내용이 있으면 답장 버튼 숨기기
 	
 			}else if(reply=="답변대기"){
 				$("#detailText").val(""); //답변 하고 나면 textarea안에 값 비워주기
@@ -227,7 +230,8 @@ function dmSend(){
 		 if(data == 1 ){
 		 	alert("답변성공");
 		 	 closeModal(); //모달 닫기
-		 	 getReceiveDm(); 
+		 	 getReceiveDm(); //리스트 불러오기
+ 			history.go(0);//새로고침
 		 }else{
 		 	alert("실패");
 		 }

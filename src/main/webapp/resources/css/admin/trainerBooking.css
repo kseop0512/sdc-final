@@ -197,13 +197,14 @@ tbody>tr>td:nth-child(2):hover{
 /* X버튼 */
 .modal-top{
     display: block;
+    position: relative;
 }
 
 .modal-top .close-area{
     position: absolute;
     color: #fff;
-    top: 20px;
-    left: 1447px;
+    top: -10px;
+    left: 1140px;
     cursor: pointer;
 }
 #modalmodal-Btn{

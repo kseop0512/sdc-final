@@ -195,7 +195,7 @@
                                             </tbody>
                                         </table>
                                         <div id="modalmodal-Btn">
-                                            <button class="btn bc11" onclick="dmSend();">답장</button>
+                                            <button class="btn bc11" id="send-btn" onclick="dmSend();">답장</button>
                                             <button class="btn bc11" onclick="closeModal();">닫기</button>
                                         </div>
                                     </div>
