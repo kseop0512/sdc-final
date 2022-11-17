@@ -269,7 +269,6 @@ public class ManagerController {
 		int result = service.insertNoticeG(ng);
 		return "redirect:/adminNotice.do?reqPage=1";
 }
-
 	//관리자 - 파트너 P로 이동  파트너승인
 	@RequestMapping(value="/partnerList.do")
 	public String partnerList(String type, String keyword, Model model) {
