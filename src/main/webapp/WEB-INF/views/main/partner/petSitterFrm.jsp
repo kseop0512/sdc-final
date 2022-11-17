@@ -41,7 +41,7 @@
                             <label for="petsitterBoardTitle" class="form-label col-form-label-lg">제목 <span class="text-warning">*</span></label>
                             <input type="text" class="form-control form-control-lg" name="petsitterBoardTitle" id="petsitterBoardTitle" placeholder="게시물 제목 입니다.">
                             <%--파트너 번호--%>
-                            <input type="hidden" name="pNo" value="P-1070">
+                            <input type="hidden" name="pNo" value="${sessionScope.p.PNo}">
 
                         </div>
                         <div class="col-12 mt-4">
