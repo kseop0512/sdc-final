@@ -469,7 +469,7 @@
                 </div>
                 <div class="msg-info msg-date mb-3">
                     <span><span class="text-muted me-1">To:</span> ${detail.pName} 펫시터 님</span>
-                    <input type="hidden" name="receiver" value="${detail.pNo}">
+                    <input type="hidden" name="receiver" value="${detail.pId}">
                 </div>
                 <div class="msg-content position-relative">
                     <textarea id="reply-msg" name="dmContent" placeholder="" required></textarea>
@@ -576,7 +576,11 @@
 <script src="/resources/js/sticky-sidebar.js"></script>
 <script src="https://js.tosspayments.com/v1"></script>
 <script>
-
+    rsvDate = [
+        <c:forEach items="${rsvList}" var="rsv">
+        {"startDate" : "${rsv.startDate}", "endDate" : "${rsv.endDate}"},
+        </c:forEach>
+    ];
     var sidebar = new StickySidebar('#sidebar', {
         containerSelector: '#main-content',
         innerWrapperSelector: '.sidebar__inner',

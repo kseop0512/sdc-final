@@ -59,7 +59,7 @@
                 <li><a class="nav-link scrollto" href="/#gallery">갤러리</a></li>
                 <li class="dropdown"><a href="#"><span>파트너 찾기</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                        <li><a href="javascript:void(0)">펫시터 매칭</a></li>
+                        <%--<li><a href="javascript:void(0)">펫시터 매칭</a></li>--%>
                         <li><a href="/petSitterBoardList.do">위탁 펫시터 찾기</a></li>
                         <li><a href="/trainerList.do">훈련사 프로필</a></li>
                         <li><a href="/joinPetSitterPartnerFrm.do">파트너(펫시터) 지원</a></li>

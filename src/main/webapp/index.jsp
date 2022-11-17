@@ -333,7 +333,7 @@
                     <p class="fst-italic">강아지의 삶에 가장 중요한 산책을 바쁜 일상으로 인해 자주 미루셨나요?
                       이제는 똑독캣 펫시터에게 강아지의 안전하고 즐거운 산책을 맡겨보세요</p>
                     <p>언제 어디서든 원하시는 방법으로 '똑독캣' 방문 펫시터 서비스를 예약할 수 있어요</p>
-                    <a href="/petSitterList.do" id="jasehi" class="btn-book animated fadeInUp scrollto jasehi">
+                    <a href="/petSitterBoardList.do" id="jasehi" class="btn-book animated fadeInUp scrollto jasehi">
                       <div style="width: 170px;height: 59px;border: 1px solid #333333;margin-top: 50px;display: flex;justify-content: center;align-items: center;">
                         <p style="font-size: 17px;color: #cda45e;font-weight: 600;letter-spacing: -0.2px;margin-bottom: 0;">자세히 보기</p>
                         <img src="resources//assets/img/arrow_right.png" style="width: 20px;height: 17px;margin-left: 15px;">
@@ -352,7 +352,7 @@
                     <p class="fst-italic">혼자 남겨진 반려동물을 생각하며, 외출을 망설인 적이 있으신가요?
                       이제는 똑독캣 펫시터에게 맡기고, 여러분의 소중한 일상을 마음 편히 보내세요</p>
                     <p>언제 어디서든 원하시는 방법으로 '똑독캣' 방문 펫시터 서비스를 예약할 수 있어요</p>
-                    <a href="/petSitterList.do" id="jasehi" class="btn-book animated fadeInUp scrollto jasehi">
+                    <a href="/petSitterBoardList.do" id="jasehi" class="btn-book animated fadeInUp scrollto jasehi">
                       <div style="width: 170px;height: 59px;border: 1px solid #333333;margin-top: 50px;display: flex;justify-content: center;align-items: center;">
                         <p style="font-size: 17px;color: #cda45e;font-weight: 600;letter-spacing: -0.2px;margin-bottom: 0;">자세히 보기</p>
                         <img src="resources//assets/img/arrow_right.png" style="width: 20px;height: 17px;margin-left: 15px;">
@@ -389,7 +389,7 @@
                     <h3>다른곳에 맡기고 싶다면 위탁 서비스를 이용해보세요</h3>
                     <p class="fst-italic">행복한 하루를 선물하세요</p>
                     <p>여행, 출장, 늦은 퇴근에도 걱정마세요! 가족같은 펫시터가 내 아이와 함께합니다</p>
-                    <a href="/petSitterList.do" id="jasehi" class="btn-book animated fadeInUp scrollto jasehi">
+                    <a href="/petSitterBoardList.do" id="jasehi" class="btn-book animated fadeInUp scrollto jasehi">
                       <div style="width: 170px;height: 59px;border: 1px solid #333333;margin-top: 50px;display: flex;justify-content: center;align-items: center;">
                         <p style="font-size: 17px;color: #cda45e;font-weight: 600;letter-spacing: -0.2px;margin-bottom: 0;">자세히 보기</p>
                         <img src="resources//assets/img/arrow_right.png" style="width: 20px;height: 17px;margin-left: 15px;">

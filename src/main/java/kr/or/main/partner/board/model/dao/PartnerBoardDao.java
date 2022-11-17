@@ -49,4 +49,9 @@ public class PartnerBoardDao {
         List list = sqlSession.selectList("partnerBoard.selectBoardReplyList", pNo);
         return (ArrayList<Map<String, Object>>) list;
     }
+
+    public ArrayList<Map<String, Object>> selectRsvList(Object pNo) {
+        List list = sqlSession.selectList("partnerBoard.selectRsvList", pNo);
+        return (ArrayList<Map<String, Object>>) list;
+    }
 }

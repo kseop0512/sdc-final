@@ -34,11 +34,10 @@ window.addEventListener('DOMContentLoaded', event => {
     if (datatablesSimple) {
         dataTable = new simpleDatatables.DataTable(datatablesSimple);
     }
-
-
     /*dataTable.rows.add(newRows);*/
 
     let addNewColumn = function() {
+
         let columnDataUrl
         if(partnerObj.partnerNo == "") {
             columnDataUrl = "/getPartnerReceivedDmList.do";
@@ -51,34 +50,102 @@ window.addEventListener('DOMContentLoaded', event => {
         $.ajax({
             url : columnDataUrl,
             dataType: 'json',
+            async : false,
             success : function(data) {
                 console.log(data);
                 for(let i=0; i<data.length; i++) {
                     const dataObj = {};
-                    const readChk = data[i].readCheck = 1 ? "답변대기" : "답변완료";
+                    //const readChk = data[i].readCheck = 1 ? "답변대기" : "답변완료";
+                    let dmType = data[i].dmType;
+                    switch (dmType){
+                        case 0 :
+                            dmType = '결제/취소';
+                            break;
+                        case 1 :
+                            dmType = '예약/취소';
+                            break;
+                        case 2 :
+                            dmType = '기타문의';
+                            break;
+                    }
+
                     dataObj["DM-NO"] = data[i].dmNo;
                     dataObj["보낸사람"] = data[i].sender;
-                    dataObj["DM 구분"] = data[i].senderCategory;
+                    // dataObj["DM 구분"] = data[i].senderCategory;
                     // dataObj["받는사람"] = data[i].receiver;
                     dataObj["내용"] = data[i].dmContent;
                     dataObj["보낸날짜"] = data[i].dmDate;
-                    dataObj["답변여부"] = readChk;
-                    dataObj["DM 유형"] = data[i].dmType;
+                    if(data[i].readCheck == 1) {
+                        dataObj["답변여부"] = "답변완료";
+                    } else {
+                        dataObj["답변여부"] = "답변대기";
+                    }
+
+                    // dataObj["DM 유형"] = dmType;
                     // dataObj["reply"] = data[i].dmType;
                     newData.push(dataObj);
                 }
-                console.log(newData);
                 dataTable.insert(newData);
             }
         })
-        /*fetch(columnDataUrl)
-            .then(response => response.json())
-            .then(data => newData.data = data)
-        console.log(newData);*/
-        //dataTable.columns.add(newData);
-
 
     }
 
     addNewColumn();
+
+    dataTable.on('datatable.page', function(page) {
+        setDataTable();
+    });
+    dataTable.on('datatable.sort', function(column, direction) {
+        setDataTable();
+    });
+    dataTable.on('datatable.search', function(query, matched) {
+        setDataTable();
+    });
+    dataTable.on('datatable.init', function(args) {
+
+        const dom = $(this.dom);
+        const tr = dom.find("tbody tr");
+        $.each(tr, function(index, item){
+            $(item).attr("onclick", "showAnswerModal(this)");
+            const contentTd = $(item).find("td").eq(2);
+            const dmContent = contentTd.text();
+            const divParent = $("<div>");
+            const divChild = $("<div>");
+            const divLast = $("<div>");
+            divParent.addClass("table-overflow");
+            divChild.addClass("table-overflow-space");
+            divLast.addClass("table-overflow-text");
+
+            divLast.text(dmContent);
+            divChild.append(divLast);
+            divParent.append(divChild);
+            contentTd.text("");
+            contentTd.append(divParent);
+        })
+    });
+
+    function setDataTable() {
+        const tr = $(".table-inquiry tbody tr");
+        $.each(tr, function(index, item){
+            $(item).attr("onclick", "showAnswerModal(this)");
+            const contentTd = $(item).find("td").eq(2);
+            const dmContent = contentTd.text();
+            const divParent = $("<div>");
+            const divChild = $("<div>");
+            const divLast = $("<div>");
+            divParent.addClass("table-overflow");
+            divChild.addClass("table-overflow-space");
+            divLast.addClass("table-overflow-text");
+
+            divLast.text(dmContent);
+            divChild.append(divLast);
+            divParent.append(divChild);
+            contentTd.text("");
+            contentTd.append(divParent);
+        })
+    }
+
 });
+
+

@@ -162,6 +162,12 @@
 	 		0, 1, null
 	 	)
 	 </insert>
+	<insert id="insertDmFromPartner" parameterType="dm">
+		insert into direct_msg values(
+										 'DM.NO-'||DM_SEQ.NEXTVAL, #{sender},#{senderCategory},#{receiver},#{dmContent},to_char(sysdate,'yy/mm/dd'),
+										 0, #{dmType}, #{reply}
+									 )
+	</insert>
 
 	<select id="selectPartnerReceivedDmList" parameterType="string" resultType="dm">
 		select
@@ -176,4 +182,10 @@
 			reply
 		from DIRECT_MSG where RECEIVER = #{_parameter}
 	</select>
+
+	<update id="updateDmChkRead" parameterType="dm">
+		update direct_msg
+		set read_check = 1
+		where dm_no = #{dmNo}
+	</update>
 </mapper>
