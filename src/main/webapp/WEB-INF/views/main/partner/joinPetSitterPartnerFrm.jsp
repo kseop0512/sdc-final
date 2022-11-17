@@ -306,7 +306,7 @@
                     </div>
                 </div>
                 <div class="text-center php-email-form border-top pt-5 mt-5">
-                    <button type="button" class="btn-complete btn-warning btn-lg">지원서 보내기</button>
+                    <button type="button" class="btn-complete btn btn-warning btn-lg">지원서 보내기</button>
                 </div>
                 </form>
             </div>

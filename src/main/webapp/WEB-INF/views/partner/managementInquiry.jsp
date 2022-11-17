@@ -12,6 +12,27 @@
     <meta name="author" content="" />--%>
     <title>파트너메인페이지 - 문의관리</title>
     <jsp:include page="/WEB-INF/views/partner/common/headContent.jsp"/>
+    <style>
+        .table-inquiry tbody tr{
+            cursor: pointer;
+        }
+        .table-overflow {
+            display: flex;
+            flex: 1;
+        }
+
+        .table-overflow-space {
+            flex: 1;
+            width: 1px;
+        }
+
+        .table-overflow-text {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            word-break: break-all;
+        }
+    </style>
 </head>
 <body class="sb-nav-fixed">
 <jsp:include page="/WEB-INF/views/partner/common/header.jsp"/>
@@ -31,17 +52,17 @@
                         문의관리
                     </div>
                     <div class="card-body">
-                        <table id="partnerDataTable">
+                        <table id="partnerDataTable" class="table-inquiry">
                             <thead>
                             <tr>
                                 <th>DM-NO</th>
                                 <th>보낸사람</th>
-                                <th>DM 구분</th>
+<%--                                <th>DM 구분</th>--%>
 <%--                                <th>받는사람</th>--%>
                                 <th>내용</th>
+<%--                                <th>DM 유형</th>--%>
                                 <th>보낸날짜</th>
                                 <th>답변여부</th>
-                                <th>DM 유형</th>
                                 <%--<th>reply</th>--%>
                             </tr>
                             </thead>
@@ -49,12 +70,13 @@
                             <tr>
                                 <th>DM-NO</th>
                                 <th>보낸사람</th>
-                                <th>DM 구분</th>
+<%--                                <th>DM 구분</th>--%>
 <%--                                <th>받는사람</th>--%>
                                 <th>내용</th>
+<%--                                <th>DM 유형</th>--%>
                                 <th>보낸날짜</th>
                                 <th>답변여부</th>
-                                <th>DM 유형</th>
+
                                 <%--<th>reply</th>--%>
                             </tr>
                             </tfoot><%--
@@ -117,12 +139,66 @@
 
 
             </div>
-            <input type="hidden" name="partnerNo" value="<c:if test="${not empty sessionScope.p}">${sessionScope.p.PNo}</c:if>">
+            <input type="hidden" name="partnerNo" value="<c:if test="${not empty sessionScope.p}">${sessionScope.p.PId}</c:if>">
         </main>
         <footer>
         </footer>
     </div>
 </div>
+
+
+<div class="modal fade" id="answerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="answerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form action="/insertDmFromPartner.do">
+            <div class="modal-header">
+                <h5 class="modal-title" id="answerModalLabel">답변하기</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">보낸사람</span>
+                                <input type="hidden" name="dmNo" value="">
+                                <input type="hidden" name="sender" value="${sessionScope.p.PId}">
+                                <input type="hidden" name="senderCategory" value="P">
+                                <input type="hidden" name="dmType" value="2">
+                                <input type="hidden" name="reply" value="">
+                                <input type="text" class="form-control" name="receiver" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="receiveContent" style="height: 100px" readonly></textarea>
+                                <label for="receiveContent"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mt-3">
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="dmContent" name="dmContent" style="height: 100px" required></textarea>
+                                <label for="receiveContent">답변입력</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button type="submit" class="btn btn-primary">전송</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 <%--<script src="/resources/js/partnerScripts.js"></script>--%>
 
 <%--<script src="/resources/js/partner-datatables-simple-demo.js"></script>--%>
@@ -134,6 +210,27 @@
     const partnerObj = {
        partnerNo : $("[name=partnerNo]").val()
     }
+    const ansModal = document.getElementById('answerModal');
+    var answerModal = new bootstrap.Modal(ansModal, {
+        keyboard: false
+    })
+    let targetObj;
+    ansModal.addEventListener('show.bs.modal', function (event) {
+        const modal = event.target;
+        const targetRow = $(targetObj);
+        const dmNo = targetRow.find(">td:nth-child(1)").text();
+        const receiver = targetRow.find(">td:nth-child(2)").text();
+        const msg = targetRow.find(">td:nth-child(3)").text();
+        $(modal).find("[name=receiver]").val(receiver);
+        $(modal).find("#receiveContent").val(msg);
+        $(modal).find("[name=dmNo]").val(dmNo);
+    })
+
+    function showAnswerModal(obj) {
+        targetObj = obj
+        answerModal.show();
+    }
+
 </script>
 </body>
 

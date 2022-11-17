@@ -116,4 +116,13 @@ public class DirectMessageService {
 	public ArrayList<DirectMessage> selectPartnerReceivedDmList(String partnerNo) {
 		return dao.selectPartnerReceivedDmList(partnerNo);
 	}
+	@Transactional
+	public int insertDmFromPartner(DirectMessage dm) {
+
+		int result =  dao.insertDmFromPartner(dm);
+		if(result>0) {
+			result += dao.updateDmChkRead(dm);
+		}
+		return result;
+	}
 }

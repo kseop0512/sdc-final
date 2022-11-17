@@ -332,6 +332,7 @@ let mnDate;
 let mxDate;
 let sDate;
 let eDate;
+let rsvDate = [];
 sdcJs.initResvCalendar = function (calendarEl) {
     if (!calendarEl.length) {
         return;
@@ -436,7 +437,11 @@ sdcJs.initResvCalendar = function (calendarEl) {
         let endDate = "+2M";
 
         if(mnDate != undefined && mxDate != undefined && mnDate != "" && mxDate != "") {
-            startDate = new Date(mnDate);
+            if(startDate > new Date(mnDate)) {
+                startDate = new Date();
+            } else {
+                startDate = new Date(mnDate);
+            }
             endDate = new Date(mxDate);
         }
         if(sDate != undefined && eDate != undefined && sDate != "" && eDate != "") {
@@ -519,7 +524,14 @@ sdcJs.initResvCalendar = function (calendarEl) {
                         return [true, 'tdDefault'];
                     }
                 }
-
+                //예약된 날 제한
+                if(rsvDate.length>0) {
+                    for(let k=0; k<rsvDate.length; k++) {
+                        if(rsvDate[k]["startDate"] <= calDate && rsvDate[k]["endDate"] >= calDate) {
+                            return [true, 'tdDefault'];
+                        }
+                    }
+                }
 
                 // 중간 날짜 선택
                 return [

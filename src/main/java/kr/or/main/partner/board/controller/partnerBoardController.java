@@ -101,6 +101,10 @@ public class partnerBoardController {
             ArrayList<Map<String, Object>> replyList = service.selectBoardReplyList(detailContent.get("pNo"));
             model.addAttribute("replyList", replyList);
         }
+        if(Integer.parseInt(String.valueOf(detailContent.get("bookingCnt"))) > 0) {
+            ArrayList<Map<String, Object>> rsvList = service.selectRsvList(detailContent.get("pNo"));
+            model.addAttribute("rsvList", rsvList);
+        }
         if(member != null) {
             ArrayList<Pet> petList = pService.selectMyPet(member.getMemberNo());
             model.addAttribute("pList", petList);

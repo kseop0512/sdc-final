@@ -45,6 +45,12 @@
 	<select id="selectPetSitterBoardCount" parameterType="hashmap" resultType="_int">
 		SELECT count(*) AS cnt FROM PARTNER_PETSITTER_BOARD
 	</select>
+	<select id="selectRsvList" parameterType="string" resultType="b">
+		SELECT
+			to_char(start_date, 'yyyy-mm-dd') as startDate,
+			to_char(end_date, 'yyyy-mm-dd') as endDate
+		FROM BOOKING_TBL bt WHERE P_NO = #{_parameter}
+	</select>
 	<select id="selectPetSitterBoardList" parameterType="hashmap" resultMap="getBoardList">
 		SELECT * FROM (
 		SELECT ROWNUM as rnum, b.* FROM (
@@ -95,6 +101,7 @@
 		SELECT
 		    	p.P_NO,
 				SUBSTR(p.p_name,1,1) || LPAD('*', LENGTH(p.p_name)-2, '*') || SUBSTR(p_name, LENGTH(p.p_name), 1) AS p_name,
+				p.P_ID,
 				p.P_GENDER,
 				p.PROFILE_PATH,
 				p.LICENSE,
@@ -112,7 +119,8 @@
 				 WHERE PETSITTER_BOARD_NO = #{petsitterBoardNo}) AS filelist,
 				pol.petsitter_option,
 				(SELECT count(*) FROM REVIEW_TBL rt WHERE p_no = p.p_no) AS review_cnt,
-				to_char((SELECT AVG(review_rate) FROM REVIEW_TBL rt2 WHERE rt2.P_NO = p.P_NO), '9.99')AS review_avg
+				to_char((SELECT AVG(review_rate) FROM REVIEW_TBL rt2 WHERE rt2.P_NO = p.P_NO), '9.99')AS review_avg,
+				(SELECT COUNT(*) FROM BOOKING_TBL bt WHERE P_NO = p.P_NO) AS booking_cnt
 		FROM PARTNER p , PARTNER_PETSITTER_BOARD ppb,
 			 (SELECT PETSITTER_BOARD_NO, no_pet_str || ',' || pickup_str || ',' || large_pet_str || ',' || yard_str || ',' || old_pet_str AS petsitter_option
 			  FROM (SELECT petsitter_board_no, no_pet, pickup, large_pet, yard, old_pet,
@@ -146,6 +154,7 @@
 	<resultMap type="Map" id="getBoard">
 		<result column="p_no" property="pNo"/>
 		<result column="p_name" property="pName"/>
+		<result column="p_id" property="pId"/>
 		<result column="p_gender" property="pGender"/>
 		<result column="profile_path" property="profilePath"/>
 		<result column="license" property="license"/>
@@ -161,6 +170,7 @@
 		<result column="petsitter_option" property="petsitterOption"/>
 		<result column="review_cnt" property="reviewCnt"/>
 		<result column="review_avg" property="reviewAvg"/>
+		<result column="booking_cnt" property="bookingCnt"/>
 	</resultMap>
 	<resultMap type="Map" id="getBoardList">
 		<result column="petsitter_board_no" property="petsitterBoardNo"/>

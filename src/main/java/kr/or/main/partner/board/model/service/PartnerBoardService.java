@@ -114,4 +114,8 @@ public class PartnerBoardService {
     public ArrayList<Map<String, Object>> selectBoardReplyList(Object pNo) {
         return dao.selectBoardReplyList(pNo);
     }
+
+    public ArrayList<Map<String, Object>> selectRsvList(Object pNo) {
+        return dao.selectRsvList(pNo);
+    }
 }

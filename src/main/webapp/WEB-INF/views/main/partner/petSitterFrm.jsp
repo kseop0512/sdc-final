@@ -345,7 +345,7 @@
                 if(res > 2) {
                     successModal.show();
                     successModalEl.addEventListener('hidden.bs.modal', function (event) {
-                        window.location = "/petSitterList.do";
+                        window.location = "/petSitterBoardList.do";
                     });
                 } else {
                     submitModal.hide();

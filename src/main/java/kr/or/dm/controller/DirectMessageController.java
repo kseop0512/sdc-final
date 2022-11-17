@@ -194,4 +194,22 @@ public class DirectMessageController {
 		return "common/msg";
 	}
 	// end 혜규 on 11/14
+
+	@RequestMapping(value="/insertDmFromPartner.do")
+	public String insertDmFromPartner(DirectMessage dm, Model model) {
+		int result = service.insertDmFromPartner(dm);
+		if(result>1) {
+			model.addAttribute("title","문의하기 완료");
+			model.addAttribute("msg","문의하기 메시지가 전달되었습니다.");
+			model.addAttribute("icon","success");
+		}else {
+			model.addAttribute("title","문의하기 실패");
+			model.addAttribute("msg","다시 시도해보세요");
+			model.addAttribute("icon","error");
+		}
+
+		model.addAttribute("loc","/managementInquiry.do");
+
+		return "common/msg";
+	}
 }

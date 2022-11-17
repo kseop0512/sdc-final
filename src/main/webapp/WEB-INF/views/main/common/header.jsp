@@ -99,7 +99,7 @@
         </nav><!-- .navbar -->
         <a href="/logoutPartner.do" class="book-a-table-btn scrollto d-none d-lg-flex">LOGOUT</a>
       </c:when>
-      
+
       <c:when test="${not empty sessionScope.koko }">
             <li><a class="nav-link scrollto" href="#contact">문의하기</a></li>
             </ul>

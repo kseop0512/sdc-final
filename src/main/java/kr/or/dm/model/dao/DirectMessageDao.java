@@ -118,4 +118,12 @@ public class DirectMessageDao {
 		List list = sqlSession.selectList("dm.selectPartnerReceivedDmList", partnerNo);
 		return (ArrayList<DirectMessage>) list;
 	}
+
+	public int insertDmFromPartner(DirectMessage dm) {
+		return sqlSession.insert("dm.insertDmFromPartner", dm);
+	}
+
+	public int updateDmChkRead(DirectMessage dm) {
+		return sqlSession.update("dm.updateDmChkRead", dm);
+	}
 }
