@@ -113,10 +113,11 @@
 	position: absolute;
     top: 50%;
     color: #fff;
-	font-weight: bolder;
+    font-weight: bolder;
     font-size: 40px;
-    left: 62%;
+    left: 44vw;
     transform: translate(-50%, 0%);
+    width: 500px;
 }
 </style>
 <body>
