@@ -8,9 +8,9 @@
     <title>똑독캣 (SDC) | 강아지 전문 훈련사 </title>
     <jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
     <script src="http://code.jquery.com/jquery-3.6.1.js"></script>
-    <link href="/resources/css/partner/trainerStyles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
+    <link href="/resources/css/partner/trainerStyles.css" rel="stylesheet" />
 <style>
 	main{
 		position: relative;
