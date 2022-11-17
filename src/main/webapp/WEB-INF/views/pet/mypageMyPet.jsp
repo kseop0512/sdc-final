@@ -9,10 +9,9 @@
 <style type="text/css">
 .deleteA{
 	color: white;
-    position: absolute;
-    right: 110px;
     font-size: 17px;
-    top: 0px;
+    float: right;
+    margin-right: 6vw;
 }
 .deleteA:hover{
 	color: red;
@@ -24,7 +23,7 @@
 <title>똑독캣 마이페이지</title>
 <jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 <!-- 마이페이지 CSS -->
 <link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_mypet.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_nav.css">
@@ -53,10 +52,9 @@
 					</div>
 					<div id="content-wrap">
 						<c:forEach var="pet" items="${petList}" varStatus="statNum">
-								<div class="info-wrap2" style="position:relative;">
 							<div class="pet-wrap" onclick="petDetail(this);">
 								<img class="petProfile" src="/resources/upload/pet/petProfile/${pet.petFilename }">
-								<div class="info-wrap">
+								<div class="info-wrap" style="position:relative;">
 									<p class="petName">${pet.petName }</p>
 									<p class="petInfo">
 										<c:choose>
@@ -89,8 +87,7 @@
 										${petAge }살
 									</p>
 								</div>
-								</div>
-									<a href="#" onclick="deletePet(${pet.petNo});" class="deleteA">삭제</a>
+								
 								<!-- 상세에서 사용할 데이터들 -->
 								<!-- pet_chklist꺼 -->
 								<div class="info-petChk-wrap">
@@ -127,6 +124,7 @@
 									<input type="hidden" class="info-petFilepath" value="${pet.petFilepath}">
 								</div>
 							</div>
+							<a href="#" onclick="deletePet(${pet.petNo});" class="deleteA">삭제</a>
 							<hr class="hrCss">
 						</c:forEach>
 						<!-- 펫 성향 평균값 -->
@@ -197,15 +195,15 @@
 				</div>
 				<div class="pdGraph-detail">
 				<textarea readonly>
-Independence: 체크리스트를 통해 대략적으로 측정한 값으로 얼마나 독립적인 지를 보여주는 독립성 지표입니다.
+독립성: 체크리스트를 통해 대략적으로 측정한 값으로 얼마나 독립적인 지를 보여주는 독립성 지표입니다.
 
-Activity: 체크리스트를 통해 대략적으로 측정한 값으로 얼마나 활동적인 지를 보여주는 활동성 지표입니다.
+활동성: 체크리스트를 통해 대략적으로 측정한 값으로 얼마나 활동적인 지를 보여주는 활동성 지표입니다.
 
-Sociality: 체크리스트를 통해 대략적으로 측정한 값으로 얼마나 사회적인 지를 보여주는 사회성 지표입니다.
+사회성: 체크리스트를 통해 대략적으로 측정한 값으로 얼마나 사회적인 지를 보여주는 사회성 지표입니다.
 
-Sensitivity: 체크리스트를 통해 대략적으로 측정한 값으로 얼마나 예민한지를 보여주는 예민성 지표입니다.
+예민성: 체크리스트를 통해 대략적으로 측정한 값으로 얼마나 예민한지를 보여주는 예민성 지표입니다.
 
-Min ~ Max: 최소값과 최대값을 나타내주기 위한 지표입니다.</textarea>
+최소 ~ 최소: 각 수치의 최소값과 최대값을 나타내주기 위한 지표입니다.</textarea>
 				</div>
 				<div class="pdBtn-wrap">
 					<button class="pdPetEditBtn pdBtn" onclick="editPet();">펫정보수정</button>
@@ -220,7 +218,7 @@ Min ~ Max: 최소값과 최대값을 나타내주기 위한 지표입니다.</te
 		if(confirm("정말 삭제하시겠습니까?\n삭제 후에는 복구할 수 없습니다")){
 			location.href="/petDelete.do?petNo="+deletePetNo;
 		}else{
-			preventEvent();
+			e.preventEvent();
 		}
 	}
 	
@@ -324,7 +322,7 @@ Min ~ Max: 최소값과 최대값을 나타내주기 위한 지표입니다.</te
 		new Chart(document.getElementById("radar-chart"), {
 		    type: 'radar',
 		    data: {
-		      labels: ["Independence", "Activity", "Min ~ Max", "Sociality","Sensitivity"],
+		      labels: ["독립성", "활동성", "최소 ~ 최대", "사회성","예민성"],
 		      datasets: [
 		        {
 		          label: "평균",

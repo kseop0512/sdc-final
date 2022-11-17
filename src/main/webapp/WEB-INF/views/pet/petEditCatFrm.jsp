@@ -10,6 +10,7 @@
 <jsp:include page="/WEB-INF/views/main/common/headContent.jsp"/>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_pet.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/member/mypage_nav.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/main/common/header.jsp"/>

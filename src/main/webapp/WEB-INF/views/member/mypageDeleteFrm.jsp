@@ -90,6 +90,7 @@
 	
 	function deleteMember(memberId){
 		var delChk = $(".deleteChk").is(":checked");
+		var check = 0;
 		if(delChk){
 			swal({
 				title: "완료되지 않은 예약이 있을경우 탈퇴되지 않습니다. 정말 탈퇴하시겠습니까?",
@@ -109,7 +110,13 @@
 					cache: false,
 					dataType : "json",
 					success : function(data) {
-						if(data.includes("R" || "Y" || "C")){
+						
+						for(let i=0;i<data.length;i++){
+							if(data[i]=="R" || data[i]=="Y" || data[i]=="C"){
+								check +=1;
+							}
+						}
+						if(check > 0){
 							swal({
 								title: "처리가 완료되지 않은 예약내역이 있습니다.\n이용내역으로 가시겠습니까?",
 								type: "error",
