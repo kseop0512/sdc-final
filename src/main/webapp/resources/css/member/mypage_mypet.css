@@ -80,7 +80,7 @@
 	display: flex;
     justify-content: center;
     margin-left: 35px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 .pet-wrap:hover{
 	cursor: pointer;
