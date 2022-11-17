@@ -18,8 +18,8 @@
     </head>
     <style>
      #calendar{
-     	max-height: 700px;
-     	margin: 0 auto;
+        max-height: 700px;
+        margin: 0 auto;
      }
     </style>
     <body class="sb-nav-fixed">
@@ -61,7 +61,7 @@
                             <div class="sb-sidenav-menu-heading">Interface</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                	내정보 수정
+                                   내정보 수정
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
@@ -72,19 +72,18 @@
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                               		 스케줄 관리
+                                      스케줄 관리
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        	예약관리
+                                           예약관리
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link"  href="/appliedList.do?pNo=${sessionScope.p.PNo }">예약요청 리스트</a>
-                                            <a class="nav-link" href="#">뭐 넣지</a>
                                         </nav>
                                     </div>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
@@ -120,16 +119,16 @@
             </div>
             <div id="layoutSidenav_content">
                 <main>
-                	<div class="container-fluid px-4">
-                		<h1>예약 리스트</h1>
-                		<ol class="breadcrumb mb-4">
-                			<li class="breadcrumb-item active">똑독캣 파트너
-                		</ol>
-                		<div class="container">
-                		<div id="calendar">
-                		</div>
-                		</div> <!-- end Container -->
-                	</div>
+                   <div class="container-fluid px-4">
+                      <h1>예약 리스트</h1>
+                      <ol class="breadcrumb mb-4">
+                         <li class="breadcrumb-item active">똑독캣 파트너
+                      </ol>
+                      <div class="container">
+                      <div id="calendar">
+                      </div>
+                      </div> <!-- end Container -->
+                   </div>
                 </main>
                 
             </div>
