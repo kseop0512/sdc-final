@@ -41,6 +41,7 @@
 }
 #content{
     padding-top: 20px;
+    min-height: 600px;
 }
 
 /* input[type=text] border, 배경색 없애기 */

@@ -56,6 +56,7 @@
 /* 이용내역 표 */
 .service-box{
     margin: 10px;
+    min-height: 600px;
 }
 .service-box>table{
     width: 100%;
