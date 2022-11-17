@@ -105,7 +105,6 @@
 		where member_id = #{memberId}
 	</update>
 	
-<<<<<<< HEAD
 	<delete id="deleteMember" parameterType="String">
 		update member_tbl set del_member = 1 where member_id=#{_parameter}
 	</delete>
@@ -125,7 +124,6 @@
      )
     </insert>
 	-->
-	
 	<!-- 카카오톡 로그인
      <select id="kakaoSearchId" resultType="m" parameterType="string">
         select
@@ -152,7 +150,6 @@
 	</insert>
 >>>>>>> refs/heads/hwan
 	 -->
-<<<<<<< HEAD
 	
 	<select id="selectOnePartnerInfo" parameterType="string" resultType="p">
 		select
