@@ -214,8 +214,8 @@
 			<div class="q6 qstn">
 				<h2 class="qNumber">Q6</h2><h4 class="qqNumber">6/8</h4>
 				<p class="chkQuestion">집에서 평상시 행동은 어떤가요?　　　　　　　　</p>
-				<input type="radio" id="q6a1" name="question6" value="산책 여부와 상관없이 항상 뛰어다니고 움직여요">
-<!-- 활동성 +2 -->	<label for="q6a1" class="modal-label">1) 산책 여부와 상관없이 항상 뛰어다니고 움직여요</label>
+				<input type="radio" id="q6a1" name="question6" value="놀이 여부와 상관없이 항상 뛰어다니고 움직여요">
+<!-- 활동성 +2 -->	<label for="q6a1" class="modal-label">1) 놀이 여부와 상관없이 항상 뛰어다니고 움직여요</label>
 				<input type="radio" id="q6a2" name="question6" value="방에 있거나 화장실을 가면 항상 찾아와요">
 <!-- 활동성 +1 --><label for="q6a2" class="modal-label">2) 방에 있거나 화장실을 가면 항상 찾아와요</label>
 				<input type="radio" id="q6a3" name="question6" value="대부분을 누워 있지만 사람이 오면 일어나요">
