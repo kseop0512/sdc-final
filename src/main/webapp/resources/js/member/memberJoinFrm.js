@@ -1,5 +1,11 @@
 var joinFrmChks = 0; //모든 조건 만족 확인을 위한 변수
 var joinFinalChk = 0;
+var smsChk = 0;
+var bDateChk = 0;
+var idChk = 0;
+var pwChk = 0;
+var pwReChk = 0;
+var addrChk = 0;
 $("#mGender").attr("value","M");
 //아이디 부분체크
 $("[name=memberId]").on("keyup change paste",function(){
@@ -22,12 +28,13 @@ $("[name=memberId]").on("keyup change paste",function(){
 					$("#idSpan").css("color","red");
 					$("#idSpan").css("margin-left", "10px");
 					joinFrmChks = 0;
-					
+					idChk = 0;
 				}else if(data=="0"){
 					$("#idSpan").text("사용가능한 아이디입니다.");
 					$("#idSpan").css("color","#ffb347");
 					$("#idSpan").css("margin-left", "10px");
 					joinFrmChks = 1;
+					idChk = 1;
 					
 				}
 			}
@@ -35,6 +42,7 @@ $("[name=memberId]").on("keyup change paste",function(){
 	}else{
 		$("#idSpan").text("영어/숫자 조합으로 6~20글자입니다.");
 		$("#idSpan").css("color","red");
+		idChk = 0;
 	}
 	joinFinalChk += joinFrmChks;
 	console.log(joinFinalChk);
@@ -60,11 +68,13 @@ $("[name=memberPw]").on("keyup change paste",function(){
 			$("#pwReSpan").css("color","#ffb347");
 			$("#pwReSpan").css("margin-left", "10px");
 			joinFrmChks = 1;	
+			pwChk = 1;
 		}else{
 			$("#pwReSpan").text("비밀번호가 일치하지 않습니다.");
 			$("#pwReSpan").css("color","red");
 			$("#pwRespan").css("margin-left", "10px");
 			joinFrmChks = 0;
+			pwReChk = 0;
 		}
 	}
 	if(pwReg.test(pwValue) && pwReg1.test(pwValue) && pwReg2.test(pwValue) && pwReg3.test(pwValue)){
@@ -72,7 +82,7 @@ $("[name=memberPw]").on("keyup change paste",function(){
 		$("#pwSpan").css("color","#ffb347");
 		$("#pwSpan").css("margin-left", "10px");
 		joinFrmChks = 1;
-		
+		pwChk = 1;
 		//비밀번호확인 일치검사
 		$("[name=memberPwRe]").on("keyup change paste",function(){
 			$("#pwReSpan").text("");
@@ -82,12 +92,14 @@ $("[name=memberPw]").on("keyup change paste",function(){
 					$("#pwReSpan").text("비밀번호가 일치합니다.");
 					$("#pwReSpan").css("color","#ffb347");
 					$("#pwReSpan").css("margin-left", "10px");
-					joinFrmChks = 1;	
+					joinFrmChks = 1;
+					pwReChk = 1;	
 				}else{
 					$("#pwReSpan").text("비밀번호가 일치하지 않습니다.");
 					$("#pwReSpan").css("color","red");
 					$("#pwReSpan").css("margin-left", "10px");
 					joinFrmChks = 0;
+					pwReChk = 0;
 				}
 			}	
 		});
@@ -95,6 +107,7 @@ $("[name=memberPw]").on("keyup change paste",function(){
 		$("#pwSpan").text("비밀번호는 소문자/대문자/숫자 조합으로 8~12글자입니다.");
 		$("#pwSpan").css("color","red");
 		joinFrmChks = 0;
+		pwChk = 0;
 	}
 	$("[name=memberPwRe]").on("keyup change paste",function(){
 			$("#pwReSpan").text("");
@@ -106,11 +119,13 @@ $("[name=memberPw]").on("keyup change paste",function(){
 					$("#pwReSpan").css("color","#ffb347");
 					$("#pwReSpan").css("margin-left", "10px");
 					joinFrmChks = 1;	
+					pwReChk = 1;
 				}else{
 					$("#pwReSpan").text("비밀번호가 일치하지 않습니다.");
 					$("#pwReSpan").css("color","red");
 					$("#pwReSpan").css("margin-left", "10px");
 					joinFrmChks = 0;
+					pwReChk = 0;
 				}
 			}	
 		});
@@ -128,8 +143,10 @@ $("[name=memberBdate]").on("keyup change paste",function(){
 		$("#bdateSpan").css("color","red");
 		$("#bdateSpan").css("margin-left", "10px");
 		joinFrmChks = 0;
+		bDateChk = 0;
 	}else{
 		joinFrmChks = 1;
+		bDateChk = 1;
 	}
 	joinFinalChk += joinFrmChks;
 	console.log(joinFinalChk);
@@ -230,7 +247,7 @@ $(".smsChkBtn").on("click", function(){
 			$(".smsChkBtn").hide();
 			$(".smsBtn").hide();
 			joinFrmChks = 1;
-			
+			smsChk = 1;
 		} else {
 			$(".timeRSpan").append("인증 실패! 올바르게 입력 후 다시 확인버튼을 눌러주세요.");
 			$(".timeRSpan").css("color", "red");
@@ -254,7 +271,7 @@ $("#RadioM").click(function(){
 });
 
 $("#joinBtn").click(function(e){
-	if((joinFinalChk >= 5) && (joinFrmChks == 1) && (!$("#mAddr").val()=="") && (!$("#mName").val()=="") && (!$("#mPwRe").val()=="") && (!$("#mPw").val()=="")){
+	if((idChk ==1) && (pwChk == 1) && (pwReChk == 1) && (smsChk == 1) && (bDateChk == 1) && (joinFinalChk >= 5) && (joinFrmChks == 1) && (!$("#mAddr").val()=="") && (!$("#mName").val()=="") && (!$("#mPwRe").val()=="") && (!$("#mPw").val()=="")){
 
 	}else{
 		e.preventDefault();
