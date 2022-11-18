@@ -243,14 +243,14 @@
         		}
          	}) // ajax끝
          	$(".acceptBtn").on("click",function(){
-                if(window.confirm("예약 요청을 수락하시겠습니까?")){
+                if(confirm("예약 요청을 수락하시겠습니까?")){
                    const pNo = $("#pNo").val();
                    const bookingPhone = $("#bookingPhone").val();
                    location.href="/acceptBooking.do?bookingNo="+bookingNo+"&&pNo="+pNo+"&&bookingPhone="+bookingPhone;
                 }
              })
              $(".denyBtn").on("click",function(){
-                if(window.confirm("예약 요청을 정말 '거절'하시겠습니까?^^")){
+                if(confirm("예약 요청을 정말 '거절'하시겠습니까?^^")){
                    const pNo = $("#pNo").val();
                    console.log("위탁"+pNo);
                    const bookingPhone = $("#bookingPhone").val();
