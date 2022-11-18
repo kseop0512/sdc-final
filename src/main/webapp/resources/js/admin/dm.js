@@ -204,6 +204,7 @@ function getReceiveDm(){
 			}else if(reply=="답변대기"){
 				$("#detailText").val(""); //답변 하고 나면 textarea안에 값 비워주기
 				$("#detailText").attr("disabled",false); //답변대기 부분은 답변가능하게
+				$("#send-btn").show();
 			}
 			
 			
