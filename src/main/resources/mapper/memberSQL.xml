@@ -128,9 +128,9 @@
 	
 	<select id="selectPetsitterOption" parameterType="_int" resultType="pbo">
 		select
-			no_pet as noPet
-			pickup
-			large_pet as largePet
+			no_pet as noPet,
+			pickup,
+			large_pet as largePet,
 			yard
 		from petsitter_option_tbl
 		where petsitter_board_no=#{_parameter}
