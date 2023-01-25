@@ -3,8 +3,18 @@ package common;
 import java.io.File;
 
 import org.springframework.stereotype.Component;
+
+/**
+ * @author : kseop
+ */
 @Component
 public class FileRename {
+	/**
+	 *
+	 * @param path
+	 * @param filename
+	 * @return
+	 */
 	public String fileRename(String path, String filename) {
 		String onlyFilename = filename.substring(0,filename.lastIndexOf(".")); // test
 		String extention = filename.substring(filename.lastIndexOf(".")); //.txt
